@@ -38,18 +38,19 @@
   ],
   "tabs": [
     {
+      "name": "Self-hosting",
+      "url": "self-hosting"
+    },
+    {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Webhooks",
+      "url": "webhooks"
     }
   ],
   "navigation": [
-    {
-      "group": "Getting Started",
-      "pages": [
-        "introduction/home",
-        "introduction/quickstart"
-      ]
-    },
     {
       "group": "Self-hosting",
       "pages": [
@@ -93,75 +94,6 @@
           ]
         }
       ]
-    },
-    {
-      "group": "Core concepts",
-      "pages": [
-        {
-          "group":"Workspaces",
-          "pages":[
-            "core-concepts/workspaces/overview",
-            "core-concepts/workspaces/members"
-          ]
-        },
-        {
-          "group":"Account",
-          "pages":[
-            "core-concepts/account/overview",
-            "core-concepts/account/settings"
-          ]
-        },
-        {
-          "group":"Projects",
-          "pages":[
-            "core-concepts/projects/overview",
-            "core-concepts/projects/run-project"
-          ]
-        },
-        {
-          "group":"Issues",
-          "pages":[
-            "core-concepts/issues/overview",
-            "core-concepts/issues/properties",
-            "core-concepts/issues/visualise_filter",
-            "core-concepts/issues/issue-types",
-            "core-concepts/issues/time-tracking"
-          ]
-        },
-        "core-concepts/cycles",
-        "core-concepts/modules",
-        "core-concepts/views",
-        {
-          "group":"Pages",
-          "pages":[
-            "core-concepts/pages/overview",
-            "core-concepts/pages/editor-blocks"
-          ]
-        },
-        "core-concepts/inbox",
-        "core-concepts/analytics",
-        "core-concepts/deploy",
-        "core-concepts/power-k"
-      ]
-    },
-    {
-      "group": "Workspaces and users",
-      "pages": [
-        "workspaces-and-users/billing-and-plans",
-        "workspaces-and-users/upgrade-plan"
-      ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        "plane-integrations/about",
-        "plane-integrations/github",
-        "plane-integrations/slack"
-      ]
-    },
-    {
-      "group": "Importers",
-      "pages": ["plane-importers/github-imp", "plane-importers/jira-imp"]
     },
     {
       "group": "API Reference",
