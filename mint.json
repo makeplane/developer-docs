@@ -26,6 +26,11 @@
   },
   "anchors": [
     {
+      "name": "Documentation",
+      "icon": "book",
+      "url": "https://docs.plane.so/"
+    },
+    {
       "name": "Discord",
       "icon": "discord",
       "url": "https://discord.com/invite/A92xrEGCge"
@@ -239,5 +244,5 @@
     "ga4": {
         "measurementId": "G-G578SD4VZD"
     }
-}
+  }
 }
