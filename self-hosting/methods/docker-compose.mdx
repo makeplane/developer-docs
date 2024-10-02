@@ -4,7 +4,7 @@ title: Docker
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Docker.
 
-## Recommended edition
+## Install Plane
 Plane One and Plane Pro are enabled on this edition, so the Free plan on this edition is easier to trial our paid plans from.
 
 ### Prerequisites
@@ -17,7 +17,11 @@ Plane One and Plane Pro are enabled on this edition, so the Free plan on this ed
       - CentOS
       - Amazon Linux 2 or Linux 2023
 
-### Installation
+### Procedure
+
+   <Tip>
+   If you want to upgrade from Community to the Commercial edition, see [Upgrade from Community](/self-hosting/upgrade-from-community).
+   </Tip>
 
    1. `ssh` into your machine as the root user (or user with sudo access) per the norms of your hosting provider.
    2. Run the command below:  
@@ -30,10 +34,13 @@ Plane One and Plane Pro are enabled on this edition, so the Free plan on this ed
       - **Express**: Plane installs with the default configurations.
       - **Advanced**: You can customize the database, Redis, storage  and other settings.
    6. The installation will take a few minutes to complete and you will see the message **Plane has successfully installed**. You can access the Plane application on the domain you provided during the installation. 
-   7. If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so/workspaces-and-users/upgrade-plan).
+   
+<Tip>
+If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so/workspaces-and-users/upgrade-plan).
+</Tip>
 
-## Community Edition 
-   To install our Community Edition, please follow these steps below.
+<Accordion title="Install Community Edition ">
+  The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
 
    ### Prerequisites
 
@@ -132,3 +139,4 @@ Plane One and Plane Pro are enabled on this edition, so the Free plan on this ed
 
          If all goes well, you will see something like this:
          ![Restart Services](/images/docker-compose/restart-docker.png)
+</Accordion>
