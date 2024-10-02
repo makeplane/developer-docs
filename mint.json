@@ -26,7 +26,7 @@
   },
   "anchors": [
     {
-      "name": "Documentation",
+      "name": "Plane Documentation",
       "icon": "book",
       "url": "https://docs.plane.so/"
     },
@@ -92,11 +92,11 @@
         {
           "group" : "Manage instance",
           "pages": [
-            "self-hosting/manage/backup-restore",
-            "self-hosting/manage/upgrade-plane",
             "self-hosting/upgrade-from-community",
+            "self-hosting/manage/upgrade-plane",
             "self-hosting/manage/prime-cli",
-            "self-hosting/manage/view-logs"
+            "self-hosting/manage/view-logs",
+            "self-hosting/manage/backup-restore"
             
           ]
         },
