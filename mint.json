@@ -70,8 +70,9 @@
           ]
         },
         {
-          "group" : "Configure instance",
+          "group" : "Configure",
           "pages": [
+            "self-hosting/govern/database-and-storage",
             "self-hosting/govern/instance-admin",
             {
               "group": "Authentication",
@@ -90,7 +91,7 @@
           ]
         },
         {
-          "group" : "Manage instance",
+          "group" : "Manage",
           "pages": [
             "self-hosting/upgrade-from-community",
             "self-hosting/manage/upgrade-plane",
