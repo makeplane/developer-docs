@@ -23,27 +23,49 @@ Plane tracks anonymized workspace activity, including but not limited to the num
 ### User interaction and behavior
 Plane collects anonymized data for how you work with Plane when creating, updating, or deleting Plane entities, including but not restricted to projects, issues, cycles, modules, and others. This data helps us understand user journeys, pain points, and overall behavior.
 
-### Performance
+### Performance data
 Plane collects machine configurations, environment details, OS flavors, network throughput, and stack traces to help troubleshoot and prevent performance hiccups.
 
-## How do we use the data?
+## Data sample
+```json
+    {
+    "Created At": "October 7, 2024, 1:50 PM",
+    "Page Count": "14",
+    "Is Telemetry Enabled": "true",
+    "Updated At": "October 7, 2024, 1:50 PM",
+    "User Count": "97",
+    "Cycle Count": "62",
+    "Cycle Issue Count": "710",
+    "Module Issue Count": "428",
+    "ID": "1234567890",
+    "Updated By ID": null,
+    "Current Version": "0.23.0",
+    "Issue Count": "2,000",
+    "Instance ID": "1234567890",
+    "Latest Version": "0.23.0",
+    "Module Count": "81",
+    "Name": "Test",
+    "Workspace Count": "11",
+    "Project Count": "20",
+    "UUID": "1234567890"
+    }
+```
 
-- **Improving product performance**   
-Analyzing real-world usage helps us identify performance bottlenecks, optimize resource usage, and ensure that Plane runs smoothly across various environments.
+## How we use the data
+
+- **Improving user experience**  
+Analyzing real-world usage guides us in making Plane more intuitive and user-friendly.
 
 - **Detecting and fixing bugs**  
-Identifying bugs and errors as they occur enables us to quickly diagnose and fix issues, minimize downtime, and improving product stability.
-
-- **Understanding user behavior**  
-Collecting data on how users interact with Plane helps us prioritize feature development and make informed decisions about future enhancements to better meet user needs.
+Identifying bugs and errors as they occur enables us to quickly investigate and fix issues, minimize downtime, and improve product performance.
 
 - **Enhancing security**   
-Monitoring for abnormal patterns helps us identify and mitigate potential security threats or vulnerabilities, ensuring the protection of user data and the integrity of the platform.
+Monitoring for abnormal patterns helps us identify and mitigate potential security threats or vulnerabilities, ensuring data protection and platform integrity.
 
-- **Informing product development**  
-Aggregated telemetry provides insight into frequently used features, highlighting areas for improvement and aligning the product roadmap with user expectations.
+- **Driving product decisions**  
+Understanding how users interact with Plane helps us prioritize future developments and focus on high-impact features and improvements that drive better user outcomes. 
 
-## Disabling telemetry
+## Disable telemetry
 As much as we'd love to understand your usage better, we agree that you should be in control of your data. If for any reason you don't want to send us that data, you can turn telemetry collection off in three clicks.
 
 1. Go to your instance's God Mode by appending `/god-mode` to the domain you have hosted Plane on.
