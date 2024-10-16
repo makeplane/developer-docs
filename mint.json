@@ -220,7 +220,7 @@
           ]
         },
         {
-          "group": "Inbox issue",
+          "group": "Intake issue",
           "pages": [
             "api-reference/inbox-issue/overview",
             "api-reference/inbox-issue/add-inbox-issue",
