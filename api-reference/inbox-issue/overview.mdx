@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-To enable an inbox, the user can hit a PATCH request on the project api with the body as
+To enable the intake feature, the user can hit a PATCH request on the project api with the body as
 
 ```http
 GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/
@@ -18,7 +18,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/:iss
 }
 ```
 
-To create an inbox issue, the payload should be sent in the below format
+To create an intake issue, the payload should be sent in the below format
 
 ```json
 {
@@ -29,7 +29,7 @@ To create an inbox issue, the payload should be sent in the below format
 }
 ```
 
-### Inbox Issue Object
+### Intake Issue Object
 
 **Attribute**
 
@@ -57,7 +57,7 @@ To create an inbox issue, the payload should be sent in the below format
 
 - `source`
 
-  The source describes the type inbox issue from
+  The source describes the type intake issue from
 
 - `created_by` , `updated_by` _uuid_
 
@@ -73,7 +73,7 @@ To create an inbox issue, the payload should be sent in the below format
 
 - `inbox`
 
-  inbox id of the issue
+  intake id of the issue
 
 - `issue`
 
