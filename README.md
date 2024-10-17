@@ -1,14 +1,14 @@
-# Plane Documentation
+# Plane developer documentation
 
-Welcome to the documentation repository for Plane! This repository hosts comprehensive documentation for Plane, accessible at [docs.plane.so](https://docs.plane.so).
+This repository hosts comprehensive developer documentation for Plane, accessible at [developers.plane.so](https://developers.plane.so). If you are looking for the product documentation, see [Plane documentation](https://github.com/makeplane/docs)
 
 ## Overview
 
 The Plane documentation provides detailed information on the following topics:
 
 - Setting up and managing a self-hosted instance of Plane.
-- Understanding the different components of Plane.
-- Establishing connections between Plane and other applications.
+- API Reference
+- Webhooks
 
 ## Raising Issues
 
