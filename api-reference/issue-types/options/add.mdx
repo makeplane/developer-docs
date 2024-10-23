@@ -1,0 +1,19 @@
+---
+title: Add
+description: description
+api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issue-properties/{property_id}/options/
+---
+
+### Path parameters
+
+<ParamField path="workspace_slug" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="property_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string" required></ParamField>
+<ParamField body="description" type="string"></ParamField>
+<ParamField body="is_default" type="boolean"></ParamField>
+<ParamField body="is_active" type="boolean"></ParamField>
+<ParamField body="parent" type="string"></ParamField>

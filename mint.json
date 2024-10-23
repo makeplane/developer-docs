@@ -9,8 +9,8 @@
     "primary": "#3f76ff",
     "light": "#517be0",
     "dark": "#3f76ff",
-    "background":{
-      "dark":"#1B1B1F"
+    "background": {
+      "dark": "#1B1B1F"
     }
   },
   "api": {
@@ -58,49 +58,46 @@
   "navigation": [
     {
       "group": "Self-hosting",
+      "pages": ["self-hosting/overview"]
+    },
+    {
+      "group": "Install Plane",
       "pages": [
-        "self-hosting/overview"
+        "self-hosting/methods/docker-compose",
+        "self-hosting/methods/kubernetes"
       ]
-    },  
+    },
+    {
+      "group": "Configure",
+      "pages": [
+        "self-hosting/govern/database-and-storage",
+        "self-hosting/govern/instance-admin",
         {
-          "group":"Install Plane",
-          "pages":[
-          "self-hosting/methods/docker-compose",
-          "self-hosting/methods/kubernetes"
-          ]
-        },
-        {
-          "group" : "Configure",
+          "group": "Authentication",
           "pages": [
-            "self-hosting/govern/database-and-storage",
-            "self-hosting/govern/instance-admin",
-            {
-              "group": "Authentication",
-              "pages": [
-                "self-hosting/govern/authentication",
-                "self-hosting/govern/google-oauth",
-                "self-hosting/govern/github-oauth",
-                "self-hosting/govern/oidc-sso",
-                "self-hosting/govern/saml-sso"
-              ]
-            },
-            "self-hosting/govern/communication",
-            "self-hosting/govern/custom-domain",
-            "self-hosting/govern/reset-password",
-            "self-hosting/telemetry"
+            "self-hosting/govern/authentication",
+            "self-hosting/govern/google-oauth",
+            "self-hosting/govern/github-oauth",
+            "self-hosting/govern/oidc-sso",
+            "self-hosting/govern/saml-sso"
           ]
         },
-        {
-          "group" : "Manage",
-          "pages": [
-            "self-hosting/upgrade-from-community",
-            "self-hosting/manage/upgrade-plane",
-            "self-hosting/manage/prime-cli",
-            "self-hosting/manage/view-logs",
-            "self-hosting/manage/backup-restore"
-            
-          ]
-        },
+        "self-hosting/govern/communication",
+        "self-hosting/govern/custom-domain",
+        "self-hosting/govern/reset-password",
+        "self-hosting/telemetry"
+      ]
+    },
+    {
+      "group": "Manage",
+      "pages": [
+        "self-hosting/upgrade-from-community",
+        "self-hosting/manage/upgrade-plane",
+        "self-hosting/manage/prime-cli",
+        "self-hosting/manage/view-logs",
+        "self-hosting/manage/backup-restore"
+      ]
+    },
     {
       "group": "API Reference",
       "pages": [
@@ -229,6 +226,47 @@
             "api-reference/inbox-issue/update-inbox-issue-detail",
             "api-reference/inbox-issue/delete-inbox-issue"
           ]
+        },
+        {
+          "group": "Issue types",
+          "pages": [
+            "api-reference/issue-types/types/overview",
+            "api-reference/issue-types/types/add",
+            "api-reference/issue-types/types/list",
+            "api-reference/issue-types/types/get-detail",
+            "api-reference/issue-types/types/update",
+            "api-reference/issue-types/types/delete"
+          ]
+        },
+        {
+          "group": "Issue type properties",
+          "pages": [
+            "api-reference/issue-types/properties/overview",
+            "api-reference/issue-types/properties/add",
+            "api-reference/issue-types/properties/list",
+            "api-reference/issue-types/properties/get-detail",
+            "api-reference/issue-types/properties/update",
+            "api-reference/issue-types/properties/delete"
+          ]
+        },
+        {
+          "group": "Issue type property options",
+          "pages": [
+            "api-reference/issue-types/options/overview",
+            "api-reference/issue-types/options/add",
+            "api-reference/issue-types/options/list",
+            "api-reference/issue-types/options/get-detail",
+            "api-reference/issue-types/options/update",
+            "api-reference/issue-types/options/delete"
+          ]
+        },
+        {
+          "group": "Issue type property values",
+          "pages": [
+            "api-reference/issue-types/values/overview",
+            "api-reference/issue-types/values/add",
+            "api-reference/issue-types/values/list"
+          ]
         }
       ]
     },
@@ -243,7 +281,7 @@
   },
   "analytics": {
     "ga4": {
-        "measurementId": "G-G578SD4VZD"
+      "measurementId": "G-G578SD4VZD"
     }
   }
 }
