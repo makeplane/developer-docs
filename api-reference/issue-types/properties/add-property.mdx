@@ -1,0 +1,23 @@
+---
+title: Add custom properties
+description: Define additional attributes for an issue type in your project. 
+api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issue-types/{type_id}/issue-properties/
+---
+
+### Path parameters
+
+<ParamField path="workspace_slug" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="type_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="display_name" type="string" required></ParamField>
+<ParamField body="description" type="string"></ParamField>
+<ParamField body="property_type" type="string"></ParamField>
+<ParamField body="relation_type" type="string"></ParamField>
+<ParamField body="default_value" type="string[]"></ParamField>
+<ParamField body="validation_rules" type="object"></ParamField>
+<ParamField body="is_required" type="boolean"></ParamField>
+<ParamField body="is_active" type="boolean"></ParamField>
+<ParamField body="is_multi" type="boolean"></ParamField>
