@@ -1,0 +1,114 @@
+---
+title: Migrate from public to private bucket
+sidebarTitle: Migrate to private bucket
+---
+
+<Warning>
+Starting with v1.4.0 of the Commercial edition Plane will use private storage buckets for any file uploaded to your Plane instance.
+</Warning>
+
+We highly recommend that you migrate to private bucket storage which ensures greater security and gives you more control over how files are accessed.
+
+You can continue using the public bucket or switch to private bucket storage. Follow the instructions below based on whether you're using the default MinIO or an external S3-compatible storage.
+
+## For default MinIO storage
+
+If you prefer to keep using the public bucket, no configuration changes are needed.
+
+To migrate from public to private storage, simply run the migration script using this command:
+```bash
+docker exec -it <api_container> python manage.py update_bucket
+```
+This process updates your bucket while keeping any public objects you already have accessible.
+    
+## For external storage (S3 compatible)
+
+Here’s how you can make the switch or adjust your current setup:
+
+- If you'd prefer to continue using the public bucket, that's fine—but you'll need to update your bucket’s CORS policy to include your hosted origin. This ensures that the new pre-signed uploads work correctly. See the [Update bucket's CORS policy](#update-buckets-cors-policy) section below.
+
+- To migrate from public to private bucket storage, you must update your bucket's CORS policy and follow the instructions in the [Switch to private storage](#switch-to-private-storage) section below.
+
+### Update bucket's CORS policy
+
+<Warning>
+This update is critical if you are using external storage to ensure continued functionality.
+</Warning>
+
+Here’s a sample CORS policy for your reference. Just replace `<YOUR_DOMAIN>` with your actual domain and apply the policy to your bucket.
+```bash
+[
+    {
+        "AllowedHeaders": [
+                "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "<YOUR_DOMAIN>",
+        ],
+        "ExposeHeaders": [
+            "ETag",
+            "x-amz-server-side-encryption",
+            "x-amz-request-id",
+            "x-amz-id-2"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]
+```
+
+### Switch to private storage
+Before migrating to a private bucket, make sure your CORS policy is up to date. If you haven’t done so already, see the [Update bucket's CORS policy](#update-buckets-cors-policy) section above.
+
+To migrate from public to private bucket storage, follow the instructions below:
+
+1. Ensure you have the following permissions on your S3 bucket before running the script.   
+    - **s3:GetObject**  
+    To access existing objects publicly.
+
+    - **s3:ListBucket**  
+    To list and create a policy for public access.
+
+    - **s3:PutObject**  
+    To create new objects.
+
+    - **s3:PutBucketPolicy**  
+    To update the bucket policy
+
+2. Once permissions are provided, run this script to update the bucket:
+    ```bash
+    docker exec -it <api_container> python manage.py update_bucket
+    ``` 
+    <Note>
+    If the required permissions are missing, the script will generate a `permissions.json` file, which you can copy and use to update your bucket policy manually.
+
+    To copy the `permissions.json` file to the local machine, run this command:
+
+    ```bash
+    docker cp <api_container>:/code/permissions.json .
+    ```
+
+    Here’s a sample `permission.json` file for reference:
+    ```bash
+        {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": [
+                "arn:aws:s3:::<bucket_name>/<object_1>",
+                "arn:aws:s3:::<bucket_name>/<object_2>"
+            ]
+            }
+        ]
+        }
+    ```
+    </Note>

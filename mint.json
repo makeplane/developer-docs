@@ -75,11 +75,34 @@
         {
           "group": "Authentication",
           "pages": [
-            "self-hosting/govern/authentication",
-            "self-hosting/govern/google-oauth",
-            "self-hosting/govern/github-oauth",
-            "self-hosting/govern/oidc-sso",
-            "self-hosting/govern/saml-sso"
+            "self-hosting/govern/database-and-storage",
+            "self-hosting/govern/instance-admin",
+            {
+              "group": "Authentication",
+              "pages": [
+                "self-hosting/govern/authentication",
+                "self-hosting/govern/google-oauth",
+                "self-hosting/govern/github-oauth",
+                "self-hosting/govern/oidc-sso",
+                "self-hosting/govern/saml-sso"
+              ]
+            },
+            "self-hosting/govern/communication",
+            "self-hosting/govern/custom-domain",
+            "self-hosting/govern/reset-password",
+            "self-hosting/govern/private-bucket",
+            "self-hosting/telemetry"
+          ]
+        },
+        {
+          "group" : "Manage",
+          "pages": [
+            "self-hosting/upgrade-from-community",
+            "self-hosting/manage/upgrade-plane",
+            "self-hosting/manage/prime-cli",
+            "self-hosting/manage/view-logs",
+            "self-hosting/manage/backup-restore"
+            
           ]
         },
         "self-hosting/govern/communication",
