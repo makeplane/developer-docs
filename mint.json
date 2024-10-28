@@ -254,41 +254,41 @@
           "group": "Issue types",
           "pages": [
             "api-reference/issue-types/types/overview",
-            "api-reference/issue-types/types/add",
-            "api-reference/issue-types/types/list",
-            "api-reference/issue-types/types/get-detail",
-            "api-reference/issue-types/types/update",
-            "api-reference/issue-types/types/delete"
+            "api-reference/issue-types/types/add-issue-type",
+            "api-reference/issue-types/types/list-issue-types",
+            "api-reference/issue-types/types/get-issue-type-details",
+            "api-reference/issue-types/types/update-issue-types",
+            "api-reference/issue-types/types/delete-issue-type"
           ]
         },
         {
-          "group": "Issue type properties",
+          "group": "Custom properties",
           "pages": [
             "api-reference/issue-types/properties/overview",
-            "api-reference/issue-types/properties/add",
-            "api-reference/issue-types/properties/list",
-            "api-reference/issue-types/properties/get-detail",
-            "api-reference/issue-types/properties/update",
-            "api-reference/issue-types/properties/delete"
+            "api-reference/issue-types/properties/add-property",
+            "api-reference/issue-types/properties/list-properties",
+            "api-reference/issue-types/properties/get-property-details",
+            "api-reference/issue-types/properties/update-property",
+            "api-reference/issue-types/properties/delete-property"
           ]
         },
         {
-          "group": "Issue type property options",
+          "group": "Custom property options",
           "pages": [
             "api-reference/issue-types/options/overview",
-            "api-reference/issue-types/options/add",
-            "api-reference/issue-types/options/list",
-            "api-reference/issue-types/options/get-detail",
-            "api-reference/issue-types/options/update",
-            "api-reference/issue-types/options/delete"
+            "api-reference/issue-types/options/add-dropdown-options",
+            "api-reference/issue-types/options/list-dropdown-options",
+            "api-reference/issue-types/options/get-option-details",
+            "api-reference/issue-types/options/update-dropdown-options",
+            "api-reference/issue-types/options/delete-dropdown-options"
           ]
         },
         {
-          "group": "Issue type property values",
+          "group": "Custom property values",
           "pages": [
             "api-reference/issue-types/values/overview",
-            "api-reference/issue-types/values/add",
-            "api-reference/issue-types/values/list"
+            "api-reference/issue-types/values/add-property-values",
+            "api-reference/issue-types/values/list-property-values"
           ]
         }
       ]
