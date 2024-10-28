@@ -1,0 +1,16 @@
+---
+title: Add issue type
+description: Lets you create custom issue types in your project.
+api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/
+---
+
+### Path parameters
+
+<ParamField path="workspace_slug" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string" required></ParamField>
+<ParamField body="description" type="string"></ParamField>
+<ParamField body="is_active" type="boolean"></ParamField>
