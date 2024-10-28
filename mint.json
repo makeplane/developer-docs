@@ -96,6 +96,7 @@
             "self-hosting/upgrade-from-community",
             "self-hosting/manage/upgrade-plane",
             "self-hosting/manage/prime-cli",
+            "self-hosting/manage/migrate-plane",
             "self-hosting/manage/view-logs",
             "self-hosting/manage/backup-restore"
             

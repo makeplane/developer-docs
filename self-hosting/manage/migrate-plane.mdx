@@ -1,0 +1,42 @@
+---
+title: Migrate Plane to a new server (Commercial edition)
+sidebarTitle: Migrate Plane
+---
+
+Here's a straightforward guide to help you migrate your Plane data from one machine to another. 
+
+## Prerequisites
+Before we dive in, ensure:
+
+- You’re running Plane's Commercial Edition.
+- The migration will be done on a different server (not on the same machine).
+- The new server uses the same domain as the current server.
+
+## Migration steps
+1. **Delink licenses**  
+Log into Plane on your current server. Head to each Pro/One workspace and [delink the licenses](https://docs.plane.so/workspaces-and-users/upgrade-plan#delink-license-key). This will free up the licenses for activation on your new server.
+
+2. **Backup data**  
+Create a backup of your Plane instance by running:
+    ```bash
+    prime-cli backup
+    ```
+    This command will generate a backup file in the path: `/opt/plane/backup`.
+
+3. **Set up Plane on the new server**  
+Follow the [installation guide](/self-hosting/methods/docker-compose#install-plane) to deploy Plane on the new instance.
+
+4. **Transfer backup files**  
+Copy the backup folder from the old server (created in step 2) to the new server. Place the backup in `/opt/plane`.
+
+5. **Restore data**  
+On the new server, restore your data by running:
+    ```bash
+    prime-cli restore
+    ````
+    Follow the prompts during the restore process to make sure everything is set up correctly.
+
+6. **Reactivate license**  
+Finally, reactivate your workspaces with the license keys you delinked in step 1.
+
+And that’s it! This should get your Plane instance up and running on the new server.
