@@ -32,12 +32,48 @@ The Prime CLI enables you to configure the Commercial edition instance, allowing
         Specify the URL of your external Redis instance to override the default Redis configuration.  
         *Default*: `Redis 7.2.4`
 
-    - `External storage`  
-        Switch to your own storage by entering your AWS S3 credentials. Use the following format:
-            - AWS Access Key ID
-            - AWS Secret Access Key
-            - AWS S3 Bucket Name    
+    - `External storage`   
+       Plane currently supports only S3 compatible storages.  
+       *Default*: `MinIO` 
 
-        *Default*: `MinIO`
+       1. Ensure your IAM user has the following permissions on your S3 bucket.
+            - **s3:GetObject**  
+            To access the objects.
+            - **s3:PutObject**  
+            To upload new assets using the presigned url. 
+        2. Configure the CORS policy on your bucket to enable presigned uploads. Use the example policy below, making sure to replace `<YOUR_DOMAIN>` with your actual domain.
+            ```
+            [
+                {
+                    "AllowedHeaders": [
+                        "*"
+                    ],
+                    "AllowedMethods": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "HEAD"
+                    ],
+                    "AllowedOrigins": [
+                        "<YOUR_DOMAIN>",
+                    ],
+                    "ExposeHeaders": [
+                        "ETag",
+                        "x-amz-server-side-encryption",
+                        "x-amz-request-id",
+                        "x-amz-id-2"
+                    ],
+                    "MaxAgeSeconds": 3000
+                }
+            ]
+            ```
+        3. Switch to your external storage by providing the following values:
+            - S3 access key ID 
+            - S3 secret access key
+            - S3 bucket name
+            - S3 region 
+            - S3 endpoint URL
+
 3. After confirming your choices, your instance will automatically restart with the updated configuration.
 
