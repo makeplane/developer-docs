@@ -13,8 +13,6 @@ api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issu
 
 ### Body
 
-<ParamField body="name" type="string" required></ParamField>
-<ParamField body="description" type="string"></ParamField>
-<ParamField body="is_default" type="boolean"></ParamField>
-<ParamField body="is_active" type="boolean"></ParamField>
-<ParamField body="parent" type="string"></ParamField>
+<ParamField body="values" type="object[]" required>
+  <ParamField body="value" type="string" required></ParamField>
+</ParamField>

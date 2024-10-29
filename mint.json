@@ -241,7 +241,7 @@
           ]
         },
         {
-          "group": "Custom properties",
+          "group": "Issue properties",
           "pages": [
             "api-reference/issue-types/properties/overview",
             "api-reference/issue-types/properties/add-property",
@@ -252,7 +252,7 @@
           ]
         },
         {
-          "group": "Custom property options",
+          "group": "Issue property options",
           "pages": [
             "api-reference/issue-types/options/overview",
             "api-reference/issue-types/options/add-dropdown-options",
@@ -263,7 +263,7 @@
           ]
         },
         {
-          "group": "Custom property values",
+          "group": "Issue property values",
           "pages": [
             "api-reference/issue-types/values/overview",
             "api-reference/issue-types/values/add-property-values",
