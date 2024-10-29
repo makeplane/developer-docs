@@ -1,0 +1,17 @@
+---
+title: Update issue type
+description: Allows you to modify an existing issue type.
+api: PATCH /api/v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/{type_id}/
+---
+
+### Path parameters
+
+<ParamField path="workspace_slug" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="type_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string" required></ParamField>
+<ParamField body="description" type="string"></ParamField>
+<ParamField body="is_active" type="boolean"></ParamField>

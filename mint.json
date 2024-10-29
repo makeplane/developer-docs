@@ -9,8 +9,8 @@
     "primary": "#3f76ff",
     "light": "#517be0",
     "dark": "#3f76ff",
-    "background":{
-      "dark":"#1B1B1F"
+    "background": {
+      "dark": "#1B1B1F"
     }
   },
   "api": {
@@ -58,19 +58,22 @@
   "navigation": [
     {
       "group": "Self-hosting",
+      "pages": ["self-hosting/overview"]
+    },
+    {
+      "group": "Install Plane",
       "pages": [
-        "self-hosting/overview"
+        "self-hosting/methods/docker-compose",
+        "self-hosting/methods/kubernetes"
       ]
-    },  
+    },
+    {
+      "group": "Configure",
+      "pages": [
+        "self-hosting/govern/database-and-storage",
+        "self-hosting/govern/instance-admin",
         {
-          "group":"Install Plane",
-          "pages":[
-          "self-hosting/methods/docker-compose",
-          "self-hosting/methods/kubernetes"
-          ]
-        },
-        {
-          "group" : "Configure",
+          "group": "Authentication",
           "pages": [
             "self-hosting/govern/database-and-storage",
             "self-hosting/govern/instance-admin",
@@ -87,6 +90,7 @@
             "self-hosting/govern/communication",
             "self-hosting/govern/custom-domain",
             "self-hosting/govern/reset-password",
+            "self-hosting/govern/private-bucket",
             "self-hosting/telemetry"
           ]
         },
@@ -102,6 +106,22 @@
             
           ]
         },
+        "self-hosting/govern/communication",
+        "self-hosting/govern/custom-domain",
+        "self-hosting/govern/reset-password",
+        "self-hosting/telemetry"
+      ]
+    },
+    {
+      "group": "Manage",
+      "pages": [
+        "self-hosting/upgrade-from-community",
+        "self-hosting/manage/upgrade-plane",
+        "self-hosting/manage/prime-cli",
+        "self-hosting/manage/view-logs",
+        "self-hosting/manage/backup-restore"
+      ]
+    },
     {
       "group": "API Reference",
       "pages": [
@@ -230,6 +250,47 @@
             "api-reference/inbox-issue/update-inbox-issue-detail",
             "api-reference/inbox-issue/delete-inbox-issue"
           ]
+        },
+        {
+          "group": "Issue types",
+          "pages": [
+            "api-reference/issue-types/types/overview",
+            "api-reference/issue-types/types/add-issue-type",
+            "api-reference/issue-types/types/list-issue-types",
+            "api-reference/issue-types/types/get-issue-type-details",
+            "api-reference/issue-types/types/update-issue-types",
+            "api-reference/issue-types/types/delete-issue-type"
+          ]
+        },
+        {
+          "group": "Custom properties",
+          "pages": [
+            "api-reference/issue-types/properties/overview",
+            "api-reference/issue-types/properties/add-property",
+            "api-reference/issue-types/properties/list-properties",
+            "api-reference/issue-types/properties/get-property-details",
+            "api-reference/issue-types/properties/update-property",
+            "api-reference/issue-types/properties/delete-property"
+          ]
+        },
+        {
+          "group": "Custom property options",
+          "pages": [
+            "api-reference/issue-types/options/overview",
+            "api-reference/issue-types/options/add-dropdown-options",
+            "api-reference/issue-types/options/list-dropdown-options",
+            "api-reference/issue-types/options/get-option-details",
+            "api-reference/issue-types/options/update-dropdown-options",
+            "api-reference/issue-types/options/delete-dropdown-options"
+          ]
+        },
+        {
+          "group": "Custom property values",
+          "pages": [
+            "api-reference/issue-types/values/overview",
+            "api-reference/issue-types/values/add-property-values",
+            "api-reference/issue-types/values/list-property-values"
+          ]
         }
       ]
     },
@@ -244,7 +305,7 @@
   },
   "analytics": {
     "ga4": {
-        "measurementId": "G-G578SD4VZD"
+      "measurementId": "G-G578SD4VZD"
     }
   }
 }
