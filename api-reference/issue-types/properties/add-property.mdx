@@ -14,8 +14,12 @@ api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issue-types/
 
 <ParamField body="display_name" type="string" required></ParamField>
 <ParamField body="description" type="string"></ParamField>
-<ParamField body="property_type" type="string"></ParamField>
-<ParamField body="relation_type" type="string"></ParamField>
+<ParamField body="property_type" type="string" placeholder="TEXT | DATETIME | DECIMAL | BOOLEAN | OPTION | RELATION">
+TEXT | DATETIME | DECIMAL | BOOLEAN | OPTION | RELATION
+</ParamField>
+<ParamField body="relation_type" type="string" placeholder="null | USER">
+null | USER
+</ParamField>
 <ParamField body="default_value" type="string[]"></ParamField>
 <ParamField body="validation_rules" type="object"></ParamField>
 <ParamField body="is_required" type="boolean"></ParamField>
