@@ -21,13 +21,13 @@ Create a backup of your Plane instance with ↓:
     ```bash
     prime-cli backup
     ```
-    This command will generate a backup file in the path: `/opt/plane/backup`.
+    This command will generate a backup file in the path: `/opt/plane/backups`.
 
 3. **Set up Plane on the new server**  
 Follow the [installation guide](/self-hosting/methods/docker-compose#install-plane) to deploy Plane on the new instance.
 
 4. **Transfer backup files**  
-Copy the backup folder from the old server, created in step 2, to the new server. Place the backup in the folder `/opt/plane`.
+Copy the `backups` folder from the old server, created in step 2, to the new server. Place the backup in the folder `/opt/plane`.
 
 5. **Restore data**  
 On the new server, restore your data with ↓:
