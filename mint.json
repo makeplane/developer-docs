@@ -57,11 +57,13 @@
   ],
   "navigation": [
     {
-      "group": "Self-hosting",
-      "pages": ["self-hosting/overview"]
+      "group": "Self-host Plane",
+      "pages": [
+        "self-hosting/overview"
+      ]
     },
     {
-      "group": "Install Plane",
+      "group": "Install",
       "pages": [
         "self-hosting/methods/docker-compose",
         "self-hosting/methods/kubernetes"
@@ -70,7 +72,6 @@
     {
       "group": "Configure",
       "pages": [
-        "self-hosting/govern/database-and-storage",
         "self-hosting/govern/instance-admin",
         {
           "group": "Authentication",
@@ -79,12 +80,13 @@
               "self-hosting/govern/google-oauth",
               "self-hosting/govern/github-oauth",
               "self-hosting/govern/oidc-sso",
-              "self-hosting/govern/saml-sso"
+              "self-hosting/govern/saml-sso",
+              "self-hosting/govern/reset-password"
             ]
         },
         "self-hosting/govern/communication",
+        "self-hosting/govern/database-and-storage",
         "self-hosting/govern/custom-domain",
-        "self-hosting/govern/reset-password",
         "self-hosting/govern/private-bucket",
         "self-hosting/telemetry"
       ]
@@ -93,11 +95,13 @@
       "group": "Manage",
       "pages": [
         "self-hosting/upgrade-from-community",
+        "self-hosting/manage/backup-restore",
         "self-hosting/manage/upgrade-plane",
-        "self-hosting/manage/prime-cli",
-        "self-hosting/manage/migrate-plane",
         "self-hosting/manage/view-logs",
-        "self-hosting/manage/backup-restore"
+        "self-hosting/manage/migrate-plane",
+        "self-hosting/manage/prime-cli"
+        
+        
       ]
     },
     {

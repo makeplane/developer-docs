@@ -1,14 +1,43 @@
 ---
-title: Backup and restore data on Community edition
-sidebarTitle: Community backup and restore
+title: Backup and restore data
+sidebarTitle: Backup and restore
 ---
 
-## Backup data
-There would a time when you might want to backup your data from docker volumes to external storage like S3 or drives.
+Backing up your data regularly helps prevent data loss and allows you to restore your system quickly if necessary. Follow these instructions to back up and restore your data using Plane’s command-line interface.
 
-Lets again run the ./setup.sh command. You will again be prompted with the below options. This time select `7` to back data up.
+## Backup data
+Create a backup of your Plane data with ↓:
+```bash
+sudo prime-cli backup
 ```
-Select a Action you want to perform:
+
+This command initiates a full backup of all critical data, storing it in the default backup location at:
+```bash
+/opt/plane/backups
+```
+Each backup file will be timestamped to ensure you can easily identify the latest or a specific backup if needed.
+
+## Restore data
+
+You can restore your data from a previous backup with ↓:
+```bash
+sudo prime-cli restore
+```
+
+This command prompts the restoration process, which will overwrite the current data with the data from the most recent backup file. Ensure you have selected the correct backup before running this command, as restoring will replace your current data.
+
+<Accordion title="Backup and restore on Community Edition">
+
+## Backup data
+
+To create a backup, start by running the setup script:
+```bash
+./setup.sh
+```
+You’ll see a menu of options—just type 7 to select "Backup Data."
+
+```
+Select an Action you want to perform:
    1) Install (x86_64)
    2) Start
    3) Stop
@@ -20,7 +49,8 @@ Select a Action you want to perform:
 
 Action [2]: 7
 ```
-In response, you can find the backup folder
+The system will start backing up the PostgreSQL, Redis, and upload data:
+
 ```
 Backing Up plane-app_pgdata
 Backing Up plane-app_redisdata
@@ -28,30 +58,28 @@ Backing Up plane-app_uploads
 
 Backup completed successfully. Backup files are stored in /....../plane-app/backup/20240502-1120
 ```
-This backup is stored in your machine and you can then further copy it to any storage service.
+The backup files are stored locally, so you can copy them to an external storage service if needed for extra security.
 **** 
 
-
 ## Restore data
+Follow these steps to restore data from a backup:
 
-When you want to restore the previously backed-up data, follow the instructions below.
+1. Make sure Plane-CE is installed and started, then stop it. This ensures the necessary Docker volumes are ready.
 
-1. Make sure that Plane-CE is installed, started, and then stopped. This ensures that the Docker volumes are created.
-
-2. Download the restore script using the command below. We suggest downloading it in the same folder as setup.sh.
+2. Use the command ↓ to download the restore script. It’s easiest to save it in the same directory as `setup.sh`.
 
     ```bash
     curl -fsSL -o restore.sh https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/restore.sh
     chmod +x restore.sh
     ```
 
-3. Execute the command below to restore your data.
+3. Now, run the command ↓ to restore your data, specifying the path to your backup folder (the folder with the `*.tar.gz` files):
 
     ```bash
     ./restore.sh <path to backup folder containing *.tar.gz files>
     ```
 
-    As an example, for a backup folder /opt/plane-selfhost/plane-app/backup/20240722-0914, expect the response below:
+    Here’s an example output for restoring from /opt/plane-selfhost/plane-app/backup/20240722-0914:
 
     ```bash
         --------------------------------------------
@@ -80,4 +108,11 @@ When you want to restore the previously backed-up data, follow the instructions 
         Restore completed successfully.
     ```
 
-4. Start the Plane instance using ./setup.sh start.
+4. Start your Plane instance again with ↓:
+    ```bash
+    ./setup.sh start
+    ```
+
+That’s it! You’re back up and running with your restored data.
+
+</Accordion>
