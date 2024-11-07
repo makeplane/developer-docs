@@ -1,17 +1,12 @@
 ---
-title: Configure external database and storage
-sidebarTitle: Database and storage
+title: Configure external PostgreSQL, Redis and S3 storage
+sidebarTitle: External database and storage
 ---
 
-> **Edition**: Commercial
 
-<Tip>
-If you're currently on the Community edition and wish to upgrade to the Commercial edition, please refer to [Upgrade from Community](/self-hosting/upgrade-from-community).
-</Tip>
+The Prime CLI lets you easily configure your Commercial Edition instance, providing options to customize the PostgreSQL database, Redis, external storage, and other advanced settings.
 
-The Prime CLI enables you to configure the Commercial edition instance, allowing customization of the PostgreSQL database, Redis, external storage, and other advanced settings.
-
-1. From any directory on your machine, run the Prime CLI with:
+1.  Run the Prime CLI with ↓:
     ```sudo prime-cli``` 
 
 2. Once the CLI is running, enter `configure`, which will guide you through a step-by-step form where you can specify the following:
@@ -21,11 +16,11 @@ The Prime CLI enables you to configure the Commercial edition instance, allowing
         *Default*: `80`
 
     - `Max file-upload size`  
-        Set the maximum file size (in MB) that can be uploaded to your Plane app.  
+        Set the maximum file size (in MB) that members can upload.
         *Default*: `5 MB`
 
     - `External Postgres URL`  
-        Provide the URL of your external Postgres instance if you want to switch from the default Plane configuration.
+        Provide the URL of your external PostgreSQL instance if you want to switch from the default Plane configuration.
         *Default*: `Postgres 15.5` in the Docker container
 
     - `External Redis URL`  

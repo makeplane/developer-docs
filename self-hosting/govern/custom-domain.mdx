@@ -1,8 +1,12 @@
 ---
-title: Brand instance
+title: Custom domain
 description: Host your Plane instance in your custom domain. Our steps differ slightly depending on whether you are hosting on a public IP or a private/internal IP. Follow the steps listed below.
 ---
-## Update Configuration in .env File
+<Info>
+In the Commercial Edition, you can set up a custom domain right during installation. 
+</Info>
+
+## Update configuration in .env file
 
 <Note>This step is mandatory for you to host Plane on a custom domain</Note>
 
@@ -22,7 +26,7 @@ CORS_ALLOWED_ORIGINS=https://example.com
 
 If you are hosting Plane on a public IP, then follow the steps here. However, if you are hosting Plane on an internal IP then follow these steps.
 
-## Set DNS A Record (For Public IP)
+## Set DNS A record (for public IP)
 
 If your server has a public IP address, you need to configure the DNS A record to point to this IP address. This allows users to access your application using your custom domain name. Here’s how to do it:
 
@@ -32,7 +36,7 @@ If your server has a public IP address, you need to configure the DNS A record t
 - Add a new A record with the hostname set to `@` (or your subdomain if applicable) and the IP address set to your server's public IP address.
 - Save the changes. It may take some time for the DNS changes to propagate.
 
-## Configure Reverse Proxy (For Internal IP)
+## Configure reverse proxy (for internal IP)
 
 If your server is behind a firewall or router and has an internal IP address, you'll need to set up a reverse proxy to route requests from your custom domain to your server. Follow these steps:
 

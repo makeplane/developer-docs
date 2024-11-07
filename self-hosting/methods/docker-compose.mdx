@@ -70,16 +70,6 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
          ```bash 
          curl -fsSL -o setup.sh https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/install.sh
          ```
-            
-         <Note>
-         If you want to download the latest preview release, run the following commands:
-            ```bash
-            export RELEASE=preview
-            ```
-            ```bash
-            curl -fsSL https://raw.githubusercontent.com/makeplane/plane/$RELEASE/deploy/selfhost/install.sh | sed  's@BRANCH=master@BRANCH='"$RELEASE"'@' > setup.sh
-            ```
-            </Note>
       4. Make the file executable.
          ```bash
          chmod +x setup.sh
