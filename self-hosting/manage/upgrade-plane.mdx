@@ -1,119 +1,145 @@
 ---
 title: Update Plane version
+sidebarTitle: Update Plane
 ---
+Keeping Plane up to date ensures you’re using the latest features, improvements, and security fixes. Here’s how to upgrade your Plane installation with a single command.
 
-This page provides steps to update Plane to the latest version on your self-hosted instance.
+<Note>
+The upgrade process may involve a brief downtime as services are updated and restarted.
+</Note>
+
 ## Prerequisites
-Create a backup of the Plane instance. See [Backup data](/self-hosting/manage/backup-restore#backup-data) (Recommended)
-## Update Plane version
-<Note> This upgrade guide is for v0.14.0 and above. If your Plane version is v0.13.2 than v0.14.0 then follow the guide [here](#upgrading-from-v0-13-2-to-v0-14-0) to get to v0.14.0 and then continue with further upgrades.</Note>
-It is always advised to keep Plane up to date with the latest release.
+We recommend creating a backup of your data before any major upgrade. See [Backup and restore data](/self-hosting/manage/backup-restore).
 
-Lets again run the `./setup.sh` command. You will again be prompted with the below options. This time select `5` to upgrade the release.
+## Update version
 
-```
-Select a Action you want to perform:
-   1) Install (x86_64)
-   2) Start
-   3) Stop
-   4) Restart
-   5) Upgrade
-   6) View Logs
-   7) Backup Data
-   8) Exit
+1. Update your Prime CLI with the command ↓:
+   ```bash
+   sudo prime-cli update-cli
+   ``` 
+   The latest version of the CLI ensures your Plane upgrades happen smoothly.
 
-Action [2]: 5
+2. To update Plane to the latest version, run:
+   ```bash
+   sudo prime-cli upgrade
+   ```
+   This command checks for the latest version of Plane and applies the upgrade if a new version is available.
 
-```
+<Accordion title="Update Plane on Community Edition">
 
+Keeping Plane up to date helps you stay on top of the latest features and improvements. 
 
-By choosing this, it will stop the services and then will download the latest `docker-compose.yaml` and `variables-upgrade.env`. Here system will not replace `.env` with the new one.
+<Warning>
+This guide covers how to upgrade from version 0.14.0 and above. If you’re running version 0.13.2 or below, first follow the guide to upgrade to v0.14.0 at the bottom of this section before continuing with these steps.
+</Warning>
 
-You must expect the below message
+## Prerequisites
 
-![Alt text](/images/docker-compose/stopped-docker.png)
+Before starting, make a backup of your Plane instance. For detailed steps, see the [Backup and restore data](/self-hosting/manage/backup-restore#backup-data) section. This is strongly recommended to ensure you have a safe restore point.
 
-Once done, choose `6` to exit from prompt.
+## Update version
 
-> _**"It is very important for you to compare the 2 files `variables-upgrade.env` and `.env`. Copy the newly added variable from downloaded file to `.env` and set the expected values."**_
+1. Execute the setup script with ↓:
+   ```bash
+   ./setup.sh
+   ```
+   This will bring up a menu with several options. Select option `5` to upgrade:
 
-Once done with making changes in `.env` file, jump on to `Start Server`
+   ```bash
+   Select a Action you want to perform:
+      1) Install (x86_64)
+      2) Start
+      3) Stop
+      4) Restart
+      5) Upgrade
+      6) View Logs
+      7) Backup Data
+      8) Exit
 
-#### Upgrading from v0.13.2 to v0.14.0
+   Action [2]: 5
+   ```
+   Choosing this option stops all services and downloads the latest `docker-compose.yaml` and `variables-upgrade.env` files. The `plane.env` file won’t be overwritten, so your existing environment settings are safe.
 
+   You’ll see a message indicating the services have been stopped.
+   ![Stopped Docker services](/images/docker-compose/stopped-docker.png)
 
-This is a one time activity for users who are upgrading from v0.13.2 to v0.14.0
+2. After the update completes, select `6` to exit the prompt.
 
-As there have been significant changes to Self Hosting process, this step mainly covers the data migration from current (v0.13.2) docker volumes to newly created volumes
+3. After the upgrade, open `variables-upgrade.env` and compare it with your `plane.env` file. Copy any new variables from `variables-upgrade.env` to your `plane.env` file and set the correct values. This step is essential to ensure that all configuration changes are in place for the latest version.
 
-> _**"Before we begin with migration, make sure your v0.14.0 was started and then stopped. This is required to know the newly created docker volume names."**_
+4. Once your `plane.env` file is updated, start your Plane instance again by selecting option `2`.
 
-Begin with downloading the migration script using below command
+### Upgrade from v0.13.2 to v0.14.0
 
-```
+If you’re upgrading from `v0.13.2`, there are some additional migration steps due to significant changes in the self-hosting setup. Follow these instructions to migrate your data to the new volume structure in `v0.14.0`.
 
-curl -fsSL -o migrate.sh https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/migration-0.13-0.14.sh
+1. First, start and then stop Plane in version `0.14.0` to initialize the new Docker volumes.
 
-chmod +x migrate.sh
+2. Use the following command to download the migration script:
+   ```bash
+   curl -fsSL -o migrate.sh https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/migration-0.13-0.14.sh
+   ```
 
-```
+3. Make the file executable.
+   ```bash
+   chmod +x migrate.sh
+   ```
 
+4. Run the migration script: 
+   ```bash
+   ./migrate.sh
+   ```
 
-Now run the `./migrate.sh` command and expect the instructions as below
+   You’ll see the following instructions:
 
-```
-******************************************************************
+   ```
+   ******************************************************************
 
-This script is solely for the migration purpose only.
-This is a 1 time migration of volume data from v0.13.2 => v0.14.x
+   This script is solely for the migration purpose only.
+   This is a 1 time migration of volume data from v0.13.2 => v0.14.x
 
-Assumption:
-1. Postgres data volume name ends with _pgdata
-2. Minio data volume name ends with _uploads
-3. Redis data volume name ends with _redisdata
+   Assumption:
+   1. Postgres data volume name ends with _pgdata
+   2. Minio data volume name ends with _uploads
+   3. Redis data volume name ends with _redisdata
 
-Any changes to this script can break the migration.
+   Any changes to this script can break the migration.
 
-Before you proceed, make sure you run the below command
-to know the docker volumes
+   Before you proceed, make sure you run the below command
+   to know the docker volumes
 
-docker volume ls -q | grep -i "_pgdata"
-docker volume ls -q | grep -i "_uploads"
-docker volume ls -q | grep -i "_redisdata"
+   docker volume ls -q | grep -i "_pgdata"
+   docker volume ls -q | grep -i "_uploads"
+   docker volume ls -q | grep -i "_redisdata"
 
-*******************************************************
+   *******************************************************
 
-Given below list of REDIS volumes, identify the prefix of source and destination volumes leaving "_redisdata"
----------------------
-plane-app_redisdata
-v0132_redisdata
+   Given below list of REDIS volumes, identify the prefix of source and destination volumes leaving "_redisdata"
+   ---------------------
+   plane-app_redisdata
+   v0132_redisdata
 
-Provide the Source Volume Prefix :
+   Provide the Source Volume Prefix :
+   ```
 
-```
+5. Open a second terminal and run the commands shown above to identify your source and destination volume prefixes. For example, you might see something like:
+   ```bash
+   plane-app_redisdata
+   v0132_redisdata
+   ```
 
+   In this example, `v0132` is the prefix for `v0.13.2`, and `plane-app` is the prefix for `v0.14.0`.
 
-**Open another terminal window**, and run the mentioned 3 command. This may be different for users who have changed the volume names in their previous setup (v0.13.2)
+6. Return to the original terminal, enter the source volume prefix `v0132` and destination volume prefix `plane-app`, and press ENTER:
+   ```bash
+   Provide the Source Volume Prefix : v0132
+   Provide the Destination Volume Prefix : plane-app
+   ```
 
-For every command you must see 2 records something like shown in above example of `redisdata`
+   If there are any issues, an error will appear. For a successful migration, there will be no error, and the process will exit quietly.
 
-To move forward, you would need PREFIX of old setup and new setup. As per above example, `v0132` is the prefix of v0.13.2 and `plane-app` is the prefix of v0.14.0 setup
+   ![Migrate Error](/images/docker-compose/migrate-error.png)
 
-**Back to original terminal window**, _Provide the Source Volume Prefix_ and hit ENTER.
+7. Restart the upgraded v0.14.0 instance.
 
-Now you will be prompted to _Provide Destination Volume Prefix_. Provide the value and hit ENTER
-
-```
-Provide the Source Volume Prefix : v0132
-Provide the Destination Volume Prefix : plane-app
-
-```
-
-
-In case the suffixes are wrong or the mentioned volumes are not found, you will receive the error shown below. The image below displays an error for source volumes.
-
-![Migrate Error](/images/docker-compose/migrate-error.png)
-
-In case of successful migration, it will be a silent exit without error.
-
-Now it's time to restart v0.14.0 setup.
+</Accordion>
