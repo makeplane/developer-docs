@@ -96,7 +96,13 @@
       "pages": [
         "self-hosting/upgrade-from-community",
         "self-hosting/manage/backup-restore",
-        "self-hosting/manage/upgrade-plane",
+        {
+          "group": "Update Plane",
+          "pages": [
+            "self-hosting/manage/upgrade-plane",
+            "self-hosting/manage/upgrade-from-0.13.2-0.14.0"
+          ]
+        },
         "self-hosting/manage/view-logs",
         "self-hosting/manage/migrate-plane",
         "self-hosting/manage/prime-cli"

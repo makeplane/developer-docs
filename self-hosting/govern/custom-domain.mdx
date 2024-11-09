@@ -1,14 +1,19 @@
 ---
 title: Custom domain
-description: Host your Plane instance in your custom domain. Our steps differ slightly depending on whether you are hosting on a public IP or a private/internal IP. Follow the steps listed below.
+sidebarTitle: Custom domain
+description: Host your Plane instance in your custom domain. 
 ---
-<Info>
-In the Commercial Edition, you can set up a custom domain right during installation. 
-</Info>
+<Note>
+With the Commercial Edition, you can set up a custom domain right during installation. If you ever need to change the domain later, just contact our support team for assistance until we ship out a feature that lets you handle domain changes yourself.
+</Note>
+
+<Accordion title="Community Edition">
+
+Our steps differ slightly depending on whether you are hosting on a public IP or a private/internal IP. Follow the steps listed below.
 
 ## Update configuration in .env file
 
-<Note>This step is mandatory for you to host Plane on a custom domain</Note>
+<Warning>This step is mandatory for you to host Plane on a custom domain.</Warning>
 
 Open your project's `.env` file in a text editor. This file contains configuration settings for your application. Locate the following lines:
 
@@ -49,3 +54,5 @@ If your server is behind a firewall or router and has an internal IP address, yo
 - Once the reverse proxy is properly configured, ensure that your firewall/router allows incoming traffic on the necessary ports to reach your server.
 
 By following these steps, you will be able to access your self-hosted instance of Plane using your custom domain name, whether your server has a public IP address or is behind a firewall with an internal IP address.
+
+</Accordion> 
