@@ -88,13 +88,15 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
 
    In this example, `plane-013-dev` is the prefix for `v0.13.2`, and `plane-app` is the prefix for `v0.14.0`.
 
-10. Return to the original terminal, enter the source volume prefix `plane-013-dev` and destination volume prefix `plane-app`, and press ENTER:
+10. Return to the original terminal, enter the source volume prefix `v0132` and destination volume prefix `plane-app`, and press ENTER:
      ```bash
     Provide the Source Volume Prefix : plane-013-dev
     Provide the Destination Volume Prefix : plane-app
     ```
 
     If there are any issues, an error will appear. For a successful migration, there will be no error, and the process will exit quietly.
+
+    ![Migrate Error](/images/docker-compose/migrate-error.png)
 
 11. Restart the upgraded v0.14.0 instance with:
     ```bash
