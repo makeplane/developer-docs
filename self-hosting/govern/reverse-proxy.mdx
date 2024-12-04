@@ -14,20 +14,6 @@ All configurations include:
     - Caddy: Handles certificates automatically
     - Traefik: Uses Let’s Encrypt
 
-## Proxy setup
-
-1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
-
-2. Replace the following placeholders:
-    - `<domain>`   
-    Your Plane application's domain name.
-    - `<plane-host-ip>`  
-    The IP address where Plane is hosted.
-    - `<plane-host-port>`   
-    The port Plane listens on.
-    
-3. For Traefik, also update `your-email@example.com` with your email.
-
 ## Configuration templates
 
 ### NGINX
@@ -166,3 +152,17 @@ providers:
             X-Real-IP: "{{ .RemoteAddr }}"
 ```
 </Accordion>
+
+## Proxy setup
+
+1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
+
+2. Replace the following placeholders:
+    - `<domain>`   
+    Your Plane application's domain name.
+    - `<plane-host-ip>`  
+    The IP address where Plane is hosted.
+    - `<plane-host-port>`   
+    The port Plane listens on.
+    
+3. For Traefik, also update `your-email@example.com` with your email.
