@@ -17,35 +17,79 @@ This role lets instance admins access `/god-mode`, a route for features that hel
 New instances allow skipping going to God Mode and setting up your workspace instead. Whatever you choose after secure instance set-up, we highly recommend coming quickly to /god-mode to set up at least your SMTP server so your users can start getting invite emails to projects.
 </Tip>
 
+## Settings
+
 God Mode features a few screens as shown below.
 
-    -  **General**
+### General 
+The General settings page allows you to view or configure core instance details and telemetry preferences.
+Here’s what you can manage:
 
-        Your instance name, admin’s email address, and the provision to add other instance admins show up on this screen. There’s also an option to report anonymous usage data so we can learn from how you use Plane and ship better product.
+- **Name of instance**  
+Customize the name of your instance.
 
-    -  **Email**
-        Set up your SMTP server here so you can send essential emails—password resets, exports, changes to your instance—and Plane-enabled emails—onboarding, tips and tricks, new features— to all your users. [Learn more here](/self-hosting/govern/communication).
+- **Email**  
+Displays the instance admin email address.
 
-    -  **SSO and OAuth**
-        <Frame>![](/images/instance-admin/authentication-instance-settings.png)</Frame>
+- **Instance ID**  
+Displays a unique identifier for your instance.
 
-        
+- **Chat with us**  
+Enable or disable in-app chat support for users. Disabling telemetry automatically turns this off.
 
-        Control what SSO and OAuth services your users can use to log into their Plane account. You can also toggle magic links on and off from here. [Learn more here](/self-hosting/govern/authentication).
+- **Let Plane collect anonymous usage data**  
+Plane collects anonymized usage data (no PII) to help improve features and overall experience. You can turn this off anytime. See [Telemetry](/self-hosting/telemetry) for more info.
 
-    <Note>
-    This is where you will see new SSO services and custom OAuth configs in the future.
-    </Note>
+<Frame>![](/images/instance-admin/god-mode-general.webp)</Frame>
 
--   **Artificial intelligence**
+### Workspaces
+The Workspaces section allows you to manage all workspaces within your Plane instance.
 
-    Plane supports the use of AI throughout your projects. For now, we support OpenAI’s APIs and keys. You can configure them here or leave them blank if you don’t wish to offer AI features to your users. Your Plane experience remains largely unchanged if you don’t set this up.
+-  **View all Workspaces**  
+Access a complete list of workspaces on your instance.
 
--   **Images in Plane**
+- **Create Workspaces**  
+You can create new workspaces directly from this section. If workspace creation is restricted, only the instance admin will have this ability.
 
-    You can use your own third-party libraries to update images in project settings. Configure your Unsplash key here. When we add more image libraries, they will show up here.
+- **Restrict Workspace creation**   
+Toggle the **Prevent anyone from creating a workspace** option to prevent anyone else from creating workspaces. Once enabled, only you (the instance admin) can create new workspaces.
 
-Soon, we will introduce God Mode for our Cloud users as well so they can manage their workspaces better. To get notified about this, [sign up here](https://ece39166.sibforms.com/serve/MUIFANgaMWIARsq1n0lMNrch19pdY2HJm9FkSXAeq1DrCoXJBmO9Yq6SPgtzu7rL0lQBmCvvz2A2arVl5WaDxYu6YhNW4PKNAis0DMXmpRnwm5633BvXqIYILqZuyqYiGS7_QjJ0Ozh4R2uctd8RwiiTLSHWpnV2njQt6DPV5cVr8FH3K-TouNAlBScOJxbCpjj8fYo2ULsEJeAL).
+To add users to a workspace, you will need to [invite them](https://docs.plane.so/core-concepts/workspaces/members#add-member) after creating it.
+    
+<Note>
+Workspace deletion is currently not supported.
+</Note>
+
+<Frame>![](/images/instance-admin/god-mode-workspaces.webp)</Frame>
+
+### Email 
+Set up your SMTP server here so you can send essential emails—password resets, exports, changes to your instance—and Plane-enabled emails—onboarding, tips and tricks, new features— to all your users. [Learn more here](/self-hosting/govern/communication).
+
+<Frame>![](/images/instance-admin/god-mode-email.webp)</Frame>
+
+### Authentication
+Control what SSO and OAuth services your users can use to sign up and log in to your Plane instance. You can also toggle unique code and password logins on and off from here. [Learn more here](/self-hosting/govern/authentication).
+
+- **Allow anyone to sign up without an invite**  
+  Toggle this setting off if you want your users to join the instance only if they receive an invite.
+
+<Note>
+This is where you will see new SSO services and custom OAuth configs in the future.
+</Note>
+
+<Frame>![](/images/instance-admin/god-mode-authentication.webp)</Frame>
+
+### Artificial intelligence
+
+Plane supports the use of AI throughout your projects. For now, we support OpenAI’s APIs and keys. You can configure them here or leave them blank if you don’t wish to offer AI features to your users. Your Plane experience remains largely unchanged if you don’t set this up.
+
+<Frame>![](/images/instance-admin/god-mode-ai.webp)</Frame>
+
+### Images in Plane
+
+You can use your own third-party libraries to update images in project settings. Configure your Unsplash key here. When we add more image libraries, they will show up here.
+
+<Frame>![](/images/instance-admin/god-mode-images.webp)</Frame>
 
 ## Add instance admin
 To grant a user full administrative access (including God mode) to your self-hosted Plane instance, you'll need to assign them the Instance Admin role. Instance admins have unrestricted control over all configurations and settings within the instance.
@@ -56,16 +100,20 @@ To promote an existing user to Instance Admin, execute the following command in 
 ```  
 Ensure that the provided email matches the user's registered account. This command will instantly elevate their privileges to full administrative access.
 
+--------
+
+Soon, we will introduce God Mode for our Cloud users as well so they can manage their workspaces better. To get notified about this, [sign up here](https://ece39166.sibforms.com/serve/MUIFANgaMWIARsq1n0lMNrch19pdY2HJm9FkSXAeq1DrCoXJBmO9Yq6SPgtzu7rL0lQBmCvvz2A2arVl5WaDxYu6YhNW4PKNAis0DMXmpRnwm5633BvXqIYILqZuyqYiGS7_QjJ0Ozh4R2uctd8RwiiTLSHWpnV2njQt6DPV5cVr8FH3K-TouNAlBScOJxbCpjj8fYo2ULsEJeAL).
+
 ## FAQs
 <AccordionGroup>
   <Accordion title="How do you know who an Instance admin is?">
     Whoever spins up the instance or upgrades to v0.14, we assume, is the instance admin. When you see Let's secure your instance, enter your email-password combo. If you are already using Plane with those credentials, you will be logged in and will see /god-mode features. If not, we will create a new user on your local instance and you will see /god-mode.
 
-    Our shrewd guess right now is users technical enough to upgrade to or bring up a new instance with v0.14 are instance admins. If there’s a case where this isn’t true, please reach out to us before you upgrade or set-up your fresh instance.
+    Our shrewd guess right now is users are technical enough to upgrade to or bring up a new instance with v0.14 are instance admins. If there’s a case where this isn’t true, please reach out to us before you upgrade or set up your fresh instance.
   </Accordion>
 
   <Accordion title="What if I don’t complete secure instance set-up at the time of the upgrade?">
-    We strongly recommend completing set-up at upgrade so your regular users can access Plane without trouble. Because we are introducing several sensitive admin features in `God Mode`, we will show an instance-not-set-up screen to your regular users until such a time that you can complete set-up.
+    We strongly recommend completing set-up at upgrade so your regular users can access Plane without trouble. Because we are introducing several sensitive admin features in `God Mode`, we will show an instance-not-set-up screen to your regular users until such a time that you can complete the setup.
     <Frame>![success-on-setup-existing-instances-self-hosted](/images/faq-2.png)</Frame>
   </Accordion>
 
