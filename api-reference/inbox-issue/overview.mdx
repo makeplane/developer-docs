@@ -2,23 +2,35 @@
 title: Overview
 ---
 
-To enable the intake feature, the user can hit a PATCH request on the project api with the body as
+<Warning>
+**Deprecation notice**
+
+We are deprecating all `/api/v1/.../inbox-issues/` endpoints in favor of `/api/v1/.../intake-issues/`.
+
+**End of support**  
+28th February 2025
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/inbox-issues/` references with `/intake-issues/` in your codebase before the support end date.
+</Warning>
+
+To enable the Intake feature, the user can hit a PATCH request on the project api with the body as
 
 ```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/:issue_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/:issue_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/:issue_id/
+GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/
+POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/
+GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/:issue_id/
+PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/:issue_id/
+DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/:issue_id/
 ```
 
 ```
 {
-	inbox_view:true,
+	intake_view:true,
 }
 ```
 
-To create an intake issue, the payload should be sent in the below format
+To create an Intake issue, the payload should be sent in the below format
 
 ```json
 {
@@ -29,7 +41,7 @@ To create an intake issue, the payload should be sent in the below format
 }
 ```
 
-### Intake Issue Object
+### Intake issue object
 
 **Attribute**
 
@@ -90,7 +102,7 @@ To create an intake issue, the payload should be sent in the below format
     "pending_issue_count": 0,
     "created_at": "2023-11-21T07:32:26.072634Z",
     "updated_at": "2023-11-21T07:32:26.072648Z",
-    "name": "a dummy project hvh Inbox",
+    "name": "a dummy project with Intake",
     "description": "",
     "is_default": true,
     "view_props": {},

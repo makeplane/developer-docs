@@ -17,6 +17,14 @@ This command initiates a full backup of all critical data, storing it in the def
 ```
 Each backup file will be timestamped to ensure you can easily identify the latest or a specific backup if needed.
 
+### Backup plane.env
+If you need to back up only the `plane.env` file, you'll need to do it manually. Here’s how:
+
+1. Navigate to the `/opt/plane` folder on your machine or server where Plane is installed..
+2. Locate the `plane.env` file.
+3. Copy this file to a different location as a backup, so you can restore it if needed.
+
+
 ## Restore data
 
 You can restore your data from a previous backup with ↓:
@@ -59,7 +67,15 @@ Backing Up plane-app_uploads
 Backup completed successfully. Backup files are stored in /....../plane-app/backup/20240502-1120
 ```
 The backup files are stored locally, so you can copy them to an external storage service if needed for extra security.
-**** 
+
+### Backup plane.env
+If you need to back up only the `plane.env` file, you'll need to do it manually. Here’s how:
+
+1. Navigate to the folder on your machine or server where Plane is installed..
+2. Locate the `plane.env` file.
+3. Copy this file to a different location as a backup, so you can restore it if needed.
+
+***
 
 ## Restore data
 Follow these steps to restore data from a backup:
