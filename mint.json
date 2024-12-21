@@ -112,6 +112,13 @@
       ]
     },
     {
+      "group": "Troubleshoot",
+      "pages": [
+        "self-hosting/troubleshoot/license-errors",
+        "self-hosting/troubleshoot/cli-errors"
+      ]
+    },
+    {
       "group": "API Reference",
       "pages": [
         "api-reference/introduction",
@@ -166,6 +173,7 @@
             "api-reference/issue/add-issue",
             "api-reference/issue/list-issues",
             "api-reference/issue/get-issue-detail",
+            "api-reference/issue/get-issue-sequence-id",
             "api-reference/issue/update-issue-detail",
             "api-reference/issue/delete-issue"
           ]
@@ -232,12 +240,12 @@
         {
           "group": "Intake issue",
           "pages": [
-            "api-reference/inbox-issue/overview",
-            "api-reference/inbox-issue/add-inbox-issue",
-            "api-reference/inbox-issue/list-inbox-issues",
-            "api-reference/inbox-issue/get-inbox-issue-detail",
-            "api-reference/inbox-issue/update-inbox-issue-detail",
-            "api-reference/inbox-issue/delete-inbox-issue"
+            "api-reference/intake-issue/overview",
+            "api-reference/intake-issue/add-intake-issue",
+            "api-reference/intake-issue/list-intake-issues",
+            "api-reference/intake-issue/get-intake-issue-detail",
+            "api-reference/intake-issue/update-intake-issue-detail",
+            "api-reference/intake-issue/delete-intake-issue"
           ]
         },
         {
