@@ -6,6 +6,7 @@ sidebarTitle: Backup and restore
 Backing up your data regularly helps prevent data loss and allows you to restore your system quickly if necessary. Follow these instructions to back up and restore your data using Plane’s command-line interface.
 
 ## Backup data
+
 Create a backup of your Plane data with ↓:
 ```bash
 sudo prime-cli backup
@@ -17,7 +18,7 @@ This command initiates a full backup of all critical data, storing it in the def
 ```
 Each backup file will be timestamped to ensure you can easily identify the latest or a specific backup if needed.
 
-### Backup plane.env
+## Backup plane.env
 If you need to back up only the `plane.env` file, you'll need to do it manually. Here’s how:
 
 1. Navigate to the `/opt/plane` folder on your machine or server where Plane is installed..
@@ -68,7 +69,7 @@ Backup completed successfully. Backup files are stored in /....../plane-app/back
 ```
 The backup files are stored locally, so you can copy them to an external storage service if needed for extra security.
 
-### Backup plane.env
+## Backup plane.env
 If you need to back up only the `plane.env` file, you'll need to do it manually. Here’s how:
 
 1. Navigate to the folder on your machine or server where Plane is installed..

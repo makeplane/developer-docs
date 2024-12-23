@@ -7,6 +7,8 @@ The Commercial edition comes with the free plan and the flexibility to upgrade t
 <Warning> 
  Follow the instructions below first all the way to the end of the section **Restore data**.  
  We strongly recommend you install on a fresh machine, not the one running Plane Community.
+
+ The instructions provided on this page are specific to installations using Docker. If you are running Plane on Kubernetes, the backup process differs. You'll need to manually create a database dump and back up your file storage by copying the relevant volumes or storage paths.
 </Warning>
 
 <Tip>
@@ -15,6 +17,7 @@ The `/opt` folder requires sudo or root privileges. Be sure to log in as the roo
 
 
 ## Back up data
+
 `setup.sh` in the Community Edition now comes with an option to back up your data.
 
 1. Use  `./setup.sh` to open the operator menu and select `7` to backup your Plane data.
