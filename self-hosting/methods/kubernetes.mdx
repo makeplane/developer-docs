@@ -26,6 +26,10 @@ Plane One and Plane Pro are enabled on this edition, so the Free plan on this ed
         DOMAIN_NAME=<subdomain.domain.tld or domain.tld>
         ```
 
+        <Warning>
+            When configuring the PLANE_VERSION environment variable, **do not** set it to `stable`. Always specify the latest version number (e.g., `1.6.0`). Using `stable` can lead to unexpected issues.
+        </Warning>
+
     3. Add the Plane helm chart repo.
 
         ```bash

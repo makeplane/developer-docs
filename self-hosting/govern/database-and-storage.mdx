@@ -21,7 +21,11 @@ The Prime CLI lets you easily configure your Commercial Edition instance, provid
 
     - `External Postgres URL`  
         Provide the URL of your external PostgreSQL instance if you want to switch from the default Plane configuration.
-        *Default*: `Postgres 15.5` in the Docker container
+        *Default*: `Postgres 15.5` in the Docker container. 
+
+        <Warning>
+        Don’t use a database on your local machine. If you use `localhost` in the URL, it won’t work. Make sure to use a database hosted on a network-accessible server.
+        </Warning>
 
     - `External Redis URL`  
         Specify the URL of your external Redis instance to override the default Redis configuration.  
