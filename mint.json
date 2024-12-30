@@ -107,13 +107,12 @@
         "self-hosting/manage/view-logs",
         "self-hosting/manage/migrate-plane",
         "self-hosting/manage/prime-cli"
-        
-        
       ]
     },
     {
       "group": "Troubleshoot",
       "pages": [
+        "self-hosting/troubleshoot/installation-errors",
         "self-hosting/troubleshoot/license-errors",
         "self-hosting/troubleshoot/cli-errors"
       ]
