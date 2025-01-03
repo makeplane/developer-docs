@@ -59,7 +59,9 @@
     {
       "group": "Self-host Plane",
       "pages": [
-        "self-hosting/overview"
+        "self-hosting/overview",
+        "self-hosting/editions-and-versions"
+
       ]
     },
     {
