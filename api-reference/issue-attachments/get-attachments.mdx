@@ -1,0 +1,50 @@
+---
+title: Get attachments
+description: Gets all the attachments in the issue.
+api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/issue-attachments/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required>
+The workspace-slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ParamField>
+<ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
+<ParamField path="issue_id" type="string" required>The unique identifier of the issue</ParamField>
+
+### Response
+
+```json
+{
+   "id": "<asset-id>",
+   "created_at": "2024-10-30T09:32:32.815273Z",
+   "updated_at": "2024-10-30T09:32:35.533136Z", 
+   "deleted_at": null,
+   "attributes": {
+       "name": "example.png",
+       "size": 135686,
+       "type": "image/png"
+   },
+   "asset": "<workspace-id>/<unique-id>-example.png",
+   "entity_type": "ISSUE_ATTACHMENT",
+   "is_deleted": false,
+   "is_archived": false,
+   "external_id": null,
+   "external_source": null,
+   "size": 135686.0,
+   "is_uploaded": true,
+   "storage_metadata": {
+       "ETag": "<etag-hash>",
+       "Metadata": {},
+       "ContentType": "image/png",
+       "LastModified": "2024-10-30T09:32:34+00:00",
+       "ContentLength": 135686
+   },
+   "created_by": "<user-id>",
+   "updated_by": "<user-id>",
+   "workspace": "<workspace-id>",
+   "project": "<project-id>",
+   "issue": "<issue-id>"
+}
+```
