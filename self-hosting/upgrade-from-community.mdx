@@ -6,17 +6,17 @@ The Commercial edition comes with the free plan and the flexibility to upgrade t
 
 <Warning> 
  Follow the instructions below first all the way to the end of the section **Restore data**.  
- We strongly recommend you install on a fresh machine, not the one running Plane Community.
 
  The instructions provided on this page are specific to installations using Docker. If you are running Plane on Kubernetes, you'll need to manually create a database dump and back up your file storage by copying the relevant volumes or storage paths.
 </Warning>
 
-<Tip>
-The `/opt` folder requires sudo or root privileges. Be sure to log in as the root user or as a user with sudo access.
-</Tip>
+## Prerequisites
+
+-  Install on a fresh machine, not the one running the Plane Community Edition.
+- Be sure to log in as the root user or as a user with sudo access. The `/opt` folder requires sudo or root privileges.
 
 
-## Back up data
+## Back up data on Community Edition
 
 `setup.sh` in the Community Edition now comes with an option to back up your data.
 
@@ -27,11 +27,11 @@ e.g., `/plane-selfhost/plane-app/backup/20240522-1027`
     - `pgdata.tar.gz`
     - `redisdata.tar.gz`
     - `uploads.tar.gz`
-4. Copy all the 3 files from the server running the Community Edition to any folder on the server running Plane One on any folder of your choice._createMdxContent
+4. Copy all the 3 files from the server running the Community Edition to any folder on the server running Plane One on any folder of your choice.
 
 e.g., `~/ce-backup`
 
-## Restore data
+## Restore data and install Commercial Edition
 1. Start any command-line interface like Terminal and go into the folder with the back-up files.
     ```
     cd ~/ce-backup
@@ -56,6 +56,6 @@ e.g., `~/ce-backup`
     mv $TARGET_DIR/uploads/ $TARGET_DIR/minio/uploads/
     ```
 3. This script will extract your Community Edition data and restore it to /opt/plane/data.
-4. Install **Commercial** edition.
+4. Install the **Commercial** Edition.
     - Using [Docker](/self-hosting/methods/docker-compose#recommended-edition)
     - Using [Kubernetes](/self-hosting/methods/kubernetes#recommended-edition)
