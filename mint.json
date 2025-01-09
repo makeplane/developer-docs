@@ -116,7 +116,8 @@
       "pages": [
         "self-hosting/troubleshoot/installation-errors",
         "self-hosting/troubleshoot/license-errors",
-        "self-hosting/troubleshoot/cli-errors"
+        "self-hosting/troubleshoot/cli-errors",
+        "self-hosting/troubleshoot/storage-errors"
       ]
     },
     {
