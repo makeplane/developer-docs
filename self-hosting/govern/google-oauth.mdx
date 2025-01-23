@@ -19,7 +19,7 @@ First, you will need to identify Plane as an approved OAuth app to Google.
    1. **Authorized JavaScript origins**\
       The HTTP origins that host your web application, e.g., `https://app.plane.so`
    2. **Authorized redirect URIs**\
-      Append the path that users should be redirected to after they have authenticated with Google, e.g., `https://app.plane.so/auth/google/callback`
+      Append the path that users should be redirected to after they have authenticated with Google. `https://<plane.example.com>/auth/google/callback` and `https://<plane.example.com>/auth/mobile/google/callback/` where `<plane.example.com>` is your self-hosted instance's domain.
    3. Click **Create**.
    4. Get the Client ID and Client secret under **OAuth 2.0 Client IDs** on the **Credentials** screen.
    <Frame>![](/images/authentication/google/google-auth-4.png)</Frame>
