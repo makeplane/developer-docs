@@ -23,8 +23,10 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
 2. Click **New GitHub App**.
+   ![Create GitHub App](/images/github-integration/create-github-app.webp)
 
-3. Provide a **GitHub App name** and **Homepage URL**.
+3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
+    ![App name and homepage URL](/images/github-integration/app-name-homepage-url.webp)
 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**. 
 
@@ -33,6 +35,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     https://<your-domain>/silo/api/github/auth/user/callback
     ```
     These URLs allow Plane to verify and enable workspace connection with the Github App.
+    ![Add Callback URL](/images/github-integration/add-callback-url.webp)
 
 5. In the **Post installation** section, add the below **Setup URL**.  
 
@@ -40,7 +43,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     https://<your-domain>/silo/api/github/auth/callback
     ```
    Redirects users to this URL after GitHub app installation.
-
+   ![Add setup URL](/images/github-integration/add-setup-url.webp)
 
 6. Turn on **Redirect on update**.
 
@@ -50,29 +53,35 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     ```
     This allows Plane to receive updates from GitHub repositories.
 
+    ![Add Webhook URL](/images/github-integration/add-webhook-url.webp)
+
 ### Set up permissions and events
 
 1. Add repository and account permissions by setting the **Access** dropdown next to each permission, as shown in the tables below.
+    ![Setup permissions](/images/github-integration/setup-permissions.webp)
 
     **Repository permissions**
 
-    |Permission|Access level|Purpose|
-    |---------|------------|-----------|
-    |Commit statuses|Read-only|Monitor CI/CD status of commits|
-    |Contents|Read and write|Read and modify repository files|
-    |Issues|Read and write|Sync issues between Plane and GitHub|
-    |Merge queues|Read-only|View merge queue details|
-    |Metadata|Read-only|Access repository details|
-    |Pull requests|Read and write|Manage pull requests|
+    |Permission&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Access&nbsp;level&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
+    |---------|---------------------|-----------|
+    |Commit statuses|Read-only|Allows the GitHub app to read and update commit statuses, indicating whether a commit has passed checks (e.g., CI/CD pipelines).|
+    |Contents|Read and write|Grants access to read and modify repository contents, including reading files, creating commits, and updating files.|
+    |Issues|Read and write|Enables reading, creating, updating, closing, and commenting on issues within the repository.|
+    |Merge queues|Read-only|Allows interaction with merge queues to manage the order of pull request merges.|
+    |Metadata|Read-only|Provides read-only access to repository metadata, such as its name, description, and visibility.|
+    |Pull requests|Read and write|Allows reading, creating, updating, merging, and commenting on pull requests.|
 
     **Account permissions**
 
-    |Permission|Access level|Purpose|
+    |Permission&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Access&nbsp;level&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
     |---------|------------|-----------|
-    |Email addresses|Read-only|Access user email for notifications|
-    |Profile|Read and write|Retrieve and update user profile data|
+    |Email addresses|Read-only|Grants access to users' email addresses, typically for notifications or communication.|
+    |Profile|Read and write|Enables access to user profile details like name, username, and avatar.|
+
 
 2. In the **Subscribe to events** section, turn on all the required events below. 
+
+    ![Subscribe to events](/images/github-integration/subscribe-to-events.webp)
     
     |Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
     |---------|------------|
@@ -87,7 +96,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     |Push|Activates when new commits are pushed to a repository. Useful for tracking code updates and changes.|
     |Rsepository sub issues|Tracks issues within a repository that are linked to or managed by another issue. Ensures accurate synchronization of related issues.|
 
-3. Click the **Create Github App** button.
+3. Click the **Create GitHub App** button at the bottom of the page.
 
 ## Configure Plane instance
 
@@ -97,18 +106,22 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 3. In the **General** tab, under the **Client secrets** section, click **Generate a new client secret**.
 
+   ![General tab](/images/github-integration/general-tab.webp)
+
 4. Scroll down to the **Private keys** section.
+
+    ![Private keys](/images/github-integration/private-keys.webp)
 
 5. Click **Genereate a private key**.
 
-6. Retrieve the following details from the General tab:
+6. Retrieve the following details from the **General** tab:
     - App ID
     - Client ID
     - Client secret
     - GitHub App name
     - Private key
 
-7. Add these environment variables to your Plane instance's `.env` file. 
+7. Add these environment variables with the values to your Plane instance's `.env` file. 
 
     ```bash
     GITHUB_CLIENT_ID=<CLIENT_ID>
@@ -118,6 +131,6 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     GITHUB_PRIVATE_KEY=<PRIVATE_KEY>
     ```
 
-8. Save the file and restrat the instance. 
+8. Save the file and restart the instance. 
 
 9. Once you've completed the instance configuration, [activate the GitHub integration in Plane](https://docs.plane.so/integrations/github).
