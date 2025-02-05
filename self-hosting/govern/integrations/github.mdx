@@ -1,0 +1,123 @@
+---
+title : Configure GitHub App for Plane integration
+sidebarTitle: GitHub
+---
+
+This guide walks you through setting up a GitHub App to enable GitHub integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for GitHub, you’ll need to set up the necessary authentication, permissions, and webhooks to ensure smooth integration.
+
+In this guide, you’ll:
+1. [Create and configure a GitHub App](/self-hosting/govern/integrations/github#create-github-app)
+2. [Set up permissions and events](/self-hosting/govern/integrations/github#set-up-permissions-and-events)
+3. [Configure your Plane instance](/self-hosting/govern/integrations/github#configure-plane-instance)
+
+<Warning>
+**Activate GitHub integration**
+
+After creating and configuring the GitHub app and configuring the instance as detailed on this page, you'll need to [setup the GitHub integration](https://docs.plane.so/integrations/github) within Plane. 
+</Warning>
+
+## Create GitHub App
+
+To configure GitHub integration, you'll need to create a GitHub App within your organization. Follow these steps:
+
+1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
+
+2. Click **New GitHub App**.
+
+3. Provide a **GitHub App name** and **Homepage URL**.
+
+4. In the **Identifying and authorizing users** section, add the following **Callback URLS**. 
+
+    ```bash
+    https://<your-domain>/silo/api/github/auth/callback
+    https://<your-domain>/silo/api/github/auth/user/callback
+    ```
+    These URLs allow Plane to verify and enable workspace connection with the Github App.
+
+5. In the **Post installation** section, add the below **Setup URL**.  
+
+    ```bash
+    https://<your-domain>/silo/api/github/auth/callback
+    ```
+   Redirects users to this URL after GitHub app installation.
+
+
+6. Turn on **Redirect on update**.
+
+7. In the **Webhook** section, add the below **Webhook URL**.  
+    ```bash
+    https://<your-domain>/silo/api/github/github-webhook
+    ```
+    This allows Plane to receive updates from GitHub repositories.
+
+### Set up permissions and events
+
+1. Add repository and account permissions by setting the **Access** dropdown next to each permission, as shown in the tables below.
+
+    **Repository permissions**
+
+    |Permission|Access level|Purpose|
+    |---------|------------|-----------|
+    |Commit statuses|Read-only|Monitor CI/CD status of commits|
+    |Contents|Read and write|Read and modify repository files|
+    |Issues|Read and write|Sync issues between Plane and GitHub|
+    |Merge queues|Read-only|View merge queue details|
+    |Metadata|Read-only|Access repository details|
+    |Pull requests|Read and write|Manage pull requests|
+
+    **Account permissions**
+
+    |Permission|Access level|Purpose|
+    |---------|------------|-----------|
+    |Email addresses|Read-only|Access user email for notifications|
+    |Profile|Read and write|Retrieve and update user profile data|
+
+2. In the **Subscribe to events** section, turn on all the required events below. 
+    
+    |Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
+    |---------|------------|
+    |Installation target| This is where the repositories or organizations where your GitHub App is installed. This determines which repositories Plane can sync with.|
+    |Meta|Includes metadata about the app's configuration and setup. This is essential for maintaining integration stability.|
+    |Issue comment| Triggers when a comment is added, edited, or deleted on an issue. Useful for keeping comments synced between Plane and GitHub.|
+    |Issues|Triggers when an issue is created, updated, closed, reopened, assigned, labeled, or transferred. Ensures issue status and details remain consistent between Plane and GitHub.|
+    |Pull request|Fires when a pull request is opened, closed, merged, edited, or labeled. Essential for tracking development progress.|
+    |Pull request review|Activates when a review is submitted, edited, or dismissed. Keeps review activities aligned between Plane and GitHub.|
+    |Pull request review comment|Fires when a review comment is added, modified, or removed. Ensures feedback is reflected across both platforms.|
+    |Pull request review thread|Triggers when a review discussion thread is resolved or reopened. Helps maintain visibility on code review discussions.|
+    |Push|Activates when new commits are pushed to a repository. Useful for tracking code updates and changes.|
+    |Rsepository sub issues|Tracks issues within a repository that are linked to or managed by another issue. Ensures accurate synchronization of related issues.|
+
+3. Click the **Create Github App** button.
+
+## Configure Plane instance
+
+1. Go back to **Settings \> Developer Settings \> GitHub Apps**.
+
+2. Click **Edit** on the GitHub you created. 
+
+3. In the **General** tab, under the **Client secrets** section, click **Generate a new client secret**.
+
+4. Scroll down to the **Private keys** section.
+
+5. Click **Genereate a private key**.
+
+6. Retrieve the following details from the General tab:
+    - App ID
+    - Client ID
+    - Client secret
+    - GitHub App name
+    - Private key
+
+7. Add these environment variables to your Plane instance's `.env` file. 
+
+    ```bash
+    GITHUB_CLIENT_ID=<CLIENT_ID>
+    GITHUB_CLIENT_SECRET=<CLIENT_SECRET>
+    GITHUB_APP_NAME=<APP_NAME>
+    GITHUB_APP_ID=<APP_ID>
+    GITHUB_PRIVATE_KEY=<PRIVATE_KEY>
+    ```
+
+8. Save the file and restrat the instance. 
+
+9. Once you've completed the instance configuration, [activate the GitHub integration in Plane](https://docs.plane.so/integrations/github).

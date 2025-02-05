@@ -90,6 +90,12 @@
         "self-hosting/govern/database-and-storage",
         "self-hosting/govern/custom-domain",
         "self-hosting/govern/private-bucket",
+        {
+          "group": "Integrations",
+          "pages": [
+              "self-hosting/govern/integrations/github"
+            ]
+        },
         "self-hosting/govern/reverse-proxy",
         "self-hosting/telemetry"
       ]
