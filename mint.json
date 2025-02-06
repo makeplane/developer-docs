@@ -306,7 +306,7 @@
           "pages": [
             "api-reference/worklogs/overview",
             "api-reference/worklogs/get-worklogs-for-issue",
-            "api-reference/worklogs/get-all-worklogs",
+            "api-reference/worklogs/get-total-time",
             "api-reference/worklogs/create-worklog",
             "api-reference/worklogs/update-worklog",
             "api-reference/worklogs/delete-worklog"
