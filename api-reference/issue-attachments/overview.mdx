@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: Allows you to manage file attachments associated with issues. You can upload new attachments and retrieve existing attachments for a specific issue.
+description: Allows you to manage file attachments associated with issues and Intake issues. You can upload new attachments and retrieve existing attachments for a specific issue.
 ---
 
 ```http
@@ -107,9 +107,9 @@ PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
     ID of user who last modified the attachment
 
-*   `updated_by` _string_ 
+*   `deleted_by` _string_ 
 
-    ID of user who last modified the attachment
+    ID of user who deleted the attachment
 
 *   `workspace` _string_ 
 

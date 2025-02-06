@@ -1,0 +1,29 @@
+---
+title: Get total time for each issue
+sidebarTitle: Total logged time
+description: Aggregates the worklogs and provides the total time spent on each issue in the project. 
+api: GET /api/v1/workspaces/:workspace-slug/projects/:project_id/total-worklogs/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required>
+The workspace-slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ParamField>
+<ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
+
+### Response
+
+```json
+    [
+        {
+            "issue_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            "duration": 3.5
+        },
+        {
+            "issue_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            "duration": 8
+        },
+    ]
+```
