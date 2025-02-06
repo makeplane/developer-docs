@@ -31,8 +31,8 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**. 
 
     ```bash
-    https://<your-domain>/silo/api/github/auth/callback
-    https://<your-domain>/silo/api/github/auth/user/callback
+    https://<your-domain>/api/github/auth/callback
+    https://<your-domain>/api/github/auth/user/callback
     ```
     These URLs allow Plane to verify and enable workspace connection with the Github App.
     ![Add Callback URL](/images/github-integration/add-callback-url.webp)
@@ -40,7 +40,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 5. In the **Post installation** section, add the below **Setup URL**.  
 
     ```bash
-    https://<your-domain>/silo/api/github/auth/callback
+    https://<your-domain>/api/github/auth/callback
     ```
    Redirects users to this URL after GitHub app installation.
    ![Add setup URL](/images/github-integration/add-setup-url.webp)
@@ -49,7 +49,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 7. In the **Webhook** section, add the below **Webhook URL**.  
     ```bash
-    https://<your-domain>/silo/api/github/github-webhook
+    https://<your-domain>/api/github/github-webhook
     ```
     This allows Plane to receive updates from GitHub repositories.
 
