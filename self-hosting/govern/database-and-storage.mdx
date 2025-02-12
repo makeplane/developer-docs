@@ -25,6 +25,8 @@ The Prime CLI lets you easily configure your Commercial Edition instance, provid
 
         <Warning>
         Don’t use a database on your local machine. If you use `localhost` in the URL, it won’t work. Make sure to use a database hosted on a network-accessible server.
+
+        Avoid using special characters in your PostgreSQL password.
         </Warning>
 
     - `External Redis URL`  
@@ -94,6 +96,12 @@ To configure external Postgres, Redis, and S3 storage for the Plane Community Ed
    PGDATA=/var/lib/postgresql/data             # No need to change this for external Postgres.
    DATABASE_URL=                               # Leave this empty if you're providing values for the variables above. If you choose to use the DATABASE_URL, you can leave all the other database-related variables empty.
    ```
+
+    <Warning>
+    Don’t use a database on your local machine. If you use `localhost` in the URL, it won’t work. Make sure to use a database hosted on a network-accessible server.
+
+    Avoid using special characters in your PostgreSQL password.
+    </Warning>
 
 3. In the **REDIS SETTINGS** section, update the variables to connect to your external Redis instance:
    ```bash
