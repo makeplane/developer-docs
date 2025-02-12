@@ -23,10 +23,10 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
 2. Click **New GitHub App**.
-   ![Create GitHub App](/images/github-integration/create-github-app.webp)
+   ![Create GitHub App](/images/integrations/github/create-github-app.webp)
 
 3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
-    ![App name and homepage URL](/images/github-integration/app-name-homepage-url.webp)
+    ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp)
 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**. 
 
@@ -35,7 +35,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     https://<your-domain>/silo/api/github/auth/user/callback
     ```
     These URLs allow Plane to verify and enable workspace connection with the Github App.
-    ![Add Callback URL](/images/github-integration/add-callback-url.webp)
+    ![Add Callback URL](/images/integrations/github/add-callback-url.webp)
 
 5. In the **Post installation** section, add the below **Setup URL**.  
 
@@ -43,7 +43,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     https://<your-domain>/silo/api/github/auth/callback
     ```
    Redirects users to this URL after GitHub app installation.
-   ![Add setup URL](/images/github-integration/add-setup-url.webp)
+   ![Add setup URL](/images/integrations/github/add-setup-url.webp)
 
 6. Turn on **Redirect on update**.
 
@@ -53,12 +53,12 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     ```
     This allows Plane to receive updates from GitHub repositories.
 
-    ![Add Webhook URL](/images/github-integration/add-webhook-url.webp)
+    ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp)
 
 ### Set up permissions and events
 
 1. Add repository and account permissions by setting the **Access** dropdown next to each permission, as shown in the tables below.
-    ![Setup permissions](/images/github-integration/setup-permissions.webp)
+    ![Setup permissions](/images/integrations/github/setup-permissions.webp)
 
     **Repository permissions**
 
@@ -81,7 +81,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 2. In the **Subscribe to events** section, turn on all the required events below. 
 
-    ![Subscribe to events](/images/github-integration/subscribe-to-events.webp)
+    ![Subscribe to events](/images/integrations/github/subscribe-to-events.webp)
     
     |Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
     |---------|------------|
@@ -106,11 +106,11 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 3. In the **General** tab, under the **Client secrets** section, click **Generate a new client secret**.
 
-   ![General tab](/images/github-integration/general-tab.webp)
+   ![General tab](/images/integrations/github/general-tab.webp)
 
 4. Scroll down to the **Private keys** section.
 
-    ![Private keys](/images/github-integration/private-keys.webp)
+    ![Private keys](/images/integrations/github/private-keys.webp)
 
 5. Click **Genereate a private key**.
 
@@ -124,11 +124,11 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 7. Add these environment variables with the values to your Plane instance's `.env` file. 
 
     ```bash
-    GITHUB_CLIENT_ID=<CLIENT_ID>
-    GITHUB_CLIENT_SECRET=<CLIENT_SECRET>
-    GITHUB_APP_NAME=<APP_NAME>
-    GITHUB_APP_ID=<APP_ID>
-    GITHUB_PRIVATE_KEY=<PRIVATE_KEY>
+    GITHUB_CLIENT_ID=<client_id>
+    GITHUB_CLIENT_SECRET=<client_secret>
+    GITHUB_APP_NAME=<app_name>
+    GITHUB_APP_ID=<app_id>
+    GITHUB_PRIVATE_KEY=<private_key>
     ```
 
 8. Save the file and restart the instance. 
