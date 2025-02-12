@@ -7,5 +7,6 @@ api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/
 ### Path parameters
 
 <ParamField path="workspace-slug" type="string" required></ParamField>
-
 <ParamField path="project_id" type="string" required></ParamField>
+<ParamField query="fields" type="string" required></ParamField>
+<ParamField query="expand" type="string" required></ParamField>
