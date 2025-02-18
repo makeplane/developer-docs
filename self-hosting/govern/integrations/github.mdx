@@ -121,12 +121,12 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     - GitHub App name
     - Private key
     
-7. You’ll need to convert the **Private key** to `base64` before adding it as an environment variable. You can do this using the following command:
+7. Before adding the Private key as an environment variable, you’ll need to convert it to base64. Since private keys are typically multi-line, they can cause parsing errors or issues when setting environment variables. To avoid this, run the following command to convert the key to base64:
     ```bash
     cat private_key.pem | base64 -w 0
     ```
 
-8. Add the environment variables with the values to your Plane instance's `.env` file. 
+8. Add these environment variables with the values to your Plane instance's `.env` file. 
 
     ```bash
     GITHUB_CLIENT_ID=<client_id>
