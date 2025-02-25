@@ -68,7 +68,8 @@
       "group": "Install",
       "pages": [
         "self-hosting/methods/docker-compose",
-        "self-hosting/methods/kubernetes"
+        "self-hosting/methods/kubernetes",
+        "self-hosting/methods/portainer"
       ]
     },
     {

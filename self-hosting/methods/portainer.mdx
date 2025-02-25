@@ -1,0 +1,53 @@
+---
+title: Portainer
+---
+
+This guide shows you the steps to deploy a self-hosted instance of Plane using Portainer.
+
+## Install Plane
+
+### Prerequisites
+
+   - A virtual or on-prem machine with atleast 2 vCPUs and 4 GB RAM
+   - `x64` AKA `AMD 64` or `AArch 64` AKA `ARM 64` CPUs
+   - Supported operating systems:
+      - Ubuntu
+      - Debian
+      - CentOS
+      - Amazon Linux 2 or Linux 2023
+
+### Procedure
+
+1. **Download the required files**  
+You'll need two essential files to get started:
+
+    - [docker-compose.yml](https://prime.plane.so/deployment/assets/docker-compose.yml) – Defines the services and dependencies required for Plane.
+    - [variables.env](https://prime.plane.so/deployment/assets/variables.env) – Stores environment variables for your deployment.
+
+2. Click **+ Add stack** on Portainer.
+
+3. Copy and paste the contents of `docker-compose.yml` into the editor.
+
+4. Load environment variables from the `variables.env` file.
+
+5. **Configure environment variables**  
+    Before deploying, edit the following variables:
+
+    - `DOMAIN_NAME` – Your application's domain name.
+    - `APP_RELEASE_VERSION` – The version of Plane you want to deploy.
+    - `SITE_ADDRESS` – The full domain name (FQDN) of your instance.
+    - `WEB_URL` – 
+    - `COR_ALLOWED_ORIGINS` – 
+    - `CERT_EMAIL` – Email address for SSL certificate generation (only needed if you're setting up HTTPS).
+    - `MACHINE_SIGNATURE` – A unique identifier for your machine. You can generate this with:
+        ```sh
+        openssl rand -hex 16
+        ```
+        or
+        ```sh
+        uuidgen
+        ```
+
+6. Click **Deploy the stack**.
+
+That's it! Once the deployment is complete, Plane should be up and running on your configured domain.
