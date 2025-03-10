@@ -98,6 +98,7 @@
               "self-hosting/govern/integrations/gitlab"
             ]
         },
+        "self-hosting/govern/external-secrets",
         "self-hosting/govern/reverse-proxy",
         "self-hosting/telemetry"
       ]
