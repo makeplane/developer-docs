@@ -68,7 +68,10 @@
       "group": "Install",
       "pages": [
         "self-hosting/methods/docker-compose",
-        "self-hosting/methods/kubernetes"
+        "self-hosting/methods/docker-swarm",
+        "self-hosting/methods/kubernetes",
+        "self-hosting/methods/coolify",
+        "self-hosting/methods/portainer"
       ]
     },
     {
