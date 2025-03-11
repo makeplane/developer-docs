@@ -2,7 +2,7 @@
 title: Docker Swarm
 ---
 
-This guide shows you the steps to deploy a self-hosted instance of the Plane Commercial Edition (`v1.8.2` onwards) using Docker Swarm.
+This guide shows you the steps to deploy a self-hosted instance of the Plane Commercial Edition using Docker Swarm.
 
 ## Install Plane
 
@@ -21,6 +21,9 @@ This guide shows you the steps to deploy a self-hosted instance of the Plane Com
         ```bash
         curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
         ```
+    <Warning>
+    The `<plane-version>` value should be v1.8.2 or higher.
+    </Warning>
 
 2. **Configure environment variables**  
     Before deploying, edit the `variables.env` file in your preferred text editor and update the following values:
