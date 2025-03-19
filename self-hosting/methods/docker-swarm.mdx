@@ -14,9 +14,9 @@ This guide shows you the steps to deploy a self-hosted instance of the Plane Com
 ### Procedure
 
 1. **Download the required depoyment files**  
-    - `docker-compose.yml` – Defines Plane's services and dependencies.
+    - `portainer-compose.yml` – Defines Plane's services and dependencies.
         ```bash
-        curl -fsSL https://prime.plane.so/releases/<plane-version>/docker-compose.yml -o docker-compose.yml
+        curl -fsSL https://prime.plane.so/releases/<plane-version>/portainer-compose.yml -o swarm-compose.yml
         ```
     - `variables.env` – Stores environment variables for your deployment.
         ```bash
@@ -53,7 +53,7 @@ This guide shows you the steps to deploy a self-hosted instance of the Plane Com
 
 4. **Deploy the stack**
     ```bash
-    docker stack deploy -c <path-to docker-compose.yml> plane
+    docker stack deploy -c <path-to swarm-compose.yml> plane
     ```
 
 That's it! This will deploy Plane as a Swarm stack, and your instance should be accessible on your configured domain.

@@ -14,9 +14,9 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using P
 ### Procedure
 
 1. **Download the required depoyment files**  
-    - `docker-compose.yml` – Defines Plane's services and dependencies.
+    - `portainer-compose.yml` – Defines Plane's services and dependencies.
         ```bash
-        curl -fsSL https://prime.plane.so/releases/<plane-version>/docker-compose.yml -o docker-compose.yml
+        curl -fsSL https://prime.plane.so/releases/<plane-version>/docker-compose.yml -o portainer-compose.yml
         ```
     - `variables.env` – Stores environment variables for your deployment.
         ```bash
@@ -28,7 +28,7 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using P
 
 2. Click **+ Add stack** on Portainer.
 
-3. Copy and paste the contents of `docker-compose.yml` into the editor.
+3. Copy and paste the contents of `portainer-compose.yml` into the editor.
 
 4. Load environment variables from the `variables.env` file.
 
