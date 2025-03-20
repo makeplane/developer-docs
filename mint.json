@@ -91,7 +91,6 @@
         },
         "self-hosting/govern/communication",
         "self-hosting/govern/database-and-storage",
-        "self-hosting/govern/env-variables",
         "self-hosting/govern/custom-domain",
         "self-hosting/govern/private-bucket",
         {
@@ -104,6 +103,7 @@
         },
         "self-hosting/govern/external-secrets",
         "self-hosting/govern/reverse-proxy",
+        "self-hosting/govern/env-variables",
         "self-hosting/telemetry"
       ]
     },
