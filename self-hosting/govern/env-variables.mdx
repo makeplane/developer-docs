@@ -24,7 +24,6 @@ This is where you'll make all configuration changes. Remember to restart the ins
 | **DOMAIN_NAME** | Primary domain name for your Plane instance. This determines how users will access your installation. | `localhost` |
 | **APP_RELEASE_VERSION** | The version of Plane Commercial Edition you're running. This helps with troubleshooting and ensures compatibility. | *Current release version* |
 | **WEB_URL** | The complete base URL for the web application including protocol (e.g., `https://plane.example.com`).|`http://localhost`|
-| **API_BASE_URL** | The base URL for API services. In most setups, this will be the same as your WEB_URL with `/api` appended. |`http://api:8000`|
 | **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API. Usually, this should include your WEB_URL. |`http://localhost`|
 | **DEBUG** | Toggles debug mode for more verbose logging and debugging information.| `0` (disabled) |
 
@@ -71,7 +70,7 @@ This is where you'll make all configuration changes. Remember to restart the ins
 | **POSTGRES_DB** | Same as PGDATABASE - the name of the PostgreSQL database. | `plane` |
 | **POSTGRES_PORT** | TCP port your PostgreSQL server is listening on. | `5432` |
 | **PGDATA** | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL within the same container/system. | `/var/lib/postgresql/data` |
-| **DATABASE_URL** | Full connection string for PostgreSQL. If provided, this takes precedence over individual connection parameters. Format: `postgresql://username:password@host:port/dbname` | *Constructed from individual settings* |
+| **DATABASE_URL** | Full connection string for PostgreSQL. If provided, this takes precedence over individual connection parameters. Format: `postgresql://username:password@host:port/dbname` |  |
 
 ### Redis settings
 
@@ -97,7 +96,6 @@ This is where you'll make all configuration changes. Remember to restart the ins
 |----------|-------------|---------------|
 | **SECRET_KEY** | Secret key used for various cryptographic operations, including JWT token signing. | |
 | **MACHINE_SIGNATURE** | Unique identifier for your instance, used for licensing and authentication.| |
-| **SILO_HMAC_SECRET_KEY** | Secret key for Silo authentication and secure communication. | |
 
 ### File Storage (MinIO / S3)
 
@@ -166,7 +164,6 @@ The environment configuration file is located at:
 | **APP_DOMAIN** | Domain name for your Plane instance. This determines how users will access your installation. | `localhost` |
 | **APP_RELEASE** | Release version of Plane. Helps with compatibility and troubleshooting. |   `stable` |
 | **WEB_URL** | The complete base URL for the web application including protocol. Essential for email links and integrations. | `http://${APP_DOMAIN}` |
-| **API_BASE_URL** | The base URL for API services. Typically your WEB_URL with `/api` appended. | `http://api:8000` |
 | **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API. | `http://${APP_DOMAIN}` |
 | **DEBUG** | Toggles debug mode for verbose logging. Set to `1` to enable, `0` to disable. Not recommended in production as it may expose sensitive information. | `0` |
 | **NGINX_PORT** | Port for HTTP traffic. The primary port your users will connect to. | `80` |
@@ -228,10 +225,10 @@ The environment configuration file is located at:
 |----------|-------------|---------------|
 | **USE_MINIO** | Whether to use MinIO for object storage. Set to `1` to enable, `0` to use other configured storage. | `1` |
 | **MINIO_ENDPOINT_SSL** | Force HTTPS for MinIO when handling SSL termination. Set to `1` to enable. | `0` |
-| **AWS_REGION** | AWS region for S3 storage services. Applies when using S3 or MinIO. | *Empty* |
+| **AWS_REGION** | AWS region for S3 storage services. Applies when using S3 or MinIO. |  |
 | **AWS_ACCESS_KEY_ID** | Access key for MinIO or AWS S3 authentication. | `access-key` |
 | **AWS_SECRET_ACCESS_KEY** | Secret key for MinIO or AWS S3 authentication. | `secret-key` |
-| **AWS_S3_ENDPOINT_URL** | Endpoint URL for MinIO or S3-compatible storage. | *Based on APP_DOMAIN* |
+| **AWS_S3_ENDPOINT_URL** | Endpoint URL for MinIO or S3-compatible storage. | |
 | **AWS_S3_BUCKET_NAME** | S3 bucket name for file storage. All uploads will be stored in this bucket. | `uploads` |
 | **FILE_SIZE_LIMIT** | Maximum file upload size in bytes. | `5242880` (5MB) |
 
