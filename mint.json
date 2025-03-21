@@ -103,7 +103,7 @@
         },
         "self-hosting/govern/external-secrets",
         "self-hosting/govern/reverse-proxy",
-        "self-hosting/govern/env-variables",
+        "self-hosting/govern/environment-variables",
         "self-hosting/telemetry"
       ]
     },
