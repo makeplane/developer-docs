@@ -357,7 +357,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | plane.example.com | `/auth/*` | `<http://plane-app-api.plane:8000>` |
     | plane.example.com | `/uploads/*` | `<http://plane-app-minio.plane:9000>` |
     | plane-minio.example.com | `/` | `<http://plane-app-minio.plane:9090>` |
-    | plane-mq.example.com | / | <http://plane-app-rabbitmq.plane:15672> | (Optional) if using local setup, this will enable management console access |
+    | plane-mq.example.com | `/` | `<http://plane-app-rabbitmq.plane:15672>` | (Optional) if using local setup, this will enable management console access |
   
 <Accordion title="Install Community Edition ">
   The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
@@ -622,8 +622,8 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | ssl.createIssuer | false |  | Kubernets cluster setup supports creating `issuer` type resource. After deployment, this is step towards creating secure access to the ingress url. Issuer is required for you generate SSL certifiate. Kubernetes can be configured to use any of the certificate authority to generate SSL (depending on CertManager configuration). Set it to `true` to create the issuer. Applicable only when `ingress.enabled=true`|
         | ssl.issuer | http |  | CertManager configuration allows user to create issuers using `http` or any of the other DNS Providers like `cloudflare`, `digitalocean`, etc. As of now Plane supports `http`, `cloudflare`, `digitalocean`|
         | ssl.token |  |  | To create issuers using DNS challenge, set the issuer api token of dns provider like cloudflare` or `digitalocean`(not required for http) |
-        | ssl.server | <https://acme-v02.api.letsencrypt.org/directory> |  | Issuer creation configuration need the certificate generation authority server url. Default URL is the `Let's Encrypt` server|
-        | ssl.email | <plane@example.com> |  | Certificate generation authority needs a valid email id before generating certificate. Required when `ssl.createIssuer=true`  |
+        | ssl.server | `<https://acme-v02.api.letsencrypt.org/directory>` |  | Issuer creation configuration need the certificate generation authority server url. Default URL is the `Let's Encrypt` server|
+        | ssl.email | `<plane@example.com>` |  | Certificate generation authority needs a valid email id before generating certificate. Required when `ssl.createIssuer=true`  |
         | ssl.generateCerts | false |  | After creating the issuers, user can still not create the certificate untill sure of configuration. Setting this to `true` will try to generate SSL certificate and associate with ingress. Applicable only when `ingress.enabled=true` and `ssl.createIssuer=true` |
         | ssl.tls_secret_name |  |  | If you have a custom TLS secret name, set this to the name of the secret. Applicable only when `ingress.enabled=true` and `ssl.createIssuer=false` |
 
