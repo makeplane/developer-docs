@@ -1,0 +1,50 @@
+---
+title: Get workspace members
+sidebarTitle: Workspace members
+description: Retrieve the list of all members in a workspace.
+api: GET /api/v1/workspaces/:workspace-slug/members/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required>
+The workspace-slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ParamField>
+
+### Response
+
+```json
+[
+    {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "first_name": "User",
+        "last_name": "One",
+        "email": "user1@example.com",
+        "avatar": "",
+        "avatar_url": null,
+        "display_name": "user1",
+        "role": 15
+    },
+    {
+        "id": "00000000-0000-0000-0000-000000000002",
+        "first_name": "",
+        "last_name": "",
+        "email": "user2@example.com",
+        "avatar": "",
+        "avatar_url": null,
+        "display_name": "user2",
+        "role": 15
+    },
+    {
+        "id": "00000000-0000-0000-0000-000000000003",
+        "first_name": "User",
+        "last_name": "Three",
+        "email": "user3@example.com",
+        "avatar": "",
+        "avatar_url": null,
+        "display_name": "user3",
+        "role": 20
+    }
+]
+```
