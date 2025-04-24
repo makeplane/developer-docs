@@ -324,6 +324,14 @@
             "api-reference/worklogs/update-worklog",
             "api-reference/worklogs/delete-worklog"
           ]
+        },
+        {
+          "group": "Members",
+          "pages": [
+            "api-reference/members/overview",
+            "api-reference/members/get-workspace-members",
+            "api-reference/members/get-project-members"
+          ]
         }
       ]
     },
