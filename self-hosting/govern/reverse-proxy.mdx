@@ -1,9 +1,44 @@
 ---
-title: Configure external reverse proxy
+title: Configure external reverse proxy • Commercial Edition
 sidebarTitle: External reverse proxy
 ---
 
-This guide provides configuration templates for setting up external reverse proxies with Plane using NGINX, Caddy, or Traefik. 
+This page provides configuration for setting up an external reverse proxy with Plane. 
+
+## Plane environment setup
+
+Make sure to update the following environment variables in your plane.env file.
+
+1. Assign free ports for Plane to listen on. Update the following variables with two different unsused ports:
+    ```bash
+    LISTEN_HTTP_PORT=
+    LISTEN_HTTPS_PORT=
+    ```
+
+2. Update the SITE_ADDRESS variable to `:80`
+    ```bash
+      SITE_ADDRESS=:80
+    ```
+    This is required so that generated links and redirects work correctly behind the proxy:
+
+## Proxy setup
+
+1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
+
+2. Replace the following placeholders:
+    - `<domain>`   
+    Your Plane application's domain name.
+    - `<plane-host-ip>`  
+    The IP address where Plane is hosted.
+    - `<plane-host-port>`   
+    The port Plane listens on.
+    
+3. For Traefik, also update `your-email@example.com` with your email.
+
+Ensure that your reverse proxy setup follows the template provided, and that the forwarded headers and ports are correctly set to match the environment variable configuration.
+
+
+## Configuration templates
 
 All configurations include:
 - Automatic HTTPS redirection
@@ -14,9 +49,7 @@ All configurations include:
     - Caddy: Handles certificates automatically
     - Traefik: Uses Let’s Encrypt
 
-## Configuration templates
 
-### NGINX
 <Accordion title="NGINX configuration">
     ```bash
     server {
@@ -59,7 +92,7 @@ server {
 
 </Accordion>
 
-### Caddy
+
 <Accordion title="Caddy configuration">
 ```bash
 <domain> {
@@ -94,7 +127,6 @@ server {
 
 </Accordion>
 
-### Traefik
 <Accordion title="Traefik configuration">
 ```bash
 entryPoints:
@@ -153,16 +185,3 @@ providers:
 ```
 </Accordion>
 
-## Proxy setup
-
-1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
-
-2. Replace the following placeholders:
-    - `<domain>`   
-    Your Plane application's domain name.
-    - `<plane-host-ip>`  
-    The IP address where Plane is hosted.
-    - `<plane-host-port>`   
-    The port Plane listens on.
-    
-3. For Traefik, also update `your-email@example.com` with your email.
