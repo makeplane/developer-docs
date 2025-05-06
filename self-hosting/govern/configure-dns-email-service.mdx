@@ -1,0 +1,95 @@
+---
+title: Configure DNS for Intake Email
+sidebarTitle: DNS for Intake Email
+description: Configure DNS records to enable automatic conversion of incoming emails into work items in your project's Intake section.
+---
+
+You will need to set up DNS records to allow your domain to receive incoming [Intake Emails](https://docs.plane.so/intake/intake-email). These configurations enable your server to accept messages sent to your project's dedicated Intake address, which are then  converted into work items in your project's Intake section.
+
+The instructions below will help you establish the required DNS records to properly receive and process emails for your Plane instance.
+
+## Configure DNS records
+
+1. **Create an A Record**  
+This record points to the server running your email service.
+
+    ```bash
+    Type: A
+    Host: <host-domain>           # Example: plane.example.com
+    Value: <public-ip-address>    # Your server's public IP address
+    TTL: Auto | 3600
+    ``` 
+
+    <Note> 
+    You can alternatively use a CNAME record if you're using a cloud load balancer.
+    </Note>
+
+2. **Add an MX Record**  
+This record directs email traffic to your mail server.
+    ```bash
+    Type: MX
+    Host: <mail-domain>           # Example: intake.example.com
+    Value: <host-domain>          # Same as your A record host
+    Priority: 10
+    TTL: Auto | 3600
+    ```
+
+3. **Configure an SPF Record**  
+This record helps prevent email spoofing.
+
+    ```bash
+    Type: TXT
+    Host: <mail-domain>           # Example: intake.example.com
+    Value: "v=spf1 ip4:<A-record-ip-host-domain> -all"
+    TTL: Auto | 3600
+    ``` 
+4. **Set Up a DMARC record**  
+This record specifies how receiving mail servers should handle authentication failures.
+
+    ```bash
+    Type: TXT
+    Host: _dmarc.<mail-domain>    # Example: _dmarc.intake.example.com
+    Value: "v=DMARC1; p=reject; rua=mailto:<valid-email-addr>"
+    TTL: Auto | 3600
+    ```
+## Verify your configuration
+After setting up your DNS records, verify that they're correctly configured:
+
+    ```bash
+    # Verify A record
+    dig A <mail-domain>
+
+    # Verify MX record
+    dig MX <mail-domain>
+
+    # Verify SPF record
+    dig TXT <mail-domain>
+
+    # Verify DMARC record
+    dig TXT _dmarc.<mail-domain>
+    ```
+
+    You can also use [MXToolbox](https://mxtoolbox.com) to check for any issues with your DNS configuration.
+
+## Test your mail server
+Once your DNS records have propagated, test your SMTP connections:
+
+    ```bash
+    # Test SMTP connection on standard ports
+    telnet <host-domain> 25
+    telnet <host-domain> 465
+    telnet <host-domain> 587
+    ```
+
+## Troubleshooting
+
+- MX Record issues
+
+    - Ensure there's a proper dot at the end of the domain.
+    - Check that the priority number is correct (lower = higher priority).
+    - Allow 24-48 hours for DNS changes to fully propagate.
+
+- A Record issues
+
+    - Verify that the IP address is correct.
+    - Ensure your mail subdomain matches the MX record.
