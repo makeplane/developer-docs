@@ -20,7 +20,7 @@ Plane One and Plane Pro are enabled on this edition, so the Free plan on this ed
     1. Open terminal or any other command-line app that has access to Kubernetes tools on your local system.
     2. Set the following environment variables:
         ```bash
-        PLANE_VERSION=v1.8.3
+        PLANE_VERSION=v1.9.1
         ```
         ```bash
         DOMAIN_NAME=<subdomain.domain.tld or domain.tld>
@@ -77,7 +77,7 @@ Plane One and Plane Pro are enabled on this edition, so the Free plan on this ed
             ```
 
             Make sure you set the required environment variables listed below:
-            - `planeVersion: v1.8.3`
+            - `planeVersion: v1.9.1`
             - `license.licenseDomain: <The domain you have specified to host Plane>`
             - `license.licenseServer: https://prime.plane.so`
             - `ingress.enabled: <true | false>`
@@ -107,7 +107,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
 
     | Setting | Default | Required | Description |
     |---|:---:|:---:|---|
-    | planeVersion | v1.8.3	 | Yes |  Specifies the version of Plane to be deployed. Copy this from `prime.plane.so.` |
+    | planeVersion | v1.9.1	 | Yes |  Specifies the version of Plane to be deployed. Copy this from `prime.plane.so.` |
     | license.licenseServer | `https://prime.plane.so` | Yes | Sets the value of the `licenseServer` that gets you your license and validates it periodically. Don't change this. |
     | license.licenseDomain | 'plane.example.com' | Yes | The fully-qualified domain name (FQDN) in the format `sudomain.domain.tld` or `domain.tld` that the license is bound to. It is also attached to your `ingress` host to access Plane. |
 
@@ -116,7 +116,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | Setting | Default | Required | Description |
     |---|:---:|:---:|---|
     | services.postgres.local_setup | true |  | Plane uses `postgres` as the primary database to store all the transactional data. This database can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. aws rds or similar services). Set this to  `true` when you choose to setup stateful deployment of `postgres`. Mark it as `false` when using a remotely hosted database |
-    | services.postgres.image | `registry.plane.tools/plane/postgres:15.5-alpine` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `postgres`. (must be set when `services.postgres.local_setup=true`)|
+    | services.postgres.image | `postgres:15.7-alpine` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `postgres`. (must be set when `services.postgres.local_setup=true`)|
     | services.postgres.servicePort | 5432 |  | This key sets the default port number to be used while setting up stateful deployment of `postgres`. |
     | services.postgres.cliConnectPort |  | | If you intend to access the hosted stateful deployment of postgres using any of the client tools (e.g Postico), this key helps you expose the port. The mentioned port must not be occupied by any other applicaiton|
     | services.postgres.volumeSize | 2Gi |  | While setting up the stateful deployment, while creating the persistant volume, volume allocation size need to be provided. This key helps you set the volume allocation size. Unit of this value must be in Mi (megabyte) or Gi (gigabyte) |
@@ -131,7 +131,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | Setting | Default | Required | Description |
     |---|:---:|:---:|---|
     | services.redis.local_setup | true |  | Plane uses `redis` to cache the session authentication and other static data. This database can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. aws rds or similar services). Set this to  `true` when you choose to setup stateful deployment of `redis`. Mark it as `false` when using a remotely hosted database |
-    | services.redis.image | `registry.plane.tools/plane/valkey:7.2.5-alpine` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `redis`. (must be set when `services.redis.local_setup=true`)|
+    | services.redis.image | `valkey/valkey:7.2.5-alpine` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `redis`. (must be set when `services.redis.local_setup=true`)|
     | services.redis.servicePort | 6379 |  | This key sets the default port number to be used while setting up stateful deployment of `redis`. |
     | services.redis.volumeSize | 500Mi |  | While setting up the stateful deployment, while creating the persistant volume, volume allocation size need to be provided. This key helps you set the volume allocation size. Unit of this value must be in Mi (megabyte) or Gi (gigabyte) |
     | services.redis.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
@@ -142,7 +142,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | Setting | Default | Required | Description |
     |---|:---:|:---:|---|
     | services.rabbitmq.local_setup | true |  | Plane uses `rabbitmq` as message queuing system. This can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. aws mq or similar services). Set this to  `true` when you choose to setup stateful deployment of `rabbitmq`. Mark it as `false` when using a remotely hosted service |
-    | services.rabbitmq.image | rabbitmq:3.13.6-management-alpine |  | Using this key, user must provide the docker image name to setup the stateful deployment of `rabbitmq`. (must be set when `services.rabbitmq.local_setup=true`)|
+    | services.rabbitmq.image | `rabbitmq:3.13.6-management-alpine` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `rabbitmq`. (must be set when `services.rabbitmq.local_setup=true`)|
     | services.rabbitmq.pullPolicy | IfNotPresent |  | Using this key, user can set the pull policy for the stateful deployment of `rabbitmq`. (must be set when `services.rabbitmq.local_setup=true`)|
     | services.rabbitmq.servicePort | 5672 |  | This key sets the default port number to be used while setting up stateful deployment of `rabbitmq`. |
     | services.rabbitmq.managementPort | 15672 |  | This key sets the default management port number to be used while setting up stateful deployment of `rabbitmq`. |
@@ -157,7 +157,8 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | Setting | Default | Required | Description |
     |---|:---:|:---:|---|
     | services.minio.local_setup | true |  | Plane uses `minio` as the default file storage drive. This storage can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. aws S3 or similar services). Set this to  `true` when you choose to setup stateful deployment of `minio`. Mark it as `false` when using a remotely hosted database |
-    | services.minio.image | `registry.plane.tools/plane/minio:latest` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `minio`. (must be set when `services.minio.local_setup=true`)|
+    | services.minio.image | minio/minio:latest |  | Using this key, user must provide the docker image name to setup the stateful deployment of `minio`. (must be set when `services.minio.local_setup=true`)|
+    | services.minio.image_mc | minio/mc:latest |  | Using this key, user must provide the docker image name to setup the job deployment of `minio client`. (must be set when `services.minio.local_setup=true`)|
     | services.minio.volumeSize | 3Gi |  | While setting up the stateful deployment, while creating the persistant volume, volume allocation size need to be provided. This key helps you set the volume allocation size. Unit of this value must be in Mi (megabyte) or Gi (gigabyte) |
     | services.minio.root_user | admin |  |  Storage credentials are requried to access the hosted stateful deployment of `minio`.  Use this key to set the username for the stateful deployment. |
     | services.minio.root_password | password |  | Storage credentials are requried to access the hosted stateful deployment of `minio`.  Use this key to set the password for the stateful deployment. |
@@ -176,7 +177,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | services.web.replicas | 1 | Yes | Kubernetes helps you with scaling up or down the deployments. You can run 1 or more pods for each deployment. This key helps you set up the number of replicas you want to run for this deployment. It must be >=1 |
     | services.web.memoryLimit | 1000Mi |  | Every deployment in Kubernetes can be set to use the maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
     | services.web.cpuLimit | 500m |  |  Every deployment in Kubernetes can be set to use the maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-    | services.web.image| `registry.plane.tools/plane/web-enterprise` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+    | services.web.image| `artifacts.plane.so/makeplane/web-commercial` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
     | services.web.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 
     #### Space Deployment
@@ -186,7 +187,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | services.space.replicas | 1 | Yes | Kubernetes helps you with scaling up or down the deployments. You can run 1 or more pods for each deployment. This key helps you set up the number of replicas you want to run for this deployment. It must be >=1 |
     | services.space.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use the maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
     | services.space.cpuLimit | 500m |  | Every deployment in kubernetes can be set to use the maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-    | services.space.image| `registry.plane.tools/plane/space-enterprise` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+    | services.space.image| `artifacts.plane.so/makeplane/space-commercial` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
     | services.space.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 
     #### Admin Deployment
@@ -196,7 +197,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | services.admin.replicas | 1 | Yes | Kubernetes helps you with scaling up or down the deployments. You can run 1 or more pods for each deployment. This key helps you set up the number of replicas you want to run for this deployment. It must be >=1 |
     | services.admin.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use the maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
     | services.admin.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use the maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-    | services.admin.image| `registry.plane.tools/plane/admin-enterprise` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+    | services.admin.image| `artifacts.plane.so/makeplane/admin-commercial` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
     | services.admin.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 
     #### Live Service Deployment
@@ -206,7 +207,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | services.live.replicas | 1 | Yes | Kubernetes helps you with scaling up\/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
     | services.live.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
     | services.live.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-    | services.live.image| registry.plane.tools/plane/live-enterprise |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+    | services.live.image| `artifacts.plane.so/makeplane/live-commercial` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
     | env.live_sentry_dsn |  |  | (optional) Live service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry provided DSN for this integration.|
     | env.live_sentry_environment |  |  | (optional) Live service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry environment name (as configured in Sentry) for this integration.|
     | env.live_sentry_traces_sample_rate |  |  | (optional) Live service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry trace sample rate (as configured in Sentry) for this integration.|
@@ -218,7 +219,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     |---|:---:|:---:|---|
     | services.monitor.memoryLimit | 1000Mi |  | Every deployment in kubernetes can be set to use the maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
     | services.monitor.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use the maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-    | services.monitor.image| `registry.plane.tools/plane/monitor-enterprise` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+    | services.monitor.image| `artifacts.plane.so/makeplane/monitor-commercial` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
     | services.monitor.volumeSize | 100Mi |  | While setting up the stateful deployment, while creating the persistant volume, volume allocation size need to be provided. This key helps you set the volume allocation size. Unit of this value must be in Mi (megabyte) or Gi (gigabyte) |
     | services.monitor.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 
@@ -229,7 +230,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | services.api.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you set up the number of replicas you want to run for this deployment. It must be >=1 |
     | services.api.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use the maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
     | services.api.cpuLimit | 500m |  | Every deployment in kubernetes can be set to use the maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-    | services.api.image| `registry.plane.tools/plane/backend-enterprise` |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+    | services.api.image| `artifacts.plane.so/makeplane/backend-commercial` |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
     | env.sentry_dsn |  |  | (optional) API service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry-provided DSN for this integration.|
     | env.sentry_environment |  |  | (optional) API service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry environment name (as configured in Sentry) for this integration.|
     | services.api.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
@@ -241,7 +242,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     | services.silo.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
     | services.silo.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
     | services.silo.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-    | services.silo.image| registry.plane.tools/plane/silo-enterprise |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+    | services.silo.image| `artifacts.plane.so/makeplane/silo-commercial` |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
     | services.silo.pullPolicy | Always |  | Using this key, user can set the pull policy for the deployment of `silo`. |
     | services.silo.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service | 
     | services.silo.connectors.slack.enabled | false |  | Slack Integration |
@@ -302,13 +303,13 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
     |                      | `FILE_SIZE_LIMIT`        | Yes | Limit for file uploads in your system        | `5MB`               |
     | app_env_existingSecret      | `SECRET_KEY`             | Yes | Random secret key                            | `60gp0byfz2dvffa45cxl20p1scy9xbpf6d8c5y0geejgkyp1b5`  |
     |                      | `REDIS_URL`              | Yes | Redis URL                                    | `redis://plane-redis.plane-ns.svc.cluster.local:6379/`  |
-    |                      | `DATABASE_URL`           | Yes | PostgreSQL connection URL                    | **k8s service example**: `postgresql://plane:plane@plane-pgdb.plane-ns.svc.cluster.local:5432/plane` <br> <br>**external service example**: `postgresql://username:password@your-db-host:5432/plane` |
-    |                      | `AMQP_URL`               | Yes | RabbitMQ connection URL                      | **k8s service example**: `amqp://plane:plane@plane-rabbitmq.plane-ns.svc.cluster.local:5672/`  <br> <br> **external service example**: `amqp://username:password@your-rabbitmq-host:5672/` |
+    |                      | `DATABASE_URL`           | Yes | PostgreSQL connection URL                    | **k8s service example**: `postgresql://plane:plane@plane-pgdb.plane-ns.svc.cluster.local:5432/plane` <br/> <br/>**external service example**: `postgresql://username:password@your-db-host:5432/plane` |
+    |                      | `AMQP_URL`               | Yes | RabbitMQ connection URL                      | **k8s service example**: `amqp://plane:plane@plane-rabbitmq.plane-ns.svc.cluster.local:5672/`  <br/> <br/> **external service example**: `amqp://username:password@your-rabbitmq-host:5672/` |
     | live_env_existingSecret    | `REDIS_URL`              | Yes | Redis URL                                    | `redis://plane-redis.plane-ns.svc.cluster.local:6379/`  |
     | silo_env_existingSecret    | `SILO_HMAC_SECRET_KEY`       | Yes | Silo HMAC secret Key                             | `<random-32-bit-string>`|
     |     | `REDIS_URL`              | Yes | Redis URL                                    | `redis://plane-redis.plane-ns.svc.cluster.local:6379/`  |
-    |                            | `DATABASE_URL`           | Yes | PostgreSQL connection URL                    |  **k8s service example**: `postgresql://plane:plane@plane-pgdb.plane-ns.svc.cluster.local:5432/plane` <br> <br>**external service example**: `postgresql://username:password@your-db-host:5432/plane`|
-    |                            | `AMQP_URL`               | Yes | RabbitMQ connection URL                      | **k8s service example**: `amqp://plane:plane@plane-rabbitmq.plane-ns.svc.cluster.local:5672/`  <br> <br> **external service example**: `amqp://username:password@your-rabbitmq-host:5672/`  |
+    |                            | `DATABASE_URL`           | Yes | PostgreSQL connection URL                    |  **k8s service example**: `postgresql://plane:plane@plane-pgdb.plane-ns.svc.cluster.local:5432/plane` <br/> <br/>**external service example**: `postgresql://username:password@your-db-host:5432/plane`|
+    |                            | `AMQP_URL`               | Yes | RabbitMQ connection URL                      | **k8s service example**: `amqp://plane:plane@plane-rabbitmq.plane-ns.svc.cluster.local:5672/`  <br/> <br/> **external service example**: `amqp://username:password@your-rabbitmq-host:5672/`  |
     |                            | `GITHUB_APP_NAME`        | required if `services.silo.connectors.github.enabled` is `true` | GitHub app name                              | `your_github_app_name`|
     |                            | `GITHUB_APP_ID`          | required if `services.silo.connectors.github.enabled` is `true` | GitHub app ID                                | `your_github_app_id`|
     |                            | `GITHUB_CLIENT_ID`       | required if `services.silo.connectors.github.enabled` is `true` | GitHub client ID                             | `your_github_client_id`|
@@ -511,7 +512,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | web.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
         | web.memoryLimit | 1000Mi |  | Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
         | web.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-        | web.image| makeplane/plane-frontend |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+        | web.image| artifacts.plane.so/makeplane/plane-frontend |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
         | web.pullPolicy | Always |  | Using this key, user can set the pull policy for the deployment of `web`. |  
         | web.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 
@@ -522,7 +523,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | space.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
         | space.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
         | space.cpuLimit | 500m |  | Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-        | space.image| makeplane/plane-space|  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+        | space.image| artifacts.plane.so/makeplane/plane-space|  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
         | space.pullPolicy | Always |  | Using this key, user can set the pull policy for the deployment of `space`. |
         | space.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 
@@ -533,7 +534,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | admin.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
         | admin.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
         | admin.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-        | admin.image| makeplane/plane-admin |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+        | admin.image| artifacts.plane.so/makeplane/plane-admin |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
         | admin.pullPolicy | Always |  | Using this key, user can set the pull policy for the deployment of `admin`. |
         | admin.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 
@@ -544,7 +545,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | live.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
         | live.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
         | live.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-        | live.image| makeplane/plane-live |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+        | live.image| artifacts.plane.so/makeplane/plane-live |  |  This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
         | live.pullPolicy | Always |  | Using this key, user can set the pull policy for the deployment of `live`. |
         | env.live_sentry_dsn |  |  | (optional) Live service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry provided DSN for this integration.|
         | env.live_sentry_environment |  |  | (optional) Live service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry environment name (as configured in Sentry) for this integration.|
@@ -559,7 +560,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | api.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
         | api.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
         | api.cpuLimit | 500m |  | Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-        | api.image| makeplane/plane-backend |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+        | api.image| artifacts.plane.so/makeplane/plane-backend |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
         | api.pullPolicy | Always |  | Using this key, user can set the pull policy for the deployment of `api`. |
         | env.sentry_dsn |  |  | (optional) API service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry provided DSN for this integration.|
         | env.sentry_environment |  |  | (optional) API service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry environment name (as configured in Sentry) for this integration.|
@@ -573,7 +574,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | worker.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you set up the number of replicas you want to run for this deployment. It must be >=1 |
         | worker.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use the maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
         | worker.cpuLimit | 500m |  | Every deployment in kubernetes can be set to use the maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-        | worker.image| makeplane/plane-backend |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+        | worker.image| artifacts.plane.so/makeplane/plane-backend |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
 
         #### Beat-Worker deployment
 
@@ -582,7 +583,7 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
         | beatworker.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you set up the number of replicas you want to run for this deployment. It must be >=1 |
         | beatworker.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use the maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
         | beatworker.cpuLimit | 500m |  | Every deployment in kubernetes can be set to use the maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
-        | beatworker.image| makeplane/plane-backend |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
+        | beatworker.image| artifacts.plane.so/makeplane/plane-backend |  | This deployment needs a preconfigured docker image to function. Docker image name is provided by the owner and must not be changed for this deployment |
 
         #### External Secrets Config
 
