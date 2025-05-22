@@ -18,6 +18,69 @@ If any of these ports are currently in use, you can free them by running:
 
 This is necessary for email functionality (e.g., sending invites, notifications) to work properly.
 
+## Generate SSL/TLS Certificate for Email Domain 
+<Warning>
+For Docker Compose deployments only
+</Warning>
+Before configuring DNS records for Intake Email, secure your email domain with an SSL/TLS certificate. This ensures encrypted communication between mail servers and improves email trust and deliverability.
+
+1. **Install Certbot**   
+Update your system and install Certbot.
+    ```bash
+    sudo apt update && sudo apt install certbot
+    ```
+    For NGINX:
+    ```bash
+    sudo apt install python3-certbot-nginx
+    ```
+    For Apache:
+    ```bash
+    sudo apt install python3-certbot-apache
+    ```
+
+2. **Generate SSL Certificate**  
+Choose the method that matches your web server setup:
+
+    For NGINX:
+    ```bash
+    sudo certbot --nginx -d <mail-domain>
+    ```
+
+    For Apache:
+    ```bash
+    sudo certbot --apache -d <mail-domain>
+    ```
+
+    For standalone (no web server):
+    ```bash
+    sudo certbot certonly --standalone -d <mail-domain>
+    ```
+
+3. **Copy Certificate Files**  
+Copy the generated certificate files to Plane's expected directory:
+
+    ```bash
+    sudo cp /etc/letsencrypt/live/<mail-domain>/fullchain.pem /opt/plane/data/email/tls/cert.pem 
+    sudo cp /etc/letsencrypt/live/<mail-domain>/privkey.pem /opt/plane/data/email/tls/key.pem
+    ```
+
+4. **Configure Environment Variables**  
+Add the following settings to your plane.env file:
+
+    ```bash
+    # If using SMTP_DOMAIN as FQDN (e.g., intake.example.com),
+    # generate a valid SSL certificate and set these paths accordingly.
+    SMTP_DOMAIN=intake.example.com
+    TLS_CERT_PATH=tls/cert.pem
+    TLS_PRIV_KEY_PATH=tls/key.pem
+    INTAKE_EMAIL_DOMAIN=intake.example.com
+    ```
+
+    <Warning>
+    Important: `SMTP_DOMAIN` and `INTAKE_EMAIL_DOMAIN` must be identical.
+    </Warning>
+
+
 ## Configure DNS records
 
 1. **Create an A Record**  
