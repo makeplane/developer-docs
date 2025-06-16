@@ -1,0 +1,37 @@
+name: Docs to Vector
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - docs-to-vector
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Webhook (Master)
+        if: ${{ github.ref_name == 'master' }}
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"commit_id": "${{ github.sha }}", "branch": "${{ github.ref_name }}"}' \
+            ${{ secrets.VECTOR_WEBHOOK_URL }}
+
+      - name: Connect to company network
+        if: ${{ github.ref_name != 'master' }}
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+      
+      - name: Call Webhook (Preview)
+        if: ${{ github.ref_name != 'master' }}
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"commit_id": "${{ github.sha }}", "branch": "${{ github.ref_name }}"}' \
+            ${{ secrets.VECTOR_WEBHOOK_URL_PREVIEW }}
+
