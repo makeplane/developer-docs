@@ -5,40 +5,45 @@ sidebarTitle: Upgrade to Commercial Edition
 The Commercial edition comes with the free plan and the flexibility to upgrade to a paid plan at any point.
 
 <Warning> 
- Follow the instructions below first all the way to the end of the section **Restore data**.  
+**IMPORTANT**  
 
- The instructions provided on this page are specific to installations using Docker. If you are running Plane on Kubernetes, you'll need to manually create a database dump and back up your file storage by copying the relevant volumes or storage paths.
+Make sure you already have Commercial Edition installed on a fresh machine before starting this migration. If you haven’t installed it yet, follow our [Commercial Edition](/self-hosting/methods/docker-compose#recommended-edition) installation guide first.
+
+The instructions provided on this page are specific to installations using Docker. If you are running Plane on Kubernetes, you'll need to manually create a database dump and back up your file storage by copying the relevant volumes or storage paths.
 </Warning>
 
 ## Prerequisites
-
--  Install on a fresh machine, not the one running the Plane Community Edition.
+- Install the [Commercial Edition](/self-hosting/methods/docker-compose#recommended-edition) on a fresh machine, not the one running the Plane Community Edition.
 - Be sure to log in as the root user or as a user with sudo access. The `/opt` folder requires sudo or root privileges.
 
+## Back up data on Community instance
+1. Download the latest version of `setup.sh`.
+    ```bash
+    curl -fsSL https://github.com/makeplane/plane/releases/latest/download/setup.sh -o setup.sh
+    ```
 
-## Back up data on Community Edition
-
-`setup.sh` in the Community Edition now comes with an option to back up your data.
-
-1. Use  `./setup.sh` to open the operator menu and select `7` to backup your Plane data.
-2. When done, your data will be backed up to the folder shown on the screen.
-e.g., `/plane-selfhost/plane-app/backup/20240522-1027`
-3. This folder will contain 3 `tar.gz` files.
+2. Run the setup.sh backup script to take the backup of the Community Edition instance.
+    ```bash 
+    ./setup.sh backup
+    ```
+3. When done, your data will be backed up to the folder shown on the screen.
+    e.g., `/plane-selfhost/plane-app/backup/20240522-1027`
+     This folder will contain 3 `tar.gz` files.
     - `pgdata.tar.gz`
     - `redisdata.tar.gz`
     - `uploads.tar.gz`
-4. Copy all the 3 files from the server running the Community Edition to any folder on the server running Plane One on any folder of your choice.
 
-e.g., `~/ce-backup`
+4. Copy all the 3 files from the server running the Community Edition to any folder on the server running the Commercial Edition on any folder of your choice.
 
-## Restore data and install Commercial Edition
+    e.g., `~/ce-backup`
+
+## Restore data on Commercial instance
 1. Start any command-line interface like Terminal and go into the folder with the back-up files.
     ```
     cd ~/ce-backup
     ```
 2. Copy and paste the script below on Terminal and hit Enter.
     ```
-    
     TARGET_DIR=/opt/plane/data
     sudo mkdir -p $TARGET_DIR
     for FILE in *.tar.gz; do
@@ -55,7 +60,4 @@ e.g., `~/ce-backup`
     mkdir -p $TARGET_DIR/minio
     mv $TARGET_DIR/uploads/ $TARGET_DIR/minio/uploads/
     ```
-3. This script will extract your Community Edition data and restore it to /opt/plane/data.
-4. Install the **Commercial** Edition.
-    - Using [Docker](/self-hosting/methods/docker-compose#recommended-edition)
-    - Using [Kubernetes](/self-hosting/methods/kubernetes#recommended-edition)
+3. This script will extract your Community Edition data and restore it to `/opt/plane/data`.
