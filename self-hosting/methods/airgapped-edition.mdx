@@ -1,5 +1,5 @@
 ---
-title: Commercial Airgapped Edition
+title: Deploy Plane Commercial Airgapped Edition
 sidebarTitle: Airgapped Edition
 ---
 
@@ -14,44 +14,66 @@ These instructions are for new installations only. If you're migrating from an e
 Before we get started, make sure your air-gapped machine has:
 
 - Docker (version 24 or later) up and running
-- Docker Compose Plugin installed (you should be able to run docker compose or docker-compose)
-- The Plane air-gapped package (`airgapped.tar.gz`) that we'll provide, which includes:
+- Docker Compose Plugin installed (you should be able to run `docker compose` or `docker-compose`)
+- The Plane air-gapped package we provide includes:
     - Docker image files (`.tar` format)
     - Configuration files (`docker-compose.yml` and `plane.env`)
     - Installation script (`install.sh`)
 
+### Required files
+
+- `docker-compose.yml` - Docker Compose configuration for service orchestration
+- `plane.env` - Default configuration file containing environment variables
+- `admin-commercial-<version>.tar` - Docker image for admin service
+- `backend-commercial-<version>.tar` - Docker image for api/worker/beat-worker/migrator service
+- `email-commercial-<version>.tar` - Docker image for email service
+- `live-commercial-<version>.tar` - Docker image for live service
+- `monitor-commercial-<version>.tar` - Docker image for monitor service
+- `proxy-commercial-<version>.tar` - Docker image for plane-proxy service
+- `silo-commercial-<version>.tar` - Docker image for silo service
+- `space-commercial-<version>.tar` - Docker image for space service
+- `web-commercial-<version>.tar` - Docker image for web service
+- `minio-latest.tar` - Docker image for plane-minio service
+- `postgres-15.7-alpine.tar` - Docker image for plane-db service
+- `rabbitmq-3.13.6-management-alpine.tar` - Docker image for plane-mq service
+- `valkey-7.2.5-alpine.tar` - Docker image for plane-redis service
+
 ## Install Plane
-1. Reach out to support@plane.so to get your installation download URL and the license file.
+1. Get in touch with sales@plane.so to get your installation download URL and the license file.
 
 2. On a machine that has internet access, download the installation package:
 
     ```bash
     curl -LO <asset-download-url>
     ```
+    
+    The download may take 15 minutes. Once the file is downloaded you no longer need internet access.  
 
-3. Transfer the `airgapped.tar.gz` file to your offline machine using whatever method works in your environment.
+3. Transfer the `airgapped-{arch}.tar.gz` file to your air-gapped machine.
 
 4. Once you have the file on your air-gapped machine, extract the package.
 
     ```bash
     mkdir -p airgapped
-    tar -xvzf airgapped.tar.gz -C airgapped
+    tar -xvzf airgapped-amd64.tar.gz -C airgapped
     cd airgapped
     ```
+
+    The airgapped directory contains your `plane.env`, `docker-compose.yml`, and `install.sh` files which are used in the following steps.  
 
 5. Run the installation script:
     ```bash
     bash install.sh
     ```
 
-    The script will guide you through the process. Here's what to expect:
+    The script will guide you through the process step by step. Here's what to expect:
 
-    The installer will ask you a few questions:
         ```bash
         **********************************************************
         You are about to install/upgrade Plane as airgapped setup
 
-        Pre-requisites:
+        Pre-requisites:  
+
         - Docker installed and running
         - Docker version 24 or higher
         - docker-compose or docker compose installed
@@ -76,7 +98,6 @@ Before we get started, make sure your air-gapped machine has:
         - Copy the `docker-compose.yml` and `plane.env` files to your chosen installation directory.
         - Create the necessary folders for data and logs.
         - Load all the Docker images into your local Docker registry.
-        - Show you the next steps to get Plane running
 
     You'll see something like this when the installation completes:
         ```bash
@@ -84,24 +105,17 @@ Before we get started, make sure your air-gapped machine has:
         Plane Setup is ready to configure and start
 
         Use below commands to configure and start Plane
-
         Switch to the setup directory
             cd /home/ubuntu/planeairgapped
-
         Start the services
             docker compose -f docker-compose.yml --env-file plane.env up -d
-
         Check logs of migrator service and wait for it to finish using below command
             docker compose logs -f migrator
-
         Check logs of api service and wait for it to start using below command
             docker compose logs -f api
-
         Once the api service is started, you can access Plane at http://plane.mycompany.com
-
         **********************************************************
         Installation completed successfully
-
         You can access Plane at http://plane.mycompany.com
         ```
 
@@ -113,9 +127,15 @@ Before we get started, make sure your air-gapped machine has:
     ├── data/
     └── logs/
     ```
-<Tip>
-Once everything is working, you can safely delete the `airgapped` folder that contains the installation script and image files to free up space.
-</Tip>
+
+## Environment variables
+
+The following key environment variables are automatically configured during installation:
+
+- `MACHINE_SIGNATURE` - A unique UUID generated for your installation
+- `DOMAIN_NAME` - The domain or IP address where Plane will be accessible
+- `WEB_URL` - The full URL where Plane will be accessible (e.g., `http://your-domain`)
+- `CORS_ALLOWED_ORIGINS` - Allowed origins for CORS (Cross-Origin Resource Sharing)
 
 ## Start Plane
 1. To get Plane up and running, navigate to your installation directory and start the services:
@@ -124,16 +144,18 @@ Once everything is working, you can safely delete the `airgapped` folder that co
     docker compose --env-file plane.env up -d
     ```
 
-2. Watch the logs to make sure everything starts properly:
-    - Monitor the database migration process:
+2. Watch the logs to make sure everything starts properly.
+    - To monitor the database migration process:
     ```bash
     docker compose logs -f migrator
     ```
 
-    - Monitor the API service startup:
+    - To monitor the API service startup:
     ```bash
     docker compose logs -f api
     ```
+
+    The api is healthy when you see`: api-1   listening at`
 
 Once both services are running smoothly, you can access Plane by opening your browser and going to the domain or IP address you configured during installation.
 
@@ -144,10 +166,15 @@ Once your air-gapped installation is running, you'll need to activate your works
 You should have received the `license_key.json` file as part of your air-gapped package. If you don't have this file, contact our support team.
 </Note>
 
-1. Go to your **Workspace Settings** in the Plane application.
+1. Go to your [Workspace Settings](/core-concepts/workspaces/overview#workspace-settings) in the Plane application.
 2. Select **Billing and plans** on the right pane.
 3. Click the **Activate this workspace** button.
     ![Upload license file](/images/activate-license/upload-license-file.webp)
 4. Upload the license file `license_key.json` to activate your workspace.
----
-You should now have Plane Business plan running in your air-gapped environment. If you run into any issues, reach out to our support team for assistance.
+
+You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
+
+<Tip>
+*Optional*  
+Once everything is working, you can safely delete the `airgapped` folder that contains the installation script and image files to free up space.
+</Tip>
