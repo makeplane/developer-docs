@@ -49,8 +49,14 @@ To configure Slack integration, you'll need to create a Slack App within your or
                     {
                         "name": "Create new issue",
                         "type": "message",
-                        "callback_id": "create_new_issue",
+                        "callback_id": "issue_shortcut",
                         "description": "Create a new issue in plane"
+                    },
+                    {
+                        "name": "Link Work Item",
+                        "type": "message",
+                        "callback_id": "link_work_item",
+                        "description": "Links thread with an existing work item"
                     }
                 ],
                 "slash_commands": [
@@ -139,8 +145,12 @@ To configure Slack integration, you'll need to create a Slack App within your or
             shortcuts:
                 - name: Create new issue
                 type: message
-                callback_id: create_new_issue
+                callback_id: issue_shortcut
                 description: Create a new issue in plane
+                - name: Link Work Item
+                type: message
+                callback_id: link_work_item
+                description: Links thread with an existing work item
             slash_commands:
                 - command: /plane
                 url: https://[YOUR_DOMAIN]silo/api/slack/command/
