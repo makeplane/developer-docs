@@ -71,7 +71,8 @@
         "self-hosting/methods/docker-swarm",
         "self-hosting/methods/kubernetes",
         "self-hosting/methods/coolify",
-        "self-hosting/methods/portainer"
+        "self-hosting/methods/portainer",
+        "self-hosting/methods/airgapped-edition"
       ]
     },
     {
@@ -112,6 +113,7 @@
       "group": "Manage",
       "pages": [
         "self-hosting/upgrade-from-community",
+        "self-hosting/manage/community-to-airgapped",
         "self-hosting/manage/backup-restore",
         {
           "group": "Update Plane",
