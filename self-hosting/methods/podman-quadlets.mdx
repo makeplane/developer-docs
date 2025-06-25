@@ -22,7 +22,7 @@ Before we start, make sure you've got these covered:
     curl -fsSL https://download.opensuse.org/repositories/home:alvistack/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
     ```
 
-3. Refresh your package lists
+3. Refresh your package lists.
     ```bash
     sudo apt update
     ```
@@ -109,7 +109,7 @@ Check that all services are running correctly:
     systemctl --user status plane-{db,redis,mq,minio}.service
     ```
 
-3. Check backend services
+3. Check backend services.
     ```bash
     systemctl --user status {api,worker,beat-worker,migrator,monitor}.service
     ```
@@ -118,7 +118,7 @@ Check that all services are running correctly:
     ```bash
     systemctl --user status {web,space,admin,live,proxy}.service
     ```
-    
+
 Your Plane installation should now be running successfully with Podman Quadlets. This setup provides automatic service restart capabilities and standard systemd management commands for maintaining your installation.
 
 ## Troubleshoot
