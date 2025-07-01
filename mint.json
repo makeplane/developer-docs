@@ -53,6 +53,10 @@
     {
       "name": "Webhooks",
       "url": "webhooks"
+    },
+    {
+      "name": "Guides",
+      "url": "guides"
     }
   ],
   "navigation": [
@@ -341,6 +345,12 @@
     {
       "group": "Webhooks",
       "pages": ["webhooks/intro-webhooks"]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/build-plane-app"
+      ]
     }
   ],
   "footerSocials": {
