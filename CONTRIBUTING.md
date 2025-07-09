@@ -17,10 +17,22 @@ git checkout -b <branch-name>
 ### 3. Make Changes in the Appropriate Page
 Navigate to the relevant documentation page in the repository and make your changes. Ensure that your changes align with our style guide and maintain consistency across the documentation.
 
-### 4. Raise a Pull Request (PR)
+### 4. Preview your changes
+Make sure you are visually happy with your changes.
+
+1. Run `npx mint dev`
+1. A url will be printed to your console. Open it in your browser.
+1. Visit your pages and confirm they look correct.
+
+### 5. Fix broken links
+
+1. Run `npx mint broken-links`
+2. Fix all reported broken links
+
+### 6. Raise a Pull Request (PR)
 Once your changes are ready, raise a pull request (PR) to merge your branch into the `master` branch. Please provide a descriptive title and detailed description of your changes.
 
-### 5. Leave a Clear Commit Message
+### 7. Leave a Clear Commit Message
 When committing your changes, leave a clear and concise message that links to the corresponding issue (if applicable) and explains the fix or enhancement you've made.
 
 ```bash
@@ -28,13 +40,13 @@ git add .
 git commit -m "Fixes #<issue-number>: Description of the fix or enhancement"
 ```
 
-### 6. Link the Issue to the Pull Request
+### 8. Link the Issue to the Pull Request
 In your pull request description, be sure to reference the related issue using GitHub's syntax (`#<issue-number>`). This links the PR to the issue and helps maintain context.
 
-### 7. Sign the Contributor License Agreement (CLA)
+### 9. Sign the Contributor License Agreement (CLA)
 Before we can merge your contribution, you must sign our contributor license agreement (CLA). This agreement ensures that your contributions comply with our licensing terms.
 
-### 8. Assign a Reviewer from Our Team
+### 10. Assign a Reviewer from Our Team
 Once your PR is submitted, a member of our team will be assigned to review your changes. They will provide feedback and may request revisions if necessary. Please respond promptly to any review comments to expedite the merging process.
 
 Thank you for contributing to our documentation! We appreciate your efforts in making our product documentation more comprehensive and user-friendly. If you have any questions or need assistance, feel free to reach out to our team. Happy contributing!
