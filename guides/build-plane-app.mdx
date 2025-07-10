@@ -1,50 +1,62 @@
 ---
-title: Build your Plane Integration app
-sidebarTitle: Build your Plane Integration app
-description: Step-by-step guide for developers to build and integrate an app with Plane.so using OAuth-based authentication and authorization workflow.
+title: Build a Plane App (Beta)
+sidebarTitle: Build a Plane App (Beta)
+description: Step-by-step guide for developers to build and integrate an app with Plane using OAuth-based authentication and authorization workflow.
 ---
 
-This guide provides step-by-step instructions for developers to build and integrate an app with Plane.so using an OAuth-based authentication and authorization workflow.
+<Note>Plane apps are currently in **Beta**. Please send any feedback to support@plane.so.</Note>
 
 ## Introduction
+Plane apps (beta) seamlessly integrate tools and services with Plane so you can use them without ever leaving your Workspace. Apps are conveniently available from our [marketplace](https://plane.so/marketplace/integrations), helping you stay focused and productive.
 
-Plane.so supports OAuth 2.0 for secure authentication and authorization of third-party applications. This ensures that apps can request and obtain access tokens on behalf of users, enabling seamless integration while maintaining security standards.
+## Why Build a Plane App?
+Plane has a large ecosystem of users, build community integrations to highlight your product or service to the Plane community, or simply build an integration for your own internal requirements.
+
+Stop doing manual work. Plane integrations eliminate repetitive tasks like copying updates between tools, creating work items from support tickets, or generating status reports. Instead of spending hours on administrative work, let your integration handle it automatically.
+
+Connect everything you already use. Your team probably uses 5-10 different tools. Plane integrations create a unified workflow by connecting your CRM, time tracking, CI/CD pipelines, communication tools, and more. One change in Plane can trigger updates across your entire tech stack.
+
+Build exactly what you need. Unlike rigid SaaS platforms, Plane's open-source nature means you can create integrations that fit your specific workflow.
+
+### Promote Your Plane Integration
+Contact us to help promote your Plane integration and feature it within blogs and Plane itself: support@plane.so
 
 ## Prerequisites
 
-* A Plane.so workspace.
-* Access to Plane.so developer portal.
-* Familiarity with OAuth 2.0 concepts (authorization code flow).
-* A backend server to handle OAuth token exchange.
+- A [Plane](https://app.plane.so) workspace
+- Admin access to your workspace settings
+- Familiarity with OAuth 2.0 concepts (authorization code flow).
+- A backend server to handle OAuth token exchange.
 
 ## High-Level Workflow
 
-1. **Register your app on Plane.so developer portal**
-2. **Implement OAuth authorization code flow**
-3. **Obtain and store access tokens securely**
-4. **Make authenticated API requests to Plane.so**
-5. **Handle token refresh**
+1. [Register your app on Plane developer portal](/guides/build-plane-app/#registering-your-app)
+2. [Implement OAuth authorization code flow](/guides/build-plane-app#authentication-setup)
+3. Obtain and store access tokens securely
+4. Make authenticated API requests to Plane
+5. Handle token refresh
 
 ## Registering Your App
 
-To build an OAuth application with Plane.so:
+To build an OAuth application with Plane:
 
 1. Navigate to `https://app.plane.so/<workspace_slug>/settings/applications/`.
 2. Click on the **Build your own** button.
 3. Fill out the form with the required details:
 
-   * **Redirect URIs**: Provide the URIs where Plane.so will send the authorization code.
-   * **Contact Details**: Add your email or other contact information.
-   * **Webhook URL Endpoint**: Update this with your service's webhook endpoint. Plane.so will send webhooks for all changes that happen in the installed workspace.
-   * **Organization Details**: Include contact email, privacy policy URL, terms of service URL, and any other relevant information. This helps Plane.so validate and approve your application for listing in the marketplace.
+   - **Redirect URIs**: Provide the URIs where Plane will send the authorization code.
+   - **Contact Details**: Add your email or other contact information.
+   - **Webhook URL Endpoint**: Update this with your service's webhook endpoint. Plane will send webhooks for all changes that happen in the installed workspace.
+   - **Organization Details**: Include contact email, privacy policy URL, terms of service URL, and any other relevant information. This helps Plane validate and approve your application for listing in the marketplace.
+
 4. If you're building an agent (with or without using Plane's ADK) capable of performing operations when assigned or mentioned, enable the **Is Mentionable** checkbox during app creation.
-5. Once the app is created, securely store the **Client ID** and **Client Secret**. You will need these credentials to interact with Plane.so's API during the OAuth flow and for making authenticated API requests.
+5. Once the app is created, securely store the **Client ID** and **Client Secret**. You will need these credentials to interact with Plane's API during the OAuth flow and for making authenticated API requests.
 
 ## Authentication Setup
 
 ### Generating Consent URL
 
-Before handling types of authentication, if your app manages installation, you must generate the consent (authorization) URL to initiate the OAuth flow. Below is a sample implementation:
+Before handling authentication, if your app manages installation, you must generate the consent (authorization) URL to initiate the OAuth flow. Below is a sample Python implementation:
 
 ```python
 params = {
@@ -59,20 +71,25 @@ consent_url = f"https://api.plane.so/auth/o/authorize-app/?{urlencode(params)}"
 
 There are two types of authenticated actions your application can perform:
 
-1. **User-authorized actions** — Actions performed on behalf of a user after they grant permission to your app via OAuth.
-2. **App-authorized actions** — Actions that the app can perform independently within the workspace where it is installed (such as responding to webhooks or automation triggers).
+1. **User-authorized actions**: Actions performed on behalf of a user after they grant permission to your app via OAuth.
+2. **App-authorized actions**: Actions that the app can perform independently within the workspace where it is installed (such as responding to webhooks or automation triggers).
 
 We will describe how to configure and use each type in the following sections.
 
 ### App-Authorized Actions (Client Credentials Flow)
 
-When the user or admin installs the app, Plane.so will send an `app_installation_id` as part of the callback to the `redirect_uri` provided during consent URL generation. You can use this `app_installation_id` to request a bot token for your app.
+When the app is installed, Plane will send an `app_installation_id` as part of the callback to the `redirect_uri` provided during consent URL generation. You can use this `app_installation_id` to request a bot token for your app.
 
-#### Example Pseudo-code
+#### Examples
 
 ```python
+import base64
+import requests
+
 # Prepare basic auth header using client_id and client_secret
-basic_auth = base64encode("client_id:client_secret")
+client_id = "your_client_id"
+client_secret = "your_client_secret"
+basic_auth = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
 
 # Prepare request data
 payload = {
@@ -81,25 +98,34 @@ payload = {
 }
 
 # Make a POST request to fetch bot token
-response = POST(
+response = requests.post(
     url="https://api.plane.so/auth/o/token/",
     headers={"Authorization": f"Basic {basic_auth}",
              "Content-Type": "application/x-www-form-urlencoded"},
     data=payload
 )
 
-bot_token = response.data['access_token']
-expires_in = response.data["expires_in"]
+# Parse the response
+response_data = response.json()
+bot_token = response_data['access_token']
+expires_in = response_data["expires_in"]
 ```
 
 ### User-Authorized Actions (Authorization Code Flow)
 
 In this flow, your app exchanges the `code` received as a query parameter on the callback (to your `redirect_uri`) for an access token and refresh token. The access token is short-lived and must be refreshed using the refresh token when it expires. Both tokens should be securely stored.
 
-#### Example Pseudo-code
+#### Examples
 
 ```python
+import requests
+
 # Exchange authorization code for access and refresh tokens
+code = "authorization_code_from_callback"
+client_id = "your_client_id"
+client_secret = "your_client_secret"
+redirect_uri = "your_redirect_uri"
+
 payload = {
     "grant_type": "authorization_code",
     "code": code,
@@ -108,15 +134,17 @@ payload = {
     "redirect_uri": redirect_uri
 }
 
-response = POST(
+response = requests.post(
     url="https://api.plane.so/auth/o/token/",
     headers={"Content-Type": "application/x-www-form-urlencoded"},
     data=payload
 )
 
-access_token = response.data["access_token"]
-refresh_token = response.data["refresh_token"]
-expires_in = response.data["expires_in"]
+# Parse the response
+response_data = response.json()
+access_token = response_data["access_token"]
+refresh_token = response_data["refresh_token"]
+expires_in = response_data["expires_in"]
 
 # When access token expires, use refresh token to get a new access token
 refresh_payload = {
@@ -126,29 +154,33 @@ refresh_payload = {
     "client_secret": client_secret
 }
 
-refresh_response = POST(
+refresh_response = requests.post(
     url="https://api.plane.so/auth/o/token/",
     headers={"Content-Type": "application/x-www-form-urlencoded"},
     data=refresh_payload
 )
 
-access_token = refresh_response.data["access_token"]
+# Parse the refresh response
+refresh_response_data = refresh_response.json()
+access_token = refresh_response_data["access_token"]
 ```
 
 ### Fetching App Installation Details
 
-In both user-authorized and app-authorized flows, the `app_installation_id` identifies the app's installation within a specific workspace. It is recommended that developers fetch workspace details after OAuth is successfully completed. Plane.so provides an `app-installation` endpoint that works with both types of tokens.
+In both user-authorized and app-authorized flows, the `app_installation_id` identifies the app's installation within a specific workspace. It is recommended that developers fetch workspace details after OAuth is successfully completed. Plane provides an `app-installation` endpoint that works with both types of tokens.
 
-#### Example Pseudo-code
+#### Examples
 
 ```python
+import requests
+
 # Set authorization header with either access token or bot token
 headers = {
     "Authorization": f"Bearer {token}",
 }
 
 # Make GET request to fetch installation/workspace details
-response = GET(
+response = requests.get(
     url=f"https://api.plane.so/auth/o/app-installation/?id={app_installation_id}",
     headers=headers
 )
@@ -157,6 +189,7 @@ workspace_details = response.data[0]
 ```
 
 #### Sample Response
+
 ```
 [
     {
@@ -184,8 +217,8 @@ workspace_details = response.data[0]
 
 To simplify the OAuth flow and make it easier to build Plane apps, official SDKs are available:
 
-* **Node.js**: `npm i @makeplane/plane-node-sdk`
-* **Python**: `pip install plane-sdk`
+- **Node.js**: `npm i @makeplane/plane-node-sdk`
+- **Python**: `pip install plane-sdk`
 
 These SDKs provide helpers for OAuth and other common tasks, allowing developers to implement the above flows efficiently.
 
