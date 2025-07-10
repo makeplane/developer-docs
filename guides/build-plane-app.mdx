@@ -18,9 +18,6 @@ Connect everything you already use. Your team probably uses 5-10 different tools
 
 Build exactly what you need. Unlike rigid SaaS platforms, Plane's open-source nature means you can create integrations that fit your specific workflow.
 
-### Promote Your Plane Integration
-Contact us to help promote your Plane integration and feature it within blogs and Plane itself: support@plane.so
-
 ## Prerequisites
 
 - A [Plane](https://app.plane.so) workspace
@@ -56,9 +53,15 @@ To build an OAuth application with Plane:
 
 ### Generating Consent URL
 
-Before handling authentication, if your app manages installation, you must generate the consent (authorization) URL to initiate the OAuth flow. Below is a sample Python implementation:
+Before handling authentication, if your app manages installation, you must generate the consent (authorization) URL to initiate the OAuth flow. Below are sample implementations:
+
+<Tabs>
+<Tab title="Python">
 
 ```python
+import os
+from urllib.parse import urlencode
+
 params = {
     "client_id": os.getenv("PLANE_CLIENT_ID"),
     "response_type": "code",
@@ -68,6 +71,25 @@ params = {
 
 consent_url = f"https://api.plane.so/auth/o/authorize-app/?{urlencode(params)}"
 ```
+
+</Tab>
+<Tab title="TypeScript">
+
+```typescript
+import { URLSearchParams } from 'url';
+
+const params = new URLSearchParams({
+  client_id: process.env.PLANE_CLIENT_ID!,
+  response_type: "code",
+  redirect_uri: process.env.PLANE_REDIRECT_URI!,
+  // Optional: include state if needed
+});
+
+const consentUrl = `https://api.plane.so/auth/o/authorize-app/?${params.toString()}`;
+```
+
+</Tab>
+</Tabs>
 
 There are two types of authenticated actions your application can perform:
 
@@ -81,6 +103,9 @@ We will describe how to configure and use each type in the following sections.
 When the app is installed, Plane will send an `app_installation_id` as part of the callback to the `redirect_uri` provided during consent URL generation. You can use this `app_installation_id` to request a bot token for your app.
 
 #### Examples
+
+<Tabs>
+<Tab title="Python">
 
 ```python
 import base64
@@ -111,11 +136,52 @@ bot_token = response_data['access_token']
 expires_in = response_data["expires_in"]
 ```
 
+</Tab>
+<Tab title="TypeScript">
+
+```typescript
+import axios from 'axios';
+
+// Prepare basic auth header using client_id and client_secret
+const clientId = "your_client_id";
+const clientSecret = "your_client_secret";
+const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+
+// Prepare request data
+const payload = {
+  grant_type: "client_credentials",
+  app_installation_id: appInstallationId
+};
+
+// Make a POST request to fetch bot token
+const response = await axios.post(
+  "https://api.plane.so/auth/o/token/",
+  payload,
+  {
+    headers: {
+      Authorization: `Basic ${basicAuth}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  }
+);
+
+// Parse the response
+const responseData = response.data;
+const botToken = responseData.access_token;
+const expiresIn = responseData.expires_in;
+```
+
+</Tab>
+</Tabs>
+
 ### User-Authorized Actions (Authorization Code Flow)
 
 In this flow, your app exchanges the `code` received as a query parameter on the callback (to your `redirect_uri`) for an access token and refresh token. The access token is short-lived and must be refreshed using the refresh token when it expires. Both tokens should be securely stored.
 
 #### Examples
+
+<Tabs>
+<Tab title="Python">
 
 ```python
 import requests
@@ -165,11 +231,76 @@ refresh_response_data = refresh_response.json()
 access_token = refresh_response_data["access_token"]
 ```
 
+</Tab>
+<Tab title="TypeScript">
+
+```typescript
+import axios from 'axios';
+
+// Exchange authorization code for access and refresh tokens
+const code = "authorization_code_from_callback";
+const clientId = "your_client_id";
+const clientSecret = "your_client_secret";
+const redirectUri = "your_redirect_uri";
+
+const payload = {
+  grant_type: "authorization_code",
+  code: code,
+  client_id: clientId,
+  client_secret: clientSecret,
+  redirect_uri: redirectUri
+};
+
+const response = await axios.post(
+  "https://api.plane.so/auth/o/token/",
+  payload,
+  {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  }
+);
+
+// Parse the response
+const responseData = response.data;
+const accessToken = responseData.access_token;
+const refreshToken = responseData.refresh_token;
+const expiresIn = responseData.expires_in;
+
+// When access token expires, use refresh token to get a new access token
+const refreshPayload = {
+  grant_type: "refresh_token",
+  refresh_token: refreshToken,
+  client_id: clientId,
+  client_secret: clientSecret
+};
+
+const refreshResponse = await axios.post(
+  "https://api.plane.so/auth/o/token/",
+  refreshPayload,
+  {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  }
+);
+
+// Parse the refresh response
+const refreshResponseData = refreshResponse.data;
+const accessToken = refreshResponseData.access_token;
+```
+
+</Tab>
+</Tabs>
+
 ### Fetching App Installation Details
 
 In both user-authorized and app-authorized flows, the `app_installation_id` identifies the app's installation within a specific workspace. It is recommended that developers fetch workspace details after OAuth is successfully completed. Plane provides an `app-installation` endpoint that works with both types of tokens.
 
 #### Examples
+
+<Tabs>
+<Tab title="Python">
 
 ```python
 import requests
@@ -187,6 +318,29 @@ response = requests.get(
 
 workspace_details = response.data[0]
 ```
+
+</Tab>
+<Tab title="TypeScript">
+
+```typescript
+import axios from 'axios';
+
+// Set authorization header with either access token or bot token
+const headers = {
+  Authorization: `Bearer ${token}`,
+};
+
+// Make GET request to fetch installation/workspace details
+const response = await axios.get(
+  `https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`,
+  { headers }
+);
+
+const workspaceDetails = response.data[0];
+```
+
+</Tab>
+</Tabs>
 
 #### Sample Response
 
@@ -217,8 +371,10 @@ workspace_details = response.data[0]
 
 To simplify the OAuth flow and make it easier to build Plane apps, official SDKs are available:
 
-- **Node.js**: `npm i @makeplane/plane-node-sdk`
-- **Python**: `pip install plane-sdk`
+| Language | Package Link | Source Code |
+|----------|---------|-------------|
+| Node.js | [npm i @makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) | [plane-node-sdk](https://github.com/makeplane/plane-node-sdk) |
+| Python | [pip install plane-sdk](https://pypi.org/project/plane-sdk/) | [plane-python-sdk](https://github.com/makeplane/plane-python-sdk) |
 
 These SDKs provide helpers for OAuth and other common tasks, allowing developers to implement the above flows efficiently.
 
