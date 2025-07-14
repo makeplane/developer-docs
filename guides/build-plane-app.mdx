@@ -40,10 +40,10 @@ integrations that fit your specific workflow.
 ## High-Level Workflow
 
 1. [Register your app on Plane developer portal](/guides/build-plane-app/#registering-your-app)
-2. [Implement OAuth authorization code flow](/guides/build-plane-app#authentication-setup)
-3. Obtain and store access tokens securely
-4. Make authenticated API requests to Plane
-5. Handle token refresh
+2. [Implement OAuth flow](/guides/build-plane-app#implement-oauth-flow)
+3. [Obtain and store access tokens securely](/guides/build-plane-app#obtain-and-store-access-tokens-securely)
+4. [Make authenticated API requests to Plane](/guides/build-plane-app#make-authenticated-api-requests-to-plane)
+5. [Handle token refresh](/guides/build-plane-app#handle-token-refresh)
 
 ## Registering Your App
 
@@ -54,18 +54,23 @@ To build an OAuth application with Plane:
 3. Fill out the form with the required details:
 
    - **Redirect URIs**: Provide the URIs where Plane will send the authorization code.
+   - **Setup URL(Optional)**: Provide the URL that users will be redirected to when they click "Install App" from the marketplace. This URL should initiate the OAuth flow for your application.
    - **Contact Details**: Add your email or other contact information.
-   - **Webhook URL Endpoint**: Update this with your service's webhook endpoint. Plane will send webhooks for all changes that happen in the installed workspace.
-   - **Organization Details**: Include contact email, privacy policy URL, terms of service URL, and any other relevant information. This helps Plane validate and approve your application for listing in the marketplace.
+   - **Webhook URL Endpoint(Optional)**: Your service's webhook endpoint. Plane will send an HTTP `POST` request to this endpoint upon every change to the workspace in which your app was installed.
+   - **Organization Details(Optional)**: Optionally include your contact email, privacy policy URL, terms of service URL, and any other relevant information. This helps Plane validate and approve your application should you choose to [list in the marketplace](#listing-your-app-on-plane-marketplace).
 
 4. If you're building an agent (with or without using Plane's ADK) capable of performing operations when assigned or mentioned, enable the **Is Mentionable** checkbox during app creation.
-5. Once the app is created, securely store the **Client ID** and **Client Secret**. You will need these credentials to interact with Plane's API during the OAuth flow and for making authenticated API requests.
+5. Once the app is created, securely store the generated **Client ID** and **Client Secret**. You will need these credentials to interact with Plane's API during the OAuth flow and for making authenticated API requests.
 
-## Authentication Setup
+## Implement OAuth Flow
 
-### Generating Consent URL
+### Generating Consent URL (Optional)
 
-Before handling authentication, if your app manages installation, you must generate the consent (authorization) URL to initiate the OAuth flow. Below are sample implementations:
+This step is optional. This is needed only if the app should be installed from outside Plane's environment, the developer needs to generate the consent URL using the client ID generated during their app creation flow.
+
+If this flow needs to be triggered from Plane marketplace as well, then provide the URL in "Setup URL" field on application create screen to redirect the user from marketplace on clicking "Install App" button.
+
+Below are sample implementations:
 
 <Tabs>
 <Tab title="Python">
@@ -223,24 +228,6 @@ response_data = response.json()
 access_token = response_data["access_token"]
 refresh_token = response_data["refresh_token"]
 expires_in = response_data["expires_in"]
-
-# When access token expires, use refresh token to get a new access token
-refresh_payload = {
-    "grant_type": "refresh_token",
-    "refresh_token": refresh_token,
-    "client_id": client_id,
-    "client_secret": client_secret
-}
-
-refresh_response = requests.post(
-    url="https://api.plane.so/auth/o/token/",
-    headers={"Content-Type": "application/x-www-form-urlencoded"},
-    data=refresh_payload
-)
-
-# Parse the refresh response
-refresh_response_data = refresh_response.json()
-access_token = refresh_response_data["access_token"]
 ```
 
 </Tab>
@@ -278,28 +265,6 @@ const responseData = response.data;
 const accessToken = responseData.access_token;
 const refreshToken = responseData.refresh_token;
 const expiresIn = responseData.expires_in;
-
-// When access token expires, use refresh token to get a new access token
-const refreshPayload = {
-  grant_type: "refresh_token",
-  refresh_token: refreshToken,
-  client_id: clientId,
-  client_secret: clientSecret
-};
-
-const refreshResponse = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  refreshPayload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
-
-// Parse the refresh response
-const refreshResponseData = refreshResponse.data;
-const accessToken = refreshResponseData.access_token;
 ```
 
 </Tab>
@@ -379,16 +344,87 @@ const workspaceDetails = response.data[0];
 ]
 ```
 
-## Using Plane SDKs
 
-To simplify the OAuth flow and make it easier to build Plane apps, official SDKs are available:
+
+## Obtain and store access tokens securely
+
+Once you have obtained the access token, you can use it to make authenticated API requests to Plane.
+Store the access token and refresh token securely in your database.
+
+
+## Make authenticated API requests to Plane
+
+For making authenticated API requests to Plane, you can use the access token obtained from the OAuth flow.
+
+API reference is available at [https://docs.plane.so/api-reference](https://docs.plane.so/api-reference).
+
+We have official SDKs for the following languages to simplify the OAuth flow and make it easier to call Plane's API.
 
 | Language | Package Link | Source Code |
 |----------|---------|-------------|
 | Node.js | [npm i @makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) | [plane-node-sdk](https://github.com/makeplane/plane-node-sdk) |
 | Python | [pip install plane-sdk](https://pypi.org/project/plane-sdk/) | [plane-python-sdk](https://github.com/makeplane/plane-python-sdk) |
 
-These SDKs provide helpers for OAuth and other common tasks, allowing developers to implement the above flows efficiently.
+## Handle Token Refresh
+
+When the access token expires, you can use the refresh token to get a new access token.
+
+
+#### Examples
+
+<Tabs>
+<Tab title="Python">
+
+```python
+# When access token expires, use refresh token to get a new access token
+refresh_payload = {
+    "grant_type": "refresh_token",
+    "refresh_token": refresh_token,
+    "client_id": client_id,
+    "client_secret": client_secret
+}
+
+refresh_response = requests.post(
+    url="https://api.plane.so/auth/o/token/",
+    headers={"Content-Type": "application/x-www-form-urlencoded"},
+    data=refresh_payload
+)
+
+# Parse the refresh response
+refresh_response_data = refresh_response.json()
+access_token = refresh_response_data["access_token"]
+```
+
+</Tab>
+<Tab title="TypeScript">
+
+```typescript
+// When access token expires, use refresh token to get a new access token
+const refreshPayload = {
+  grant_type: "refresh_token",
+  refresh_token: refreshToken,
+  client_id: clientId,
+  client_secret: clientSecret
+};
+
+const refreshResponse = await axios.post(
+  "https://api.plane.so/auth/o/token/",
+  refreshPayload,
+  {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  }
+);
+
+// Parse the refresh response
+const refreshResponseData = refreshResponse.data;
+const accessToken = refreshResponseData.access_token;
+```
+</Tab>
+
+</Tabs>
+
 
 ## Listing Your App on Plane Marketplace
 
