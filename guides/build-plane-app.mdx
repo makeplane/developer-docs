@@ -53,9 +53,9 @@ To build an OAuth application with Plane:
 2. Click on the **Build your own** button.
 3. Fill out the form with the required details:
 
-   - **Redirect URIs**: Provide the URIs where Plane will send the authorization code.
-   - **Setup URL(Optional)**: Provide the URL that users will be redirected to when they click "Install App" from the marketplace. This URL should initiate the OAuth flow for your application.
+   - **Redirect URIs**: Provide the URIs where Plane will send the authorization code after the user consents to the app.
    - **Contact Details**: Add your email or other contact information.
+   - **Setup URL(Optional)**: Provide the URL that users will be redirected to when they click "Install App" from the marketplace. This URL should initiate the OAuth flow for your application.
    - **Webhook URL Endpoint(Optional)**: Your service's webhook endpoint. Plane will send an HTTP `POST` request to this endpoint upon every change to the workspace in which your app was installed.
    - **Organization Details(Optional)**: Optionally include your contact email, privacy policy URL, terms of service URL, and any other relevant information. This helps Plane validate and approve your application should you choose to [list in the marketplace](#listing-your-app-on-plane-marketplace).
 
@@ -113,11 +113,19 @@ There are two types of authenticated actions your application can perform:
 1. **User-authorized actions**: Actions performed on behalf of a user after they grant permission to your app via OAuth.
 2. **App-authorized actions**: Actions that the app can perform independently within the workspace where it is installed (such as responding to webhooks or automation triggers).
 
+For both these flows, Plane will make a GET request to the Redirect URI with parameters as mentioned in the following sections.
+
 We will describe how to configure and use each type in the following sections.
 
 ### App-Authorized Actions (Client Credentials Flow)
 
-When the app is installed, Plane will send an `app_installation_id` as part of the callback to the `redirect_uri` provided during consent URL generation. You can use this `app_installation_id` to request a bot token for your app.
+When the app is installed, Plane will send an `app_installation_id` as part of the callback to the Redirect URI provided during consent URL generation. You can use this `app_installation_id` to request a bot token for your app.
+
+Plane will make a GET request to the Redirect URI with below parameters:
+
+| Parameter | Description |
+|-----------|-------------|
+| app_installation_id | The unique identifier for the app installation in the workspace |
 
 #### Examples
 
@@ -193,7 +201,15 @@ const expiresIn = responseData.expires_in;
 
 ### User-Authorized Actions (Authorization Code Flow)
 
-In this flow, your app exchanges the `code` received as a query parameter on the callback (to your `redirect_uri`) for an access token and refresh token. The access token is short-lived and must be refreshed using the refresh token when it expires. Both tokens should be securely stored.
+In this flow, your app exchanges the `code` received as a query parameter on the callback (to your Redirect URI) for an access token and refresh token. The access token is short-lived and must be refreshed using the refresh token when it expires. Both tokens should be securely stored.
+
+Plane will make a GET request to the Redirect URI with below parameters:
+
+| Parameter | Description | Required |
+|-----------|-------------|----------|
+| code | The authorization code that can be exchanged for an access token | Yes |
+| state | The state parameter that was passed in the authorization request | No |
+
 
 #### Examples
 
