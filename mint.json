@@ -72,7 +72,8 @@
         "self-hosting/methods/kubernetes",
         "self-hosting/methods/coolify",
         "self-hosting/methods/portainer",
-        "self-hosting/methods/airgapped-edition"
+        "self-hosting/methods/airgapped-edition",
+        "self-hosting/methods/podman-quadlets"
       ]
     },
     {
