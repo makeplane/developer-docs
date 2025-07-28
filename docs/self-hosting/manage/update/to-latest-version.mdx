@@ -13,7 +13,7 @@ The update process may involve a brief downtime as services are updated and rest
 
 ## Prerequisites
 
-We recommend creating a backup of your data before any version updates. See [Backup data](/self-hosting/manage/backup-restore).
+We recommend creating a backup of your data before any version updates. See [backup and restore data](/self-hosting/manage/backup-restore).
 
 ## Check version
 
@@ -24,6 +24,12 @@ You can quickly check your Plane version by clicking the **?** icon on the sideb
 ## Update version
 
 1. Update your Prime CLI with the command ↓:
+
+:::warning
+For Commercial Edition v1.13.0, ensure you're using the **latest version of
+Docker Compose**. Check your Docker Compose version with `docker-compose
+--version` and update if needed.
+:::
 
    ```bash
    sudo prime-cli update-cli
