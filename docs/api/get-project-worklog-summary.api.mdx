@@ -1,0 +1,71 @@
+---
+id: get-project-worklog-summary
+title: "Get project worklog summary"
+description: "Get project worklog summary"
+sidebar_label: "Get project worklog summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9V1tv2zYU/isHfFkLyJaTOl2npwVNFhgrOqNJ1gGpEdDUic2aIlmSsusa+u/DoWT5Iqcd+rCX2Oa58Ny+7zAbZiw6HqTRo5xlbIbh0TrzGUV4XBm3UGb26Mui4G7NEpajF05a0mYZu8EAjS40urDTtdzxAgM6z7KHDZNkYXmYs4RpXiD9au6ROUuYF3MsOMs2LKwtSX1wUs9Ywp6MK3hgGStLmbPqOIpxE8HoiiXM4ZdSOsxZFlyJCcOvvLAKPfm9rr83+qMrOltyVdJlFxcDfDMcDHp4/tu0NzzLhz3+69nr3nD4+vXFxXA4GAwGFGSTXbZ11uYfbz8M7BLC2krBVat0fz+6YlVVJSfL4VU5+04hOol/NG7hLRcIjeV/SL612U++WPdW7fmpJPelz+W4OoymqqpJwgKfUfdjqDAKWMDHek48myTMoyidDOs4H5dW/onryzLMUQcpeH3Bw4SK9Rcdn5+QTShpb432dZbngwF9CKMD6kBfubWqsUg/ezLbdCvMneM0sjJg4ffOzZTa1kn6Fp3kSn5DB0/GPQcBWMkwBz6bOZzxgDnkZY0zsOhAel9SOa0j/AVZxx9PCQ8/hMFxTKMrME8Q5nWzgDKJE9PcuedQ6oAzdB0PdyZwtQtSmdkM85hgmEu/cwtSg0dhdO5ZVe1P3cPuumSXCo2BDAp3UG1m4LaZs4oQ8Qyoj2s6XTeVqxI2HJxRWkcDeTAkIBzm9JMrDyt0CNpEzlrKHHMwDrhDkHrJlcz7tdNXXadjdIX0nhzmqCXmfbj36EBxsfCwLQD1tVHzja9h11eTPEgfY0HNp6qtc8snsbIFhrlpSDkSapizjKXcynR5lraA8+mGIFelja1PNztmrdJAfe01hfQpARzdckvLpVMsY/MQrM9Sct23imvse9MZkLEzeSniDwLlzjJLU2UEV3PjQ/amZspD03ckZtUe5m8Jg/XQn0b+DpxRTBNFnubI8zi8DWn+07scj3q1wtEkjEewwDXwA8d9GNfdh7UpHWyVpI7Vb71BfU9s42n22ZEEXXBOAFVmFROiA+Pkt6j51uTYObyPtUvpLDXpVoQ9bi01KJgFHunEo9g8YWxdN4echuMD8hy4EOg9BAMOvSmdQM8StnIyUIgf6fOkDo2ZUBJ1eLtDSkzufwyhg/664kedA19aa1yQegZTQ9S6X1EQJkegFgDXOdQ5HcCfZH34w7jnhAlILVSZI/zCrX2U2geuVPT+KPNfoH3QbKclFiTCH30Ay9fK8LxOTqBcInAKtFEjgO92JLcW9i8gwqhoxJ9MrH5DmHdzhDHhET5c397RtLKEEXbrOg36g/5Zl8g7Rp/0J/239DIAzfyXUooF+MBdgFlJUKCKPZVKRTjkRpQF6lCXlQd4yHGJitaUb8lh8mJLGSeERCM9h0/oUAtMpQ4tc7zssySuZy7iem5QHMNlyREb7TERFlySqJmB31tRlTAlBWqPe+5u3t/D5c343fJVx+dMhnk57QtTpAVfYPRTX5ROlZmm1uFS4ip9N3p7/f72uh++1lxsjQ8F1/uXfPf1e9CSvRfJD8waTgn4NVBUkqi2zmDT8P8DESJNATV+twNYwrLmGbhdA3R08MQ+3AQsYbSbibTJ62Yz5R7vnaoqOv5SIj0BHyYJW3InaUnFfZFLHxcWy5648vidRF98aPbiSzh4op9Mccv1moqwfZeyhC1wffiPAm2en4qh81r+iTjql+2kSrZriCpSiy6FQBv2jDoPT9p+7Ua/ub5jSdwJh5tuERdZ84W8nwxof+nV19NfKs1J9c2m3qFV1erXomct2i1ba1NtJlVV/Qtzk+z/
+sidebar_class_name: "get api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get project worklog summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/total-worklogs/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get project worklog summary
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"Serializer for project worklog summary with aggregated duration per issue","properties":{"issue_id":{"type":"string","format":"uuid","description":"ID of the work item"},"duration":{"type":"integer","description":"Total duration logged for this work item in seconds"}},"required":["duration","issue_id"],"title":"ProjectWorklogSummary"}}}},"description":"Project worklog summary by issue"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Worklog is not enabled for the project"}}}
+>
+  
+</StatusCodes>
+
+
+      
