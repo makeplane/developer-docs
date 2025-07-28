@@ -20,6 +20,7 @@
   --ifm-heading-font-family: 'Nacelle', system-ui, -apple-system, sans-serif;
   --ifm-font-family-monospace: 'IBM Mono';
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -32,6 +33,7 @@
   --ifm-color-primary-lighter: #3e6ef0;
   --ifm-color-primary-lightest: #557ef2;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="%23ebebeb99" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
 }
 
 @media (min-width: 1536px) {
@@ -622,11 +624,6 @@ html[data-theme='dark'] {
     margin-right: auto;
   }
 
-  .navbarSearchContainer_Bca1 {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .DocSearch-Button {
     width: 400px;
   }
@@ -634,10 +631,20 @@ html[data-theme='dark'] {
 
 .navbar__search-input {
   width: 25rem;
-  background-color: #fafafa;
   border: 1px solid #9e9e9e33 !important;
   border-radius: 0.5rem;
 }
+
+[data-theme='dark'] .navbar__search-input {
+  width: 25rem;
+  background-color: var(--docsearch-searchbox-background);
+  border: 1px solid #9e9e9e33 !important;
+}
+
+[data-theme='dark'] .navbar__search-input::placeholder {
+  color: rgb(235, 235, 235, 0.6);
+}
+
 
 .DocSearch-Button {
   border-radius: 0.5em !important;
