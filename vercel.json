@@ -39,7 +39,7 @@
       "destination": "/webhooks/intro"
     },
     {
-      "source": "/api-reference/*",
+      "source": "/api-reference/(.*)",
       "destination": "/api"
     }
   ]
