@@ -615,6 +615,8 @@ html[data-theme='dark'] {
 }
 
 @media (min-width: 768px) {
+
+  [class^='navbarSearchContainer_'],
   .navbarSearchContainer_node_modules-\@docusaurus-theme-classic-lib-theme-Navbar-Search-styles-module {
     margin-left: auto;
     margin-right: auto;
@@ -628,6 +630,13 @@ html[data-theme='dark'] {
   .DocSearch-Button {
     width: 400px;
   }
+}
+
+.navbar__search-input {
+  width: 25rem;
+  background-color: #fafafa;
+  border: 1px solid #9e9e9e33 !important;
+  border-radius: 0.5rem;
 }
 
 .DocSearch-Button {
