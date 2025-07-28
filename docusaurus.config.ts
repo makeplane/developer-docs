@@ -301,7 +301,7 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'preload',
-        href: '/fonts/nacelle/Nacelle-Regular.otf',
+        href: '/fonts/nacelle/nacelle-regular.otf',
         as: 'font',
         type: 'font/otf',
         crossorigin: 'anonymous',
@@ -311,7 +311,7 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'preload',
-        href: '/fonts/nacelle/Nacelle-Light.otf',
+        href: '/fonts/nacelle/nacelle-light.otf',
         as: 'font',
         type: 'font/otf',
         crossorigin: 'anonymous',
@@ -321,7 +321,7 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'preload',
-        href: '/fonts/nacelle/Nacelle-SemiBold.otf',
+        href: '/fonts/nacelle/nacelle-semibold.otf',
         as: 'font',
         type: 'font/otf',
         crossorigin: 'anonymous',
@@ -361,6 +361,7 @@ const config: Config = {
       {
         hashed: true,
         indexBlog: false,
+        docsRouteBasePath: '/',
       },
     ],
     'docusaurus-theme-openapi-docs',
