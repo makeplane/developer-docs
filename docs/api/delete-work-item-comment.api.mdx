@@ -1,0 +1,71 @@
+---
+id: delete-work-item-comment
+title: "Endpoints for issue comment create/update/delete and fetch issue comment details"
+description: "Permanently remove a comment from a work item. Records deletion activity for audit purposes."
+sidebar_label: "Endpoints for issue comment create/update/delete and fetch issue comment details"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9V21v2zYQ/isHfmkLyJaTOlmnTwsSrzAWdEbarAPSIKDJc8xZIlmSsusZ+u/DUZLf0xVpty+WTB7veM/dPXdaMWPR8aCMHkqWMYk5BnxYGDd7UAGLB2GKAnVgCZPohVOWRFnGRugKrlGHfAkOCzNH4NAIw8SZAjiQFiAtXbhBYZz0EPUro4GLoOYqLGFiHPBSqgC2dNZ49F2WMMsdLzCg8yy7WzFFJi0PU5YwzQtkGVPel/igJEuYF1MsOMtWLCwt7fnglH5kCZsYV/DAMlaWSrJq34kh6YDhFUuYw8+lcihZFlyJCcMvvLA5etI6qN+j9PCKVuY8L8nQ2VkP3/R7vQ6e/jzu9E9kv8N/Ojnv9Pvn52dn/X6v1+vRBcui4G7JslYVqI3l3StdQFhaJXjeiNzeDq9YVVXJURDs7Hvcv2zC9a0ANPI/CAKxbf0pEFqhf4HBmb9QhO/MhlGt5ZvhaOR/EBx22/pTcLRCX4fD5+XjV4A4cPyjcTNvuUBoTn6D8+sz284Xy85ivX7Mye3dp3xc7N6mqqr7hAX+SEwQrwrDgAU0yejZfcI8itKpsIxccWHVb7i8KMMUdVCC1wbu7gms32n59MjePTntrdG+9vK016fHIU6Rz9ZpWdOlBF8Kgd5PyjxfEr793snh8V2zIBxK+stzDwt0CNoECvBcSZRArOgQlJ7zXMlurfT1oVLiYeU9KZSoFcou3Hp0kHMx89AGEuxazDe6jvjX8gFdZGJKLVlVJazAMDWb3hDJOUxZxlJuVTo/SdcB8+mKQlalTZr6dLWpzCqNhObTVcvcVdrASHKzKqWMQTdvOb90OcvYNATrs5RsdW3ONXa9OWxGzshSxD8U5c3JLE1zI3g+NT5kb+rS2z16Tdus2kqi91Q2dRYcT6V1PfG4zZK6BqfIJbpNFf7ZuRgNO7XAXiKMhjDDJfAdxV0Y1cGHpSkdtEJKQ5girLVBbSdG8Xg6r+9nyMApEV9uFtEhWjBO/R0lL43Eg8XbiF1Ka6lJ2y3scGspQMHMcE8mLsXgCWNr3BxySpgb5BJ4rAwIBhx6UzqBniVs4VSgK36k51EZSj2RK9ThclMo0bn/8QoHVFkjvhc58KW1xgWlH2FswhR2EAVhJAKFALiWUPu0U/2014VfjXtqMwGlRV5KhBfc2gelfeB5HrU/KPkC1tNSmy0RkFj96ANYvswNl7VzAlWc1cYmNGI0gW1Il1sL2waILypK8YmJ6KuQE2ofpggjqke4Gbz/QNnKEka1W+PU6/a6JweJf3jok/6k/1BeBaCc/1wqMQMfuAvwWFIpEGLEqrEcpBEl8UUNKw9wJ3GOOU2wfk0O9y9byjiySTTScThBh1pgqnRYM8crGjuF0YGLQI42VRyvy5I9NtpiIiy4oq0mB35Zb1UJy5VA7XFL3dt3t3DxdnQ9f32g81GFaTnuClOkBZ9h1FMbSse5GafW4VzhIr0eXg7evR90w5cQI2ONDwXXW0YGWlqjdPAxtPUc2XYs4ZAHTEsr6VFTeo0yBjHdE5YYuMr9fhxXESf6KvjPvwMaJgv4JRAWigi+xm3VtKE7omHKPUq3TStiCcuaaabtRrS0MynWDYmWtz4m2p4UpWm8pgGD+geZWq3G3OOty6uKlj+XSOPN3X3C5twpPqbSuFsxqTy9S5ZNeO7xK/C9vGk69CvY+hg56nXbdDQ1lHbiYgmb4XL7c4ga4LPs73wNPOMGdvZ82zuj93Nsb8L67DscTMHPuEc9sd5vT01Xg+vBhwFLYpvdHR5mcTZoXihvjirfniNqK/RLbh4VX63qsaSq1vL11pMn1oNLk0maPKiqfwDr6IYm
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Endpoints for issue comment create/update/delete and fetch issue comment details"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/issues/{issue_id}/comments/{pk}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently remove a comment from a work item. Records deletion activity for audit purposes.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"issue_id","schema":{"type":"string","format":"uuid"},"description":"Issue ID","required":true,"examples":{"ExampleIssueID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example issue ID","description":"A typical issue UUID"}}},{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"description":"Comment ID","required":true,"examples":{"ExampleCommentID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example comment ID","description":"A typical comment UUID"}}},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Work item comment deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Comment not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

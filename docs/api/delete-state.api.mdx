@@ -1,0 +1,71 @@
+---
+id: delete-state
+title: "Delete state"
+description: "Permanently remove a workflow state from a project. Default states and states with existing work items cannot be deleted."
+sidebar_label: "Delete state"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVm1vGjkQ/isjf2krLSxJSa/Hp4sarkIXtVHTXE9KUWTWQ/DhtV3bC+HQ/vfT2OwCgVRV7nT3Bbye8bw+87JmxqLjQRo9EmzABCoMeOcDD8gyJtAXTloiswG7QldyjTqoFTgszQKBw9K4+VSZJcQ3MHWmBA7WmT+xCF24wCmvVEhUD1yL5riUYQb4IH2Q+j6KARmw9FBwrU2ACUKyRnRZxix3vMSAzrPB7ZpJssfyMGMZ07xE+koq76RgGfPFDEvOBmsWVpaoPjip71nGpsaVPLABqyopWH3gY5ICowuWMYffKulQsEFwFWYMH3hpFXqSO0znDf/ogu4WXFWk7Oysh2/7vV4HT3+edPonot/hP5286fT7b96cnfX7vV6vR0ZWZcndig0aYU3YkvZ9w84hrKwsuGqZbm5GF6yu6+xoOLyq7r8TiAPHvxg395YXCJuXP+B8+2bX+XLVWbb3x5zcpT7l43Lfmqe9JCz9w5RfR+D+aMIj97+Ubr/V/FQgEkuT6nHGAr+nEkhWezbOmMeicjKsYmGcW/kbrs6rMEMdZMGTwNsxxe8jXZ8eoY3Jc2+N9snV016f/vZt+oTeVK5oqxJ8VRTo/bRSakVR7fd6h69ScA9KOvGfHPLvWweFQ0GfXHlYokMgMdaZhRQowDjgDkHqBVdSdJPQ14dCqXFJ70mgQC1RdOHGowPFi7mHJulgWza/kXUkDJ9nGF+gpxi4JihL7qNtU1NpsqTOWIlhZrZNNTaxMGMDlnMr88VJ3oLc52uCeZ1vStvn6203q/PUMPN1A/Y6JzShWzTdsHKKDdgsBOsHOUnvWsU1dr057OHOiKqIHwSJ7ctBnitTcDUzPgzeJsTuP70kMqt3EHdNJZcgcxx3bS3ySGZZquEZcoFuW8V/dM6vRp3E8AgOVyOY4wr4nuAuXCUIwMpUDhomqSHMEFppkPTEXB7HfmufIQWn1CuUWUaH6MI4+VfkfGcEHlzexNjldJebvCFhh1tLCQpmjo944lVMXmFsiptDLmJxcQE81hME08LKs4wtnQxk4hf6P8pDYCuURB3ebcslOvcfmnDQVlPEH2UOfGWtcXHkT0yYwV5EoTACIW4TtCgkn/Z6ANG68KtxTxEzkLpQlUB4wa29k9oHrlSUfifFC2j3iAYtMSBNRYPlK2W4SM4VKOOKMzFhwzY1bmc0cWthV4FPdS/11MToy6Bw0zGuqB7h0/D6M6GVZYxqN8Wp1+11Tw6Af/joq/6qf5deBiDMf6tkMafp4ALcV1QKFDHqxbEchCmqEnVIYeUBbgUuUNGy59vmMH7ZtIwjRGojHYdTdKgLzKUObed4RQtZYXTgRSBHN1UczWXZo26004mw5JJIGwz80pLqjClZoPa4I+79hxs4f391uXh9IPNehlk16RamzEs+xygnKconykxy63AhcZlfjt4NP1wPu+EhxMxY40PJ9Y6Si9ia4ei+u44+og7/8+q7aVEBHwI5Kalzp4CsNxPllvorgYpwtJ0qLGODzTLXDBa62l+U0xpBnNtVirYKmgMkeb2ecI83TtU1XX+rkFaY23HGFtxJPiGI366ZkJ7Ogg2mXHn8TihfftrM21ewt2wfdbMZH5pGQ7NvsYzNcbW/8tMwe5YNB3vvM+xIO+pzLdjZP5+ju0lbPd7dOS6Gl8PPQ5bFkbU/iOdxzm4OlLujCnZnctJEv+TkUfb1Oo34um75E+nJF+0SkLjJ13Fd138DABgEHA==
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete state"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/states/{state_id}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently remove a workflow state from a project. Default states and states with existing work items cannot be deleted.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}},{"in":"path","name":"state_id","schema":{"type":"string","format":"uuid"},"description":"State ID","required":true,"examples":{"ExampleStateID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example state ID","description":"A typical state UUID"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource deleted successfully"},"400":{"description":"State cannot be deleted"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      

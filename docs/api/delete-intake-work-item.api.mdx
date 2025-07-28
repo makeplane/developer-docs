@@ -1,0 +1,71 @@
+---
+id: delete-intake-work-item
+title: "Delete intake work item"
+description: "Permanently remove an intake work item from the triage queue. Also deletes the underlying work item if it hasn't been accepted yet."
+sidebar_label: "Delete intake work item"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVltv2zYU/isHfGkLyJaTOl2npwVNVhgLNqNt1gGpEdDisc2ZIhmSsusZ+u/DoWRZjp2iyIZhL77w3G/fOVtmLDoepNEjwTImUGHAe6kDX+L92rjlvQxYsIQJ9LmTljhZxsboCq5RB7UBh4VZIXANtRiQGJAYzJwpICwQgpN8jvBQYol9uFTeQG3KR3KpBTq1kXreEZYzkAEW3OsXAaaIGnieow0oYIOhzxJmueMFBnSeZXdbJskzy8OCJUzzAlnGpPcl3kvBEubzBRacZVsWNpZoPjip5yxhM+MKHljGylIKVj2OdUQ6YHTFEubwoZQOBcuCKzFh+JUXVqEnrdf178g9uqKXFVclGbq4GODb4WDQw/Mfp73hmRj2+A9nb3rD4Zs3FxfD4WAwGJCDZVFwt2HZThXIveVDly4hbKzMuWpYbm9HV6yqquRkEqwzf2Ie/mEaxrWW705Ew/8vpcJ2rT+VjB3Tt9PhVTn/RiKOAv9s3NJbniM0kt8RfCvTDb7Y9Nbt+6kgu9SnYlwfelNV1SRhgc9pBNgoDiCbJMxjXjoZNnEwLq38BTeXZVigDjLntdK7CSXoN3o+P0GbUKDeGu3ryM4HQ/o69OsDelO6HJtpFuDLPEfvZ6VSG0rlcHB2LHVoDXKHgv5y5WGNDkGbQLVcSYECjAPuEKRecSVFv1b6+lgpQZL0nhQK1BJFH249OlA8X3rY1Qxsy+YbXSfC+rTAKIGeYnK7INfcR99mptTkSZWwAsPC7JEzglJYsIyl3Mp0dZa29fLplipWpU2X+nS7H8wqrbGzF+fZp9sdcFUpdQq61Q7kSqdYxhYhWJ+lZKRvFdfY9+YYpJ0RZR7/UKX3klmaKpNztTA+ZG/rkTsUvSEyqzqN9JHGpe6E0+3UzhGPZJbUs7dALtDtp++P3uV41KsZHnXFeARL3AA/UNyHcd0JsDGlgx2T1HFxtNqgthNLerqlW/8MGTgnwFNmHQOiB+PkX5HznRF49Hgbc5fSW2rSHQl73FoqUDBLfMQTn2LxcmPrvDnkIs4MF3GVeQ/BtN3lWcLWTgZy8TN9n+ShnsuVRB3e7acmBvcfunAEkXXGH1UOfGmtcYG2+tSEBRxkFHIjEKgEwLWAOqYDKCBaH3427iliAlLnqhQIL7i191L7wJWK2u+leAHtebDrlpiQ3WCD5RtluKiDy1HSDUOONmwz4zpgy62FrgFfj7/UMxOzL4PCBjjGNI/w4frjJ+pWljCa3TpPg/6gf3bU+MdCX/QX/bv0MgD1/EMp8yX4wF2AeUmjQBkjiI3jIExeFqhDnVYe4E7gChUddr4Fh8nLHWScIBKM9BzO0KHOkaCoRY5XdGflRgeeBwq0meLoLkseoVEHibDgkkhND/zUkqqEKZmj9thR9/7XW7h8P75ZvT7SOZdhUU77uSnSgi8x6qkNpVNlpql1uJK4Tm9G765//XjdD19DrIw1PhRcd4xcRYQ+OlIfl2Mbw0Ud/jdnboNbAb8GilwSnNdZ2jbb5o5AlzqNmmu/cVjCsuZm2S0dejq4Bw/2DlE7JzMdErQjyMB2O+Ueb52qKnp+KJFOl7tJwlbcST6l9r/bMiE9/RYsm3Hl8Ru5ffmhWcmvoHNhn4x1t1g0LY3dNcUStsRN98anJfcs+wen7TM86CT02T4cXZnP8KO+CCfds+Tq+ub60zVL4jo7XNLLuIObH1S7k8q7+7q2Qp8U5kn27bZe/1XV8tekJyXaA6GppqYIqupvMCQH4A==
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete intake work item"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/intake-issues/{issue_id}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently remove an intake work item from the triage queue. Also deletes the underlying work item if it hasn't been accepted yet.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"issue_id","schema":{"type":"string","format":"uuid"},"description":"Issue ID","required":true,"examples":{"ExampleIssueID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example issue ID","description":"A typical issue UUID"}}},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      
