@@ -1,0 +1,74 @@
+---
+id: delete-user-asset
+title: "Delete user asset"
+description: "Delete user asset."
+sidebar_label: "Delete user asset"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVk1vGzcQ/SvEXOIAK63syGm6pxqxGgg1EiGx2wK2YIyWI4vQLsmQXDmqsP+9GHIly5LaYw+92CvOcD7fzOMGjCWHQRk9llCApIoCPTae3CN6TwEykORLpyzrQAHXUUOwhoga/Qf9oLtTTOfWmbmqKMnFGa4woBPGidKsyAlV4xO9FailcFSbFQkVvHA0J0e6JDF3phZhQa+M9R/07UJ5YcnNjau9QOHNPIgUsZitRY1uqfRTvJk8o+/EMjprrMSw1WDbb/zOOmRg0WFNgZyH4n4DirO1GBaQgcaaoIBo9VFJyMCXC6oRig2EtWWZD07pJ8iAo8MABTSNktAe1u8qRja+hgwcfW+UIwlFcA1lQD+wthV5tjpK31F7fM0nK6wadnR5OaAPw8GgRxc/z3rDczns4U/n73vD4fv3l5fD4WAwGHCATV2jW0OxNdXVJHo+CEmEtVUlVp3K3d34Gtq2nWYQ8ImrkaL2MM3AU9k4FdaxRldW/UbrqyYsSAdVYjJ4P22zDXzh44sTsiln7q3RPqV6MRjyv1Nl2nbPN2VJ3s+bqlpzSYeD8xNXXrkSpSPJP7Hy4pkcCW0Ct3ulJEkGIzoSSq+wUrKfjL47NjohVyvv2aAkrUj2xR2jssJyyZhNHWRUdmq+s3Uip9sFxRvkOSdH3jSuJPGMPsY2N43mSNoMagoL8zKPEZxhAQXkaFW+Os9jo3zOIO5135stOtuc209utUVy4yooYBGC9UXOFvq2Qk19b46gMHFGNmX8wT18uVnkeWVKrBbGh+JDgtjrqzcshnYPIt94RlKPTwNlNzwYxZCloVsQSnIvY/dn72oy7iWFg5ZPxmJJa4GvDPfFJLVZrE3jxFZJ6Tj4O2si+Yn9Og3WXXyGHVzwcFfmOSbEB8apv6LmRyPp6PAu1i7ns9zkWxH10FpuUDBLOtCJR7F5pbGpbo6QYfCVUAqMMyCC2UHHQwbPTgUO8Q/+f1KHAVVWinT4+DISMbn/MISjPZgqftA54RtrjYtLembCQryqqCiNJMEtiOs85fRqzlnWF78y05wWZkLpsmokiTdo7aPSPmBVReuPSr4ROw7YoiUWZDu1wuK6MihTciWpFVPezIRObW6ceDZu6S2WJNBase/Ap9lWem5i9VWoqNsKE55H8XX07ZbRChnw7KY6DfqD/vkR8I8vMQv/rrwKgjH/vVHlUviALoinhkeBK8b7M46DNGVTkw6prBjEvaQVVfwW8LvlMD3browTQl4jvR1l50qH3eZ4y2RaGh2wDJxoN8UxXMgOttHeJqIaFYs6DPyyE7UZVKok7WnP3KfPd+Lq0+Rm9e7I5pMKi2bWL02d17ikaCc5ymeVmeXW0UrRc34z/jj6/G3UDz9C7Iw1PtSo95wcPXYOG7GJiZIO/+uXUbcFA/0IXEfF5JBqvumI6Z5XOOOWoZoIidvyQk+QQbH3fOKXBFMJ39xsZujpzlVty8ffG+Jny/00gxU6hTOekvsNSOX5W0Ixx8rTvzTi7GtHy2/F3mvrZBJb/tHMLdsXFmSwpPX+e6+d7pPy9ehmdDviRBvOfZ/FlpGkug+O+qSDfUJLnvgvE+5J9c0m8WPb7vST6B9v7Bg0aXOu07Zt/wb6gSJO
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete user asset"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/assets/user-assets/{asset_id}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete user asset.
+
+Delete a user profile asset (avatar or cover image) and remove its reference from the user profile.
+This performs a soft delete by marking the asset as deleted and updating the user's profile.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"asset_id","schema":{"type":"string","format":"uuid"},"description":"Asset ID","required":true,"examples":{"ExampleAssetID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example asset ID","description":"A typical asset UUID"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Asset deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      
