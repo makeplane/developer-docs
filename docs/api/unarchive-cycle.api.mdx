@@ -1,0 +1,71 @@
+---
+id: unarchive-cycle
+title: "Unarchive cycle"
+description: "Restore an archived cycle to active status, making it available for regular use."
+sidebar_label: "Unarchive cycle"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VuuPGjcQ/1dG/pJEWljuwqUpn3q6oxHqKUFJaCpd0MnYA7h47Y3thVC0/3s13gdwcFF7UvuFx8x4nr957JjN0fGgrBlJNmCF4U4s1RofxFZoZAmT6IVTOUmwAfuIPliHwA3UghKiJAQLXAS1RvCBh8InkPGVMgtQAfiaK81nGmFuHThcFJo7KDx2WcJy7niGAZ1ng/sdU2Qm52HJEmZ4hvRvxRLmxRIzzgY7FrY5UX1wyixYwubWZTyQ84WSrEyYw2+FcijZILgCy+S8Umf/RBEelPx3yo/zMa60wOiWPbabMPzOs1yjJ73D6nctP7ol2prrgoxdXfXwbb/X6+Dlz7NO/0L2O/ynizedfv/Nm6urfr/X6/XIySLLuNuyQaMM8kPrx45dQ9jmSnDdCk0mo1tWlk+kw+ti8YNEnAT+xbqVz7lAqF/+g+DbN4fBZ9vOpqWfC/KQ+1SMm2NvyrKcJizwBUGK3RA+PZsmzKMonArbCLTrXP2G2+siLNEEJXil9H5KCfpA5MszvCkF6nNrfBXZZa9PXydNYgsnENpukuALIdD7eaH1lrLZ712cPjw2CMKhpL9ce9igQzA2UDnXSqIE64A7BGXWXCvZrZS+PlU6Rpcp70mhRKNQdmHi0YHmYuWhKRvkrZivdZ2J7PMS4wv0ASW4Js4N99G3uS0MeVImLMOwtDRRJGoMGPs8LNmApTxX6foibUvm0x0VrUxroPp0t+/NMm0y2IljhpirMm0TmxJk0K2b6VE4zQZsGULuBymZ6uaaG+x6e4KesbOyEPEPlXz/cpCm2gqul9aHwduq946f3hGblQeI+kR9U0HiPK7ahuKRzZKqCZfIJbp9G/7RuR6POpXAI2yMR7DCLfAjxV0YV3iArS0cNELKQFgitNqgshMLex7brX+WDFzS5NN2EwMignXqryh5YyWeECcxdynRUps2LOzwPKcCBbvCRzKRFIsnbF7lzSGXsXm4BB6bhXZKgzHPErZxKpCLX+j7rAwhT2iFJtzseycG9z+6cDIrq4w/qhz4Is+tC7QiZzYs4SijIKxEoBIANxKqmI4GAvG68Kt1TzETUEboQiK84Hn+oIwPXOuo/UHJF9Du3QYtMSFNe0POt9pyWQUnkBY7J0drMVrk+6nL8xwODfhqCCgztzH7Kmisx8eY+hE+Dj99JrSyhFHvVnnqdXvdixPgnz76ar6a35VXAQjz3wolVnR0uACLglqBMkaDNraDtKLI0IQqrTzAvcQ1ajp7fDscpi+bkXGGSWOk43CODo3AVJnQTo5XdMAIawIXgQKtuzi6y5JH0+hgEmHGFbFqDPzSssqEaSXQeDxQ9+79BK7fje/Wr090LlRYFrOusFma8RVGPZWhdKbtLM0drhVu0rvRzfD9p2E3fA+xMrn1IePmwMikGalw9vLbxTDRhP/mCKyHT8DvgdxXNJOrUHf14rinyUlwIYTslwdL2KC+QJr9QaSj6+7RCol8OinbLcISRucBDXwytNvNuMeJ02VJ5G8F0kFyP03YmjtFIcRdI5Wn35IN5lx7/EHCXn6st+wreCrWZjsYmvzNbcQStsJtdQHTjnqWxaMT9Tm296l8tg8n1+Iz/Kguu+nhbXE7vBt+HlKFC4LI4Y5dxRVa/6BqnVV+uG4rK/RJYZ4V3+2q7V2WrXzFevJFu98raYpzWpbl30YMpZM=
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unarchive cycle"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/archived-cycles/{pk}/unarchive/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Restore an archived cycle to active status, making it available for regular use.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"required":true},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource unarchived successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      

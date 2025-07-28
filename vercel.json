@@ -1,0 +1,46 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/self-hosting/methods/one-click",
+      "destination": "/self-hosting/methods/docker-compose"
+    },
+    {
+      "source": "/intro",
+      "destination": "/"
+    },
+    {
+      "source": "/self-hosting/govern/reset-password",
+      "destination": "/self-hosting/govern/authentication/reset-password"
+    },
+    {
+      "source": "/self-hosting/telemetry",
+      "destination": "/self-hosting/govern/telemetry"
+    },
+    {
+      "source": "/self-hosting/upgrade-from-community",
+      "destination": "/self-hosting/manage/upgrade/upgrade-from-community"
+    },
+    {
+      "source": "/self-hosting/manage/community-to-airgapped",
+      "destination": "/self-hosting/manage/upgrade/community-to-airgapped"
+    },
+    {
+      "source": "/self-hosting/manage/upgrade-from-0.13.2-0.14.0",
+      "destination": "/self-hosting/manage/update/from-0.13.2-0.14.0"
+    },
+    {
+      "source": "/self-hosting/manage/upgrade-plane",
+      "destination": "/self-hosting/manage/update/to-latest-version"
+    },
+    {
+      "source": "/webhooks/intro-webhooks",
+      "destination": "/webhooks/intro"
+    },
+    {
+      "source": "/api-reference/*",
+      "destination": "/api"
+    }
+  ]
+}
