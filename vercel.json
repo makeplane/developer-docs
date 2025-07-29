@@ -36,7 +36,7 @@
     },
     {
       "source": "/webhooks/intro-webhooks",
-      "destination": "/webhooks/intro"
+      "destination": "/webhooks/overview"
     },
     {
       "source": "/api-reference/(.*)",
