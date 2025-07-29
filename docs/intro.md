@@ -35,4 +35,3 @@ import { CardGroup } from '@site/src/components/CardGroup';
     Learn how to integrate Plane's webhooks with your service.
   </Card>
 </CardGroup>
-
