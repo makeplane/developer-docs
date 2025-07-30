@@ -31,7 +31,7 @@ import { CardGroup } from '@site/src/components/CardGroup';
   <Card title="API Reference" icon="FaCog" href="/api/the-plane-rest-api">
     Use our API reference to build a custom integration.
   </Card>
-  <Card title="Webhooks" icon="FaCog" href="/webhooks/intro">
+  <Card title="Webhooks" icon="FaCog" href="/webhooks/overview">
     Learn how to integrate Plane's webhooks with your service.
   </Card>
 </CardGroup>
