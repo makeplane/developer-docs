@@ -101,7 +101,8 @@
           "pages": [
               "self-hosting/govern/integrations/github",
               "self-hosting/govern/integrations/slack",
-              "self-hosting/govern/integrations/gitlab"
+              "self-hosting/govern/integrations/gitlab",
+              "self-hosting/govern/integrations/github-enterprise"
             ]
         },
         "self-hosting/govern/external-secrets",
