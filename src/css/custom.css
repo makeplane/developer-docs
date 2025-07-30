@@ -758,7 +758,7 @@ table thead tr {
   margin: 10px;
 }
 
-img[src*='#center'] {
+img[src*='#center'], img.center {
   display: block;
   border-radius: 0.75rem;
   float: none;
@@ -771,7 +771,9 @@ img[src*='#center'] {
   background-color: rgb(226 226 226);
 }
 
-[data-theme='dark'] img[src*='#center'] {
+[data-theme='dark'] img[src*='#center'],
+[data-theme='dark'] img.center
+ {
   display: block;
   border-radius: 0.75rem;
   float: none;
