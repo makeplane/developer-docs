@@ -159,10 +159,9 @@ identify and verify the request. The most important headers are:
 
 To verify the authenticity of the webhook payloads, you can use the `X-Plane-Signature` header.
 This header contains an HMAC SHA-256 signature of the payload, generated using the secret key
-you received when creating the webhook. If the signature matches the expected signature, you can be confident that the payload
-was sent by Plane and has not been tampered with.
-
-Here's how to verify the payload signature in Python:
+you received when creating the webhook. If the signature in the header matches
+the HMAC SHA-256 hash of the incoming payload and your secret, you can be
+confident that the payload was sent by Plane and has not been tampered with.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
