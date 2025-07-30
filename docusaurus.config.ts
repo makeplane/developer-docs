@@ -117,18 +117,6 @@ const config: Config = {
           label: 'Sign in',
           position: 'right',
         },
-        // {
-        //   type: "docSidebar",
-        //   sidebarId: "sidebar",
-        //   position: "left",
-        //   label: "Docs",
-        // },
-        // { to: '/releases', label: 'Releases', position: 'left' },
-        // {
-        //   href: "https://github.com/makeplane",
-        //   label: "GitHub",
-        //   position: "right",
-        // },
       ],
     },
     footer: {
@@ -138,16 +126,24 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Introduction',
-              to: '/',
-            },
-            {
               label: 'Self-Hosting',
               to: '/self-hosting/overview',
             },
             {
+              label: 'SDKs',
+              to: '/sdks/overview',
+            },
+            {
+              label: 'AI Solutions',
+              to: '/ai-solutions/overview',
+            },
+            {
               label: 'Webhooks',
-              to: '/webhooks/intro',
+              to: '/webhooks/overview',
+            },
+            {
+              label: 'API Reference',
+              to: '/api',
             },
           ],
         },
