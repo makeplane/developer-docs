@@ -173,7 +173,7 @@ const config: Config = {
           items: [
             {
               label: 'Blog',
-              to: 'https://plane.so/blog',
+              href: 'https://plane.so/blog',
             },
             {
               label: 'GitHub',
