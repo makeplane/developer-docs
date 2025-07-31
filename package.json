@@ -12,6 +12,7 @@
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
+    "serve:local": "docusaurus serve --port 3030",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "gen-api-docs": "pnpm docusaurus gen-api-docs all",
