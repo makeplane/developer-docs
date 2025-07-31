@@ -7,7 +7,7 @@ description: Explore our guides and examples to integrate Plane
 
 # Plane Developer Documentation
 
-{frontMatter.description && <h3 class="description">{frontMatter.description}</h3>}
+{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
 
 :::tip Let's Go!
 Get Started with Self-Hosting right away by visiting our [QuickStart](/self-hosting/overview).
