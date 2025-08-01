@@ -47,7 +47,7 @@
       "url": "self-hosting"
     },
     {
-      "name": "API Reference",
+      "name": "APIs and BYOA",
       "url": "api-reference"
     },
     {
@@ -135,6 +135,13 @@
         "self-hosting/troubleshoot/license-errors",
         "self-hosting/troubleshoot/cli-errors",
         "self-hosting/troubleshoot/storage-errors"
+      ]
+    },
+
+     {
+      "group": "App Development",
+      "pages": [
+        "api-reference/byoa/build-plane-app"
       ]
     },
     {
