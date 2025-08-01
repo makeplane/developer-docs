@@ -8,13 +8,14 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-color-primary-lightest: #aad6ee;
+  --ifm-color-primary-lighter: #7fc2e6;
+  --ifm-color-primary-light: #55addd;
   --ifm-color-primary: #006399;
-  --ifm-color-primary-dark: #1b47c2;
-  --ifm-color-primary-darker: #1941b1;
-  --ifm-color-primary-darkest: #153693;
-  --ifm-color-primary-light: #2257ed;
-  --ifm-color-primary-lighter: #3e6ef0;
-  --ifm-color-primary-lightest: #557ef2;
+  /* --ifm-color-primary: #3fa3d9; */
+  --ifm-color-primary-dark: #2892cc;
+  --ifm-color-primary-darker: #195c80;
+  --ifm-color-primary-darkest: #113d55;
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'Nacelle', system-ui, -apple-system, sans-serif;
   --ifm-heading-font-family: 'Nacelle', system-ui, -apple-system, sans-serif;
