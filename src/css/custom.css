@@ -827,3 +827,28 @@ a.footer__link-item:hover {
     box-sizing: border-box;
   }
 }
+
+/* openapi */
+
+.openapi-params__list-item {
+  padding-bottom: 1rem;
+}
+
+.openapi-params__list-item>strong {
+  display: inline-block;
+  padding-top: 0.5rem;
+}
+
+.openapi-tabs__schema-tabs-container {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  margin-bottom: -0.5rem;
+}
+
+.openapi-tabs__schema-tabs-container .openapi-tabs__schema-item {
+  border-radius: var(--ifm-global-radius) var(--ifm-global-radius) 0 0;
+}
+
+.openapi-tabs__schema-tabs-container .openapi-tabs__schema-item.active {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
