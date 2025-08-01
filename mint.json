@@ -4,7 +4,7 @@
     "light": "https://media.docs.plane.so/logo/new-logo-white.png",
     "dark": "https://media.docs.plane.so/logo/new-logo-dark.png"
   },
-  "favicon": "https://media.docs.plane.so/logo/favicon-32x32.png",
+  "favicon": "/logo/favicon-32x32.png",
   "colors": {
     "primary": "#3f76ff",
     "light": "#517be0",
