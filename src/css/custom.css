@@ -12,7 +12,6 @@
   --ifm-color-primary-lighter: #7fc2e6;
   --ifm-color-primary-light: #55addd;
   --ifm-color-primary: #006399;
-  /* --ifm-color-primary: #3fa3d9; */
   --ifm-color-primary-dark: #2892cc;
   --ifm-color-primary-darker: #195c80;
   --ifm-color-primary-darkest: #113d55;
@@ -25,23 +24,34 @@
   --color-neutral-500: oklch(58.24% .0161 231.06);
   --color-neutral-600: oklch(47.52% .0127 231.05);
   --color-brand-25: oklch(98.54% .0085 230.78);
+  --color-brand-50: oklch(97.09% .017 230.91);
+  --color-brand-300: oklch(84.11% .0949 233.04);
+  --color-brand-400: oklch(76.44% .1392 236.52);
+  --color-brand-500: oklch(62.27% .1255 238.15);
+  --color-brand-600: oklch(48.1% .1154 242.59);
+  --color-brand-700: oklch(37.56% .0879 241.26);
+  --color-brand-800: oklch(27.52% .0617 238.68);
   --color-brand-900: oklch(20.77% .044 234.86);
   --color-brand-950: oklch(17.92% .0365 231.95);
+
   --ifm-footer-background-color: var(--color-brand-950);
   --plane-footer-background-color: var(--color-brand-950);
+  --plane-call-to-action-color: var(--color-brand-500);
+  --plane-call-to-action-hover-color: var(--color-brand-600);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
+  --default-transition-duration: .15s;
+  --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme='dark'] {
-  --ifm-color-primary-lightest: #aad6ee;
-  --ifm-color-primary-lighter: #7fc2e6;
-  --ifm-color-primary-light: #55addd;
-  --ifm-color-primary: #3fa3d9;
-  --ifm-color-primary-dark: #2892cc;
-  --ifm-color-primary-darker: #195c80;
-  --ifm-color-primary-darkest: #113d55;
+  --ifm-color-primary-lighter: var(--color-brand-300);
+  --ifm-color-primary-light: var(--color-brand-400);
+  --ifm-color-primary: var(--color-brand-500);
+  --ifm-color-primary-dark: var(--color-brand-600);
+  --ifm-color-primary-darker: var(--color-brand-700);
+  --ifm-color-primary-darkest: var(--color-brand-800);
 
   --ifm-heading-color: #e0e4ec;
   --ifm-background-color: var(--color-brand-900);
@@ -49,6 +59,8 @@ html[data-theme='dark'] {
   --ifm-footer-link-color: var(--color-neutral-500);
   --plane-footer-background-color: var(--color-brand-950);
   --plane-footer-link-color: var(--color-neutral-400);
+  --plane-call-to-action-color: var(--color-brand-500);
+  --plane-call-to-action-hover-color: var(--color-brand-600);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="%23ebebeb99" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
 }
@@ -85,7 +97,7 @@ html[data-theme='dark'] {
 .menu__list {
   display: block !important;
   margin: 0;
-  transition: height 0.35s cubic-bezier(0.36, 0.66, 0.04, 1) 25ms !important;
+  transition: height 0.35s var(--default-transition-timing-function) 25ms !important;
   will-change: auto !important;
 }
 
@@ -128,7 +140,6 @@ html[data-theme='dark'] {
   letter-spacing: -0.01em;
   line-height: 16px;
   transition: opacity 0.2s ease-out;
-  /* color: rgba(60, 60, 60, 0.7); */
   color: var(--color-neutral-600);
 }
 
@@ -300,7 +311,7 @@ h3.description {
 }
 
 #__docusaurus>nav>div.navbar__inner>div.navbar__items.navbar__items--right>a:nth-child(4) {
-  background-color: var(--ifm-color-primary);
+  background-color: var(--plane-call-to-action-color);
   border-radius: 8px;
   color: #f3f5f7;
   font-size: 0.75rem;
@@ -315,6 +326,10 @@ h3.description {
 
 [data-theme="dark"] #__docusaurus>nav>div.navbar__inner>div.navbar__items.navbar__items--right>a:nth-child(4) {
   color: var(--ifm-color-emphasis-800);
+}
+
+#__docusaurus>nav>div.navbar__inner>div.navbar__items.navbar__items--right>a:nth-child(4):hover {
+  background-color: var(--plane-call-to-action-hover-color);
 }
 
 #__docusaurus>nav>div.navbar__inner>div.navbar__items.navbar__items--right>a>svg {
@@ -536,6 +551,11 @@ html[data-theme="dark"] .one {
 .card-link:hover {
   text-decoration: none;
   color: inherit;
+}
+
+/* fix text ellipses for docusaurus index cards */
+.card p.text--truncate[class*='cardDescription_'] {
+ width: 100%;
 }
 
 html {
@@ -851,4 +871,14 @@ a.footer__link-item:hover {
 .openapi-tabs__schema-tabs-container .openapi-tabs__schema-item.active {
   border-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary);
+}
+
+.openapi-explorer__request-form .openapi-explorer__request-btn {
+  background-color: var(--plane-call-to-action-color);
+  font-weight: inherit;
+  text-transform: inherit;
+}
+
+.openapi-explorer__request-form .openapi-explorer__request-btn:hover {
+  background-color: var(--plane-call-to-action-hover-color);
 }
