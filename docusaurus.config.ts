@@ -187,7 +187,18 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['bash'],
+      additionalLanguages: [
+        'ruby',
+        'csharp',
+        'php',
+        'java',
+        'powershell',
+        'json',
+        'bash',
+        'dart',
+        'objectivec',
+        'r',
+      ],
     },
     metadata: [
       {
@@ -265,10 +276,6 @@ const config: Config = {
       {
         highlight: 'objective-c',
         language: 'objective-c',
-      },
-      {
-        highlight: 'ocaml',
-        language: 'ocaml',
       },
       {
         highlight: 'r',
