@@ -1,14 +1,14 @@
 {
   "name": "Plane",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "https://media.docs.plane.so/logo/new-logo-white.png",
+    "dark": "https://media.docs.plane.so/logo/new-logo-dark.png"
   },
   "favicon": "/logo/favicon-32x32.png",
   "colors": {
-    "primary": "#3f76ff",
-    "light": "#517be0",
-    "dark": "#3f76ff",
+    "primary": "#006399",
+    "light": "#006399",
+    "dark": "#006399",
     "background": {
       "dark": "#1B1B1F"
     }
@@ -47,7 +47,7 @@
       "url": "self-hosting"
     },
     {
-      "name": "API Reference",
+      "name": "APIs and BYOA",
       "url": "api-reference"
     },
     {
@@ -136,6 +136,13 @@
         "self-hosting/troubleshoot/license-errors",
         "self-hosting/troubleshoot/cli-errors",
         "self-hosting/troubleshoot/storage-errors"
+      ]
+    },
+
+     {
+      "group": "App Development",
+      "pages": [
+        "api-reference/byoa/build-plane-app"
       ]
     },
     {
