@@ -826,11 +826,3 @@ a.footer__link-item:hover {
     box-sizing: border-box;
   }
 }
-
-/* openapi */
-
-/* The Plane API currently does not support 'access-control-allow-origin: *' */
-.openapi-explorer__request-form,
-.openapi-explorer__response-container {
-  display: none;
-}
