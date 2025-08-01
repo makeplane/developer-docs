@@ -3,6 +3,13 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 import apiSidebar from './docs/api/sidebar.js';
 
+// Substitute our custom intro page b/c it's nicer than the generated one.
+const indexPage = apiSidebar[0]
+if (!(indexPage.type === 'doc' && indexPage.id === 'api/the-plane-rest-api')) {
+  throw new Error('Could not find API index page. Aborting.');
+}
+apiSidebar[0].id = 'api/introduction';
+
 const sidebars: SidebarsConfig = {
   sidebar: [
     {

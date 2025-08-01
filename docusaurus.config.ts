@@ -339,7 +339,7 @@ const config: Config = {
         docsPluginId: 'classic', // configured for preset-classic
         config: {
           plane: {
-            specPath: 'api-spec/schema.yaml',
+            specPath: 'api/schema.yaml',
             outputDir: 'docs/api',
             sidebarOptions: {
               groupPathsBy: 'tag',
