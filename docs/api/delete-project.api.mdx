@@ -1,0 +1,71 @@
+---
+id: delete-project
+title: "Delete project"
+description: "Permanently remove a project and all its associated data from the workspace."
+sidebar_label: "Delete project"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VttuGzcQ/RWCL0mAlVZ25DTdpxqxGgg1UiOJmwKOEIzIkcWKSzIkV4oq7L8Xw71YsuSgCIq+7IUznPucmR23Dj1EZc1U8oJL1Bjxi/P2LxSRZ1xiEF45YuAFv0FfgkET9ZZ5LO0aGbCWmYGRDLRmKgYGIVihIKJkEiKwhbcli0tkG+tXwYHAIc+4Aw8lRvSBF3c7rkiFg7jkGTdQIv2teMaDWGIJvNjxuHV0GqJX5p5nfGF9CZEXvKqU5PWRua1l0yuecY9fK+VR8iL6CjOO36B0GgPJnTTfLf/0is7WoCtSdnExwtfj0WiA5z/PB+MzOR7AT2evBuPxq1cXF+PxaDQakZFVWYLf8qIT1sclaT807JLFrVMCdM90ezu94nVdZyfDEHR1/51AHDn+qYsya2/+C+f7O/vOl9tBn7GTTu5Tn/Jxc2hNXdezjEe4p6x3OQp8lvGAovIqblM1XDr1G24vq7hEE5WARuzdjEL0Ox2fn6DNyNXgrAmNb+ejMb0OLXuPwVZeIGuqXbJQCYEhLCqttxTM8ejs+NahNiY8SvoFHdgGPTJjI2VzrSRKZj0Dj0yZNWglh43Ql8dCqaFUCCRQolEoh+w2oGcaxCqwLmvM9WyhlXXCrY9LTDcwkE++c3IDIdm2sJUhS+qMlxiX9qHdUyfGJS94Dk7l67O8z1jId5SzOm/rNOQ7t6pzKgX0665xK695wZcxulDkJGPoNBgcBnuMIN7KSqQfSuTDzSLPtRWglzbE4nXTU4dXr4nM6706+UD90CT6dLX0jQKJzLOmuZYIEv1De/05uLyZDhqGR0m/mbIVbhkcCB6ymybRbGsrzzomZRLE9dJYoydl7HTF9vZZUnBOiKbtJjlEB9arvxPnGyvx6PA2xS6ns9zmHQkH4BwlKNoVPuJJRyl5wrombh5BppYAySB1AYu2L57AM77xKpKJn+h9kodKSmiFJr55aIrk3P9owhEGNhF/lDkWKuesj8rcs7mNS3YQUSasREYpSMOs8emg04k2ZL9a/xQxY8oIXUlkz8C5L8qECFon6V+UfMb6kddVSwpI17fMwVZbkI1zAlUasHMbW7aF9XtoCs6xfQWh6W5lFjZFX0WNLS7cUD+y95MPH6laecapd5s4jYaj4dlR4R9f+mw+mz9UUJFRzX+tlFixEMFHdl9RK1DECEFTO0grqhJNbMIKkd1JXKOmZSP04DB73kHGCSLByMDjAj0agbkysUeOF7Q7CGsiiEiOtl2czOXZIzTaQyIsQRGprYFfelKdca0EmoB74t6+u2WXb2+u1y+PZN6ruKzmQ2HLvIQVJjmNonyu7Tx3HtcKN/n19M3k3YfJMH6LKTPOhliC2VNylQCYPbFv7ZKXaOJ/v3q1uBPxWyTLFcFx4+WuHQZ3BJpUKVQcDwOBZ7xol4puJtBRWtRohhN+0+Xdbg4Bb72uazr+WiHtDXezjK/BK5hTad7tuFSBviUvFqADficAz9+30/AFO9jrTnrSwb4hSO+WGZ7xFW6brZKGzw/pPlqtfkB/swbN9ifx1eR68nHCswTxh4NrleZS+0ExOyl8f4Y1WuhJbp5k3+2akVjXPX9DevJGPzQbbvJzVtf1P774O00=
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete project"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{pk}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently remove a project and all its associated data from the workspace.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      
