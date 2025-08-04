@@ -85,15 +85,15 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
             **For Plane cloud instance**  
 
                ```bash
-               https://silo.plane.so/api/github/auth/callback
-               https://silo.plane.so/api/github/auth/user/callback
+               https://silo.plane.so/api/oauth/github-enterprise/auth/callback
+               https://silo.plane.so/api/oauth/github-enterprise/auth/user/callback
                ```
 
             **For Plane self-hosted instance**  
 
                ```bash
-               https://<your-domain>/silo/api/github/auth/callback
-               https://<your-domain>/silo/api/github/auth/user/callback
+               https://<your-domain>/silo/api/oauth/github-enterprise/auth/callback
+               https://<your-domain>/silo/api/oauth/github-enterprise/auth/user/callback
                ```
             
          These URLs allow Plane to verify and enable workspace connection with the Github App.
@@ -253,6 +253,6 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
     cat private_key.pem | base64 -w 0
     ```
 
-8. Once you've created the app, [activate the GitHub Enterprise integration in Plane](https://docs.plane.so/integrations/github#connect-github-enterprise-organization).
+8. Once you've created the app, [activate the GitHub Enterprise integration in Plane](https://docs.plane.so/integrations/github?edition=github-enterprise#connect-github-organization).
 </Tab>
 </Tabs>
