@@ -15,24 +15,17 @@ In this guide, you’ll:
 ## Create GitLab Application
 
 1. On the left sidebar in GitLab, select your avatar.
-
-2. Select **Preferences** tab.
-
+2. Select the **Preferences** tab.
 3. Navigate to the **Applications** tab.
-
-4. Click on **Add new application** to begin the setup.
+4. Click **Add new application** to begin setup.
    ![Add GitLab application](/images/integrations/gitlab/add-gitlab-application.webp)
-
 5. Provide a **Name** for your application.
-
 6. Enter the following **Redirect URI**, replacing [YOUR_DOMAIN] with your actual domain:
    ```bash
    https://[YOUR_DOMAIN]/silo/api/gitlab/auth/callback
    ```
 7. You can choose to check or leave the **Confidential** box unchecked—both options work for Plane.
-
    ![Add app details](/images/integrations/gitlab/add-app-details.webp)
-
 8. Set permissions by selecting the required **Scopes**. The table below explains each scope:
 
    | Permission         | Explanation                                                                                                                                                      |
@@ -45,20 +38,16 @@ In this guide, you’ll:
    | `profile`          | Grants read-only access to the user's profile data using OpenID Connect.                                                                                         |
    | `email`            | Provides read-only access to the user's primary email address using OpenID Connect.                                                                              |
 
-9. Click **Save Application** to finalize the setup.
+9. Click **Save Application** to finalize setup.
 
 ## Configure Plane instance
 
 1. Copy the **Application ID** and **Secret** from the newly created application.
    ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
-
-2. Add these environment variables with the values to your Plane instance's `.env` file.
-
+2. Add these environment variables to your Plane instance's `.env` file:
    ```bash
    GITLAB_CLIENT_ID=<application_id>
    GITLAB_CLIENT_SECRET=<secret>
    ```
-
 3. Save the file and restart the instance.
-
 4. Once you've completed the instance configuration, [activate the GitLab integration in Plane](https://docs.plane.so/integrations/gitlab).

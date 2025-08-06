@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 {frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
 
-This guide walks you through setting up a Slack App to enable Slack integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for Slack, you’ll need to set up the necessary authentication, permissions, and event subscriptions to ensure seamless communication between Plane and Slack.
+This guide walks you through setting up a Slack App to enable Slack integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for Slack, you’ll need to set up authentication, permissions, and event subscriptions to ensure seamless communication between Plane and Slack.
 
 In this guide, you’ll:
 
@@ -23,20 +23,16 @@ After creating and configuring the Slack app and configuring the instance as det
 
 ## Create Slack App
 
-To configure Slack integration, you'll need to create a Slack App within your organization. Follow these steps:
+To configure Slack integration, create a Slack App within your organization:
 
-1.  Go to [Your Apps](https://api.slack.com/apps) on Slack.
-
-2.  Click **Create an App**.
-    ![Create Slack App](/images/integrations/slack/create-slack-app.webp)
-
-3.  Choose **From a manifest**.
-    ![Choose Manifest](/images/integrations/slack/choose-from-manifest.webp)
-
-4.  Select the workspace where you want the app installed.
-
-5.  Remove the default manifest and paste the one below, making sure to update the placeholders with your actual values.
-    ![Manifest](/images/integrations/slack/app-from-manifest.webp)
+1. Go to [Your Apps](https://api.slack.com/apps) on Slack.
+2. Click **Create an App**.
+   ![Create Slack App](/images/integrations/slack/create-slack-app.webp)
+3. Choose **From a manifest**.
+   ![Choose Manifest](/images/integrations/slack/choose-from-manifest.webp)
+4. Select the workspace where you want the app installed.
+5. Remove the default manifest and paste the one below, updating placeholders with your actual values.
+   ![Manifest](/images/integrations/slack/app-from-manifest.webp)
 
 <Tabs>
 <TabItem label="JSON" value="JSON" default>
@@ -216,8 +212,8 @@ token_rotation_enabled: true
 </TabItem>
 </Tabs>
 
-6.  Review the permissions and click **Create**.
-    ![Review summary](/images/integrations/slack/review-summary.webp)
+6. Review the permissions and click **Create**.
+   ![Review summary](/images/integrations/slack/review-summary.webp)
 
 ### Manifest reference
 
@@ -289,20 +285,16 @@ For thread sync and link unfurling to work, event subscriptions must be enabled.
 
 ## Configure Plane instance
 
-After creating your Slack app, follow these steps:
+After creating your Slack app:
 
 1. Go to the **Event Subscriptions** tab.
-
 2. Click **Retry** to verify your event subscription URL.
    ![Event subscriptions](/images/integrations/slack/event-subscriptions.webp)
-
 3. Navigate to the **Basic Information** tab on Slack to find your `client_id` and `client_secret`.
-
-4. Add these environment variables with the values to your Plane instance's `.env` file.
+4. Add these environment variables to your Plane instance's `.env` file:
    ```bash
    SLACK_CLIENT_ID=<client_id>
    SLACK_CLIENT_SECRET=<client_secret>
    ```
 5. Save the file and restart the instance.
-
 6. Once you've completed the instance configuration, [activate the Slack integration in Plane](https://docs.plane.so/integrations/slack).

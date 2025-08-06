@@ -65,17 +65,16 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
    ******************************************************************
 
    This script is solely for the migration purpose only.
-   This is a 1 time migration of volume data from v0.13.2 => v0.14.x
+   This is a one-time migration of volume data from v0.13.2 => v0.14.x
 
-   Assumption:
+   Assumptions:
    1. Postgres data volume name ends with _pgdata
    2. Minio data volume name ends with _uploads
    3. Redis data volume name ends with _redisdata
 
    Any changes to this script can break the migration.
 
-   Before you proceed, make sure you run the below command
-   to know the docker volumes
+   Before you proceed, make sure you run the below command to know the docker volumes:
 
    docker volume ls -q | grep -i "_pgdata"
    docker volume ls -q | grep -i "_uploads"

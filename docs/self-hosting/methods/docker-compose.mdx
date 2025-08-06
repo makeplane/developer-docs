@@ -6,21 +6,20 @@ sidebar_position: 1
 
 {frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
 
-This guide shows you the steps to deploy a self-hosted instance of Plane using Docker.
+This guide shows you how to deploy a self-hosted instance of Plane using Docker.
 
 :::tip
-If you want to upgrade from Community to the Commercial edition, see [Upgrade to
-Commercial Edition](/self-hosting/manage/upgrade/upgrade-from-community).
+To upgrade from Community to Commercial edition, see [Upgrade to Commercial Edition](/self-hosting/manage/upgrade/upgrade-from-community).
 :::
 
 ## Install Plane
 
-Plane Pro and Plane Business are enabled on this edition, so the Free plan on this edition is easier to trial our paid plans from.
+Plane Pro and Plane Business are enabled on this edition, so the Free plan is ideal for trialing paid features.
 
 ### Prerequisites
 
-- A virtual or on-prem machine with at least 2 vCPUs and 4 GB RAM (8 GB RAM recommended)
-- `x64` AKA `AMD 64` or `AArch 64` AKA `ARM 64` CPUs
+- A virtual or on-prem machine with at least 2 vCPUs and 4 GB RAM (8 GB recommended)
+- `x64` (AMD 64) or `AArch 64` (ARM 64) CPUs
 - Supported operating systems:
   - Ubuntu
   - Debian
@@ -28,35 +27,34 @@ Plane Pro and Plane Business are enabled on this edition, so the Free plan on th
   - Amazon Linux 2 or Linux 2023
 
 :::tip
-Ensure you're using the **latest version of Docker Compose**. Check your Docker
-Compose version with `docker-compose --version` and update if needed.
+Use the **latest version of Docker Compose**. Check with `docker-compose --version` and update if needed.
 :::
 
 ### Procedure
 
-1.  `ssh` into your machine as the root user (or user with sudo access) per the norms of your hosting provider.
-2.  Run the command below:
-    ```
-    curl -fsSL https://prime.plane.so/install/ | sh -
-    ```
-3.  Follow the instructions on the terminal. Hit `Enter` or `Return` to continue.
-4.  Enter the domain name where you will access the Plane app in the format `domain.tld` or `subdomain.domain.tld`. If you are using a paid plan, the domain linked to the license can’t be changed later.
-5.  Choose one of the options below:
-    - **Express**: Plane installs with the default configurations.
-    - **Advanced**: You can customize the database, Redis, storage and other settings.
-      :::warning
-      When self-hosting Plane for production use, it is strongly recommended to configure [external database and storage](/self-hosting/govern/database-and-storage). This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-      :::
-6.  The installation will take a few minutes to complete and you will see the message **Plane has successfully installed**. You can access the Plane application on the domain you provided during the installation.
+1. SSH into your machine as root or a user with sudo access.
+2. Run:
+   ```bash
+   curl -fsSL https://prime.plane.so/install/ | sh -
+   ```
+3. Follow the terminal instructions. Press `Enter` to continue.
+4. Enter the domain name where you will access Plane (e.g., `domain.tld` or `subdomain.domain.tld`). For paid plans, the domain linked to the license cannot be changed later.
+5. Choose one of the following:
+   - **Express**: Installs Plane with default configurations.
+   - **Advanced**: Lets you customize the database, Redis, storage, and other settings.
+     :::warning
+     For production, configure [external database and storage](/self-hosting/govern/database-and-storage) to ensure data security and reliability. Relying on local storage increases the risk of data loss and service disruption.
+     :::
+6. Wait for installation to complete. When you see **Plane has successfully installed**, access Plane at the domain you provided.
 
 :::tip
-If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so/workspaces-and-users/upgrade-plan).
+To upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so/workspaces-and-users/upgrade-plan).
 :::
 
 <details>
-   <summary>Install Community Edition</summary>
+  <summary>Install Community Edition</summary>
 
-The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
+The Commercial edition includes a free plan and the flexibility to upgrade. If you want to install the Community edition, follow these steps:
 
 ### Prerequisites
 

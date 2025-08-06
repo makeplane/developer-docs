@@ -6,33 +6,33 @@ sidebar_position: 1
 
 {frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
 
-Our command-line tool is here to make managing your Plane instance simple. You can handle installs, upgrades, and general management without needing to be a Docker expert.
+Our command-line tool makes managing your Plane instance simple. You can handle installs, upgrades, and general management without needing to be a Docker expert.
 
 ## Commercial Edition • Prime CLI
 
 :::note
-If you are on the Community edition and want to upgrade to the Commercial edition, see [Upgrade to Commercial Edition](/self-hosting/manage/upgrade/upgrade-from-community).
+If you are on the Community Edition and want to upgrade to the Commercial Edition, see [Upgrade to Commercial Edition](/self-hosting/manage/upgrade/upgrade-from-community).
 :::
 
 Prime CLI provides commands for common tasks like configuring services, monitoring health, managing backups, and upgrading your Plane instance.
 
-Bring up Prime CLI with `sudo prime-cli` from any directory on your machine.
+Launch Prime CLI with `sudo prime-cli` from any directory on your machine.
 
 ### Prime CLI Commands
 
-- `start` starts a service in the Docker network
-- `stop` stops a service in the Docker network
-- `restart` restarts a service in the Docker network
-- `monitor` allows you to see if services are up or down and access their [logs](/self-hosting/manage/view-logs)
-- `healthcheck` shows you the service status and errors, if any
-- `repair` automatically diagnoses and fixes common errors. This command also resets all configuration values in the plane.env file to their defaults.
-- `update-cli` downloads and installs the latest version of Prime CLI
+- `start` — Starts a service in the Docker network
+- `stop` — Stops a service in the Docker network
+- `restart` — Restarts a service in the Docker network
+- `monitor` — Allows you to see if services are up or down and access their [logs](/self-hosting/manage/view-logs)
+- `healthcheck` — Shows you the service status and errors, if any
+- `repair` — Automatically diagnoses and fixes common errors. This command also resets all configuration values in the plane.env file to their defaults.
+- `update-cli` — Downloads and installs the latest version of Prime CLI
 
   :::tip
-  It is highly recommend to run `update-cli` before you download any Plane updates. The latest version of the CLI ensures your Plane upgrades happen smoothly.
+  It is highly recommended to run `update-cli` before you download any Plane updates. The latest version of the CLI ensures your Plane upgrades happen smoothly.
   :::
 
-- `configure` brings up a step form to let you specify the following:
+- `configure` — Brings up a step form to let you specify the following:
 
 <details>
 <summary>Configuration steps</summary>
@@ -56,7 +56,7 @@ Bring up Prime CLI with `sudo prime-cli` from any directory on your machine.
 
       - `External Redis URL`
 
-          Specify the URL of your own hosted REdis if you would like to change the default Redis Plane ships with.
+          Specify the URL of your own hosted Redis if you would like to change the default Redis Plane ships with.
 
           Default Redis: Redis 7.2.4
 
@@ -75,11 +75,11 @@ Bring up Prime CLI with `sudo prime-cli` from any directory on your machine.
 
 </details>
 
-- `upgrade` checks your instance for available version upgrades. You will be asked for confirmation before downloading the latest available version.
+- `upgrade` — Checks your instance for available version upgrades. You will be asked for confirmation before downloading the latest available version.
   1. Typing `YES` lets the CLI automatically download the latest version and installs it. Then it restarts the instance to load the latest app.
   2. Typing `NO` cancels the upgrade.
 
-- `uninstall` uninstalls Plane. Before continuing, you are asked for confirmation.
+- `uninstall` — Uninstalls Plane. Before continuing, you are asked for confirmation.
   1. Typing `YES` lets the CLI clean up the `/opt/plane` folder, leaving behind the `/opt/plane/data` and `/opt/plane/logs` folders.
   2. Typing `NO` cancels the uninstall.
 
@@ -89,8 +89,7 @@ Bring up Prime CLI with `sudo prime-cli` from any directory on your machine.
 
 ## Community Edition • setup.sh
 
-The setup script `setup.sh` provides a menu-driven interface to help you install
-and manage your Plane Community Edition instance.
+The setup script `setup.sh` provides a menu-driven interface to help you install and manage your Plane Community Edition instance.
 
 ### Usage
 
@@ -103,7 +102,7 @@ To run the setup.sh script, use the following command in your terminal from the 
 This will launch an interactive menu with options to manage various aspects of your Plane instance.
 
 ```bash
-Select a Action you want to perform:
+Select an action you want to perform:
    1) Install
    2) Start
    3) Stop
@@ -133,7 +132,6 @@ Select a Action you want to perform:
 
   :::warning
   It’s recommended to create a backup before upgrading your instance. See [Backup and restore](/self-hosting/manage/backup-restore).
-  {/* It’s recommended to create a backup before upgrading your instance. See [Backup and restore](/self-hosting/manage/backup-restore#backup-and-restore-community-edition-data). */}
   :::
 
 - **View Logs**
@@ -144,7 +142,6 @@ Select a Action you want to perform:
   :::
 
 - **Backup Data**
-  {/* Creates a backup of your current Plane installation, including all data. See [Backup and restore data](/self-hosting/manage/backup-restore#backup-and-restore-data-community-edition) for more info. */}
   Creates a backup of your current Plane installation, including all data. See [Backup and restore data](/self-hosting/manage/backup-restore) for more info.
 
 - **Exit**

@@ -85,7 +85,7 @@ servers and improves email trust and deliverability.
         Important: `SMTP_DOMAIN` and `INTAKE_EMAIL_DOMAIN` must be identical.
         :::
 
-## Configure DNS records
+## Configure DNS Records
 
 1.  **Create an A Record**
     This record points to the server running your email service.
@@ -122,7 +122,7 @@ servers and improves email trust and deliverability.
     TTL: Auto | 3600
     ```
 
-4.  **Set Up a DMARC record**
+4.  **Set Up a DMARC Record**
     This record specifies how receiving mail servers should handle authentication failures.
 
     ```bash
@@ -132,7 +132,7 @@ servers and improves email trust and deliverability.
     TTL: Auto | 3600
     ```
 
-## Verify your configuration
+## Verify Your Configuration
 
 After setting up your DNS records, verify that they're correctly configured:
 
@@ -152,7 +152,7 @@ After setting up your DNS records, verify that they're correctly configured:
 
     You can also use [MXToolbox](https://mxtoolbox.com) to check for any issues with your DNS configuration.
 
-## Test your mail server
+## Test Your Mail Server
 
 Once your DNS records have propagated, test your SMTP connections:
 
@@ -165,15 +165,15 @@ Once your DNS records have propagated, test your SMTP connections:
 
 ## Troubleshooting
 
-- MX Record issues
+- **MX Record issues**
   - Ensure there's a proper dot at the end of the domain.
   - Check that the priority number is correct (lower = higher priority).
   - Allow 24-48 hours for DNS changes to fully propagate.
 
-- A Record issues
+- **A Record issues**
   - Verify that the IP address is correct.
   - Ensure your mail subdomain matches the MX record.
 
-## See also
+## See Also
 
 [Intake Email](https://docs.plane.so/intake/intake-email)
