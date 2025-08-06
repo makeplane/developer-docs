@@ -68,11 +68,12 @@
       "group": "Install",
       "pages": [
         "self-hosting/methods/docker-compose",
+        "self-hosting/methods/docker-aio",
         "self-hosting/methods/docker-swarm",
+        "self-hosting/methods/airgapped-edition",
         "self-hosting/methods/kubernetes",
         "self-hosting/methods/coolify",
         "self-hosting/methods/portainer",
-        "self-hosting/methods/airgapped-edition",
         "self-hosting/methods/podman-quadlets"
       ]
     },
