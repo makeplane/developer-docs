@@ -3,9 +3,13 @@ title: Mandatory checkpoint at v0.14.0 • Community Edition
 sidebar_label: Versions before v0.14.0
 ---
 
-{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
+{frontMatter.description && (
+   <h3 className="description">{frontMatter.description}</h3>
+)}
 
-If you’re upgrading from `v0.13.2` or below, there are some additional migration steps due to significant changes in the self-hosting setup. Follow these instructions to migrate your data to the new volume structure in `v0.14.0`.
+If you’re upgrading from `v0.13.2` or below, there are some additional migration
+steps due to significant changes in the self-hosting setup. Follow these
+instructions to migrate your data to the new volume structure in `v0.14.0`.
 
 1. First, stop the running `v0.13-2` (or older) instance of Plane. If it's still running, you might hit a "ports not available" error, which will prevent the `v0.14-0` containers from starting up correctly.
 
@@ -24,7 +28,8 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
 
    ```bash
    export RELEASE=v0.14-dev
-   curl -fsSL https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/install.sh | sed -e 's@BRANCH=${BRANCH:-master}@BRANCH='"$RELEASE"'@' -e 's@APP_RELEASE="stable"@APP_RELEASE='"$RELEASE"'@' > setup.sh
+   curl -fsSL https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/install.sh | \
+   sed -e 's@BRANCH=${BRANCH:-master}@BRANCH='"$RELEASE"'@' -e 's@APP_RELEASE="stable"@APP_RELEASE='"$RELEASE"'@' > setup.sh
    chmod +x setup.sh
    ```
 
@@ -65,17 +70,17 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
    ******************************************************************
 
    This script is solely for the migration purpose only.
-   This is a 1 time migration of volume data from v0.13.2 => v0.14.x
+   This is a one-time migration of volume data from v0.13.2 => v0.14.x
 
-   Assumption:
+   Assumptions:
    1. Postgres data volume name ends with _pgdata
    2. Minio data volume name ends with _uploads
    3. Redis data volume name ends with _redisdata
 
    Any changes to this script can break the migration.
 
-   Before you proceed, make sure you run the below command
-   to know the docker volumes
+   Before you proceed, make sure you run the below command to know the docker
+   volumes:
 
    docker volume ls -q | grep -i "_pgdata"
    docker volume ls -q | grep -i "_uploads"
@@ -95,7 +100,8 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
 
    ![](/images/update-plane/docker-volumes.png#center)
 
-   In this example, `plane-013-dev` is the prefix for `v0.13.2`, and `plane-app` is the prefix for `v0.14.0`.
+   In this example, `plane-013-dev` is the prefix for `v0.13.2`, and `plane-app`
+   is the prefix for `v0.14.0`.
 
 10. Return to the original terminal, enter the source volume prefix `plane-013-dev` and destination volume prefix `plane-app`, and press ENTER:
 
@@ -104,7 +110,8 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
     Provide the Destination Volume Prefix : plane-app
     ```
 
-    If there are any issues, an error will appear. For a successful migration, there will be no error, and the process will exit quietly.
+    If there are any issues, an error will appear. For a successful migration,
+    there will be no error, and the process will exit quietly.
 
 11. Restart the upgraded v0.14.0 instance with:
 

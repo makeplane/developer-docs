@@ -3,24 +3,31 @@ title: View container logs
 sidebar_label: View logs
 ---
 
-{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
+{frontMatter.description && (
+  <h3 className="description">{frontMatter.description}</h3>
+)}
 
-If you need to check the logs for troubleshooting or to monitor what’s happening in specific Plane services like the API or Worker, you can access them directly from the command line.
+If you need to check logs for troubleshooting or to monitor what’s happening in
+specific Plane services like the API or Worker, you can access them directly
+from the command line.
 
-To view logs, start by running the command ↓:
+To view logs, run:
 
 ```bash
 sudo prime-cli monitor
 ```
 
-This brings up a table where you can select which container logs you want to view.
+This brings up a table where you can select which container logs you want to
+view.
 
 ![Container logs](/images/view-logs/container-logs.webp)
 
 <details>
    <summary>Community Edition</summary>
 
-Here’s how to view logs for any service in Plane Community Edition, whether it’s the API, Worker, Redis, or others. This can be really helpful when troubleshooting or just getting insights into how each service is running.
+Here’s how to view logs for any service in Plane Community Edition, whether it’s
+the API, Worker, Redis, or others. This can be helpful for troubleshooting or
+getting insights into how each service is running.
 
 1.  Start by running the setup script:
 
@@ -31,7 +38,7 @@ Here’s how to view logs for any service in Plane Community Edition, whether it
     This will bring up the main menu with options. Select `6` to view logs.
 
     ```
-    Select a Action you want to perform:
+    Select an Action you want to perform:
        1) Install (x86_64)
        2) Start
        3) Stop
@@ -63,9 +70,10 @@ Here’s how to view logs for any service in Plane Community Edition, whether it
     Service:
     ```
 
-3.  Pick the service whose logs you’d like to check. For example, if you want to view the **API logs**, type `3`.
+3.  Pick the service whose logs you’d like to check. For example, to view the **API logs**, type `3`.
 
-    After selecting a service, you’ll see the logs in real-time. Here’s an example of what API logs might look like:
+    After selecting a service, you’ll see the logs in real-time. Here’s an
+    example of what API logs might look like:
 
     ```
     api-1  | Waiting for database...

@@ -3,46 +3,60 @@ title: Deploy Plane with Coolify • Commercial Edition
 sidebar_label: Coolify
 ---
 
-{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
+{frontMatter.description && (
+  <h3 className="description">{frontMatter.description}</h3>
+)}
 
-This guide shows you the steps to deploy a self-hosted instance of Plane using Coolify.
+This guide explains how to deploy a self-hosted instance of Plane using
+Coolify.
 
-## Install Plane
+## Prerequisites
 
-### Prerequisites
+- A Coolify instance set up and accessible
+- Support for amd64 or arm64 architectures
 
-- Before you get started, make sure you have a Coolify environment set up and ready to go.
-- Your setup should support either amd64 or arm64 architectures.
+## Download Deployment Files
 
-### Procedure
-
-1. **Download the required depoyment files**
-   - `coolify-compose.yml` – Defines Plane's services and dependencies.
-
+1. Download the required deployment files for your Plane version:
+   - `coolify-compose.yml` — Defines Plane's services and dependencies.
      ```bash
      curl -fsSL https://prime.plane.so/releases/<plane-version>/coolify-compose.yml -o coolify-compose.yml
      ```
-
+   - `variables.env` — Stores environment variables for your deployment.
+     ```bash
+     curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
+     ```
    :::warning
-   The `<plane-version>` value should be v1.8.2 or higher.
+   Replace `<plane-version>` with v1.8.2 or higher.
    :::
 
-2. Create a new project in Coolify.
+## Configure Environment Variables
 
-3. Add a new resource.
+Edit `plane.env` and set the following variables:
+- `DOMAIN_NAME` — (required) Your application's domain name
+- `SITE_ADDRESS` — (required) The full domain name (FQDN) of your instance
+- `MACHINE_SIGNATURE` — (required) Unique identifier for your machine. Generate with:
+  ```sh
+  sed -i 's/MACHINE_SIGNATURE=.*/MACHINE_SIGNATURE='$(openssl rand -hex 16)'/' plane.env
+  ```
+- `CERT_EMAIL` — (optional) Email for SSL certificate generation (needed for HTTPS)
 
-4. Select **Docker Compose Empty** as the deployment method.
+## Configure External Services
 
-5. Copy and paste the contents of the `coolify-compose.yml` file into the editor.
+:::warning
+For production, configure external database and storage to ensure data security
+and reliability. Relying on local storage increases the risk of data loss and
+service disruption.
+:::
+- `DATABASE_URL` — Connection string for your external database
+- `REDIS_URL` — Connection string for your external Redis instance
+- `AMQP_URL` — Connection string for your external RabbitMQ server
 
-6. Configure external DB, Redis, RabbitMQ and any other required environment variables in the UI.
-   :::warning
-   When self-hosting Plane for production use, it is strongly recommended to configure external database and storage. This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-   :::
-   - `DATABASE_URL` – Connection string for your external database.
-   - `REDIS_URL` – Connection string for your external Redis instance.
-   - `AMQP_URL` – Connection string for your external RabbitMQ server.
+## Deploy with Coolify
 
-7. Deploy to launch your Plane instance.
+1. In Coolify, create a new stack.
+2. Upload the `coolify-compose.yml` file.
+3. Load environment variables from the `plane.env` file.
+4. Click **Deploy**.
 
-Once the deployment is complete, your Plane instance should be accessible on the configured domain.
+Once deployment is complete, Plane should be running on your configured domain.

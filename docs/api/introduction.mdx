@@ -1,25 +1,27 @@
 ---
 title: Plane API Documentation
 sidebar_label: Introduction
-description: Use the Plane API to programatically read and write changes to your Workspaces, Projects, Work Items and much more.
+description: Use the Plane API to programmatically read and write changes to your Workspaces, Projects, Work Items, and much more.
 sidebar_position: 0
 ---
 
-{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
+{frontMatter.description && (
+  <h3 className="description">{frontMatter.description}</h3>
+)}
 
 :::info
-The Plane cloud API is available at `https://api.plane.so/`
+The Plane Cloud API is available at `https://api.plane.so/`
 :::
 
-## Quick start
+## Quick Start
 
-### 1. Get your API key
+### 1. Get Your API Key
 
-To make requests to the Plane API, you'll need an API key.  This key is used to
-verify your client's identity and permissions.  The key must be passed as the
-value of the `X-API-Key` header.
+To make requests to the Plane API, you'll need an API key. This key is used to verify
+your client's identity and permissions. The key must be passed as the value of the
+`X-API-Key` header.
 
-Enough talk. Let's get you an API key!
+Let's get you an API key!
 
 :::tip
 You must have a Plane account or be registered to your instance to generate a key.
@@ -32,19 +34,18 @@ You must have a Plane account or be registered to your instance to generate a ke
 3. Click **Add personal access token**
   ![Add API key](/images/api-reference/add-api-key-plane.png#center)
 4. Enter a title and description to help you remember why you created this key
-5. Optionally set an expiry date for the key, after which time the key will no longer be valid
+5. Optionally set an expiry date for the key, after which the key will no longer be valid
 
 :::danger
-Treat your API key like a password. Keep it secret. Keep it safe. It is
-important to store your API key securely and keep it confidential to prevent
-unauthorized access to your account. Do not share it or expose it in
-client-side code.
+Treat your API key like a password. Keep it secret. Keep it safe. Store your API key
+securely and keep it confidential to prevent unauthorized access to your account. Do
+not share it or expose it in client-side code.
 :::
 
-### 2. Execute an HTTP request 🔄
+### 2. Execute an HTTP Request 🔄
 
-When issuing HTTP requests to the API, you'll always set the `x-api-key`
-request header to your API key.  For example, if using `curl` this looks like:
+When issuing HTTP requests to the API, always set the `X-API-Key` request header to
+your API key. For example, using `curl`:
 
 ```bash
 curl -L 'https://api.plane.so/api/v1/workspaces/:slug/projects/:project_id/issues/' \
@@ -57,12 +58,12 @@ Run the above command to receive your first response from the Plane API.
 ### 3. Congratulations 🥳
 
 Congratulations! You've successfully run your first HTTP request using the
-[Plane](https://plane.so) API. Next, browse the rest of our documentation for
-more examples of how you can integrate your project! 😎
+[Plane](https://plane.so) API. Next, browse the rest of our documentation for more
+examples of how you can integrate your project! 😎
 
 ___
 
-## General API usage
+## General API Usage
 
 ### Base URL
 
@@ -73,74 +74,75 @@ https://api.plane.so/
 ```
 
 :::info
-If you're using a self-hosted instance of Plane, your API base URL will differ based on your custom domain and setup.
+If you're using a self-hosted instance of Plane, your API base URL will differ based
+on your custom domain and setup.
 :::
 
-### Security recommendations
+### Security Recommendations
 
 - **Keep the API Key Secret**: Treat your API key like a password. Do not share it or expose it in client-side code.
 - **Regenerate Key If Compromised**: If you suspect that your API key has been compromised, generate a new one immediately and update your applications.
 
-### API key errors
+### API Key Errors
 
 - If the **`X-API-Key`** header is not included, the API will return an error indicating that authentication is required.
 - If the provided API key is invalid or expired, the API will return an error message indicating an authentication failure.
 
-### HTTP methods
+### HTTP Methods
 
-HTTP defines a set of request methods, also known as HTTP verbs, to indicate the desired action for a given resource.
+HTTP defines a set of request methods, also known as HTTP verbs, to indicate the
+desired action for a given resource.
 
-Given below is the list of methods commonly adopted by Plane's API:
+Below is a list of methods commonly adopted by Plane's API:
 
-|Verb  |Description                                        |Example                            |
-|------|---------------------------------------------------|-----------------------------------|
-|GET   |Requests a representation of the specified resource|Fetch all work items from a project|
-|POST  |Submits an entity to the specified resource        |Create a project                   |
-|DELETE|Deletes the specified resource                     |Delete a work item                 |
-|PATCH |Applies partial modifications to a resource        |Edit a module                      |
+| Verb   | Description                                        | Example                            |
+|--------|----------------------------------------------------|------------------------------------|
+| GET    | Requests a representation of the specified resource| Fetch all work items from a project |
+| POST   | Submits an entity to the specified resource        | Create a project                    |
+| DELETE | Deletes the specified resource                     | Delete a work item                  |
+| PATCH  | Applies partial modifications to a resource        | Edit a module                       |
 
-### Status codes
+### Status Codes
 
-Given below is the list of the most commonly encountered success responses:
+Below are the most commonly encountered success responses:
 
 | Status Code    | Description                                                                            |
 |----------------|----------------------------------------------------------------------------------------|
-| 200 OK         | The request succeeded. Generally used in GET or PATCH requests.     |
-| 201 Created    | The request succeeded and a new resource was created. Generally used in POST requests. |
-| 204 No Content | The request succeeded and no body is returned. Generally used in DELETE requests.      |
+| 200 OK         | The request succeeded. Generally used in GET or PATCH requests.                         |
+| 201 Created    | The request succeeded and a new resource was created. Generally used in POST requests.  |
+| 204 No Content | The request succeeded and no body is returned. Generally used in DELETE requests.       |
 
-### Error responses
+### Error Responses
 
-Given below is the list of the most commonly encountered error responses:
+Below are the most commonly encountered error responses:
 
 | Status Code               | Description                                                                                                                                                                           |
 |---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 400 Bad Request           | The server cannot or will not process the request due to something that is perceived to be a client error.                                                                            |
 | 401 Unauthorized          | Although the HTTP standard specifies "unauthorized", semantically, this response means "unauthenticated". That is, the client must authenticate itself to get the requested response. |
 | 404 Not Found             | The server cannot find the requested resource. This means the URL is not recognized.                                                                                                  |
-| 429 Throttling Error      | The server has received too many requests from your client within a short period of time. Retry the request later. You can read more in our [rate-limiting](#rate-limiting) section.                  |
-| 500 Internal Server Error | The server has encountered a situation it does not know how to handle, and failed to process the request.                                                                                                                |
+| 429 Throttling Error      | The server has received too many requests from your client within a short period of time. Retry the request later. You can read more in our [rate-limiting](#rate-limiting) section. |
+| 500 Internal Server Error | The server has encountered a situation it does not know how to handle, and failed to process the request.                                                                             |
 | 502 Bad Gateway           | The server received an invalid response from another service which was required to handle the request.                                          |
-| 503 Service Unavailable   | The server is not ready to handle the request. Common causes are a server that is down for maintenance or overloaded.                                                              |
-| 504 Gateway Timeout       | The server was unable to receive a timely response from a downstream service.
-
+| 503 Service Unavailable   | The server is not ready to handle the request. Common causes are a server that is down for maintenance or overloaded.                          |
+| 504 Gateway Timeout       | The server was unable to receive a timely response from a downstream service.                                                                  |
 
 ---
 
 ## Pagination
 
 The Plane API implements a cursor-based pagination system, allowing clients to
-efficiently navigate through large datasets. The system uses a cursor parameter
-to manage the position and direction of pagination.
+efficiently navigate through large datasets. The system uses a cursor parameter to
+manage the position and direction of pagination.
 
-### Querystring parameters
+### Query String Parameters
 
-Paging is controlled by clients via the following querystring parameters.
+Paging is controlled by clients via the following query string parameters:
 
 - **`per_page` (optional)**: Number of items to display per page. Defaults to 100. The maximum allowed value is 100.
 - **`cursor` (optional)**: Cursor string (see below) to navigate to a specific page. If not provided, pagination starts from the first page.
 
-### Cursor string format
+### Cursor String Format
 
 The cursor string is formatted as **`value:offset:is_prev`**, where:
 
@@ -148,13 +150,13 @@ The cursor string is formatted as **`value:offset:is_prev`**, where:
 - **`offset`** is the current page number (starting from 0)
 - **`is_prev`** indicates whether the cursor is moving to the previous page (**`1`**) or to the next page (**`0`**)
 
-### Example: Fetching the first page
+### Example: Fetching the First Page
 
 ```
 GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/?per_page=20
 ```
 
-#### Pagination response
+#### Pagination Response
 
 The paginated response includes the following fields:
 
@@ -184,13 +186,13 @@ Here's an example response for the first page of results:
 }
 ```
 
-### Example: Fetching the next page
+### Example: Fetching the Next Page
 
 ```
 GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues?per_page=20&cursor=20:1:0
 ```
 
-#### Pagination next page response
+#### Pagination Next Page Response
 
 ```json
 {
@@ -206,28 +208,29 @@ GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues?per_page=20&c
 }
 ```
 
-### Pagination errors
+### Pagination Errors
 
 - **Invalid Cursor Format**: If the provided cursor string is not in the correct format, the API will respond with an error message indicating an invalid cursor format.
 - **Pagination Limits**: Requests exceeding the maximum **`per_page`** limit will receive an error response detailing the maximum allowed value.
 
 ---
 
-## Rate limiting
+## Rate Limiting
 
-To ensure fair usage and maintain the overall quality of service for the
-community, the Plane API implements rate limiting. Rate limiting restricts the
-number of requests a client can make within a certain time frame.
+To ensure fair usage and maintain the overall quality of service for the community,
+the Plane API implements rate limiting. Rate limiting restricts the number of
+requests a client can make within a certain time frame.
 
-### Rate limit details
+### Rate Limit Details
 
 - **Limit**: Each client is limited to 60 requests per minute
 - **Reset Interval**: The rate limit counter resets every minute
 - **Scope of Limitation**: The rate limit applies to all requests made with a given API key
 
-### Identifying your rate limit status
+### Identifying Your Rate Limit Status
 
-Your current rate limit status is communicated in the response headers of each API request:
+Your current rate limit status is communicated in the response headers of each API
+request:
 
 - **`X-RateLimit-Remaining`**: The number of requests remaining in the current rate limit window
 - **`X-RateLimit-Reset`**: The time at which the current rate limit window resets (in UTC epoch seconds)
@@ -239,49 +242,50 @@ X-RateLimit-Reset: 1700327957
 
 ---
 
-## Fine tuning response fields
+## Fine-Tuning Response Fields
 
 The Plane API provides flexible data retrieval capabilities through two powerful query
 parameters: `fields` and `expand`. These parameters allow clients to tailor the
 response data to their specific needs, optimizing both the payload size and the
 clarity of the response.
 
-### Fields parameter
+### Fields Parameter
 
 The `fields` parameter enables clients to selectively retrieve only a subset of
 fields for a given resource.
 
 :::tip
-The `fields` parameter is particularly useful for reducing response time, size
-and bandwidth, especially when your client requires only specific pieces of data.
+The `fields` parameter is particularly useful for reducing response time, size, and
+bandwidth, especially when your client requires only specific pieces of data.
 :::
 
-The **`fields`** parameter accepts a comma-separated list of field names that
-the client wants to be included in the response. For example, to include only
-the `id`, `name`, and `description` fields, send the following querystring parameters:
+The **`fields`** parameter accepts a comma-separated list of field names that the
+client wants to be included in the response. For example, to include only the `id`,
+`name`, and `description` fields, send the following query string parameters:
 
 ```
 GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/?fields=id,name,description
 ```
 
-#### Fields parameter error handling
+#### Fields Parameter Error Handling
 
-Invalid or unrecognized field names passed in the **`fields`** parameter will
-result in an error response, indicating which fields are invalid.
+Invalid or unrecognized field names passed in the **`fields`** parameter will result
+in an error response, indicating which fields are invalid.
 
-### Expand parameter
+### Expand Parameter
 
-The `expand` parameter allows clients to request additional related information to
-be included in the response. This is useful for retrieving detailed information
-about nested resources without making separate API calls.
+The `expand` parameter allows clients to request additional related information to be
+included in the response. This is useful for retrieving detailed information about
+nested resources without making separate API calls.
 
-For example, to return the resource data along with expanded information about
-the `assignees` and `state`, send the following querystring parameters:
+For example, to return the resource data along with expanded information about the
+`assignees` and `state`, send the following query string parameters:
 
 ```
 GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/?expand=assignees,state
 ```
 
-#### Expand parameter error handling
+#### Expand Parameter Error Handling
 
-If **`expand`** is used on fields that cannot be expanded, an appropriate error message will be returned.
+If **`expand`** is used on fields that cannot be expanded, an appropriate error
+message will be returned.

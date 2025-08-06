@@ -3,31 +3,37 @@ title: Environment variables reference guide
 sidebar_label: Environment variables
 ---
 
-{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
+{frontMatter.description && (
+  <h3 className="description">{frontMatter.description}</h3>
+)}
 
-This guide provides a comprehensive overview of all environment variables used in the Commercial Edition. These variables allow you to customize your Plane instance to best fit your organization's needs.
+This guide provides a comprehensive overview of all environment variables used in
+the Commercial Edition. These variables allow you to customize your Plane instance
+to best fit your organization's needs.
 
 ## Where to find the .env file
 
 The environment file for Plane Commercial Edition is located at:
-`bash
-    /opt/plane/plane.env
-    `
 
-This is where you'll make all configuration changes. Remember to restart the instance after making changes to ensure they take effect.
+```bash
+/opt/plane/plane.env
+```
+
+Make all configuration changes here. Remember to restart the instance after making
+changes for them to take effect.
 
 ## Environment variables
 
 ### General settings
 
 | Variable                 | Description                                                                                                                   | Default Value             |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | **INSTALL_DIR**          | Directory where Plane is installed.                                                                                           | `/opt/plane`              |
-| **DOMAIN_NAME**          | Primary domain name for your Plane instance. This determines how users will access your installation.                         | `localhost`               |
-| **APP_RELEASE_VERSION**  | The version of Plane Commercial Edition you're running. This helps with troubleshooting and ensures compatibility.            | _Current release version_ |
-| **WEB_URL**              | The complete base URL for the web application including protocol (e.g., `https://plane.example.com`).                         | `http://localhost`        |
-| **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API. Usually, this should include your WEB_URL. | `http://localhost`        |
-| **DEBUG**                | Toggles debug mode for more verbose logging and debugging information.                                                        | `0` (disabled)            |
+| **DOMAIN_NAME**          | Primary domain name for your Plane instance. Determines how users access your installation.                                   | `localhost`               |
+| **APP_RELEASE_VERSION**  | The version of Plane Commercial Edition you're running. Useful for troubleshooting and compatibility.                        | _Current release version_ |
+| **WEB_URL**              | Complete base URL for the web application, including protocol (e.g., `https://plane.example.com`).                          | `http://localhost`        |
+| **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API. Usually includes your WEB_URL.            | `http://localhost`        |
+| **DEBUG**                | Toggles debug mode for verbose logging and debugging information.                                                            | `0` (disabled)            |
 
 ### Scaling and performance
 
@@ -55,11 +61,11 @@ This is where you'll make all configuration changes. Remember to restart the ins
 ### SSL and certificates
 
 | Variable          | Description                                                                                                                          | Default Value                                    |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 | **CERT_EMAIL**    | Email used for SSL certificate registration with Let's Encrypt or other ACME providers.                                              | `admin@example.com`                              |
 | **CERT_ACME_CA**  | ACME Certificate Authority URL for SSL certificate issuance.                                                                         | `https://acme-v02.api.letsencrypt.org/directory` |
 | **CERT_ACME_DNS** | DNS provider configuration for SSL certificate domain validation. Format varies by provider.                                         |                                                  |
-| **SITE_ADDRES**   | The domain name and port required by Caddy for serving your Plane instance. This determines how Caddy will handle incoming requests. | `localhost:80`                                   |
+| **SITE_ADDRES**   | The domain name and port required by Caddy for serving your Plane instance. Determines how Caddy will handle incoming requests.      | `localhost:80`                                   |
 
 ### Database settings
 
@@ -103,18 +109,18 @@ This is where you'll make all configuration changes. Remember to restart the ins
 ### File Storage (MinIO / S3)
 
 | Variable                  | Description                                                                                                                | Default Value             |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| **USE_MINIO**             | Determines whether to use MinIO for object storage. Set to `1` to enable MinIO, `0` to use configured S3 or local storage. | `1`                       |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
+| **USE_MINIO**             | Use MinIO for object storage (`1`) or configured S3/local storage (`0`).                                                  | `1`                       |
 | **AWS_REGION**            | AWS region for S3 storage services.                                                                                        |                           |
 | **AWS_ACCESS_KEY_ID**     | Access key for MinIO or AWS S3 authentication.                                                                             |                           |
 | **AWS_SECRET_ACCESS_KEY** | Secret key for MinIO or AWS S3 authentication.                                                                             |                           |
 | **AWS_S3_ENDPOINT_URL**   | Custom endpoint URL for MinIO or S3-compatible storage.                                                                    | `http://plane-minio:9000` |
 | **AWS_S3_BUCKET_NAME**    | S3 bucket name for file storage.                                                                                           | `uploads`                 |
-| **MINIO_ROOT_USER**       | Username for MinIO authentication. This is effectively your MinIO admin account.                                           | `access-key`              |
-| **MINIO_ROOT_PASSWORD**   | Password for MinIO root user authentication. Keep this secure as it provides full access to your storage.                  | `secret-key`              |
-| **BUCKET_NAME**           | S3 bucket name where all file uploads will be stored. This bucket will be automatically created if it doesn't exist.       | `uploads`                 |
+| **MINIO_ROOT_USER**       | Username for MinIO authentication (admin account).                                                                         | `access-key`              |
+| **MINIO_ROOT_PASSWORD**   | Password for MinIO root user authentication.                                                                               | `secret-key`              |
+| **BUCKET_NAME**           | S3 bucket name for all file uploads. Created automatically if it doesn't exist.                                            | `uploads`                 |
 | **FILE_SIZE_LIMIT**       | Maximum file upload size in bytes.                                                                                         | `5242880` (5MB)           |
-| **MINIO_ENDPOINT_SSL**    | Force HTTPS for MinIO when dealing with SSL termination. Set to `1` to enable.                                             | `0`                       |
+| **MINIO_ENDPOINT_SSL**    | Force HTTPS for MinIO when dealing with SSL termination (`1` to enable).                                                   | `0`                       |
 
 ### GitHub integration
 
@@ -149,14 +155,17 @@ This is where you'll make all configuration changes. Remember to restart the ins
 <details>
   <summary>Community Edition</summary>
 
-This guide provides a comprehensive overview of all environment variables available for configuring your self-hosted Plane Community Edition. Use these variables to customize your instance to fit your deployment needs.
+This guide provides a comprehensive overview of all environment variables available
+for configuring your self-hosted Plane Community Edition. Use these variables to
+customize your instance to fit your deployment needs.
 
 ## Where to find the environment file
 
 The environment configuration file is located at:
-`bash
-    plane-selfhost/plane-app/plane.env
-    `
+
+```bash
+plane-selfhost/plane-app/plane.env
+```
 
 ## Environment Variables
 
@@ -195,7 +204,7 @@ The environment configuration file is located at:
 | Variable              | Description                                                                                                                                  | Default Value              |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | **PGHOST**            | Hostname or IP address of your PostgreSQL server.                                                                                            | `plane-db`                 |
-| **PGDATABASE**        | Name of the PostgreSQL database Plane will use.                                                                                              | `plane`                    |
+| **PGDATABASE**        | Name of the PostgreSQL database Plane will use.                                                                                            | `plane`                    |
 | **POSTGRES_USER**     | Username for PostgreSQL authentication.                                                                                                      | `plane`                    |
 | **POSTGRES_PASSWORD** | Password for PostgreSQL authentication. Use a strong, unique password.                                                                       | `plane`                    |
 | **POSTGRES_DB**       | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                    | `plane`                    |

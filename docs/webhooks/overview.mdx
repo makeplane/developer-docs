@@ -8,10 +8,7 @@ description: Use webhooks to receive real-time notifications about events in Pla
 
 ## Introduction
 
-Webhooks are a powerful way to receive real-time HTTP-based notifications about
-events in Plane. By setting up a webhook, you can automatically receive updates
-whenever specific events occur, such as the creation, update, or deletion of
-projects, work items, or other entities.
+Webhooks are a powerful way to receive real-time HTTP-based notifications about events in Plane. By setting up a webhook, you can automatically receive updates whenever specific events occur, such as the creation, update, or deletion of projects, work items, or other entities.
 
 :::tip Events
 Plane supports the following webhook events:
@@ -23,35 +20,29 @@ Plane supports the following webhook events:
 - **Work Item Comment**: created, updated, deleted
 :::
 
+## Creating a Webhook
 
-## Creating a webhook
-
-To create a webhook, navigate to your Plane workspace settings, **Developer**
-section, and click **Webhooks**. Then click the **Add webhook** button.
+To create a webhook, go to your Plane workspace settings, open the **Developer** section, and click **Webhooks**. Then click **Add webhook**.
 
 import ImgCreate from '@site/static/images/webhooks/create.png';
 
 <img src={ImgCreate} className='center' style={{width: '700px'}} alt="Create webhook" />
 
-Next, enter your URL, optionally choose the events which will trigger
-your webhook and click **Create**.
+Next, enter your URL, optionally choose the events that will trigger your webhook, and click **Create**.
 
 import ImgDetails from '@site/static/images/webhooks/details.png';
 
 <img src={ImgDetails} className='center' style={{width: '700px'}} alt="Define webhook details" />
 
-Afterwards, you will be prompted to save your webhook secret key. You can use
-this key to verify the authenticity of webhook payloads you receive from Plane.
-We'll cover this [later in the guide](#verifying-payloads).
+Afterwards, you will be prompted to save your webhook secret key. You can use this key to verify the authenticity of webhook payloads you receive from Plane. We'll cover this [later in the guide](#verifying-payloads).
 
 import ImgKey from '@site/static/images/webhooks/key.png';
 
 <img src={ImgKey} className='center' style={{width: '700px'}} alt="Webhook key created" />
 
-## Defining a webhook consumer
+## Defining a Webhook Consumer
 
-Your webhook consumer URL must be an HTTP endpoint which satisfies the following conditions:
-
+Your webhook consumer URL must be an HTTP endpoint that:
 1. Responds to Plane requests with an `HTTP 200` ("OK") response
 2. Is publicly accessible
 3. Is not localhost
@@ -59,26 +50,21 @@ Your webhook consumer URL must be an HTTP endpoint which satisfies the following
     - Invalid: `http://localhost:3000/webhook`
 
 :::tip
-If your consumer does not respond with an `HTTP 200` response, Plane will retry the delivery
-up to three times with an exponential backoff delay.
+If your consumer does not respond with an `HTTP 200`, Plane will retry delivery up to three times with exponential backoff.
 :::
 
-## Webhook payloads
+## Webhook Payloads
 
-When a webhook is triggered, Plane sends a JSON payload to your specified URL via HTTP `POST`.
-The payload contains the following fields:
-
+When a webhook is triggered, Plane sends a JSON payload to your specified URL via HTTP `POST`. The payload contains:
 - `action`: One of `create`, `update`, or `delete`, indicating the type of event
-- `event`: One of `project`, `cycle`, `module`, or `issue`, indicating the type of event that triggered the webhook
-  - _Note: `issue` refers to Work Items in Plane. This will be updated in the future to reflect the correct terminology._
+- `event`: One of `project`, `cycle`, `module`, or `issue` (issue = Work Item)
 - `webhook_id`: The unique identifier of the webhook
 - `workspace_id`: The ID of the workspace where the event occurred
-- `data`: An optional object containing the details of the event. The structure
-of this field varies based on the `event` and `action` (see below).
+- `data`: An optional object containing the details of the event. The structure of this field varies based on the `event` and `action` (see below).
 
-### Payload examples
+### Payload Examples
 
-#### Delete action
+#### Delete Action
 
 ```json
 {
@@ -92,7 +78,7 @@ of this field varies based on the `event` and `action` (see below).
 }
 ```
 
-#### Update action
+#### Update Action
 
 ```json
 {
@@ -136,32 +122,29 @@ of this field varies based on the `event` and `action` (see below).
 }
 ```
 
-## Webhook headers
+## Webhook Headers
 
-When Plane sends a webhook payload, it includes several HTTP headers to help you
-identify and verify the request. The most important headers are:
+Plane includes several HTTP headers with each webhook payload:
 
 ```json
 "Content-Type": "application/json",
-"X-Plane-Delivery": "f819eff4-cd50-4987-bc97-e5be1e04c94f",
-"X-Plane-Event": "project",
-"X-Plane-Signature": "7896ae9addb1f73931132b4f3e052bf12c410b837b24898e75dcd660c7"
+"X-Plane-Delivery": "<uuid>",
+"X-Plane-Event": "<event>",
+"X-Plane-Signature": "<signature>"
 ```
 
-| Header            | Description                                                          |
-| ----------------- | -------------------------------------------------------------------- |
-| X-Plane-Delivery  | A randomly generated UUID for uniquely identifying the payload |
-| X-Plane-Event     | The event for which the webhook was triggered               |
-| X-Plane-Signature | A signature generated based on the secret and the payload         |
+| Header            | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| X-Plane-Delivery  | Unique UUID for the payload                        |
+| X-Plane-Event     | The event that triggered the webhook               |
+| X-Plane-Signature | HMAC SHA-256 signature for verifying authenticity  |
 
+## Verifying Payloads
 
-## Verifying payloads
-
-To verify the authenticity of the webhook payloads, you can use the `X-Plane-Signature` header.
-This header contains an HMAC SHA-256 signature of the payload, generated using the secret key
-you received when creating the webhook. If the signature in the header matches
-the HMAC SHA-256 hash of the incoming payload and your secret, you can be
-confident that the payload was sent by Plane and has not been tampered with.
+To verify authenticity, use the `X-Plane-Signature` header. This is an HMAC
+SHA-256 signature of the payload, generated using the secret key you received
+when creating the webhook. If the signature matches the HMAC SHA-256 hash of the
+payload and your secret, the payload is authentic.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -211,6 +194,5 @@ import TabItem from '@theme/TabItem';
 </Tabs>
 
 :::tip Questions?
-If you have any questions or need help with webhooks, please reach out to us at
-engineering@plane.so
+If you have any questions or need help with webhooks, please reach out to us at engineering@plane.so
 :::
