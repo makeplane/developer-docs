@@ -41,61 +41,72 @@ To configure GitHub integration, create a GitHub App within your organization.
 
 <Tabs queryString="edition" groupId="editions">
   <TabItem value="github-cloud" label="GitHub Cloud">
+    1. Go to **Settings > Developer Settings > GitHub Apps** in your GitHub organization.
 
-  1. Go to **Settings > Developer Settings > GitHub Apps** in your GitHub organization.
-  2. Click **New GitHub App**.
-     ![Create GitHub App](/images/integrations/github/create-github-app.webp#center)
-  3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
-     ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#center)
-  4. In the **Identifying and authorizing users** section, add the following **Callback URLs**:
-     ```bash
-     https://<your-domain>/silo/api/github/auth/callback
-     https://<your-domain>/silo/api/github/auth/user/callback
-     ```
-     These URLs allow Plane to verify and enable workspace connection with the GitHub App.
-     ![Add Callback URL](/images/integrations/github/add-callback-url.webp#center)
-  5. In the **Post installation** section, add this **Setup URL** and check the box for **Redirect on update**.
-     ![Add setup URL](/images/integrations/github/add-setup-url.webp#center)
-  6. In the **Webhook** section, add the following **Webhook URL** to allow Plane to receive updates from GitHub repositories:
-     ```bash
-     https://<your-domain>/silo/api/github/github-webhook
-     ```
-     ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#center)
+    2. Click **New GitHub App**.
+        ![Create GitHub App](/images/integrations/github/create-github-app.webp#center)
+
+    3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
+        ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#center)
+
+    4. In the **Identifying and authorizing users** section, add the following **Callback URLs**:
+        ```bash
+        https://<your-domain>/silo/api/github/auth/callback
+        https://<your-domain>/silo/api/github/auth/user/callback
+        ```
+        These URLs allow Plane to verify and enable workspace connection with the GitHub App.
+        ![Add Callback URL](/images/integrations/github/add-callback-url.webp#center)
+
+    5. In the **Post installation** section, add this **Setup URL** and check the box for **Redirect on update**.
+        ![Add setup URL](/images/integrations/github/add-setup-url.webp#center)
+
+    6. In the **Webhook** section, add the following **Webhook URL** to allow Plane to receive updates from GitHub repositories:
+        ```bash
+        https://<your-domain>/silo/api/github/github-webhook
+        ```
+        ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#center)
   </TabItem>
   <TabItem value="github-enterprise" label="GitHub Enterprise Server">
     1. Go to **Settings > Developer Settings > GitHub Apps** in your GitHub organization.
+
     2. Click **New GitHub App**.
-       ![Create GitHub App](/images/integrations/github/create-github-app.webp#center)
+        ![Create GitHub App](/images/integrations/github/create-github-app.webp#center)
+
     3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
-       ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#center)
+        ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#center)
+
     4. In the **Identifying and authorizing users** section, add the following **Callback URLs**:
-       **For Plane cloud**
-       ```bash
-       https://silo.plane.so/api/github/auth/callback
-       https://silo.plane.so/api/github/auth/user/callback
-       ```
-       **For Plane self-hosted instance**
-       ```bash
-       https://<your-domain>/silo/api/github/auth/callback
-       https://<your-domain>/silo/api/github/auth/user/callback
-       ```
-       ![Add Callback URL](/images/integrations/github/add-callback-url.webp#center)
+
+        **For Plane cloud**
+        ```bash
+        https://silo.plane.so/api/oauth/github-enterprise/auth/callback
+        https://silo.plane.so/api/oauth/github-enterprise/auth/user/callback
+        ```
+        **For Plane self-hosted instance**
+        ```bash
+        https://<your-domain>/silo/api/oauth/github-enterprise/auth/callback
+        https://<your-domain>/silo/api/oauth/github-enterprise/auth/user/callback
+        ```
+        ![Add Callback URL](/images/integrations/github/add-callback-url.webp#center)
+
     5. In the **Post installation** section:
-       - Add the appropriate **Setup URL**, based on your hosting type:
-         - **Plane cloud**: `https://silo.plane.so/api/oauth/github-enterprise/auth/callback`
-         - **Self-hosted**: `https://<your-plane-domain>/silo/api/oauth/github-enterprise/auth/callback`
-       - Check the box for **Redirect on update**
-       ![Add setup URL](/images/integrations/github/add-setup-url.webp#center)
+        - Add the appropriate **Setup URL**, based on your hosting type:
+          - **Plane cloud**: `https://silo.plane.so/api/oauth/github-enterprise/auth/callback`
+          - **Self-hosted**: `https://<your-plane-domain>/silo/api/oauth/github-enterprise/auth/callback`
+        - Check the box for **Redirect on update**
+        ![Add setup URL](/images/integrations/github/add-setup-url.webp#center)
+
     6. In the **Webhook** section, add the following **Webhook URL** to allow Plane to receive updates from your GitHub repositories:
-       **For Plane cloud**
-       ```bash
-       https://silo.plane.so/api/github/github-webhook
-       ```
-       **For Plane self-hosted instance**
-       ```bash
-       https://<your-domain>/silo/api/github/github-webhook
-       ```
-       ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#center)
+
+        **For Plane cloud**
+        ```bash
+        https://silo.plane.so/api/github/github-webhook
+        ```
+        **For Plane self-hosted instance**
+        ```bash
+        https://<your-domain>/silo/api/github/github-webhook
+        ```
+        ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#center)
   </TabItem>
 </Tabs>
 
