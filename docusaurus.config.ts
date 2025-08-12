@@ -187,7 +187,18 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['bash'],
+      additionalLanguages: [
+        'ruby',
+        'csharp',
+        'php',
+        'java',
+        'powershell',
+        'json',
+        'bash',
+        'dart',
+        'objectivec',
+        'r',
+      ],
     },
     metadata: [
       {
@@ -267,10 +278,6 @@ const config: Config = {
         language: 'objective-c',
       },
       {
-        highlight: 'ocaml',
-        language: 'ocaml',
-      },
-      {
         highlight: 'r',
         language: 'r',
       },
@@ -339,7 +346,7 @@ const config: Config = {
         docsPluginId: 'classic', // configured for preset-classic
         config: {
           plane: {
-            specPath: 'api-spec/schema.yaml',
+            specPath: 'api/schema.yaml',
             outputDir: 'docs/api',
             sidebarOptions: {
               groupPathsBy: 'tag',

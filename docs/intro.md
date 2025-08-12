@@ -28,7 +28,7 @@ import { CardGroup } from '@site/src/components/CardGroup';
   <Card title="Self-Hosting" icon="FaDocker" href="/self-hosting/overview">
     Learn how to self-host Plane.
   </Card>
-  <Card title="API Reference" icon="FaCog" href="/api/the-plane-rest-api">
+  <Card title="API Reference" icon="FaCog" href="/api/introduction">
     Use our API reference to build a custom integration.
   </Card>
   <Card title="Webhooks" icon="FaCog" href="/webhooks/overview">
