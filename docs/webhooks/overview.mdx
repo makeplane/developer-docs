@@ -149,10 +149,26 @@ payload and your secret, the payload is authentic.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs>
-  <TabItem value="NodeJS" label="NodeJS" default>
-  ```javascript
-  // Fastify example
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python">
+  ```python
+  import hashlib
+  import hmac
+
+  secret_token = os.environ.get("WEBHOOK_SECRET")
+
+  received_signature = request.headers.get('X-Plane-Signature')
+  received_payload = json.dumps(request.json).encode('utf-8')
+
+  expected_signature = hmac.new(secret_token.encode('utf-8'), msg=received_payload, digestmod=hashlib.sha256).hexdigest()
+
+  if not hmac.compare_digest(expected_signature, received_signature):
+    raise HTTPException(status_code=403, detail="Invalid Signature provided")
+  ```
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+  ```typescript
+  // Node.js Fastify example
   import { createHmac } from 'node:crypto';
   const secret = process.env.WEBHOOK_SECRET;
 
@@ -173,22 +189,6 @@ import TabItem from '@theme/TabItem';
     // Process the webhook payload
     return reply.status(200).send('Webhook received');
   })
-  ```
-  </TabItem>
-  <TabItem value="python" label="Python">
-  ```python
-  import hashlib
-  import hmac
-
-  secret_token = os.environ.get("WEBHOOK_SECRET")
-
-  received_signature = request.headers.get('X-Plane-Signature')
-  received_payload = json.dumps(request.json).encode('utf-8')
-
-  expected_signature = hmac.new(secret_token.encode('utf-8'), msg=received_payload, digestmod=hashlib.sha256).hexdigest()
-
-  if not hmac.compare_digest(expected_signature, received_signature):
-    raise HTTPException(status_code=403, detail="Invalid Signature provided")
   ```
   </TabItem>
 </Tabs>

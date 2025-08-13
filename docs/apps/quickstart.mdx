@@ -53,31 +53,30 @@ If your app should be installed from outside Plane, generate the consent URL usi
 client ID from app creation. Provide this URL in the "Setup URL" field if you want the
 flow triggered from the marketplace.
 
-<Tabs>
-<TabItem value="Python" default>
-
-```python
-import os
-from urllib.parse import urlencode
-params = {
-    "client_id": os.getenv("PLANE_CLIENT_ID"),
-    "response_type": "code",
-    "redirect_uri": os.getenv("PLANE_REDIRECT_URI"),
-}
-consent_url = f"https://api.plane.so/auth/o/authorize-app/?{urlencode(params)}"
-```
-</TabItem>
-<TabItem value="TypeScript">
-```typescript
-import { URLSearchParams } from 'url';
-const params = new URLSearchParams({
-  client_id: process.env.PLANE_CLIENT_ID!,
-  response_type: "code",
-  redirect_uri: process.env.PLANE_REDIRECT_URI!,
-});
-const consentUrl = `https://api.plane.so/auth/o/authorize-app/?${params.toString()}`;
-```
-</TabItem>
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
+  ```python
+  import os
+  from urllib.parse import urlencode
+  params = {
+      "client_id": os.getenv("PLANE_CLIENT_ID"),
+      "response_type": "code",
+      "redirect_uri": os.getenv("PLANE_REDIRECT_URI"),
+  }
+  consent_url = f"https://api.plane.so/auth/o/authorize-app/?{urlencode(params)}"
+  ```
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
+  ```typescript
+  import { URLSearchParams } from 'url';
+  const params = new URLSearchParams({
+    client_id: process.env.PLANE_CLIENT_ID!,
+    response_type: "code",
+    redirect_uri: process.env.PLANE_REDIRECT_URI!,
+  });
+  const consentUrl = `https://api.plane.so/auth/o/authorize-app/?${params.toString()}`;
+  ```
+  </TabItem>
 </Tabs>
 
 There are two types of authenticated actions your app can perform:
@@ -99,29 +98,29 @@ callback. Use this to request a bot token for your app.
 
 #### Example
 
-<Tabs>
-<TabItem value="Python" default>
-```python
-import base64
-import requests
-client_id = "your_client_id"
-client_secret = "your_client_secret"
-basic_auth = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
-payload = {
-    "grant_type": "client_credentials",
-    "app_installation_id": app_installation_id
-}
-response = requests.post(
-    url="https://api.plane.so/auth/o/token/",
-    headers={"Authorization": f"Basic {basic_auth}", "Content-Type": "application/x-www-form-urlencoded"},
-    data=payload
-)
-response_data = response.json()
-bot_token = response_data['access_token']
-expires_in = response_data["expires_in"]
-```
-</TabItem>
-<TabItem value="TypeScript">
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
+  ```python
+  import base64
+  import requests
+  client_id = "your_client_id"
+  client_secret = "your_client_secret"
+  basic_auth = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
+  payload = {
+      "grant_type": "client_credentials",
+      "app_installation_id": app_installation_id
+  }
+  response = requests.post(
+      url="https://api.plane.so/auth/o/token/",
+      headers={"Authorization": f"Basic {basic_auth}", "Content-Type": "application/x-www-form-urlencoded"},
+      data=payload
+  )
+  response_data = response.json()
+  bot_token = response_data['access_token']
+  expires_in = response_data["expires_in"]
+  ```
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
 ```typescript
 import axios from 'axios';
 const clientId = "your_client_id";
@@ -162,38 +161,38 @@ Plane will make a GET request to the Redirect URI with:
 | state | The state parameter passed in the authorization request | No |
 
 #### Example
-<Tabs>
-<TabItem value="Python" default>
-```python
-import requests
-code = "authorization_code_from_callback"
-client_id = "your_client_id"
-client_secret = "your_client_secret"
-redirect_uri = "your_redirect_uri"
-payload = {
-    "grant_type": "authorization_code",
-    "code": code,
-    "client_id": client_id,
-    "client_secret": client_secret,
-    "redirect_uri": redirect_uri
-}
-response = requests.post(
-    url="https://api.plane.so/auth/o/token/",
-    headers={"Content-Type": "application/x-www-form-urlencoded"},
-    data=payload
-)
-response_data = response.json()
-access_token = response_data["access_token"]
-refresh_token = response_data["refresh_token"]
-expires_in = response_data["expires_in"]
-```
-</TabItem>
-<TabItem value="TypeScript">
-```typescript
-import axios from 'axios';
-const code = "authorization_code_from_callback";
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
+  ```python
+  import requests
+  code = "authorization_code_from_callback"
+  client_id = "your_client_id"
+  client_secret = "your_client_secret"
+  redirect_uri = "your_redirect_uri"
+  payload = {
+      "grant_type": "authorization_code",
+      "code": code,
+      "client_id": client_id,
+      "client_secret": client_secret,
+      "redirect_uri": redirect_uri
+  }
+  response = requests.post(
+      url="https://api.plane.so/auth/o/token/",
+      headers={"Content-Type": "application/x-www-form-urlencoded"},
+      data=payload
+  )
+  response_data = response.json()
+  access_token = response_data["access_token"]
+  refresh_token = response_data["refresh_token"]
+  expires_in = response_data["expires_in"]
+  ```
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
+  ```typescript
+  import axios from 'axios';
+  const code = "authorization_code_from_callback";
+  const clientId = "your_client_id";
+  const clientSecret = "your_client_secret";
 const redirectUri = "your_redirect_uri";
 const payload = {
   grant_type: "authorization_code",
@@ -225,29 +224,29 @@ In both flows, the `app_installation_id` identifies the app's installation withi
 workspace. Fetch workspace details after OAuth is completed. Use the
 `app-installation` endpoint with either type of token.
 
-<Tabs>
-<TabItem value="Python" default>
-```python
-import requests
-headers = {"Authorization": f"Bearer {token}"}
-response = requests.get(
-    url=f"https://api.plane.so/auth/o/app-installation/?id={app_installation_id}",
-    headers=headers
-)
-workspace_details = response.data[0]
-```
-</TabItem>
-<TabItem value="TypeScript">
-```typescript
-import axios from 'axios';
-const headers = { Authorization: `Bearer ${token}` };
-const response = await axios.get(
-  `https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`,
-  { headers }
-);
-const workspaceDetails = response.data[0];
-```
-</TabItem>
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
+  ```python
+  import requests
+  headers = {"Authorization": f"Bearer {token}"}
+  response = requests.get(
+      url=f"https://api.plane.so/auth/o/app-installation/?id={app_installation_id}",
+      headers=headers
+  )
+  workspace_details = response.data[0]
+  ```
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
+  ```typescript
+  import axios from 'axios';
+  const headers = { Authorization: `Bearer ${token}` };
+  const response = await axios.get(
+    `https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`,
+    { headers }
+  );
+  const workspaceDetails = response.data[0];
+  ```
+  </TabItem>
 </Tabs>
 
 #### Sample Response
@@ -288,45 +287,45 @@ Use the access token to make authenticated requests to Plane via the
 
 When the access token expires, use the refresh token to obtain a new access token.
 
-<Tabs>
-<TabItem value="Python" default>
-```python
-refresh_payload = {
-    "grant_type": "refresh_token",
-    "refresh_token": refresh_token,
-    "client_id": client_id,
-    "client_secret": client_secret
-}
-refresh_response = requests.post(
-    url="https://api.plane.so/auth/o/token/",
-    headers={"Content-Type": "application/x-www-form-urlencoded"},
-    data=refresh_payload
-)
-refresh_response_data = refresh_response.json()
-access_token = refresh_response_data["access_token"]
-```
-</TabItem>
-<TabItem value="TypeScript">
-```typescript
-const refreshPayload = {
-  grant_type: "refresh_token",
-  refresh_token: refreshToken,
-  client_id: clientId,
-  client_secret: clientSecret
-};
-const refreshResponse = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  refreshPayload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
+  ```python
+  refresh_payload = {
+      "grant_type": "refresh_token",
+      "refresh_token": refresh_token,
+      "client_id": client_id,
+      "client_secret": client_secret
   }
-);
-const refreshResponseData = refreshResponse.data;
-const accessToken = refreshResponseData.access_token;
-```
-</TabItem>
+  refresh_response = requests.post(
+      url="https://api.plane.so/auth/o/token/",
+      headers={"Content-Type": "application/x-www-form-urlencoded"},
+      data=refresh_payload
+  )
+  refresh_response_data = refresh_response.json()
+  access_token = refresh_response_data["access_token"]
+  ```
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
+  ```typescript
+  const refreshPayload = {
+    grant_type: "refresh_token",
+    refresh_token: refreshToken,
+    client_id: clientId,
+    client_secret: clientSecret
+  };
+  const refreshResponse = await axios.post(
+    "https://api.plane.so/auth/o/token/",
+    refreshPayload,
+    {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+  );
+  const refreshResponseData = refreshResponse.data;
+  const accessToken = refreshResponseData.access_token;
+  ```
+  </TabItem>
 </Tabs>
 
 ## Listing Your App on Plane Marketplace
