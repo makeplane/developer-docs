@@ -1,0 +1,71 @@
+---
+id: delete-label
+title: "Delete a label"
+description: "Permanently remove a label from the project. This action cannot be undone."
+sidebar_label: "Delete a label"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vm1vGzcM/iuEvqwFzj4ndbruPi1ovMJY0Bltsg5IjUA+0bFmnaRKOqeecf99oHR+d4oiK/bFLyTFdz7kihmLjgdp9FCwgglUGPBe8QkqljGBvnTSEpsVbISu4hp1UEtwWJkFAocoClNnKggzBOvM31iGLtzMpAde0lMoudYmwASh1sJo7LKMWe54hQGdZ8XdikkyYHmYsYxpXiH9m7OM+XKGFWfFioWlJaoPTuoHlrGpcRUPrGB1LQVrDp29jn4Nr1jGHH6ppUPBiuBqzBh+5ZVV6EnrIP2O0sMroiy4qsnQxUUP3/R7vQ6e/zLp9M9Ev8N/Pnvd6fdfv7646Pd7vV6PHKyrirslK9aq2oxEy/suXUJYWlly1Yrc3g6vWNM02enwUybvpfgvaRglLd+diFb+B6XC7lp/KhlroW+nw6v64RuJOAr8k3Fzb3mJ0L78juA3b3aDr5adxw39VJC73KdifNz3pmmaccYCf6DmT63q2ThjHsvaybCMI3Fp5e+4vKzDDHWQJU9K78aUoD+IfH6CN6ZAvTXap8jOe3362vfrA3pTuxIhjbsAX5clej+tlVpSKvu9s+NX+9agdCjoL1ceHtEh0IhbZxZSoADjgDsEqRdcSdFNSl8dKyVMkd6TQoFaoujCrUcHipdzD+uagd2I+VbXibDSyJMbU1NrwZomYxWGmdkiWwSeMGMFy7mV+eIs31TG5yuqTZO3/ejz1XYEmzyOLNHmTU5tgG6xxq7aKVawWQjWFznp7VrFNXa9OYZQZ0QdQZFRGbcvizxXpuRqZnwo3qR5OoiO2KzZ6ZKPNAupzKd7ZTMkPLJZlgZrhlyg247WX53L0bCTBA5KPhrCHJfA9xR3YZTKDEtTO1gLSR03wEYbJDuxXqf7deOfIQPnhGbKPMaAiGCc/CdKvjUCj4i3MXc50XKTr1nY4dZSgYKZ44FMJMXilcamvDnkIg4EF8DjDEAw4Nr58Cxjj04GcvETfZ+UoTYrlUQd3m5HIgb3P7pwhH8p4weVA19ba1yQ+gEmJsxgL6NQGoFAJQCuBaSY9uaceF34zbinmBlIXapaIPzErb2X2geuVNR+L8VPsNn6626JCYlzjj6A5UtluEjBlSjjhTExoRWbGreDpNxa2DVAyNBQi09NzL4MirJ2M0MY0TzCh8HHG+pWljGa3ZSnXrfXPTtq/ONHn/Vn/af0MgD1/JdalnPwgbsADzWNAmWM8DOOgzBlXaEOKa08wJ3ABSq6tfwGHMYv1pBxgkkw0nE4RYe6xFzqsEGOl3Q+lUYHXgYKtJ3i6C7LDtBoB4mw4pJYbQ/8umE1GVOyRO1xR92797dw+W50vXh1pPNBhlk96Zamyis+x6gnGconykxy63Ah8TG/Hr4dvP846IavIVbGGh8qrneMXEVQXl+Rh1VYxShRhx99e7aoE/BrIL8lgXGKcdWuhzuCTOoTao3timAZK9pzYr0liLR3qqVFEcl0wNJaJ1AnnavVhHu8dappiPylRjok7sYZW3An+YT69W7FhPT0W7BiypXHb2TlxYd2Qb6EnXv3ZHjrTaAJ5de3DcvYHJfp1qZ99CzLeyfmc2xvs/dsH46uvWf4kS6z8e7RcDW4HtwMWBY3z/4+ncd12f6gqp1UvrtakxX6pDBPiq9WaVM3zUY+sZ58sdnlSZriHDdN8y9i070K
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a label"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/labels/{pk}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently remove a label from the project. This action cannot be undone.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"description":"Label ID","required":true,"examples":{"ExampleLabelID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example label ID","description":"A typical label UUID"}}},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Label not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

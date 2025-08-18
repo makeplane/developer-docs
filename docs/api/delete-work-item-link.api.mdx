@@ -1,0 +1,71 @@
+---
+id: delete-work-item-link
+title: "Endpoints for issue link create/update/delete and fetch issue link details"
+description: "Permanently remove an external link from a work item."
+sidebar_label: "Endpoints for issue link create/update/delete and fetch issue link details"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9V21v2zYQ/isHfmkLyJaTOl2nTwsarzAWdEbbrANSI6DFc8yZIlmScuIZ+u/DkX6RY6ct0mJfLJl3vPd77rRixqLjQRo9FKxgAhUGvLkzbn4jA1Y3Suo5y5hAXzppiY8VbISu4hp1UEtwWJkFAteA9wGd5groDkydqYADSQKS1GUZs9zxCgM6z4rrFZMky/IwYxnTvEJWMOl9jTdSsIz5coYVZ8WKhaUlmg9O6luWsalxFQ+sYHUtBWseWjckGTC8YBlz+KWWDgUrgqsxY3jPK6vQk9RBeo/cwws6WXBVk6Kzsx6+7vd6HTz9ddLpn4h+h/9y8qrT7796dXbW7/d6vR4ZWFcVd0tWbESB3GneN+kcwtLKkqs1y9XV8II1TZMdDYKd/4j7lxT97/WemH+S82qr9zHfI8c3XHfmHyzDD1bAKEn57iis+X9SIGxb+2Ox2DB9PRxe1bdfCcSB45+Mm3vLS4T1ze9wfnun7Xy17Nxtz4852aY+5uPdvjVN04wzFvgtdX80FYYBK6Aa9GycMY9l7WRYRnA4t/IPXJ7XYYY6yJIn6ddjitSfdHx6hDYmj7012icXT3t9ehwGKUJSKsgEeQJ8XZbo/bRWakmR7fdODu/u64TSoaC/XHm4Q4egTaDULqRAAcYBdwhSL7iSopuEvjwUSnAqvSeBArVE0YUrjw4UL+ceNikEu2Xza1nfdo7smZpaC9Y0GaswzMwO5iMihxkrWM6tzBcn+TZjPl9Rzpp8Xac+X+1as8kjivl8tYHrJidtxDRvcqoXdIsNytdOsYLNQrC+yElR1yqusevN4VxxRtRl/ENp3t0s8lyZkquZ8aF4nRrvAeoRmTWtKvpATZPK4HgtbbuJRzLLUgfOkAt0ux78u3M+GnYSw4NiGA1hjkvge4K7MEoFAEtTO9gwSQ1hhrCVBklPzOTxet7aZ0jBKcGeMnfRITowTv4bOd8YgQeHVzF2OZ3lJt+QsMOtpQQFM8cHPPEoJq80NsXNIadqeY9cAI/dAcGAQ29qV6JnGbtzMpCJn+h5lIfqrlQSdXiza5bo3P9owgFQpog/yBz42lrjgtS3MDFhBnsRhdIIBEoBcC0g+bSHAETrwu/GPUbMQOpS1QLhGbf2RmofuFJR+o0Uz2C7H22qJQYkIgD6AJYvleEiOVeipLWLDF2zTY1rQS63FtoKCDMaKvGpidGXQVHUPs4QRtSP8H7w4SNVK8sY9W6KU6/b654cFP7hpc/6s/5LehmAav5LLcs5+MBdgNuaWoEiRsga20GYsq5QhxRWHuBa4AIVbaJ+Cw7j5xvIOEIkGOk4nKJDXWIuddgixwtaNEujAy8DObru4mguyx6gUQuJsOKSSOsa+G1LajKmZInaY0vc23dXcP52dLl4eSDzVoZZPemWpsorPscoJynKJ8pMcutwIfEuvxy+Gbz7MOiG+xAzY40PFdctJQMtrJE6+JjatDlGVC8d8oB5bQU9EpinEGMoZ21OgYFL5R9mcBUjhDr8wDK/BqeA94Hck4TZKRSr9Vi5JmSlcqIK2o0WlrFivZ5spgsd7a1+acDQceuLIM6YyEoLMm0MNA9Iz2o14R6vnGoaOv5SIy0r1+OMLbiTfEKlfr1iQnp6F6yYcuXxK0F5/n49dV9A63PiqMubIaJpQGz2J5axOS7bHzQ00J6kf7fPP0G9nT9d8d4W/RTdu4Q+2YaDhfYJdqTlc9zefy4Gl4OPA5bFmbm/CczjoF+/UNEcFd5eCpIW+iU3j7KvVmnHaJotfyI9emO7hazLSJMHTfMfB3Zb7w==
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Endpoints for issue link create/update/delete and fetch issue link details"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/issues/{issue_id}/links/{pk}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently remove an external link from a work item.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"issue_id","schema":{"type":"string","format":"uuid"},"description":"Issue ID","required":true,"examples":{"ExampleIssueID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example issue ID","description":"A typical issue UUID"}}},{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"description":"Link ID","required":true,"examples":{"ExampleLinkID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example link ID","description":"A typical link UUID"}}},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Work item link deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Work item link not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -28,8 +28,9 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+
 # vercel
 .vercel
 
-# lock files
-package-lock.json
+# docusaurus
+/.docusaurus

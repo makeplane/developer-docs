@@ -1,0 +1,63 @@
+---
+id: get-current-user
+title: "Get current user"
+description: "Retrieve the authenticated user's profile information including basic details."
+sidebar_label: "Get current user"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vt9vGzcM/lcEvnQDzndO5mSdnxpkWZEtaIO22QakQSDraFuJTlIlnlPX8P8+UDo7/lW0e9j8cHcWKZL6SH7UApzHIEk7e1nDECZI96oNAS3dtxEDFFBjVEF7VoEhvEMKGmcoaIpCtjRFS1pJwlqw/osofHBjbVBoO3ahSaaFtsq0tbYTMZJRK1EjSW1iCQWQnEQY3sJNxBDhroCIqg2a5jC8XcCZ13/g/OzZT4ri9m5ZLOAtLx8fkN0VEDB6ZyNGGC7guN/nl3KW0BJ/Su9Nt6N6iLxtAVFNsZH8RXOPMAQ3ekBFewhc6cmUnpCf6cgiYtDS6C8YxNgF0WirG2lELUkKCtLGMYbyo/1or4Ob6RqjwBg5ZGmygcNIWdlgLIScSZKhENLWgk8gFa3g+2idJ93oL1hnz9iMMAijI/HGGPXEIopaR2/kPGYbyWPAMQa0ClMKfOAiIJ3R0vUGBpGCthMoIEcIQ2hbXQMDLOu31sxhSKHFZQFjHSLdc9CHtu+pG/lvtLGR2nxbswDbGiNHBtc7M3zf5SSr3rfhuzxtF8VZ2itu3l3BsoAO8e8937IA0sRBpy640oRsBT/LxpucFF7n90yaFldZgpOTPr4c9Ps9PP5l1Bsc1YOe/PnotDcYnJ6enAwG/X6/D9upgd/d1MIW/vCrQ1hjDA9uasva4avOf6lcA89AwpTIx2FVbYirLCwf/AS2cfy29jZWKTzBAS35twvzeaamXMQd0TBUg/4Rg7KTky1mECpgnbsuiicMKKwjtsEtWQsXhAxMWjNpdF0C+26Qpq5jRW4TSVMYQiW9rmZHFccQqwYrYM4KM6Yvpqztc0uvS2+kxTK6PSq5Dq5uVfrDhPa8c1hVxilppi7S8GXO4g4LsRiWG3z5nvkrV8th1lzXoUxiKECzpSnKOhF9l4G/e2fXl72ssAPo9aV4xPkm7WtnS9Hxmpi7NoiVkrZpRKytieyn5HQdZu5n4mUHx1y4xj2lA/GCC/pL0jx3Ne4t3iTsKl6rXLUSYU96zwki94g7OmkpJU85n3HjvkwzTtZCKoUxCnIiYHRtUBihgKfAzTmEv/h9UIcLRxmNls6fCy4d7n8MYa9xMuI7mROx9d4FSnPZ0VRsISqUq1FwCvLsSWfa6iKWleI3F74mLLpxhuKF9P5e20jSmGT9XtcvhJdBNkhpBKZqSYCIgJ9ajCS8nBsn63w4hXqGQnKgnRqPvCcXHqOXCoX0Xmw6iLmHebYm9DuC/TBFcc39KN5dvP/A1QoFcO9mnPplvzzaK/z9TTzO/9RRk+Ca/9Rq9SgiyUBi0nIrMGLj1pjUDrVTbYOWMqySxG2NMzQ8dOOaHO5+WFHGASHTSG89tCttac0cP/IE7y4GfNCui1O4UOyw0QYTrei+q4FXaxEPZ63QRtww9/rNjTh7fX01+2nP5kTTtB0lYm/kIyY72VE1Mm5U+YAzjU/V1eX5xZv3FyV9ppQZ7yI10m46QRJqg+F387BxhfsP7qGZewg/E0evmZKhuwtk5r9l4uRq4QJJ7A88I6AAvrYyVbPOYjGSEW+CWS55+VOLga+ydwXMZND5bsL31xXv8sh4xDnTq1LoedB0Q37/lsp0vx5Kry8+8LBtObRNan9MzN19sPWVyM43bG+yfHbPT55CB9UXizw0lsu1fhZ9dcd6rGRtxvNuuVz+A5QdU+k=
+sidebar_class_name: "get api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get current user"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/v1/users/me/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieve the authenticated user's profile information including basic details.
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"content":{"application/json":{"schema":{"type":"object","description":"Lightweight user serializer for minimal data transfer.\n\nProvides essential user information including names, avatar, and contact details\noptimized for member lists, assignee displays, and user references.","properties":{"id":{"type":"string","format":"uuid","readOnly":true},"first_name":{"type":"string","readOnly":true},"last_name":{"type":"string","readOnly":true},"email":{"type":"string","readOnly":true,"nullable":true},"avatar":{"type":"string","readOnly":true},"avatar_url":{"type":"string","readOnly":true,"description":"Avatar URL"},"display_name":{"type":"string","readOnly":true}},"title":"UserLite"},"examples":{"User":{"value":{"id":"550e8400-e29b-41d4-a716-446655440000","first_name":"John","last_name":"Doe","email":"john.doe@example.com","avatar":"https://example.com/avatar.jpg","avatar_url":"https://example.com/avatar.jpg","display_name":"John Doe"}}}}},"description":"Current user profile"},"401":{"description":"Authentication credentials were not provided or are invalid."}}}
+>
+  
+</StatusCodes>
+
+
+      

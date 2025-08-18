@@ -1,0 +1,58 @@
+---
+title: Configure SMTP for email notifications
+sidebar_label: SMTP for Email
+description: Set SMTP settings to let users receive emails to reset passwords, onboard, be notified of changes, and receive data exports.
+---
+
+{frontMatter.description && (
+
+<h3 className="description">{frontMatter.description}</h3>
+)}
+
+:::info
+Plane currently supports SMTP authentication only via email and password.
+OAuth-based SMTP configurations aren’t supported.
+:::
+
+## Configuration
+
+Plane provides an interface to configure Simple Mail Transfer Protocol (SMTP) and SSL
+for encrypted email communication.
+
+Navigate to `Email` in `/god-mode` and you will see the following screen:
+
+![](/images/instance-admin/email-settings.png#center)
+
+- **Host**: The address of your SMTP server.
+- **Port**: The port for outgoing emails.
+- **Sender email address**: The email address you wish to use as the sender.
+- **Email security**: Toggle `TLS` or `SSL` as the security layer for your emails. If you do not wish to use either, you can choose the `No email security` option.
+- **Authentication**: Configure the username and password to authenticate the SMTP server. This is optional, but recommended for secure email delivery.
+  - **Username**: Specify the username for SMTP authentication.
+  - **Password**: Specify the password for SMTP authentication.
+
+:::tip
+**Google Workspaces**
+
+If your Plane instance is not accessible on the internet, Gmail may block profile
+photos or other embedded images in email notifications. This occurs because Gmail
+uses Google's secure image proxy to serve images for security purposes.
+
+To resolve this, configure the Image URL proxy allowlist in your Google Workspace
+settings to include your Plane instance's URL. Refer to Google’s documentation:
+[Allowlist image URLs](https://support.google.com/a/answer/3299041?hl=en).
+:::
+
+## Configuration for popular email service providers
+
+### Amazon SES
+
+1. Sign in to [Amazon SES Console](https://console.aws.amazon.com/ses).
+2. Navigate to **SMTP Settings** in the sidebar.
+3. Click **Create My SMTP Credentials**.
+4. Follow prompts to create a user, then click **Create**.
+5. Select **Show User SMTP Credentials** to view the credentials.
+6. Enter these details in your Plane instance's `/god-mode` Email settings.
+
+Review [Amazon SES email quotas](https://docs.aws.amazon.com/ses/latest/dg/quotas.html)
+and consider managing recipients using groups to optimize usage.

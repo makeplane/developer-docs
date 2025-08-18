@@ -1,0 +1,71 @@
+---
+id: archive-project
+title: "Archive project"
+description: "Move a project to archived status, hiding it from active project lists."
+sidebar_label: "Archive project"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VllvGzcQ/ivEvCQBVlrZkd10n2o4biA0TYTYbgo4gkGRIy+rXZIhuVJUYf97MdzDkiUHRVD0RQfnPr6Z2YKx6HhQRk8kZMCdyNUK760zf6EIkIBEL5yyxAEZ/G5WyDhrySwY1kpI5gMPlU9YrqTSD0wFtnCmZFwEtcJeolA++CEkYLnjJQZ0HrK7LSjSbnnIIQHNS6R/jci9kpCAFzmWHLIthI0lqg9O6QdIYGFcyQNkUFVKQv3U42lrePIWEnD4tVIOJWTBVZgAfuOlLdCT3qvmd8s/eUtvK15UZOzsbIRvxqPRAE9/ng/GJ3I84D+dnA/G4/Pzs7PxeDQajcjJqiy520DWKevDjtb3HbtgYWOV4EXPdHs7eQt1XSdH0+GL6uE7iTgI/LNxS2+5QNZK/ovge5nd4MvNYN2/Hwtyl/pcjOt9b+q6niUQ+ANVv6uRh1kCHkXlVNjErriw6jfcXFQhRx2U4I3auxml6CM9nx6hzShUb432TWynozF97Xv2Cb2pnMCd/q2EQO8XVVFsKJvj0cmh2L45JhxK+ssLz9bokGkTqJwrJVEy4xh3yJRe8ULJYaP09aHSKbpSeU8KJWqFcshuPTpWcLH0rCsbsz2bb3UdiesmxyiBPqBkrotyzX30bWEqTZ7UCZQYckOYt8aHCMiQQwYptypdnaR9wXy6pZLVadumPt0+IrNO2/yl1BnoVh2eK1dABnkI1mcp6RzagmscenPQJFNnZCXiH6rro2SWpoURvMiND9mbBmL7ou+JDPVO21wTPJq6H2+eHjc8kiFpsJYjl+ge0fbn4GI6GTQMT1pgOmFL3DC+p3jIpk3Z2cZUjnVMSrOQI+u1scZOrN/xBu79M2TglAZcYdYxIHowTv0dOS+NxIPH25i7lN5Sk3YkHHBrqUDBLPEJT3yKxRPGNnlzyGVECJeMR0zQnO9ayUMCa6cCufiZvo/yUIOJQqEOl48QicH9jy4cjMQm408qx3xlrXGBltbchJztZZQJI5FRCRjXkjUx7eGeaEP2q3HPEROmtCgqiewFt/ZeaR94UUTt90q+YP0m7LolJqRDMbN8Uxgum+AEqriA5ya0bAvjdoYrt5btGvAN1pVemJh9FQpsp8SU8Mg+XV3fULdCAoTdJk+j4Wh4ctD4h0Jf9Bf9h/IqMOr5r5USSzoDXGAPFUGBMkbzNMJBGlGVqEOTVh7YncQVFnR/+H44zF52I+MIkcbIwOECHWqBqdKhnxyv6KQQRgcuAgXaoji6C8mTabQzibDkikhtD/zSk+oECiVQe9xR9+7DLbt4N32/en2g80GFvJoPhSnTki8x6mkMpfPCzFPrcKVwnb6fXF59uL4ahm8hVoaGb8n1jpGLZqCyZ06wbQwTdfhPr7F25gT8FshrRaO4iXDbLoY7GpjUJdQYj8sBEsja+6LbD/S0d7u1TkECtOBpmpO67XbOPd66oq7p+WuFdFTczRJYcaf4nBr1bgtSefotIVvwwuN3svHyU7spX7G9o+9obN0S0DTgu0sHEljiZv/0pJX0Qz4c3F8/4EdzK812t/X04/UN5bSiouwus2XcVe0PytxR1bt7rbFBnxTkUfbttlmTdd3zN6RnJfpF2nBTlLO6rv8BakVKwQ==
+sidebar_class_name: "post api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Archive project"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/archive/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Move a project to archived status, hiding it from active project lists.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource archived successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      

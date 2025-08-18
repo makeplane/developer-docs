@@ -1,0 +1,71 @@
+---
+id: get-generic-asset
+title: "Get presigned URL for asset download"
+description: "Get presigned URL for asset download"
+sidebar_label: "Get presigned URL for asset download"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VktvGzcQ/iuDuSQB1lrZyaHYU13DNYwaqeDYTQFHMGhyJBHikjTJla0I+9+L4UpryZKDIIde9OA8OI9vvuEKnacgknb2UmGFU0r3U7IUtLwXMVLCAhVFGbRnHazwghL4QFFPLSm4vb6CiQuQdUG5J2ucUFigF0HUlChErO5WqNnUizTDAq2oCSvMJvealaOcUS2wWmFaepbFFLSdYoETF2qRsMKm0QrbAgM9NjqQwiqFhtrioOtomukP3Lavc/rqwjx6IQnWlru3FEjPovaGIvs67373Nny2EKbhC+rl0VN/XmBs6lqEJVYbI9iW7sZwCmnptRTmRaeLpm3bcYFJTLmSeMpVizguMJJsgk7LXN9Tr/+i5WmTZmSTlqJzejfmAv3NxycHZGNONHpnY5fZyXDIX7txjfpeb7qbm55BIhIpiI2UFOOkMWbJpf10yMsfQgEXlWLqdI73dXYjBBlI8V9hIjxRILCOkecWWpECxlwg0HYhjFaDzunHA+FTqHWM7FCR1aQGcBspgBFyHmHTZ/C9Wlz7+nQgwAxyDmPiGquwbQusKc3cenIy7NMMKyyF1+XiuOxbGcsVN7MtM+pjudqgvy0ZJxQWm0lpgsEKZyn5WJXsZ+CNsDSIbg8yo+BUI/Mf7vOLZVWWxklhZi6m6rfhcLhnesVibLdg9IWHpcPBYTD1UySyGItu8mYkFIWX2fv36HR0edQpvCrf6BLmtASx43gAo66nsHRNgI2StpBmBL036O7JzTkM6D4+xxecMHkY95QT4gMX9PeseeYU7R3e5tqVfFa6ciOiI+E9Nyi5Ob3SyUe5edL5rm6BBCPhmoQCkYcCkoNA0TVBUsQCn4JOHOJX/j6ow5iSRpNNZy/4z8n9jyHsEWRX8Vedg9h470LSdgoPLs1gp6IgnSLgFoCwCrqcdoaaZQP404W3hAVoK02jCN4J7++1jUkYk73fa/UO+h2zQUsuyIZnwItlpqucnCS9IBAc6FqN19YL1QrvYfsCpoGWIT5xufo6Ga7azYxgxPMI1+dfbhitWCDPblen4WA4ON4D/r7RN/vN/qOjTsCYf2y0nENMIiSYNjwKXDEm1DwOysmmJpu6sooEd4oWZHhxx54cxu83lHFAyDRyFGhCgaykUtvUM8eHARYonU1CJk50PcU5XCxesdEWE1EtNIvWGPi9F7UFGi3JRtpyd/H5Fk4vRleLj3s+pzrNmoeBdHVZizllP91F5YNxD6UPtND0VF5dnp1//nI+SM8pd8a7mGphty/5uZfJTm9WOXey6eft1yyT6DlxnJrJt8tptab/O6ZIxgVD4WUFYIHV+n3RbQE+2HoF8VJnxmYHq9WDiHQbTNvy8WND/Iy4Gxe4EEGLBwbj3QqVjvxbYTURJtIPknt/vV51H+CtHDb0bpm6Ny8aLHBOy+3nGq+aX7p375X1C1F0L6Lx9uK9OL/hijZc+e0dNc8raP2Di3XQ8/a66q7gT87xoPpq1W2/tu31O9GbFv1+7LQ5yXHbtv8BlkT4mA==
+sidebar_class_name: "get api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get presigned URL for asset download"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/v1/workspaces/{slug}/assets/{asset_id}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get presigned URL for asset download
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"asset_id","schema":{"type":"string","format":"uuid"},"required":true},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Presigned download URL generated successfully"},"400":{"description":"Bad request"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Asset not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

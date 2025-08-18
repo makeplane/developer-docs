@@ -1,0 +1,71 @@
+---
+id: delete-cycle-work-item
+title: "Delete cycle work item"
+description: "Remove a work item from a cycle while keeping the work item in the project."
+sidebar_label: "Delete cycle work item"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vm1v2zYQ/isEv6wFZMtJna7TpwWJVxgLOqNt1gGpEdDUOeZMkSxJ2fUE/ffhSEmRX1JswdYvfrk73vs9dxXVBizzQqtpTjOagwQP93zHJdxvtV3fCw8FTWgOjlthUJBm9D0UegOEERQhKEKWVheEkfCSbFdCAlkDGKEeiF9BT1CoQDBW/wncD2lCDbOsAA/W0eyuogItGOZXNKGKFUAzGv0ROU2o4ysoGM0q6ncGec5boR5oQpfaFszTjJalyGmdUAtfSmEhp5m3JdTJSdXCufJ/Ut2E+K+V7+d6FrWQ6TU9tJtQ+MoKI8Gh3kn83chPr5G2YbJEYxcXI3gzHo0GcP7TYjA+y8cD9uPZ68F4/Pr1xcV4PBqNRuhkWRTM7mjWKmvLFK3vO3ZJ/M4IzmQndHs7vaZ1/UQ6nCwfvpGIo8A/abt2hnEgzct/EHz3ph98sRtsO/qpIPvcp2Lc7ntT1/U8oZ49YM/SK+xPR+cJdcBLK/wudPKlEb/C7rL0K1BecBaV3s0xQb8h+fwEb46BOqOVi5Gdj8b4dTiATpeWA4kDmxNXcg7OLUspd5jK8ejs+NW+NcIt5PiXSUe2YIEo7bGWG5FDTrQlzAIRasOkyIdR6atjpTOwhXAOFeagBORDcuvAEsn42pG2ZsR0Yq7RdSKsjysIL8BhTLYNcstc8G2pS4We1AktwK/0I2IFFPErmtGUGZFuztKuXi6tsGJ12nSpS6vHwazTAC0urVqIaSiDgAsurVp8qFNsHbCbFqZKK2lGV94bl6VodWgkUzB0+qiLZlbnJQ9/sPSPL7M0lZozudLOZ2/iDO4/vUE2rXud9QHnJ7bG6f7qBosFNk3iMK6A5WAfx/GPweVsOogCB20ym5I17AjbUzwks9gaZKdLS1qhBs47bSTaCTU+3eOdfxoNnCMCSr0NASFBW/FXkLzSORwRb0PuUqSlOm1ZMGDGYIG8XsOBTCCF4nFtYt4ssDwMEcsJC3NDvO7azdGEbq3w6OIn/D4pg03IpQDlrx7HKAT3HV04wsyY8YPKEVcao63HXbzQfkX2Mkq4zoFgCQhTOYkx7WED8obkF22fYiZEKC7LHMgPzJh7oZxnUgbt9yL/gXQLvu2WkJB20olhO6lZHoPjIMJlsdC+EVtq20NfZgzpG3ARD4Ra6pB94SU0SDLDeSTvJx8+YrfShOLsxjyNhqPh2VHjHz/6rD6r34UTnmDPfykFXxPnmfXkocRRwIwh5oZxyDUvC1A+ppV5cpfDBiReWK4Dh/mLFjJOMBFGBhaWYEFxSIXyHXK8xEuJa+UZ9xhoM8XBXZocoFEPiaBgAllND/zcseqESsFBOeipe/vully+nd1sXh3pfBB+VS6GXBdpwdYQ9ERD6ULqRWosbARs05vp1eTdh8nQf/WhMkY7XzDVM3IdILs9FdvD8LAaVYgWlP/P780Gfjx89RiAQFSOwVbNFrlD7MSGwR553CQ0oVlzi7TLBEl7d17cJ0juHa39lYKs3tGJRwPCPxqtqgVzcGtlXSP5Swl4ptzNE7phVrAFdvZdRXPh8HdOsyWTDr6Rtxfvm/X7kjwVd7srFO6B9mKiCV3Drn944976jna7BD3b7t7Z/AwPekV9tg9HF+wz/IjX5rx/8lxPbiYfJzQJm3F/36/DOm9+YK+cVN5f/dEKfmKYJ8WrKl4Sdd3JR9aTL7pbo6mmwgjq+m9kvfh4
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete cycle work item"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/{issue_id}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Remove a work item from a cycle while keeping the work item in the project.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"cycle_id","schema":{"type":"string","format":"uuid"},"required":true},{"in":"path","name":"issue_id","schema":{"type":"string","format":"uuid"},"required":true},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,0 +1,154 @@
+---
+id: the-plane-rest-api
+title: "The Plane REST API"
+description: "The Plane REST API"
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 0.0.1"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"The Plane REST API"}
+>
+</Heading>
+
+
+
+The Plane REST API
+
+Visit our quick start guide and full API documentation at [developers.plane.so](https://developers.plane.so/api-reference/introduction).
+
+<div
+  style={{"marginBottom":"2rem"}}
+>
+  <Heading
+    id={"authentication"}
+    as={"h2"}
+    className={"openapi-tabs__heading"}
+    children={"Authentication"}
+  >
+  </Heading><SchemaTabs
+    className={"openapi-tabs__security-schemes"}
+  >
+    <TabItem
+      label={"API Key: ApiKeyAuthentication"}
+      value={"ApiKeyAuthentication"}
+    >
+
+
+      API key authentication. Provide your API key in the X-API-Key header.
+
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                apiKey
+              </td>
+            </tr><tr>
+              <th>
+                Header parameter name:
+              </th><td>
+                X-API-Key
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem><TabItem
+      label={"OAuth 2.0: OAuth2Authentication"}
+      value={"OAuth2Authentication"}
+    >
+
+
+      OAuth2 authentication supporting both authorization code flow and client credentials flow. For client credentials flow, include 'app_installation_id' parameter in the token request payload to receive a bot token for workspace app installations.
+
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                oauth2
+              </td>
+            </tr><tr>
+              <th>
+                OAuth Flow (authorizationCode):
+              </th><td>
+                <div>
+                  Token URL: /auth/o/token/
+                </div><div>
+                  Authorization URL: /auth/o/authorize-app/
+                </div><span>
+                  Scopes:
+                </span><ul>
+                  <li>
+                    read: Read access to resources
+                  </li><li>
+                    write: Write access to resources
+                  </li>
+                </ul>
+              </td>
+            </tr><tr>
+              <th>
+                OAuth Flow (clientCredentials):
+              </th><td>
+                <div>
+                  Token URL: /auth/o/token/
+                </div><span>
+                  Scopes:
+                </span><ul>
+                  <li>
+                    read: Read access to resources
+                  </li><li>
+                    write: Write access to resources
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+  </SchemaTabs>
+</div><div
+  style={{"display":"flex","flexDirection":"column","marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    Contact
+  </h3><span>
+    Plane: [support@plane.so](mailto:support@plane.so)
+  </span><span>
+    URL: [https://plane.so](https://plane.so)
+  </span>
+</div><div
+  style={{"marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    License
+  </h3><a
+    href={"https://github.com/makeplane/plane/blob/preview/LICENSE.txt"}
+  >
+    GNU AGPLv3
+  </a>
+</div>

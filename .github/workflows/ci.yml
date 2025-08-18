@@ -16,22 +16,30 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Set up Node.js
+      - name: 📦 Setup pnpm package manager
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: 🟢 Setup Node.js runtime
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
-      - name: Check for broken links
-        run: |
-          set -e
-          output=$(npx mint broken-links)
-          echo "$output"
-          if ! echo "$output" | grep -q '^success '; then
-            echo "Error: Broken links found! Fix the broken links listed above before merging."
-            exit 1
-          fi
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: 📚 Install project dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: ✅ Check types
+        run: pnpm check:type
+
+      - name: 🏗️ Build
+        run: pnpm build
