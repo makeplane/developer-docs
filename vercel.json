@@ -35,12 +35,12 @@
       "destination": "/self-hosting/manage/update/to-latest-version"
     },
     {
-      "source": "/webhooks/intro-webhooks",
-      "destination": "/webhooks/overview"
-    },
-    {
       "source": "/api-reference/(.*)",
       "destination": "/api"
+    },
+    {
+      "source": "/api-reference/byoa/build-plane-app",
+      "destination": "/apps/build-plane-app"
     }
   ]
 }
