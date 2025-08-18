@@ -3,7 +3,8 @@ title: License errors
 ---
 
 {frontMatter.description && (
-  <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide helps you resolve common issues encountered while activating the
@@ -12,7 +13,7 @@ step-by-step solutions.
 
 ## License is invalid
 
-<div style={{ color: 'red' }}>Error: Your license is invalid or already in use.</div>
+<div style={{ color: "red" }}>Error: Your license is invalid or already in use.</div>
 
 - This issue usually occurs when your server cannot connect to verify the
   license. Try running `prime-cli restart` to resolve the problem.
@@ -24,9 +25,7 @@ step-by-step solutions.
 
 ## Something went wrong
 
-<div style={{ color: 'red' }}>
-  Error: Something went wrong, please try again later
-</div>
+<div style={{ color: "red" }}>Error: Something went wrong, please try again later</div>
 
 This error usually occurs when the license validation service is unavailable.
 Troubleshooting steps:
@@ -40,7 +39,7 @@ validation service.
 
 ## Payment server is not configured
 
-<div style={{ color: 'red' }}>Error: Payment server is not configured</div>
+<div style={{ color: "red" }}>Error: Payment server is not configured</div>
 
 This usually occurs when the environment configuration is incorrect. The
 `payment_server_url` environment variable is missing. To fix:

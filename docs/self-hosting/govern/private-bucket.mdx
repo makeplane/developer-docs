@@ -59,12 +59,7 @@ apply the policy to your bucket:
     "AllowedHeaders": ["*"],
     "AllowedMethods": ["GET", "POST", "PUT", "DELETE", "HEAD"],
     "AllowedOrigins": ["<YOUR_DOMAIN>"],
-    "ExposeHeaders": [
-      "ETag",
-      "x-amz-server-side-encryption",
-      "x-amz-request-id",
-      "x-amz-id-2"
-    ],
+    "ExposeHeaders": ["ETag", "x-amz-server-side-encryption", "x-amz-request-id", "x-amz-id-2"],
     "MaxAgeSeconds": 3000
   }
 ]
@@ -103,10 +98,7 @@ To migrate from public to private bucket storage:
          "Effect": "Allow",
          "Principal": "*",
          "Action": "s3:GetObject",
-         "Resource": [
-           "arn:aws:s3:::<bucket_name>/<object_1>",
-           "arn:aws:s3:::<bucket_name>/<object_2>"
-         ]
+         "Resource": ["arn:aws:s3:::<bucket_name>/<object_1>", "arn:aws:s3:::<bucket_name>/<object_2>"]
        }
      ]
    }
@@ -117,6 +109,7 @@ To migrate from public to private bucket storage:
    ```bash
    docker cp <api_container>:/code/permissions.json .
    ```
+
    :::
 
 ## Troubleshooting

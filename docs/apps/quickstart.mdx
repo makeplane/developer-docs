@@ -4,11 +4,12 @@ sidebar_label: Quickstart
 description: Step-by-step development guide to building a Plane App
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 {frontMatter.description && (
-  <h3 class="description">{frontMatter.description}</h3>
+
+<h3 class="description">{frontMatter.description}</h3>
 )}
 
 :::tip Beta
@@ -92,8 +93,8 @@ described below.
 When the app is installed, Plane will send an `app_installation_id` as part of the
 callback. Use this to request a bot token for your app.
 
-| Parameter | Description |
-|-----------|-------------|
+| Parameter           | Description                                                     |
+| ------------------- | --------------------------------------------------------------- |
 | app_installation_id | The unique identifier for the app installation in the workspace |
 
 #### Example
@@ -155,12 +156,13 @@ must be refreshed using the refresh token when it expires. Store both tokens sec
 
 Plane will make a GET request to the Redirect URI with:
 
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| code | The authorization code to exchange for an access token | Yes |
-| state | The state parameter passed in the authorization request | No |
+| Parameter | Description                                             | Required |
+| --------- | ------------------------------------------------------- | -------- |
+| code      | The authorization code to exchange for an access token  | Yes      |
+| state     | The state parameter passed in the authorization request | No       |
 
 #### Example
+
 <Tabs queryString="lang" groupId="code-examples">
   <TabItem label="Python" value="python" default>
   ```python

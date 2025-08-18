@@ -4,7 +4,8 @@ sidebar_label: External database and storage
 ---
 
 {frontMatter.description && (
-  <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 The Prime CLI lets you easily configure your Commercial Edition instance, providing
@@ -18,7 +19,6 @@ advanced settings.
     ```
 
 2.  Once the CLI is running, enter `configure` to start a step-by-step form where you can specify:
-
     - `Listening port`: Port for the built-in reverse proxy. _Default_: `80`
     - `Max file-upload size`: Maximum file size (in MB) that members can upload. _Default_: `5 MB`
     - `External Postgres URL`: URL of your external PostgreSQL instance. _Default_: `Postgres 15.5` in Docker.
@@ -36,19 +36,14 @@ advanced settings.
          - **s3:GetObject**: Access objects.
          - **s3:PutObject**: Upload new assets using presigned URLs.
       2. Configure the CORS policy on your bucket to enable presigned uploads.
-      Replace `<YOUR_DOMAIN>` with your actual domain:
+         Replace `<YOUR_DOMAIN>` with your actual domain:
          ```json
          [
            {
              "AllowedHeaders": ["*"],
              "AllowedMethods": ["GET", "POST", "PUT", "DELETE", "HEAD"],
              "AllowedOrigins": ["<YOUR_DOMAIN>"],
-             "ExposeHeaders": [
-               "ETag",
-               "x-amz-server-side-encryption",
-               "x-amz-request-id",
-               "x-amz-id-2"
-             ],
+             "ExposeHeaders": ["ETag", "x-amz-server-side-encryption", "x-amz-request-id", "x-amz-id-2"],
              "MaxAgeSeconds": 3000
            }
          ]
@@ -60,56 +55,58 @@ advanced settings.
          - S3 region
          - S3 endpoint URL
 
-3. After confirming your choices, your instance will automatically restart with the updated configuration.
+3.  After confirming your choices, your instance will automatically restart with the updated configuration.
 
 <details>
   <summary>Community Edition</summary>
 
-  To configure external Postgres, Redis, and S3 storage for the Plane Community
-  Edition, adjust the environment variables in `plane.env` as follows:
+To configure external Postgres, Redis, and S3 storage for the Plane Community
+Edition, adjust the environment variables in `plane.env` as follows:
 
-  1. Open the `plane.env` file on your server.
-  2. In the **DB SETTINGS** section, update the variables to connect to your external Postgres instance:
-      ```bash
-      # DB SETTINGS
-      PGHOST=your-external-postgres-host          # Hostname or IP address of your Postgres server.
-      PGDATABASE=                                 # Leave blank when using external database.
-      POSTGRES_USER=your-postgres-username        # Username for Postgres.
-      POSTGRES_PASSWORD=your-postgres-password    # Password for the Postgres user.
-      POSTGRES_DB=your-database-name              # Database Plane should connect to.
-      POSTGRES_PORT=5432                          # Port for Postgres (usually 5432).
-      PGDATA=/var/lib/postgresql/data             # No need to change for external Postgres.
-      DATABASE_URL=                               # Leave empty if using the above variables. If using DATABASE_URL, leave others empty.
-      ```
+1. Open the `plane.env` file on your server.
+2. In the **DB SETTINGS** section, update the variables to connect to your external Postgres instance:
 
-      :::warning
-      Do not use a database on your local machine. If you use `localhost` in the
-      URL, it will not work. Use a network-accessible server.
+   ```bash
+   # DB SETTINGS
+   PGHOST=your-external-postgres-host          # Hostname or IP address of your Postgres server.
+   PGDATABASE=                                 # Leave blank when using external database.
+   POSTGRES_USER=your-postgres-username        # Username for Postgres.
+   POSTGRES_PASSWORD=your-postgres-password    # Password for the Postgres user.
+   POSTGRES_DB=your-database-name              # Database Plane should connect to.
+   POSTGRES_PORT=5432                          # Port for Postgres (usually 5432).
+   PGDATA=/var/lib/postgresql/data             # No need to change for external Postgres.
+   DATABASE_URL=                               # Leave empty if using the above variables. If using DATABASE_URL, leave others empty.
+   ```
 
-      Avoid special characters in your PostgreSQL password.
-      :::
-  3. In the **REDIS SETTINGS** section, update the variables for your external Redis instance:
-      ```bash
-      # REDIS SETTINGS
-      REDIS_HOST=your-external-redis-host         # Hostname or IP of the Redis server.
-      REDIS_PORT=6379                             # Port for Redis (default 6379).
-      REDIS_URL=                                  # Leave empty if using the above variables. If using REDIS_URL, leave others empty.
-      ```
-  4. In the **DATA STORE SETTINGS** section, update the variables for any S3-compatible storage:
-      ```bash
-      # DATA STORE SETTINGS
-      USE_MINIO=0                                 # Set to 0 for external S3, 1 for MinIO (default).
-      AWS_REGION=your-s3-region                   # For AWS, set the region, e.g., "us-west-1".
-      AWS_ACCESS_KEY_ID=your-s3-access-key        # Access key for S3.
-      AWS_SECRET_ACCESS_KEY=your-s3-secret-key    # Secret key for S3.
-      AWS_S3_ENDPOINT_URL=https://your-s3-endpoint # S3 API endpoint URL (e.g., "https://s3.amazonaws.com" for AWS).
-      AWS_S3_BUCKET_NAME=your-s3-bucket-name      # S3 bucket name for Plane data.
-      MINIO_ROOT_USER=                            # Leave blank for external S3.
-      MINIO_ROOT_PASSWORD=                        # Leave blank for external S3.
-      BUCKET_NAME=                                # Leave blank for external S3.
-      FILE_SIZE_LIMIT=5242880                     # Max file upload size in bytes (5MB here).
-      ```
-  5. Save your changes to `plane.env`.
-  6. Restart Plane services to apply the new settings using the `setup.sh` script.
+   :::warning
+   Do not use a database on your local machine. If you use `localhost` in the
+   URL, it will not work. Use a network-accessible server.
+
+   Avoid special characters in your PostgreSQL password.
+   :::
+
+3. In the **REDIS SETTINGS** section, update the variables for your external Redis instance:
+   ```bash
+   # REDIS SETTINGS
+   REDIS_HOST=your-external-redis-host         # Hostname or IP of the Redis server.
+   REDIS_PORT=6379                             # Port for Redis (default 6379).
+   REDIS_URL=                                  # Leave empty if using the above variables. If using REDIS_URL, leave others empty.
+   ```
+4. In the **DATA STORE SETTINGS** section, update the variables for any S3-compatible storage:
+   ```bash
+   # DATA STORE SETTINGS
+   USE_MINIO=0                                 # Set to 0 for external S3, 1 for MinIO (default).
+   AWS_REGION=your-s3-region                   # For AWS, set the region, e.g., "us-west-1".
+   AWS_ACCESS_KEY_ID=your-s3-access-key        # Access key for S3.
+   AWS_SECRET_ACCESS_KEY=your-s3-secret-key    # Secret key for S3.
+   AWS_S3_ENDPOINT_URL=https://your-s3-endpoint # S3 API endpoint URL (e.g., "https://s3.amazonaws.com" for AWS).
+   AWS_S3_BUCKET_NAME=your-s3-bucket-name      # S3 bucket name for Plane data.
+   MINIO_ROOT_USER=                            # Leave blank for external S3.
+   MINIO_ROOT_PASSWORD=                        # Leave blank for external S3.
+   BUCKET_NAME=                                # Leave blank for external S3.
+   FILE_SIZE_LIMIT=5242880                     # Max file upload size in bytes (5MB here).
+   ```
+5. Save your changes to `plane.env`.
+6. Restart Plane services to apply the new settings using the `setup.sh` script.
 
 </details>

@@ -4,7 +4,8 @@ sidebar_label: Portainer
 ---
 
 {frontMatter.description && (
-  <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide shows you how to deploy a self-hosted instance of Plane using
@@ -46,14 +47,14 @@ Portainer.
    - `CERT_EMAIL` — (optional) Email for SSL certificate generation (needed for HTTPS)
 
 6. **Configure external DB, Redis, and RabbitMQ**
-    :::warning
-    For production, configure external database and storage to ensure data
-    security and reliability. Relying on local storage increases the risk of data
-    loss and service disruption.
-    :::
-    - `DATABASE_URL` — Connection string for your external database
-    - `REDIS_URL` — Connection string for your external Redis instance
-    - `AMQP_URL` — Connection string for your external RabbitMQ server
+   :::warning
+   For production, configure external database and storage to ensure data
+   security and reliability. Relying on local storage increases the risk of data
+   loss and service disruption.
+   :::
+   - `DATABASE_URL` — Connection string for your external database
+   - `REDIS_URL` — Connection string for your external Redis instance
+   - `AMQP_URL` — Connection string for your external RabbitMQ server
 
 7. Click **Deploy the stack**.
 

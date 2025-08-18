@@ -3,7 +3,8 @@ title: Storage errors
 ---
 
 {frontMatter.description && (
-  <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide helps you resolve common issues encountered while configuring storage
@@ -11,9 +12,9 @@ in Plane. Each section includes potential causes and step-by-step solutions.
 
 ## Bucket policy exceeds size limit
 
-<div style={{ color: 'red' }}>
-  Error: An error occurred (PolicyTooLarge) when calling the PutBucketPolicy
-  operation: Policy exceeds the maximum allowed document size.
+<div style={{ color: "red" }}>
+  Error: An error occurred (PolicyTooLarge) when calling the PutBucketPolicy operation: Policy exceeds the maximum
+  allowed document size.
 </div>
 
 This error occurs when the bucket policy exceeds the 20KB size limit allowed by
@@ -33,7 +34,7 @@ within the MinIO container:
        "Statement": [
          {
            "Effect": "Allow",
-           "Principal": {"AWS": ["*"]},
+           "Principal": { "AWS": ["*"] },
            "Action": ["s3:GetObject"],
            "Resource": ["arn:aws:s3:::uploads/*"],
            "Condition": {
@@ -46,7 +47,7 @@ within the MinIO container:
      }
      ```
 
-  - Save this file in an accessible location.
+- Save this file in an accessible location.
 
 2. **Set up and apply the policy**
    :::warning
@@ -54,37 +55,43 @@ within the MinIO container:
    Execute all `mc` commands **within the MinIO container** (attach or use `docker exec`).
    :::
 
-  - Configure MinIO alias:
-     ```bash
-     mc alias set myminio http://plane-plane-minio:9000 <minio-username> <minio-password>
-     ```
-     Replace `plane-plane-minio:9000` with your MinIO server address.
+- Configure MinIO alias:
 
-  - Tag existing objects:
-     ```bash
-     mc find myminio/uploads --exec "mc tag set {} publicAccess=true"
-     ```
+  ```bash
+  mc alias set myminio http://plane-plane-minio:9000 <minio-username> <minio-password>
+  ```
 
-  - Copy the policy file to the MinIO container:
-     ```bash
-     docker cp bucket-policy.json <minio-container-id>:/tmp
-     ```
-     Replace `<minio-container-id>` with your MinIO container ID (find it with `docker ps`).
+  Replace `plane-plane-minio:9000` with your MinIO server address.
 
-  - Apply the policy to the bucket:
-     ```bash
-     mc anonymous set-json /tmp/bucket-policy.json myminio/uploads
-     ```
+- Tag existing objects:
+
+  ```bash
+  mc find myminio/uploads --exec "mc tag set {} publicAccess=true"
+  ```
+
+- Copy the policy file to the MinIO container:
+
+  ```bash
+  docker cp bucket-policy.json <minio-container-id>:/tmp
+  ```
+
+  Replace `<minio-container-id>` with your MinIO container ID (find it with `docker ps`).
+
+- Apply the policy to the bucket:
+  ```bash
+  mc anonymous set-json /tmp/bucket-policy.json myminio/uploads
+  ```
 
 3. **Verification**
-  - Verify that objects are correctly tagged:
-     ```bash
-     mc tag list myminio/uploads/<object-name>
-     ```
-  - Test public access:
-     ```bash
-     curl http://<minio-server>:9000/uploads/<object-name>
-     ```
+
+- Verify that objects are correctly tagged:
+  ```bash
+  mc tag list myminio/uploads/<object-name>
+  ```
+- Test public access:
+  ```bash
+  curl http://<minio-server>:9000/uploads/<object-name>
+  ```
 
 ### Notes
 

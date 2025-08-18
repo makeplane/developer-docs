@@ -4,7 +4,8 @@ sidebar_label: Move to another server
 ---
 
 {frontMatter.description && (
-   <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 Switching to another machine is straightforward on the Commercial Edition.
@@ -32,9 +33,11 @@ assistance.
 
 2. **Backup data**
    Create a backup of your Plane instance:
+
    ```bash
    prime-cli backup
    ```
+
    This command will generate a backup file at `/opt/plane/backups`.
 
 3. **Set up Plane on the new server**
@@ -47,9 +50,11 @@ assistance.
 
 5. **Restore data**
    On the new server, restore your data:
+
    ```bash
    prime-cli restore
    ```
+
    Follow the prompts during the restore process to ensure everything is set up
    correctly.
 

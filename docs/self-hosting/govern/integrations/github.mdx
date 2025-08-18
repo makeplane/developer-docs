@@ -3,11 +3,12 @@ title: Configure GitHub App for Plane integration
 sidebar_label: GitHub
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 {frontMatter.description && (
-   <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide walks you through setting up a GitHub App to enable GitHub integration for
@@ -64,6 +65,7 @@ To configure GitHub integration, create a GitHub App within your organization.
         https://<your-domain>/silo/api/github/github-webhook
         ```
         ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#center)
+
   </TabItem>
   <TabItem value="github-enterprise" label="GitHub Enterprise Server">
     1. Go to **Settings > Developer Settings > GitHub Apps** in your GitHub organization.
@@ -106,6 +108,7 @@ To configure GitHub integration, create a GitHub App within your organization.
         https://<your-domain>/silo/api/github/github-webhook
         ```
         ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#center)
+
   </TabItem>
 </Tabs>
 

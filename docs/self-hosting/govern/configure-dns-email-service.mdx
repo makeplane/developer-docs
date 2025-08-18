@@ -5,7 +5,8 @@ description: Configure DNS records to enable automatic conversion of incoming em
 ---
 
 {frontMatter.description && (
-    <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide explains how to configure DNS settings to enable the
@@ -56,16 +57,19 @@ improves email trust and deliverability.
 2.  **Generate SSL Certificate** - Choose the method that matches your web server setup:
 
     For NGINX:
+
     ```bash
     sudo certbot --nginx -d <mail-domain>
     ```
 
     For Apache:
+
     ```bash
     sudo certbot --apache -d <mail-domain>
     ```
 
     For standalone (no web server):
+
     ```bash
     sudo certbot certonly --standalone -d <mail-domain>
     ```

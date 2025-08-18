@@ -4,7 +4,8 @@ sidebar_label: Airgapped Edition
 ---
 
 {frontMatter.description && (
-   <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide walks you through setting up the Commercial Airgapped Edition in an
@@ -19,12 +20,13 @@ Community Edition to air-gapped, follow [this guide](/self-hosting/manage/upgrad
 ## Prerequisites
 
 Before you start, ensure your air-gapped machine has:
+
 - Docker (v24 or later)
 - Docker Compose Plugin (should be able to run `docker compose` or `docker-compose`)
 - The Plane air-gapped package, which includes:
-   - Docker image files (`.tar`)
-   - Configuration files (`docker-compose.yml`, `plane.env`)
-   - Installation script (`install.sh`)
+  - Docker image files (`.tar`)
+  - Configuration files (`docker-compose.yml`, `plane.env`)
+  - Installation script (`install.sh`)
 
 ### Required files
 
@@ -63,11 +65,14 @@ Before you start, ensure your air-gapped machine has:
    The airgapped directory contains your `plane.env`, `docker-compose.yml`, and
    `install.sh` files which are used in the following steps.
 5. Run the installation script:
+
    ```bash
    bash install.sh
    ```
+
    The script will guide you through the process step by step. Here's what to
    expect:
+
    ```bash
    **********************************************************
    You are about to install/upgrade Plane as airgapped setup
@@ -93,6 +98,7 @@ Before you start, ensure your air-gapped machine has:
    - Installation Type: New
    **********************************************************
    ```
+
    Once you confirm your settings, the installer will:
    - Copy the `docker-compose.yml` and `plane.env` files to your chosen installation directory.
    - Create the necessary folders for data and logs.
@@ -127,7 +133,7 @@ Before you start, ensure your air-gapped machine has:
    ├── plane.env
    ├── data/
    └── logs/
-   ````
+   ```
 
 ## Environment variables
 
@@ -148,13 +154,17 @@ installation:
    ```
 2. Watch the logs to make sure everything starts properly.
    - To monitor the database migration process:
+
    ```bash
    docker compose logs -f migrator
    ```
+
    - To monitor the API service startup:
+
    ```bash
    docker compose logs -f api
    ```
+
    The api is healthy when you see: `api-1   listening at`
 
    Once both services are running smoothly, you can access Plane by opening your

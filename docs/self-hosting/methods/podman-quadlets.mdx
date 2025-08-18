@@ -4,7 +4,8 @@ sidebar_label: Podman Quadlets
 ---
 
 {frontMatter.description && (
-   <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide explains how to deploy Plane using Podman Quadlets on a self-hosted
@@ -19,10 +20,12 @@ environment.
 ## Download Deployment Files
 
 1. Download the Podman Quadlet files for your Plane version:
+
    ```bash
    curl -fsSL https://prime.plane.so/releases/<plane-version>/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
    tar -xzvf podman-quadlets.tar.gz
    ```
+
    :::warning
    Replace `<plane-version>` with v1.8.2 or higher.
    :::
@@ -35,13 +38,14 @@ environment.
 ## Configure Environment Variables
 
 Edit `plane.env` and set the following variables:
+
 - `DOMAIN_NAME` — (required) Your application's domain name
 - `SITE_ADDRESS` — (required) The full domain name (FQDN) of your instance
 - `MACHINE_SIGNATURE` — (required) Unique identifier for your machine. Generate with:
-   ```sh
-   sed -i 's/MACHINE_SIGNATURE=.*/MACHINE_SIGNATURE='$(openssl rand -hex 16)'/' \
-   plane.env
-   ```
+  ```sh
+  sed -i 's/MACHINE_SIGNATURE=.*/MACHINE_SIGNATURE='$(openssl rand -hex 16)'/' \
+  plane.env
+  ```
 - `CERT_EMAIL` — (optional) Email for SSL certificate generation (needed for HTTPS)
 
 ## Configure External Services
@@ -51,6 +55,7 @@ For production, configure external database and storage to ensure data security
 and reliability. Relying on local storage increases the risk of data loss and
 service disruption.
 :::
+
 - `DATABASE_URL` — Connection string for your external database
 - `REDIS_URL` — Connection string for your external Redis instance
 - `AMQP_URL` — Connection string for your external RabbitMQ server

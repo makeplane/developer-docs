@@ -1,17 +1,17 @@
-import { themes as prismThemes } from 'prism-react-renderer';
-import type { Config } from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
-import type * as Plugin from '@docusaurus/types/src/plugin';
-import type * as OpenApiPlugin from 'docusaurus-plugin-openapi-docs';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
+import type * as Plugin from "@docusaurus/types/src/plugin";
+import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Plane developer documentation',
-  tagline: 'Explore our guides and examples to integrate Plane',
-  favicon: '/img/favicon/white/favicon.ico',
+  title: "Plane developer documentation",
+  tagline: "Explore our guides and examples to integrate Plane",
+  favicon: "/img/favicon/white/favicon.ico",
   trailingSlash: false,
-  onDuplicateRoutes: 'warn',
+  onDuplicateRoutes: "warn",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -19,55 +19,55 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://developers.plane.so',
+  url: "https://developers.plane.so",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'makeplane', // Usually your GitHub org/user name.
-  projectName: 'developer-docs', // Usually your repo name.
+  organizationName: "makeplane", // Usually your GitHub org/user name.
+  projectName: "developer-docs", // Usually your repo name.
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
-  onBrokenAnchors: 'throw',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
+  onBrokenAnchors: "throw",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          path: 'docs',
-          routeBasePath: '/',
-          sidebarPath: './sidebars.ts',
-          include: ['**/*.md', '**/*.mdx'],
-          editUrl: 'https://github.com/makeplane/developer-docs/tree/main',
+          path: "docs",
+          routeBasePath: "/",
+          sidebarPath: "./sidebars.ts",
+          include: ["**/*.md", "**/*.mdx"],
+          editUrl: "https://github.com/makeplane/developer-docs/tree/main",
           sidebarCollapsible: true,
           sidebarCollapsed: true,
-          docItemComponent: '@theme/ApiItem', // Derived from docusaurus-theme-openapi
+          docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
         sitemap: {
-          lastmod: 'date',
-          changefreq: 'weekly',
+          lastmod: "date",
+          changefreq: "weekly",
           priority: 0.5,
-          ignorePatterns: ['/tags/**'],
-          filename: 'sitemap.xml',
+          ignorePatterns: ["/tags/**"],
+          filename: "sitemap.xml",
         },
         gtag: {
-          trackingID: process.env.GTAG_TRACKING_ID || 'fake',
+          trackingID: process.env.GTAG_TRACKING_ID || "fake",
           anonymizeIP: true,
         },
       } satisfies Preset.Options,
@@ -75,7 +75,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'https://media.docs.plane.so/logo.svg',
+    image: "https://media.docs.plane.so/logo.svg",
     docs: {
       sidebar: {
         hideable: false,
@@ -83,101 +83,101 @@ const config: Config = {
       },
     },
     navbar: {
-      title: 'Developers',
+      title: "Developers",
       logo: {
-        alt: 'Plane',
-        src: '/img/logo/symbol-black.png',
-        srcDark: '/img/logo/symbol-white.png',
+        alt: "Plane",
+        src: "/img/logo/symbol-black.png",
+        srcDark: "/img/logo/symbol-white.png",
       },
       items: [
         {
-          type: 'search',
-          position: 'left',
+          type: "search",
+          position: "left",
         },
         {
-          href: 'https://docs.plane.so',
-          'aria-label': 'Plane Docs',
-          position: 'right',
-          className: 'navbar--plane-docs-link',
+          href: "https://docs.plane.so",
+          "aria-label": "Plane Docs",
+          position: "right",
+          className: "navbar--plane-docs-link",
         },
         {
-          href: 'https://discord.com/invite/A92xrEGCge',
-          'aria-label': 'Discord',
-          position: 'right',
-          className: 'navbar--discord-link',
+          href: "https://discord.com/invite/A92xrEGCge",
+          "aria-label": "Discord",
+          position: "right",
+          className: "navbar--discord-link",
         },
         {
-          href: 'https://github.com/makeplane/plane',
-          'aria-label': 'GitHub',
-          position: 'right',
-          className: 'navbar--github-link',
+          href: "https://github.com/makeplane/plane",
+          "aria-label": "GitHub",
+          position: "right",
+          className: "navbar--github-link",
         },
         {
-          href: 'https://app.plane.so/sign-in',
-          label: 'Sign in',
-          position: 'right',
+          href: "https://app.plane.so/sign-in",
+          label: "Sign in",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "Docs",
           items: [
             {
-              label: 'Self-Hosting',
-              to: '/self-hosting/overview',
+              label: "Self-Hosting",
+              to: "/self-hosting/overview",
             },
             {
-              label: 'SDKs',
-              to: '/sdks/overview',
+              label: "SDKs",
+              to: "/sdks/overview",
             },
             {
-              label: 'AI Solutions',
-              to: '/ai-solutions/overview',
+              label: "AI Solutions",
+              to: "/ai-solutions/overview",
             },
             {
-              label: 'Webhooks',
-              to: '/webhooks/overview',
+              label: "Webhooks",
+              to: "/webhooks/overview",
             },
             {
-              label: 'API Reference',
-              to: '/api',
+              label: "API Reference",
+              to: "/api",
             },
           ],
         },
         {
-          title: 'Community',
+          title: "Community",
           items: [
             {
-              label: 'Discord',
-              href: 'https://discord.com/invite/A92xrEGCge',
+              label: "Discord",
+              href: "https://discord.com/invite/A92xrEGCge",
             },
             {
-              label: 'X',
-              href: 'https://twitter.com/planepowers',
+              label: "X",
+              href: "https://twitter.com/planepowers",
             },
             {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/company/planepowers/',
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/company/planepowers/",
             },
             {
-              label: 'Discussions',
-              href: 'https://github.com/orgs/makeplane/discussions',
+              label: "Discussions",
+              href: "https://github.com/orgs/makeplane/discussions",
             },
           ],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
             {
-              label: 'Blog',
-              href: 'https://plane.so/blog',
+              label: "Blog",
+              href: "https://plane.so/blog",
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/makeplane',
+              label: "GitHub",
+              href: "https://github.com/makeplane",
             },
           ],
         },
@@ -187,107 +187,95 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: [
-        'ruby',
-        'csharp',
-        'php',
-        'java',
-        'powershell',
-        'json',
-        'bash',
-        'dart',
-        'objectivec',
-        'r',
-      ],
+      additionalLanguages: ["ruby", "csharp", "php", "java", "powershell", "json", "bash", "dart", "objectivec", "r"],
     },
     metadata: [
       {
-        property: 'og:image',
-        content: 'https://media.docs.plane.so/logo/docs-og.webp',
+        property: "og:image",
+        content: "https://media.docs.plane.so/logo/docs-og.webp",
       },
       {
-        name: 'twitter:image',
-        content: 'https://media.docs.plane.so/logo/docs-og.webp',
+        name: "twitter:image",
+        content: "https://media.docs.plane.so/logo/docs-og.webp",
       },
       {
-        name: 'keywords',
-        content:
-          'project management, issue tracking, sprint management, agile, scrum, create projects, track sprints',
+        name: "keywords",
+        content: "project management, issue tracking, sprint management, agile, scrum, create projects, track sprints",
       },
     ],
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: "light",
     },
     languageTabs: [
       {
-        highlight: 'bash',
-        language: 'curl',
+        highlight: "bash",
+        language: "curl",
       },
       {
-        highlight: 'python',
-        language: 'python',
+        highlight: "python",
+        language: "python",
       },
       {
-        highlight: 'javascript',
-        language: 'nodejs',
-        logoClass: 'nodejs',
+        highlight: "javascript",
+        language: "nodejs",
+        logoClass: "nodejs",
       },
       {
-        highlight: 'go',
-        language: 'go',
+        highlight: "go",
+        language: "go",
       },
       {
-        highlight: 'ruby',
-        language: 'ruby',
+        highlight: "ruby",
+        language: "ruby",
       },
       {
-        highlight: 'java',
-        language: 'java',
-        variant: 'unirest',
+        highlight: "java",
+        language: "java",
+        variant: "unirest",
       },
       {
-        highlight: 'rust',
-        language: 'rust',
+        highlight: "rust",
+        language: "rust",
       },
       {
-        highlight: 'php',
-        language: 'php',
+        highlight: "php",
+        language: "php",
       },
       {
-        highlight: 'csharp',
-        language: 'csharp',
+        highlight: "csharp",
+        language: "csharp",
       },
       {
-        highlight: 'powershell',
-        language: 'powershell',
+        highlight: "powershell",
+        language: "powershell",
       },
       {
-        highlight: 'dart',
-        language: 'dart',
+        highlight: "dart",
+        language: "dart",
       },
       {
-        highlight: 'javascript',
-        language: 'javascript',
+        highlight: "javascript",
+        language: "javascript",
       },
       {
-        highlight: 'c',
-        language: 'c',
+        highlight: "c",
+        language: "c",
       },
       {
-        highlight: 'objective-c',
-        language: 'objective-c',
+        highlight: "objective-c",
+        language: "objective-c",
       },
       {
-        highlight: 'r',
-        language: 'r',
+        highlight: "r",
+        language: "r",
       },
       {
-        highlight: 'swift',
-        language: 'swift',
+        highlight: "swift",
+        language: "swift",
       },
       {
-        highlight: 'kotlin',
-        language: 'kotlin',
+        highlight: "kotlin",
+        language: "kotlin",
       },
     ],
   } satisfies Preset.ThemeConfig,
@@ -301,55 +289,55 @@ const config: Config = {
 
   headTags: [
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'preload',
-        href: '/fonts/nacelle/nacelle-regular.otf',
-        as: 'font',
-        type: 'font/otf',
-        crossorigin: 'anonymous',
+        rel: "preload",
+        href: "/fonts/nacelle/nacelle-regular.otf",
+        as: "font",
+        type: "font/otf",
+        crossorigin: "anonymous",
       },
     },
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'preload',
-        href: '/fonts/nacelle/nacelle-light.otf',
-        as: 'font',
-        type: 'font/otf',
-        crossorigin: 'anonymous',
+        rel: "preload",
+        href: "/fonts/nacelle/nacelle-light.otf",
+        as: "font",
+        type: "font/otf",
+        crossorigin: "anonymous",
       },
     },
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'preload',
-        href: '/fonts/nacelle/nacelle-semibold.otf',
-        as: 'font',
-        type: 'font/otf',
-        crossorigin: 'anonymous',
+        rel: "preload",
+        href: "/fonts/nacelle/nacelle-semibold.otf",
+        as: "font",
+        type: "font/otf",
+        crossorigin: "anonymous",
       },
     },
   ],
 
   plugins: [
     [
-      '@docusaurus/plugin-google-tag-manager',
+      "@docusaurus/plugin-google-tag-manager",
       {
-        containerId: process.env.GOOGLE_TAG_MANAGER_ID || 'fake',
+        containerId: process.env.GOOGLE_TAG_MANAGER_ID || "fake",
       },
     ],
     [
-      'docusaurus-plugin-openapi-docs',
+      "docusaurus-plugin-openapi-docs",
       {
-        id: 'api', // plugin id
-        docsPluginId: 'classic', // configured for preset-classic
+        id: "api", // plugin id
+        docsPluginId: "classic", // configured for preset-classic
         config: {
           plane: {
-            specPath: 'api/schema.yaml',
-            outputDir: 'docs/api',
+            specPath: "api/schema.yaml",
+            outputDir: "docs/api",
             sidebarOptions: {
-              groupPathsBy: 'tag',
+              groupPathsBy: "tag",
             },
           } satisfies OpenApiPlugin.Options,
         },
@@ -359,15 +347,15 @@ const config: Config = {
 
   themes: [
     [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
+      require.resolve("@easyops-cn/docusaurus-search-local"),
       /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
       {
         hashed: true,
         indexBlog: false,
-        docsRouteBasePath: '/',
+        docsRouteBasePath: "/",
       },
     ],
-    'docusaurus-theme-openapi-docs',
+    "docusaurus-theme-openapi-docs",
   ],
 };
 

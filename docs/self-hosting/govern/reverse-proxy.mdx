@@ -4,7 +4,8 @@ sidebar_label: External reverse proxy
 ---
 
 {frontMatter.description && (
-  <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This page provides configuration for setting up an external reverse proxy with
@@ -25,8 +26,8 @@ Make sure to update the following environment variables in your `plane.env` file
    ```bash
    SITE_ADDRESS=:80
    ```
-  This is required so that generated links and redirects work correctly behind
-  the proxy.
+   This is required so that generated links and redirects work correctly behind
+   the proxy.
 
 ## Proxy Setup
 

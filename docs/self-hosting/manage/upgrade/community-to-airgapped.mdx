@@ -5,7 +5,8 @@ sidebar_position: 3
 ---
 
 {frontMatter.description && (
-   <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide walks you through migrating your existing Plane Community Edition data
@@ -33,9 +34,11 @@ first.
    ```
 
 2. Run the setup.sh backup script to back up the Community Edition instance:
+
    ```bash
    ./setup.sh backup
    ```
+
    This will create a backup of the Plane Community instance in the `backup/`
    folder with the timestamp as the folder name.
 

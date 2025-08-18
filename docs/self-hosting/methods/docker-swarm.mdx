@@ -5,7 +5,8 @@ sidebar_position: 2
 ---
 
 {frontMatter.description && (
-   <h3 className="description">{frontMatter.description}</h3>
+
+<h3 className="description">{frontMatter.description}</h3>
 )}
 
 This guide shows you how to deploy a self-hosted instance of Plane Commercial
@@ -54,6 +55,7 @@ Edition using Docker Swarm.
    - `AMQP_URL` — Connection string for your external RabbitMQ server
 
 4. **Load the environment variables**
+
    ```bash
    set -o allexport; source <path-to variables.env>; set +o allexport;
    ```
