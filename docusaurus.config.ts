@@ -86,19 +86,31 @@ const config: Config = {
       title: 'Developers',
       logo: {
         alt: 'Plane',
-        src: '/img/logo/symbol-black.png',
-        srcDark: '/img/logo/symbol-white.png',
+        src: 'https://media.docs.plane.so/logo/new-logo-white.png',
+        srcDark: 'https://media.docs.plane.so/logo/new-logo-dark.png',
       },
       items: [
         {
-          type: 'search',
+          type: 'docSidebar',
+          sidebarId: 'sidebar',
           position: 'left',
+          label: 'Self-hosting',
         },
         {
-          href: 'https://docs.plane.so',
-          'aria-label': 'Plane Docs',
-          position: 'right',
-          className: 'navbar--plane-docs-link',
+          type: 'docSidebar', 
+          sidebarId: 'apiSidebar',
+          position: 'left',
+          label: 'API',
+        },
+        {
+          type: 'docSidebar', 
+          sidebarId: 'devToolsSidebar',
+          position: 'left',
+          label: 'Dev Tools',
+        },
+        {
+          type: 'search',
+          position: 'left',
         },
         {
           href: 'https://discord.com/invite/A92xrEGCge',
@@ -119,6 +131,7 @@ const config: Config = {
         },
       ],
     },
+/*
     footer: {
       style: 'dark',
       links: [
@@ -184,6 +197,7 @@ const config: Config = {
       ],
       // copyright: false,
     },
+*/    
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
@@ -301,33 +315,83 @@ const config: Config = {
 
   headTags: [
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'preload',
-        href: '/fonts/nacelle/nacelle-regular.otf',
-        as: 'font',
-        type: 'font/otf',
-        crossorigin: 'anonymous',
+        rel: "preload",
+        href: "/fonts/nacelle/nacelle-light.otf",
+        as: "font",
+        type: "font/otf",
+        crossorigin: "anonymous",
       },
     },
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'preload',
-        href: '/fonts/nacelle/nacelle-light.otf',
-        as: 'font',
-        type: 'font/otf',
-        crossorigin: 'anonymous',
+        rel: "preload",
+        href: "/fonts/nacelle/nacelle-regular.otf",
+        as: "font",
+        type: "font/otf",
+        crossorigin: "anonymous",
       },
     },
     {
-      tagName: 'link',
+      tagName: "link",
       attributes: {
-        rel: 'preload',
-        href: '/fonts/nacelle/nacelle-semibold.otf',
-        as: 'font',
-        type: 'font/otf',
-        crossorigin: 'anonymous',
+        rel: "preload",
+        href: "/fonts/nacelle/nacelle-semibold.otf",
+        as: "font",
+        type: "font/otf",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/nacelle/nacelle-bold.otf",
+        as: "font",
+        type: "font/otf",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/ibm/ibmplexmono-light.ttf",
+        as: "font",
+        type: "font/ttf",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/ibm/ibmplexmono-regular.ttf",
+        as: "font",
+        type: "font/ttf",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/ibm/ibmplexmono-semibold.ttf",
+        as: "font",
+        type: "font/ttf",
+        crossorigin: "anonymous",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preload",
+        href: "/fonts/ibm/ibmplexmono-bold.ttf",
+        as: "font",
+        type: "font/ttf",
+        crossorigin: "anonymous",
       },
     },
   ],
