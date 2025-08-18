@@ -3,44 +3,46 @@ title: Configure external reverse proxy • Commercial Edition
 sidebar_label: External reverse proxy
 ---
 
-{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
+{frontMatter.description && (
 
-This page provides configuration for setting up an external reverse proxy with Plane.
+<h3 className="description">{frontMatter.description}</h3>
+)}
 
-## Plane environment setup
+This page provides configuration for setting up an external reverse proxy with
+Plane.
 
-Make sure to update the following environment variables in your plane.env file.
+## Plane Environment Setup
 
-1. Assign free ports for Plane to listen on. Update the following variables with two different unsused ports:
+Make sure to update the following environment variables in your `plane.env` file.
+
+1. Assign free ports for Plane to listen on. Update the following variables with two different unused ports:
 
    ```bash
    LISTEN_HTTP_PORT=
    LISTEN_HTTPS_PORT=
    ```
 
-2. Update the SITE_ADDRESS variable to `:80`
+2. Update the SITE_ADDRESS variable to `:80`:
    ```bash
-     SITE_ADDRESS=:80
+   SITE_ADDRESS=:80
    ```
-   This is required so that generated links and redirects work correctly behind the proxy:
+   This is required so that generated links and redirects work correctly behind
+   the proxy.
 
-## Proxy setup
+## Proxy Setup
 
 1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
-
 2. Replace the following placeholders:
-   - `<domain>`
-     Your Plane application's domain name.
-   - `<plane-host-ip>`
-     The IP address where Plane is hosted.
-   - `<plane-host-port>`
-     The port Plane listens on.
-
+   - `<domain>`: Your Plane application's domain name.
+   - `<plane-host-ip>`: The IP address where Plane is hosted.
+   - `<plane-host-port>`: The port Plane listens on.
 3. For Traefik, also update `your-email@example.com` with your email.
 
-Ensure that your reverse proxy setup follows the template provided, and that the forwarded headers and ports are correctly set to match the environment variable configuration.
+Ensure that your reverse proxy setup follows the template provided, and that the
+forwarded headers and ports are correctly set to match the environment variable
+configuration.
 
-## Configuration templates
+## Configuration Templates
 
 All configurations include:
 

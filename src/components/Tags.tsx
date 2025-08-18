@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function Tags({ tags }) {
   return (
@@ -7,19 +7,14 @@ function Tags({ tags }) {
         tag && tag.name ? (
           <React.Fragment key={index}>
             {tag.link ? (
-              <a
-                href={tag.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`plantag ${tag.additionalClass}`}
-              >
+              <a href={tag.link} target="_blank" rel="noopener noreferrer" className={`plantag ${tag.additionalClass}`}>
                 {tag.name}
               </a>
             ) : (
               <span className={`plantag ${tag.additionalClass}`}>{tag.name}</span>
             )}
           </React.Fragment>
-        ) : null,
+        ) : null
       )}
     </div>
   );

@@ -1,17 +1,17 @@
-import { themes as prismThemes } from 'prism-react-renderer';
-import type { Config } from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
-import type * as Plugin from '@docusaurus/types/src/plugin';
-import type * as OpenApiPlugin from 'docusaurus-plugin-openapi-docs';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
+import type * as Plugin from "@docusaurus/types/src/plugin";
+import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Plane developer documentation',
-  tagline: 'Explore our guides and examples to integrate Plane',
-  favicon: '/img/favicon/white/favicon.ico',
+  title: "Plane developer documentation",
+  tagline: "Explore our guides and examples to integrate Plane",
+  favicon: "/img/favicon/white/favicon.ico",
   trailingSlash: false,
-  onDuplicateRoutes: 'warn',
+  onDuplicateRoutes: "warn",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -19,55 +19,55 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://developers.plane.so',
+  url: "https://developers.plane.so",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'makeplane', // Usually your GitHub org/user name.
-  projectName: 'developer-docs', // Usually your repo name.
+  organizationName: "makeplane", // Usually your GitHub org/user name.
+  projectName: "developer-docs", // Usually your repo name.
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
-  onBrokenAnchors: 'throw',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
+  onBrokenAnchors: "throw",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          path: 'docs',
-          routeBasePath: '/',
-          sidebarPath: './sidebars.ts',
-          include: ['**/*.md', '**/*.mdx'],
-          editUrl: 'https://github.com/makeplane/developer-docs/tree/main',
+          path: "docs",
+          routeBasePath: "/",
+          sidebarPath: "./sidebars.ts",
+          include: ["**/*.md", "**/*.mdx"],
+          editUrl: "https://github.com/makeplane/developer-docs/tree/main",
           sidebarCollapsible: true,
           sidebarCollapsed: true,
-          docItemComponent: '@theme/ApiItem', // Derived from docusaurus-theme-openapi
+          docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
         sitemap: {
-          lastmod: 'date',
-          changefreq: 'weekly',
+          lastmod: "date",
+          changefreq: "weekly",
           priority: 0.5,
-          ignorePatterns: ['/tags/**'],
-          filename: 'sitemap.xml',
+          ignorePatterns: ["/tags/**"],
+          filename: "sitemap.xml",
         },
         gtag: {
-          trackingID: process.env.GTAG_TRACKING_ID || 'fake',
+          trackingID: process.env.GTAG_TRACKING_ID || "fake",
           anonymizeIP: true,
         },
       } satisfies Preset.Options,
@@ -75,7 +75,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'https://media.docs.plane.so/logo.svg',
+    image: "https://media.docs.plane.so/logo.svg",
     docs: {
       sidebar: {
         hideable: false,
@@ -161,23 +161,23 @@ const config: Config = {
           ],
         },
         {
-          title: 'Community',
+          title: "Community",
           items: [
             {
-              label: 'Discord',
-              href: 'https://discord.com/invite/A92xrEGCge',
+              label: "Discord",
+              href: "https://discord.com/invite/A92xrEGCge",
             },
             {
-              label: 'X',
-              href: 'https://twitter.com/planepowers',
+              label: "X",
+              href: "https://twitter.com/planepowers",
             },
             {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/company/planepowers/',
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/company/planepowers/",
             },
             {
-              label: 'Discussions',
-              href: 'https://github.com/orgs/makeplane/discussions',
+              label: "Discussions",
+              href: "https://github.com/orgs/makeplane/discussions",
             },
           ],
         },

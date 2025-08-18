@@ -29,8 +29,8 @@ jobs:
       - name: 🟢 Setup Node.js runtime
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Enable Corepack
         run: corepack enable

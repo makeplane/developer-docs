@@ -1,5 +1,5 @@
-import React from 'react';
-import * as Icons from 'react-icons/fa';
+import React from "react";
+import * as Icons from "react-icons/fa";
 
 export const Card = ({
   title,
@@ -20,11 +20,7 @@ export const Card = ({
   const CardContent = (
     <>
       <div className="card-icon">
-        {svg ? (
-          svg
-        ) : IconComponent ? (
-          <IconComponent size={25} className="icon-style" />
-        ) : null}
+        {svg ? svg : IconComponent ? <IconComponent size={25} className="icon-style" /> : null}
       </div>
       <h3 className="card-title">{title}</h3>
       <p className="card-description">{children}</p>
