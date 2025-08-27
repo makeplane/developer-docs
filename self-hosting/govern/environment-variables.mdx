@@ -166,7 +166,8 @@ The environment configuration file is located at:
 | **WEB_URL** | The complete base URL for the web application including protocol. Essential for email links and integrations. | `http://${APP_DOMAIN}` |
 | **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API. | `http://${APP_DOMAIN}` |
 | **DEBUG** | Toggles debug mode for verbose logging. Set to `1` to enable, `0` to disable. Not recommended in production as it may expose sensitive information. | `0` |
-| **NGINX_PORT** | Port for HTTP traffic. The primary port your users will connect to. | `80` |
+| **LISTEN_HTTP_PORT** | Port for HTTP traffic. The primary port your users will connect to. | `80` |
+| **LISTEN_HTTPS_PORT** | Port for HTTPS traffic. The primary port your users will connect to. | `443` |
 
 ### Scaling and performance
 
