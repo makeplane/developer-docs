@@ -11,10 +11,6 @@
       "destination": "/"
     },
     {
-      "source": "/self-hosting/govern/reset-password",
-      "destination": "/self-hosting/govern/authentication/reset-password"
-    },
-    {
       "source": "/self-hosting/telemetry",
       "destination": "/self-hosting/govern/telemetry"
     },

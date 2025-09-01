@@ -8,81 +8,81 @@ sidebar_label: External reverse proxy
 <h3 className="description">{frontMatter.description}</h3>
 )}
 
-This page provides configuration for setting up an external reverse proxy with
-Plane.
+This page provides configuration for setting up an external reverse proxy with Plane. 
 
-## Plane Environment Setup
+## Plane environment setup
 
-Make sure to update the following environment variables in your `plane.env` file.
+Make sure to update the following environment variables in your plane.env file.
 
-1. Assign free ports for Plane to listen on. Update the following variables with two different unused ports:
+1. Assign free ports for Plane to listen on. Update the following variables with two different unsused ports:
+    ```bash
+    LISTEN_HTTP_PORT=
+    LISTEN_HTTPS_PORT=
+    ```
 
-   ```bash
-   LISTEN_HTTP_PORT=
-   LISTEN_HTTPS_PORT=
-   ```
+2. Update the SITE_ADDRESS variable to `:80`
+    ```bash
+      SITE_ADDRESS=:80
+    ```
+    This is required so that generated links and redirects work correctly behind the proxy:
 
-2. Update the SITE_ADDRESS variable to `:80`:
-   ```bash
-   SITE_ADDRESS=:80
-   ```
-   This is required so that generated links and redirects work correctly behind
-   the proxy.
-
-## Proxy Setup
+## Proxy setup
 
 1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
+
 2. Replace the following placeholders:
-   - `<domain>`: Your Plane application's domain name.
-   - `<plane-host-ip>`: The IP address where Plane is hosted.
-   - `<plane-host-port>`: The port Plane listens on.
+    - `<domain>`   
+    Your Plane application's domain name.
+    - `<plane-host-ip>`  
+    The IP address where Plane is hosted.
+    - `<plane-host-port>`   
+    The port Plane listens on.
+    
 3. For Traefik, also update `your-email@example.com` with your email.
 
-Ensure that your reverse proxy setup follows the template provided, and that the
-forwarded headers and ports are correctly set to match the environment variable
-configuration.
+Ensure that your reverse proxy setup follows the template provided, and that the forwarded headers and ports are correctly set to match the environment variable configuration.
 
-## Configuration Templates
+
+## Configuration templates
 
 All configurations include:
-
 - Automatic HTTPS redirection
 - WebSocket support
 - Standard proxy headers
 - SSL/TLS certificate management
-  - NGINX: Uses Certbot
-  - Caddy: Handles certificates automatically
-  - Traefik: Uses Let’s Encrypt
+    - NGINX: Uses Certbot
+    - Caddy: Handles certificates automatically
+    - Traefik: Uses Let’s Encrypt
 
 <details>
 <summary>NGINX configuration</summary>
 
 ```bash
-server {
-  server_name <domain>;
+    server {
+    server_name <domain>;
 
-  location / {
-      proxy_pass http://<plane-host-ip>:<plane-host-port>/;
+    location / {
+        proxy_pass http://<plane-host-ip>:<plane-host-port>/;
+        
+        # Set headers for proxied request
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host  $host;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Real-IP         $remote_addr;
+        
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $http_host;
+        proxy_http_version 1.1;
+    }
 
-      # Set headers for proxied request
-      proxy_set_header X-Forwarded-Proto $scheme;
-      proxy_set_header X-Forwarded-Host  $host;
-      proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
-      proxy_set_header X-Real-IP         $remote_addr;
+    client_max_body_size 10M;
 
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection "upgrade";
-      proxy_set_header Host $http_host;
-      proxy_http_version 1.1;
-  }
-
-  client_max_body_size 10M;
-
-  listen 443 ssl; # managed by Certbot
-  ssl_certificate /etc/letsencrypt/live/<domain>/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/<domain>/privkey.pem;
-  include /etc/letsencrypt/options-ssl-nginx.conf;
-  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/<domain>/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<domain>/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
 
 server {
@@ -102,6 +102,7 @@ server {
 <summary>Caddy configuration</summary>
 
 ```bash
+```bash
 <domain> {
     tls {
         # Caddy will automatically handle certificates
@@ -115,7 +116,7 @@ server {
         header_up X-Real-IP {remote_host}
         header_up X-Forwarded-For {remote_host}
         header_up Host {http.request.host}
-
+        
         header_up Upgrade {http.request.header.Upgrade}
         header_up Connection {http.request.header.Connection}
 
@@ -147,7 +148,7 @@ entryPoints:
           to: websecure
           scheme: https
           permanent: true
-
+  
   websecure:
     address: ":443"
 
@@ -184,7 +185,7 @@ providers:
               dialTimeout: 30s
               responseHeaderTimeout: 30s
               idleConnTimeout: 90s
-
+    
     middlewares:
       headers:
         headers:
