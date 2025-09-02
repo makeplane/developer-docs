@@ -19,18 +19,6 @@
       "destination": "/self-hosting/manage/upgrade/upgrade-from-community"
     },
     {
-      "source": "/self-hosting/manage/community-to-airgapped",
-      "destination": "/self-hosting/manage/upgrade/community-to-airgapped"
-    },
-    {
-      "source": "/self-hosting/manage/upgrade-from-0.13.2-0.14.0",
-      "destination": "/self-hosting/manage/update/from-0.13.2-0.14.0"
-    },
-    {
-      "source": "/self-hosting/manage/upgrade-plane",
-      "destination": "/self-hosting/manage/update/to-latest-version"
-    },
-    {
       "source": "/api-reference/(.*)",
       "destination": "/api"
     },
