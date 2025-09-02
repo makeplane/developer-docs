@@ -14,7 +14,7 @@ Kubernetes.
 
 :::tip
 To upgrade from Community to Commercial edition, see [Upgrade to Commercial
-Edition](/self-hosting/manage/upgrade/upgrade-from-community).
+Edition](/self-hosting/manage/upgrade-from-community).
 :::
 
 ## Install Plane
@@ -33,19 +33,18 @@ ideal for trialing paid features.
 1.  Open a terminal with access to Kubernetes tools.
 2.  Set the following environment variables:
     ```bash
-    PLANE_VERSION=v1.13.0
+    PLANE_VERSION=<plane-version>
     DOMAIN_NAME=<subdomain.domain.tld or domain.tld>
     ```
     :::warning
-    **Do not** set `PLANE_VERSION` to `stable`. Always specify the latest version
-    number (e.g., `1.8.0`).
+    Replace `<plane-version>` with the [latest version](https://plane.so/changelog?category=self-hosted). (e.g., v1.13.0).
     :::
 3.  Add the Plane Helm chart repo:
     ```bash
     helm repo add plane https://helm.plane.so/
     ```
 4.  Deploy Plane using one of the following:
-    - **Quick setup**: Fastest way to deploy with default settings. This creates stateful deployments for Postgres, Redis/Valkey, and Minio with a persistent volume claim using the `longhorn` storage class, and sets up Ingress routes using the `nginx` ingress class. To customize, see [Custom ingress routes](#custom-ingress-routes).
+    - **Quick setup**:  This is the fastest way to deploy Plane with the default settings. This will create stateful deployments for Postgres, Redis/Valkey, and Minio with a persistent volume claim using the `longhorn` storage class. This also sets up the Ingress routes for you using `nginx` ingress class. To customize these settings, see the [Custom ingress routes](#custom-ingress-routes).
 
       Run the following command to deploy Plane:
 
@@ -83,24 +82,24 @@ ideal for trialing paid features.
       disruption.
       :::
 
-            For more control over your setup, follow the steps below:
+        For more control over your setup, follow the steps below:
 
-            1. Run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano.
+        1. Run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano.
 
-                ```bash
-                helm  show values plane/plane-enterprise > values.yaml
-                vi values.yaml
-                ```
+            ```bash
+            helm  show values plane/plane-enterprise > values.yaml
+            vi values.yaml
+            ```
 
-                Make sure you set the required environment variables listed below:
-                  - `planeVersion: v1.13.0`
-                  - `license.licenseDomain: <The domain you have specified to host Plane>`
-                  - `license.licenseServer: https://prime.plane.so`
-                  - `ingress.enabled: <true | false>`
-                  - `ingress.ingressClass: <nginx or any other ingress class configured in your cluster>`
-                  - `env.storageClass: <longhorn or any other storage class configured in your cluster>`
+            Make sure you set the required environment variables listed below:
+                - `planeVersion: <latest-version>`
+                - `license.licenseDomain: <The domain you have specified to host Plane>`
+                - `license.licenseServer: https://prime.plane.so`
+                - `ingress.enabled: <true | false>`
+                - `ingress.ingressClass: <nginx or any other ingress class configured in your cluster>`
+                - `env.storageClass: <longhorn or any other storage class configured in your cluster>`
 
-                See the **Configuration settings** toggle section for more details.
+            See the **Configuration settings** toggle section for more details.
 
             2. After saving the `values.yaml` file, run the following command to deploy Plane:
 

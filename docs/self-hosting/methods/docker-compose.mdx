@@ -13,7 +13,7 @@ This guide shows you how to deploy a self-hosted instance of Plane using Docker.
 
 :::tip
 To upgrade from Community to Commercial edition, see [Upgrade to Commercial
-Edition](/self-hosting/manage/upgrade/upgrade-from-community).
+Edition](/self-hosting/manage/upgrade-from-community).
 :::
 
 ## Install Plane
@@ -38,31 +38,29 @@ Use the **latest version of Docker Compose**. Check with
 
 ### Procedure
 
-1. SSH into your machine as root or a user with sudo access.
-2. Run:
+1. `ssh` into your machine as the root user (or user with sudo access) per the norms of your hosting provider.
+2. Run the command below:
    ```bash
    curl -fsSL https://prime.plane.so/install/ | sh -
    ```
-3. Follow the terminal instructions. Press `Enter` to continue.
-4. Enter the domain name where you will access Plane (e.g., `domain.tld` or `subdomain.domain.tld`). For paid plans, the domain linked to the license cannot be changed later.
+3. Follow the instructions on the terminal. Hit `Enter` or `Return` to continue.
+4. Enter the domain name where you will access the Plane app in the format `domain.tld` or `subdomain.domain.tld`. If you are using a paid plan, the domain linked to the license can’t be changed later.
 5. Choose one of the following:
    - **Express**: Installs Plane with default configurations.
    - **Advanced**: Lets you customize the database, Redis, storage, and other settings.
      :::warning
-     For production, configure [external database and storage](/self-hosting/govern/database-and-storage) to ensure data security and reliability. Relying on local storage increases the risk of data loss and service disruption.
+     When self-hosting Plane for production use, it is strongly recommended to configure [external database and storage](/self-hosting/govern/database-and-storage). This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
      :::
-6. Wait for installation to complete. When you see **Plane has successfully installed**, access Plane at the domain you provided.
+6. The installation will take a few minutes to complete and you will see the message **Plane has successfully installed**. You can access the Plane application on the domain you provided during the installation. 
 
 :::tip
-To upgrade to a paid plan, see [Plan
-upgrades](https://docs.plane.so/workspaces-and-users/upgrade-plan).
+If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so/workspaces-and-users/upgrade-plan).
 :::
 
 <details>
   <summary>Install Community Edition</summary>
 
-The Commercial edition includes a free plan and the flexibility to upgrade. If
-you want to install the Community edition, follow these steps:
+  The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
 
 ### Prerequisites
 
@@ -117,14 +115,14 @@ you want to install the Community edition, follow these steps:
    Action [2]: 1
    ```
 6. Enter `1` as input.
-   This will create a folder `plane-app` or `plane-app-preview` (in case of
-   preview deployment) and will download the `docker-compose.yaml` and
+   This will create a folder `plane-app` and will download the `docker-compose.yaml` and
    `plane.env` files.
 7. Enter `8` to exit.
 8. Set up the environment variables. You can use any text editor to edit this file. Below are the most importants keys you must refer to:
-   - `NGINX_PORT`: This is set to `80` by default. Make sure the port you choose to use is not preoccupied. For example, `NGINX_PORT=8080`
-   - `WEB_URL`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with NGINX_PORT. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
-   - `CORS_ALLOWED_ORIGINS`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with NGINX_PORT. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
+   - `LISTEN_HTTP_PORT`: This is set to `80` by default. Make sure the port you choose to use is not preoccupied. For example, `LISTEN_HTTP_PORT=8080`
+   - `LISTEN_HTTPS_PORT`: This is set to `443` by default. Make sure the port you choose to use is not preoccupied. For example, `LISTEN_HTTPS_PORT=4430`
+   - `WEB_URL`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with LISTEN_HTTP_PORT. For example,  `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
+   - `CORS_ALLOWED_ORIGINS`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with LISTEN_HTTP_PORT. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
 9. Run the following command to continue with the setup.
    ```bash
    ./setup.sh

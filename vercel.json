@@ -11,10 +11,6 @@
       "destination": "/"
     },
     {
-      "source": "/self-hosting/govern/reset-password",
-      "destination": "/self-hosting/govern/authentication/reset-password"
-    },
-    {
       "source": "/self-hosting/telemetry",
       "destination": "/self-hosting/govern/telemetry"
     },
@@ -23,24 +19,12 @@
       "destination": "/self-hosting/manage/upgrade/upgrade-from-community"
     },
     {
-      "source": "/self-hosting/manage/community-to-airgapped",
-      "destination": "/self-hosting/manage/upgrade/community-to-airgapped"
-    },
-    {
-      "source": "/self-hosting/manage/upgrade-from-0.13.2-0.14.0",
-      "destination": "/self-hosting/manage/update/from-0.13.2-0.14.0"
-    },
-    {
-      "source": "/self-hosting/manage/upgrade-plane",
-      "destination": "/self-hosting/manage/update/to-latest-version"
-    },
-    {
-      "source": "/webhooks/intro-webhooks",
-      "destination": "/webhooks/overview"
-    },
-    {
       "source": "/api-reference/(.*)",
       "destination": "/api"
+    },
+    {
+      "source": "/api-reference/byoa/build-plane-app",
+      "destination": "/apps/build-plane-app"
     }
   ]
 }
