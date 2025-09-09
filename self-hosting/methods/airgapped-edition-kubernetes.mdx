@@ -87,13 +87,13 @@ Before starting, ensure you have:
     ```yaml
     # Example of image updates in custom-values.yaml
     license:
-    licenseDomain: 'plane.example.com'
+        licenseDomain: 'plane.example.com'
 
     airgapped:
-    enabled: true
-    # if using Custom Root CA for S3 storage
-    s3SecretName: "s3-custom-ca"
-    s3SecretKey: "s3-custom-ca.crt"
+        enabled: true
+        # if using Custom Root CA for S3 storage
+        s3SecretName: "s3-custom-ca"
+        s3SecretKey: "s3-custom-ca.crt"
 
     services:
     web:
@@ -135,7 +135,7 @@ Before starting, ensure you have:
         image_mc: <your-registry.com>/mc:latest
 
     env:
-    storageClass: ''
+        storageClass: ''
     ```
 
 8. Install Plane Commercial Airgapped edition using your customized values file:
