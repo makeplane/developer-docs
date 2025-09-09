@@ -96,43 +96,43 @@ Before starting, ensure you have:
         s3SecretKey: "s3-custom-ca.crt"
 
     services:
-    web:
-        image: <your-registry.com>/web-commercial:<PLANE_VERSION>
-    
-    api:
-        image: <your-registry.com>/backend-commercial:<PLANE_VERSION>
-    
-    space:
-        image: <your-registry.com>/space-commercial:<PLANE_VERSION>
-    
-    admin:
-        image: <your-registry.com>/admin-commercial:<PLANE_VERSION>
-    
-    live:
-        image: <your-registry.com>/live-commercial:<PLANE_VERSION>
-    
-    monitor:
-        image: <your-registry.com>/monitor-commercial:<PLANE_VERSION>
-    
-    silo:
-        image: <your-registry.com>/silo-commercial:<PLANE_VERSION>
-    
-    iframely:
-        image: <your-registry.com>/iframely:v1.2.0
-    
-    # Database and infrastructure images
-    redis:
-        image: <your-registry.com>/valkey:7.2.5-alpine
-    
-    postgres:
-        image: <your-registry.com>/postgres:15.7-alpine
-    
-    rabbitmq:
-        image: <your-registry.com>/rabbitmq:3.13.6-management-alpine
-    
-    minio:
-        image: <your-registry.com>/minio:latest
-        image_mc: <your-registry.com>/mc:latest
+        web:
+            image: <your-registry.com>/web-commercial:<PLANE_VERSION>
+        
+        api:
+            image: <your-registry.com>/backend-commercial:<PLANE_VERSION>
+        
+        space:
+            image: <your-registry.com>/space-commercial:<PLANE_VERSION>
+        
+        admin:
+            image: <your-registry.com>/admin-commercial:<PLANE_VERSION>
+        
+        live:
+            image: <your-registry.com>/live-commercial:<PLANE_VERSION>
+        
+        monitor:
+            image: <your-registry.com>/monitor-commercial:<PLANE_VERSION>
+        
+        silo:
+            image: <your-registry.com>/silo-commercial:<PLANE_VERSION>
+        
+        iframely:
+            image: <your-registry.com>/iframely:v1.2.0
+        
+        # Database and infrastructure images
+        redis:
+            image: <your-registry.com>/valkey:7.2.5-alpine
+        
+        postgres:
+            image: <your-registry.com>/postgres:15.7-alpine
+        
+        rabbitmq:
+            image: <your-registry.com>/rabbitmq:3.13.6-management-alpine
+        
+        minio:
+            image: <your-registry.com>/minio:latest
+            image_mc: <your-registry.com>/mc:latest
 
     env:
         storageClass: ''
@@ -142,12 +142,12 @@ Before starting, ensure you have:
 
     ```bash
     helm install plane-app plane-enterprise-1.4.1.tgz \
-            --create-namespace \
-            --namespace plane \
-            -f custom-values.yaml \
-            --timeout 10m \
-            --wait \
-            --wait-for-jobs
+        --create-namespace \
+        --namespace plane \
+        -f custom-values.yaml \
+        --timeout 10m \
+        --wait \
+        --wait-for-jobs
     ```
 
 ## Verify installation
