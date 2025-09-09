@@ -26,7 +26,7 @@ Ensure you're using use **Helm chart v1.3.0**.
     1. Open terminal or any other command-line app that has access to Kubernetes tools on your local system.
     2. Set the following environment variables:
         ```bash
-        PLANE_VERSION=v1.13.0
+        PLANE_VERSION=v1.14.1
         ```
         ```bash
         DOMAIN_NAME=<subdomain.domain.tld or domain.tld>
@@ -83,7 +83,7 @@ Ensure you're using use **Helm chart v1.3.0**.
             ```
 
             Make sure you set the required environment variables listed below:
-            - `planeVersion: v1.13.0`
+            - `planeVersion: v1.14.1`
             - `license.licenseDomain: <The domain you have specified to host Plane>`
             - `license.licenseServer: https://prime.plane.so`
             - `ingress.enabled: <true | false>`
@@ -113,9 +113,17 @@ If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so
 
     | Setting | Default | Required | Description |
     |---|:---:|:---:|---|
-    | planeVersion | v1.13.0	 | Yes |  Specifies the version of Plane to be deployed. Copy this from `prime.plane.so.` |
-    | license.licenseServer | `https://prime.plane.so` | Yes | Sets the value of the `licenseServer` that gets you your license and validates it periodically. Don't change this. |
+    | planeVersion | v1.14.1	 | Yes |  Specifies the version of Plane to be deployed. Copy this from `prime.plane.so.` |
     | license.licenseDomain | 'plane.example.com' | Yes | The fully-qualified domain name (FQDN) in the format `sudomain.domain.tld` or `domain.tld` that the license is bound to. It is also attached to your `ingress` host to access Plane. |
+
+    #### Airgapped settings
+
+    | Setting | Default | Required | Description |
+    |---|:---:|:---:|---|
+    | airgapped.enabled | false | No |  Specifies the airgapped mode the Plane API runs in. |
+    | airgapped.s3SecretName | "s3-custom-ca" | No | Name of the Secret that contains the CA certificate (.crt). The Secret must include a data key whose filename matches the basename of `airgapped.s3SecretKey` (default: `s3-custom-ca.crt`). Used to override S3’s CA when `airgapped.enabled=true`. Applying this secret looks like: `kubectl -n plane create secret generic plane-s3-ca \ --from-file=s3-custom-ca.crt=/path/to/your/ca.crt` | 
+    | airgapped.s3SecretKey | "s3-custom-ca.crt" | No | Key name of the secret to load the Custom Root CA from `airgapped.s3SecretName` |
+        
 
     #### Postgres
 
