@@ -1,0 +1,71 @@
+---
+id: delete-work-item-attachment
+title: "Endpoints for issue attachment create/update/delete and fetch issue attachment details"
+description: "Permanently remove an attachment from a work item. Records deletion activity for audit purposes."
+sidebar_label: "Endpoints for issue attachment create/update/delete and fetch issue attachment details"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9V21v2zYQ/isHfmkLyJaTOlmnTwsarzAWdEHarANSI2DIc8RZIlmSsusZ+u/DUbItv6Rog6FfYps83stzd89dVsxYdDwoo8eSZUxigQHvF8bN7lXA8p6HwEVeog4sYRK9cMqSNMvYNbqSa9ShWILD0swRuIbtA5g6UwIHUgakrA83KIyTHqIZZTRwEdRchSVMjQNeSRXAVs4aj77PEma54yUGdJ5ldyumyKzlIWcJ07xEljHlfYX3SrKEeZFjyVm2YmFp6c4Hp/QjS9jUuJIHlrGqUpLVCXP4pVIOJcuCq7BOjqq2sx9TuovOxRaH8SXbN5kw/MpLW6An1aPm+/bJ+JKO57yoyOTZ2QDfDAeDHp7++tAbnshhj/9yct4bDs/Pz86Gw8FgMCBXq7Lkbsmytb5uLqIPex5CWFoleNGVu70dX7K6fgoSZ/5BEX4Y773CabR8Ny6t/P8Eiu1afwqRtdC34fBF9fgNIA4C/2TczFsuENqX3xH85k03+HLZW2zOjwXZvX0qxsWuN3VdTxIW+CP1WnQVxgFL2FalZ5OEeRSVU2EZG/LCqj9weVGFHHVQgjc27iaE1590fHrkbkJxe2u0bwI9HQzp4xCqSBrd4mzYSYKvhEDvp1VRLAnl4eDkUMOuZRAOJf3khYcFOgRtAqV5riRKIPZxCErPeaFkv1H6+lApcZ7ynhRK1AplH249Oii4mHlYpxPsRsy3uo6E2GEI8mVqKi1ZXSesxJCbLRtHHgw5y1jKrUrnJ+kmcz5dUe7qtK1Xn662LVqnkRx9ulqTZHvS20JKD2Z1SjWEbr7m2coVLGN5CNZnKRnt24Jr7HtzOASckZWIPyjp25dZmhZG8CI3PmRvmmbcfXpF16zu1NQHaqSmKI5X1qbDeLxmSdOVOXKJbtuXf/curse9RmAP8+sxzHAJfEdxH66bQoClqRyshZSGkCNstEFjJ2b0eHVv/DNk4JSosDCLGBAdGKf+jZJvjcSDw9uIXUpnqUnXV9jj1lKCgpnhnkw8iskTxja4OeRUOTfIJfDYJRAMOPSmcgI9S9jCqUAufqLPozJUg6JQqMPbbdPE4H6iCwfk2SC+lznwlbXGBaUf4cGEHHYQBWEkAqUAuJbQxLTDBHTXh9+Ne+oyAaVFUUmEF9zae6V94EURtd8r+QI2G8q6WiIgkQnQB7B8WRgum+AEKtqRyNFWjLaeLQ1za6FrgLijphKfmoi+CgWh9jFHuKZ+hJvRh49UrSxh1LsNToP+oH9yUPiHjz7rz/ov5VUAqvkvlRIz8IG7AI8VtQIhRgwb20EaURFfNLDyAHcS51jQ8ug35DB5uaaMI5dEIz2HU3SoBaZKhw1zvKJVTxgduAgUaNvF0V2W7LFRh4mw5Iqu2hr4bXNVJ6xQArXHjrp372/h4t311fz1gc5HFfLqoS9MmZZ8hlFPYyh9KMxDah3OFS7Sq/Hb0fsPo374GmJmrPGh5LpjZKSlNUoHH1Mb2bY7wIRDHjCtrKSPht4boDGI/FBeYuCq8PvZXEW0aCf/KVt4y2kBvwZCRRHVNwiu2sl0R4RMVUiFt51OLGFZu+msBxQd7WyRzYyi484qfzCm4jPax2kFoZFCNlerB+7x1hV1TcdfKqQd6G6SsDl3ij9Qt9ytmFSevkuWTXnh8RtYvrxpB/greCrs9fzRNFvW6xhL2AyX3f9GaBY+y+7+vw3PcMLOnm9+ZzV/ju1tap/tw8GW/Aw/mo120l2mLkdXo48jlsShu7tKzOKm0H6hkjmqvLtVNFboL4V5VHy1apaUut7IN1dPvtisMW0xaYqgrv8DdA5lyA==
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Endpoints for issue attachment create/update/delete and fetch issue attachment details"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/issues/{issue_id}/issue-attachments/{pk}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently remove an attachment from a work item. Records deletion activity for audit purposes.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"issue_id","schema":{"type":"string","format":"uuid"},"required":true},{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"description":"Attachment ID","required":true,"examples":{"ExampleAttachmentID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example attachment ID","description":"A typical attachment UUID"}}},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Work item attachment deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Attachment not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

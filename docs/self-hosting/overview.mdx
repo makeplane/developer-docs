@@ -1,0 +1,48 @@
+---
+title: Self-host Plane
+sidebar_label: Overview
+sidebar_position: 1
+---
+
+{frontMatter.description && (
+
+<h3 className="description">{frontMatter.description}</h3>
+)}
+
+import { Card } from "@site/src/components/Card";
+import { CardGroup } from "@site/src/components/CardGroup";
+
+Self-hosting gives you full control over your applications and data. It’s an
+excellent way to ensure privacy, control, and customization for your Plane
+deployment.
+
+## Methods
+
+<CardGroup cols={2}>
+  <Card title="Docker" icon="FaDocker" href="/self-hosting/methods/docker-compose">
+    Learn how to run Plane on Docker.
+  </Card>
+  <Card title="Kubernetes" icon="FaCog" href="/self-hosting/methods/kubernetes">
+    Run Plane on a Kubernetes cluster using the Helm package manager.
+  </Card>
+</CardGroup>
+
+## Governance
+
+<CardGroup cols={2}>
+  <Card title="Instance Admin and God Mode" icon="FaToolbox" href="/self-hosting/govern/instance-admin">
+    Learn how to configure your instance.
+  </Card>
+  <Card title="Authentication" icon="FaKey" href="/self-hosting/govern/authentication">
+    Set up authentication methods on your Plane instance.
+  </Card>
+  <Card title="Communication" icon="FaPaperPlane" href="/self-hosting/govern/communication">
+    Send emails by setting up SMTP configuration.
+  </Card>
+  <Card title="Reset Password" icon="FaUnlock" href="/self-hosting/govern/authentication/reset-password">
+    Reset passwords for users without emails.
+  </Card>
+  <Card title="Branding" icon="FaPaintRoller" href="/self-hosting/govern/custom-domain">
+    Run Plane on your custom domain.
+  </Card>
+</CardGroup>

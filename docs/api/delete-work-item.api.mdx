@@ -1,0 +1,71 @@
+---
+id: delete-work-item
+title: "Delete work item"
+description: "Permanently delete an existing work item from the project. Only admins or the item creator can perform this action."
+sidebar_label: "Delete work item"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVllvGzcQ/isDvjQBVlrZkdN0n2rEaiDUSIwkbgo4gkEtRxYrLsmQXMmqsP+9GFJanU5bP7QvOjj38c3MihmLjgdp9FCwgglUGPB+YdzsXgasWMYE+tJJSyysYDfoKq5RB7WExAxcAz5KH6R+ABIEEoSJMxWEKYJ15g8sQxc+aLUELiqpPRgXaZGzdMiDcVByDRbdxDgSlB54SUa7LGOWO15hQOdZcbdikjyxPExZxjSvkP7NWMZ8OcWKs2LFwtLSqw9O6geWMVLKAytYXUvBmow5/FZLh4IVwdXYZKeVJtfvpfh3yg9SlrTA8Iod2s0YPvLKKvSkd5B+r/mHV/Q256omYxcXPXzT7/U6eP7TuNM/E/0O//Hsdafff/364qLf7/V6PXKyrirulqzYKNukP1nfd+wSwtLKkquW6fZ2eMWa5ol0eFU/fCcRR4F/MW7mLS8R1pL/IPhWZjf4atlZtO+ngtylPhXjYt+bpmlGGQv8gVoqugrDgJVno4x5LGsnwzI226WVv+Lysg5T1EGWPCm+G1GSPtDz+QnaiIL11mifojvv9elr37eP6E3tSlwDSYCvyxK9n9RKLSmd/d7ZsdS+NUKPoL9ceVigQ9AmUD3nUqAgnHGHIPWcKym6SemrY6VbbJLI3yAyaTkR0JcW/eTExNRasKbJWIVharbjJQI6TFnBcm5lPj/L29r4fEXVafJ1R/p8tQVhk0vva+KxsyanRkA338yE2ilWsGkI1hc56e1axTV2vTmeYc6IehPJrmSR58qUXE2ND8WbhKh90Wsis2anRz4RGlKRT3dKCxMeySxL0JoiF+i24Pq9c3kz7CSGg4LfDGGGS+B7irtwk4oMS1M72DBJHQdrqw2SnVj5093a+mfIwDnNM2UWMSB6ME7+GTnfGoFHj7cxdzm95SbfkLDDraUCBTPDA574FItXGpvy5pCLCAcugEcEQDDg1ujwLGMLJwO5+IW+T/JQm5VKog5vt4CIwf2HLhxNwJTxg8qBr601Lu7LsQlT2MsolEYgUAmAawEppj2UE60LvxA+TxMzkLpUtUD4gVt7L7UPXKmo/V6KH6DdpptuiQkBms7oA1i+VIaLFFyJco7AydE128S4nVnKrYVdA74bSyH1xMTsy6Aoa5+nCDeER/g4+PSZupVljLCb8tTr9rpnR41/LPRVf9W/SS8DUM9/q2U5Ax+4C/BQExQoYzQ9IxyEKesKdUhp5QHuBM5R0cHj2+EwerEZGSeINEY6DifoUJeYSx3ayfGSzpLS6MDLQIGuURzdZdnBNNqZRFhxSaR1D/zckpqMKVmi9rij7t37W7h8d3M9f3Wk80GGaT3ulqbKKz7DqCcZysfKjHPrcC5xkV8P3w7efxp0w2OIlbHGh4rrHSNX6YxrT7fDOqxinKjD/3b+rQdUwMdAIcq4gWI6VutNckfTlVqKumi7TVjGivXtsVko9LR316WdEp/phqT9T/OfdK5WY+7x1qmmoedvNdLVcTfK2Jw7ycfU2ncrJqSn34IVE648fid9Lz6uL6CX8FRYm2WhaRFsDiCWsRku05lLK+tZFvfu0OfY3mbt2T4cnYTP8COdb6Pdu+JqcD34PGBZXE77K3cWN+r6B1XrpPLd7Zus0CeFeZJ9tUrLvGla/kR6UqJd94mb4hw1TfMX0G2oOA==
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete work item"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/issues/{pk}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Permanently delete an existing work item from the project. Only admins or the item creator can perform this action.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"required":true},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Only admin or creator can perform this action"},"404":{"description":"Work item not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

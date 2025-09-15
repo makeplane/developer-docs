@@ -1,0 +1,90 @@
+---
+title: MCP Server
+sidebar_label: MCP Server
+description: Use the Plane MCP server to integrate with Plane
+sidebar_position: 1
+---
+
+{frontMatter.description && (
+
+<h3 className="description">{frontMatter.description}</h3>
+)}
+
+## Introduction
+
+The [Model Context Protocol](https://modelcontextprotocol.io/overview) (MCP) is a
+standardized interface that enables AI models to communicate with external tools and
+services. When combined with Server-Sent Events (SSE), it provides a powerful
+mechanism for real-time data transfer between AI models and external systems.
+
+:::tip Alpha
+The Plane MCP Server is currently in **Alpha**. Some aspects of the API may change.
+While MCP is standardized, it is also rapidly evolving. The Plane MCP Server aims to
+provide a stable implementation for developers to build robust AI-powered
+applications. Please send feedback to engineering@plane.so.
+:::
+
+## Using the Plane MCP Server
+
+Follow these steps to integrate with the Plane MCP Server.
+
+### Claude.ai
+
+- Open **Settings** from the sidebar on the web or desktop app.
+- Scroll to the **Integrations** section and click **Add more**.
+- Enter the Integration URL: `https://mcp.plane.so/sse`
+- Click **Connect** to link your Plane workspace.
+
+### Claude Desktop
+
+Add Plane to [Claude Desktop](https://modelcontextprotocol.io/quickstart/user) by
+updating your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://mcp.plane.so/sse"]
+    }
+  }
+}
+```
+
+### VSCode
+
+Connect Plane to [VSCode](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server)
+by editing your `.vscode.json` or `mcp.json` file:
+
+```json
+{
+  "servers": {
+    "plane": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://mcp.plane.so/sse"]
+    }
+  }
+}
+```
+
+If you encounter issues with Plane Auth, run the following command in your terminal to
+remove stale auth tokens, then restart the server. MCP Remote servers are still
+experimental.
+
+```bash
+rm -rf ~/.mcp-auth/mcp-remote-*
+```
+
+## Activating the Plane MCP Server
+
+After setup, when activating the server, you will be prompted in your browser to
+connect your Plane workspace to the MCP server.
+
+When prompted to authorize, click **Approve**.
+
+Next, choose the workspace you want to connect, review the permissions, and click
+**Accept**.
+
+## Congrats!
+
+You have successfully connected your Plane workspace to the MCP server!

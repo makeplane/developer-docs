@@ -1,0 +1,30 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/self-hosting/methods/one-click",
+      "destination": "/self-hosting/methods/docker-compose"
+    },
+    {
+      "source": "/intro",
+      "destination": "/"
+    },
+    {
+      "source": "/self-hosting/telemetry",
+      "destination": "/self-hosting/govern/telemetry"
+    },
+    {
+      "source": "/self-hosting/upgrade-from-community",
+      "destination": "/self-hosting/manage/upgrade/upgrade-from-community"
+    },
+    {
+      "source": "/api-reference/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/api-reference/byoa/build-plane-app",
+      "destination": "/apps/build-plane-app"
+    }
+  ]
+}
