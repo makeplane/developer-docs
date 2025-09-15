@@ -1,0 +1,71 @@
+---
+id: delete-issue-property
+title: "Delete an issue property"
+description: "Delete an issue property"
+sidebar_label: "Delete an issue property"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9V21v2zYQ/isEv7QFZMtJna7TpwWNVxgLWqNN1gGpEdDkOeYskSxJ2fUE/ffhqBdLsR102bAvsc073h2fe+4lBdUGLPNSq6mgCRWQgod76VwO98ai0O9oRAU4bqVBPZrQq6BFmCJBkXQUDbMsAw/W0eSuoBLVDfMrGlHFMsBfVv8J3N9LQSPq+AoyRpOC+p1BqfNWqgca0aW2GfM0oXkuBS0fhzCrrJDpFY2ohW+5tCBo4m0OEYXvLDMpOLQ7qb7X+tMrPNuwNEdnFxcjeDsejQZw/vNiMD4T4wH76ezNYDx+8+biYjwejUYjDDLPMmZ3NGmMEdP13g/skvidkZylrdLt7fSKlmUZnYIjYPeP8eg/+oR1l+YPT5g9gPWLtmtnGAdS3/wBaNs7XWiz3WDbnh+DsCs9heC2H81JDPFR/5JPNzsDP0wmVP6PmORbv6dACBoNh+YR9ewBayukikw9ZGRWUUiCo/OIOuC5lX4X6u/SyN9gd5n7FSgvOaus380RyI94fH5ENkcQnNHKVa8+H43xox/gtFf5pGocAdjx6OxQve+GcAsCf7LUkS1YIEp7NLaRAgTRljALRKoNS6UYVkZfHxqdgc2kc2hQgJIghuTWgSUp42tHmkQS06q52taR99ysINwA50EQC07nlgPZMhdiW+pcYSRlRDPwK71vlqHp+RVNaMyMjDdncUtbFxdI3DKuW4GLi333K+PQPAeYXxcXNYebU9PmNNxpWkQZI4vAbpoGm9uUJnTlvXFJjAEMTcoUDJ0+oNTMapHz8APTv7+ZxHGqOUtX2vnkbcXU/tVrFNOyw67PWGgVPY5zrK1AFsQ0qgp3BUyA3ZfuH4PL2XRQKTxizGxK1rAjrGd4iGxHlpCdzi1plKQifgWktUYqPyHdx3nexqfRwTl2iFRvw4PwQFv5V9B8pwUcHN4G7GI8i3XciGDAjMEEeb2GRzrhKCSPa1PhZoEhiz4BE4RxDs4Rr1vmORrRrZUeQ/yCn0d1kI88laD8u31Fhcf9jyEcNNMK8UeZIy43Rlsv1QNZaL8iPUQJ1wIIpoAwJUj1pl6bQNmQ/KrtKWFEpOJpLoC8YMbcS+U8S9Ng/V6KF6RdTRq2BECaoieG7VLNRPU4DnIDhGGgtdpS2848YsaQrgNXtQapljqgL30KdVOZYT2ST5PPN8hWGlGs3Qqn0XA0PDsg/uGlr+qr+l066Qly/lsu+Zo4z6wnDzmWAiK2zNM0lIPQPM9A+QpW5smdgA2k2EJc2xzmL5uWcUSIbWRgYQkWFIdYKt92jldDGlGulWfc40PrKg7h0uhRN+p0IsiYRFHNgV9aURnRVHJQDjrm3n+4JZfvZ9eb1wc2H6Rf5Ysh11mcsTUEO5WjeJHqRWwsbCRs4+vpu8mHz5Oh/+5DZox2PmOq4+SJJbaXjyK8F5R/+k7dTTx89xiPxCZbxV7U8+EOWyHmH1O+nxE0okm9bDVjAo96a3JnUqBsv+88Hhb1zc5GiSsBNnb0XxQL5uDWpmWJx99ywF3kbh7RDbOSLZCzdwUV0uF3QZMlSx08gcfLT/WMfUV6C/lRMJp5oBCuZnGiEV3Drv9vAU6nZ8XwbM8tXs92fbA4PyOQasl9bgT7DfYZrhtGlfPugnM1uZ7cTGgUhl9/pK/DxK6/IGmO2u9O98oR/sUnHlUvimpZKMtWvxKdvNGuE5U2PnVeluXfXQAZ0Q==
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete an issue property"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/issue-types/{type_id}/issue-properties/{property_id}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete an issue property
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"property_id","schema":{"type":"string","format":"uuid"},"required":true},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}},{"in":"path","name":"type_id","schema":{"type":"string","format":"uuid"},"description":"Type ID","required":true,"examples":{"ExampleTypeID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example type ID","description":"A typical type UUID"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Issue property deleted"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"The requested resource was not found."}}}
+>
+  
+</StatusCodes>
+
+
+      

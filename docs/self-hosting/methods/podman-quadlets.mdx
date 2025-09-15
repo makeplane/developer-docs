@@ -1,0 +1,140 @@
+---
+title: Deploy Plane with Podman Quadlets • Commercial Edition
+sidebar_label: Podman Quadlets
+sidebar_position: 6
+---
+
+{frontMatter.description && (
+
+<h3 className="description">{frontMatter.description}</h3>
+)}
+
+This guide shows you the steps to deploy a self-hosted instance of Plane using Podman Quadlets.
+
+## Prerequisites
+
+- A non-root user account with `systemd --user support` (most modern Linux setups have this)
+- Podman version **4.4 or higher**
+
+## Set up Podman
+1. Add the Podman repository.
+    ```bash
+    echo 'deb http://download.opensuse.org/repositories/home:/alvistack/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
+    ```
+
+2. Add the GPG key.
+    ```bash
+    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    ```
+
+3. Refresh your package lists.
+    ```bash
+    sudo apt update
+    ```
+
+4. Install Podman and its dependencies.
+    ```bash
+    sudo apt install -y podman uidmap netavark passt
+    ```
+
+    The `uidmap` package handles user namespace mapping, `netavark` takes care of networking, and `passt` helps with network connectivity. 
+
+## Install Plane
+
+1. Download and extract Podman Quadlets.    
+    ```bash
+    curl -fsSL https://prime.plane.so/releases/<plane-version>/podman-quadlets.tar.gz -o podman-quadlets.tar.g
+    tar -xzf podman-quadlets.tar.gz
+    cd podman-quadlets
+    ```
+    :::warning
+     Replace `<plane-version>` with the [latest version](https://plane.so/changelog?category=self-hosted). (e.g., v1.13.0).
+   :::
+
+   The directory contains an `install.sh` script that will handle the installation and configuration.
+
+2. The installation script sets up Plane and configures all required services. You have two options:
+
+   **Without sudo access**
+    ```bash
+    ./install.sh --domain your-domain.com --base-dir /your/custom/path
+    ```
+    This installs Plane in your specified directory, which is useful if you want to maintain control over the installation location.
+
+   **With sudo access**
+    ```bash
+    ./install.sh --domain your-domain.com
+    ```
+    This installs Plane in `/opt/plane`, which is a standard system location.
+
+   :::note
+   Systemd configurations are installed in `~/.config/containers/systemd/`
+   :::
+
+## Start Plane
+
+:::warning
+**Important**  
+Note that you should run these commands without `sudo`.
+:::
+
+1. Reload systemd to recognize new configurations.
+    ```bash
+    systemctl --user daemon-reload
+    ```
+
+2. Start the network service.
+    ```bash
+    systemctl --user start plane-nw-network.service
+    ```
+
+3. Start core dependencies.
+    ```bash
+    systemctl --user start plane-{db,redis,mq,minio}.service
+    ```
+
+4. Start backend services.
+    ```bash
+    systemctl --user start {api,worker,beat-worker,migrator,monitor}.service
+    ```
+
+5. Start frontend services.
+    ```bash
+    systemctl --user start {web,space,admin,live,proxy}.service
+    ```
+
+The startup sequence is important: network first, then dependencies, followed by backend services, and finally frontend services.
+
+### Verify service status
+Check that all services are running correctly:
+
+1. Check network status.
+    ```bash
+    systemctl --user status plane-nw-network.service
+    ```
+
+2. Check core dependencies.
+    ```bash
+    systemctl --user status plane-{db,redis,mq,minio}.service
+    ```
+
+3. Check backend services.
+    ```bash
+    systemctl --user status {api,worker,beat-worker,migrator,monitor}.service
+    ```
+
+4. Check frontend services.
+    ```bash
+    systemctl --user status {web,space,admin,live,proxy}.service
+    ```
+
+Your Plane installation should now be running successfully with Podman Quadlets. This setup provides automatic service restart capabilities and standard systemd management commands for maintaining your installation.
+
+## Troubleshoot
+
+To debug service issues, examine the logs using:
+    ```bash
+    journalctl --user -u <service-name> --no-pager
+    ```
+
+The logs will provide detailed information about any configuration issues or errors that may occur.

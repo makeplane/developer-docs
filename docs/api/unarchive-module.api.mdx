@@ -1,0 +1,71 @@
+---
+id: unarchive-module
+title: "Unarchive module"
+description: "Restore an archived module to active status, making it available for regular use."
+sidebar_label: "Unarchive module"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VttuGzcQ/ZUBX5IAK63syGmqpxqxGhh1UyGJmgKOYNDkyGLFJTe8yFGF/fdilrsryZKDwL286EIO53JmzsxsmC3R8aCsuZRsxKLhTizUCm8KK6NGljGJXjhVkggbsffog3UI3EAjKSGJQrDARVArBB94iD6Dgi+VuQMVgK+40vxWI8ytA4d3UXMH0WOfZazkjhcY0Hk2ut4wRXZKHhYsY4YXSP+WLGNeLLDgbLRhYV3SqQ9OmTuWsbl1BQ/kflSSVQ99/jX5d3nBMubwS1QOJRsFFzFj+JUXpUZPasfpdxK/vKCjFdeRTJ2dDfD1cDDo4emPt73hiRz2+A8nr3rD4atXZ2fD4WAwGJCLsSi4W7NRq6vFpra979U5hHWpBNetzHR6ecGqqsqOQ+DsnyjCjZL/BIpJ0vLdWDTy/xIY5a71x9Bohb4Nh9fx7htAHAT+ybqlL7lAaF5+R/Ddm93gi3Xvvjs/FuTu7WMx3u97U1XVLGOB3xEBmnL1bJYxjyI6FdY1L85L9Quuz2NYoAlK8KT1ekYI/UbHp0fuZhSpL63xKbTTwZC+DkhtoxMIHf0l+CgEej+PWq8JzuHg5PDhvkEQDiX95drDPToEYwPlc6UkSrAOuENQZsW1kv2k9OWh0gm6QnlPCiUahbIPU48ONBdLD23eoOzEfKPrSGQN9cmPuY1GsqrKWIFhYanbSdQYsO5AYcFGLOelylcneZcen28oQVXeFKXPN1seVnkLVi8xmG6XVd6BmFN9oFu1jS06zUZsEULpRznZ6peaG+x7e1AqE2dlFPUfSu/25SjPtRVcL6wPo9eJaPtPr+iaVTvV84FIktJ/vIY69vD6mmWJcQvkEt2Wc3/0zieXvSTwoA4ml7DENfA9xX2YpNzD2kYHrZAyEBYInTZIduokHq/jzj9LBk6pzWl7XwdEB9apv2rJN1biweG0xi6ns9zm7RX2eFlSgoJd4gOZ+qhOnrBlws0hlzVRuAReE4PGnWt441nG7p0K5OIn+j4qQ6UntEIT3mx5Ugf3P7pw0BgT4g8yBz6WpXWBpvetDQvYQxSElQiUAuBGQoppj/x014efrXvsMgNlhI4S4RkvyxtlfOBa19pvlHwG3UrQVksNSE1+9AFKvtaWyxScQNo5ODnaiNGOsW2xvCxh1wC1i4pKfG5r9FXQhNrHBcKE+Ajvxx8+UrWyjBF3E06D/qB/clD4h48+m8/md+VVAKr5L1GJJe1DLsBdJCoQYtRUazpIK2KBJiRYeYBriSvUtJP5rjnMnrct48gltZGewzk6NAJzZULXOV7QbiWsCVwECrRhce0uyx50o51OhAVXdNXUwE/dVZUxrQQajzvq3r6bwvnbydXq5YHOOxUW8bYvbJEXfIm1nmQov9X2Ni8drhTe51eXb8bvPoz74WuoM1NaHwpudoxM25YKx9fSTR0nmvAfbahN+wn4NVAAirpyCnbTzI5r6p1UMFQj2/nBMjZqFo52hNDR3jL3cIrUArTwdoOEZYy2Aer5ZGmzueUep05XFR1/iUgLyPUsYyvuFMVQjxupPP2WbDTn2uM3IHv+vhmqL2B3Vz4adTspDE2BdiliGVviOi3qNK+eZHpvN32K7S2oT/bhYE18gh9ppZvtLhoX46vxxzHlOlKx7M7bZT1Omx+UtqPKd0dvskKfFOZR8c0mTfKq6uTT1aMvulmfpCnOWVVVfwPhrtrg
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unarchive module"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/archived-modules/{pk}/unarchive/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Restore an archived module to active status, making it available for regular use.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"pk","schema":{"type":"string","format":"uuid"},"description":"Module ID","required":true,"examples":{"ExampleModuleID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example module ID","description":"A typical module UUID"}}},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource unarchived successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Module not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

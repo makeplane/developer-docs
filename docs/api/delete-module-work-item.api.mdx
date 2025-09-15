@@ -1,0 +1,71 @@
+---
+id: delete-module-work-item
+title: "Delete module work item"
+description: "Remove a work item from a module while keeping the work item in the project."
+sidebar_label: "Delete module work item"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9V21v2zYQ/isEv7QFZMtJna7TpwWNVxjLWqNt1gGpEdDiOeJMiSxJ2fUE/ffhSEmWXxIUabEviU0e7+W5u+fOFVUaDHNCFVNOE8pBgoO7XPFSwt1GmdWdcJDTiHKwqREaJWlCP0Cu1kAYQRGCImRpVE4YCU/JJhMSyApAi+KeuAx6kqLwB9qofyB1QxpRzQzLwYGxNLmtqEATmrmMRrRgOdCECmtLuBOcRtSmGeSMJhV1W4131hlR3NOILpXJmaMJLUvBaX3o9BR1kOkVjaiBr6UwwGniTAkRhW8s1xIsap2Ez156eoUnayZLNHRxMYLX49FoAOe/LgbjMz4esF/OXg3G41evLi7G49FoNEIHyzxnZkuTVhURO8v7Ll0St9UiZbIRubmZXtG6rqOTIDRp+TEU/gwJ+l4YgvhPwiHv2X4IiEbmcSSa2vlBKGZBy3dj0cj/JDB03/pDaLRCj8NhZXn/CBBHgX9WZmU1S4E0L78j+O5NP/h8O9h056eC7N8+FONm35u6rucRdeweyaApV0vnEbWQlka4reeISy3+gO1l6TIonEhZ0Ho7R4Te4/H5ibs5Rmq1KmwI7Xw0xn+H3GZVaVIggQw5sWWagrXLUsotYjkenR2/2rdGUgMcvzJpyQYMkEI5TOZacOBEGcIMEFGsmRR8GJS+PFY6A5MLa1Ehh0IAH5IbC4ZIlq4saZNGdCdmG10nwmr6PvAMerNUZcFpXUc0B5epHf17QnYZTWjMtIjXZ3GXIRtXmKM6burSxtWuFes49K6Nq46p2rOBt2vjqiXyOsZ6AbNuSb80kiY0c07bJEbDQy1ZAUOrjkpnZhQvU/8F0717mcSxVCmTmbIueR0ab//pNV7TuldNH7FpQjmcrqmum5i/plHowAwYB7Prwb8Hl7PpIAgclMZsSlawJWxP8ZDMQjmQrSoNaYWa4dhpI8GOz+vpuu78U2jgHGlPqo0PCA+UEf96yTeKw9HhjccuxrNYxe0VDJjWmCCnVnAg44988lKlA24GGPeNwzhhvleIU8Q0fWRpRDdGOHTxM/4/KYN1mEoBhXuzax0f3P/owhFRBsQPMkdsqbUyDjebhXIZ2UOUpIoDwRQQVnASYtrjA7wbkt+VeegyIqJIZcmBPGNa34nCOial134n+DPSrUtttXhAPB+AdUSzrVSMh+BSEH5RWyjXiC2V6VEu05r0DSCD1FjiS+XRF04iap8yIDPsR/Jh8vETViuNKPZuwGk0HA3Pjgr/+NGX4kvxl7DCEaz5r6VIV8Q6Zhy5L7EVEDHkWd8OXKVlDoULsDJHbjmsQeLGajtymD9vKePEJdLIwMASDBQpxKJwHXO8wL0zVYVjqcNAmy727tLogI16TAQ5E3jV1MBv3VUdUSlSKCz01L19d0Mu386u1y+PdN4Ll5WLYaryOGcr8HqCoXgh1SLWBtYCNvH19M3k3cfJ0H1zPjNaWZezomfkyrN2t3m3e/ZhOiofLhTu5+/vDQE5+OYwBIG8HMKtmlFyi+yJJYNVshsnNKJJs4K0EwWP9ta7ZqjgeX8B3psreNn7iYDbAs4AtFtVC2bhxsi6xuOvJeCCcjuP6JoZwRZY3rcV5cLiZ06TJZMWHsHu+Ydm7r4gvV8UJyFoB0eBQ6HdmWhEV7Dt/6bBIfYk+/1d/gkO7OB8sgd7K/QTXOhl+sk+HG2zT/AjbJ7z/jJ0NbmefJrQyA/M/TVg5ad88wGr56Ty/kYQrOBfDPOkeFWFBaOuO/lw9eCLbgVp6qnACOr6P075avE=
+sidebar_class_name: "delete api-method"
+info_path: api/the-plane-rest-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete module work item"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/workspaces/{slug}/projects/{project_id}/modules/{module_id}/module-issues/{issue_id}/"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Remove a work item from a module while keeping the work item in the project.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"in":"path","name":"issue_id","schema":{"type":"string","format":"uuid"},"description":"Issue ID","required":true,"examples":{"ExampleIssueID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example issue ID","description":"A typical issue UUID"}}},{"in":"path","name":"module_id","schema":{"type":"string","format":"uuid"},"description":"Module ID","required":true,"examples":{"ExampleModuleID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example module ID","description":"A typical module UUID"}}},{"in":"path","name":"project_id","schema":{"type":"string","format":"uuid"},"description":"Project ID","required":true,"examples":{"ExampleProjectID":{"value":"550e8400-e29b-41d4-a716-446655440000","summary":"Example project ID","description":"A typical project UUID"}}},{"in":"path","name":"slug","schema":{"type":"string"},"description":"Workspace slug","required":true,"examples":{"ExampleWorkspace":{"value":"my-workspace","summary":"Example workspace","description":"A typical workspace slug"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"204":{"description":"Resource deleted successfully"},"401":{"description":"Authentication credentials were not provided or are invalid."},"403":{"description":"Permission denied. User lacks required permissions."},"404":{"description":"Module issue not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

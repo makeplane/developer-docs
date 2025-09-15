@@ -1,0 +1,68 @@
+---
+title: Deploy Plane with Docker Swarm • Commercial Edition
+sidebar_label: Docker Swarm
+sidebar_position: 2
+---
+
+{frontMatter.description && (
+
+<h3 className="description">{frontMatter.description}</h3>
+)}
+
+This guide shows you how to deploy a self-hosted instance of Plane Commercial
+Edition using Docker Swarm.
+
+## Install Plane
+
+### Prerequisites
+
+- Before you get started, make sure you have a Docker Swarm environment set up and ready to go. 
+- Your setup should support either amd64 or arm64 architectures.
+
+### Procedure
+
+1. **Download the required deployment files**
+   - `swarm-compose.yml` — Defines Plane's services and dependencies.
+     ```bash
+     curl -fsSL https://prime.plane.so/releases/<plane-version>/swarm-compose.yml -o swarm-compose.yml
+     ```
+   - `variables.env` — Stores environment variables for your deployment.
+     ```bash
+     curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
+     ```
+   :::warning
+   Replace `<plane-version>` with the [latest version](https://plane.so/changelog?category=self-hosted). (e.g., v1.13.0).
+   :::
+
+2. **Configure environment variables**
+    Before deploying, edit the `variables.env` file in your preferred text editor and update the following values:
+
+   - `DOMAIN_NAME` — (required) Your application's domain name
+   - `SITE_ADDRESS` — (required) The full domain name (FQDN) of your instance
+   - `MACHINE_SIGNATURE` – (required) A unique identifier for your machine. You can generate this by running below code in terminal:
+        ```sh
+        sed -i 's/MACHINE_SIGNATURE=.*/MACHINE_SIGNATURE='$(openssl rand -hex 16)'/' plane.env 
+        ```
+   - `CERT_EMAIL` – (required if you're setting up HTTPS) Email address for SSL certificate generation
+
+3. **Configure external DB, Redis, and RabbitMQ**
+   :::warning
+   When self-hosting Plane for production use, it is strongly recommended to configure external database and storage. This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.  
+   :::
+   - `DATABASE_URL` — Connection string for your external database
+   - `REDIS_URL` — Connection string for your external Redis instance
+   - `AMQP_URL` — Connection string for your external RabbitMQ server
+
+4. **Load the environment variables**
+
+   ```bash
+   set -o allexport; source <path-to variables.env>; set +o allexport;
+   ```
+
+5. **Deploy the stack**
+   ```bash
+   docker stack deploy -c <path-to swarm-compose.yml> plane
+   ```
+
+That's it! This will deploy Plane as a Swarm stack, and your instance should be
+accessible on your configured domain.

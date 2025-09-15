@@ -1,0 +1,202 @@
+---
+title: Webhooks Overview
+sidebar_label: Webhooks
+description: Use webhooks to receive real-time notifications about events in Plane.
+---
+
+{frontMatter.description && <h3 className="description">{frontMatter.description}</h3>}
+
+## Introduction
+
+Webhooks are a powerful way to receive real-time HTTP-based notifications about events in Plane. By setting up a webhook, you can automatically receive updates whenever specific events occur, such as the creation, update, or deletion of projects, work items, or other entities.
+
+:::tip Events
+Plane supports the following webhook events:
+
+- **Project**: created, updated, deleted
+- **Cycle**: created, updated, deleted
+- **Module**: created, updated, deleted
+- **Work Item**: created, updated, deleted, added to cycle, added to module
+- **Work Item Comment**: created, updated, deleted
+  :::
+
+## Creating a Webhook
+
+To create a webhook, go to your Plane workspace settings, open the **Developer** section, and click **Webhooks**. Then click **Add webhook**.
+
+import ImgCreate from "@site/static/images/webhooks/create.png";
+
+<img src={ImgCreate} className="center" style={{ width: "700px" }} alt="Create webhook" />
+
+Next, enter your URL, optionally choose the events that will trigger your webhook, and click **Create**.
+
+import ImgDetails from "@site/static/images/webhooks/details.png";
+
+<img src={ImgDetails} className="center" style={{ width: "700px" }} alt="Define webhook details" />
+
+Afterwards, you will be prompted to save your webhook secret key. You can use this key to verify the authenticity of webhook payloads you receive from Plane. We'll cover this [later in the guide](#verifying-payloads).
+
+import ImgKey from "@site/static/images/webhooks/key.png";
+
+<img src={ImgKey} className="center" style={{ width: "700px" }} alt="Webhook key created" />
+
+## Defining a Webhook Consumer
+
+Your webhook consumer URL must be an HTTP endpoint that:
+
+1. Responds to Plane requests with an `HTTP 200` ("OK") response
+2. Is publicly accessible
+3. Is not localhost
+   - Valid: `https://example.com/webhook`
+   - Invalid: `http://localhost:3000/webhook`
+
+:::tip
+If your consumer does not respond with an `HTTP 200`, Plane will retry delivery up to three times with exponential backoff.
+:::
+
+## Webhook Payloads
+
+When a webhook is triggered, Plane sends a JSON payload to your specified URL via HTTP `POST`. The payload contains:
+
+- `action`: One of `create`, `update`, or `delete`, indicating the type of event
+- `event`: One of `project`, `cycle`, `module`, or `issue` (issue = Work Item)
+- `webhook_id`: The unique identifier of the webhook
+- `workspace_id`: The ID of the workspace where the event occurred
+- `data`: An optional object containing the details of the event. The structure of this field varies based on the `event` and `action` (see below).
+
+### Payload Examples
+
+#### Delete Action
+
+```json
+{
+  "event": "issue",
+  "action": "delete",
+  "webhook_id": "f1a2fe64-c8d4-4eed-b3ef-498690052c1d",
+  "workspace_id": "c467e125-59e3-44ec-b5ee-f9c1e138c611",
+  "data": {
+    "id": "9a28bd00-ed9c-4f5d-8be9-fc05cbb1fc57"
+  }
+}
+```
+
+#### Update Action
+
+```json
+{
+  "event": "project",
+  "action": "update",
+  "webhook_id": "3c2c32ac-82df-48b3-be2a-a3e21dbe8692",
+  "workspace_id": "d2d97c94-a6ad-4012-b526-5577c0d7c769",
+  "data": {
+    "id": "22b6fc9c-1849-45da-b103-52a3e3a6b4c1",
+    "workspace_detail": {
+      "name": "Testing Project",
+      "slug": "testing-project",
+      "id": "bob1b192-f988-4bf9-b569-825de8cb0678"
+    },
+    "created_at": "2023-10-25T04:38:59.566962Z",
+    "updated_at": "2023-10-25T06:44:48.543685Z",
+    "name": "vfecddcwerj",
+    "description": "",
+    "description_text": null,
+    "description_html": null,
+    "network": 2,
+    "identifier": "TRACE",
+    "emoji": null,
+    "icon_prop": null,
+    "module_view": true,
+    "cycle_view": true,
+    "issue_views_view": true,
+    "page_view": true,
+    "inbox_view": true,
+    "cover_image": null,
+    "archive_in": 0,
+    "close_in": 0,
+    "created_by": "6bb20d1c-4960-41ca-af4f-cee01de160c4",
+    "updated_by": "6bb20d1c-4960-41ca-af4f-cee01de160c4",
+    "workspace": "bob1b192-f988-4bf9-b569-825de8cb0678",
+    "default_assignee": null,
+    "project_lead": null,
+    "estimate": null,
+    "default_state": null
+  }
+}
+```
+
+## Webhook Headers
+
+Plane includes several HTTP headers with each webhook payload:
+
+```json
+"Content-Type": "application/json",
+"X-Plane-Delivery": "<uuid>",
+"X-Plane-Event": "<event>",
+"X-Plane-Signature": "<signature>"
+```
+
+| Header            | Description                                       |
+| ----------------- | ------------------------------------------------- |
+| X-Plane-Delivery  | Unique UUID for the payload                       |
+| X-Plane-Event     | The event that triggered the webhook              |
+| X-Plane-Signature | HMAC SHA-256 signature for verifying authenticity |
+
+## Verifying Payloads
+
+To verify authenticity, use the `X-Plane-Signature` header. This is an HMAC
+SHA-256 signature of the payload, generated using the secret key you received
+when creating the webhook. If the signature matches the HMAC SHA-256 hash of the
+payload and your secret, the payload is authentic.
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python">
+  ```python
+  import hashlib
+  import hmac
+
+secret_token = os.environ.get("WEBHOOK_SECRET")
+
+received_signature = request.headers.get('X-Plane-Signature')
+received_payload = json.dumps(request.json).encode('utf-8')
+
+expected_signature = hmac.new(secret_token.encode('utf-8'), msg=received_payload, digestmod=hashlib.sha256).hexdigest()
+
+if not hmac.compare_digest(expected_signature, received_signature):
+raise HTTPException(status_code=403, detail="Invalid Signature provided")
+
+````
+</TabItem>
+<TabItem value="typescript" label="TypeScript">
+```typescript
+// Node.js Fastify example
+import { createHmac } from 'node:crypto';
+const secret = process.env.WEBHOOK_SECRET;
+
+// Fastify setup excluded for brevity
+
+fastify.post('/webhook', options, async (request, reply) => {
+  const receivedSignature = request.headers['x-plane-signature'];
+  const payload = JSON.stringify(request.body);
+
+  const computedSignature = createHmac('sha256', secret)
+    .update(payload)
+    .digest('hex');
+
+  if (receivedSignature !== computedSignature) {
+    return reply.status(403).send('Invalid signature');
+  }
+
+  // Process the webhook payload
+  return reply.status(200).send('Webhook received');
+})
+````
+
+  </TabItem>
+</Tabs>
+
+:::tip Questions?
+If you have any questions or need help with webhooks, please reach out to us at engineering@plane.so
+:::
