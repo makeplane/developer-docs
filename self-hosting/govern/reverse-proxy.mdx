@@ -21,6 +21,11 @@ Make sure to update the following environment variables in your plane.env file.
     ```
     This is required so that generated links and redirects work correctly behind the proxy:
 
+3. After editing plane.env, restart your instance so the changes take effect:
+   ```bash
+   sudo prime-cli restart
+   ```
+
 ## Proxy setup
 
 1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
