@@ -132,81 +132,81 @@ Plane will make a GET request to the Redirect URI with below parameters:
 
 #### Examples
 
-<Tabs>
-<Tab title="Python">
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
 
-```python
-import os
-import time
-from plane.oauth.api import OAuthApi
-from plane.oauth.models import OAuthConfig
+  ```python
+  import os
+  import time
+  from plane.oauth.api import OAuthApi
+  from plane.oauth.models import OAuthConfig
 
-# Initialize OAuth API
-def get_oauth_api():
-    oauth_config = OAuthConfig(
-        client_id=os.getenv("PLANE_CLIENT_ID"),
-        client_secret=os.getenv("PLANE_CLIENT_SECRET"),
-        redirect_uri=os.getenv("PLANE_REDIRECT_URI"),
-    )
-    return OAuthApi(
-        oauth_config=oauth_config,
-        base_url=os.getenv("PLANE_BASE_URL", "https://api.plane.so"),
-    )
+  # Initialize OAuth API
+  def get_oauth_api():
+      oauth_config = OAuthConfig(
+          client_id=os.getenv("PLANE_CLIENT_ID"),
+          client_secret=os.getenv("PLANE_CLIENT_SECRET"),
+          redirect_uri=os.getenv("PLANE_REDIRECT_URI"),
+      )
+      return OAuthApi(
+          oauth_config=oauth_config,
+          base_url=os.getenv("PLANE_BASE_URL", "https://api.plane.so"),
+      )
 
-# Get bot token using app installation ID
-oauth_api = get_oauth_api()
-token_response = oauth_api.get_bot_token(app_installation_id)
+  # Get bot token using app installation ID
+  oauth_api = get_oauth_api()
+  token_response = oauth_api.get_bot_token(app_installation_id)
 
-# Get app installation details
-app_installations = oauth_api.get_app_installations(
-    token_response.access_token,
-    app_installation_id,
-)
+  # Get app installation details
+  app_installations = oauth_api.get_app_installations(
+      token_response.access_token,
+      app_installation_id,
+  )
 
-if not app_installations:
-    raise Exception(f"No app installations found for app installation ID {app_installation_id}")
+  if not app_installations:
+      raise Exception(f"No app installations found for app installation ID {app_installation_id}")
 
-app_installation = app_installations[0]
-bot_token = token_response.access_token
-expires_in = token_response.expires_in
-```
+  app_installation = app_installations[0]
+  bot_token = token_response.access_token
+  expires_in = token_response.expires_in
+  ```
 
-</Tab>
-<Tab title="TypeScript">
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
 
-```typescript
-import axios from 'axios';
+  ```typescript
+  import axios from 'axios';
 
-// Prepare basic auth header using client_id and client_secret
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
-const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+  // Prepare basic auth header using client_id and client_secret
+  const clientId = "your_client_id";
+  const clientSecret = "your_client_secret";
+  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
-// Prepare request data
-const payload = {
-  grant_type: "client_credentials",
-  app_installation_id: appInstallationId
-};
+  // Prepare request data
+  const payload = {
+    grant_type: "client_credentials",
+    app_installation_id: appInstallationId
+  };
 
-// Make a POST request to fetch bot token
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      "Content-Type": "application/x-www-form-urlencoded"
+  // Make a POST request to fetch bot token
+  const response = await axios.post(
+    "https://api.plane.so/auth/o/token/",
+    payload,
+    {
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
     }
-  }
-);
+  );
 
-// Parse the response
-const responseData = response.data;
-const botToken = responseData.access_token;
-const expiresIn = responseData.expires_in; // Token expiry in seconds
-```
+  // Parse the response
+  const responseData = response.data;
+  const botToken = responseData.access_token;
+  const expiresIn = responseData.expires_in; // Token expiry in seconds
+  ```
 
-</Tab>
+  </TabItem>
 </Tabs>
 
 ### User-Authorized Actions (Authorization Code Flow)
@@ -222,62 +222,62 @@ Plane will make a GET request to the Redirect URI with below parameters:
 
 #### Examples
 
-<Tabs>
-<Tab title="Python">
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
 
-```python
-from plane.oauth.api import OAuthApi
-from plane.oauth.models import OAuthConfig
+  ```python
+  from plane.oauth.api import OAuthApi
+  from plane.oauth.models import OAuthConfig
 
-# Initialize OAuth API
-oauth_api = get_oauth_api()  # Using the helper function from above
+  # Initialize OAuth API
+  oauth_api = get_oauth_api()  # Using the helper function from above
 
-# Exchange authorization code for access and refresh tokens
-code = "authorization_code_from_callback"
-token_response = oauth_api.exchange_code_for_token(
-    code,
-    "authorization_code",
-)
+  # Exchange authorization code for access and refresh tokens
+  code = "authorization_code_from_callback"
+  token_response = oauth_api.exchange_code_for_token(
+      code,
+      "authorization_code",
+  )
 
-# Parse the response
-access_token = token_response.access_token
-refresh_token = token_response.refresh_token
-expires_in = token_response.expires_in
-```
+  # Parse the response
+  access_token = token_response.access_token
+  refresh_token = token_response.refresh_token
+  expires_in = token_response.expires_in
+  ```
 
-</Tab>
-<Tab title="TypeScript">
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
 
-```typescript
-import axios from 'axios';
+  ```typescript
+  import axios from 'axios';
 
-// Exchange authorization code for access and refresh tokens
-const code = "authorization_code_from_callback";
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
-const redirectUri = "your_redirect_uri";
-const payload = {
-  grant_type: "authorization_code",
-  code: code,
-  client_id: clientId,
-  client_secret: clientSecret,
-  redirect_uri: redirectUri
-};
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+  // Exchange authorization code for access and refresh tokens
+  const code = "authorization_code_from_callback";
+  const clientId = "your_client_id";
+  const clientSecret = "your_client_secret";
+  const redirectUri = "your_redirect_uri";
+  const payload = {
+    grant_type: "authorization_code",
+    code: code,
+    client_id: clientId,
+    client_secret: clientSecret,
+    redirect_uri: redirectUri
+  };
+  const response = await axios.post(
+    "https://api.plane.so/auth/o/token/",
+    payload,
+    {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
     }
-  }
-);
-const responseData = response.data;
-const accessToken = responseData.access_token;
-const refreshToken = responseData.refresh_token;
-const expiresIn = responseData.expires_in;
-```
-</TabItem>
+  );
+  const responseData = response.data;
+  const accessToken = responseData.access_token;
+  const refreshToken = responseData.refresh_token;
+  const expiresIn = responseData.expires_in;
+  ```
+  </TabItem>
 </Tabs>
 
 ### Fetching App Installation Details
@@ -286,45 +286,45 @@ In both user-authorized and app-authorized flows, the `app_installation_id` iden
 
 #### Examples
 
-<Tabs>
-<Tab title="Python">
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
 
-```python
-# Using the OAuth API to fetch app installation details
-oauth_api = get_oauth_api()
-app_installations = oauth_api.get_app_installations(
-    token,  # Either access token or bot token
-    app_installation_id,
-)
+  ```python
+  # Using the OAuth API to fetch app installation details
+  oauth_api = get_oauth_api()
+  app_installations = oauth_api.get_app_installations(
+      token,  # Either access token or bot token
+      app_installation_id,
+  )
 
-if app_installations:
-    workspace_details = app_installations[0]
-    print(f"Workspace: {workspace_details.workspace_detail.name}")
-    print(f"Workspace Slug: {workspace_details.workspace_detail.slug}")
-    print(f"Bot User ID: {workspace_details.app_bot}")
-```
+  if app_installations:
+      workspace_details = app_installations[0]
+      print(f"Workspace: {workspace_details.workspace_detail.name}")
+      print(f"Workspace Slug: {workspace_details.workspace_detail.slug}")
+      print(f"Bot User ID: {workspace_details.app_bot}")
+  ```
 
-</Tab>
-<Tab title="TypeScript">
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
 
-```typescript
-import axios from 'axios';
+  ```typescript
+  import axios from 'axios';
 
-// Set authorization header with either access token or bot token
-const headers = {
-  Authorization: `Bearer ${token}`,
-};
+  // Set authorization header with either access token or bot token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
-// Make GET request to fetch installation/workspace details
-const response = await axios.get(
-  `https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`,
-  { headers }
-);
+  // Make GET request to fetch installation/workspace details
+  const response = await axios.get(
+    `https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`,
+    { headers }
+  );
 
-const workspaceDetails = response.data[0];
-```
+  const workspaceDetails = response.data[0];
+  ```
 
-</Tab>
+  </TabItem>
 </Tabs>
 
 #### Sample Response
@@ -469,103 +469,104 @@ When an issue is created, updated, or deleted:
 
 Here's how to process webhooks in your application:
 
-<Tabs>
-<Tab title="TypeScript">
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="TypeScript" value="typescript">
 
-```typescript
-interface WebhookPayload {
-  event: string;
-  action: string;
-  webhook_id: string;
-  workspace_id: string;
-  data: any;
-  activity: {
-    actor: {
-      id: string;
-      display_name: string;
-      email?: string;
+  ```typescript
+  interface WebhookPayload {
+    event: string;
+    action: string;
+    webhook_id: string;
+    workspace_id: string;
+    data: any;
+    activity: {
+      actor: {
+        id: string;
+        display_name: string;
+        email?: string;
+      };
+      field?: string;
+      new_value?: any;
+      old_value?: any;
     };
-    field?: string;
-    new_value?: any;
-    old_value?: any;
-  };
-}
-
-// Process incoming webhook
-async function handleWebhook(payload: WebhookPayload) {
-  console.log(`Received ${payload.event} ${payload.action} event`);
-  
-  // Get workspace credentials
-  const credentials = await getCredentialsForWorkspace(payload.workspace_id);
-  if (!credentials) {
-    throw new Error(`No credentials found for workspace ${payload.workspace_id}`);
   }
-  
-  // Process specific event types
-  if (payload.event === 'issue_comment' && payload.action === 'created') {
-    const comment = payload.data.comment_stripped;
-    if (comment.includes('/your-command')) {
-      // Handle your custom command
-      await processCommand(payload.data, credentials);
+
+  // Process incoming webhook
+  async function handleWebhook(payload: WebhookPayload) {
+    console.log(`Received ${payload.event} ${payload.action} event`);
+    
+    // Get workspace credentials
+    const credentials = await getCredentialsForWorkspace(payload.workspace_id);
+    if (!credentials) {
+      throw new Error(`No credentials found for workspace ${payload.workspace_id}`);
+    }
+    
+    // Process specific event types
+    if (payload.event === 'issue_comment' && payload.action === 'created') {
+      const comment = payload.data.comment_stripped;
+      if (comment.includes('/your-command')) {
+        // Handle your custom command
+        await processCommand(payload.data, credentials);
+      }
     }
   }
-}
-```
+  ```
 
-</Tab>
-<Tab title="Python">
+  </TabItem>
 
-```python
-from typing import Dict, Any
-from pydantic import ValidationError
+  <TabItem label="Python" value="python" default>
 
-def handle_webhook(payload_data: Dict[str, Any]):
-    """Process incoming webhook from Plane with Pydantic validation"""
-    try:
-        # Validate webhook payload using Pydantic models
-        webhook = WebhookEvent(**payload_data)
-        print(f"Received {webhook.event} {webhook.action} event")
-        
-        # Get workspace credentials (implement your own storage)
-        credentials = get_credentials_for_workspace(webhook.workspace_id)
-        if not credentials:
-            raise Exception(f"No credentials found for workspace {webhook.workspace_id}")
-        
-        # Process specific event types with validated data
-        if webhook.event == 'issue_comment' and webhook.action == 'created':
-            comment_data = CommentEventData(**webhook.data)
-            comment_text = comment_data.comment_stripped or ""
-            
-            if '/your-command' in comment_text:
-                process_command(comment_data, credentials)
-        
-        elif webhook.event == 'issue' and webhook.action == 'updated':
-            issue_data = IssueEventData(**webhook.data)
-            
-            if webhook.activity.field == 'assignees':
-                handle_assignment_change(issue_data, credentials)
-                
-    except ValidationError as e:
-        print(f"Invalid webhook payload: {e}")
-    except Exception as e:
-        print(f"Error processing webhook: {e}")
+  ```python
+  from typing import Dict, Any
+  from pydantic import ValidationError
 
-def process_command(comment_data: CommentEventData, credentials):
-    """Process custom commands from issue comments"""
-    from plane.api import WorkItemsApi
-    from plane.models import PatchedIssueRequest
-    
-    # Use the Plane API to respond to commands
-    # Implementation depends on your specific command logic
-    pass
+  def handle_webhook(payload_data: Dict[str, Any]):
+      """Process incoming webhook from Plane with Pydantic validation"""
+      try:
+          # Validate webhook payload using Pydantic models
+          webhook = WebhookEvent(**payload_data)
+          print(f"Received {webhook.event} {webhook.action} event")
+          
+          # Get workspace credentials (implement your own storage)
+          credentials = get_credentials_for_workspace(webhook.workspace_id)
+          if not credentials:
+              raise Exception(f"No credentials found for workspace {webhook.workspace_id}")
+          
+          # Process specific event types with validated data
+          if webhook.event == 'issue_comment' and webhook.action == 'created':
+              comment_data = CommentEventData(**webhook.data)
+              comment_text = comment_data.comment_stripped or ""
+              
+              if '/your-command' in comment_text:
+                  process_command(comment_data, credentials)
+          
+          elif webhook.event == 'issue' and webhook.action == 'updated':
+              issue_data = IssueEventData(**webhook.data)
+              
+              if webhook.activity.field == 'assignees':
+                  handle_assignment_change(issue_data, credentials)
+                  
+      except ValidationError as e:
+          print(f"Invalid webhook payload: {e}")
+      except Exception as e:
+          print(f"Error processing webhook: {e}")
 
-def handle_assignment_change(issue_data: IssueEventData, credentials):
-    """Handle issue assignment changes"""
-    # Your custom logic for handling assignments
-    pass
-```
+  def process_command(comment_data: CommentEventData, credentials):
+      """Process custom commands from issue comments"""
+      from plane.api import WorkItemsApi
+      from plane.models import PatchedIssueRequest
+      
+      # Use the Plane API to respond to commands
+      # Implementation depends on your specific command logic
+      pass
 
-</Tab>
+  def handle_assignment_change(issue_data: IssueEventData, credentials):
+      """Handle issue assignment changes"""
+      # Your custom logic for handling assignments
+      pass
+  ```
+
+  </TabItem>
 </Tabs>
 
 ## Obtain and store access tokens securely
@@ -595,64 +596,64 @@ Token refresh works differently depending on the type of token you're using:
 
 Bot tokens obtained through the client credentials flow don't use refresh tokens. Instead, when a bot token expires, you simply request a new one using the same `app_installation_id`:
 
-<Tabs>
-<Tab title="Python">
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
 
-```python
-# When bot token expires, request a new one using the same app_installation_id
-from plane.oauth.api import OAuthApi
+  ```python
+  # When bot token expires, request a new one using the same app_installation_id
+  from plane.oauth.api import OAuthApi
 
-def refresh_bot_token(app_installation_id: str):
-    """Refresh an expired bot token"""
-    oauth_api = get_oauth_api()  # Using helper function from earlier examples
-    
-    # Get new bot token using the same app_installation_id
-    token_response = oauth_api.get_bot_token(app_installation_id)
-    
-    # Store the new token securely in your database
-    new_bot_token = token_response.access_token
-    expires_in = token_response.expires_in
-    
-    return new_bot_token, expires_in
+  def refresh_bot_token(app_installation_id: str):
+      """Refresh an expired bot token"""
+      oauth_api = get_oauth_api()  # Using helper function from earlier examples
+      
+      # Get new bot token using the same app_installation_id
+      token_response = oauth_api.get_bot_token(app_installation_id)
+      
+      # Store the new token securely in your database
+      new_bot_token = token_response.access_token
+      expires_in = token_response.expires_in
+      
+      return new_bot_token, expires_in
 
-# Usage example
-new_token, expires_in = refresh_bot_token(app_installation_id)
-```
+  # Usage example
+  new_token, expires_in = refresh_bot_token(app_installation_id)
+  ```
 
-</Tab>
-<Tab title="TypeScript">
+  </TabItem>
+  <TabItem label="TypeScript" value="typescript">
 
-```typescript
-// When bot token expires, request a new one using the same app_installation_id
-import axios from 'axios';
+  ```typescript
+  // When bot token expires, request a new one using the same app_installation_id
+  import axios from 'axios';
 
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
-const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+  const clientId = "your_client_id";
+  const clientSecret = "your_client_secret";
+  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
-const payload = {
-  grant_type: "client_credentials",
-  app_installation_id: appInstallationId  // Same ID used during initial setup
-};
+  const payload = {
+    grant_type: "client_credentials",
+    app_installation_id: appInstallationId  // Same ID used during initial setup
+  };
 
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      "Content-Type": "application/x-www-form-urlencoded"
+  const response = await axios.post(
+    "https://api.plane.so/auth/o/token/",
+    payload,
+    {
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
     }
-  }
-);
+  );
 
-// Parse the response
-const responseData = response.data;
-const newBotToken = responseData.access_token;
-const expiresIn = responseData.expires_in;
-```
+  // Parse the response
+  const responseData = response.data;
+  const newBotToken = responseData.access_token;
+  const expiresIn = responseData.expires_in;
+  ```
 
-</Tab>
+  </TabItem>
 </Tabs>
 
 ### User Token Refresh (Authorization Code Flow)
@@ -661,71 +662,46 @@ When user access tokens expire, you can use the refresh token to get a new acces
 
 #### Examples
 
-<Tabs>
-<Tab title="Python">
+<Tabs queryString="lang" groupId="code-examples">
+  <TabItem label="Python" value="python" default>
 
-```python
-# When access token expires, use refresh token to get a new access token
-from plane.oauth.api import OAuthApi
+  ```python
+  # When access token expires, use refresh token to get a new access token
+  from plane.oauth.api import OAuthApi
 
-def refresh_user_token(refresh_token: str):
-    """Refresh an expired user access token"""
-    oauth_api = get_oauth_api()  # Using helper function from earlier examples
-    
-    # Use refresh token to get new access token
-    token_response = oauth_api.exchange_code_for_token(
-        refresh_token,
-        "refresh_token",
-    )
-    
-    # Store the new tokens securely
-    new_access_token = token_response.access_token
-    new_refresh_token = token_response.refresh_token  # May be the same or new
-    expires_in = token_response.expires_in
-    
-    return new_access_token, new_refresh_token, expires_in
+  def refresh_user_token(refresh_token: str):
+      """Refresh an expired user access token"""
+      oauth_api = get_oauth_api()  # Using helper function from earlier examples
+      
+      # Use refresh token to get new access token
+      token_response = oauth_api.exchange_code_for_token(
+          refresh_token,
+          "refresh_token",
+      )
+      
+      # Store the new tokens securely
+      new_access_token = token_response.access_token
+      new_refresh_token = token_response.refresh_token  # May be the same or new
+      expires_in = token_response.expires_in
+      
+      return new_access_token, new_refresh_token, expires_in
 
-# Usage example
-new_access_token, new_refresh_token, expires_in = refresh_user_token(stored_refresh_token)
-```
-
-</Tab>
-<Tab title="TypeScript">
-
-```typescript
-// When access token expires, use refresh token to get a new access token
-const refreshPayload = {
-  grant_type: "refresh_token",
-  refresh_token: refreshToken,
-  client_id: clientId,
-  client_secret: clientSecret
-};
-
-const refreshResponse = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  refreshPayload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-  refresh_response = requests.post(
-      url="https://api.plane.so/auth/o/token/",
-      headers={"Content-Type": "application/x-www-form-urlencoded"},
-      data=refresh_payload
-  )
-  refresh_response_data = refresh_response.json()
-  access_token = refresh_response_data["access_token"]
+  # Usage example
+  new_access_token, new_refresh_token, expires_in = refresh_user_token(stored_refresh_token)
   ```
+
   </TabItem>
   <TabItem label="TypeScript" value="typescript">
+
   ```typescript
+  // When access token expires, use refresh token to get a new access token
   const refreshPayload = {
     grant_type: "refresh_token",
     refresh_token: refreshToken,
     client_id: clientId,
     client_secret: clientSecret
   };
+
   const refreshResponse = await axios.post(
     "https://api.plane.so/auth/o/token/",
     refreshPayload,
@@ -734,11 +710,15 @@ const refreshResponse = await axios.post(
         "Content-Type": "application/x-www-form-urlencoded"
       }
     }
-  );
-  const refreshResponseData = refreshResponse.data;
-  const accessToken = refreshResponseData.access_token;
-  ```
-  </TabItem>
+    refresh_response = requests.post(
+        url="https://api.plane.so/auth/o/token/",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        data=refresh_payload
+    )
+    refresh_response_data = refresh_response.json()
+    access_token = refresh_response_data["access_token"]
+    ```
+    </TabItem>
 </Tabs>
 
 ## Listing Your App on Plane Marketplace
