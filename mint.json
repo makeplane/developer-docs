@@ -47,12 +47,12 @@
       "url": "self-hosting"
     },
     {
-      "name": "APIs and BYOA",
+      "name": "API",
       "url": "api-reference"
     },
     {
-      "name": "Webhooks",
-      "url": "webhooks"
+      "name": "Dev tools",
+      "url": "dev-tools"
     }
   ],
   "navigation": [
@@ -142,13 +142,6 @@
         "self-hosting/troubleshoot/license-errors",
         "self-hosting/troubleshoot/cli-errors",
         "self-hosting/troubleshoot/storage-errors"
-      ]
-    },
-
-     {
-      "group": "App Development",
-      "pages": [
-        "api-reference/byoa/build-plane-app"
       ]
     },
     {
@@ -354,8 +347,12 @@
       ]
     },
     {
-      "group": "Webhooks",
-      "pages": ["webhooks/intro-webhooks"]
+      "group": "Dev tools",
+      "pages": [
+      "dev-tools/build-plane-app",
+      "dev-tools/intro-webhooks",
+      "dev-tools/mcp-server"
+      ]
     }
   ],
   "footerSocials": {
@@ -366,5 +363,15 @@
     "ga4": {
       "measurementId": "G-G578SD4VZD"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/api-reference/byoa/build-plane-app",
+      "destination": "/dev-tools/build-plane-app"
+    },
+    {
+      "source": "/webhooks/intro-webhooks",
+      "destination": "/dev-tools/intro-webhooks"
+    }
+  ]
 }
