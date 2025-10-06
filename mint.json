@@ -47,11 +47,11 @@
       "url": "self-hosting"
     },
     {
-      "name": "API",
+      "name": "API Reference",
       "url": "api-reference"
     },
     {
-      "name": "Dev tools",
+      "name": "Dev Tools",
       "url": "dev-tools"
     }
   ],
@@ -347,7 +347,7 @@
       ]
     },
     {
-      "group": "Dev tools",
+      "group": "Build and extend Plane",
       "pages": [
       "dev-tools/build-plane-app",
       "dev-tools/intro-webhooks",
