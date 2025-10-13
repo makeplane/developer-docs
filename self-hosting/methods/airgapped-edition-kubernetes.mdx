@@ -1,0 +1,197 @@
+---
+title: Deploy Plane Commercial in an Airgapped Kubernetes Environment
+sidebarTitle: For Kubernetes
+---
+
+This guide walks you through installing Plane Enterprise in a Kubernetes cluster without internet access. You'll use Helm charts and pre-packaged Docker images to deploy a fully functional Plane instance.
+
+## What you'll need
+
+Before starting, ensure you have:
+
+- Helm 3.x installed
+- kubectl with access to your target Kubernetes cluster
+
+## Install Plane
+
+1. Get the Plane Enterprise Helm chart from the official release:
+
+    ```bash
+    # Using wget
+    wget https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.4.1/plane-enterprise-1.4.1.tgz
+
+    # Using curl
+    curl -L -O https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.4.1/plane-enterprise-1.4.1.tgz
+    ```
+
+2. Contact [**sales@plane.so**](mailto:sales@plane.so) to get your installation download URL and license file.
+
+2. On a machine with internet access, download the installation package:
+
+   ```bash
+   curl -LO <asset-download-url>
+   ```
+
+   The download may take 15 minutes. Once complete, you no longer need internet access.
+
+3. Transfer the `airgapped-{arch}.tar.gz` file to your air-gapped machine.
+
+4. Extract the package on your air-gapped machine:
+
+   ```bash
+   mkdir -p airgapped
+   tar -xvzf airgapped-amd64.tar.gz -C airgapped
+   cd airgapped
+   ```
+
+    You'll find these Docker image .tar files for your airgapped installation in this folder.
+
+    - `admin-commercial-<version>.tar` - Admin service image
+    - `backend-commercial-<version>.tar` - API/worker/beat-worker/migrator service image
+    - `email-commercial-<version>.tar` - Email service image
+    - `live-commercial-<version>.tar` - Live service image
+    - `monitor-commercial-<version>.tar` - Monitor service image
+    - `proxy-commercial-<version>.tar` - Plane-proxy service image
+    - `silo-commercial-<version>.tar` - Silo service image
+    - `space-commercial-<version>.tar` - Space service image
+    - `web-commercial-<version>.tar` - Web service image
+    - `minio-latest.tar` - Plane-minio service image
+    - `postgres-15.7-alpine.tar` - Plane-db service image
+    - `rabbitmq-3.13.6-management-alpine.tar` - Plane-mq service image
+    - `valkey-7.2.5-alpine.tar` - Plane-redis service image
+
+    <Note>
+    For this installation, you can ignore the extra files in this folder (e.g., `docker-compose.yml`, `install.sh`, `plane.env`, etc.).  
+    </Note>
+
+5. Load the images into your local Docker registry or private registry:
+
+    ```bash
+    # Load each image into Docker 
+    docker load -i <plane-images>.tar
+
+    # Tag and push each image to your private registry
+    docker tag <image-name> <your-registry>/<image-name>
+    docker push <your-registry>/<image-name>
+    ```
+
+6. Create Custom Values File
+
+    ```bash
+    # Extract the Helm chart to access the values file
+    helm show values plane-enterprise-1.4.1.tgz > custom-values.yaml
+    ```
+
+7. Edit the `custom-values.yaml` file to point to your local/private registry images and configure important settings:
+
+    ```yaml
+    # Example of image updates in custom-values.yaml
+    license:
+        licenseDomain: 'plane.example.com'
+
+    airgapped:
+        enabled: true
+        # if using Custom Root CA for S3 storage
+        s3SecretName: "s3-custom-ca"
+        s3SecretKey: "s3-custom-ca.crt"
+
+    services:
+        web:
+            image: <your-registry.com>/web-commercial:<PLANE_VERSION>
+        
+        api:
+            image: <your-registry.com>/backend-commercial:<PLANE_VERSION>
+        
+        space:
+            image: <your-registry.com>/space-commercial:<PLANE_VERSION>
+        
+        admin:
+            image: <your-registry.com>/admin-commercial:<PLANE_VERSION>
+        
+        live:
+            image: <your-registry.com>/live-commercial:<PLANE_VERSION>
+        
+        monitor:
+            image: <your-registry.com>/monitor-commercial:<PLANE_VERSION>
+        
+        silo:
+            image: <your-registry.com>/silo-commercial:<PLANE_VERSION>
+        
+        iframely:
+            image: <your-registry.com>/iframely:v1.2.0
+        
+        # Database and infrastructure images
+        redis:
+            image: <your-registry.com>/valkey:7.2.5-alpine
+        
+        postgres:
+            image: <your-registry.com>/postgres:15.7-alpine
+        
+        rabbitmq:
+            image: <your-registry.com>/rabbitmq:3.13.6-management-alpine
+        
+        minio:
+            image: <your-registry.com>/minio:latest
+            image_mc: <your-registry.com>/mc:latest
+
+    env:
+        storageClass: ''
+    ```
+
+8. Install Plane Commercial Airgapped edition using your customized values file:
+
+    ```bash
+    helm install plane-app plane-enterprise-1.4.1.tgz \
+        --create-namespace \
+        --namespace plane \
+        -f custom-values.yaml \
+        --timeout 10m \
+        --wait \
+        --wait-for-jobs
+    ```
+
+## Verify installation
+
+Check that all components are running properly:
+
+```bash
+# Check all pods
+kubectl get pods -n plane
+
+# Check services
+kubectl get services -n plane
+
+# Check ingress
+kubectl get ingress -n plane
+
+# Check persistent volumes
+kubectl get pv,pvc -n plane
+
+# Get the ingress URL
+kubectl get ingress -n plane -o wide
+```
+
+## Additional configuration
+
+For more advanced Plane configuration options, refer to the [Kubernetes documentation](https://developers.plane.so/self-hosting/methods/kubernetes#configuration-settings).
+
+
+## Activate your license
+
+Once your air-gapped installation is running, you'll need to activate your workspace with the provided license file.
+<Note>
+You should have received the `license_key.json` file as part of your air-gapped package. If you don't have this file, contact our support team.
+</Note>
+
+1. Go to your [Workspace Settings](https://docs.plane.so/core-concepts/workspaces/overview#workspace-settings) in the Plane application.
+2. Select **Billing and plans** on the right pane.
+3. Click the **Activate this workspace** button.
+    ![Upload license file](/images/activate-license/upload-airgapped-license-file.webp)
+4. Upload the license file `license_key.json` to activate your workspace.
+
+You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
+
+<Tip>
+*Optional*  
+Once everything is working, you can safely delete the `airgapped` folder that contains the installation script and image files to free up space.
+</Tip>

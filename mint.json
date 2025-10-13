@@ -47,12 +47,12 @@
       "url": "self-hosting"
     },
     {
-      "name": "APIs and BYOA",
+      "name": "API Reference",
       "url": "api-reference"
     },
     {
-      "name": "Webhooks",
-      "url": "webhooks"
+      "name": "Dev Tools",
+      "url": "dev-tools"
     }
   ],
   "navigation": [
@@ -74,6 +74,14 @@
         "self-hosting/methods/kubernetes",
         "self-hosting/methods/coolify",
         "self-hosting/methods/portainer",
+        {
+          "group": "Airgapped Edition",
+          "pages": [
+              "self-hosting/methods/airgapped-edition",
+              "self-hosting/methods/airgapped-edition-kubernetes"
+            ]
+        },
+        
         "self-hosting/methods/podman-quadlets"
       ]
     },
@@ -136,13 +144,6 @@
         "self-hosting/troubleshoot/license-errors",
         "self-hosting/troubleshoot/cli-errors",
         "self-hosting/troubleshoot/storage-errors"
-      ]
-    },
-
-     {
-      "group": "App Development",
-      "pages": [
-        "api-reference/byoa/build-plane-app"
       ]
     },
     {
@@ -348,8 +349,12 @@
       ]
     },
     {
-      "group": "Webhooks",
-      "pages": ["webhooks/intro-webhooks"]
+      "group": "Build and extend Plane",
+      "pages": [
+      "dev-tools/build-plane-app",
+      "dev-tools/intro-webhooks",
+      "dev-tools/mcp-server"
+      ]
     }
   ],
   "footerSocials": {
@@ -360,5 +365,15 @@
     "ga4": {
       "measurementId": "G-G578SD4VZD"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/api-reference/byoa/build-plane-app",
+      "destination": "/dev-tools/build-plane-app"
+    },
+    {
+      "source": "/webhooks/intro-webhooks",
+      "destination": "/dev-tools/intro-webhooks"
+    }
+  ]
 }
