@@ -28,37 +28,37 @@ After creating and configuring the GitLab application and configuring the instan
 
 <Tabs>
 <Tab title="GitLab Cloud">
-    1. On the left sidebar in GitLab, select your avatar.
+1. On the left sidebar in GitLab, select your avatar.
 
-    2. Select **Preferences** tab.
+2. Select **Preferences** tab.
 
-    3. Navigate to the **Applications** tab.
+3. Navigate to the **Applications** tab.
 
-    4. Click on **Add new application** to begin the setup.
-        ![Add GitLab application](/images/integrations/gitlab/add-gitlab-application.webp)
+4. Click on **Add new application** to begin the setup.
+    ![Add GitLab application](/images/integrations/gitlab/add-gitlab-application.webp)
 
-    5. Provide a **Name** for your application.
+5. Provide a **Name** for your application.
 
-    6. Enter the following **Redirect URI**, replacing [YOUR_DOMAIN] with your actual domain:
-        ```bash
-        https://[YOUR_DOMAIN]/silo/api/gitlab/auth/callback
-        ```
-    7. Check the **Confidential** box..
+6. Enter the following **Redirect URI**, replacing [YOUR_DOMAIN] with your actual domain:
+    ```bash
+    https://[YOUR_DOMAIN]/silo/api/gitlab/auth/callback
+       ```
+7. Check the **Confidential** box..
 
-        ![Add app details](/images/integrations/gitlab/add-app-details.webp)
+    ![Add app details](/images/integrations/gitlab/add-app-details.webp)
 
-    8. Set permissions by selecting the required **Scopes**. The table below explains each scope:
+8. Set permissions by selecting the required **Scopes**. The table below explains each scope:
 
-        |Permission|Explanation|
-        |----------|-----------|
-        |`api`|Grants full read/write access to the API, including all groups, projects, container registry, dependency proxy, and package registry. Required for API requests.|
-        |`read_api`|Allows read-only access to all groups, projects, container registry, and package registry.|
-        |`read_user`|Grants read-only access to user profiles via the /user API endpoint, including username, public email, and full name. Also provides access to /users endpoints.|
-        |`read_repository`|Enables read-only access to repositories in private projects via Git-over-HTTP or the Repository Files API.|
-        |`profile`|Grants read-only access to the user's profile data using OpenID Connect.|
-        |`email`|Provides read-only access to the user's primary email address using OpenID Connect.|
+    |Permission|Explanation|
+    |----------|-----------|
+    |`api`|Grants full read/write access to the API, including all groups, projects, container registry, dependency proxy, and package registry. Required for API requests.|
+    |`read_api`|Allows read-only access to all groups, projects, container registry, and package registry.|
+    |`read_user`|Grants read-only access to user profiles via the /user API endpoint, including username, public email, and full name. Also provides access to /users endpoints.|
+    |`read_repository`|Enables read-only access to repositories in private projects via Git-over-HTTP or the Repository Files API.|
+    |`profile`|Grants read-only access to the user's profile data using OpenID Connect.|
+    |`email`|Provides read-only access to the user's primary email address using OpenID Connect.|
 
-    9. Click **Save Application** to finalize the setup.
+9. Click **Save Application** to finalize the setup.
 </Tab>
 
 <Tab title="GitLab Self-managed">
