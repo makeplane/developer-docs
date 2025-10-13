@@ -43,7 +43,7 @@ After creating and configuring the GitLab application and configuring the instan
         ```bash
         https://[YOUR_DOMAIN]/silo/api/gitlab/auth/callback
         ```
-    7. You can choose to check or leave the **Confidential** box unchecked—both options work for Plane.
+    7. Check the **Confidential** box..
 
         ![Add app details](/images/integrations/gitlab/add-app-details.webp)
 
@@ -55,7 +55,6 @@ After creating and configuring the GitLab application and configuring the instan
         |`read_api`|Allows read-only access to all groups, projects, container registry, and package registry.|
         |`read_user`|Grants read-only access to user profiles via the /user API endpoint, including username, public email, and full name. Also provides access to /users endpoints.|
         |`read_repository`|Enables read-only access to repositories in private projects via Git-over-HTTP or the Repository Files API.|
-        |`write_repository`|Allows read/write access to repositories on private projects via Git-over-HTTP (not through the API).|
         |`profile`|Grants read-only access to the user's profile data using OpenID Connect.|
         |`email`|Provides read-only access to the user's primary email address using OpenID Connect.|
 
