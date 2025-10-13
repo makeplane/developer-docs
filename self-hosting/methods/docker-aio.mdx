@@ -9,16 +9,25 @@ The Plane Commercial All-in-One (AIO) Docker image packages all Plane services i
 
 Your single AIO container includes all these services running together:
 
-- **Web App** (Port 3001) - The main Plane web interface you'll use
-- **Space** (Port 3002) - Public project spaces for external collaboration  
-- **Admin** (Port 3003) - Administrative interface
-- **API Server** (Port 3004) - Backend API
-- **Live Server** (Port 3005) - Real-time collaboration features
-- **Silo** (Port 3006) - Integration services
-- **Monitor** (Port 3007) - Feature flags and payments
-- **Email Server** (Ports 10025, 10465, 10587) - SMTP server for notifications
+- **Web App** - The main Plane web interface you'll use
+- **Space** - Public project spaces for external collaboration  
+- **Admin** - Administrative interface
+- **API Server** - Backend API
+- **Live Server** - Real-time collaboration features
+- **Silo** - Integration services
+- **Monitor** - Feature flags and payments
+- **Email Server** - SMTP server for notifications
 - **Proxy** (Port 80, 20025, 20465, 20587) - Caddy reverse proxy
 - **Worker and Beat Worker** - Background task processing
+
+### Port Mapping
+
+The following ports are exposed:
+- `80`: Main web interface (HTTP)
+- `443`: HTTPS (if SSL configured)
+- `20025`: SMTP port 25
+- `20465`: SMTP port 465 (SSL/TLS)
+- `20587`: SMTP port 587 (STARTTLS)
 
 ## Prerequisites
 
@@ -35,7 +44,10 @@ Your single AIO container includes all these services running together:
 
 ## Install Plane
 
-1. [Download the image]
+1. Download the image with:
+    ```bash
+    docker pull artifacts.plane.so/makeplane/plane-aio-commercial:stable
+    ```
 
 2. Run the following command to deploy the Plane AIO container. Make sure to replace all placeholder values (e.g., `your-domain.com`, `user:pass`) with your actual configuration.
 
@@ -60,7 +72,7 @@ Your single AIO container includes all these services running together:
         plane-aio-commercial:latest
     ```
 
-    If you're running everything locally, use this example:
+    If you're running on an IP address, use this example:
 
     ```bash
     MYIP=192.168.68.169
@@ -74,8 +86,8 @@ Your single AIO container includes all these services running together:
     -e REDIS_URL=redis://${MYIP}:16379 \
     -e AMQP_URL=amqp://plane:plane@${MYIP}:15673/plane \
     -e AWS_REGION=us-east-1 \
-    -e AWS_ACCESS_KEY_ID=5MV45J9NF5TEFZWYCRAX \
-    -e AWS_SECRET_ACCESS_KEY=7xMqAiAHsf2UUjMH+EwICXlyJL9TO30m8leEaDsL \
+    -e AWS_ACCESS_KEY_ID=<YOUR_AWS_ACCESS_KEY_ID> \
+    -e AWS_SECRET_ACCESS_KEY=<YOUR_AWS_SECRET_ACCESS_KEY> \
     -e AWS_S3_BUCKET_NAME=plane-app \
     -e AWS_S3_ENDPOINT_URL=http://${MYIP}:19000 \
     -e FILE_SIZE_LIMIT=10485760 \
