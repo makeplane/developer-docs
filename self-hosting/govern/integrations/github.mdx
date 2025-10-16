@@ -256,3 +256,54 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 8. Once you've created the app, [activate the GitHub Enterprise integration in Plane](https://docs.plane.so/integrations/github?edition=github-enterprise#connect-github-organization).
 </Tab>
 </Tabs>
+
+
+## Troubleshooting
+
+### Error: Invalid private key
+
+<div style={{color:"#ffffff", backgroundColor:"#333333", padding:"10px", borderRadius:"5px"}}> 
+    Failed to create GitHub connection: Invalid keyData
+</div>
+
+This error usually occurs when the private key is not correctly generated. To fix this, follow the below steps.
+
+1. Generate a new private key.
+2. Convert the private key to base64. 
+ ```bash
+   cat private_key.pem | base64 -w 0
+  ```
+3. Add the private key to the `.env` file.
+ ```bash
+   GITHUB_PRIVATE_KEY=<private_key>
+ ```
+4. Save the file and restart the instance.
+
+### Unable to connect GitHub organization account or personal account
+
+<div style={{color:"#ffffff", backgroundColor:"#333333", padding:"10px", borderRadius:"5px"}}> 
+    Error: Invalid request callback URL.
+</div>
+
+This error usually occurs when the callback URL is not correctly configured or the GitHub App is not marked public. To fix this, follow the below steps.
+
+1. Check if the callback URL is correctly configured.
+2. Check if your GitHub App is marked public.
+
+
+<div style={{color:"#ffffff", backgroundColor:"#333333", padding:"10px", borderRadius:"5px"}}> 
+    Error: Application secret value not found for key: x-github-id
+</div>
+
+This error usually occurs when the application secret is not correctly configured. To fix this, follow the below steps.
+
+1. Delete the `plane_app_details_github` key from redis cache. ```del plane_app_details_github```.
+2. Set the `SILO_BASE_URL` in env with plane self hosted url and restart the api server. ```export SILO_BASE_URL=https://<your-domain>```
+3. Run this command in api server shell `python manage.py reset_marketplace_app_secrets` to reset the application secrets.
+4. Try to connect again to the organization account to Plane.
+
+### Github integration suddenly stopped working after a while
+
+This error usually occurs when the GitHub integration is not correctly configured. To fix this, follow the below steps.
+
+1. Make sure you've `opted out` of Server Token expiration and reconnect once again to the organization account to Plane. Check in Github App Settings > Optional Features
