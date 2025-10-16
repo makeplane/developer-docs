@@ -260,10 +260,10 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 ## Troubleshooting
 
-### Error: Invalid private key
+### Invalid private key
 
-<div style={{color:"#ffffff", backgroundColor:"#333333", padding:"10px", borderRadius:"5px"}}> 
-    Failed to create GitHub connection: Invalid keyData
+<div style={{color:"red"}}> 
+   Error: Failed to create GitHub connection: Invalid keyData
 </div>
 
 This error usually occurs when the private key is not correctly generated. To fix this, follow the below steps.
@@ -281,8 +281,8 @@ This error usually occurs when the private key is not correctly generated. To fi
 
 ### Unable to connect GitHub organization account or personal account
 
-<div style={{color:"#ffffff", backgroundColor:"#333333", padding:"10px", borderRadius:"5px"}}> 
-    Error: Invalid request callback URL.
+<div style={{color:"red"}}> 
+   Error: Invalid request callback URL.
 </div>
 
 This error usually occurs when the callback URL is not correctly configured or the GitHub App is not marked public. To fix this, follow the below steps.
@@ -290,9 +290,10 @@ This error usually occurs when the callback URL is not correctly configured or t
 1. Check if the callback URL is correctly configured.
 2. Check if your GitHub App is marked public.
 
+### Application secret value not found
 
-<div style={{color:"#ffffff", backgroundColor:"#333333", padding:"10px", borderRadius:"5px"}}> 
-    Error: Application secret value not found for key: x-github-id
+<div style={{color:"red"}}> 
+   Error: Application secret value not found for key: x-github-id
 </div>
 
 This error usually occurs when the application secret is not correctly configured. To fix this, follow the below steps.
