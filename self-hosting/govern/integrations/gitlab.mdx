@@ -66,9 +66,6 @@ After creating and configuring the GitLab application and configuring the instan
 2. Click on your profile icon in the top-right corner.
 3. From the dropdown menu that appears, select **Edit profile**.
 4. Look for and select the **Applications** option within this menu.
-
-![GitLab Applications](https://media.docs.plane.so/integrations/gitlab/gitlab-applications.webp#center)
-
 5. On the Applications page, click **Add new application** to begin configuring your OAuth application.
 
 Fill in the application details with the following configuration:
@@ -79,12 +76,12 @@ Fill in the application details with the following configuration:
     - **Redirect URI**  
     The redirect URI depends on your Plane deployment:
 
-        **For Plane Cloud:**
+        **For Plane Cloud:**    
         ```
         https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback
         ```
 
-        **For Plane Self-Hosted:**
+        **For Plane Self-Hosted:**  
         ```
         https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback
         ```
