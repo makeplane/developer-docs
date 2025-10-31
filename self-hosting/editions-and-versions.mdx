@@ -3,7 +3,7 @@ title: Understanding Plane's editions
 sidebarTitle: Plane's Editions
 ---
 
-Plane comes in three editions by how its deployed. Our Cloud is our only hosted edition as of 2025. Additionally, we offer two unique self-hosted editions tailored to meet two sets of unique needs—the open-source Community Edition and the recommended Commercial Edition.
+Plane comes in four editions by how its deployed. Our Cloud is our only hosted edition as of 2025. Additionally, we offer three unique self-hosted editions tailored to meet two sets of unique needs—the open-source Community Edition, the recommended Commercial Edition, and the Airgapped Edition.
 
 ## About our self-hosted editions
 
@@ -33,6 +33,28 @@ This edition also comes with a Free tier, but also lets you upgrade seamlessly t
 
 - An intuitive upgrade flow that automatically calculates the number of seats you need by the number of users with paid roles in your workspace, so you never have to guess
 
+### Airgapped
+
+Built for organizations with strict security and compliance requirements, the Airgapped Commercial Edition provides the same powerful features as the Commercial Edition but operates in completely isolated environments without internet connectivity.
+
+The Airgapped Edition offers:
+
+- **Complete isolation** 
+Operates entirely within your network perimeter with no external dependencies or outbound connections.
+
+- **Full feature parity** 
+Includes all features available in the standard Commercial Edition, including advanced work management, security controls, and governance tools
+
+- **Version updates** 
+ Updates from your own docker registry.
+
+- **Self-contained architecture** 
+All services, dependencies, and resources are bundled for deployment in restricted networks
+
+- **Compliance-ready** 
+Designed to meet requirements for environments that prohibit external network communication
+
+
 ## Why we separate editions
 
 We’ve designed Plane’s editions to serve diverse user needs while staying true to the ethos of open source.
@@ -40,6 +62,8 @@ We’ve designed Plane’s editions to serve diverse user needs while staying tr
 - The **Community Edition** is completely open-source, with no restrictions beyond those outlined in the [AGPL v3.0 license](https://github.com/makeplane/plane/blob/preview/LICENSE.txt). This is the edition that is now ranking at #1 in our space on GitHub.
 
 - The **Commercial Edition** remains closed-source to offer enterprise-grade features and seamless scalability for businesses.
+
+- The **Airgapped Edition** extends the Commercial Edition's capabilities to isolated environments, ensuring organizations with strict security requirements can still benefit from Plane's full feature set.
 
 Unlike some open-core companies, we’ve adopted a clean separation to keep things simple and transparent. There’s no hidden code that limits modifications on the Community Edition, and no forced migrations from one edition to another.
 
@@ -53,7 +77,7 @@ Each of our editions is built on a distinct codebase. Versions with each differ 
 
 - Be intentful and deliberate with changes to the Community Edition
 
-For both the Commercial and Community Editions, version updates are in your control. Regular updates ensure you’re benefiting from the latest features and improvements. See [Update Plane](/self-hosting/manage/upgrade-plane) for how to upgrade your versions.
+For both the Commercial, Airgapped, and Community Editions, version updates are in your control. Regular updates ensure you’re benefiting from the latest features and improvements. See [Update Plane](/self-hosting/manage/upgrade-plane) for how to upgrade your versions.
 
 
 ## Changelog
