@@ -51,7 +51,7 @@
       "url": "api-reference"
     },
     {
-      "name": "Dev Tools",
+      "name": "Build and extend",
       "url": "dev-tools"
     }
   ],
@@ -67,12 +67,16 @@
     {
       "group": "Install",
       "pages": [
-        "self-hosting/methods/docker-compose",
-        "self-hosting/methods/docker-aio",
-        "self-hosting/methods/docker-swarm",
+        {
+          "group": "Docker",
+          "pages": [
+               "self-hosting/methods/docker-compose",
+               "self-hosting/methods/docker-aio",
+               "self-hosting/methods/docker-swarm"
+            ]
+        },
         "self-hosting/methods/kubernetes",
-        "self-hosting/methods/coolify",
-        "self-hosting/methods/portainer",
+        "self-hosting/methods/podman-quadlets",
         {
           "group": "Airgapped Edition",
           "pages": [
@@ -80,7 +84,13 @@
               "self-hosting/methods/airgapped-edition-kubernetes"
             ]
         },
-        "self-hosting/methods/podman-quadlets"
+        {
+          "group": "Managed platforms",
+          "pages": [
+               "self-hosting/methods/coolify",
+               "self-hosting/methods/portainer"
+            ]
+        }
       ]
     },
     {

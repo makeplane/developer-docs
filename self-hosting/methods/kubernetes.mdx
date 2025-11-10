@@ -44,29 +44,29 @@ Ensure you use use the latest Helm chart version.
 
     4. Use one of the following ways to deploy Plane:
         - **Quick setup**:  
-        This is the fastest way to deploy Plane with the default settings. This will create stateful deployments for Postgres, Redis/Valkey, and Minio with a persistent volume claim using the `longhorn` storage class. This also sets up the Ingress routes for you using `nginx` ingress class. To customize these settings, see the [Custom ingress routes](#custom-ingress-routes).
+            This is the fastest way to deploy Plane with the default settings. This will create stateful deployments for Postgres, Redis/Valkey, and Minio with a persistent volume claim using the `longhorn` storage class. This also sets up the Ingress routes for you using `nginx` ingress class. To customize these settings, see the [Custom ingress routes](#custom-ingress-routes).
 
-        Run the following command to deploy Plane:
+            Run the following command to deploy Plane:
 
-            ```bash
-                helm install plane-app plane/plane-enterprise \
-                    --create-namespace \
-                    --namespace plane \
-                    --set license.licenseDomain=${DOMAIN_NAME} \
-                    --set license.licenseServer=https://prime.plane.so \
-                    --set planeVersion=${PLANE_VERSION} \
-                    --set ingress.enabled=true \
-                    --set ingress.ingressClass=nginx \
-                    --set env.storageClass=longhorn \
-                    --timeout 10m \
-                    --wait \
-                    --wait-for-jobs
-            ```
+                ```bash
+                    helm install plane-app plane/plane-enterprise \
+                        --create-namespace \
+                        --namespace plane \
+                        --set license.licenseDomain=${DOMAIN_NAME} \
+                        --set license.licenseServer=https://prime.plane.so \
+                        --set planeVersion=${PLANE_VERSION} \
+                        --set ingress.enabled=true \
+                        --set ingress.ingressClass=nginx \
+                        --set env.storageClass=longhorn \
+                        --timeout 10m \
+                        --wait \
+                        --wait-for-jobs
+                ```
 
-            <Note>
-            This is the minimum required to set up Plane Commercial edition. You can change the default namespace from `plane`, the default app name from `plane-app`, the default storage class from `longhorn`, and the default ingress class from `nginx` to whatever you would like to.<br/> <br/>
-            You can also pass other settings referring to the **Configuration Settings** toggle section below.
-            </Note>
+                <Note>
+                This is the minimum required to set up Plane Commercial edition. You can change the default namespace from `plane`, the default app name from `plane-app`, the default storage class from `longhorn`, and the default ingress class from `nginx` to whatever you would like to.<br/> <br/>
+                You can also pass other settings referring to the **Configuration Settings** toggle section below.
+                </Note>
 
         - **Advanced setup**: 
             <Warning>
@@ -77,20 +77,20 @@ Ensure you use use the latest Helm chart version.
             
             1. Run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano. 
 
-            ```bash
-            helm  show values plane/plane-enterprise > values.yaml
-            vi values.yaml
-            ```
+                ```bash
+                helm  show values plane/plane-enterprise > values.yaml
+                vi values.yaml
+                ```
 
-            Make sure you set the required environment variables listed below:
-            - `planeVersion: v1.16.0`
-            - `license.licenseDomain: <The domain you have specified to host Plane>`
-            - `license.licenseServer: https://prime.plane.so`
-            - `ingress.enabled: <true | false>`
-            - `ingress.ingressClass: <nginx or any other ingress class configured in your cluster>`
-            - `env.storageClass: <longhorn or any other storage class configured in your cluster>`
+                Make sure you set the required environment variables listed below:
+                - `planeVersion: v1.16.0`
+                - `license.licenseDomain: <The domain you have specified to host Plane>`
+                - `license.licenseServer: https://prime.plane.so`
+                - `ingress.enabled: <true | false>`
+                - `ingress.ingressClass: <nginx or any other ingress class configured in your cluster>`
+                - `env.storageClass: <longhorn or any other storage class configured in your cluster>`
 
-            See the **Configuration settings** toggle section for more details.
+                See the **Configuration settings** toggle section for more details.
 
             2. After saving the `values.yaml` file, run the following command to deploy Plane:
 
@@ -103,9 +103,7 @@ Ensure you use use the latest Helm chart version.
                     --wait \
                     --wait-for-jobs 
             ```
-<Tip>
-If you want to upgrade to a paid plan, see [Plan upgrades](https://docs.plane.so/workspaces-and-users/upgrade-plan).
-</Tip>
+    5. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
 
 ### Configuration settings
 
