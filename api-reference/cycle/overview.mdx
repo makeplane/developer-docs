@@ -4,21 +4,21 @@ title: Overview
 
 Cycles is a custom time period in which a team works to complete items on their backlog. At the end of the sprint, the team will usually have finished building and implementing a new version of their project or product.
 
+## APIs
+
 ```http
 POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/
 GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/
 GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/
 PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/
 DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/
+GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/archived-cycles/
+POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/archived-cycles/:cycle_id/archive/
+DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/archived-cycles/:cycle_id/unarchive/
+GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/cycle-issues/
+POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/cycle-issues/
+DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/cycle-issues/:issue_id/
 POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/transfer-issues/
-```
-
-To transfer issues of one cycle to another, the payload should be sent in the below format
-
-```
-{
-	"new_cycle_id": "2380ce13-1cc4-4f67-9f57-a2b7686886d7"
-}
 ```
 
 ### Cycle Object
@@ -71,6 +71,20 @@ To transfer issues of one cycle to another, the payload should be sent in the be
 
 - `owned_by` uuid
 
+  The user ID of the cycle owner
+
+- `archived_at` _timestamp_
+
+  The timestamp when the cycle was archived (if archived)
+
+- `timezone` string
+
+  The timezone for the cycle
+
+- `version` number
+
+  Version number of the cycle
+
 <ResponseExample>
 ```json JSON
 {
@@ -91,3 +105,4 @@ To transfer issues of one cycle to another, the payload should be sent in the be
 }
 ```
 </ResponseExample>
+

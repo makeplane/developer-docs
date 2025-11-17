@@ -1,0 +1,18 @@
+---
+title: Add projects to teamspace
+description: Adds projects to a teamspace
+api: POST /api/v1/workspaces/{workspace-slug}/teamspaces/{teamspace_id}/projects/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="teamspace_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="project_ids" type="string[]" required>
+Array of project IDs to add to the teamspace
+</ParamField>
+

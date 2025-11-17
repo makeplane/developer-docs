@@ -1,0 +1,28 @@
+---
+title: Add initiative label
+description: Creates a new initiative label in a workspace
+api: POST /api/v1/workspaces/{workspace-slug}/initiatives/labels/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string" required>
+Name of the initiative label
+</ParamField>
+
+<ParamField body="description" type="string">
+Description of the initiative label
+</ParamField>
+
+<ParamField body="color" type="string">
+Color code for the initiative label
+</ParamField>
+
+<ParamField body="sort_order" type="number">
+Sort order for the initiative label
+</ParamField>
+

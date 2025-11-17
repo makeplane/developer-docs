@@ -1,0 +1,20 @@
+---
+title: List initiatives
+description: Gets all the initiatives in a workspace
+api: GET /api/v1/workspaces/{workspace-slug}/initiatives/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="limit" type="number">
+Number of results to return
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip
+</ParamField>
+

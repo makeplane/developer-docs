@@ -1,7 +1,7 @@
 ---
-title: Get issue by UUID
-description: Gets the details of an issue using the UUID
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}
+title: Get work item by UUID
+description: Gets the details of a work item using the UUID
+api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/
 ---
 
 ### Path parameters
@@ -11,3 +11,9 @@ api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue
 <ParamField path="project_id" type="string" required></ParamField>
 
 <ParamField path="issue_id" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="expand" type="string">
+Comma-separated list of fields to expand. Can include: type, module, labels, assignees, state, project
+</ParamField>

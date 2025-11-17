@@ -1,7 +1,10 @@
 ---
 title: Overview
-description: The comments that are added to the issue
 ---
+
+The comments that are added to the work item.
+
+## APIs
 
 ```http
 POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/comments/
@@ -11,29 +14,45 @@ PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/comments/:comment_id/
 ```
 
-### Issue Comment Object
+### Work Item Comment Object
 
 **Attributes**
 
-- `created_by` , `updated_by` _uuid_
+- `id` _uuid_
 
-  These values are auto saved and represent the id of the user that created or updated the module
+  Unique identifier for the comment
 
 - `created_at` _timestamp_
 
-  The timestamp of the time when the project was created
+  The timestamp when the comment was created
 
 - `updated_at` _timestamp_
 
-  The timestamp of the time when the project was last updated
+  The timestamp when the comment was last updated
 
-- `comment_html` html \*string **(required)\***
+- `deleted_at` _timestamp_ or _null_
+
+  The timestamp when the comment was deleted (if deleted)
+
+- `edited_at` _timestamp_ or _null_
+
+  The timestamp when the comment was last edited
+
+- `comment_html` _string_
 
   HTML string version of the comment
 
 - `comment_stripped` _string_
 
   Stripped string version of the comment
+
+- `comment_json` _object_
+
+  JSON object version of the comment
+
+- `attachments` _string[]_
+
+  Array of attachment URLs
 
 - `access` _string_
 
@@ -42,9 +61,25 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
   - INTERNAL
   - EXTERNAL
 
+- `external_source` _string_
+
+  External source identifier
+
+- `external_id` _string_
+
+  External ID from the external source
+
+- `is_member` _boolean_
+
+  Whether the current user is a member of the project
+
+- `created_by` , `updated_by` _uuid_
+
+  These values are auto saved and represent the id of the user that created or updated the comment
+
 - `project` uuid
 
-  It contains projects uuid which is automatically saved.
+  It contains project uuid which is automatically saved.
 
 - `workspace` uuid
 
@@ -52,7 +87,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
 - `issue` _uuid_
 
-  The issue the activity is attached to
+  The work item the comment is attached to
 
 - `actor` _uuid_
 

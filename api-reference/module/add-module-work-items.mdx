@@ -1,6 +1,6 @@
 ---
-title: Add module issue
-description: Adds an issue in a module
+title: Add module work items
+description: Adds work items (issues) to a module
 api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/modules/{module_id}/module-issues/
 ---
 
@@ -15,5 +15,6 @@ api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/modules/{mod
 ### Body
 
 <ParamField body="issues" type="string[]" required>
-It expects a list of issue ids
+List of work item (issue) IDs to add to the module
 </ParamField>
+

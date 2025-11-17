@@ -1,0 +1,18 @@
+---
+title: Add labels to initiative
+description: Adds labels to an initiative
+api: POST /api/v1/workspaces/{workspace-slug}/initiatives/{initiative_id}/labels/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="initiative_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="label_ids" type="string[]" required>
+Array of initiative label IDs to add to the initiative
+</ParamField>
+

@@ -1,0 +1,24 @@
+---
+title: List customers
+description: Gets all the customers in a workspace
+api: GET /api/v1/workspaces/{workspace-slug}/customers/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="workspace" type="string">
+Filter by workspace UUID
+</ParamField>
+
+<ParamField query="limit" type="number">
+Number of results to return
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip
+</ParamField>
+

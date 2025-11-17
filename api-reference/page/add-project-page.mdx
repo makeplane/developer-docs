@@ -1,0 +1,22 @@
+---
+title: Add project page
+description: Creates a new page at the project level
+api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/pages/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="project_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string">
+Name of the page
+</ParamField>
+
+<ParamField body="description_html" type="string">
+HTML description/content of the page
+</ParamField>
+

@@ -1,11 +1,13 @@
 ---
-title: Delete issue type
-description: Lets you to remove an existing issue type from your project.
-api: DELETE /api/v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/{type_id}/
+title: Delete work item type
+description: Deletes a work item type from your project
+api: DELETE /api/v1/workspaces/{workspace-slug}/projects/{project_id}/work-item-types/{work_item_type_id}/
 ---
 
 ### Path parameters
 
-<ParamField path="workspace_slug" type="string" required></ParamField>
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
 <ParamField path="project_id" type="string" required></ParamField>
-<ParamField path="type_id" type="string" required></ParamField>
+
+<ParamField path="work_item_type_id" type="string" required></ParamField>

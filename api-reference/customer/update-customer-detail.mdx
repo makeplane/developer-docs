@@ -1,0 +1,22 @@
+---
+title: Update customer details
+description: Updates the details of a customer
+api: PATCH /api/v1/workspaces/{workspace-slug}/customers/{customer_id}/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="customer_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string">
+Name of the customer
+</ParamField>
+
+<ParamField body="email" type="string">
+Email address of the customer
+</ParamField>
+

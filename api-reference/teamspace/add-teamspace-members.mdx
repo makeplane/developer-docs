@@ -1,0 +1,18 @@
+---
+title: Add members to teamspace
+description: Adds members to a teamspace
+api: POST /api/v1/workspaces/{workspace-slug}/teamspaces/{teamspace_id}/members/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="teamspace_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="member_ids" type="string[]" required>
+Array of user IDs to add to the teamspace
+</ParamField>
+

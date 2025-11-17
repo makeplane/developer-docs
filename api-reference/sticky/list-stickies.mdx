@@ -1,0 +1,20 @@
+---
+title: List stickies
+description: Gets all the stickies in a workspace
+api: GET /api/v1/workspaces/{workspace-slug}/stickies/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="limit" type="number">
+Number of results to return
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip
+</ParamField>
+

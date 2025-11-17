@@ -1,0 +1,30 @@
+---
+title: List customer requests
+description: Gets all the requests for a customer
+api: GET /api/v1/workspaces/{workspace-slug}/customers/{customer_id}/requests/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="customer_id" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="customer" type="string">
+Filter by customer UUID
+</ParamField>
+
+<ParamField query="workspace" type="string">
+Filter by workspace UUID
+</ParamField>
+
+<ParamField query="limit" type="number">
+Number of results to return
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip
+</ParamField>
+

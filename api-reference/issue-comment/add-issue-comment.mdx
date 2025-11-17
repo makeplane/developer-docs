@@ -1,6 +1,6 @@
 ---
-title: Add issue comment
-description: Adds a comment to an issue
+title: Add work item comment
+description: Adds a comment to a work item
 api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/comments/
 ---
 
@@ -14,4 +14,22 @@ api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issu
 
 ### Body
 
-<ParamField body="comment_html" type="string" required></ParamField>
+<ParamField body="comment_html" type="string">
+HTML string version of the comment
+</ParamField>
+
+<ParamField body="comment_json" type="object">
+JSON object version of the comment
+</ParamField>
+
+<ParamField body="access" type="string">
+Access level of the comment. Can be: INTERNAL, EXTERNAL
+</ParamField>
+
+<ParamField body="external_source" type="string">
+External source identifier
+</ParamField>
+
+<ParamField body="external_id" type="string">
+External ID from the external source
+</ParamField>

@@ -1,0 +1,20 @@
+---
+title: Transfer cycle work items
+description: Transfers work items (issues) from one cycle to another
+api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/cycles/{cycle_id}/transfer-issues/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="project_id" type="string" required></ParamField>
+
+<ParamField path="cycle_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="new_cycle_id" type="string" required>
+ID of the target cycle to transfer work items to
+</ParamField>
+

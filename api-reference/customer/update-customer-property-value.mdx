@@ -1,0 +1,20 @@
+---
+title: Update customer property value
+description: Updates a property value for a customer
+api: PATCH /api/v1/workspaces/{workspace-slug}/customers/{customer_id}/property-values/{property_id}/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="customer_id" type="string" required></ParamField>
+
+<ParamField path="property_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="values" type="array" required>
+Array of values for the property
+</ParamField>
+

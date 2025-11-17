@@ -1,0 +1,18 @@
+---
+title: Remove epics from initiative
+description: Removes epics from an initiative
+api: DELETE /api/v1/workspaces/{workspace-slug}/initiatives/{initiative_id}/epics/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="initiative_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="epic_ids" type="string[]" required>
+Array of epic IDs to remove from the initiative
+</ParamField>
+
