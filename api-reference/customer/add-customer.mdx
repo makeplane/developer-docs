@@ -1,0 +1,20 @@
+---
+title: Add customer
+description: Creates a new customer in a workspace
+api: POST /api/v1/workspaces/{workspace-slug}/customers/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string">
+Name of the customer
+</ParamField>
+
+<ParamField body="email" type="string">
+Email address of the customer
+</ParamField>
+

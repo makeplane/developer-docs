@@ -1,0 +1,20 @@
+---
+title: Search work items
+description: Searches for work items across a workspace
+api: GET /api/v1/workspaces/{workspace-slug}/issues/search/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="search" type="string" required>
+Search query string
+</ParamField>
+
+<ParamField query="project" type="string">
+Filter by project UUID
+</ParamField>
+

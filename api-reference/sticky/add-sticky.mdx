@@ -1,0 +1,32 @@
+---
+title: Add sticky
+description: Creates a new sticky in a workspace
+api: POST /api/v1/workspaces/{workspace-slug}/stickies/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string">
+Name of the sticky
+</ParamField>
+
+<ParamField body="description_html" type="string">
+HTML description of the sticky
+</ParamField>
+
+<ParamField body="logo_props" type="object">
+Logo properties for the sticky
+</ParamField>
+
+<ParamField body="color" type="string">
+Color of the sticky
+</ParamField>
+
+<ParamField body="background_color" type="string">
+Background color of the sticky
+</ParamField>
+

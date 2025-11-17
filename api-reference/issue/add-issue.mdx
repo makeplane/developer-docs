@@ -1,6 +1,6 @@
 ---
-title: Add issue
-description: Adds an issue to a project
+title: Add work item
+description: Adds a work item to a project
 api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/
 ---
 
@@ -12,4 +12,50 @@ api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/
 
 ### Body
 
-<ParamField body="name" type="string" required></ParamField>
+<ParamField body="name" type="string" required>
+Name of the work item
+</ParamField>
+
+<ParamField body="description_html" type="string">
+HTML description of the work item
+</ParamField>
+
+<ParamField body="state" type="string">
+UUID of the state for the work item
+</ParamField>
+
+<ParamField body="assignees" type="string[]">
+Array of user UUIDs assigned to the work item
+</ParamField>
+
+<ParamField body="labels" type="string[]">
+Array of label UUIDs for the work item
+</ParamField>
+
+<ParamField body="parent" type="string">
+UUID of the parent work item
+</ParamField>
+
+<ParamField body="estimate_point" type="string">
+Estimate point for the work item (value between 0-7)
+</ParamField>
+
+<ParamField body="type" type="string">
+UUID of the work item type
+</ParamField>
+
+<ParamField body="module" type="string">
+UUID of the module the work item belongs to
+</ParamField>
+
+<ParamField body="target_date" type="string">
+Target date of the work item in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="start_date" type="string">
+Start date of the work item in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="priority" type="string">
+Priority of the work item. Can be: none, urgent, high, medium, low
+</ParamField>

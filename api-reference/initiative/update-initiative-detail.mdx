@@ -1,0 +1,54 @@
+---
+title: Update initiative details
+description: Updates the details of an initiative
+api: PATCH /api/v1/workspaces/{workspace-slug}/initiatives/{initiative_id}/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="initiative_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string">
+Name of the initiative
+</ParamField>
+
+<ParamField body="description" type="string">
+Plain text description of the initiative
+</ParamField>
+
+<ParamField body="description_html" type="string">
+HTML description of the initiative
+</ParamField>
+
+<ParamField body="description_stripped" type="string">
+Stripped version of the HTML description
+</ParamField>
+
+<ParamField body="description_binary" type="string">
+Binary description of the initiative
+</ParamField>
+
+<ParamField body="lead" type="string">
+User ID of the initiative lead
+</ParamField>
+
+<ParamField body="start_date" type="string">
+Start date of the initiative in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="end_date" type="string">
+End date of the initiative in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="logo_props" type="object">
+Logo properties for the initiative
+</ParamField>
+
+<ParamField body="state" type="string">
+State of the initiative. Can be: DRAFT, PLANNED, ACTIVE, COMPLETED, CLOSED
+</ParamField>
+

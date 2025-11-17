@@ -1,0 +1,22 @@
+---
+title: List initiative projects
+description: Gets all the projects associated with an initiative
+api: GET /api/v1/workspaces/{workspace-slug}/initiatives/{initiative_id}/projects/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="initiative_id" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="limit" type="number">
+Number of results to return
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip
+</ParamField>
+

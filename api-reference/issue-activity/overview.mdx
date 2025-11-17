@@ -1,24 +1,35 @@
 ---
 title: Overview
-description: Issue activities are the history of all the changes that happened to the issue like property changes etc.
 ---
+
+Work item activities are the history of all the changes that happened to the work item like property changes etc.
+
+## APIs
 
 ```http
 GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/activities/
 GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/activities/:activity_id/
 ```
 
-### Issue Activity Object
+### Work Item Activity Object
 
 **Attributes**
 
+- `id` _uuid_
+
+  Unique identifier for the activity
+
 - `created_at` _timestamp_
 
-  The timestamp of the time when the project was created
+  The timestamp of the time when the activity was created
 
 - `updated_at` _timestamp_
 
-  The timestamp of the time when the project was last updated
+  The timestamp of the time when the activity was last updated
+
+- `deleted_at` _timestamp_ or _null_
+
+  The timestamp when the activity was deleted (if deleted)
 
 - `verb` _string_
 
@@ -66,7 +77,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
 - `issue` _uuid_
 
-  The issue the activity is attached to
+  The work item the activity is attached to
 
 - `issue_comment` _uuid or null_
 
@@ -74,7 +85,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
 - `actor` uuid
 
-  The actor who triggered this actor
+  The actor who triggered this activity
 
 <ResponseExample>
 ```json JSON
@@ -86,7 +97,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
     "field": null,
     "old_value": null,
     "new_value": null,
-    "comment": "created the issue",
+    "comment": "created the work item",
     "attachments": [],
     "old_identifier": null,
     "new_identifier": null,

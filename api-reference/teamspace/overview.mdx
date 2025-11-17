@@ -1,0 +1,104 @@
+---
+title: Overview
+---
+
+Teamspaces allow you to organize teams, projects, and members within a workspace. They provide a way to group related work and manage access at a team level.
+
+## APIs
+
+### Teamspace Management
+
+```http
+POST   /api/v1/workspaces/:workspace-slug/teamspaces/
+GET    /api/v1/workspaces/:workspace-slug/teamspaces/
+GET    /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/
+PATCH  /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/
+DELETE /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/
+```
+
+### Teamspace Members
+
+```http
+GET    /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/members/
+POST   /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/members/
+DELETE /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/members/
+```
+
+### Teamspace Projects
+
+```http
+GET    /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/projects/
+POST   /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/projects/
+DELETE /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/projects/
+```
+
+### Teamspace Object
+
+**Attributes**
+
+- `id` _uuid_
+
+  Unique identifier for the teamspace
+
+- `name` _string_ **(required)**
+
+  Name of the teamspace
+
+- `description_json` _object_
+
+  JSON description of the teamspace
+
+- `description_html` _string_
+
+  HTML description of the teamspace
+
+- `description_stripped` _string_
+
+  Stripped version of the HTML description
+
+- `description_binary` _string_
+
+  Binary description of the teamspace
+
+- `logo_props` _object_
+
+  Logo properties for the teamspace
+
+- `lead` _uuid_
+
+  User ID of the teamspace lead
+
+- `workspace` _uuid_
+
+  Workspace UUID which is automatically saved
+
+- `created_at` _timestamp_
+
+  The timestamp when the teamspace was created
+
+- `updated_at` _timestamp_
+
+  The timestamp when the teamspace was last updated
+
+- `created_by` _uuid_
+
+  ID of the user who created the teamspace
+
+- `updated_by` _uuid_
+
+  ID of the user who last updated the teamspace
+
+<ResponseExample>
+```json JSON
+{
+	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+	"created_at": "2023-11-19T11:56:55.176802Z",
+	"updated_at": "2023-11-19T11:56:55.176809Z",
+	"name": "Engineering Team",
+	"description_html": "<p>Engineering team workspace</p>",
+	"lead": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
+}
+```
+</ResponseExample>
+

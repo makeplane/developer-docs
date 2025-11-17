@@ -1,7 +1,7 @@
 ---
-title: Update issue comment details
-description: Gets the details of a comment of an issue
-api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/comments/{comment_id}
+title: Update work item comment details
+description: Updates the details of a comment of a work item
+api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/comments/{comment_id}/
 ---
 
 ### Path parameters
@@ -16,4 +16,22 @@ api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{iss
 
 ### Body
 
-<ParamField body="comment_html" type="string" required></ParamField>
+<ParamField body="comment_html" type="string">
+HTML string version of the comment
+</ParamField>
+
+<ParamField body="comment_json" type="object">
+JSON object version of the comment
+</ParamField>
+
+<ParamField body="access" type="string">
+Access level of the comment. Can be: INTERNAL, EXTERNAL
+</ParamField>
+
+<ParamField body="external_source" type="string">
+External source identifier
+</ParamField>
+
+<ParamField body="external_id" type="string">
+External ID from the external source
+</ParamField>

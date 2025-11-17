@@ -1,6 +1,6 @@
 ---
-title: List issues
-description: Gets all the issues of a project
+title: List work items
+description: Gets all the work items of a project
 api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/
 ---
 
@@ -8,5 +8,29 @@ api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/
 
 <ParamField path="workspace-slug" type="string" required></ParamField>
 <ParamField path="project_id" type="string" required></ParamField>
-<ParamField query="fields" type="string"></ParamField>
-<ParamField query="expand" type="string"></ParamField>
+
+### Query parameters
+
+<ParamField query="project" type="string">
+Filter by project UUID
+</ParamField>
+
+<ParamField query="state" type="string">
+Filter by state UUID
+</ParamField>
+
+<ParamField query="assignee" type="string">
+Filter by assignee user UUID
+</ParamField>
+
+<ParamField query="limit" type="number">
+Number of results to return
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip
+</ParamField>
+
+<ParamField query="expand" type="string">
+Comma-separated list of fields to expand. Can include: type, module, labels, assignees, state, project
+</ParamField>

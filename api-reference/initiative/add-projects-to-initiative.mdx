@@ -1,0 +1,18 @@
+---
+title: Add projects to initiative
+description: Adds projects to an initiative
+api: POST /api/v1/workspaces/{workspace-slug}/initiatives/{initiative_id}/projects/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="initiative_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="project_ids" type="string[]" required>
+Array of project IDs to add to the initiative
+</ParamField>
+

@@ -1,0 +1,40 @@
+---
+title: Add teamspace
+description: Creates a new teamspace in a workspace
+api: POST /api/v1/workspaces/{workspace-slug}/teamspaces/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string" required>
+Name of the teamspace
+</ParamField>
+
+<ParamField body="description_json" type="object">
+JSON description of the teamspace
+</ParamField>
+
+<ParamField body="description_html" type="string">
+HTML description of the teamspace
+</ParamField>
+
+<ParamField body="description_stripped" type="string">
+Stripped version of the HTML description
+</ParamField>
+
+<ParamField body="description_binary" type="string">
+Binary description of the teamspace
+</ParamField>
+
+<ParamField body="logo_props" type="object">
+Logo properties for the teamspace
+</ParamField>
+
+<ParamField body="lead" type="string">
+User ID of the teamspace lead
+</ParamField>
+

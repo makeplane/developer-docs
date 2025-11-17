@@ -1,0 +1,20 @@
+---
+title: Add workspace page
+description: Creates a new page at the workspace level
+api: POST /api/v1/workspaces/{workspace-slug}/pages/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="name" type="string">
+Name of the page
+</ParamField>
+
+<ParamField body="description_html" type="string">
+HTML description/content of the page
+</ParamField>
+

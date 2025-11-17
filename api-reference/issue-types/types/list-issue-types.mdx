@@ -1,10 +1,25 @@
 ---
-title: List issue types
-description: Fetches all available issue types in your project.
-api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/
+title: List work item types
+description: Fetches all available work item types in your project
+api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/work-item-types/
 ---
 
 ### Path parameters
 
-<ParamField path="workspace_slug" type="string" required></ParamField>
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
 <ParamField path="project_id" type="string" required></ParamField>
+
+### Query parameters
+
+<ParamField query="project" type="string">
+Project UUID to filter work item types
+</ParamField>
+
+<ParamField query="limit" type="number">
+Number of results to return
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip
+</ParamField>

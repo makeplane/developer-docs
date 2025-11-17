@@ -1,0 +1,18 @@
+---
+title: Link work items to customer
+description: Links work items (issues) to a customer
+api: POST /api/v1/workspaces/{workspace-slug}/customers/{customer_id}/issues/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="customer_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="issue_ids" type="string[]" required>
+Array of work item (issue) IDs to link to the customer
+</ParamField>
+

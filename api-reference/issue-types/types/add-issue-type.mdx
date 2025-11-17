@@ -1,16 +1,41 @@
 ---
-title: Add issue type
-description: Lets you create custom issue types in your project.
-api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/issue-types/
+title: Add work item type
+description: Creates a new work item type in your project
+api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/work-item-types/
 ---
 
 ### Path parameters
 
-<ParamField path="workspace_slug" type="string" required></ParamField>
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
 <ParamField path="project_id" type="string" required></ParamField>
 
 ### Body
 
-<ParamField body="name" type="string" required></ParamField>
-<ParamField body="description" type="string"></ParamField>
-<ParamField body="is_active" type="boolean"></ParamField>
+<ParamField body="name" type="string">
+Name of the work item type
+</ParamField>
+
+<ParamField body="description" type="string">
+Description of the work item type
+</ParamField>
+
+<ParamField body="logo_props" type="object">
+Logo properties for the work item type
+</ParamField>
+
+<ParamField body="is_epic" type="boolean">
+Whether this work item type is an epic
+</ParamField>
+
+<ParamField body="is_default" type="boolean">
+Whether this is the default work item type
+</ParamField>
+
+<ParamField body="is_active" type="boolean">
+Whether this work item type is active
+</ParamField>
+
+<ParamField body="level" type="number">
+Level of the work item type
+</ParamField>

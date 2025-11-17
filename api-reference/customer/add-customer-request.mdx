@@ -1,0 +1,22 @@
+---
+title: Add customer request
+description: Creates a new request for a customer
+api: POST /api/v1/workspaces/{workspace-slug}/customers/{customer_id}/requests/
+---
+
+### Path parameters
+
+<ParamField path="workspace-slug" type="string" required></ParamField>
+
+<ParamField path="customer_id" type="string" required></ParamField>
+
+### Body
+
+<ParamField body="title" type="string">
+Title of the request
+</ParamField>
+
+<ParamField body="description" type="string">
+Description of the request
+</ParamField>
+

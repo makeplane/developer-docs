@@ -1,11 +1,19 @@
 ---
-title: Get issue by sequence ID 
-description: Gets the details of an issue using the sequence id
-api: GET /api/v1/workspaces/{workspace-slug}/issues/{sequence_id}/
+title: Get work item by identifier
+description: Gets the details of a work item using the identifier (e.g., PROJ-123)
+api: GET /api/v1/workspaces/{workspace-slug}/issues/{identifier}/
 ---
 
 ### Path parameters
 
 <ParamField path="workspace-slug" type="string" required></ParamField>
 
-<ParamField path="sequence_id" type="string" required></ParamField>
+<ParamField path="identifier" type="string" required>
+Work item identifier in the format PROJECT-123 (e.g., PROJ-123)
+</ParamField>
+
+### Query parameters
+
+<ParamField query="expand" type="string">
+Comma-separated list of fields to expand. Can include: type, module, labels, assignees, state, project
+</ParamField>

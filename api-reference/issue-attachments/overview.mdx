@@ -1,12 +1,17 @@
 ---
 title: Overview
-description: Allows you to manage file attachments associated with issues and Intake issues. You can upload new attachments and retrieve existing attachments for a specific issue.
 ---
+
+Allows you to manage file attachments associated with work items and Intake issues. You can upload new attachments and retrieve existing attachments for a specific work item.
+
+## APIs
 
 ```http
 GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/
+GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/:attachment_id/
 POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/asset-id/
+PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/:attachment_id/
+DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/:attachment_id/
 ```
 
 ## Upload Process
@@ -15,7 +20,7 @@ PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 2. [Upload the file](/api-reference/issue-attachments/upload-file) to storage.
 3. [Complete attachment upload](/api-reference/issue-attachments/complete-upload) to notify server.
 
-## Issue attachment object
+## Work Item Attachment Object
 
 **Attributes**
 
@@ -47,9 +52,13 @@ PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
     
     Storage path/identifier for the attachment file
 
-*   `entity-type` _string_
+*   `entity_type` _string_
     
-    Always `ISSUE_ATTACHMENT` for issue attachments
+    Always `ISSUE_ATTACHMENT` for work item attachments
+
+*   `entity_identifier` _string_
+    
+    Entity identifier for the attachment
 
 *   `is_deleted` _boolean_
     
@@ -117,11 +126,27 @@ PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
 *   `project` _string_
 
-    ID of project containing the issue
+    ID of project containing the work item
 
 *   `issue` _string_
 
-    ID of issue containing the attachment
+    ID of work item containing the attachment
+
+*   `user` _string_
+
+    ID of user associated with the attachment
+
+*   `draft_issue` _string_
+
+    ID of draft work item if applicable
+
+*   `comment` _string_
+
+    ID of comment if attachment is associated with a comment
+
+*   `page` _string_
+
+    ID of page if attachment is associated with a page
 
     
 <ResponseExample>

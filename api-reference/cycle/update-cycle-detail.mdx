@@ -1,7 +1,7 @@
 ---
 title: Update cycle details
 description: Updates the details of a cycle
-api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/cycles/{cycle_id}
+api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/cycles/{cycle_id}/
 ---
 
 ### Path parameters
@@ -14,4 +14,34 @@ api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/cycles/{cyc
 
 ### Body
 
-<ParamField body="name" type="string" required></ParamField>
+<ParamField body="name" type="string">
+Name of the cycle
+</ParamField>
+
+<ParamField body="description" type="string">
+Description of the cycle
+</ParamField>
+
+<ParamField body="start_date" type="string">
+Start date of the cycle in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="end_date" type="string">
+End date of the cycle in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="owned_by" type="string">
+User ID of the cycle owner
+</ParamField>
+
+<ParamField body="external_source" type="string">
+External source identifier
+</ParamField>
+
+<ParamField body="external_id" type="string">
+External ID from the external source
+</ParamField>
+
+<ParamField body="timezone" type="string">
+Timezone for the cycle
+</ParamField>
