@@ -2,50 +2,11 @@
 title: Overview
 ---
 
-Initiatives are high-level strategic goals that help organize and track work across multiple projects, epics, and work items. They provide a way to group related work and measure progress toward larger objectives.
+Initiatives are high-level strategic goals that help organize and track work across multiple projects, epics, and work items, providing a way to group related work and measure progress toward larger objectives.
 
-## APIs
+[Learn more about Initiatives](https://docs.plane.so/core-concepts/projects/initiatives)
 
-### Initiative Management
-
-```http
-POST   /api/v1/workspaces/:workspace-slug/initiatives/
-GET    /api/v1/workspaces/:workspace-slug/initiatives/
-GET    /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/
-PATCH  /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/
-DELETE /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/
-```
-
-### Initiative Labels
-
-```http
-POST   /api/v1/workspaces/:workspace-slug/initiatives/labels/
-GET    /api/v1/workspaces/:workspace-slug/initiatives/labels/
-GET    /api/v1/workspaces/:workspace-slug/initiatives/labels/:label_id/
-PATCH  /api/v1/workspaces/:workspace-slug/initiatives/labels/:label_id/
-DELETE /api/v1/workspaces/:workspace-slug/initiatives/labels/:label_id/
-GET    /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/labels/
-POST   /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/labels/
-DELETE /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/labels/
-```
-
-### Initiative Projects
-
-```http
-GET    /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/projects/
-POST   /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/projects/
-DELETE /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/projects/
-```
-
-### Initiative Epics
-
-```http
-GET    /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/epics/
-POST   /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/epics/
-DELETE /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/epics/
-```
-
-### Initiative Object
+## The Initiative object
 
 **Attributes**
 
@@ -114,7 +75,7 @@ DELETE /api/v1/workspaces/:workspace-slug/initiatives/:initiative_id/epics/
   ID of the user who last updated the initiative
 
 <ResponseExample>
-```json JSON
+```json INITIATIVES OBJECT
 {
 	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
 	"created_at": "2023-11-19T11:56:55.176802Z",

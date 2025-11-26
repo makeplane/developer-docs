@@ -1,34 +1,38 @@
 ---
-title: Update sticky details
-description: Updates the details of a sticky
-api: PATCH /api/v1/workspaces/{workspace-slug}/stickies/{sticky_id}/
+title: Update a sticky
+description: Updates an existing sticky by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+api: PATCH /api/v1/workspaces/{workspace_slug}/stickies/{sticky_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="sticky_id" type="string" required></ParamField>
+<ParamField path="sticky_id" type="string" required>
+The unique identifier for the sticky.
+</ParamField>
 
-### Body
+## Body parameters
 
 <ParamField body="name" type="string">
-Name of the sticky
+Name of the sticky.
 </ParamField>
 
 <ParamField body="description_html" type="string">
-HTML description of the sticky
+HTML-formatted content of the sticky.
 </ParamField>
 
 <ParamField body="logo_props" type="object">
-Logo properties for the sticky
+Logo properties and visual configuration.
 </ParamField>
 
 <ParamField body="color" type="string">
-Color of the sticky
+Text color for the sticky (hex code).
 </ParamField>
 
 <ParamField body="background_color" type="string">
-Background color of the sticky
+Background color for the sticky (hex code). 
 </ParamField>
 

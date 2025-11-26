@@ -1,20 +1,22 @@
 ---
-title: List teamspaces
-description: Gets all the teamspaces in a workspace
-api: GET /api/v1/workspaces/{workspace-slug}/teamspaces/
+title: List all teamspaces
+description: Returns a list of all teamspaces in a workspace.
+api: GET /api/v1/workspaces/{workspace_slug}/teamspaces/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-### Query parameters
+## Query parameters
 
 <ParamField query="limit" type="number">
-Number of results to return
+Number of results to return per page.
 </ParamField>
 
 <ParamField query="offset" type="number">
-Number of results to skip
+Number of results to skip for pagination.
 </ParamField>
 

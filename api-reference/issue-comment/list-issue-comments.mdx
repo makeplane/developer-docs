@@ -1,35 +1,41 @@
 ---
-title: List work item comments
-description: Gets all the comments of a work item
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/comments/
+title: List all work item comments
+description: Returns a list of all comments on a work item, ordered chronologically.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/comments/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-<ParamField path="issue_id" type="string" required></ParamField>
+<ParamField path="work_item_id" type="string" required>
+The unique identifier for the work item.
+</ParamField>
 
-### Query parameters
+## Query parameters
 
 <ParamField query="issue" type="string">
-Filter by work item UUID
+Filter by work item ID.
 </ParamField>
 
 <ParamField query="project" type="string">
-Filter by project UUID
+Filter by project ID.
 </ParamField>
 
 <ParamField query="workspace" type="string">
-Filter by workspace UUID
+Filter by workspace ID.
 </ParamField>
 
 <ParamField query="limit" type="number">
-Number of results to return
+Number of results to return per page.
 </ParamField>
 
 <ParamField query="offset" type="number">
-Number of results to skip
+Number of results to skip for pagination.
 </ParamField>

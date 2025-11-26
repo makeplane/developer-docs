@@ -1,25 +1,29 @@
 ---
-title: List work item types
-description: Fetches all available work item types in your project
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/work-item-types/
+title: List all work item types
+description: Returns a list of all work item types in a project.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-item-types/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-### Query parameters
+## Query parameters
 
 <ParamField query="project" type="string">
-Project UUID to filter work item types
+Filter by project ID.
 </ParamField>
 
 <ParamField query="limit" type="number">
-Number of results to return
+Number of results to return per page.
 </ParamField>
 
 <ParamField query="offset" type="number">
-Number of results to skip
+Number of results to skip for pagination.
 </ParamField>

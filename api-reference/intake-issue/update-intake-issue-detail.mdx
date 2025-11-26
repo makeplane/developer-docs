@@ -1,19 +1,20 @@
 ---
-title: Update intake issue detail
-description: Updates the details of an intake issue
-api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/intake-issues/{issue_id}
+title: Update an intake work item
+description: Updates an existing intake work item by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+api: PATCH /api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{issue_id}
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
-<ParamField path="project_id" type="string" required></ParamField>
+</ParamField>
+<ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
+<ParamField path="work_item_id" type="string" required>The unique identifier of the work item</ParamField>
 
-<ParamField path="issue_id" type="string" required></ParamField>
-
-### Body
+## Body parameters
 
 <ParamField body="issue" type="object">
-  <ParamField body="name" type="string"></ParamField>
+  <ParamField body="name" type="string">Name of the intake work item.</ParamField>
 </ParamField>

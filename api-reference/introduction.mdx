@@ -4,6 +4,18 @@ sidebarTitle: Introduction
 description: The Plane API is organized around REST. Our API has predictable resource-oriented URLs, accepts application/json request bodies, returns JSON responses, and uses standard HTTP response codes, authentication, and verbs.
 ---
 
+<Warning>
+**Deprecation notice**
+
+We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
+
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
+</Warning>
+
 ### Base URL
 All requests to the Plane Cloud API must be made to the following base URL:
   ```
@@ -13,7 +25,7 @@ This URL should be prefixed to all endpoint paths.
 
 For example, to retrieve all projects in a workspace:
   ```
-  GET https://api.plane.so/api/v1/workspaces/:workspace-slug/projects/
+  GET https://api.plane.so/api/v1/workspaces/{workspace_slug}/projects/
   ```
 <Note>  
 💡 If you're using a self-hosted instance of Plane, your API base URL will differ based on your custom domain and setup.
@@ -52,7 +64,7 @@ Here's an example of making a GET request to the API with the API key:
 ### Request
 
 ```
-GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/
+GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/
 Headers:
   X-API-Key: plane_api_<token>
 
@@ -160,7 +172,7 @@ The paginated response includes the following fields:
 ### Request: Fetching the First Page
 
 ```
-GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/?per_page=20
+GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/?per_page=20
 
 ```
 
@@ -186,7 +198,7 @@ GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/?per_page=20
 ### Request: Fetching the Next Page
 
 ```
-GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues?per_page=20&cursor=20:1:0
+GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items?per_page=20&cursor=20:1:0
 
 ```
 
@@ -258,7 +270,7 @@ The fields parameter enables clients to selectively retrieve only a subset of fi
 *   Syntax: **`?fields=field1,field2,field3`**
 
 ```
-GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/?fields=id,name,description
+GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/?fields=id,name,description
 
 ```
 
@@ -279,7 +291,7 @@ The expand parameter allows clients to request additional related information to
 ## Example
 
 ```
-GET /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/?expand=assignees,state
+GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/?expand=assignees,state
 
 ```
 

@@ -1,14 +1,15 @@
 ---
-title: List module work items
-description: Gets all the work items (issues) in a module
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/modules/{module_id}/module-issues/
+title: List all work items in a module
+description: Returns a list of all work items in a module.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/module-issues/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>The unique identifier of the project.</ParamField>
 
-<ParamField path="module_id" type="string" required></ParamField>
-
+<ParamField path="module_id" type="string" required>The unique identifier for the module.</ParamField>

@@ -2,16 +2,21 @@
 title: Overview
 ---
 
-Work item activities are the history of all the changes that happened to the work item like property changes etc.
+Work item activity represents the history of all changes made to a work item, including property changes, comments, and other modifications.
 
-## APIs
+<Warning>
+**Deprecation notice**
 
-```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/activities/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/activities/:activity_id/
-```
+We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
 
-### Work Item Activity Object
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
+</Warning>
+
+## The Activity object
 
 **Attributes**
 
@@ -88,7 +93,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
   The actor who triggered this activity
 
 <ResponseExample>
-```json JSON
+```json THE ACTIVITY OBJECT
 {
     "id": "35612f5b-3eff-4130-b91c-c976ff887a20",
     "created_at": "2023-11-19T11:56:55.452555Z",

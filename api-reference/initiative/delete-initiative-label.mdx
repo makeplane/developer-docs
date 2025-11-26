@@ -1,12 +1,17 @@
 ---
-title: Delete initiative label
-description: Deletes an initiative label
-api: DELETE /api/v1/workspaces/{workspace-slug}/initiatives/labels/{label_id}/
+title: Delete an initiative label
+description: Permanently deletes an initiative label from a workspace. This action cannot be undone.
+api: DELETE /api/v1/workspaces/{workspace_slug}/initiatives/labels/{label_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="label_id" type="string" required></ParamField>
+<ParamField path="label_id" type="string" required>
+The unique identifier for the initiative label.
+</ParamField>
+
 

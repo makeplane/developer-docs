@@ -1,36 +1,40 @@
 ---
-title: List work items
-description: Gets all the work items of a project
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/
+title: List all work items
+description: Returns a list of all work items in a project.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-### Query parameters
+## Query parameters
 
 <ParamField query="project" type="string">
-Filter by project UUID
+Filter by project ID.
 </ParamField>
 
 <ParamField query="state" type="string">
-Filter by state UUID
+Filter by state ID.
 </ParamField>
 
 <ParamField query="assignee" type="string">
-Filter by assignee user UUID
+Filter by assignee user ID.
 </ParamField>
 
 <ParamField query="limit" type="number">
-Number of results to return
+Number of results to return per page.
 </ParamField>
 
 <ParamField query="offset" type="number">
-Number of results to skip
+Number of results to skip for pagination.
 </ParamField>
 
 <ParamField query="expand" type="string">
-Comma-separated list of fields to expand. Can include: type, module, labels, assignees, state, project
+Comma-separated list of fields to expand. Possible values: `type`, `module`, `labels`, `assignees`, `state`, `project`.
 </ParamField>

@@ -1,12 +1,16 @@
 ---
-title: Delete teamspace
+title: Delete a teamspace
 description: Deletes a teamspace
-api: DELETE /api/v1/workspaces/{workspace-slug}/teamspaces/{teamspace_id}/
+api: DELETE /api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="teamspace_id" type="string" required></ParamField>
+<ParamField path="teamspace_id" type="string" required>
+The unique identifier for the teamspace.
+</ParamField>
 

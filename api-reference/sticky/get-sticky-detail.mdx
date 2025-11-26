@@ -1,12 +1,16 @@
 ---
-title: Get sticky details
-description: Gets the details of a sticky
-api: GET /api/v1/workspaces/{workspace-slug}/stickies/{sticky_id}/
+title: Retrieve a sticky
+description: Retrieves the details of an existing sticky by its ID.
+api: GET /api/v1/workspaces/{workspace_slug}/stickies/{sticky_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="sticky_id" type="string" required></ParamField>
+<ParamField path="sticky_id" type="string" required>
+The unique identifier for the sticky.
+</ParamField>
 

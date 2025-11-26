@@ -2,22 +2,23 @@
 title: Overview
 ---
 
-Inside a work item, you can add as many details as you like to get your work done.
+Work items are the fundamental unit of work in Plane. They represent tasks that need to be accomplished — assignable, trackable, and actionable to-dos in your project management workflow.
 
-## APIs
+[Learn more about Work Items →](https://docs.plane.so/core-concepts/issues/overview)
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
-GET    /api/v1/workspaces/:workspace-slug/issues/:identifier/
-GET    /api/v1/workspaces/:workspace-slug/issues/search/
-```
+<Warning>
+**Deprecation notice**
 
+We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
 
-### Work Item Object
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
+</Warning>
+
+## The Work Item object
 
 **Attributes**
 
@@ -129,7 +130,7 @@ The following fields can be expanded when retrieving a work item by including th
 - `project` - Expands to full Project object
     
 <ResponseExample>
-```json JSON
+```json WORK ITEM OBJECT
 {
 	"id": "e1c25c66-5bb8-465e-a818-92a483423443",
 	"created_at": "2023-11-19T11:56:55.176802Z",

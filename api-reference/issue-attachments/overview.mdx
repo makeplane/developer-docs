@@ -4,23 +4,27 @@ title: Overview
 
 Allows you to manage file attachments associated with work items and Intake issues. You can upload new attachments and retrieve existing attachments for a specific work item.
 
-## APIs
+[Learn more about Attachments →](https://docs.plane.so/core-concepts/issues/overview#add-links-and-attachments)
 
-```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/:attachment_id/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/:attachment_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/:attachment_id/
-```
+<Warning>
+**Deprecation notice**
 
-## Upload Process
+We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
+
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
+</Warning>
+
+## Upload process
 
 1. Get the [upload credentials](/api-reference/issue-attachments/get-upload-credentials).
 2. [Upload the file](/api-reference/issue-attachments/upload-file) to storage.
 3. [Complete attachment upload](/api-reference/issue-attachments/complete-upload) to notify server.
 
-## Work Item Attachment Object
+## The Attachment object
 
 **Attributes**
 
@@ -150,7 +154,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
     
 <ResponseExample>
-```json JSON
+```json THE ATTACHMENT OBJECT
 {
     "id": "8caf3ed5-4f57-9674-76c4fce146b2",
     "created_at": "2024-10-30T09:32:32.815273Z",

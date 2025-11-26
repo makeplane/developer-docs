@@ -4,50 +4,9 @@ title: Overview
 
 Customers allow you to manage customer relationships and track customer-related work items, requests, and custom properties within a workspace.
 
-## APIs
+[Learn more about Customers →](https://docs.plane.so/customers)
 
-### Customer Management
-
-```http
-POST   /api/v1/workspaces/:workspace-slug/customers/
-GET    /api/v1/workspaces/:workspace-slug/customers/
-GET    /api/v1/workspaces/:workspace-slug/customers/:customer_id/
-PATCH  /api/v1/workspaces/:workspace-slug/customers/:customer_id/
-DELETE /api/v1/workspaces/:workspace-slug/customers/:customer_id/
-```
-
-### Customer Work Items
-
-```http
-GET    /api/v1/workspaces/:workspace-slug/customers/:customer_id/issues/
-POST   /api/v1/workspaces/:workspace-slug/customers/:customer_id/issues/
-DELETE /api/v1/workspaces/:workspace-slug/customers/:customer_id/issues/:issue_id/
-```
-
-### Customer Properties
-
-```http
-GET    /api/v1/workspaces/:workspace-slug/customer-properties/
-POST   /api/v1/workspaces/:workspace-slug/customer-properties/
-GET    /api/v1/workspaces/:workspace-slug/customer-properties/:property_id/
-PATCH  /api/v1/workspaces/:workspace-slug/customer-properties/:property_id/
-DELETE /api/v1/workspaces/:workspace-slug/customer-properties/:property_id/
-GET    /api/v1/workspaces/:workspace-slug/customers/:customer_id/property-values/
-GET    /api/v1/workspaces/:workspace-slug/customers/:customer_id/property-values/:property_id/
-PATCH  /api/v1/workspaces/:workspace-slug/customers/:customer_id/property-values/:property_id/
-```
-
-### Customer Requests
-
-```http
-GET    /api/v1/workspaces/:workspace-slug/customers/:customer_id/requests/
-POST   /api/v1/workspaces/:workspace-slug/customers/:customer_id/requests/
-GET    /api/v1/workspaces/:workspace-slug/customers/:customer_id/requests/:request_id/
-PATCH  /api/v1/workspaces/:workspace-slug/customers/:customer_id/requests/:request_id/
-DELETE /api/v1/workspaces/:workspace-slug/customers/:customer_id/requests/:request_id/
-```
-
-### Customer Object
+## The Customer object
 
 **Attributes**
 
@@ -84,7 +43,7 @@ DELETE /api/v1/workspaces/:workspace-slug/customers/:customer_id/requests/:reque
   ID of the user who last updated the customer
 
 <ResponseExample>
-```json JSON
+```json CUSTOMER OBJECT
 {
 	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
 	"created_at": "2023-11-19T11:56:55.176802Z",

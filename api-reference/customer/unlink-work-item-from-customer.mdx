@@ -1,14 +1,20 @@
 ---
 title: Unlink work item from customer
-description: Unlinks a work item (issue) from a customer
-api: DELETE /api/v1/workspaces/{workspace-slug}/customers/{customer_id}/issues/{issue_id}/
+description: Removes the association between a work item and a customer.
+api: DELETE /api/v1/workspaces/{workspace_slug}/customers/{customer_id}/work-items/{work_item_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="customer_id" type="string" required></ParamField>
+<ParamField path="customer_id" type="string" required>
+The unique identifier for the customer.
+</ParamField>
 
-<ParamField path="issue_id" type="string" required></ParamField>
+<ParamField path="work_item_id" type="string" required>
+The unique identifier for the work item.
+</ParamField>
 

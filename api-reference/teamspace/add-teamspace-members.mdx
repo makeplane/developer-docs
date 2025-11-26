@@ -1,18 +1,22 @@
 ---
 title: Add members to teamspace
 description: Adds members to a teamspace
-api: POST /api/v1/workspaces/{workspace-slug}/teamspaces/{teamspace_id}/members/
+api: POST /api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/members/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="teamspace_id" type="string" required></ParamField>
+<ParamField path="teamspace_id" type="string" required>
+The unique identifier for the teamspace.
+</ParamField>
 
-### Body
+## Body parameters
 
 <ParamField body="member_ids" type="string[]" required>
-Array of user IDs to add to the teamspace
+Array of user IDs to add to the teamspace.
 </ParamField>
 

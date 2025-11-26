@@ -2,19 +2,11 @@
 title: Overview
 ---
 
-Stickies are workspace-level notes or reminders that can be used to capture quick thoughts, ideas, or important information.
+Stickies are workspace-level notes that allow you to capture quick thoughts, ideas, or important reminders.
 
-## APIs
+[Learn more about Stickies →](https://docs.plane.so/core-concepts/stickies)
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/stickies/
-GET    /api/v1/workspaces/:workspace-slug/stickies/
-GET    /api/v1/workspaces/:workspace-slug/stickies/:sticky_id/
-PATCH  /api/v1/workspaces/:workspace-slug/stickies/:sticky_id/
-DELETE /api/v1/workspaces/:workspace-slug/stickies/:sticky_id/
-```
-
-### Sticky Object
+## The Sticky object
 
 **Attributes**
 
@@ -83,7 +75,7 @@ DELETE /api/v1/workspaces/:workspace-slug/stickies/:sticky_id/
   ID of the user who last updated the sticky
 
 <ResponseExample>
-```json JSON
+```json STICKIES OBJECT
 {
 	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
 	"created_at": "2023-11-19T11:56:55.176802Z",

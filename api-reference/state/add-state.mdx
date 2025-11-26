@@ -1,17 +1,21 @@
 ---
-title: Add state
-description: Add a state to the project
-api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/states/
+title: Create a state
+description: Creates a new state in a project.
+api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/states/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-### Body
+### Body parameters
 
-<ParamField body="name" type="string" required></ParamField>
+<ParamField body="name" type="string" required>Name of the state.</ParamField>
 
-<ParamField body="color" type="string" required></ParamField>
+<ParamField body="color" type="string" required>Hex color code for the state (e.g., "#eb5757").</ParamField>

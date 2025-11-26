@@ -1,12 +1,19 @@
 ---
-title: Get option details
+title: Retrieve option details
 description:  Retrieves information about a specific option within a dropdown property.
-api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/issue-properties/{property_id}/options/{option_id}/
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-item-properties/{property_id}/options/{option_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace_slug" type="string" required></ParamField>
-<ParamField path="project_id" type="string" required></ParamField>
-<ParamField path="property_id" type="string" required></ParamField>
-<ParamField path="option_id" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
+
+<ParamField path="property_id" type="string" required>The unique identifier for the custom property.</ParamField>
+
+<ParamField path="option_id" type="string" required>The unique identifier for the option.</ParamField>

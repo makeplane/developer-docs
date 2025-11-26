@@ -1,41 +1,45 @@
 ---
-title: Add work item type
-description: Creates a new work item type in your project
-api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/work-item-types/
+title: Create a work item type
+description: Creates a new work item type in a project.
+api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-item-types/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-### Body
+## Body parameters
 
 <ParamField body="name" type="string">
-Name of the work item type
+Name of the work item type.
 </ParamField>
 
 <ParamField body="description" type="string">
-Description of the work item type
+Description of the work item type.
 </ParamField>
 
 <ParamField body="logo_props" type="object">
-Logo properties for the work item type
+Logo properties for the work item type.
 </ParamField>
 
 <ParamField body="is_epic" type="boolean">
-Whether this work item type is an epic
+Whether this work item type is an epic.
 </ParamField>
 
 <ParamField body="is_default" type="boolean">
-Whether this is the default work item type
+Whether this is the default work item type.
 </ParamField>
 
 <ParamField body="is_active" type="boolean">
-Whether this work item type is active
+Whether this work item type is active.
 </ParamField>
 
 <ParamField body="level" type="number">
-Level of the work item type
+Hierarchical level of the work item type.
 </ParamField>

@@ -1,12 +1,17 @@
 ---
-title: List customer work items
-description: Gets all the work items (issues) associated with a customer
-api: GET /api/v1/workspaces/{workspace-slug}/customers/{customer_id}/issues/
+title: List all customer work items
+description: Returns a list of all work items associated with a customer.
+api: GET /api/v1/workspaces/{workspace_slug}/customers/{customer_id}/work-items/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="customer_id" type="string" required></ParamField>
+<ParamField path="customer_id" type="string" required>
+The unique identifier for the customer.
+</ParamField>
+
 

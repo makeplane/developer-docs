@@ -4,23 +4,9 @@ title: Overview
 
 Modules are smaller, focused projects that help you group and organize issues within a specific time frame. They allow you to break down your work into manageable chunks and track progress towards specific goals or objectives.
 
-## APIs
+[Learn more about Modules →](https://docs.plane.so/core-concepts/modules)
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/archived/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/archive/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/unarchive/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/module-issues/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/module-issues/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_id/module-issues/:issue_id/
-```
-
-### Module Object
+## The Module object
 
 **Attributes**
 
@@ -106,7 +92,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/modules/:module_i
   Description in plain text format
 
 <ResponseExample>
-```json JSON
+```json MODULE OBJECT
 {
 	"id": "b69b19ae-261f-428c-899f-dd58efaa36c0",
 	"created_at": "2023-11-19T11:48:21.130161Z",

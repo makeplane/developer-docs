@@ -1,19 +1,25 @@
 ---
-title: Get work item by UUID
-description: Gets the details of a work item using the UUID
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/
+title: Retrieve a work item by ID
+description: Retrieves the details of an existing work item by its ID.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-<ParamField path="issue_id" type="string" required></ParamField>
+<ParamField path="work_item_id" type="string" required>
+The unique identifier for the work item.
+</ParamField>
 
-### Query parameters
+## Query parameters
 
 <ParamField query="expand" type="string">
-Comma-separated list of fields to expand. Can include: type, module, labels, assignees, state, project
+Comma-separated list of fields to expand. Possible values: `type`, `module`, `labels`, `assignees`, `state`, `project`.
 </ParamField>

@@ -1,12 +1,16 @@
 ---
-title: Get customer property details
-description: Gets the details of a customer property definition
-api: GET /api/v1/workspaces/{workspace-slug}/customer-properties/{property_id}/
+title: Retrieve a customer property
+description: Retrieves the details of an existing customer property definition by its ID.
+api: GET /api/v1/workspaces/{workspace_slug}/customer-properties/{property_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="property_id" type="string" required></ParamField>
+<ParamField path="property_id" type="string" required>
+The unique identifier for the customer property.
+</ParamField>
 

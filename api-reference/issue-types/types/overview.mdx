@@ -1,19 +1,23 @@
 ---
 title: Overview
-description: Provides a comprehensive suite of endpoints for adding, modifying, and deleting work item types within your project.
 ---
+Work item types categorize different kinds of work in your project (e.g., "Task", "Bug", "Feature").
 
-## APIs
+[Learn more about Work Item Types →](https://docs.plane.so/core-concepts/issues/work-item-types)
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/work-item-types/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/work-item-types/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/work-item-types/:work_item_type_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/work-item-types/:work_item_type_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/work-item-types/:work_item_type_id/
-```
+<Warning>
+**Deprecation notice**
 
-### Work Item Type Object
+We are deprecating all `/api/v1/.../issue-types/` endpoints in favor of `/api/v1/.../work-item-types/`.
+
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issue-types/` references with `/work-item-types/` in your codebase before the support end date.
+</Warning>
+
+## The Work Item Type object
 
 **Attributes**
 
@@ -86,7 +90,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/work-item-types/:
   External source for the work item type (auto saved)
 
 <ResponseExample>
-```json JSON
+```json WORK ITEM TYPE OBJECT
 {
 	"id": "d6af3c13-3459-43ab-b91c-c33ef2fd7131",
 	"name": "Postman work item type",

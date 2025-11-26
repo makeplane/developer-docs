@@ -1,40 +1,42 @@
 ---
-title: Add teamspace
-description: Creates a new teamspace in a workspace
-api: POST /api/v1/workspaces/{workspace-slug}/teamspaces/
+title: Create a teamspace
+description: Creates a new teamspace in a workspace.
+api: POST /api/v1/workspaces/{workspace_slug}/teamspaces/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-### Body
+## Body parameters
 
 <ParamField body="name" type="string" required>
-Name of the teamspace
+Name of the teamspace.
 </ParamField>
 
 <ParamField body="description_json" type="object">
-JSON description of the teamspace
+JSON representation of the teamspace description.
 </ParamField>
 
 <ParamField body="description_html" type="string">
-HTML description of the teamspace
+HTML-formatted description of the teamspace.
 </ParamField>
 
 <ParamField body="description_stripped" type="string">
-Stripped version of the HTML description
+Stripped version of the HTML description.
 </ParamField>
 
 <ParamField body="description_binary" type="string">
-Binary description of the teamspace
+Binary representation of the description.
 </ParamField>
 
 <ParamField body="logo_props" type="object">
-Logo properties for the teamspace
+Logo properties for the teamspace.
 </ParamField>
 
 <ParamField body="lead" type="string">
-User ID of the teamspace lead
+ID of the user who leads the teamspace.
 </ParamField>
 

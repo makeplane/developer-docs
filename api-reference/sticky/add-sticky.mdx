@@ -1,32 +1,34 @@
 ---
-title: Add sticky
-description: Creates a new sticky in a workspace
-api: POST /api/v1/workspaces/{workspace-slug}/stickies/
+title: Create a sticky
+description: Creates a new sticky note in a workspace.
+api: POST /api/v1/workspaces/{workspace_slug}/stickies/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-### Body
+## Body parameters
 
 <ParamField body="name" type="string">
-Name of the sticky
+Name of the sticky.
 </ParamField>
 
 <ParamField body="description_html" type="string">
-HTML description of the sticky
+HTML-formatted content of the sticky.
 </ParamField>
 
 <ParamField body="logo_props" type="object">
-Logo properties for the sticky
+Logo properties and visual configuration.
 </ParamField>
 
 <ParamField body="color" type="string">
-Color of the sticky
+Text color for the sticky (hex code).
 </ParamField>
 
 <ParamField body="background_color" type="string">
-Background color of the sticky
+Background color for the sticky (hex code).
 </ParamField>
 

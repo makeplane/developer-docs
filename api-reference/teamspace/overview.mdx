@@ -2,94 +2,68 @@
 title: Overview
 ---
 
-Teamspaces allow you to organize teams, projects, and members within a workspace. They provide a way to group related work and manage access at a team level.
+Teamspaces allow you to organize teams, projects, and members within a workspace, providing a way to group related work and manage access at a team level.
 
-## APIs
+[Learn more about Teamspaces →](https://docs.plane.so/core-concepts/workspaces/teamspaces)
 
-### Teamspace Management
-
-```http
-POST   /api/v1/workspaces/:workspace-slug/teamspaces/
-GET    /api/v1/workspaces/:workspace-slug/teamspaces/
-GET    /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/
-PATCH  /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/
-DELETE /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/
-```
-
-### Teamspace Members
-
-```http
-GET    /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/members/
-POST   /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/members/
-DELETE /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/members/
-```
-
-### Teamspace Projects
-
-```http
-GET    /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/projects/
-POST   /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/projects/
-DELETE /api/v1/workspaces/:workspace-slug/teamspaces/:teamspace_id/projects/
-```
-
-### Teamspace Object
+## The Teamspace object
 
 **Attributes**
 
 - `id` _uuid_
 
-  Unique identifier for the teamspace
+  Unique identifier for the teamspace.
 
 - `name` _string_ **(required)**
 
-  Name of the teamspace
+  Name of the teamspace.
 
 - `description_json` _object_
 
-  JSON description of the teamspace
+  JSON representation of the teamspace description.
 
 - `description_html` _string_
 
-  HTML description of the teamspace
+  HTML-formatted description of the teamspace.
 
 - `description_stripped` _string_
 
-  Stripped version of the HTML description
+  Stripped version of the HTML description.
 
 - `description_binary` _string_
 
-  Binary description of the teamspace
+  Binary representation of the description.
 
 - `logo_props` _object_
 
-  Logo properties for the teamspace
+  Logo properties for the teamspace.
 
 - `lead` _uuid_
 
-  User ID of the teamspace lead
+  ID of the user who leads the teamspace.
 
 - `workspace` _uuid_
-
-  Workspace UUID which is automatically saved
+  
+  ID of the workspace containing the teamspace.
 
 - `created_at` _timestamp_
 
-  The timestamp when the teamspace was created
+  Time at which the teamspace was created.
 
 - `updated_at` _timestamp_
 
-  The timestamp when the teamspace was last updated
+  Time at which the teamspace was last updated.
 
 - `created_by` _uuid_
 
-  ID of the user who created the teamspace
+  ID of the user who created the teamspace.
 
 - `updated_by` _uuid_
 
-  ID of the user who last updated the teamspace
+  ID of the user who last updated the teamspace.
 
 <ResponseExample>
-```json JSON
+```json TEAMSPACE OBJECT
 {
 	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
 	"created_at": "2023-11-19T11:56:55.176802Z",

@@ -1,25 +1,25 @@
 ---
-title: Create Worklog
-sidebarTitle: Create Worklog
-description: Add a new worklog entry for a specific issue.
-api: POST /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/worklogs/
+title: Create a worklog
+description: Creates a new worklog entry for a work item.
+api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/worklogs/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required>
-The workspace-slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 </ParamField>
+
 <ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
-<ParamField path="issue_id" type="string" required>The unique identifier of the issue</ParamField>
 
-### Body
+<ParamField path="work_item_id" type="string" required>The unique identifier of the work item</ParamField>
 
-<ParamField body="description" type="string" required>Description of the work done during the worklog</ParamField>
-<ParamField body="duration" type="integer" required>Time spent on the issue in minutes</ParamField>
+## Body parameters
 
-### Response
+<ParamField body="description" type="string" required>Description of the work done during the worklog.</ParamField>
+<ParamField body="duration" type="integer" required>Time spent on the issue in minutes.</ParamField>
+
+## Response
 
 ```json
     {

@@ -1,64 +1,64 @@
 ---
-title: Update attachment
-description: Updates the details of an attachment
-api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/issue-attachments/{attachment_id}/
+title: Update an attachment
+description: Updates an existing attachment by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+api: PATCH /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/attachments/{attachment_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required>
-The workspace-slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 </ParamField>
 
-<ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
+<ParamField path="project_id" type="string" required>The unique identifier of the project.</ParamField>
 
-<ParamField path="issue_id" type="string" required>The unique identifier of the work item</ParamField>
+<ParamField path="work_item_id" type="string" required>The unique identifier of the work item.</ParamField>
 
-<ParamField path="attachment_id" type="string" required>The unique identifier of the attachment</ParamField>
+<ParamField path="attachment_id" type="string" required>The unique identifier of the attachment.</ParamField>
 
-### Body
+## Body parameters
 
 <ParamField body="attributes" type="object">
-File metadata object containing name, size, and type
+File metadata object containing name, size, and type.
 </ParamField>
 
 <ParamField body="asset" type="string">
-Storage path/identifier for the attachment file
+Storage path/identifier for the attachment file.
 </ParamField>
 
 <ParamField body="entity_type" type="string">
-Entity type of the attachment
+Entity type of the attachment.
 </ParamField>
 
 <ParamField body="entity_identifier" type="string">
-Entity identifier for the attachment
+Entity identifier for the attachment.
 </ParamField>
 
 <ParamField body="is_deleted" type="boolean">
-Whether the attachment has been deleted
+Whether the attachment has been deleted.
 </ParamField>
 
 <ParamField body="is_archived" type="boolean">
-Whether the attachment has been archived
+Whether the attachment has been archived.
 </ParamField>
 
 <ParamField body="external_id" type="string">
-External identifier if the attachment is imported to Plane
+External identifier if the attachment is imported to Plane.
 </ParamField>
 
 <ParamField body="external_source" type="string">
-Name of the source if the attachment is imported to Plane
+Name of the source if the attachment is imported to Plane.
 </ParamField>
 
 <ParamField body="size" type="number">
-File size in bytes
+File size in bytes.
 </ParamField>
 
 <ParamField body="is_uploaded" type="boolean">
-Whether the file has been successfully uploaded
+Whether the file has been successfully uploaded.
 </ParamField>
 
 <ParamField body="storage_metadata" type="object">
-Cloud storage metadata
+Cloud storage metadata.
 </ParamField>
 

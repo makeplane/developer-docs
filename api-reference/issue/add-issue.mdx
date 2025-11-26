@@ -1,61 +1,66 @@
 ---
-title: Add work item
-description: Adds a work item to a project
-api: POST /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/
+title: Create a work item
+description: Creates a new work item in a project.
+api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-### Body
+## Body parameters
 
 <ParamField body="name" type="string" required>
-Name of the work item
+Name of the work item.
 </ParamField>
 
 <ParamField body="description_html" type="string">
-HTML description of the work item
+HTML-formatted description of the work item.
 </ParamField>
 
 <ParamField body="state" type="string">
-UUID of the state for the work item
+ID of the state for the work item.
 </ParamField>
 
 <ParamField body="assignees" type="string[]">
-Array of user UUIDs assigned to the work item
-</ParamField>
-
-<ParamField body="labels" type="string[]">
-Array of label UUIDs for the work item
-</ParamField>
-
-<ParamField body="parent" type="string">
-UUID of the parent work item
-</ParamField>
-
-<ParamField body="estimate_point" type="string">
-Estimate point for the work item (value between 0-7)
-</ParamField>
-
-<ParamField body="type" type="string">
-UUID of the work item type
-</ParamField>
-
-<ParamField body="module" type="string">
-UUID of the module the work item belongs to
-</ParamField>
-
-<ParamField body="target_date" type="string">
-Target date of the work item in YYYY-MM-DD format
-</ParamField>
-
-<ParamField body="start_date" type="string">
-Start date of the work item in YYYY-MM-DD format
+Array of user IDs to assign to the work item.
 </ParamField>
 
 <ParamField body="priority" type="string">
-Priority of the work item. Can be: none, urgent, high, medium, low
+Priority level. Possible values: `none`, `urgent`, `high`, `medium`, `low`.
 </ParamField>
+
+<ParamField body="labels" type="string[]">
+Array of label IDs to apply to the work item.
+</ParamField>
+
+<ParamField body="parent" type="string">
+ID of the parent work item.
+</ParamField>
+
+<ParamField body="estimate_point" type="string">
+Estimate points for the work item (0-7).
+</ParamField>
+
+<ParamField body="type" type="string">
+ID of the work item type.
+</ParamField>
+
+<ParamField body="module" type="string">
+ID of the module the work item belongs to.
+</ParamField>
+
+<ParamField body="start_date" type="string">
+Start date in YYYY-MM-DD format.
+</ParamField>
+
+<ParamField body="target_date" type="string">
+Target completion date in YYYY-MM-DD format.
+</ParamField>
+

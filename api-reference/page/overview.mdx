@@ -2,25 +2,11 @@
 title: Overview
 ---
 
-Pages allow you to create and manage documentation pages at both workspace and project levels. Workspace pages are accessible across all projects in a workspace, while project pages are specific to a particular project.
+Pages allow you to create and manage documentation at both workspace and project levels. Workspace pages are accessible across all projects, while project pages are specific to individual projects.
 
-## APIs
+**Documentation**: [Wiki](https://docs.plane.so/core-concepts/pages/wiki), [Pages](https://docs.plane.so/core-concepts/pages/overview)
 
-### Workspace Pages
-
-```http
-POST   /api/v1/workspaces/:workspace-slug/pages/
-GET    /api/v1/workspaces/:workspace-slug/pages/:page_id/
-```
-
-### Project Pages
-
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/pages/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/pages/:page_id/
-```
-
-### Page Object
+## The Pages object
 
 **Attributes**
 
@@ -53,7 +39,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/pages/:page_id/
   ID of the user who last updated the page
 
 <ResponseExample>
-```json JSON
+```json PAGES OBJECT
 {
 	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
 	"created_at": "2023-11-19T11:56:55.176802Z",

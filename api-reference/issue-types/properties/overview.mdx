@@ -1,17 +1,24 @@
 ---
 title: Overview
-description: Offers a set of endpoints designed for adding, modifying, and deleting custom properties associated with issue types in your project.
 ---
+Custom properties allow you to extend work items with additional fields specific to your workflow and processes.
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-types/:type_id/issue-properties/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-types/:type_id/issue-properties/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-types/:type_id/issue-properties/:property_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-types/:type_id/issue-properties/:property_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-types/:type_id/issue-properties/:property_id/
-```
+[Learn more about Custom properties →](https://docs.plane.so/core-concepts/issues/work-item-types#add-custom-properties)
 
-### Issue Properties Object
+<Warning>
+**Deprecation notice**
+
+We are deprecating all `/api/v1/.../issue-types/` endpoints in favor of `/api/v1/.../work-item-types/`.
+
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issue-types/` references with `/work-item-types/` in your codebase before the support end date.
+</Warning>
+
+
+## The Properties object
 
 - `workspace` _uuid_
 
@@ -35,7 +42,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-types/:type
 
 <ResponseExample>
 
-```json JSON
+```json THE PROPERTIES OBJECT
 {
   "id": "f962febb-98bc-43ca-8bfb-8012e4d54dae",
   "created_at": "2024-10-23T07:38:58.231897Z",
