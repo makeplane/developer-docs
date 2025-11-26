@@ -195,17 +195,6 @@
           ]
         },
         {
-          "group": "Link",
-          "pages": [
-            "api-reference/link/overview",
-            "api-reference/link/add-link",
-            "api-reference/link/list-links",
-            "api-reference/link/get-link-detail",
-            "api-reference/link/update-link-detail",
-            "api-reference/link/delete-link"
-          ]
-        },
-        {
           "group": "Work Item",
           "pages": [
             "api-reference/issue/overview",
@@ -216,6 +205,17 @@
             "api-reference/issue/search-issues",
             "api-reference/issue/update-issue-detail",
             "api-reference/issue/delete-issue"
+          ]
+        },
+        {
+          "group": "Work Item Links",
+          "pages": [
+            "api-reference/link/overview",
+            "api-reference/link/add-link",
+            "api-reference/link/list-links",
+            "api-reference/link/get-link-detail",
+            "api-reference/link/update-link-detail",
+            "api-reference/link/delete-link"
           ]
         },
         {
@@ -292,6 +292,24 @@
          ]
         },
         {
+          "group": "Cycle",
+          "pages": [
+            "api-reference/cycle/overview",
+            "api-reference/cycle/add-cycle",
+            "api-reference/cycle/add-cycle-work-items",
+            "api-reference/cycle/transfer-cycle-work-items",
+            "api-reference/cycle/archive-cycle",
+            "api-reference/cycle/list-cycles",
+            "api-reference/cycle/get-cycle-detail",
+            "api-reference/cycle/list-cycle-work-items",
+            "api-reference/cycle/list-archived-cycles",
+            "api-reference/cycle/update-cycle-detail",
+            "api-reference/cycle/unarchive-cycle",
+            "api-reference/cycle/remove-cycle-work-item",
+            "api-reference/cycle/delete-cycle"
+          ]
+        },
+        {
           "group": "Modules",
           "pages": [
             "api-reference/module/overview",
@@ -309,21 +327,13 @@
           ]
         },
         {
-          "group": "Cycle",
+          "group": "Pages",
           "pages": [
-            "api-reference/cycle/overview",
-            "api-reference/cycle/add-cycle",
-            "api-reference/cycle/add-cycle-work-items",
-            "api-reference/cycle/transfer-cycle-work-items",
-            "api-reference/cycle/archive-cycle",
-            "api-reference/cycle/list-cycles",
-            "api-reference/cycle/get-cycle-detail",
-            "api-reference/cycle/list-cycle-work-items",
-            "api-reference/cycle/list-archived-cycles",
-            "api-reference/cycle/update-cycle-detail",
-            "api-reference/cycle/unarchive-cycle",
-            "api-reference/cycle/remove-cycle-work-item",
-            "api-reference/cycle/delete-cycle"
+            "api-reference/page/overview",
+            "api-reference/page/add-workspace-page",
+            "api-reference/page/add-project-page",
+            "api-reference/page/get-workspace-page",
+            "api-reference/page/get-project-page"
           ]
         },
         {
@@ -346,14 +356,6 @@
             "api-reference/worklogs/get-total-time",
             "api-reference/worklogs/update-worklog",
             "api-reference/worklogs/delete-worklog"
-          ]
-        },
-        {
-          "group": "Members",
-          "pages": [
-            "api-reference/members/overview",
-            "api-reference/members/get-workspace-members",
-            "api-reference/members/get-project-members"
           ]
         },
         {
@@ -396,16 +398,6 @@
                 "api-reference/initiative/remove-epics-from-initiative"
               ]
             },
-        {
-          "group": "Pages",
-          "pages": [
-            "api-reference/page/overview",
-            "api-reference/page/add-workspace-page",
-            "api-reference/page/add-project-page",
-            "api-reference/page/get-workspace-page",
-            "api-reference/page/get-project-page"
-          ]
-        },
         {
           "group": "Customers",
           "pages": [
@@ -479,6 +471,14 @@
             "api-reference/sticky/get-sticky-detail",
             "api-reference/sticky/update-sticky-detail",
             "api-reference/sticky/delete-sticky"
+          ]
+        },
+        {
+          "group": "Members",
+          "pages": [
+            "api-reference/members/overview",
+            "api-reference/members/get-workspace-members",
+            "api-reference/members/get-project-members"
           ]
         },
         {
