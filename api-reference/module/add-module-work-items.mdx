@@ -1,0 +1,22 @@
+---
+title: Add work items to module
+description: Adds one or more work items to a module.
+api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/module-issues/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="project_id" type="string" required>The unique identifier of the project.</ParamField>
+
+<ParamField path="module_id" type="string" required>The unique identifier for the module.</ParamField>
+
+## Body parameters
+
+<ParamField body="issues" type="string[]" required>
+Array of work item IDs to add to the module.
+</ParamField>
+

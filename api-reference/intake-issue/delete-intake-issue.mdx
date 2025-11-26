@@ -1,15 +1,16 @@
 ---
-title: Delete intake issue
-description: Deletes an intake issue
-api: DELETE /api/v1/workspaces/{workspace-slug}/projects/{project_id}/intake-issues/{issue_id}
+title: Delete an intake work item
+description: Permanently deletes an intake work item from a project. This action cannot be undone.
+api: DELETE /api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{issue_id}
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
-<ParamField path="project_id" type="string" required></ParamField>
+</ParamField>
+<ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
+<ParamField path="work_item_id" type="string" required>The unique identifier of the work item</ParamField>
 
-<ParamField path="intake_id" type="string" required></ParamField>
-
-<ParamField path="issue_id" type="string" required></ParamField>
+<ParamField path="intake_id" type="string" required>The unique identifier for the intake work item.</ParamField>

@@ -1,26 +1,13 @@
 ---
 title: Overview
-description: Projects let you manage teams and tasks within your Workspace.
 ---
 
-**Endpoints**
+Projects organize your team's work within a workspace. Each project contains work items, cycles, modules, and other resources. 
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/
-GET    /api/v1/workspaces/:workspace-slug/projects/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/
-```
+[Learn more about Projects →](https://docs.plane.so/core-concepts/projects/overview)
 
-The `workspace-slug` represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL:
 
-```
-https://app.plane.so/my-team/projects/
-``` 
-The workspace slug is `my-team`.
-
-### Project Object
+### The Project object
 
 **Attributes**
 
@@ -139,11 +126,9 @@ The workspace slug is `my-team`.
 
   Default state which will be used when the issues will be auto closed
 
-**Response Object**
-
 <ResponseExample>
 
-```json JSON
+```json THE PROJECT OBJECT
 {
   "id": "00918ea1-52f7-48bd-abe3-d3efe76ff7dd",
   "total_members": 1,

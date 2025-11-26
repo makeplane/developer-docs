@@ -1,0 +1,34 @@
+---
+title: Update an initiative label
+description: Updates an existing initiative label by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+api: PATCH /api/v1/workspaces/{workspace_slug}/initiatives/labels/{label_id}/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="label_id" type="string" required>
+The unique identifier for the initiative label.
+</ParamField>
+
+## Body parameters
+
+<ParamField body="name" type="string">
+Name of the initiative label.
+</ParamField>
+
+<ParamField body="description" type="string">
+Description of the initiative label.
+</ParamField>
+
+<ParamField body="color" type="string">
+Hex color code for the initiative label (e.g., "#eb5757").
+</ParamField>
+
+<ParamField body="sort_order" type="number">
+Sort order for display purposes.
+</ParamField>
+

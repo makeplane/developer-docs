@@ -1,17 +1,11 @@
 ---
 title: Overview
-description: Enables you to track time spent on issues within a project. Worklogs track duration in minutes and include details like description, timestamps, and user information.
 ---
+Worklogs enable time tracking for work items within a project, recording time spent in minutes along with descriptions and user information.
 
-```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/worklogs/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/total-worklogs/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/worklogs/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/worklogs/:worklog_id/
-DELETE  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/worklogs/:worklog_id/
-```
+[Learn more about Time tracking →](https://docs.plane.so/core-concepts/issues/time-tracking)
 
-## Worklogs object
+## The Worklogs object
 
 **Attributes**
 
@@ -61,7 +55,7 @@ DELETE  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id
 
 
 <ResponseExample>
-```json JSON
+```json WORKLOGS OBJECT
     {
         "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         "created_at": "2025-01-29T21:27:54.197306+05:30",

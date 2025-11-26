@@ -1,0 +1,18 @@
+---
+title: Delete an attachment
+description: Permanently deletes an attachment from a work item. This action cannot be undone.
+api: DELETE /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/attachments/{attachment_id}/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="project_id" type="string" required>The unique identifier of the project.</ParamField>
+
+<ParamField path="work_item_id" type="string" required>The unique identifier of the work item.</ParamField>
+
+<ParamField path="attachment_id" type="string" required>The unique identifier of the attachment.</ParamField>
+

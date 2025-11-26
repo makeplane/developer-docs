@@ -1,17 +1,12 @@
 ---
 title: Overview
-description: Links can be added to an issue to point to some external resources
 ---
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/links/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/links/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/links/:link_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/links/:link_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/links/:link_id/
-```
+Links attach external resources to work items, allowing you to reference documentation, designs, or other relevant URLs.
 
-### Link object
+[Learn more about Links →](https://docs.plane.so/core-concepts/work-items/overview#add-links-and-attachments)
+
+## The Link object
 
 - `title` _string_
 
@@ -46,7 +41,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
   The issue which the link is attached to
 
 <ResponseExample>
-```json JSON
+```json THE LINK OBJECT
 {
 	"id": "662dd6b2-2b01-4315-955f-480eb51baa14",
 	"created_at": "2023-11-20T06:23:10.270664Z",

@@ -1,9 +1,11 @@
 ---
-title: List projects
-description: Gets all the projects in a workspace.
-api: GET /api/v1/workspaces/{workspace-slug}/projects/
+title: List all projects
+description: Returns a list of all projects in a workspace. Projects are returned in order of creation, with the most recently created projects appearing first.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>

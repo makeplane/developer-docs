@@ -1,17 +1,25 @@
 ---
-title: Update project details
-description: Projects let you manage teams and tasks within your Workspace.
-api: PATCH /api/v1/workspaces/{workspace-slug}/projects/{project_id}
+title: Update a project
+description: Updates an existing project by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+api: PATCH /api/v1/workspaces/{workspace_slug}/projects/{project_id}
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-<ParamField body="name" type="string"></ParamField>
+## Body parameters
 
-### Body
+<ParamField body="name" type="string">
+Name of the project.
+</ParamField>
 
-<ParamField body="description" type="string"></ParamField>
+<ParamField body="description" type="string">
+Description of the project.
+</ParamField>

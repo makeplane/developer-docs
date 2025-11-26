@@ -1,17 +1,22 @@
 ---
 title: Overview
-description: Provides a set of endpoints for adding, modifying, and deleting options within the dropdown custom property types.
 ---
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-properties/:property_id/options/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-properties/:property_id/options/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-properties/:property_id/options/:option_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-properties/:property_id/options/:option_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-properties/:property_id/options/:option_id/
-```
+Custom property options define the available choices for dropdown-style custom properties on work items.
 
-### Issue Property Options Object
+<Warning>
+**Deprecation notice**
+
+We are deprecating all `/api/v1/.../issue-properties/` endpoints in favor of `/api/v1/.../work-item-properties/`.
+
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issue-properties/` references with `/work-item-properties/` in your codebase before the support end date.
+</Warning>
+
+## The Options object
 
 - `workspace` _uuid_
 
@@ -35,7 +40,7 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issue-properties/
 
 <ResponseExample>
 
-```json JSON
+```json THE OPTIONS OBJECT
 {
   "id": "51a869d1-f612-4315-ac91-ffef3e96c20e",
   "created_at": "2024-10-23T07:44:42.883820Z",

@@ -1,16 +1,15 @@
 ---
-title: Delete Worklog
-sidebarTitle: Delete Worklog
+title: Delete a worklog
 description: Delete a specific worklog entry from an issue.
-api: DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/worklogs/:worklog_id/
+api: DELETE /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/worklogs/{worklog_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required>
-The workspace-slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ParamField>
 <ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
-<ParamField path="issue_id" type="string" required>The unique identifier of the issue</ParamField>
+<ParamField path="work_item_id" type="string" required>The unique identifier of the work item</ParamField>
 <ParamField path="worklog_id" type="string" required>The unique identifier of the worklog</ParamField>

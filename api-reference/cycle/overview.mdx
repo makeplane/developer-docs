@@ -2,26 +2,11 @@
 title: Overview
 ---
 
-Cycles is a custom time period in which a team works to complete items on their backlog. At the end of the sprint, the team will usually have finished building and implementing a new version of their project or product.
+Cycles are custom time periods in which a team works to complete items from their backlog. At the end of a cycle, the team typically has a new version of their project or product ready.
 
-```http
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/cycles/:cycle_id/transfer-issues/
-```
+[Learn more about Cycles →](https://docs.plane.so/core-concepts/cycles)
 
-To transfer issues of one cycle to another, the payload should be sent in the below format
-
-```
-{
-	"new_cycle_id": "2380ce13-1cc4-4f67-9f57-a2b7686886d7"
-}
-```
-
-### Cycle Object
+## The Cycles object
 
 **Attributes**
 
@@ -71,8 +56,22 @@ To transfer issues of one cycle to another, the payload should be sent in the be
 
 - `owned_by` uuid
 
+  The user ID of the cycle owner
+
+- `archived_at` _timestamp_
+
+  The timestamp when the cycle was archived (if archived)
+
+- `timezone` string
+
+  The timezone for the cycle
+
+- `version` number
+
+  Version number of the cycle
+
 <ResponseExample>
-```json JSON
+```json CYCLES OBJECT
 {
 	"id": "50ebc791-65e4-4b4d-a164-3b4e529e55a5",
 	"created_at": "2023-11-19T12:18:14.900078Z",
@@ -91,3 +90,4 @@ To transfer issues of one cycle to another, the payload should be sent in the be
 }
 ```
 </ResponseExample>
+

@@ -1,0 +1,16 @@
+---
+title: Restore a cycle
+description: Restores an archived cycle back to the active cycles list.
+api: DELETE /api/v1/workspaces/{workspace_slug}/projects/{project_id}/archived-cycles/{cycle_id}/unarchive/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="project_id" type="string" required>The unique identifier of the project.</ParamField>
+
+<ParamField path="cycle_id" type="string" required>The unique identifier for the cycle.</ParamField>
+

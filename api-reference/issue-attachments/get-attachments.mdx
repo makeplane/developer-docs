@@ -1,19 +1,41 @@
 ---
-title: Get attachments
-description: Gets all the attachments in the issue.
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/issues/{issue_id}/issue-attachments/
+title: List all attachments
+description: Returns a list of all attachments for a work item.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/attachments/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required>
-The workspace-slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 </ParamField>
 <ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>
-<ParamField path="issue_id" type="string" required>The unique identifier of the issue</ParamField>
+<ParamField path="work_item_id" type="string" required>The unique identifier of the work item</ParamField>
+
+## Query parameters
+
+<ParamField query="issue" type="string">
+Filter by work item ID.
+</ParamField>
+
+<ParamField query="project" type="string">
+Filter by project ID.
+</ParamField>
+
+<ParamField query="workspace" type="string">
+Filter by workspace ID.
+</ParamField>
+
+<ParamField query="limit" type="number">
+Number of results to return per page.
+</ParamField>
+
+<ParamField query="offset" type="number">
+Number of results to skip for pagination.
+</ParamField>
 
 ### Response
+Returns an array of work item attachment objects.
 
 ```json
 {
