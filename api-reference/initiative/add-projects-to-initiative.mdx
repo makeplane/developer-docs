@@ -1,0 +1,22 @@
+---
+title: Add projects to initiative
+description: Adds one or more projects to an initiative.
+api: POST /api/v1/workspaces/{workspace_slug}/initiatives/{initiative_id}/projects/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="initiative_id" type="string" required>
+The unique identifier for the initiative.
+</ParamField>
+
+## Body parameters
+
+<ParamField body="project_ids" type="string[]" required>
+Array of project IDs to add to the initiative.
+</ParamField>
+

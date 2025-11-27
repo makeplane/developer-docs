@@ -18,6 +18,9 @@
     "auth": {
       "method": "key",
       "name": "x-api-key"
+    },
+    "playground": {
+     "display": "interactive"
     }
   },
   "topbarCtaButton": {
@@ -192,7 +195,20 @@
           ]
         },
         {
-          "group": "Link",
+          "group": "Work Item",
+          "pages": [
+            "api-reference/issue/overview",
+            "api-reference/issue/add-issue",
+            "api-reference/issue/list-issues",
+            "api-reference/issue/get-issue-detail",
+            "api-reference/issue/get-issue-sequence-id",
+            "api-reference/issue/search-issues",
+            "api-reference/issue/update-issue-detail",
+            "api-reference/issue/delete-issue"
+          ]
+        },
+        {
+          "group": "Work Item Links",
           "pages": [
             "api-reference/link/overview",
             "api-reference/link/add-link",
@@ -203,19 +219,7 @@
           ]
         },
         {
-          "group": "Issue",
-          "pages": [
-            "api-reference/issue/overview",
-            "api-reference/issue/add-issue",
-            "api-reference/issue/list-issues",
-            "api-reference/issue/get-issue-detail",
-            "api-reference/issue/get-issue-sequence-id",
-            "api-reference/issue/update-issue-detail",
-            "api-reference/issue/delete-issue"
-          ]
-        },
-        {
-          "group": "Issue activity",
+          "group": "Work Item Activity",
           "pages": [
             "api-reference/issue-activity/overview",
             "api-reference/issue-activity/list-issue-activities",
@@ -223,7 +227,7 @@
           ]
         },
         {
-          "group": "Issue comment",
+          "group": "Work Item Comments",
           "pages": [
             "api-reference/issue-comment/overview",
             "api-reference/issue-comment/add-issue-comment",
@@ -234,7 +238,20 @@
           ]
         },
         {
-          "group": "Issue types",
+          "group": "Work Item Attachments",
+          "pages": [
+            "api-reference/issue-attachments/overview",
+            "api-reference/issue-attachments/get-attachments",
+            "api-reference/issue-attachments/get-attachment-detail",
+            "api-reference/issue-attachments/get-upload-credentials",
+            "api-reference/issue-attachments/upload-file",
+            "api-reference/issue-attachments/complete-upload",
+            "api-reference/issue-attachments/update-attachment",
+            "api-reference/issue-attachments/delete-attachment"
+            ]
+        },
+          {
+          "group": "Work Item Types",
           "pages": [
             "api-reference/issue-types/types/overview",
             "api-reference/issue-types/types/add-issue-type",
@@ -245,7 +262,7 @@
           ]
         },
         {
-          "group": "Issue properties",
+          "group": "Custom Properties",
           "pages": [
             "api-reference/issue-types/properties/overview",
             "api-reference/issue-types/properties/add-property",
@@ -253,21 +270,10 @@
             "api-reference/issue-types/properties/get-property-details",
             "api-reference/issue-types/properties/update-property",
             "api-reference/issue-types/properties/delete-property"
-          ]
+           ]
         },
         {
-          "group": "Issue property options",
-          "pages": [
-            "api-reference/issue-types/options/overview",
-            "api-reference/issue-types/options/add-dropdown-options",
-            "api-reference/issue-types/options/list-dropdown-options",
-            "api-reference/issue-types/options/get-option-details",
-            "api-reference/issue-types/options/update-dropdown-options",
-            "api-reference/issue-types/options/delete-dropdown-options"
-          ]
-        },
-        {
-          "group": "Issue property values",
+          "group": "Custom Property Values",
           "pages": [
             "api-reference/issue-types/values/overview",
             "api-reference/issue-types/values/add-property-values",
@@ -275,57 +281,63 @@
           ]
         },
         {
-          "group": "Issue attachments",
+          "group": "Custom Property Dropdown Options",
           "pages": [
-            "api-reference/issue-attachments/overview",
-            "api-reference/issue-attachments/get-attachments",
-            "api-reference/issue-attachments/get-upload-credentials",
-            "api-reference/issue-attachments/upload-file",
-            "api-reference/issue-attachments/complete-upload"
-          ]
-        },
-        {
-          "group": "Module",
-          "pages": [
-            "api-reference/module/overview",
-            "api-reference/module/add-module",
-            "api-reference/module/list-modules",
-            "api-reference/module/get-module-detail",
-            "api-reference/module/update-module-detail",
-            "api-reference/module/delete-module"
-          ]
-        },
-        {
-          "group": "Module issue",
-          "pages": [
-            "api-reference/module-issue/overview",
-            "api-reference/module-issue/add-module-issue",
-            "api-reference/module-issue/list-module-issues",
-            "api-reference/module-issue/delete-module-issue"
-          ]
+            "api-reference/issue-types/options/overview",
+            "api-reference/issue-types/options/add-dropdown-options",
+            "api-reference/issue-types/options/list-dropdown-options",
+            "api-reference/issue-types/options/get-option-details",
+            "api-reference/issue-types/options/update-dropdown-options",
+            "api-reference/issue-types/options/delete-dropdown-options"
+         ]
         },
         {
           "group": "Cycle",
           "pages": [
             "api-reference/cycle/overview",
             "api-reference/cycle/add-cycle",
+            "api-reference/cycle/add-cycle-work-items",
+            "api-reference/cycle/transfer-cycle-work-items",
+            "api-reference/cycle/archive-cycle",
             "api-reference/cycle/list-cycles",
             "api-reference/cycle/get-cycle-detail",
+            "api-reference/cycle/list-cycle-work-items",
+            "api-reference/cycle/list-archived-cycles",
             "api-reference/cycle/update-cycle-detail",
+            "api-reference/cycle/unarchive-cycle",
+            "api-reference/cycle/remove-cycle-work-item",
             "api-reference/cycle/delete-cycle"
           ]
         },
         {
-          "group": "Cycle issue",
+          "group": "Modules",
           "pages": [
-            "api-reference/cycle-issue/overview",
-            "api-reference/cycle-issue/add-cycle-issue",
-            "api-reference/cycle-issue/list-cycle-issues",
-            "api-reference/cycle-issue/delete-cycle-issue"
+            "api-reference/module/overview",
+            "api-reference/module/add-module",
+            "api-reference/module/add-module-work-items",
+            "api-reference/module/archive-module",
+            "api-reference/module/list-modules",
+            "api-reference/module/get-module-detail",
+            "api-reference/module/list-module-work-items",
+            "api-reference/module/list-archived-modules",
+            "api-reference/module/update-module-detail",
+            "api-reference/module/unarchive-module",
+            "api-reference/module/remove-module-work-item",
+            "api-reference/module/delete-module"
           ]
         },
         {
-          "group": "Intake issue",
+          "group": "Pages",
+          "pages": [
+            "api-reference/page/overview",
+            "api-reference/page/add-workspace-page",
+            "api-reference/page/add-project-page",
+            "api-reference/page/get-workspace-page",
+            "api-reference/page/get-project-page"
+          ]
+        },
+        {
+          "group": "Intake",
           "pages": [
             "api-reference/intake-issue/overview",
             "api-reference/intake-issue/add-intake-issue",
@@ -336,14 +348,129 @@
           ]
         },
         {
-          "group": "Worklogs",
+          "group": "Time Tracking",
           "pages": [
             "api-reference/worklogs/overview",
+            "api-reference/worklogs/create-worklog",
             "api-reference/worklogs/get-worklogs-for-issue",
             "api-reference/worklogs/get-total-time",
-            "api-reference/worklogs/create-worklog",
             "api-reference/worklogs/update-worklog",
             "api-reference/worklogs/delete-worklog"
+          ]
+        },
+        {
+          "group": "Initiatives",
+          "pages": [
+            "api-reference/initiative/overview",
+            "api-reference/initiative/add-initiative",
+            "api-reference/initiative/list-initiatives",
+            "api-reference/initiative/get-initiative-detail",
+            "api-reference/initiative/update-initiative-detail",
+            "api-reference/initiative/delete-initiative"
+          ]
+        },
+        {
+              "group": "Initiative Labels",
+              "pages": [
+                "api-reference/initiative/add-initiative-label",
+                "api-reference/initiative/add-labels-to-initiative",
+                "api-reference/initiative/list-initiative-labels",
+                "api-reference/initiative/get-initiative-label-detail",
+                "api-reference/initiative/list-initiative-labels-for-initiative",
+                "api-reference/initiative/update-initiative-label-detail",
+                "api-reference/initiative/remove-labels-from-initiative",
+                "api-reference/initiative/delete-initiative-label"
+              ]
+            },
+            {
+              "group": "Initiative Projects",
+              "pages": [
+                "api-reference/initiative/add-projects-to-initiative",
+                "api-reference/initiative/list-initiative-projects",
+                "api-reference/initiative/remove-projects-from-initiative"
+              ]
+            },
+            {
+              "group": "Initiative Epics",
+              "pages": [
+                "api-reference/initiative/add-epics-to-initiative",
+                "api-reference/initiative/list-initiative-epics",
+                "api-reference/initiative/remove-epics-from-initiative"
+              ]
+            },
+        {
+          "group": "Customers",
+          "pages": [
+            "api-reference/customer/overview",
+            "api-reference/customer/add-customer",
+            "api-reference/customer/link-work-items-to-customer",
+            "api-reference/customer/list-customers",
+            "api-reference/customer/get-customer-detail",
+            "api-reference/customer/list-customer-work-items",
+            "api-reference/customer/update-customer-detail",
+            "api-reference/customer/unlink-work-item-from-customer",
+            "api-reference/customer/delete-customer"
+          ]
+        },
+        {
+              "group": "Customer Properties",
+              "pages": [
+                "api-reference/customer/add-customer-property",
+                "api-reference/customer/list-customer-properties",
+                "api-reference/customer/get-customer-property-detail",
+                "api-reference/customer/list-customer-property-values",
+                "api-reference/customer/get-customer-property-value",
+                "api-reference/customer/update-customer-property-detail",
+                "api-reference/customer/update-customer-property-value",
+                "api-reference/customer/delete-customer-property"
+              ]
+            },
+            {
+              "group": "Customer Requests",
+              "pages": [
+                "api-reference/customer/add-customer-request",
+                "api-reference/customer/list-customer-requests",
+                "api-reference/customer/get-customer-request-detail",
+                "api-reference/customer/update-customer-request-detail",
+                "api-reference/customer/delete-customer-request"
+              ]
+            },
+        {
+          "group": "Teamspaces",
+          "pages": [
+            "api-reference/teamspace/overview",
+            "api-reference/teamspace/add-teamspace",
+            "api-reference/teamspace/list-teamspaces",
+            "api-reference/teamspace/get-teamspace-detail",
+            "api-reference/teamspace/update-teamspace-detail",
+            "api-reference/teamspace/delete-teamspace"
+          ]
+        },
+        {
+              "group": "Teamspace Members",
+              "pages": [
+                "api-reference/teamspace/list-teamspace-members",
+                "api-reference/teamspace/add-teamspace-members",
+                "api-reference/teamspace/remove-teamspace-members"
+              ]
+        },
+        {
+              "group": "Teamspace Projects",
+              "pages": [
+                "api-reference/teamspace/list-teamspace-projects",
+                "api-reference/teamspace/add-projects-to-teamspace",
+                "api-reference/teamspace/remove-projects-from-teamspace"
+              ]
+        },
+        {
+          "group": "Stickies",
+          "pages": [
+            "api-reference/sticky/overview",
+            "api-reference/sticky/add-sticky",
+            "api-reference/sticky/list-stickies",
+            "api-reference/sticky/get-sticky-detail",
+            "api-reference/sticky/update-sticky-detail",
+            "api-reference/sticky/delete-sticky"
           ]
         },
         {
@@ -352,6 +479,13 @@
             "api-reference/members/overview",
             "api-reference/members/get-workspace-members",
             "api-reference/members/get-project-members"
+          ]
+        },
+        {
+          "group": "User",
+          "pages": [
+            "api-reference/user/overview",
+            "api-reference/user/get-current-user"
           ]
         }
       ]
@@ -382,6 +516,38 @@
     {
       "source": "/webhooks/intro-webhooks",
       "destination": "/dev-tools/intro-webhooks"
+    },
+    {
+      "source": "/api-reference/cycle-issue/overview",
+      "destination": "/api-reference/cycle/overview"
+    },
+    {
+      "source": "/api-reference/cycle-issue/add-cycle-issue",
+      "destination": "/api-reference/cycle/add-cycle-work-items"
+    },
+    {
+      "source": "/api-reference/cycle-issue/list-cycle-issues",
+      "destination": "/api-reference/cycle/list-cycle-work-items"
+    },
+    {
+      "source": "/api-reference/cycle-issue/delete-cycle-issue",
+      "destination": "/api-reference/cycle/remove-cycle-work-item"
+    },
+    {
+      "source": "/api-reference/module-issue/overview",
+      "destination": "/api-reference/module/overview"
+    },
+    {
+      "source": "/api-reference/module-issue/add-module-issue",
+      "destination": "/api-reference/module/add-module-work-items"
+    },
+    {
+      "source": "/api-reference/module-issue/list-module-issues",
+      "destination": "/api-reference/module/list-module-work-items"
+    },
+    {
+      "source": "/api-reference/module-issue/delete-module-issue",
+      "destination": "/api-reference/module/remove-module-work-item"
     }
   ]
 }

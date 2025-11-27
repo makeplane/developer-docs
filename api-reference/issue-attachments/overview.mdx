@@ -1,21 +1,30 @@
 ---
 title: Overview
-description: Allows you to manage file attachments associated with issues and Intake issues. You can upload new attachments and retrieve existing attachments for a specific issue.
 ---
 
-```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/issue-attachments/asset-id/
-```
+Allows you to manage file attachments associated with work items and Intake work items. You can upload new attachments and retrieve existing attachments for a specific work item.
 
-## Upload Process
+[Learn more about Attachments →](https://docs.plane.so/core-concepts/issues/overview#add-links-and-attachments)
+
+<Warning>
+**Deprecation notice**
+
+We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
+
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
+</Warning>
+
+## Upload process
 
 1. Get the [upload credentials](/api-reference/issue-attachments/get-upload-credentials).
 2. [Upload the file](/api-reference/issue-attachments/upload-file) to storage.
 3. [Complete attachment upload](/api-reference/issue-attachments/complete-upload) to notify server.
 
-## Issue attachment object
+## The Attachment object
 
 **Attributes**
 
@@ -47,9 +56,13 @@ PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
     
     Storage path/identifier for the attachment file
 
-*   `entity-type` _string_
+*   `entity_type` _string_
     
-    Always `ISSUE_ATTACHMENT` for issue attachments
+    Always `ISSUE_ATTACHMENT` for work item attachments
+
+*   `entity_identifier` _string_
+    
+    Entity identifier for the attachment
 
 *   `is_deleted` _boolean_
     
@@ -117,15 +130,31 @@ PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
 *   `project` _string_
 
-    ID of project containing the issue
+    ID of project containing the work item
 
 *   `issue` _string_
 
-    ID of issue containing the attachment
+    ID of work item containing the attachment
+
+*   `user` _string_
+
+    ID of user associated with the attachment
+
+*   `draft_issue` _string_
+
+    ID of draft work item if applicable
+
+*   `comment` _string_
+
+    ID of comment if attachment is associated with a comment
+
+*   `page` _string_
+
+    ID of page if attachment is associated with a page
 
     
 <ResponseExample>
-```json JSON
+```json THE ATTACHMENT OBJECT
 {
     "id": "8caf3ed5-4f57-9674-76c4fce146b2",
     "created_at": "2024-10-30T09:32:32.815273Z",

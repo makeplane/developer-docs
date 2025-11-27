@@ -1,0 +1,22 @@
+---
+title: Transfer cycle work items
+description: Transfers all work items from one cycle to another.
+api: POST /api/v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/transfer-issues/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="project_id" type="string" required>The unique identifier of the project.</ParamField>
+
+<ParamField path="cycle_id" type="string" required>The unique identifier for the cycle.</ParamField>
+
+## Body parameters
+
+<ParamField body="new_cycle_id" type="string" required>
+ID of the target cycle to transfer work items to.
+</ParamField>
+

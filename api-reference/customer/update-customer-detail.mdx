@@ -1,0 +1,27 @@
+---
+title: Update a customer
+description: Updates an existing customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+api: PATCH /api/v1/workspaces/{workspace_slug}/customers/{customer_id}/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="customer_id" type="string" required>
+The unique identifier for the customer.
+</ParamField>
+
+
+## Body parameters
+
+<ParamField body="name" type="string">
+Name of the customer.
+</ParamField>
+
+<ParamField body="email" type="string">
+Email address of the customer.
+</ParamField>
+

@@ -1,24 +1,40 @@
 ---
 title: Overview
-description: Issue activities are the history of all the changes that happened to the issue like property changes etc.
 ---
 
-```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/activities/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/activities/:activity_id/
-```
+Work item activity represents the history of all changes made to a work item, including property changes, comments, and other modifications.
 
-### Issue Activity Object
+<Warning>
+**Deprecation notice**
+
+We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
+
+**End of support**  
+31st March 2026
+
+**What you need to do**  
+To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
+</Warning>
+
+## The Activity object
 
 **Attributes**
 
+- `id` _uuid_
+
+  Unique identifier for the activity
+
 - `created_at` _timestamp_
 
-  The timestamp of the time when the project was created
+  The timestamp of the time when the activity was created
 
 - `updated_at` _timestamp_
 
-  The timestamp of the time when the project was last updated
+  The timestamp of the time when the activity was last updated
+
+- `deleted_at` _timestamp_ or _null_
+
+  The timestamp when the activity was deleted (if deleted)
 
 - `verb` _string_
 
@@ -66,7 +82,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
 - `issue` _uuid_
 
-  The issue the activity is attached to
+  The work item the activity is attached to
 
 - `issue_comment` _uuid or null_
 
@@ -74,10 +90,10 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
 
 - `actor` uuid
 
-  The actor who triggered this actor
+  The actor who triggered this activity
 
 <ResponseExample>
-```json JSON
+```json THE ACTIVITY OBJECT
 {
     "id": "35612f5b-3eff-4130-b91c-c976ff887a20",
     "created_at": "2023-11-19T11:56:55.452555Z",
@@ -86,7 +102,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/issues/:issue_id/
     "field": null,
     "old_value": null,
     "new_value": null,
-    "comment": "created the issue",
+    "comment": "created the work item",
     "attachments": [],
     "old_identifier": null,
     "new_identifier": null,

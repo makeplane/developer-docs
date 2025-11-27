@@ -1,13 +1,19 @@
 ---
-title: Delete state
-description: Deletes a state in a project
-api: DELETE /api/v1/workspaces/{workspace-slug}/projects/{project_id}/states/{state_id}/
+title: Delete a state
+description: Permanently deletes a state from a project. This action cannot be undone.
+api: DELETE /api/v1/workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
 
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="project_id" type="string" required>
+The unique identifier of the project.
+</ParamField>
 
-<ParamField path="state_id" type="string" required></ParamField>
+<ParamField path="state_id" type="string" required>
+The unique identifier for the state.
+</ParamField>

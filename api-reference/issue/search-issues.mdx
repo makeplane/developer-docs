@@ -1,0 +1,22 @@
+---
+title: Search work items
+description: Searches for work items across a workspace by text query.
+api: GET /api/v1/workspaces/{workspace_slug}/work-items/search/
+---
+
+### Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+### Query parameters
+
+<ParamField query="search" type="string" required>
+Text query to search for in work item names and descriptions.
+</ParamField>
+
+<ParamField query="project" type="string">
+Filter results to a specific project by ID.
+</ParamField>
+

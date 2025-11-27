@@ -17,11 +17,11 @@ To ensure uninterrupted service, replace all `/inbox-issues/` references with `/
 To enable the Intake feature, the user can hit a PATCH request on the project api with the body as
 
 ```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/:issue_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/:issue_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/inbox-issues/:issue_id/
+GET    /api/v1/workspaces/{workspace_slug}/projects/{project_id}/inbox-issues/
+POST   /api/v1/workspaces/{workspace_slug}/projects/{project_id}/inbox-issues/
+GET    /api/v1/workspaces/{workspace_slug}/projects/{project_id}/inbox-issues/{work_item_id}/
+PATCH  /api/v1/workspaces/{workspace_slug}/projects/{project_id}/inbox-issues/{work_item_id}/
+DELETE /api/v1/workspaces/{workspace_slug}/projects/{project_id}/inbox-issues/{work_item_id}/
 ```
 
 ```

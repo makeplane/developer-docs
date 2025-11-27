@@ -1,6 +1,9 @@
 ---
 title: Overview
 ---
+Intake allows guests to create work items that admins and members can review and move into a project.
+
+[Learn more about Intake →](https://docs.plane.so/core-concepts/intake)
 
 <Warning>
 **Deprecation notice**
@@ -14,15 +17,9 @@ We are deprecating all `/api/v1/.../inbox-issues/` endpoints in favor of `/api/v
 To ensure uninterrupted service, replace all `/inbox-issues/` references with `/intake-issues/` in your codebase before the support end date.
 </Warning>
 
-To enable the Intake feature, the user can hit a PATCH request on the project api with the body as
+## Enable Intake
 
-```http
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/
-POST   /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/:issue_id/
-PATCH  /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/:issue_id/
-DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/:issue_id/
-```
+To enable the Intake feature, the user can hit a PATCH request on the project api with the body as
 
 ```
 {
@@ -30,18 +27,18 @@ DELETE /api/v1/workspaces/:workspace-slug/projects/:project_id/intake-issues/:is
 }
 ```
 
-To create an Intake issue, the payload should be sent in the below format
+To create an Intake work item, the payload should be sent in the below format
 
 ```json
 {
   "issue": {
-    "name": "Snoozed Issue 2",
+    "name": "Snoozed task 2",
     "priority": "high"
   }
 }
 ```
 
-### Intake issue object
+### The Intake object
 
 **Attribute**
 
@@ -55,7 +52,7 @@ To create an Intake issue, the payload should be sent in the below format
 
 - `status`
 
-  the status of the issue can be in above mentioned status
+  the status of the work item can be in above mentioned status
 
   - \-2 - Pending
   - \-1 - Rejected
@@ -65,11 +62,11 @@ To create an Intake issue, the payload should be sent in the below format
 
 - `snoozed_till`
 
-  The time untill the issue is snoozed.
+  The time untill the work item is snoozed.
 
 - `source`
 
-  The source describes the type intake issue from
+  The source describes the type of intake from
 
 - `created_by` , `updated_by` _uuid_
 
@@ -85,18 +82,18 @@ To create an Intake issue, the payload should be sent in the below format
 
 - `inbox`
 
-  intake id of the issue
+  intake id of the work item
 
 - `issue`
 
-  issue id of the issue
+  work item id of the work item
 
 - `duplicate_to`
 
-  Id of the issue of which the current issue is duplicate of.
+  Id of the work item of which the current work item is duplicate of.
 
 <ResponseExample>
-```json JSON
+```json INTAKE OBJECT
 {
     "id": "0de4d6d1-fdc7-4849-8080-dc379ab210e3",
     "pending_issue_count": 0,

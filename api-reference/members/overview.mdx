@@ -1,14 +1,11 @@
 ---
 title: Overview
-description: APIs to retrieve members of a workspace and the individual projects within it.
 ---
+Members represent users who belong to a workspace or project. The Members API allows you to retrieve information about workspace and project members.
 
-```http
-GET    /api/v1/workspaces/:workspace-slug/members/
-GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/members/
-```
+[Learn more about Members →](https://docs.plane.so/core-concepts/workspaces/members)
 
-## Member object
+## The Members object
 **Attributes**
 
 *   `id` _string_  
@@ -37,7 +34,7 @@ GET    /api/v1/workspaces/:workspace-slug/projects/:project_id/members/
 
 
 <ResponseExample>
-```json JSON
+```json MEMBERS OBJECT
     {
         "id": "00000000-0000-0000-0000-000000000001",
         "first_name": "User",

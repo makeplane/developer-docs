@@ -1,11 +1,12 @@
 ---
-title: List intake issues
-description: Gets all the intake issue of a project
-api: GET /api/v1/workspaces/{workspace-slug}/projects/{project_id}/intake-issues/
+title: List all intake work items
+description: Returns a list of all intake work items in a project.
+api: GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/
 ---
 
-### Path parameters
+## Path parameters
 
-<ParamField path="workspace-slug" type="string" required></ParamField>
-
-<ParamField path="project_id" type="string" required></ParamField>
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+<ParamField path="project_id" type="string" required>The unique identifier of the project</ParamField>

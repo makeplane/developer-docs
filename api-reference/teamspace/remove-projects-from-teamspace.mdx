@@ -1,0 +1,22 @@
+---
+title: Remove projects from teamspace
+description: Removes one or more projects from a teamspace.
+api: DELETE /api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/projects/
+---
+
+## Path parameters
+
+<ParamField path="workspace_slug" type="string" required>
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+</ParamField>
+
+<ParamField path="teamspace_id" type="string" required>
+The unique identifier for the teamspace.
+</ParamField>
+
+## Body parameters
+
+<ParamField body="project_ids" type="string[]" required>
+Array of project IDs to remove from the teamspace.
+</ParamField>
+
