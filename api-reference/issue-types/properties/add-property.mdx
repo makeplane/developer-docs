@@ -33,3 +33,15 @@ Default value(s) for the property.
 <ParamField body="is_required" type="boolean">Whether this property is required when creating work items.</ParamField>
 <ParamField body="is_active" type="boolean">Whether this property is currently active.</ParamField>
 <ParamField body="is_multi" type="boolean">Whether this property allows multiple values.</ParamField>
+<ParamField body="options" type="object[]">
+Array of option objects for OPTION type properties. This field can be used while creating a property with type OPTION to set options on the custom property during creation itself. Each option object can contain:
+- `name` (string): Name of the option
+- `description` (string): Description of the option
+- `is_active` (boolean): Whether the option is active
+- `sort_order` (number): Sort order for the option
+- `parent` (string): Parent option ID for hierarchical options
+- `is_default` (boolean): Whether this is the default option
+- `logo_props` (object): Logo properties for the option
+
+To add or update options on an OPTION property after creation, you can use the APIs from [`issue-types/options/add-dropdown-options`](/api-reference/issue-types/options/add-dropdown-options).
+</ParamField>

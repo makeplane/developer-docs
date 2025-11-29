@@ -22,6 +22,20 @@ The unique identifier for the work item.
 
 ## Body parameters
 
-<ParamField body="values" type="object[]" required> 
-  <ParamField body="value" type="string" required></ParamField>
+<ParamField body="value" type="string | boolean | number | string[]" required>
+The value type depends on the property type:
+- TEXT/URL/EMAIL/FILE: string
+- DATETIME: string (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)
+- DECIMAL: number (int or float)
+- BOOLEAN: boolean (true/false)
+- OPTION/RELATION (single): string (UUID)
+- OPTION/RELATION (multi, when is_multi=True): list of strings (UUIDs) or single string
+
+For multi-value properties (is_multi=True):
+- Accept either a single UUID string or a list of UUID strings
+- Multiple records are created
+- Response will be a list of values
+
+For single-value properties:
+- Only one value is allowed per work item/property combination
 </ParamField>
