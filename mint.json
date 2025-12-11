@@ -359,6 +359,14 @@
           ]
         },
         {
+          "group": "Epics",
+          "pages": [
+            "api-reference/epics/overview",
+            "api-reference/epics/list-epics",
+            "api-reference/epics/get-epic-detail"
+          ]
+        },
+        {
           "group": "Initiatives",
           "pages": [
             "api-reference/initiative/overview",

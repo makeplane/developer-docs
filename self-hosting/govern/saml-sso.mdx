@@ -43,6 +43,11 @@ By default, your IdP will send the value listed under `Property`. You have to ma
 | user.lastName              | last_name                                  |
 | user.email                 | email                                      |
 
+<Note>
+**first_name** and **last_name** are optional but recommended for complete user profiles. If these are not provided, Plane will create the user account with just the email address.
+
+</Note>
+
 <Tip>
   Depending on your IdP, you will have to find both the `Name ID format` and the three other user identification properties on different screens. Please refer to your IdP's documentation when configuring these up on your IdP. Additionally, you may have to configure the IdP to sign assertions. Irrespective of that, you have to copy the signing certificate from the IdP.
 </Tip>
