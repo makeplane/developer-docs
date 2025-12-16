@@ -115,6 +115,7 @@
         "self-hosting/govern/configure-dns-email-service",
         "self-hosting/govern/database-and-storage",
         "self-hosting/govern/custom-domain",
+        "self-hosting/govern/configure-ssl",
         "self-hosting/govern/private-bucket",
         {
           "group": "Integrations",
