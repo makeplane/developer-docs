@@ -63,8 +63,8 @@
       "group": "Self-host Plane",
       "pages": [
         "self-hosting/overview",
-        "self-hosting/editions-and-versions"
-
+        "self-hosting/editions-and-versions",
+        "self-hosting/plane-architecture"
       ]
     },
     {
@@ -83,8 +83,10 @@
         {
           "group": "Airgapped Edition",
           "pages": [
+              "self-hosting/methods/airgapped-requirements",
               "self-hosting/methods/airgapped-edition",
-              "self-hosting/methods/airgapped-edition-kubernetes"
+              "self-hosting/methods/airgapped-edition-kubernetes",
+              "self-hosting/methods/clone-docker-images"
             ]
         },
         {

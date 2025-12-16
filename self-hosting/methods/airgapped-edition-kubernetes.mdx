@@ -3,145 +3,244 @@ title: Deploy Plane Commercial in an Airgapped Kubernetes Environment
 sidebarTitle: For Kubernetes
 ---
 
-This guide walks you through installing Plane Enterprise in a Kubernetes cluster without internet access. You'll use Helm charts and pre-packaged Docker images to deploy a fully functional Plane instance.
+<Note>
+**IMPORTANT**  
+Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
+</Note>
+
+This guide walks you through deploying Plane Enterprise in an airgapped Kubernetes environment using Helm charts and pre-packaged Docker images.
 
 ## What you'll need
 
 Before starting, ensure you have:
 
+- Kubernetes cluster (v1.31 - v1.33)
 - Helm 3.x installed
-- kubectl with access to your target Kubernetes cluster
+- `kubectl` configured to access your cluster
+- `cert-manager` available in the cluster
+- A valid and working ingress controller (nginx, traefik, etc)
+- Required ports opened to access the application (80, 443)
+- SMTP ports opened if using email intake (25, 465, 587)
+
+<Warning>
+While Kubernetes can run stateful services with persistent volumes, and Plane's Helm chart supports deploying PostgreSQL, MinIO, RabbitMQ, and Redis, we strongly recommend using external managed services for better reliability in backup/restore operations and disaster recovery.
+
+Consider these alternatives:
+- **MinIO**: Replace with AWS S3, Google Cloud Storage, or any S3-compatible service
+- **Redis**: Replace with Valkey or a managed Redis service
+- **PostgreSQL**: Use a managed PostgreSQL service
+- **RabbitMQ**: Use a managed message queue service
+</Warning>
 
 ## Install Plane
 
-1. Get the Plane Enterprise Helm chart from the official release:
+1. **Download Plane Enterprise Helm chart**  
+
+    Get the Plane Enterprise Helm chart from the official release. Check for the latest version at [Artifact Hub](https://artifacthub.io/packages/helm/makeplane/plane-enterprise).
 
     ```bash
     # Using wget
-    wget https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.4.1/plane-enterprise-1.4.1.tgz
+    wget https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.6.4/plane-enterprise-1.6.4.tgz
 
     # Using curl
-    curl -L -O https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.4.1/plane-enterprise-1.4.1.tgz
+    curl -L -O https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.6.4/plane-enterprise-1.6.4.tgz
     ```
 
-2. Contact [**sales@plane.so**](mailto:sales@plane.so) to get your installation download URL and license file.
+2. **Prepare Docker images for airgapped environment**  
 
-2. On a machine with internet access, download the installation package:
-
-   ```bash
-   curl -LO <asset-download-url>
-   ```
-
-   The download may take 15 minutes. Once complete, you no longer need internet access.
-
-3. Transfer the `airgapped-{arch}.tar.gz` file to your air-gapped machine.
-
-4. Extract the package on your air-gapped machine:
-
-   ```bash
-   mkdir -p airgapped
-   tar -xvzf airgapped-amd64.tar.gz -C airgapped
-   cd airgapped
-   ```
-
-    You'll find these Docker image .tar files for your airgapped installation in this folder.
-
-    - `admin-commercial-<version>.tar` - Admin service image
-    - `backend-commercial-<version>.tar` - API/worker/beat-worker/migrator service image
-    - `email-commercial-<version>.tar` - Email service image
-    - `live-commercial-<version>.tar` - Live service image
-    - `monitor-commercial-<version>.tar` - Monitor service image
-    - `proxy-commercial-<version>.tar` - Plane-proxy service image
-    - `silo-commercial-<version>.tar` - Silo service image
-    - `space-commercial-<version>.tar` - Space service image
-    - `web-commercial-<version>.tar` - Web service image
-    - `minio-latest.tar` - Plane-minio service image
-    - `postgres-15.7-alpine.tar` - Plane-db service image
-    - `rabbitmq-3.13.6-management-alpine.tar` - Plane-mq service image
-    - `valkey-7.2.5-alpine.tar` - Plane-redis service image
+    Refer to [this document](https://app.plane.so/plane/wiki/0fc896e0-ca79-4783-8860-43c51b372ec1/) to download the Docker images from the public repository to your internal repository.
 
     <Note>
-    For this installation, you can ignore the extra files in this folder (e.g., `docker-compose.yml`, `install.sh`, `plane.env`, etc.).  
+    **Important**  
+    This process will NOT download or clone these infrastructure images:
+    - `valkey:7.2.5-alpine`
+    - `postgres:15.7-alpine`
+    - `rabbitmq:3.13.6-management-alpine`
+    - `minio/minio:latest`
+    - `minio/mc:latest`
+
+    If you're using `local_setup: true` for any of these services, you'll need to pull and transfer these images separately.
     </Note>
 
-5. Load the images into your local Docker registry or private registry:
+
+3. **Configure custom values file**  
+
+    a. Extract the default values from the Helm chart.
 
     ```bash
-    # Load each image into Docker 
-    docker load -i <plane-images>.tar
-
-    # Tag and push each image to your private registry
-    docker tag <image-name> <your-registry>/<image-name>
-    docker push <your-registry>/<image-name>
+    helm show values plane-enterprise-1.6.4.tgz > custom-values.yaml
     ```
 
-6. Create Custom Values File
+    b. Update Docker image references
 
-    ```bash
-    # Extract the Helm chart to access the values file
-    helm show values plane-enterprise-1.4.1.tgz > custom-values.yaml
-    ```
+    Edit the `custom-values.yaml` file to point to your local or private registry images and configure important settings.
 
-7. Edit the `custom-values.yaml` file to point to your local/private registry images and configure important settings:
-
+    **Basic configuration:**
     ```yaml
-    # Example of image updates in custom-values.yaml
-    license:
-        licenseDomain: 'plane.example.com'
+    # Specify the Plane version
+    planeVersion: <plane-version>
 
+    # Enable airgapped mode (REQUIRED)
     airgapped:
-        enabled: true
-        # if using Custom Root CA for S3 storage
+        enabled: true  # Must be TRUE for airgapped installations
+        # If using custom root CA for S3 storage
         s3SecretName: "s3-custom-ca"
         s3SecretKey: "s3-custom-ca.crt"
-
-    services:
-        web:
-            image: <your-registry.com>/web-commercial:<PLANE_VERSION>
-        
-        api:
-            image: <your-registry.com>/backend-commercial:<PLANE_VERSION>
-        
-        space:
-            image: <your-registry.com>/space-commercial:<PLANE_VERSION>
-        
-        admin:
-            image: <your-registry.com>/admin-commercial:<PLANE_VERSION>
-        
-        live:
-            image: <your-registry.com>/live-commercial:<PLANE_VERSION>
-        
-        monitor:
-            image: <your-registry.com>/monitor-commercial:<PLANE_VERSION>
-        
-        silo:
-            image: <your-registry.com>/silo-commercial:<PLANE_VERSION>
-        
-        iframely:
-            image: <your-registry.com>/iframely:v1.2.0
-        
-        # Database and infrastructure images
-        redis:
-            image: <your-registry.com>/valkey:7.2.5-alpine
-        
-        postgres:
-            image: <your-registry.com>/postgres:15.7-alpine
-        
-        rabbitmq:
-            image: <your-registry.com>/rabbitmq:3.13.6-management-alpine
-        
-        minio:
-            image: <your-registry.com>/minio:latest
-            image_mc: <your-registry.com>/mc:latest
-
-    env:
-        storageClass: ''
     ```
 
-8. Install Plane Commercial Airgapped edition using your customized values file:
+    **Service images:**
+    ```yaml
+    services:
+        web:
+            image: /web-commercial
+        
+        api:
+            image: /backend-commercial
+        
+        space:
+            image: /space-commercial
+        
+        admin:
+            image: /admin-commercial
+        
+        live:
+            image: /live-commercial
+        
+        monitor:
+            image: /monitor-commercial
+        
+        email_service:
+            enabled: true
+            image: /email-commercial
+        
+        silo:
+            enabled: true
+            image: /silo-commercial
+        
+        iframely:
+            enabled: true
+            image: /iframely:v1.2.0
+    ```
 
+    **Infrastructure services:**
+
+    Configure whether to use local (in-cluster) or external services:
+    ```yaml
+    services:
+    # Database and infrastructure images
+    redis:
+        local_setup: true  # Set to false if using external service
+        image: valkey/valkey:7.2.11-alpine
+    
+    postgres:
+        local_setup: true  # Set to false if using external service
+        image: postgres:15.7-alpine
+    
+    rabbitmq:
+        local_setup: true  # Set to false if using external service
+        image: rabbitmq:3.13.6-management-alpine
+        external_rabbitmq_url: ''  # Required only if using remote RabbitMQ
+    
+    minio:
+        local_setup: true  # Set to false if using external service
+        image: minio/minio:latest
+        image_mc: minio/mc:latest
+    ```
+
+    **Environment variables:**
+    ```yaml
+    env:
+    storageClass: ''
+    remote_redis_url: ''  # Required only if using remote Redis
+    pgdb_remote_url: ''  # Required only if using remote PostgreSQL
+    # Required if MinIO local_setup is false
+    aws_access_key: ''
+    aws_secret_access_key: ''
+    aws_region: ''
+    aws_s3_endpoint_url: ''
+    ```
+
+    c. **Configure integrations and importers**
+
+    To set up integrations with external systems like Slack, GitHub, and GitLab, configure these values in `custom-values.yaml`:
+    ```yaml
+    services:
+    silo:
+        enabled: true
+        connectors:
+        slack:
+            enabled: false
+            client_id: ''
+            client_secret: ''
+        github:
+            enabled: false
+            client_id: ''
+            client_secret: ''
+            app_name: ''
+            app_id: ''
+            private_key: ''
+        gitlab:
+            enabled: false
+            client_id: ''
+            client_secret: ''
+
+    env:
+    silo_envs:
+        batch_size: 100
+        mq_prefetch_count: 1
+        request_interval: 400
+        hmac_secret_key: ''
+        aes_secret_key: 'dsOdt7YrvxsTIFJ37pOaEVvLxN8KGBCr'
+    ```
+
+    d. **Configure intake email**
+
+    The email intake feature in Plane lets you capture incoming emails. Before or after setting up the application, configure DNS settings following [this guide](https://developers.plane.so/self-hosting/govern/configure-dns-email-service).
+
+    Add these required values to `custom-values.yaml`:
+    ```yaml
+    ingress:
+        enabled: true
+        ingressClass: 'nginx'  # Or as per your cluster
+        ingress_annotations: {}
+
+    ssl:
+        tls_secret_name: ''  # If you have a custom TLS secret name
+        # If you want to use Let's Encrypt, set createIssuer and generateCerts to true
+        createIssuer: false
+        issuer: http  # Allowed: cloudflare, digitalocean, http
+        token: ''  # Not required for http
+        server: https://acme-v02.api.letsencrypt.org/directory
+        email: plane@example.com  # A valid email address
+        generateCerts: true
+
+    services:
+        email_service:
+            enabled: true
+            replicas: 1
+            memoryLimit: 1000Mi
+            cpuLimit: 500m
+            memoryRequest: 50Mi
+            cpuRequest: 50m
+            image: /email-commercial:
+            pullPolicy: Always
+            nodeSelector: {}
+            tolerations: []
+            affinity: {}
+            labels: {}
+            annotations: {}
+
+    env:
+        email_service_envs:
+            smtp_domain: ''
+    ```
+
+4. **Install or upgrade with custom values**
+
+    Install Plane Enterprise using your customized values file:
     ```bash
-    helm install plane-app plane-enterprise-1.4.1.tgz \
+    helm upgrade plane-app plane-enterprise-1.6.4.tgz \
+        --install \
         --create-namespace \
         --namespace plane \
         -f custom-values.yaml \
@@ -150,48 +249,45 @@ Before starting, ensure you have:
         --wait-for-jobs
     ```
 
-## Verify installation
+5. **Verify installation**
 
-Check that all components are running properly:
+    Check that all components are running:
+    ```bash
+    # Check all pods
+    kubectl get pods -n plane
 
-```bash
-# Check all pods
-kubectl get pods -n plane
+    # Check services
+    kubectl get services -n plane
 
-# Check services
-kubectl get services -n plane
+    # Check ingress
+    kubectl get ingress -n plane
 
-# Check ingress
-kubectl get ingress -n plane
+    # Check persistent volumes
+    kubectl get pv,pvc -n plane
 
-# Check persistent volumes
-kubectl get pv,pvc -n plane
+    # Get the ingress URL
+    kubectl get ingress -n plane -o wide
+    ```
 
-# Get the ingress URL
-kubectl get ingress -n plane -o wide
-```
+## Activate your license
+
+Once your air-gapped installation is running, you'll need to activate your workspace with the license file.
+
+1. Login to the [Prime portal](https://prime.plane.so/licenses) with the same email address you used to purchase the paid plan.
+2. Go to [Manage licenses](https://prime.plane.so/licenses).
+3. Click **Download license** to download the license file for your Plane version.
+    ![Download license file](/images/activate-license/download-license.webp)
+4. Navigate to the [Workspace Settings](https://docs.plane.so/core-concepts/workspaces/overview#workspace-settings) in the Plane application.
+6. Select **Billing and plans** on the right pane.
+6. Click the **Activate this workspace** button.
+    ![Upload license file](/images/activate-license/upload-airgapped-license-file.webp)
+7. Upload the license file to activate your workspace.
+
+You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
+
 
 ## Additional configuration
 
 For more advanced Plane configuration options, refer to the [Kubernetes documentation](https://developers.plane.so/self-hosting/methods/kubernetes#configuration-settings).
 
 
-## Activate your license
-
-Once your air-gapped installation is running, you'll need to activate your workspace with the provided license file.
-<Note>
-You should have received the `license_key.json` file as part of your air-gapped package. If you don't have this file, contact our support team.
-</Note>
-
-1. Go to your [Workspace Settings](https://docs.plane.so/core-concepts/workspaces/overview#workspace-settings) in the Plane application.
-2. Select **Billing and plans** on the right pane.
-3. Click the **Activate this workspace** button.
-    ![Upload license file](/images/activate-license/upload-airgapped-license-file.webp)
-4. Upload the license file `license_key.json` to activate your workspace.
-
-You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
-
-<Tip>
-*Optional*  
-Once everything is working, you can safely delete the `airgapped` folder that contains the installation script and image files to free up space.
-</Tip>
