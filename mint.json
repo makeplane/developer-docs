@@ -115,13 +115,15 @@
         "self-hosting/govern/configure-dns-email-service",
         "self-hosting/govern/database-and-storage",
         "self-hosting/govern/custom-domain",
+        "self-hosting/govern/configure-ssl",
         "self-hosting/govern/private-bucket",
         {
           "group": "Integrations",
           "pages": [
               "self-hosting/govern/integrations/github",
-              "self-hosting/govern/integrations/slack",
-              "self-hosting/govern/integrations/gitlab"
+              "self-hosting/govern/integrations/gitlab",
+              "self-hosting/govern/integrations/sentry",
+              "self-hosting/govern/integrations/slack"
             ]
         },
         "self-hosting/govern/external-secrets",
@@ -356,6 +358,14 @@
             "api-reference/worklogs/get-total-time",
             "api-reference/worklogs/update-worklog",
             "api-reference/worklogs/delete-worklog"
+          ]
+        },
+        {
+          "group": "Epics",
+          "pages": [
+            "api-reference/epics/overview",
+            "api-reference/epics/list-epics",
+            "api-reference/epics/get-epic-detail"
           ]
         },
         {

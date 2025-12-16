@@ -48,7 +48,7 @@ Go to `/god-mode/authentication/oidc` on your Plane app and find the configs ↓
 
 - Copy the `User info URL` from your IdP and paste it into the field for it on `/god-mode/authentication/oidc/`.
 
-  Used to get an authenticating user's `email`, `first_name` and the `last_name` values from the IdP, this too can be copied over from the `.well-known/` directory.
+  Used to get an authenticating user's information from the IdP. Plane requires the `email` field for user authentication. The `first_name` and `last_name` fields are optional but recommended for a complete user profile. This URL can be copied from the `.well-known/` directory.
 
 - Copy the `Authorize URL` over from the `.well-known/` directory and paste it into the field for it on Plane's `/god-mode/authentication/oidc/`.\
   This is the URL that Plane's login screen redirects to when your users click `Sign up with <name of IDP>` or `Login with <name of IdP>`.
