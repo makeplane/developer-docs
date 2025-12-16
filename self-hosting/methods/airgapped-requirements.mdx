@@ -3,15 +3,18 @@ title: Airgapped deployment architecture
 sidebarTitle: Overview
 ---
 
+<Note>
+**IMPORTANT**  
+Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
+</Note>
+
 This document explains Plane's architecture and specific requirements for airgapped deployments. Review this before beginning your airgapped installation on [Docker](/self-hosting/methods/airgapped-edition) or [Kubernetes](/self-hosting/methods/airgapped-edition-kubernetes).
 
 ## What is an airgapped deployment?
 
 An airgapped deployment operates in a completely isolated network environment with no external internet connectivity. This isolation is common in highly regulated industries, government facilities, and organizations with strict security requirements.
 
-Plane supports fully airgapped deployments where all components—application services, databases, storage, and integrations—operate entirely within your isolated network perimeter.
-
-See [Plane architecture](/self-hosting/plane-architecture)
+Plane supports fully airgapped deployments where all components - application services, databases, storage, and integrations - operate entirely within your isolated network perimeter.
 
 ## Airgapped cluster architecture
 
@@ -21,7 +24,7 @@ Here's how Plane operates in an airgapped environment with internal enterprise a
 
 This diagram illustrates a critical principle: **all OAuth flows and API communication remain internal to the airgapped cluster**. When integrating with self-hosted GitHub Enterprise, GitLab, or other internal services, the entire authentication and data exchange happens within your isolated network — no internet access required.
 
-## Connectivity and telemetry
+For a detailed breakdown of Plane's services and infrastructure dependencies, see [Plane self-hosted architecture](/self-hosting/plane-architecture).
 
 **Critical guarantees for airgapped environments**
 

@@ -83,7 +83,7 @@
         {
           "group": "Airgapped Edition",
           "pages": [
-              "self-hosting/methods/airgapped-considerations",
+              "self-hosting/methods/airgapped-requirements",
               "self-hosting/methods/airgapped-edition",
               "self-hosting/methods/airgapped-edition-kubernetes",
               "self-hosting/methods/clone-docker-images"
