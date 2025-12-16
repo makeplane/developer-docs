@@ -13,7 +13,7 @@ Plane consists of multiple services working together to provide project manageme
 The main application interface where users interact with projects, work items, and pages. This service serves the UI and handles client-side routing.
 
 **Space**  
-This powers public sharing. It lets you publish projects, views, pages to the web, so others can view without needing to log in. 
+This powers public sharing. It lets you publish projects, views, pages to the web, so others can view without needing to log in.
 
 **Admin**  
 Instance administration interface for workspace owners and administrators. Manages billing, licensing, workspace settings, and user permissions.
@@ -61,7 +61,7 @@ In-memory cache and session store. Used for caching frequently accessed data, st
 Message queue for asynchronous task processing. Workers pull jobs from queues for background operations like imports, exports, and notifications.
 
 **MinIO/S3**  
-Object storage for file uploads, attachments, and generated exports. Can be replaced with any S3-compatible storage system.
+Object storage for file uploads, attachments, and generated exports; can be replaced with any S3-compatible storage system.
 
 **OpenSearch**  
 Optional search indexing service for enhanced search capabilities. Not required for basic Plane functionality.
