@@ -63,8 +63,8 @@
       "group": "Self-host Plane",
       "pages": [
         "self-hosting/overview",
-        "self-hosting/editions-and-versions"
-
+        "self-hosting/editions-and-versions",
+        "self-hosting/plane-architecture"
       ]
     },
     {
