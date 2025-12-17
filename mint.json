@@ -507,7 +507,16 @@
       "pages": [
       "dev-tools/build-plane-app",
       "dev-tools/intro-webhooks",
-      "dev-tools/mcp-server"
+      "dev-tools/mcp-server",
+      {
+        "group": "Agents",
+        "pages": [
+          "dev-tools/agents/overview",
+          "dev-tools/agents/building-an-agent",
+          "dev-tools/agents/best-practices",
+          "dev-tools/agents/signals-content-payload"
+        ]
+      }
       ]
     }
   ],
