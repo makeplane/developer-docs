@@ -43,16 +43,41 @@ This shows you all the variables that contain your current domain. You'll update
 
 2. Find and update these environment variables with your new domain:
 
-    - `DOMAIN_NAME`
-    - `SITE_ADDRESS`
-    - `WEB_URL`
-    - `CORS_ALLOWED_ORIGINS`
+    - **DOMAIN_NAME**
 
-    <Note>
-    **Configuration requirements:**
-    - Use the correct protocol (`http://` or `https://`) where required.
-    - In `CORS_ALLOWED_ORIGINS`, separate multiple entries with commas and no spaces.
-    </Note>
+    Set this to your bare domain name without protocol:
+    ```env
+    DOMAIN_NAME=plane.company.com
+    ```
+
+    Don't include `http://` or `https://` here, just the hostname.
+
+    - **SITE_ADDRESS**
+
+    Set this to your full domain URL:
+    ```env
+    SITE_ADDRESS=https://plane.company.com
+    ```
+
+    Include the protocol (`https://` for SSL, `http://` if you haven't set up SSL yet).
+
+    - **WEB_URL**
+
+    This should match your SITE_ADDRESS:
+    ```env
+    WEB_URL=https://plane.company.com
+    ```
+
+    Again, include the full protocol.
+
+    **CORS_ALLOWED_ORIGINS**
+
+    List all domains that should be allowed to make cross-origin requests to your Plane instance. This typically includes both HTTP and HTTPS versions of your domain:
+    ```env
+    CORS_ALLOWED_ORIGINS=https://plane.company.com,http://plane.company.com
+    ```
+
+    Separate multiple entries with commas, no spaces. If you have multiple domains or subdomains that need access, add them all here.
 
 ## Restart Plane services
 
