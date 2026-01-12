@@ -3,9 +3,63 @@ title: Custom domain
 sidebarTitle: Custom domain
 description: Host your Plane instance in your custom domain. 
 ---
+During Plane Commercial Edition installation, you configure a domain for your instance. If you need to change that domain later, whether you're moving to a production domain, switching to a different hostname, or updating your DNS configuration, this guide walks you through the process.
+
 <Note>
-With the Commercial Edition, you can set up a custom domain right during installation. If you ever need to change the domain later, just contact our support team for assistance until we ship out a feature that lets you handle domain changes yourself.
+**Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
 </Note>
+
+<Warning>
+**Plan for downtime**  
+Changing domains requires restarting Plane services. Your instance will be unavailable for a few minutes during the restart. Plan accordingly or notify your users.
+</Warning>
+
+## Check current domain configuration
+
+First, see which environment variables currently reference your old domain. This helps you identify exactly what needs updating.
+
+```bash
+cat /opt/plane/plane.env | grep <old_domain>
+```
+
+**Example output:**
+```env
+DOMAIN_NAME=localhost
+SITE_ADDRESS=http://localhost
+WEB_URL=http://localhost
+CORS_ALLOWED_ORIGINS=http://localhost,https://localhost
+```
+
+This shows you all the variables that contain your current domain. You'll update each of these in the next step.
+
+## Update domain in environment file
+
+1. Open the Plane environment configuration file:
+    ```bash
+    vim /opt/plane/plane.env
+    ```
+
+2. Find and update these environment variables with your new domain:
+
+    - `DOMAIN_NAME`
+    - `SITE_ADDRESS`
+    - `WEB_URL`
+    - `CORS_ALLOWED_ORIGINS`
+
+    <Note>
+    **Configuration requirements:**
+    - Use the correct protocol (`http://` or `https://`) where required.
+    - In `CORS_ALLOWED_ORIGINS`, separate multiple entries with commas and no spaces.
+    </Note>
+
+## Restart Plane services
+
+    Apply your configuration changes by restarting Plane:
+    ```bash
+    sudo prime-cli restart
+    ```
+
+    This process typically takes a few minutes. You'll see output indicating the status of each service as it restarts.
 
 <Accordion title="Community Edition">
 
