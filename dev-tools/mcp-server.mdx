@@ -5,10 +5,12 @@ description: Use the Plane MCP server to integrate with Plane
 
 The [Model Context Protocol](https://modelcontextprotocol.io/overview) (MCP) is a
 standardized interface that enables AI models to communicate with external tools and
-services. When combined with Server-Sent Events (SSE), it provides a powerful
-mechanism for real-time data transfer between AI models and external systems.
+services. The Plane MCP Server enables AI agents to interact with Plane's project
+management capabilities through multiple transport methods.
 
-<Note> 
+The Plane MCP Server is open source and available on [GitHub](https://github.com/makeplane/plane-mcp-server).
+
+<Note>
 Beta
 The Plane MCP Server is currently in **Beta**. Some aspects of the API may change.
 While MCP is standardized, it is also rapidly evolving. The Plane MCP Server aims to
@@ -16,50 +18,58 @@ provide a stable implementation for developers to build robust AI-powered
 applications. Please send any issues to support@plane.so.
 </Note>
 
-## Prerequisites
+## Transport methods
 
-Before setting up the Plane MCP Server, ensure you have the following installed:
+The Plane MCP Server supports multiple transport methods to accommodate different deployment scenarios:
 
-### Node.js and npm
-- **Node.js**: Version 20 or later (LTS recommended)
-- **npm**: Comes bundled with Node.js
+| Transport | Best for | Authentication |
+|-----------|----------|----------------|
+| [HTTP with OAuth](#remote-http-with-oauth) | Cloud users, simplest setup | Browser-based OAuth |
+| [HTTP with PAT Token](#remote-http-with-pat-token) | Automated workflows, CI/CD | API key in headers |
+| [Local Stdio](#local-stdio-transport) | Self-hosted Plane instances | Environment variables |
+| [SSE (Legacy)](#sse-transport-legacy) | Existing integrations | Browser-based OAuth |
+
+## Remote HTTP with OAuth
+
+The recommended method for connecting to Plane Cloud. Uses browser-based OAuth for authentication.
+
+### Prerequisites
+
+- **Node.js**: Version 22 or later
 - **npx**: Comes bundled with npm
-
-You can verify your installation by running:
-```bash
-node --version
-npm --version
-npx --version
-```
-
-If you don't have Node.js installed, download it from [nodejs.org](https://nodejs.org/).
-
-<Note>
-The MCP server uses `npx` to run the `mcp-remote` package, which handles the connection to Plane's MCP server. This is why Node.js and npx are required.
-</Note>
-
-## Using the Plane MCP Server
-
-Follow these steps to integrate with the Plane MCP Server.
 
 ### Claude.ai
 
-- Open **Settings** from the sidebar on the web or desktop app.
-- Scroll to the **Integrations** section and click **Add more**.
-- Enter the Integration URL: `https://mcp.plane.so/sse`
-- Click **Connect** to link your Plane workspace.
+1. Open **Settings** from the sidebar on the web or desktop app.
+2. Scroll to the **Integrations** section and click **Add more**.
+3. Enter the Integration URL: `https://mcp.plane.so/http/mcp`
+4. Click **Connect** to link your Plane workspace.
 
 ### Claude Desktop
 
-Add Plane to [Claude Desktop](https://modelcontextprotocol.io/quickstart/user) by
-updating your `claude_desktop_config.json`:
+Add to your `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "plane": {
       "command": "npx",
-      "args": ["mcp-remote", "https://mcp.plane.so/sse"]
+      "args": ["mcp-remote@latest", "https://mcp.plane.so/http/mcp"]
+    }
+  }
+}
+```
+
+### Cursor
+
+Add to your Cursor MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "command": "npx",
+      "args": ["mcp-remote@latest", "https://mcp.plane.so/http/mcp"]
     }
   }
 }
@@ -67,15 +77,14 @@ updating your `claude_desktop_config.json`:
 
 ### VSCode
 
-Connect Plane to [VSCode](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server)
-by editing your `.vscode.json` or `mcp.json` file:
+Add to your `.vscode/mcp.json` file:
 
 ```json
 {
   "servers": {
     "plane": {
       "command": "npx",
-      "args": ["mcp-remote", "https://mcp.plane.so/sse"]
+      "args": ["mcp-remote@latest", "https://mcp.plane.so/http/mcp"]
     }
   }
 }
@@ -93,7 +102,7 @@ by editing your `.vscode.json` or `mcp.json` file:
   "mcpServers": {
     "plane": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.plane.so/sse"]
+      "args": ["-y", "mcp-remote@latest", "https://mcp.plane.so/http/mcp"]
     }
   }
 }
@@ -110,8 +119,102 @@ by editing your `.vscode.json` or `mcp.json` file:
     "plane": {
       "source": "custom",
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.plane.so/sse"],
+      "args": ["-y", "mcp-remote@latest", "https://mcp.plane.so/http/mcp"],
       "env": {}
+    }
+  }
+}
+```
+
+## Remote HTTP with PAT Token
+
+Use this method when you need header-based authentication, such as in automated workflows or CI/CD pipelines.
+
+### Prerequisites
+
+- **Node.js**: Version 22 or later
+- **npx**: Comes bundled with npm
+- **Plane API Key**: Generate from your Plane workspace settings
+
+### Configuration
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "command": "npx",
+      "args": ["mcp-remote@latest", "https://mcp.plane.so/http/api-key/mcp"],
+      "headers": {
+        "Authorization": "Bearer <YOUR_API_KEY>",
+        "X-Workspace-slug": "<YOUR_WORKSPACE_SLUG>"
+      }
+    }
+  }
+}
+```
+
+Replace `<YOUR_API_KEY>` with your Plane API key and `<YOUR_WORKSPACE_SLUG>` with your workspace slug.
+
+## Local Stdio transport
+
+Use this method to connect to a self-hosted Plane instance. The Stdio transport runs locally and communicates directly with your Plane API.
+
+### Prerequisites
+
+- **Python**: Version 3.10 or later
+- **uvx**: Comes bundled with [uv](https://docs.astral.sh/uv/getting-started/installation/)
+
+You can verify your installation by running:
+```bash
+python --version
+uvx --version
+```
+
+### Configuration
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "command": "uvx",
+      "args": ["plane-mcp-server", "stdio"],
+      "env": {
+        "PLANE_API_KEY": "<YOUR_API_KEY>",
+        "PLANE_WORKSPACE_SLUG": "<YOUR_WORKSPACE_SLUG>",
+        "PLANE_BASE_URL": "https://your-plane-instance.com/api"
+      }
+    }
+  }
+}
+```
+
+### Environment variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `PLANE_API_KEY` | Yes | Your Plane API key |
+| `PLANE_WORKSPACE_SLUG` | Yes | Your workspace slug |
+| `PLANE_BASE_URL` | No | API URL for self-hosted instances (defaults to `https://api.plane.so`) |
+
+## SSE transport (Legacy)
+
+<Note>
+The SSE transport is maintained for backward compatibility. For new integrations, we recommend using the [HTTP with OAuth](#remote-http-with-oauth) transport.
+</Note>
+
+### Prerequisites
+
+- **Node.js**: Version 22 or later
+- **npx**: Comes bundled with npm
+
+### Configuration
+
+```json
+{
+  "mcpServers": {
+    "plane": {
+      "command": "npx",
+      "args": ["mcp-remote@latest", "https://mcp.plane.so/sse"]
     }
   }
 }
@@ -119,52 +222,54 @@ by editing your `.vscode.json` or `mcp.json` file:
 
 ## Activating the Plane MCP Server
 
-After setup, when activating the server, you will be prompted in your browser to
-connect your Plane workspace to the MCP server.
+After setup, when activating the server with OAuth-based transports (HTTP with OAuth or SSE), you will be prompted in your browser to connect your Plane workspace to the MCP server.
 
 When prompted to authorize, click **Approve**.
 
-Next, choose the workspace you want to connect, review the permissions, and click
-**Accept**.
+Next, choose the workspace you want to connect, review the permissions, and click **Accept**.
 
 ## Troubleshooting
 
-### Common Issues
+### Common issues
 
-**Authentication Errors**
+**Authentication errors**
 
-If you encounter authentication issues, clear saved auth tokens:
+If you encounter authentication issues with OAuth transports, clear saved auth tokens:
 
 ```bash
 rm -rf ~/.mcp-auth
 ```
 
-**Connection Timeouts**
+**Connection timeouts**
 
 - Ensure you have a stable internet connection
 - Check if your firewall or proxy is blocking MCP connections
-- Try using the HTTP endpoint instead of SSE if available
+- Verify your Plane instance is accessible
 
 **WSL on Windows**
 
-If you're using WSL on Windows and encountering errors, use this configuration:
+If you're using WSL on Windows and encountering errors with remote transports:
 
 ```json
 {
   "mcpServers": {
     "plane": {
       "command": "wsl",
-      "args": ["npx", "-y", "mcp-remote", "https://mcp.plane.so/sse", "--transport sse-only"]
+      "args": ["npx", "-y", "mcp-remote@latest", "https://mcp.plane.so/http/mcp"]
     }
   }
 }
 ```
 
-**Node.js Version**
+**Node.js version**
 
-Ensure you have a recent version of Node.js installed. MCP servers require Node.js 18 or later.
+Ensure you have Node.js 22 or later installed for remote transports.
 
-### Getting Help
+**Python version**
+
+Ensure you have Python 3.10 or later installed for the local Stdio transport.
+
+### Getting help
 
 If you continue to experience issues:
 
