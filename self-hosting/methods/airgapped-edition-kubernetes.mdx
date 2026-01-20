@@ -47,6 +47,24 @@ Consider these alternatives:
     curl -L -O https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.6.4/plane-enterprise-1.6.4.tgz
     ```
 
+2. **Prepare Docker images for airgapped environment**  
+
+    Refer to [this document](/self-hosting/methods/clone-docker-images) to download the Docker images from the public repository to your internal repository.
+
+    <Note>
+    **Important**  
+    This process will NOT download or clone these infrastructure images:
+    - `valkey:7.2.5-alpine`
+    - `postgres:15.7-alpine`
+    - `rabbitmq:3.13.6-management-alpine`
+    - `minio/minio:latest`
+    - `minio/mc:latest`
+    - `opensearchproject/opensearch:3.3.2`
+
+    If you're using `local_setup: true` for any of these services, you'll need to pull and transfer these images separately.
+    </Note>
+
+
 3. **Configure custom values file**  
 
     a. Extract the default values from the Helm chart.
@@ -129,10 +147,6 @@ Consider these alternatives:
         local_setup: true  # Set to false if using external service
         image: minio/minio:latest
         image_mc: minio/mc:latest
-    
-    opensearch:
-        local_setup: true  # Set to false if using external service
-        image: opensearchproject/opensearch:3.3.2
     ```
 
     **Environment variables:**
