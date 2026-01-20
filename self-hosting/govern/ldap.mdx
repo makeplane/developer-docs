@@ -127,41 +127,6 @@ You'll need:
 7. Users will see **Sign in with LDAP** on Plane's login page and can use their directory credentials to sign in.
     ![Sign in using LDAP](/images/ldap/sign-in-ldap.webp)
 
-## Configuration examples
-
-### Active Directory
-```
-Server URI:          ldaps://ad.company.com:636
-Bind DN:             cn=PlaneService,ou=Service Accounts,dc=company,dc=com
-Bind Password:       ********
-User Search Base:    ou=Employees,dc=company,dc=com
-User Search Filter:  (sAMAccountName={username})
-User Attributes:     mail,cn,givenName,sn,userPrincipalName
-Provider Name:       Company Directory
-```
-
-### OpenLDAP
-```
-Server URI:          ldap://ldap.example.com:389
-Bind DN:             cn=readonly,dc=example,dc=com
-Bind Password:       ********
-User Search Base:    ou=users,dc=example,dc=com
-User Search Filter:  (uid={username})
-User Attributes:     mail,cn,givenName,sn
-Provider Name:       LDAP
-```
-
-### FreeIPA
-```
-Server URI:          ldaps://ipa.example.com:636
-Bind DN:             uid=plane-svc,cn=users,cn=accounts,dc=example,dc=com
-Bind Password:       ********
-User Search Base:    cn=users,cn=accounts,dc=example,dc=com
-User Search Filter:  (uid={username})
-User Attributes:     mail,cn,givenName,sn
-Provider Name:       FreeIPA
-```
-
 ## How LDAP authentication works
 
 LDAP authentication in Plane works through a two-phase process. First, Plane locates the user in your directory, then it verifies their credentials. This separation is fundamental to how LDAP works and explains why you need both a service account (Bind DN) and the user's own credentials.
