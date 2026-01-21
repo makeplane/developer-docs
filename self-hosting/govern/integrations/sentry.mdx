@@ -43,6 +43,8 @@ A custom integration (also called a public integration) connects your Sentry org
     Replace `[YOUR_DOMAIN]` with your actual Plane instance domain. For example, if your Plane instance is at `plane.company.com`, your Webhook URL would be `https://plane.company.com/silo/api/sentry/sentry-webhook/`
     </Note>
 
+    ![Public integration](/images/sentry/public-integration.webp)
+
 **Field explanations:**
 
 **Webhook URL**  
@@ -236,6 +238,8 @@ Configure these permissions to allow Sentry to interact with Plane appropriately
 | **Member** | Read | Access member details for assignee functionality |
 | **Alerts** | Read | Enable alert rule actions for automatic issue creation |
 
+![Sentry integration permissions](/images/sentry/sentry-permissions.webp)
+
 ### Enable webhooks
 
 Webhooks keep Plane and Sentry synchronized. When issues change in Sentry, Plane receives notifications and updates accordingly.
@@ -249,6 +253,8 @@ Enable the **issue** webhook with these events:
 | **assigned** | Sync assignee changes from Sentry to Plane |
 | **archived** | Reflect archived status in Plane |
 | **unresolved** | Update Plane when resolved issues reopen |
+
+![Sentry webhook configuration](/images/sentry/sentry-webhook-config.webp)
 
 ### Save and retrieve credentials
 
