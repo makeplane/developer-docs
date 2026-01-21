@@ -110,6 +110,7 @@
               "self-hosting/govern/github-oauth",
               "self-hosting/govern/oidc-sso",
               "self-hosting/govern/saml-sso",
+              "self-hosting/govern/ldap",
               "self-hosting/govern/reset-password"
             ]
         },
@@ -146,6 +147,13 @@
             "self-hosting/manage/upgrade-plane",
             "self-hosting/manage/upgrade-from-0.13.2-0.14.0"
           ]
+        },
+        {
+          "group": "Manage licenses",
+          "pages": [
+            "self-hosting/manage/manage-licenses/activate-pro-and-business",
+            "self-hosting/manage/manage-licenses/activate-enterprise"
+          ]  
         },
         "self-hosting/manage/view-logs",
         "self-hosting/manage/migrate-plane",
