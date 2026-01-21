@@ -249,26 +249,7 @@ Instead, Plane batches updates through Redis. When a signal fires, the update go
 The batching pattern also provides resilience. If OpenSearch is temporarily unavailable, updates accumulate in Redis and process once connectivity returns. This requires Redis 6.2+ which supports the LPOP count operation needed for efficient batch retrieval.
 
 ### The complete flow
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Plane Web     │────▶│   Plane API     │────▶│   OpenSearch    │
-│    (Search)     │     │   (Query)       │     │   (Indices)     │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-                               │
-                               │ Database signals
-                               ▼
-                        ┌─────────────────┐
-                        │   Redis Queue   │
-                        │   (Batching)    │
-                        └─────────────────┘
-                               │
-                               │ Celery task (every 5s)
-                               ▼
-                        ┌─────────────────┐
-                        │  Celery Worker  │────▶ Batch updates
-                        │  (Processing)   │
-                        └─────────────────┘
-```
+![OpenSeach flow](/images/open-search/opensearch-flow.webp)
 
 When you search, queries bypass this synchronization process entirely. The Plane API sends your search query directly to OpenSearch, which returns results almost instantly. Your database isn't involved in search queries at all — this is the key to search performance.
 
