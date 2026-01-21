@@ -115,7 +115,6 @@
             ]
         },
         "self-hosting/govern/communication",
-        "self-hosting/govern/configure-dns-email-service",
         "self-hosting/govern/database-and-storage",
         "self-hosting/govern/custom-domain",
         "self-hosting/govern/configure-ssl",
@@ -129,6 +128,8 @@
               "self-hosting/govern/integrations/slack"
             ]
         },
+        "self-hosting/govern/configure-dns-email-service",
+        "self-hosting/govern/advanced-search",
         "self-hosting/govern/external-secrets",
         "self-hosting/govern/reverse-proxy",
         "self-hosting/govern/environment-variables",
