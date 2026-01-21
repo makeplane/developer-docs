@@ -276,7 +276,7 @@ When you search, queries bypass this synchronization process entirely. The Plane
 
 Plane creates nine separate indices in OpenSearch, one for each searchable entity type. This separation might seem redundant - why not put everything in one index?
 
-The answer lies in how different entities need different search behaviors. Work items benefit from full text search. Projects need filtering by status, member count, and dates. Pages require full-text analysis of long-form content. Comments need to be searchable but also tied to their parent work item.
+The answer lies in how different entities need different search behaviors. Work items use fuzzy matching and field prioritization (title matches rank higher than description matches). Projects emphasize metadata filtering—status, member counts, and timelines. Pages analyze long-form content structure.
 
 Each index is optimized for its content type:
 
