@@ -153,7 +153,8 @@
           "group": "Manage licenses",
           "pages": [
             "self-hosting/manage/manage-licenses/activate-pro-and-business",
-            "self-hosting/manage/manage-licenses/activate-enterprise"
+            "self-hosting/manage/manage-licenses/activate-enterprise",
+            "self-hosting/manage/manage-licenses/activate-airgapped"
           ]  
         },
         "self-hosting/manage/view-logs",
