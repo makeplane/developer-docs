@@ -24,7 +24,6 @@ Once configured, advanced search provides:
 - **Full-text search** across work items, projects, cycles, modules, pages, and more
 - **Fuzzy matching** that tolerates typos and variations in spelling
 - **Autocomplete** with instant suggestions as you type
-- **Semantic search** that understands context and meaning (for work items and pages)
 - **Multi-entity search** that searches across all content types in a single query
 
 Users can access advanced search using the global search shortcut (Cmd/Ctrl + K) or search within specific projects and sections.
@@ -118,7 +117,7 @@ The Plane Helm chart provides auto-setup for OpenSearch. If you're using your ow
 
 3. **Create search indices**
 
-   Run these commmands in the API pod.
+   Run these commands in the API pod.
     ```bash
     # Get the API pod name
     API_POD=$(kubectl get pods -n plane --no-headers | grep api | head -1 | awk '{print $1}')
@@ -128,7 +127,7 @@ The Plane Helm chart provides auto-setup for OpenSearch. If you're using your ow
     ```
 
 4. **Index your existing data**
-    Run these commmands in the API pod.
+    Run these commands in the API pod.
     ```bash
     # For small datasets
     kubectl exec -n plane $API_POD -- python manage.py manage_search_index document index --force
@@ -231,7 +230,7 @@ Advanced search in Plane maintains search indices separately from your main data
 
 ### Why Plane uses OpenSearch
 
-Traditional database searches struggle with fuzzy matching, typos, and semantic understanding. If you search for "authentcation" (with a typo), a database won't find "authentication". OpenSearch handles this naturally because it analyzes text differently - it breaks words into tokens, normalizes variations, and understands linguistic patterns.
+Traditional database searches struggle with fuzzy matching and typos. If you search for "authentcation" (with a typo), a database won't find "authentication". OpenSearch handles this naturally because it analyzes text differently - it breaks words into tokens, normalizes variations, and understands linguistic patterns.
 
 This is why autocomplete feels instant. OpenSearch pre-processes text to match partial words, while your database would need to scan entire tables to achieve similar results.
 
@@ -277,18 +276,18 @@ When you search, queries bypass this synchronization process entirely. The Plane
 
 Plane creates nine separate indices in OpenSearch, one for each searchable entity type. This separation might seem redundant - why not put everything in one index?
 
-The answer lies in how different entities need different search behaviors. Work items benefit from semantic search that understands context and meaning. Projects need filtering by status, member count, and dates. Pages require full-text analysis of long-form content. Comments need to be searchable but also tied to their parent work item.
+The answer lies in how different entities need different search behaviors. Work items benefit from full text search. Projects need filtering by status, member count, and dates. Pages require full-text analysis of long-form content. Comments need to be searchable but also tied to their parent work item.
 
 Each index is optimized for its content type:
 
 | Index | Content | Search Features |
 |-------|---------|-----------------|
-| `{prefix}_issues` | Work items | Full-text, semantic search, field weighting (title > description), state filtering |
+| `{prefix}_issues` | Work items | Full-text search, field weighting (title > description), state filtering |
 | `{prefix}_issue_comments` | Comments | Comment search within work items, parent-child relationships |
 | `{prefix}_projects` | Projects | Project discovery, metadata filtering (dates, counts, status) |
 | `{prefix}_cycles` | Cycles | Cycle search, time-based filtering and aggregations |
 | `{prefix}_modules` | Modules | Module/sprint search, planning aggregations |
-| `{prefix}_pages` | Pages | Page content with semantic search, rich text analysis for long-form content |
+| `{prefix}_pages` | Pages | Page content search, rich text analysis for long-form content |
 | `{prefix}_workspaces` | Workspaces | Workspace search and discovery |
 | `{prefix}_issue_views` | Saved views | Saved view search and filtering |
 | `{prefix}_teamspaces` | Teamspaces | Teamspace discovery |
