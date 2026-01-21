@@ -32,11 +32,7 @@ Consider these alternatives:
 
 ## Install Plane
 
-1. **Contact sales for license**
-
-    Get in touch with sales@plane.so to get your license file and access to the Plane artifact registry.
-
-2. **Prepare Docker images for airgapped environment**  
+1. **Prepare Docker images for airgapped environment**  
 
     Refer to [this document](/self-hosting/methods/clone-docker-images) to download the Docker images from the Plane artifact registry to your internal registry.
 
@@ -53,7 +49,7 @@ Consider these alternatives:
     If you're using local infrastructure services, you'll need to pull and transfer these images separately.
     </Note>
 
-3. **Download Docker Compose configuration**
+2. **Download Docker Compose configuration**
 
     Download the Docker Compose configuration files from the official release.
 
@@ -65,7 +61,7 @@ Consider these alternatives:
     curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
     ```
 
-4. **Configure environment variables**
+3. **Configure environment variables**
 
     Edit the `plane.env` file to configure your deployment:
 
