@@ -16,6 +16,10 @@ The instructions provided on this page are specific to installations using Docke
 - Install the [Commercial Edition](/self-hosting/methods/docker-compose#recommended-edition) on a fresh machine, not the one running the Plane Community Edition.
 - Be sure to log in as the root user or as a user with sudo access. The `/opt` folder requires sudo or root privileges.
 
+<Note>
+No backup is required if you are using a cloud database and S3 storage while migrating from Community to Commercial. Simply point your Commercial instance to the same cloud database and S3 storage. Refer to [this guide](https://app.plane.so/plane/wiki/5e4a0b13-fc55-4a3f-896f-9f0a829bfc8b/) for more details.
+</Note>
+
 ## Back up data on Community instance
 1. Download the latest version of `setup.sh`.
     ```bash
