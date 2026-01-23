@@ -1,4 +1,4 @@
-# Deploy Plane with Coolify • Commercial Edition
+# Deploy Plane with Coolify
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Coolify.
 
@@ -18,9 +18,9 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using C
      curl -fsSL https://prime.plane.so/releases/<plane-version>/coolify-compose.yml -o coolify-compose.yml
      ```
 
-    ::: warning
-    The `<plane-version>` value should be v1.8.2 or higher.
-    :::
+        ::: warning
+        The `<plane-version>` value should be v1.8.2 or higher.
+        :::
 
 2. Create a new project in Coolify.
 

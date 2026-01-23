@@ -567,12 +567,12 @@ If you are planning to use 3rd party ingress providers, here is the available ro
 ::: details Install Community Edition 
   The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
 
-### Prerequisites
+#### Prerequisites
 
 - A working Kubernetes cluster
 - `kubectl` and `helm` on the client system that you will use to install our Helm charts
 
-### Installation
+#### Installation
 
 1. Open Terminal or any other command-line app that has access to Kubernetes tools on your local system.
 2. Add the Helm Repo
@@ -639,15 +639,15 @@ If you are planning to use 3rd party ingress providers, here is the available ro
         --wait-for-jobs 
     ```
 
-    ### Configuration settings
+    #### Configuration settings
 
-    #### Plane Version
+    ##### Plane Version
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
     | planeVersion | v1.1.0 | Yes | |
 
-    #### Postgres DB Setup
+    ##### Postgres DB Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -668,7 +668,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | postgres.labels | {} | | This key allows you to set custom labels for the stateful deployment of postgres. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | postgres.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of postgres. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### Redis/Valkey Setup
+    ##### Redis/Valkey Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -686,7 +686,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | redis.labels | {} | | This key allows you to set custom labels for the stateful deployment of redis. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | redis.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of redis. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### RabbitMQ Setup
+    ##### RabbitMQ Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -707,7 +707,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | rabbitmq.labels | {} | | This key allows you to set custom labels for the stateful deployment of rabbitmq. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | rabbitmq.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of rabbitmq. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### Doc Store (Minio/S3) Setup
+    ##### Doc Store (Minio/S3) Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -733,7 +733,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | minio.labels | {} | | This key allows you to set custom labels for the stateful deployment of minio. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | minio.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of minio. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### Web Deployment
+    ##### Web Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -751,7 +751,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | web.labels | {} | | Custom labels to add to the web deployment |
     | web.annotations | {} | | Custom annotations to add to the web deployment |
 
-    #### Space Deployment
+    ##### Space Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -769,7 +769,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | space.labels | {} | | Custom labels to add to the space deployment |
     | space.annotations | {} | | Custom annotations to add to the space deployment |
 
-    #### Admin Deployment
+    ##### Admin Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -787,7 +787,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | admin.labels | {} | | Custom labels to add to the admin deployment |
     | admin.annotations | {} | | Custom annotations to add to the admin deployment |
 
-    #### Live Service Deployment
+    ##### Live Service Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -806,7 +806,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | live.labels | {} | | Custom labels to add to the live deployment |
     | live.annotations | {} | | Custom annotations to add to the live deployment |
 
-    #### API Deployment
+    ##### API Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -827,7 +827,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | api.labels | {} | | Custom labels to add to the API deployment |
     | api.annotations | {} | | Custom annotations to add to the API deployment |
 
-    #### Worker Deployment
+    ##### Worker Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -843,7 +843,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | worker.labels | {} | | Custom labels to add to the worker deployment |
     | worker.annotations | {} | | Custom annotations to add to the worker deployment |
 
-    #### Beat-Worker Deployment
+    ##### Beat-Worker Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -859,7 +859,7 @@ If you are planning to use 3rd party ingress providers, here is the available ro
     | beatworker.labels | {} | | Custom labels to add to the beat-worker deployment |
     | beatworker.annotations | {} | | Custom annotations to add to the beat-worker deployment |
 
-    #### Common Environment Settings
+    ##### Common Environment Settings
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|

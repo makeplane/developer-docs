@@ -1,6 +1,6 @@
 # Self-host Plane
 
-## Intallation
+## Methods
 
 <CardGroup>
   <Card title="Docker" icon="docker" href="/self-hosting/methods/docker-compose">

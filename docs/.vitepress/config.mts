@@ -14,6 +14,11 @@ export default defineConfig({
       dark: '/logo/plane-logo-dark.png'
     },
 
+    outline: {
+      level: [2, 3],
+      label: 'On this page'
+    },
+
     nav: [
       { text: 'Self-hosting', link: '/self-hosting/overview' },
       { text: 'API Reference', link: '/api-reference/introduction' },
@@ -83,11 +88,9 @@ export default defineConfig({
               ]
             },
             { text: 'Communication', link: '/self-hosting/govern/communication' },
-            { text: 'Configure DNS & Email', link: '/self-hosting/govern/configure-dns-email-service' },
             { text: 'Database and Storage', link: '/self-hosting/govern/database-and-storage' },
             { text: 'Custom Domain', link: '/self-hosting/govern/custom-domain' },
             { text: 'Configure SSL', link: '/self-hosting/govern/configure-ssl' },
-            { text: 'Private Bucket', link: '/self-hosting/govern/private-bucket' },
             {
               text: 'Integrations',
               collapsed: true,
@@ -98,8 +101,11 @@ export default defineConfig({
                 { text: 'Slack', link: '/self-hosting/govern/integrations/slack' }
               ]
             },
+            { text: 'Configure DNS & Email', link: '/self-hosting/govern/configure-dns-email-service' },
+            { text: 'OpenSearch for Advanced search', link: '/self-hosting/govern/advanced-search' },
             { text: 'External Secrets', link: '/self-hosting/govern/external-secrets' },
             { text: 'Reverse Proxy', link: '/self-hosting/govern/reverse-proxy' },
+            { text: 'Private Bucket', link: '/self-hosting/govern/private-bucket' },
             { text: 'Environment Variables', link: '/self-hosting/govern/environment-variables' },
             { text: 'Telemetry', link: '/self-hosting/telemetry' }
           ]

@@ -1,7 +1,7 @@
 # Clone Docker images to your private registry
 
 ::: info
-**Part of airgapped deployment:**  
+**Part of airgapped deployment**  
 This guide is part of the airgapped deployment process. If you're setting up Plane in an airgapped environment, return to that guide after copying your images.
 :::
 

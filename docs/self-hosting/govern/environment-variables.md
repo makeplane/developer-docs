@@ -134,6 +134,16 @@ This is where you'll make all configuration changes. Remember to restart the ins
 | **GITLAB_CLIENT_ID** | OAuth client ID for GitLab integration. |  |
 | **GITLAB_CLIENT_SECRET** | OAuth client secret for GitLab integration. | |
 
+### OpenSearch
+
+| Variable | Description | Default Value |
+|----------|-------------|---------|
+| `OPENSEARCH_ENABLED` | Enable OpenSearch integration | `1` |
+| `OPENSEARCH_URL` | OpenSearch endpoint URL | `https://opensearch.example.com:9200/` |
+| `OPENSEARCH_USERNAME` | Authentication username | `admin` |
+| `OPENSEARCH_PASSWORD` | Authentication password | `your-secure-password` |
+| `OPENSEARCH_INDEX_PREFIX` | Prefix for all index names (useful for multi-tenant setups) |  (empty) | 
+
 ### API settings
 
 | Variable | Description | Default Value |

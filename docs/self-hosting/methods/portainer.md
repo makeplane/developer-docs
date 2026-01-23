@@ -1,4 +1,4 @@
-# Deploy Plane with Portainer • Commercial Edition
+# Deploy Plane with Portainer
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Portainer.
 
@@ -19,9 +19,9 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using P
         ```bash
         curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
         ```
-    ::: warning
-    The `<plane-version>` value should be v1.8.2 or higher.
-    :::
+        ::: warning
+        The `<plane-version>` value should be v1.8.2 or higher.
+        :::
 
 2. Click **+ Add stack** on Portainer.
 

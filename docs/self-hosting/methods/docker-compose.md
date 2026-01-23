@@ -45,7 +45,7 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
 ::: details Install Community Edition 
   The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
 
-   ### Prerequisites
+   #### Prerequisites
 
    -   Docker installed and running. Choose one of the following options:
          - **Option 1**  
@@ -59,7 +59,7 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
    -   User context used must have access to docker services. In most cases, use `sudo su` to switch as root user.
    -   Use the terminal (or gitbash) window to run all the future steps.
 
-   ### Installation
+   #### Installation
    1. Create a folder named `plane-selfhost` on your machine for deployment and data storage. 
             
          ```bash 
@@ -115,7 +115,7 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
 
    You have successfully self-hosted the Plane instance. Access the application by going to IP or domain you have configured it on. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
 
-   #### Stop server
+   ##### Stop server
 
    In case you want to make changes to the environment variables in the `plane.env` file, we recommend that you stop the services before doing that.
 
@@ -125,7 +125,7 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
 
    ![Stop Services](/images/docker-compose/stopped-docker.png)
 
-   #### Restart server
+   ##### Restart server
 
    In case you want to make changes to `plane.env` variables without stopping the server or noticed some abnormalities in services, you can restart the services.
 

@@ -4,7 +4,7 @@
 Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
 :::
 
-This guide walks you through deploying Plane Enterprise in an airgapped Kubernetes environment using Helm charts and pre-packaged Docker images.
+This guide walks you through deploying Plane Commercial in an airgapped Kubernetes environment using Helm charts and pre-packaged Docker images.
 
 ## What you'll need
 
@@ -26,6 +26,7 @@ Consider these alternatives:
 - **Redis**: Replace with Valkey or a managed Redis service
 - **PostgreSQL**: Use a managed PostgreSQL service
 - **RabbitMQ**: Use a managed message queue service
+- **OpenSearch**: Use a managed OpenSearch or Elasticsearch service
 :::
 
 ## Install Plane
@@ -53,6 +54,7 @@ Consider these alternatives:
     - `rabbitmq:3.13.6-management-alpine`
     - `minio/minio:latest`
     - `minio/mc:latest`
+    - `opensearchproject/opensearch:3.3.2`
 
     If you're using `local_setup: true` for any of these services, you'll need to pull and transfer these images separately.
     :::
@@ -264,22 +266,9 @@ Consider these alternatives:
     kubectl get ingress -n plane -o wide
     ```
 
-## Activate your license
+    You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
 
-Once your air-gapped installation is running, you'll need to activate your workspace with the license file.
-
-1. Login to the [Prime portal](https://prime.plane.so/licenses) with the same email address you used to purchase the paid plan.
-2. Go to [Manage licenses](https://prime.plane.so/licenses).
-3. Click **Download license** to download the license file for your Plane version.
-    ![Download license file](/images/activate-license/download-license.webp)
-4. Navigate to the [Workspace Settings](https://docs.plane.so/core-concepts/workspaces/overview#workspace-settings) in the Plane application.
-6. Select **Billing and plans** on the right pane.
-7. Click the **Activate this workspace** button.
-    ![Upload license file](/images/activate-license/upload-airgapped-license-file.webp)
-8. Upload the license file to activate your workspace.
-
-You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
-
+6. [Activate your license key](/self-hosting/manage/manage-licenses/activate-airgapped).
 
 ## Additional configuration
 
