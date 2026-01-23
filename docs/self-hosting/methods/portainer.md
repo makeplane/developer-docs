@@ -51,4 +51,4 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using P
 7. Click **Deploy the stack**.
     That's it! Once the deployment is complete, Plane should be up and running on your configured domain.
 
-8. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
+8. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.

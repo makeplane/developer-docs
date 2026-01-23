@@ -1,7 +1,6 @@
 # Airgapped deployment architecture
 
 ::: info
-**IMPORTANT**  
 Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
 :::
 

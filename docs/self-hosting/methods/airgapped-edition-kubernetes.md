@@ -1,7 +1,6 @@
-# Deploy Plane Commercial in an Airgapped Kubernetes Environment
+# Deploy Plane in an airgapped Kubernetes environment
 
 ::: info
-**IMPORTANT**  
 Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
 :::
 
@@ -48,7 +47,6 @@ Consider these alternatives:
     Refer to [this document](/self-hosting/methods/clone-docker-images) to download the Docker images from the public repository to your internal repository.
 
     ::: info
-    **Important**  
     This process will NOT download or clone these infrastructure images:
     - `valkey:7.2.5-alpine`
     - `postgres:15.7-alpine`

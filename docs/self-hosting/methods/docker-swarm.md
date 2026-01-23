@@ -1,4 +1,4 @@
-# Deploy Plane with Docker Swarm • Commercial Edition
+# Deploy Plane with Docker Swarm
 
 This guide shows you the steps to deploy a self-hosted instance of the Plane Commercial Edition using Docker Swarm.
 
@@ -55,4 +55,4 @@ This guide shows you the steps to deploy a self-hosted instance of the Plane Com
 
     That's it! This will deploy Plane as a Swarm stack, and your instance should be accessible on your configured domain.
 
-5. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
+5. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.

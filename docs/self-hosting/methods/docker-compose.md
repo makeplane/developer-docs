@@ -1,6 +1,7 @@
 # Docker Compose
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Docker.
+
 ::: tip
 If you want to upgrade from Community to the Commercial edition, see [Upgrade to Commercial Edition](/self-hosting/upgrade-from-community).
 :::
@@ -30,7 +31,7 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
       curl -fsSL https://prime.plane.so/install/ | sh -
       ```
    3. Follow the instructions on the terminal. Hit `Enter` or `Return` to continue.
-   4. Enter the domain name where you will access the Plane app in the format `domain.tld` or `subdomain.domain.tld`. If you are using a paid plan, the domain linked to the license can’t be changed later.
+   4. Enter the domain name where you will access the Plane app in the format `domain.tld` or `subdomain.domain.tld`.
    5. Choose one of the options below:
       - **Express**: Plane installs with the default configurations.
       - **Advanced**: You can customize the database, Redis, storage  and other settings.
@@ -38,7 +39,7 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
       When self-hosting Plane for production use, it is strongly recommended to configure [external database and storage](/self-hosting/govern/database-and-storage). This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
       :::
    6. The installation will take a few minutes to complete and you will see the message **Plane has successfully installed**. You can access the Plane application on the domain you provided during the installation. 
-   7. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
+   7. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
 
 
 ::: details Install Community Edition 
@@ -59,24 +60,24 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
    -   Use the terminal (or gitbash) window to run all the future steps.
 
    ### Installation
-      1. Create a folder named `plane-selfhost` on your machine for deployment and data storage. 
+   1. Create a folder named `plane-selfhost` on your machine for deployment and data storage. 
             
          ```bash 
          mkdir plane-selfhost
          ```
-      2. Navigate to this folder using the cd command.
+   2. Navigate to this folder using the cd command.
          ```bash 
          cd plane-selfhost
          ```
-      3. Download the latest stable release.
+   3. Download the latest stable release.
          ```bash 
          curl -fsSL -o setup.sh https://github.com/makeplane/plane/releases/latest/download/setup.sh
          ```
-      4. Make the file executable.
+   4. Make the file executable.
          ```bash
          chmod +x setup.sh
          ```
-      5. Run the following command:
+   5. Run the following command:
          ```bash
          ./setup.sh
          ```
@@ -93,44 +94,44 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
             8) Exit
          Action [2]: 1
          ```
-      6. Enter `1` as input. 
+   6. Enter `1` as input. 
          This will create a folder `plane-app` or `plane-app-preview` (in case of preview deployment) and will download the `docker-compose.yaml` and `plane.env` files.
-      7. Enter `8` to exit.
-      8. Set up the environment variables. You can use any text editor to edit this file. Below are the most importants keys you must refer to:
+   7. Enter `8` to exit.
+   8. Set up the environment variables. You can use any text editor to edit this file. Below are the most importants keys you must refer to:
          - `LISTEN_HTTP_PORT`: This is set to `80` by default. Make sure the port you choose to use is not preoccupied. For example, `LISTEN_HTTP_PORT=8080`
          - `LISTEN_HTTPS_PORT`: This is set to `443` by default. Make sure the port you choose to use is not preoccupied. For example, `LISTEN_HTTPS_PORT=4430`
          - `WEB_URL`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with LISTEN_HTTP_PORT. For example,  `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
          - `CORS_ALLOWED_ORIGINS`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with LISTEN_HTTP_PORT. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
-      9. Run the following command to continue with the setup.
+   9. Run the following command to continue with the setup.
          ```bash
          ./setup.sh
          ```
-      10. Enter `2` as input to start the services.
+   10. Enter `2` as input to start the services.
          You will something like this:  
             ![Downloading docker images](/images/docker-compose/download-docker.png)
          Be patient as it might take some time based on your download speed and system configuration. If all goes well, you must see something like this:
             ![Downloading completed](/images/docker-compose/download-complete.png)
          This is the confirmation that all images were downloaded and the services are up and running.
 
-      You have successfully self-hosted the Plane instance. Access the application by going to IP or domain you have configured it on. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
+   You have successfully self-hosted the Plane instance. Access the application by going to IP or domain you have configured it on. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
 
-      #### Stop server
+   #### Stop server
 
-         In case you want to make changes to the environment variables in the `plane.env` file, we recommend that you stop the services before doing that.
+   In case you want to make changes to the environment variables in the `plane.env` file, we recommend that you stop the services before doing that.
 
-         Run the `./setup.sh` command. Enter `3` to stop the services.
+   Run the `./setup.sh` command. Enter `3` to stop the services.
 
-         If all goes well, you will see something like this:
+   If all goes well, you will see something like this:
 
-         ![Stop Services](/images/docker-compose/stopped-docker.png)
+   ![Stop Services](/images/docker-compose/stopped-docker.png)
 
-      #### Restart server
+   #### Restart server
 
-         In case you want to make changes to `plane.env` variables without stopping the server or noticed some abnormalities in services, you can restart the services.
+   In case you want to make changes to `plane.env` variables without stopping the server or noticed some abnormalities in services, you can restart the services.
 
-         Run the `./setup.sh` command. Enter `4` to restart the services.
+   Run the `./setup.sh` command. Enter `4` to restart the services.
 
-         If all goes well, you will see something like this:
+   If all goes well, you will see something like this:
          ![Restart Services](/images/docker-compose/restart-docker.png)
 :::
 

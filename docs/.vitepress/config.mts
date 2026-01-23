@@ -27,7 +27,7 @@ export default defineConfig({
           text: 'Self-host Plane',
           items: [
             { text: 'Overview', link: '/self-hosting/overview' },
-            { text: 'Editions and Versions', link: '/self-hosting/editions-and-versions' },
+            { text: 'Plane Editions', link: '/self-hosting/editions-and-versions' },
             { text: 'Plane Architecture', link: '/self-hosting/plane-architecture' }
           ]
         },
@@ -49,9 +49,9 @@ export default defineConfig({
               text: 'Airgapped Edition',
               collapsed: true,
               items: [
-                { text: 'Requirements', link: '/self-hosting/methods/airgapped-requirements' },
-                { text: 'Airgapped Edition', link: '/self-hosting/methods/airgapped-edition' },
-                { text: 'Airgapped Kubernetes', link: '/self-hosting/methods/airgapped-edition-kubernetes' },
+                { text: 'Overview', link: '/self-hosting/methods/airgapped-requirements' },
+                { text: 'For Docker', link: '/self-hosting/methods/airgapped-edition' },
+                { text: 'For Kubernetes', link: '/self-hosting/methods/airgapped-edition-kubernetes' },
                 { text: 'Clone Docker Images', link: '/self-hosting/methods/clone-docker-images' }
               ]
             },
@@ -78,6 +78,7 @@ export default defineConfig({
                 { text: 'GitHub OAuth', link: '/self-hosting/govern/github-oauth' },
                 { text: 'OIDC SSO', link: '/self-hosting/govern/oidc-sso' },
                 { text: 'SAML SSO', link: '/self-hosting/govern/saml-sso' },
+                { text: 'LDAP', link: '/self-hosting/govern/ldap' },
                 { text: 'Reset Password', link: '/self-hosting/govern/reset-password' }
               ]
             },
@@ -115,6 +116,15 @@ export default defineConfig({
               items: [
                 { text: 'Upgrade Plane', link: '/self-hosting/manage/upgrade-plane' },
                 { text: 'Upgrade from 0.13.2 to 0.14.0', link: '/self-hosting/manage/upgrade-from-0.13.2-0.14.0' }
+              ]
+            },
+            {
+              text: 'Manage licenses',
+              collapsed: true,
+              items: [
+                { text: 'Activate Pro or Business', link: '/self-hosting/manage/manage-licenses/activate-pro-and-business' },
+                { text: 'Activate Enterprise', link: '/self-hosting/manage/manage-licenses/activate-enterprise' },
+                { text: 'Activate Airgapped', link: '/self-hosting/manage/manage-licenses/activate-airgapped' }
               ]
             },
             { text: 'View Logs', link: '/self-hosting/manage/view-logs' },
