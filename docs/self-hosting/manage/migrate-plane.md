@@ -1,4 +1,4 @@
-# Move your Plane instance to a new server • Commercial Edition
+# Move Plane instance to a new server <Badge type="info" text="Commercial Edition" />
 
 Switching to another machine is straightforward on the Commercial Edition. 
 

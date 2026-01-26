@@ -1,4 +1,4 @@
-# Update Plane version
+# Update Plane version <Badge type="info" text="Commercial Edition" />
 
 Keeping Plane up to date ensures you’re using the latest features, improvements, and security fixes. Here’s how to upgrade your Plane installation with a single command.
 
@@ -38,15 +38,14 @@ For Commercial Edition v1.13.0, ensure you're using the **latest version of Dock
 
 ::: details Community Edition
 
-::: warning
-This guide covers how to upgrade from version 0.14.0 and above. If you’re running version 0.13.2 or below, first follow the guide to [upgrade to version v0.14.0](/self-hosting/manage/upgrade-from-0.13.2-0.14.0) before continuing with these steps.
-:::
+> [!WARNING]
+> This guide covers how to upgrade from version 0.14.0 and above. If you’re running version 0.13.2 or below, first follow the guide to [upgrade to version v0.14.0](/self-hosting/manage/upgrade-from-0.13.2-0.14.0) before continuing with these steps.
 
-## Prerequisites
+#### Prerequisites
 
 Before starting, make a backup of your Plane instance. For detailed steps, see the [Backup data](/self-hosting/manage/backup-restore#community-edition) section. This is strongly recommended to ensure you have a safe restore point.
 
-## Update version
+#### Update version
 
 1. Download the latest stable release with ↓:
     ```bash

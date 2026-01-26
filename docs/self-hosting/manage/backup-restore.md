@@ -1,4 +1,4 @@
-# Backup and restore data
+# Backup and restore data <Badge type="info" text="Commercial Edition" />
 
 Backing up your data regularly helps prevent data loss and allows you to restore your system quickly if necessary. Follow these instructions to back up and restore your data using Plane’s command-line interface.
 
@@ -38,7 +38,7 @@ This command prompts the restoration process, which will overwrite the current d
 
 ::: details Community Edition
 
-## Backup data
+#### Backup data
 
 To create a backup, start by running the setup script:
 ```bash
@@ -70,7 +70,7 @@ Backup completed successfully. Backup files are stored in /....../plane-app/back
 ```
 The backup files are stored locally, so you can copy them to an external storage service if needed for extra security.
 
-## Backup plane.env
+#### Backup plane.env
 If you need to back up only the `plane.env` file, you'll need to do it manually. Here’s how:
 
 1. Navigate to the folder on your machine or server where Plane is installed..
@@ -79,7 +79,7 @@ If you need to back up only the `plane.env` file, you'll need to do it manually.
 
 ***
 
-## Restore data
+#### Restore data
 Follow these steps to restore data from a backup:
 
 1. Make sure Plane-CE is installed and started, then stop it. This ensures the necessary Docker volumes are ready.

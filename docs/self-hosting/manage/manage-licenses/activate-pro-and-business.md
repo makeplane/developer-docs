@@ -11,9 +11,9 @@ Activate a paid plan license on your self-hosted Plane instance using a license 
 
     ![Manage licenses](https://media.docs.plane.so/activate-license/copy-license-key.webp#hero)
     
-    <Tip>
-    Click the **Get more licenses** button as in the image above on the [Prime portal](https://prime.plane.so/licenses/plans) to buy more licenses.
-    </Tip>
+    > [!TIP]
+    > Click the **Get more licenses** button as in the image above on the [Prime portal](https://prime.plane.so/licenses/plans) to buy more licenses.
+    
 3.  On the Plane app, navigate to **Workspace Settings > Billing and plans** 
 4. Click the **Activate this Workspace** button.
 

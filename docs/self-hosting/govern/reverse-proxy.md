@@ -1,4 +1,4 @@
-# Configure external reverse proxy • Commercial Edition
+# Configure external reverse proxy <Badge type="info" text="Commercial Edition" />
 
 This page provides configuration for setting up an external reverse proxy with Plane. 
 

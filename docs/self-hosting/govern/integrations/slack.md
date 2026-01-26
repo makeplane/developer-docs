@@ -1,4 +1,4 @@
-# Configure Slack App for Plane integration
+# Configure Slack for Plane integration <Badge type="info" text="Pro" />
 
 This guide walks you through setting up a Slack App to enable Slack integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for Slack, you’ll need to set up the necessary authentication, permissions, and event subscriptions to ensure seamless communication between Plane and Slack.
 
@@ -29,187 +29,186 @@ To configure Slack integration, you'll need to create a Slack App within your or
 5. Remove the default manifest and paste the one below, making sure to update the placeholders with your actual values.
     ![Manifest](/images/integrations/slack/app-from-manifest.webp)
     
-### JSON
 
-            ```json
+:::tabs key:manifest-file
+
+== JSON {json}
+
+```json
+{
+    "display_information": {
+        "name": "[YOUR_APP_NAME]",
+        "description": "[YOUR_APP_DESCRIPTION]",
+        "background_color": "#224dab"
+    },
+    "features": {
+        "bot_user": {
+        "display_name": "[YOUR_APP_NAME]",
+        "always_online": false
+        },
+        "shortcuts": [
             {
-            "display_information": {
-                "name": "[YOUR_APP_NAME]",
-                "description": "[YOUR_APP_DESCRIPTION]",
-                "background_color": "#224dab"
+                "name": "Create new issue",
+                "type": "message",
+                "callback_id": "issue_shortcut",
+                "description": "Create a new issue in plane"
             },
-            "features": {
-                "bot_user": {
-                    "display_name": "[YOUR_APP_NAME]",
-                    "always_online": false
-                },
-                "shortcuts": [
-                    {
-                        "name": "Create new issue",
-                        "type": "message",
-                        "callback_id": "issue_shortcut",
-                        "description": "Create a new issue in plane"
-                    },
-                    {
-                        "name": "Link Work Item",
-                        "type": "message",
-                        "callback_id": "link_work_item",
-                        "description": "Links thread with an existing work item"
-                    }
-                ],
-                "slash_commands": [
-                    {
-                        "command": "/plane",
-                        "url": "https://[YOUR_DOMAIN]silo/api/slack/command/",
-                        "description": "Create issue in Plane",
-                        "should_escape": false
-                    }
-                ],
-                "unfurl_domains": [
-                    "[YOUR_DOMAIN]"
-                ]
-            },
-            "oauth_config": {
-                "redirect_urls": [
-                    "https://[YOUR_DOMAIN]silo/api/slack/team/auth/callback/",
-                    "https://[YOUR_DOMAIN]silo/api/slack/user/auth/callback/"
-                ],
-                "scopes": {
-                    "user": [
-                        "chat:write",
-                        "identify",
-                        "im:read",
-                        "im:write",
-                        "links:write",
-                        "links:read"
-                    ],
-                    "bot": [
-                        "channels:join",
-                        "channels:read",
-                        "users:read",
-                        "users:read.email",
-                        "chat:write",
-                        "chat:write.customize",
-                        "channels:history",
-                        "groups:history",
-                        "mpim:history",
-                        "im:history",
-                        "links:read",
-                        "links:write",
-                        "groups:read",
-                        "im:read",
-                        "mpim:read",
-                        "reactions:read",
-                        "reactions:write",
-                        "files:read",
-                        "files:write",
-                        "im:write",
-                        "commands"
-                    ]
-                }
-            },
-            "settings": {
-                "event_subscriptions": {
-                    "request_url": "https://[YOUR_DOMAIN]silo/api/slack/events",
-                    "bot_events": [
-                        "link_shared",
-                        "message.channels",
-                        "message.im"
-                    ]
-                },
-                "interactivity": {
-                    "is_enabled": true,
-                    "request_url": "https://[YOUR_DOMAIN]silo/api/slack/action/",
-                    "message_menu_options_url": "https://[YOUR_DOMAIN]silo/api/slack/options/"
-                },
-                "org_deploy_enabled": false,
-                "socket_mode_enabled": false,
-                "token_rotation_enabled": true
+            {
+                "name": "Link Work Item",
+                "type": "message",
+                "callback_id": "link_work_item",
+                "description": "Links thread with an existing work item"
             }
-            }
-            ```
-            
+        ],
+        "slash_commands": [
+        {
+            "command": "/plane",
+            "url": "https://[YOUR_DOMAIN]silo/api/slack/command/",
+            "description": "Create issue in Plane",
+            "should_escape": false
+        }
+        ],
+        "unfurl_domains": [
+        "[YOUR_DOMAIN]"
+        ]
+    },
+    "oauth_config": {
+        "redirect_urls": [
+            "https://[YOUR_DOMAIN]silo/api/slack/team/auth/callback/",
+            "https://[YOUR_DOMAIN]silo/api/slack/user/auth/callback/"
+        ],
+         "scopes": {
+            "user": [
+                "chat:write",
+                "identify",
+                "im:read",
+                "im:write",
+                "links:write",
+                "links:read"
+            ],
+            "bot": [
+            "channels:join",
+            "channels:read",
+            "users:read",
+            "users:read.email",
+            "chat:write",
+            "chat:write.customize",
+            "channels:history",
+            "groups:history",
+            "mpim:history",
+            "im:history",
+            "links:read",
+            "links:write",
+            "groups:read",
+            "im:read",
+            "mpim:read",
+            "reactions:read",
+            "reactions:write",
+            "files:read",
+            "files:write",
+            "im:write",
+            "commands"
+            ]
+        }
+    },
+    "settings": {
+        "event_subscriptions": {
+            "request_url": "https://[YOUR_DOMAIN]silo/api/slack/events",
+            "bot_events": [
+                "link_shared",
+                "message.channels",
+                "message.im"
+            ]
+        },
+        "interactivity": {
+            "is_enabled": true,
+            "request_url": "https://[YOUR_DOMAIN]silo/api/slack/action/",
+            "message_menu_options_url": "https://[YOUR_DOMAIN]silo/api/slack/options/"
+        },
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": true
+    }
+}
+```
         
+== YAML {yaml}
 
-        
-### YAML
-
-            ```yaml
-            display_information:
-            name: [YOUR_APP_NAME]
-            description: [YOUR_APP_DESCRIPTION]
-            background_color: "#224dab"
-            features:
-            bot_user:
-                display_name: [YOUR_APP_NAME]
-                always_online: false
-            shortcuts:
-                - name: Create new issue
-                type: message
-                callback_id: issue_shortcut
-                description: Create a new issue in plane
-                - name: Link Work Item
-                type: message
-                callback_id: link_work_item
-                description: Links thread with an existing work item
-            slash_commands:
-                - command: /plane
-                url: https://[YOUR_DOMAIN]silo/api/slack/command/
-                description: Create issue in Plane
-                should_escape: false
-            unfurl_domains:
-                - [YOUR_DOMAIN]
-            oauth_config:
-            redirect_urls:
-                - https://[YOUR_DOMAIN]silo/api/slack/team/auth/callback/
-                - https://[YOUR_DOMAIN]silo/api/slack/user/auth/callback/
-            scopes:
-                user:
-                - chat:write
-                - identify
-                - im:read
-                - im:write
-                - links:write
-                - links:read
-                bot:
-                - channels:join
-                - channels:read
-                - users:read
-                - users:read.email
-                - chat:write
-                - chat:write.customize
-                - channels:history
-                - groups:history
-                - mpim:history
-                - im:history
-                - links:read
-                - links:write
-                - groups:read
-                - im:read
-                - mpim:read
-                - reactions:read
-                - reactions:write
-                - files:read
-                - files:write
-                - im:write
-                - commands
-            settings:
-            event_subscriptions:
-                request_url: https://[YOUR_DOMAIN]silo/api/slack/events
-                bot_events:
-                - link_shared
-                - message.channels
-                - message.im
-            interactivity:
-                is_enabled: true
-                request_url: https://[YOUR_DOMAIN]silo/api/slack/action/
-                message_menu_options_url: https://[YOUR_DOMAIN]silo/api/slack/options/
-            org_deploy_enabled: false
-            socket_mode_enabled: false
-            token_rotation_enabled: true
-            ```
-        
-
+```yaml
+display_information:
+name: [YOUR_APP_NAME]
+description: [YOUR_APP_DESCRIPTION]
+background_color: "#224dab"
+features:
+bot_user:
+    display_name: [YOUR_APP_NAME]
+    always_online: false
+shortcuts:
+    - name: Create new issue
+    type: message
+    callback_id: issue_shortcut
+    description: Create a new issue in plane
+    - name: Link Work Item
+    type: message
+    callback_id: link_work_item
+    description: Links thread with an existing work item
+slash_commands:
+    - command: /plane
+    url: https://[YOUR_DOMAIN]silo/api/slack/command/
+    description: Create issue in Plane
+    should_escape: false
+unfurl_domains:
+    - [YOUR_DOMAIN]
+oauth_config:
+redirect_urls:
+    - https://[YOUR_DOMAIN]silo/api/slack/team/auth/callback/
+    - https://[YOUR_DOMAIN]silo/api/slack/user/auth/callback/
+scopes:
+    user:
+        - chat:write
+        - identify
+        - im:read
+        - im:write
+        - links:write
+        - links:read
+    bot:
+        - channels:join
+        - channels:read
+        - users:read
+        - users:read.email
+        - chat:write
+        - chat:write.customize
+        - channels:history
+        - groups:history
+        - mpim:history
+        - im:history
+        - links:read
+        - links:write
+        - groups:read
+        - im:read
+        - mpim:read
+        - reactions:read
+        - reactions:write
+        - files:read
+        - files:write
+        - im:write
+        - commands
+settings:
+event_subscriptions:
+    request_url: https://[YOUR_DOMAIN]silo/api/slack/events
+    bot_events:
+        - link_shared
+        - message.channels
+         - message.im
+    interactivity:
+        is_enabled: true
+        request_url: https://[YOUR_DOMAIN]silo/api/slack/action/
+        message_menu_options_url: https://[YOUR_DOMAIN]silo/api/slack/options/
+        org_deploy_enabled: false
+        socket_mode_enabled: false
+        token_rotation_enabled: true
+```
+:::
 
 6. Review the permissions and click **Create**.
     ![Review summary](/images/integrations/slack/review-summary.webp)

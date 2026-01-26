@@ -1,4 +1,4 @@
-# Set up Sentry integration for self-hosted Plane
+# Configure Sentry for Plane integration <Badge type="info" text="Pro" />
 
 This guide shows you how to set up Sentry integration for your self-hosted Plane instance. Unlike Plane Cloud where Sentry comes pre-configured, self-hosted instances require you to create a custom integration in Sentry and configure your Plane deployment with the necessary credentials.
 

@@ -1,6 +1,12 @@
 import { defineConfig } from 'vitepress'
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 
 export default defineConfig({
+  markdown: {
+    config(md) {
+      md.use(tabsMarkdownPlugin)
+    }
+  },
   title: 'Plane Developers',
   description: 'Plane API Documentation and Self-hosting Guides',
 
@@ -87,10 +93,10 @@ export default defineConfig({
                 { text: 'Reset Password', link: '/self-hosting/govern/reset-password' }
               ]
             },
-            { text: 'Communication', link: '/self-hosting/govern/communication' },
-            { text: 'Database and Storage', link: '/self-hosting/govern/database-and-storage' },
-            { text: 'Custom Domain', link: '/self-hosting/govern/custom-domain' },
-            { text: 'Configure SSL', link: '/self-hosting/govern/configure-ssl' },
+            { text: 'SMTP for email', link: '/self-hosting/govern/communication' },
+            { text: 'External services', link: '/self-hosting/govern/database-and-storage' },
+            { text: 'Custom domain', link: '/self-hosting/govern/custom-domain' },
+            { text: 'SSL', link: '/self-hosting/govern/configure-ssl' },
             {
               text: 'Integrations',
               collapsed: true,
@@ -101,27 +107,27 @@ export default defineConfig({
                 { text: 'Slack', link: '/self-hosting/govern/integrations/slack' }
               ]
             },
-            { text: 'Configure DNS & Email', link: '/self-hosting/govern/configure-dns-email-service' },
-            { text: 'OpenSearch for Advanced search', link: '/self-hosting/govern/advanced-search' },
-            { text: 'External Secrets', link: '/self-hosting/govern/external-secrets' },
-            { text: 'Reverse Proxy', link: '/self-hosting/govern/reverse-proxy' },
-            { text: 'Private Bucket', link: '/self-hosting/govern/private-bucket' },
-            { text: 'Environment Variables', link: '/self-hosting/govern/environment-variables' },
+            { text: 'DNS for Intake Email', link: '/self-hosting/govern/configure-dns-email-service' },
+            { text: 'OpenSearch for search', link: '/self-hosting/govern/advanced-search' },
+            { text: 'External secrets', link: '/self-hosting/govern/external-secrets' },
+            { text: 'External reverse proxy', link: '/self-hosting/govern/reverse-proxy' },
+            { text: 'Private storage buckets', link: '/self-hosting/govern/private-bucket' },
+            { text: 'Environment variables', link: '/self-hosting/govern/environment-variables' },
             { text: 'Telemetry', link: '/self-hosting/telemetry' }
           ]
         },
         {
           text: 'Manage',
           items: [
-            { text: 'Upgrade from Community', link: '/self-hosting/upgrade-from-community' },
-            { text: 'Community to Airgapped', link: '/self-hosting/manage/community-to-airgapped' },
-            { text: 'Backup & Restore', link: '/self-hosting/manage/backup-restore' },
+            { text: 'Upgrade Community to Commercial Edition', link: '/self-hosting/upgrade-from-community' },
+            { text: 'Upgrade Community to Airgapped Edition', link: '/self-hosting/manage/community-to-airgapped' },
+            { text: 'Backup and restore', link: '/self-hosting/manage/backup-restore' },
             {
               text: 'Update Plane',
               collapsed: true,
               items: [
-                { text: 'Upgrade Plane', link: '/self-hosting/manage/upgrade-plane' },
-                { text: 'Upgrade from 0.13.2 to 0.14.0', link: '/self-hosting/manage/upgrade-from-0.13.2-0.14.0' }
+                { text: 'Update to latest version', link: '/self-hosting/manage/upgrade-plane' },
+                { text: 'For versions before 0.14.0', link: '/self-hosting/manage/upgrade-from-0.13.2-0.14.0' }
               ]
             },
             {

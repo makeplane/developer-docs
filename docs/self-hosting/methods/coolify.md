@@ -1,4 +1,4 @@
-# Deploy Plane with Coolify
+# Deploy Plane with Coolify <Badge type="info" text="Commercial Edition" />
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Coolify.
 

@@ -1,4 +1,4 @@
-# Deploy Plane in an airgapped Docker environment
+# Deploy Plane with Airgapped Docker <Badge type="tip" text="Business" /> 
 
 :::info
 Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.

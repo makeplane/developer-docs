@@ -1,17 +1,17 @@
-# Custom domain
+# Configure custom domain <Badge type="info" text="Commercial Edition" />
 
-During Plane Commercial Edition installation, you configure a domain for your instance. If you need to change that domain later, whether you're moving to a production domain, switching to a different hostname, or updating your DNS configuration, this guide walks you through the process.
+During installation, you configure a domain for your instance. If you need to change that domain later, whether you're moving to a production domain, switching to a different hostname, or updating your DNS configuration, this guide walks you through the process.
 
-<Note>
+:::info
 **Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
 
 If you're running Kubernetes or another deployment method, the environment variable names are the same, but the configuration method differs based on your setup.
-</Note>
+:::
 
-<Warning>
+:::warning
 **Plan for downtime**  
 Changing domains requires restarting Plane services. Your instance will be unavailable for a few minutes during the restart. Plan accordingly or notify your users.
-</Warning>
+:::
 
 ## Check current domain configuration
 
@@ -89,9 +89,7 @@ This process typically takes a few minutes. You'll see output indicating the sta
 
 Our steps differ slightly depending on whether you are hosting on a public IP or a private/internal IP. Follow the steps listed below.
 
-## Update configuration in .env file
-
-::: warningThis step is mandatory for you to host Plane on a custom domain.:::
+#### Update configuration in .env file
 
 Open your project's `.env` file in a text editor. This file contains configuration settings for your application. Locate the following lines:
 
@@ -109,7 +107,7 @@ CORS_ALLOWED_ORIGINS=https://example.com
 
 If you are hosting Plane on a public IP, then follow the steps here. However, if you are hosting Plane on an internal IP then follow these steps.
 
-## Set DNS A record (for public IP)
+#### Set DNS A record (for public IP)
 
 If your server has a public IP address, you need to configure the DNS A record to point to this IP address. This allows users to access your application using your custom domain name. Here’s how to do it:
 
@@ -119,7 +117,7 @@ If your server has a public IP address, you need to configure the DNS A record t
 - Add a new A record with the hostname set to `@` (or your subdomain if applicable) and the IP address set to your server's public IP address.
 - Save the changes. It may take some time for the DNS changes to propagate.
 
-## Configure reverse proxy (for internal IP)
+#### Configure reverse proxy (for internal IP)
 
 If your server is behind a firewall or router and has an internal IP address, you'll need to set up a reverse proxy to route requests from your custom domain to your server. Follow these steps:
 

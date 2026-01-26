@@ -1,4 +1,4 @@
-# Configure GitLab Application for Plane integration
+# Configure GitLab for Plane integration <Badge type="info" text="Pro" />
 
 This guide walks you through setting up a GitLab application to enable GitLab integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for GitLab, you’ll need to create an application, configure authentication, and set the necessary permissions to ensure seamless integration.
 
@@ -23,8 +23,9 @@ After creating and configuring the GitLab application and configuring the instan
 
 ## Create GitLab Application
 
+:::tabs key:gitlab-edition
 
-### GitLab Cloud
+== GitLab Cloud {#gitlab-cloud}
 
 1. On the left sidebar in GitLab, select your avatar.
 
@@ -58,8 +59,7 @@ After creating and configuring the GitLab application and configuring the instan
 
 9. Click **Save Application** to finalize the setup.
 
-
-### GitLab Self-managed
+== GitLab Self-managed {#gitlab-self-managed}
 
 1. Log in to your GitLab instance.
 2. Click on your profile icon in the top-right corner.
@@ -69,65 +69,67 @@ After creating and configuring the GitLab application and configuring the instan
 
 Fill in the application details with the following configuration:
 
-    - **Name**  
-    Enter a descriptive name for your application (e.g., `Plane Local Dev` or `Plane Integration`).
+- **Name**
+Enter a descriptive name for your application (e.g., `Plane Local Dev` or `Plane Integration`).
 
-    - **Redirect URI**  
-    The redirect URI depends on your Plane deployment:
+- **Redirect URI**
+The redirect URI depends on your Plane deployment:
 
-        **For Plane Cloud:**    
-        ```
-        https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback
-        ```
+ **For Plane Cloud:**
+    ```
+    https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback
+    ```
 
-        **For Plane Self-Hosted:**  
-        ```
-        https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback
-        ```
+**For Plane Self-Hosted:**
+    ```
+    https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback
+    ```
 
-    Replace `<your-domain>` with your actual Plane instance domain.
+Replace `<your-domain>` with your actual Plane instance domain.
 
-    - **Confidential**  
-    Keep the **Confidential** checkbox enabled. This ensures the application uses a client secret for secure authentication.
+- **Confidential**
+Keep the **Confidential** checkbox enabled. This ensures the application uses a client secret for secure authentication.
 
-    - **Scopes**  
-    Select the following scopes to grant Plane the necessary permissions:
+- **Scopes**
+Select the following scopes to grant Plane the necessary permissions:
 
-        - **api** - Grants complete read/write access to the API, including all groups and projects
-        - **read_api** - Grants read access to the API, including all groups and projects
-        - **read_user** - Grants read-only access to your profile information
-        - **read_repository** - Grants read-only access to repositories on private projects
-        - **profile** - Grants read-only access to the user's profile data using OpenID Connect
-        - **email** - Grants read-only access to the user's primary email address using OpenID Connect
+- **api** - Grants complete read/write access to the API, including all groups and projects
+- **read_api** - Grants read access to the API, including all groups and projects
+- **read_user** - Grants read-only access to your profile information
+- **read_repository** - Grants read-only access to repositories on private projects
+- **profile** - Grants read-only access to the user's profile data using OpenID Connect
+- **email** - Grants read-only access to the user's primary email address using OpenID Connect
 
 6. Click **Save application** to create the OAuth application.
+
+:::
 
 
 ## Configure Plane instance
 
+:::tabs key:gitlab-edition
 
-### GitLab Cloud
-
+== GitLab Cloud {#gitlab-cloud}
 
 1. Copy the **Application ID** and **Secret** from the newly created application.
     ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
 
-2. Add these environment variables with the values to your Plane instance's `.env` file. 
+2. Add these environment variables with the values to your Plane instance's `.env` file.
 
     ```bash
     GITLAB_CLIENT_ID=<application_id>
     GITLAB_CLIENT_SECRET=<secret>
     ```
-3. Save the file and restart the instance. 
+3. Save the file and restart the instance.
 
 4. Once you've completed the instance configuration, [activate the GitLab integration in Plane](https://docs.plane.so/integrations/gitlab?edition=gitlab-cloud).
 
-
-### GitLab Self-managed
-
+== GitLab Self-managed {#gitlab-self-managed}
 
 1. Copy the **Application ID** and **Secret** from the newly created application.
     ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
 
 2. Once you've created the application, [activate the GitLab Self-managed integration in Plane](https://docs.plane.so/integrations/gitlab?edition=gitlab-self-managed).
+
+:::
 

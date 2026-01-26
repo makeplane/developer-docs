@@ -1,4 +1,4 @@
-# Environment variables reference guide
+# Environment variables reference <Badge type="info" text="Commercial Edition" />
 
 This guide provides a comprehensive overview of all environment variables used in the Commercial Edition. These variables allow you to customize your Plane instance to best fit your organization's needs.
 

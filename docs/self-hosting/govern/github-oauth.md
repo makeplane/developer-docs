@@ -1,6 +1,6 @@
 # Github OAuth
 
-Plane also supports GitHub OAuth so your users can sign-in with GitHub instead.
+Plane supports GitHub OAuth so your users can sign-in with GitHub instead.
 
 ## Configure Plane as an OAuth app on GitHub
 

@@ -1,4 +1,4 @@
-# Deploy Plane with Docker Swarm
+# Deploy Plane with Docker Swarm <Badge type="info" text="Commercial Edition" />
 
 This guide shows you the steps to deploy a self-hosted instance of the Plane Commercial Edition using Docker Swarm.
 

@@ -1,4 +1,4 @@
-# Configure DNS for Intake Email
+# Configure DNS for Intake Email <Badge type="tip" text="Business" />
 
 This guide explains how to configure DNS settings to enable the [Intake Email](https://docs.plane.so/intake/intake-email) feature for your self-hosted Plane instance. These configurations enable your server to accept messages sent to your project's dedicated Intake address, which are then  converted into work items in your project's Intake section.
 
@@ -8,9 +8,9 @@ Ensure that the Plane server allows inbound traffic on the following email-relat
 
 If any of these ports are currently in use, you can free them by running:
 
-    ```bash
-    fuser -k 25/tcp 465/tcp 587/tcp
-    ```
+```bash
+fuser -k 25/tcp 465/tcp 587/tcp
+```
 
 ## Generate SSL/TLS Certificate for Email Domain 
 ::: warning
@@ -122,31 +122,31 @@ This record specifies how receiving mail servers should handle authentication fa
 ## Verify your configuration
 After setting up your DNS records, verify that they're correctly configured:
 
-    ```bash
-    # Verify A record
-    dig A <mail-domain>
+```bash
+# Verify A record
+dig A <mail-domain>
 
-    # Verify MX record
-    dig MX <mail-domain>
+# Verify MX record
+dig MX <mail-domain>
 
-    # Verify SPF record
-    dig TXT <mail-domain>
+# Verify SPF record
+dig TXT <mail-domain>
 
-    # Verify DMARC record
-    dig TXT _dmarc.<mail-domain>
-    ```
+# Verify DMARC record
+dig TXT _dmarc.<mail-domain>
+```
 
-    You can also use [MXToolbox](https://mxtoolbox.com) to check for any issues with your DNS configuration.
+You can also use [MXToolbox](https://mxtoolbox.com) to check for any issues with your DNS configuration.
 
 ## Test your mail server
 Once your DNS records have propagated, test your SMTP connections:
 
-    ```bash
-    # Test SMTP connection on standard ports
-    telnet <host-domain> 25
-    telnet <host-domain> 465
-    telnet <host-domain> 587
-    ```
+```bash
+# Test SMTP connection on standard ports
+telnet <host-domain> 25
+telnet <host-domain> 465
+telnet <host-domain> 587
+```
 
 ## Troubleshooting
 

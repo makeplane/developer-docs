@@ -1,19 +1,12 @@
-# Configure OpenSearch for advanced search 
+# Configure OpenSearch for advanced search <Badge type="info" text="Pro" />
 
 
 Plane uses OpenSearch to provide advanced search capabilities across your workspace. This guide walks you through setting up OpenSearch integration on your self-hosted instance.
 
-<Note>
-Advanced search requires a Pro or Business plan license.
-</Note>
-
 ## Before you begin
 
 You'll need:
-
 - An OpenSearch 2.x instance (self-hosted or managed service like AWS OpenSearch).
-- Redis 6.2 or later (for batch processing).
-- Celery workers running for background index updates.
 
 ## What you get with advanced search
 

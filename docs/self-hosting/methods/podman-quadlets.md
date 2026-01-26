@@ -1,4 +1,4 @@
-# Deploy Plane with Podman Quadlets
+# Deploy Plane with Podman Quadlets <Badge type="info" text="Commercial Edition" />
 This guide shows you the steps to deploy a self-hosted instance of Plane using Podman Quadlets.
 
 ## Prerequisites

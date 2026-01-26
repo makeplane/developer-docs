@@ -1,4 +1,4 @@
-# Docker AIO (All-in-One)
+# Docker AIO (All-in-One) <Badge type="info" text="Commercial Edition" />
 
 The Plane Commercial All-in-One (AIO) Docker image packages all Plane services into a single container, making it the fastest way to get Plane running. 
 

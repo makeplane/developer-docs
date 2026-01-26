@@ -1,4 +1,4 @@
-# LDAP authentication
+# LDAP authentication <Badge type="warning" text="Enterprise" />
 
 LDAP (Lightweight Directory Access Protocol) authentication lets your team sign in to Plane using their existing corporate credentials. Instead of creating separate Plane passwords, users authenticate through your organization's directory service.
 
