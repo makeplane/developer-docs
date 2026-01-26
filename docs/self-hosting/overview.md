@@ -1,4 +1,5 @@
 # Self-host Plane
+Self-hosting allows you to have full control over your applications and data. It’s a great way to ensure privacy, control, and customization.
 
 ## Methods
 

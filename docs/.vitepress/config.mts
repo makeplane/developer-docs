@@ -7,7 +7,7 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     }
   },
-  title: 'Plane Developers',
+  title: 'Developers',
   description: 'Plane API Documentation and Self-hosting Guides',
 
   head: [
@@ -16,8 +16,8 @@ export default defineConfig({
 
   themeConfig: {
     logo: {
-      light: '/logo/plane-logo-light.png',
-      dark: '/logo/plane-logo-dark.png'
+      light: 'https://media.docs.plane.so/logo/new-logo-white.png',
+      dark: 'https://media.docs.plane.so/logo/new-logo-dark.png'
     },
 
     outline: {
@@ -29,6 +29,7 @@ export default defineConfig({
       { text: 'Self-hosting', link: '/self-hosting/overview' },
       { text: 'API Reference', link: '/api-reference/introduction' },
       { text: 'Build and extend', link: '/dev-tools/build-plane-app' },
+      { text: 'Plane Docs', link: 'https://docs.plane.so' },
       { text: 'Sign in', link: 'https://app.plane.so/sign-in' }
     ],
 
@@ -540,44 +541,6 @@ export default defineConfig({
         }
       ],
 
-      '/plane-one/': [
-        {
-          text: 'Plane One',
-          items: [
-            { text: 'Introduction', link: '/plane-one/introduction' }
-          ]
-        },
-        {
-          text: 'Self-host',
-          items: [
-            { text: 'Overview', link: '/plane-one/self-host/overview' },
-            { text: 'Guides', link: '/plane-one/self-host/guides' },
-            {
-              text: 'Install Methods',
-              collapsed: true,
-              items: [
-                { text: 'Docker', link: '/plane-one/self-host/methods/docker' },
-                { text: 'Kubernetes', link: '/plane-one/self-host/methods/kubernetes' }
-              ]
-            }
-          ]
-        },
-        {
-          text: 'Governance',
-          items: [
-            { text: 'Workspaces and Teams', link: '/plane-one/governance/workspaces-and-teams' },
-            { text: 'Custom SSO', link: '/plane-one/governance/authentication/custom-sso' }
-          ]
-        },
-        {
-          text: 'Manage',
-          items: [
-            { text: 'Prime CLI', link: '/plane-one/manage/prime-cli' },
-            { text: 'Prime Client', link: '/plane-one/manage/prime-client' },
-            { text: 'Advanced Deploy', link: '/plane-one/manage/advanced-deploy' }
-          ]
-        }
-      ]
     },
 
     socialLinks: [
@@ -595,9 +558,9 @@ export default defineConfig({
       pattern: 'https://github.com/makeplane/developer-docs/edit/main/:path'
     },
 
-    footer: {
+    /*footer: {
       message: 'Released under the Apache License 2.0.',
       copyright: 'Copyright © 2024 Plane'
-    }
+    }*/
   }
 })
