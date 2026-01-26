@@ -4,10 +4,10 @@ This guide walks you through setting up a GitLab application to enable GitLab in
 
 This guide covers configuration for both:
 
-- **[GitLab.com](/self-hosting/govern/integrations/gitlab?edition=gitlab-cloud#create-gitlab-application)**   
+- **[GitLab.com](/self-hosting/govern/integrations/gitlab#gitlab-cloud)**
 The standard cloud-hosted GitLab service
 
-- **[GitLab Self-managed](/self-hosting/govern/integrations/gitlab?edition=gitlab-self-managed#create-gitlab-application)**   
+- **[GitLab Self-managed](/self-hosting/govern/integrations/gitlab#gitlab-self-managed)**
 Self-hosted GitLab instances for organizations with specific compliance or security requirements
 
 In this guide, you’ll:

@@ -118,4 +118,4 @@ To migrate from public to private bucket storage, follow the instructions below:
 
 ## Troubleshoot
 
-- [Bucket policy exceeds size limit](/self-hosting/troubleshoot/storage-errors#minio-buckey-policy-limitation)
+- [Bucket policy exceeds size limit](/self-hosting/troubleshoot/storage-errors#bucket-policy-exceeds-size-limit)

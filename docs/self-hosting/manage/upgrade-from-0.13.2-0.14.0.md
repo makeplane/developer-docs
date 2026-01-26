@@ -104,4 +104,4 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
 
 14. You’re all set! Log in to your updated `v0.14-0` instance to check if all of your data has migrated successfully. 
 
-15. Now, [update to the latest version](/self-hosting/manage/upgrade-plane#community-edition).
+15. Now, [update to the latest version](/self-hosting/manage/upgrade-plane#update-version).

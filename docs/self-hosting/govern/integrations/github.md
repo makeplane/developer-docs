@@ -4,10 +4,10 @@ This guide walks you through setting up a GitHub App to enable GitHub integratio
 
 This guide covers configuration for both:
 
-- **[GitHub Cloud](/self-hosting/govern/integrations/github?edition=github-cloud#create-github-app)**   
+- **[GitHub Cloud](/self-hosting/govern/integrations/github#github-cloud)**
 The standard cloud-hosted GitHub service
 
-- **[GitHub Enterprise Server](/self-hosting/govern/integrations/github?edition=github-enterprise#create-github-app)**   
+- **[GitHub Enterprise Server](/self-hosting/govern/integrations/github#github-enterprise-server)**
 Self-hosted GitHub instances for organizations with specific compliance or security requirements
 
 In this guide, you’ll:

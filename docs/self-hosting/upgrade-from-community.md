@@ -6,7 +6,7 @@ The Commercial edition comes with the free plan and the flexibility to upgrade t
 > The instructions provided on this page are specific to installations using Docker. If you are running Plane on Kubernetes, you'll need to manually create a database dump and back up your file storage by copying the relevant volumes or storage paths.
 
 ## Prerequisites
-- Install the [Commercial Edition](/self-hosting/methods/docker-compose#recommended-edition) on a fresh machine, not the one running the Plane Community Edition.
+- Install the [Commercial Edition](/self-hosting/methods/docker-compose#install-plane) on a fresh machine, not the one running the Plane Community Edition.
 - Be sure to log in as the root user or as a user with sudo access. The `/opt` folder requires sudo or root privileges.
 
 
@@ -109,4 +109,4 @@ Your Commercial Edition instance is now connected to your existing external data
 
 ## What's next
 
-- [Activate a paid plan license](/self-hosting/manage/manage-licenses).
+- [Activate a paid plan license](/self-hosting/manage/manage-licenses/activate-pro-and-business).

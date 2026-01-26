@@ -43,7 +43,7 @@ For Commercial Edition v1.13.0, ensure you're using the **latest version of Dock
 
 #### Prerequisites
 
-Before starting, make a backup of your Plane instance. For detailed steps, see the [Backup data](/self-hosting/manage/backup-restore#community-edition) section. This is strongly recommended to ensure you have a safe restore point.
+Before starting, make a backup of your Plane instance. For detailed steps, see the [Backup data](/self-hosting/manage/backup-restore#backup-data) section. This is strongly recommended to ensure you have a safe restore point.
 
 #### Update version
 

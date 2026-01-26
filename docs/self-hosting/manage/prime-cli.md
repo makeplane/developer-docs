@@ -123,21 +123,21 @@ Select a Action you want to perform:
 - **Restart**  
   Restarts the Plane server and all associated services.
 
-- **Upgrade**  
-  Upgrades Plane to the latest available version. This will stop all services, update the necessary files, and then restart Plane with the latest configuration. See [Update Plane](/self-hosting/manage/upgrade-plane#update-plane-version-community-edition) for more info.
+- **Upgrade**
+  Upgrades Plane to the latest available version. This will stop all services, update the necessary files, and then restart Plane with the latest configuration. See [Update Plane](/self-hosting/manage/upgrade-plane#prerequisites) for more info.
 
   > [!WARNING]
-  > It’s recommended to create a backup before upgrading your instance. See [Backup and restore](/self-hosting/manage/backup-restore#backup-and-restore-data-community-edition).
+  > It's recommended to create a backup before upgrading your instance. See [Backup and restore](/self-hosting/manage/backup-restore#backup-data).
 
 
-- **View Logs**  
-  Displays real-time logs of specific Plane services. See [View logs](/self-hosting/manage/view-logs#view-container-logs-community-edition) for more info.
+- **View Logs**
+  Displays real-time logs of specific Plane services. See [View logs](/self-hosting/manage/view-logs) for more info.
 
   > [!TIP]
   >Use **View Logs** to monitor service performance or troubleshoot issues. Press `CTRL+C` to exit the log view and return to the main menu.
 
-- **Backup Data**  
-  Creates a backup of your current Plane installation, including all data. See [Backup and restore data](/self-hosting/manage/backup-restore#backup-and-restore-data-community-edition) for more info.
+- **Backup Data**
+  Creates a backup of your current Plane installation, including all data. See [Backup and restore data](/self-hosting/manage/backup-restore#backup-data) for more info.
 
 - **Exit**  
   Closes the setup script and returns you to the command line.
