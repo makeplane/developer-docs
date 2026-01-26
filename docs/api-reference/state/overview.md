@@ -4,6 +4,9 @@ States represent the current status of a work item in your project workflow.
 
 [Learn more about States](https://docs.plane.so/core-concepts/work-items/states)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The State Object
 
 ### Attributes
@@ -58,7 +61,10 @@ States represent the current status of a work item in your project workflow.
 
   The workspace which the issue is part of auto generated from backend
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE STATE OBJECT">
 
 ```json
 {
@@ -78,3 +84,8 @@ States represent the current status of a work item in your project workflow.
 	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

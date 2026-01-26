@@ -4,6 +4,9 @@ Pages allow you to create and manage documentation at both workspace and project
 
 **Documentation**: [Wiki](https://docs.plane.so/core-concepts/pages/wiki), [Pages](https://docs.plane.so/core-concepts/pages/overview)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Pages Object
 
 ### Attributes
@@ -36,7 +39,10 @@ Pages allow you to create and manage documentation at both workspace and project
 
   ID of the user who last updated the page
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE PAGES OBJECT">
 
 ```json
 {
@@ -49,3 +55,8 @@ Pages allow you to create and manage documentation at both workspace and project
 	"updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

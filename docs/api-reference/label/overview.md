@@ -4,7 +4,12 @@ Labels are tags that help you categorize and organize work items in your project
 
 [Learn more about Labels](https://docs.plane.so/core-concepts/work-items/labels)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Label Object
+
+### Attributes
 
 - `name` _string_ **(required)**
 
@@ -42,7 +47,10 @@ Labels are tags that help you categorize and organize work items in your project
 
   Parent of the label which is also a Label
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE LABEL OBJECT">
 
 ```json
 {
@@ -60,3 +68,8 @@ Labels are tags that help you categorize and organize work items in your project
 "parent": null
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

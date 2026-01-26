@@ -1,6 +1,4 @@
-# Build a Plane app (Beta)
-
-::: infoPlane apps are currently in **Beta**. Please send any feedback to support@plane.so.:::
+# Build a Plane app <Badge type="info" text="Pro" />
 
 ## Introduction
 Plane apps seamlessly integrate tools and services with Plane so you can
@@ -10,19 +8,19 @@ stay focused and productive.
 
 ## Why Build a Plane App?
 
-**Stop doing manual work.**
+**Stop doing manual work**  
 Plane integrations eliminate repetitive tasks like copying updates between
 tools, creating work items from support tickets, and generating status reports.
 Instead of spending hours on administrative work, let your app handle it
 automatically.
 
-**Connect everything you already use.**
+**Connect everything you already use**  
 Your team probably uses dozens of different tools. Plane apps create a unified
 workflow by connecting your favorite CRM, time tracking app, CI/CD pipelines,
 communication tools, and more, together into Plane. One change in Plane can
 trigger updates across your entire tech stack.
 
-**Build exactly what you need.**
+**Build exactly what you need**  
 Unlike rigid SaaS platforms, Plane's open core nature means you can create
 integrations that fit your specific workflow.
 
@@ -68,9 +66,9 @@ If this flow needs to be triggered from Plane marketplace as well, then provide 
 
 Below are sample implementations:
 
+:::tabs key:language
 
-### Python
-
+== Python {#python}
 
 ```python
 import os
@@ -86,9 +84,7 @@ params = {
 consent_url = f"https://api.plane.so/auth/o/authorize-app/?{urlencode(params)}"
 ```
 
-
-### TypeScript
-
+== TypeScript {#typescript}
 
 ```typescript
 import { URLSearchParams } from 'url';
@@ -102,7 +98,7 @@ const params = new URLSearchParams({
 
 const consentUrl = `https://api.plane.so/auth/o/authorize-app/?${params.toString()}`;
 ```
-
+:::
 
 There are two types of authenticated actions your application can perform:
 
@@ -126,9 +122,8 @@ Plane will make a GET request to the Redirect URI with below parameters:
 
 #### Examples
 
-
-### Python
-
+:::tabs key:language
+== Python {#python}
 
 ```python
 import os
@@ -166,9 +161,7 @@ bot_token = token_response.access_token
 expires_in = token_response.expires_in
 ```
 
-
-### TypeScript
-
+== TypeScript {#typescript}
 
 ```typescript
 import axios from 'axios';
@@ -202,6 +195,7 @@ const botToken = responseData.access_token;
 const expiresIn = responseData.expires_in; // Token expiry in seconds
 ```
 
+:::
 
 ### User-Authorized Actions (Authorization Code Flow)
 
@@ -217,9 +211,8 @@ Plane will make a GET request to the Redirect URI with below parameters:
 
 #### Examples
 
-
-### Python
-
+:::tabs key:language
+== Python {#python}
 
 ```python
 from plane.oauth.api import OAuthApi
@@ -241,9 +234,7 @@ refresh_token = token_response.refresh_token
 expires_in = token_response.expires_in
 ```
 
-
-### TypeScript
-
+== TypeScript {#typescript}
 
 ```typescript
 import axios from 'axios';
@@ -278,7 +269,7 @@ const accessToken = responseData.access_token;
 const refreshToken = responseData.refresh_token;
 const expiresIn = responseData.expires_in;
 ```
-
+:::
 
 ### Fetching App Installation Details
 
@@ -286,9 +277,8 @@ In both user-authorized and app-authorized flows, the `app_installation_id` iden
 
 #### Examples
 
-
-### Python
-
+:::tabs key:language
+== Python {#python}
 
 ```python
 # Using the OAuth API to fetch app installation details
@@ -306,7 +296,7 @@ if app_installations:
 ```
 
 
-### TypeScript
+== TypeScript {#typescript}
 
 
 ```typescript
@@ -325,7 +315,7 @@ const response = await axios.get(
 
 const workspaceDetails = response.data[0];
 ```
-
+:::
 
 #### Sample Response
 
@@ -470,52 +460,8 @@ When an issue is created, updated, or deleted:
 Here's how to process webhooks in your application:
 
 
-### TypeScript
-
-
-```typescript
-interface WebhookPayload {
-  event: string;
-  action: string;
-  webhook_id: string;
-  workspace_id: string;
-  data: any;
-  activity: {
-    actor: {
-      id: string;
-      display_name: string;
-      email?: string;
-    };
-    field?: string;
-    new_value?: any;
-    old_value?: any;
-  };
-}
-
-// Process incoming webhook
-async function handleWebhook(payload: WebhookPayload) {
-  console.log(`Received ${payload.event} ${payload.action} event`);
-  
-  // Get workspace credentials
-  const credentials = await getCredentialsForWorkspace(payload.workspace_id);
-  if (!credentials) {
-    throw new Error(`No credentials found for workspace ${payload.workspace_id}`);
-  }
-  
-  // Process specific event types
-  if (payload.event === 'issue_comment' && payload.action === 'created') {
-    const comment = payload.data.comment_stripped;
-    if (comment.includes('/your-command')) {
-      // Handle your custom command
-      await processCommand(payload.data, credentials);
-    }
-  }
-}
-```
-
-
-### Python
-
+:::tabs key:language
+== Python {#python}
 
 ```python
 from typing import Dict, Any
@@ -567,6 +513,47 @@ def handle_assignment_change(issue_data: IssueEventData, credentials):
     pass
 ```
 
+== TypeScript {#typescript}
+
+```typescript
+interface WebhookPayload {
+  event: string;
+  action: string;
+  webhook_id: string;
+  workspace_id: string;
+  data: any;
+  activity: {
+    actor: {
+      id: string;
+      display_name: string;
+      email?: string;
+    };
+    field?: string;
+    new_value?: any;
+    old_value?: any;
+  };
+}
+// Process incoming webhook
+async function handleWebhook(payload: WebhookPayload) {
+  console.log(`Received ${payload.event} ${payload.action} event`);
+  
+  // Get workspace credentials
+  const credentials = await getCredentialsForWorkspace(payload.workspace_id);
+  if (!credentials) {
+    throw new Error(`No credentials found for workspace ${payload.workspace_id}`);
+  }
+  
+  // Process specific event types
+  if (payload.event === 'issue_comment' && payload.action === 'created') {
+    const comment = payload.data.comment_stripped;
+    if (comment.includes('/your-command')) {
+      // Handle your custom command
+      await processCommand(payload.data, credentials);
+    }
+  }
+}
+```
+:::
 
 ## Obtain and store access tokens securely
 
@@ -596,8 +583,8 @@ Token refresh works differently depending on the type of token you're using:
 Bot tokens obtained through the client credentials flow don't use refresh tokens. Instead, when a bot token expires, you simply request a new one using the same `app_installation_id`:
 
 
-### Python
-
+:::tabs key:language
+== Python {#python}
 
 ```python
 # When bot token expires, request a new one using the same app_installation_id
@@ -620,9 +607,7 @@ def refresh_bot_token(app_installation_id: str):
 new_token, expires_in = refresh_bot_token(app_installation_id)
 ```
 
-
-### TypeScript
-
+== TypeScript {#typescript}
 
 ```typescript
 // When bot token expires, request a new one using the same app_installation_id
@@ -653,7 +638,7 @@ const responseData = response.data;
 const newBotToken = responseData.access_token;
 const expiresIn = responseData.expires_in;
 ```
-
+:::
 
 ### User Token Refresh (Authorization Code Flow)
 
@@ -662,9 +647,8 @@ When user access tokens expire, you can use the refresh token to get a new acces
 
 #### Examples
 
-
-### Python
-
+:::tabs key:language
+== Python {#python}
 
 ```python
 # When access token expires, use refresh token to get a new access token
@@ -691,9 +675,7 @@ def refresh_user_token(refresh_token: str):
 new_access_token, new_refresh_token, expires_in = refresh_user_token(stored_refresh_token)
 ```
 
-
-### TypeScript
-
+== TypeScript {#typescript}
 
 ```typescript
 // When access token expires, use refresh token to get a new access token
@@ -718,7 +700,7 @@ const refreshResponse = await axios.post(
 const refreshResponseData = refreshResponse.data;
 const accessToken = refreshResponseData.access_token;
 ```
-
+:::
 
 ## Listing Your App on Plane Marketplace
 

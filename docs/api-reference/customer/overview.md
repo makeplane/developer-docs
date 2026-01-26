@@ -4,6 +4,9 @@ Customers allow you to manage customer relationships and track customer-related 
 
 [Learn more about Customers](https://docs.plane.so/customers)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Customer Object
 
 ### Attributes
@@ -40,7 +43,10 @@ Customers allow you to manage customer relationships and track customer-related 
 
   ID of the user who last updated the customer
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE CUSTOMER OBJECT">
 
 ```json
 {
@@ -52,3 +58,8 @@ Customers allow you to manage customer relationships and track customer-related 
 	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

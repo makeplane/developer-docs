@@ -16,105 +16,108 @@ We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../
 To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
 :::
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Work Item object
 
 ### Attributes
 
 *   `name` _string_ **(required)**
-    
+
     Name of the work item
-    
+
 *   `created_at` , `updated_at` _timestamp_
-    
+
     Timestamp of the work item when it was created and when it was last updated
-    
+
 *   `estimate_point` _integer_ or _null_
-    
+
     Total estimate points for the work item takes value between (0,7).
-    
+
 *   `description_html` _string_
-    
+
     HTML description of the work item
-    
+
 *   `description_stripped` _string_
-    
+
     Stripped version of the html description auto generated using the application.
-    
+
 *   `priority` _string_
-    
+
     Priority of the work item takes in 5 values
-    
+
     *   none
     *   urgent
     *   high
     *   medium
     *   low
 *   `start_date` _date_
-    
+
     Start date of the work item
-    
+
 *   `target_date` _date_
-    
+
     Target date of the work item
-    
+
 *   `sequence_id` _integer_
-    
+
     Auto generated from the system the unique identifier of the work item
-    
+
 *   `sort_order` _decimal_
-    
+
     Auto generated from the system during creation used for ordering
-    
+
 *   `completed_at` _timestamp_ or _null_
-    
+
     Timestamp when the work item is moved to any completed group state
-    
+
 *   `created_by` & `updated_by`
-    
+
     This values are auto saved and represent the id of the user that created or the updated the project.
-    
+
 *   `project` _uuid_
-    
+
     The project which the work item is part of auto generated from backend
-    
+
 *   `workspace` _uuid_
-    
+
     The workspace which the work item is part of auto generated from backend
-    
+
 *   `parent` _uuid_
-    
+
     The uuid of the parent work item which should be part of the same workspace
-    
+
 *   `state` _uuid_
-    
+
     The uuid of the state which is present in the project where the work item is being created.
-    
+
 *   `assignees` - _\[uuid,\]_
-    
+
     The array of uuids of the users who are part of the project where the work item is being created or updated.
-    
+
 *   `labels` - _\[uuid,\]_
-    
+
     The array of uuids of the labels which are present in the project where the work item is being created or updated.
 
 *   `type` _uuid_
-    
+
     The uuid of the work item type for the work item.
 
 *   `module` _uuid_
-    
+
     The uuid of the module the work item belongs to.
 
 *   `is_draft` _boolean_
-    
+
     Whether the work item is a draft.
 
 *   `archived_at` _timestamp_ or _null_
-    
+
     Timestamp when the work item was archived.
 
 *   `description_binary` _string_
-    
+
     Binary description of the work item.
 
 **Expandable Fields**
@@ -126,8 +129,11 @@ The following fields can be expanded when retrieving a work item by including th
 - `assignees` - Expands to array of full User objects
 - `state` - Expands to full State object
 - `project` - Expands to full Project object
-    
-### Example Response
+
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE WORK ITEM OBJECT">
 
 ```json
 {
@@ -158,3 +164,8 @@ The following fields can be expanded when retrieving a work item by including th
 	"labels": []
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

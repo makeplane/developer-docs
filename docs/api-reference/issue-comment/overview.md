@@ -16,6 +16,9 @@ We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../
 To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
 :::
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Comments Object
 
 ### Attributes
@@ -95,7 +98,10 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
 
   UUID of the user who commented.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE COMMENTS OBJECT">
 
 ```json
 {
@@ -115,3 +121,8 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
 	"actor": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

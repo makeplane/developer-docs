@@ -1,5 +1,6 @@
 # Webhooks
 
+A webhook triggers a HTTP POST request on the specified url, whenever there is a change in an event. Like a new project is created, updated or deleted then a webhook can be triggered to receive the required payload.
 ## Creating a webhook
 
 `url` You are required to provide a url in which you want the payloads to be triggered.
@@ -135,4 +136,6 @@ The webhooks are triggered for POST, PATCH, and DELETE requests.
 ```
 
 
-::: infoNote: Whenever an issue is added to the module, the corresponding issue webhook will be triggered. Similarly, any updates made to the cycle issue will also activate the issue webhook.:::
+::: info
+Whenever an issue is added to the module, the corresponding issue webhook will be triggered. Similarly, any updates made to the cycle issue will also activate the issue webhook.
+:::

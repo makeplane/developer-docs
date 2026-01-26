@@ -4,6 +4,9 @@ Stickies are workspace-level notes that allow you to capture quick thoughts, ide
 
 [Learn more about Stickies](https://docs.plane.so/core-concepts/stickies)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Sticky Object
 
 ### Attributes
@@ -72,7 +75,10 @@ Stickies are workspace-level notes that allow you to capture quick thoughts, ide
 
   ID of the user who last updated the sticky
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE STICKY OBJECT">
 
 ```json
 {
@@ -89,3 +95,8 @@ Stickies are workspace-level notes that allow you to capture quick thoughts, ide
 	"owner": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

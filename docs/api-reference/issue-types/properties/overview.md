@@ -17,7 +17,12 @@ To ensure uninterrupted service, replace all `/issue-types/` references with `/w
 :::
 
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Properties Object
+
+### Attributes
 
 - `workspace` _uuid_
 
@@ -39,7 +44,10 @@ To ensure uninterrupted service, replace all `/issue-types/` references with `/w
 
   This values are auto saved and represent the id of the user that created or the updated the project.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE PROPERTIES OBJECT">
 
 ```json
 {
@@ -69,3 +77,8 @@ To ensure uninterrupted service, replace all `/issue-types/` references with `/w
   "issue_type": "1800681a-a749-487b-9003-3279031fea35"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

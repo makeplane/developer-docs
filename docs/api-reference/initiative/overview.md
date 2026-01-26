@@ -4,6 +4,9 @@ Initiatives are high-level strategic goals that help organize and track work acr
 
 [Learn more about Initiatives](https://docs.plane.so/core-concepts/projects/initiatives)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Initiatives Object
 
 ### Attributes
@@ -72,7 +75,10 @@ Initiatives are high-level strategic goals that help organize and track work acr
 
   ID of the user who last updated the initiative
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE INITIATIVES OBJECT">
 
 ```json
 {
@@ -89,3 +95,8 @@ Initiatives are high-level strategic goals that help organize and track work acr
 	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>
