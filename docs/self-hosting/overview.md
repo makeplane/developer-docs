@@ -1,3 +1,10 @@
+---
+title: Self-Host Plane - Deploy on Your Infrastructure
+description: Deploy Plane on your own infrastructure with Docker, Kubernetes, or Podman. Complete self-hosting guides for open-source project management with full control and customization.
+keywords: self-host plane, plane docker, plane kubernetes, self-hosted project management, docker compose plane, kubernetes helm plane, on-premise deployment
+---
+
+
 # Self-host Plane
 Self-hosting allows you to have full control over your applications and data. It’s a great way to ensure privacy, control, and customization.
 

@@ -1,3 +1,10 @@
+---
+title: Update a label - Plane API
+description: Update a label via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+---
+
+
 # Update a label
 
 <div class="api-endpoint-badge">

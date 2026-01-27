@@ -1,3 +1,10 @@
+---
+title: Retrieve a work item type - Plane API
+description: Get retrieve a work item type details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Retrieve a work item type
 
 <div class="api-endpoint-badge">

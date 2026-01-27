@@ -1,3 +1,10 @@
+---
+title: Docker AIO (All-in-One) - Self-Hosted Plane
+description: Deploy Plane with Docker All-in-One (AIO) setup. Quick installation guide for running Plane in a single Docker container.
+keywords: plane, self-hosting, deployment, plane installation, docker, docker compose, containerization
+---
+
+
 # Docker AIO (All-in-One) <Badge type="info" text="Commercial Edition" />
 
 The Plane Commercial All-in-One (AIO) Docker image packages all Plane services into a single container, making it the fastest way to get Plane running. 

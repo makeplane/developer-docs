@@ -1,3 +1,10 @@
+---
+title: List all archived cycles - Plane API
+description: List all archived cycles via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+---
+
+
 # List all archived cycles
 
 <div class="api-endpoint-badge">

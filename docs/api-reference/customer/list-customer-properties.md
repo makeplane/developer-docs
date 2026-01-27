@@ -1,3 +1,10 @@
+---
+title: List all customer properties - Plane API
+description: List all customer properties via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+---
+
+
 # List all customer properties
 
 <div class="api-endpoint-badge">

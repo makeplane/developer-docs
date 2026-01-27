@@ -1,3 +1,10 @@
+---
+title: Self-hosting overview
+description: Self-hosting overview. Complete guide and documentation for Plane.
+keywords: plane
+---
+
+
 # Self-hosting overview
 
 ## Methods

@@ -1,3 +1,10 @@
+---
+title: Manage your instance
+description: Manage your instance. Complete guide and documentation for Plane.
+keywords: plane
+---
+
+
 # Manage your instance
 
 ::: warningUpdate your CLI with the command `sudo prime-cli update-cli` before you download any Plane One updates. The latest version of the CLI ensures your Plane upgrades happen smoothly.:::

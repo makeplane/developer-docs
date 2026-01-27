@@ -1,3 +1,10 @@
+---
+title: Configure SMTP for email notifications - Self-Hosted Plane
+description: Configure SMTP email settings for Plane. Setup email notifications and communication for your self-hosted instance.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure SMTP for email notifications
 
 Either during your set-up or sometime later, you will want to set SMTP settings to let your users get emails to reset passwords, onboard themselves right, and get notifications for changes, and receive exports of your data.

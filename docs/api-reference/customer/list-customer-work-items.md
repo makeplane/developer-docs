@@ -1,3 +1,10 @@
+---
+title: List all customer work items - Plane API
+description: List all customer work items via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, customers, crm, customer management
+---
+
+
 # List all customer work items
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Issue-Comment API overview. Learn about endpoints, request/response format, and how to work with issue-comment via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
+---
+
+
 # Overview
 
 Comments allow team members to discuss and collaborate on work items by adding text, mentions, and attachments.

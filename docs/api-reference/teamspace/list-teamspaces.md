@@ -1,3 +1,10 @@
+---
+title: List all teamspaces - Plane API
+description: List all teamspaces via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # List all teamspaces
 
 <div class="api-endpoint-badge">

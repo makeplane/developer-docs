@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Page API overview. Learn about endpoints, request/response format, and how to work with page via REST API.
+keywords: plane, plane api, rest api, api integration, pages, documentation, notes
+---
+
+
 # Overview
 
 Pages allow you to create and manage documentation at both workspace and project levels. Workspace pages are accessible across all projects, while project pages are specific to individual projects.

@@ -1,3 +1,10 @@
+---
+title: Delete a worklog - Plane API
+description: Delete a worklog via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
+---
+
+
 # Delete a worklog
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Update an initiative - Plane API
+description: Update an initiative via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+---
+
+
 # Update an initiative
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Archive a cycle - Plane API
+description: Archive a cycle API endpoint. Request format, parameters, and response examples for Plane REST API.
+keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+---
+
+
 # Archive a cycle
 
 <div class="api-endpoint-badge">

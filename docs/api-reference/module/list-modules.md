@@ -1,3 +1,10 @@
+---
+title: List all modules - Plane API
+description: List all modules via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, modules, features
+---
+
+
 # List all modules
 
 <div class="api-endpoint-badge">

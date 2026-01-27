@@ -1,3 +1,10 @@
+---
+title: List all initiative labels - Plane API
+description: List all initiative labels via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+---
+
+
 # List all initiative labels
 
 <div class="api-endpoint-badge">

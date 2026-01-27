@@ -1,3 +1,10 @@
+---
+title: List all labels - Plane API
+description: List all labels via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+---
+
+
 # List all labels
 
 <div class="api-endpoint-badge">

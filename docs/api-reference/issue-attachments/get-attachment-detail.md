@@ -1,3 +1,10 @@
+---
+title: Retrieve an attachment - Plane API
+description: Get retrieve an attachment details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
+---
+
+
 # Retrieve an attachment
 
 <div class="api-endpoint-badge">

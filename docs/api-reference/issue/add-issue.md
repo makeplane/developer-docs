@@ -1,3 +1,10 @@
+---
+title: Create a work item - Plane API
+description: Create a work item via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Create a work item
 
 <div class="api-endpoint-badge">

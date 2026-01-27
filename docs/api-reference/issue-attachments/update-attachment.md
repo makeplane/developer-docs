@@ -1,3 +1,10 @@
+---
+title: Update an attachment - Plane API
+description: Update an attachment via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
+---
+
+
 # Update an attachment
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: OIDC and SAML
+description: OIDC and SAML. Complete guide and documentation for Plane.
+keywords: plane
+---
+
+
 # OIDC and SAML
 
 Plane enables custom SSO via any identity provider with an official and supported implementation of OIDC + SAML standards. This page cites examples from Okta, but we will soon publish provider-specific instructions in phases.

@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Options API overview. Learn about endpoints, request/response format, and how to work with options via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Overview
 
 Custom property options define the available choices for dropdown-style custom properties on work items.

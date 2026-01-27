@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Types API overview. Learn about endpoints, request/response format, and how to work with types via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Overview
 
 Work item types categorize different kinds of work in your project (e.g., "Task", "Bug", "Feature").

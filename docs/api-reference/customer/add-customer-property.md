@@ -1,3 +1,10 @@
+---
+title: Create a customer property - Plane API
+description: Create a customer property via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+---
+
+
 # Create a customer property
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Retrieve option details - Plane API
+description: Get retrieve option details details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Retrieve option details
 
 <div class="api-endpoint-badge">

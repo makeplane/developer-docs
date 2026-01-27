@@ -1,3 +1,10 @@
+---
+title: Remove work item from cycle - Plane API
+description: Delete work item from cycle via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
+---
+
+
 # Remove work item from cycle
 
 <div class="api-endpoint-badge">

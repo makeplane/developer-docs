@@ -1,3 +1,10 @@
+---
+title: Delete a link - Plane API
+description: Delete a link via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Delete a link
 
 <div class="api-endpoint-badge">

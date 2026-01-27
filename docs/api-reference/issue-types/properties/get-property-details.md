@@ -1,3 +1,10 @@
+---
+title: Retrieve a custom property - Plane API
+description: Get retrieve a custom property details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Retrieve a custom property
 
 <div class="api-endpoint-badge">

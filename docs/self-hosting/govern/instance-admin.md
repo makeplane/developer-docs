@@ -1,3 +1,10 @@
+---
+title: Instance admin and God mode - Self-Hosted Plane
+description: Configure Plane instance admin settings. Learn about God mode and administrative controls for self-hosted Plane.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Instance admin and God mode
 
 An instance is a single self-managed installation of Plane on a private cloud or server that the `Instance admin` controls and administers. A single instance can house multiple workspaces.

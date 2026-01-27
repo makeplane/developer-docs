@@ -1,3 +1,10 @@
+---
+title: Create a project - Plane API
+description: Create a project via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, projects, project management
+---
+
+
 # Create a project
 
 <div class="api-endpoint-badge">

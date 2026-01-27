@@ -1,3 +1,10 @@
+---
+title: List all custom property values - Plane API
+description: List all custom property values via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # List all custom property values
 
 <div class="api-endpoint-badge">

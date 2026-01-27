@@ -1,3 +1,10 @@
+---
+title: Delete intake issue - Plane API
+description: Delete intake issue via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Delete intake issue
 
 <div class="api-endpoint-badge">

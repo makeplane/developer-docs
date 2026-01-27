@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Epics API overview. Learn about endpoints, request/response format, and how to work with epics via REST API.
+keywords: plane, plane api, rest api, api integration, epics, features, stories
+---
+
+
 # Overview
 
 Epics help you group related tasks into a larger work item, providing a hierarchical structure for managing complex projects. Use epics to break down major objectives into smaller, manageable pieces while keeping everything organized.

@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Issue API overview. Learn about endpoints, request/response format, and how to work with issue via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Overview
 
 Work items are the fundamental unit of work in Plane. They represent tasks that need to be accomplished — assignable, trackable, and actionable to-dos in your project management workflow.

@@ -1,3 +1,10 @@
+---
+title: Environment variables reference - Self-Hosted Plane
+description: Configure environment variables for Plane. Complete reference of all configuration options and settings.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Environment variables reference <Badge type="info" text="Commercial Edition" />
 
 This guide provides a comprehensive overview of all environment variables used in the Commercial Edition. These variables allow you to customize your Plane instance to best fit your organization's needs.

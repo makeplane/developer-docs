@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Properties API overview. Learn about endpoints, request/response format, and how to work with properties via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Overview
 
 Custom properties allow you to extend work items with additional fields specific to your workflow and processes.

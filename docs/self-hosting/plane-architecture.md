@@ -1,3 +1,10 @@
+---
+title: Plane self-hosted architecture
+description: Learn how to plane self-hosted architecture for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Plane self-hosted architecture
 
 Plane consists of multiple services working together to provide project management capabilities.

@@ -1,3 +1,10 @@
+---
+title: Retrieve a link - Plane API
+description: Get retrieve a link details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Retrieve a link
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Webhooks - Plane Developers
+description: Configure webhooks for Plane. Setup real-time event notifications and automate workflows with webhook integrations.
+keywords: plane, developer tools, integrations, extensions, webhooks, automation, events
+---
+
+
 # Webhooks
 
 A webhook triggers a HTTP POST request on the specified url, whenever there is a change in an event. Like a new project is created, updated or deleted then a webhook can be triggered to receive the required payload.

@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Intake-Issue API overview. Learn about endpoints, request/response format, and how to work with intake-issue via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
+---
+
+
 # Overview
 
 Intake allows guests to create work items that admins and members can review and move into a project.

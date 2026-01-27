@@ -1,3 +1,10 @@
+---
+title: Configure GitHub for Plane integration
+description: Learn how to configure github for plane integration for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure GitHub for Plane integration <Badge type="info" text="Pro" />
 
 This guide walks you through setting up a GitHub App to enable GitHub integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for GitHub, you’ll need to set up the necessary authentication, permissions, and webhooks to ensure smooth integration.

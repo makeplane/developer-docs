@@ -1,3 +1,10 @@
+---
+title: Configure external reverse proxy - Self-Hosted Plane
+description: Learn how to configure external reverse proxy for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure external reverse proxy <Badge type="info" text="Commercial Edition" />
 
 This page provides configuration for setting up an external reverse proxy with Plane. 

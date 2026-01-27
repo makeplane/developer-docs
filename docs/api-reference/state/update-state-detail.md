@@ -1,3 +1,10 @@
+---
+title: Update a state - Plane API
+description: Update a state via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, states, workflow, status
+---
+
+
 # Update a state
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: List all work item activity - Plane API
+description: List all work item activity via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # List all work item activity
 
 <div class="api-endpoint-badge">

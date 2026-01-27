@@ -1,3 +1,10 @@
+---
+title: Update intake issue detail - Plane API
+description: Update intake issue detail via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Update intake issue detail
 
 <div class="api-endpoint-badge">

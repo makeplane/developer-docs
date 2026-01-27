@@ -1,3 +1,10 @@
+---
+title: Delete a project - Plane API
+description: Delete a project via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, projects, project management
+---
+
+
 # Delete a project
 
 <div class="api-endpoint-badge">

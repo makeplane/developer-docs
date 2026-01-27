@@ -1,3 +1,10 @@
+---
+title: Kubernetes - Self-Hosted Plane
+description: Deploy Plane on Kubernetes using Helm charts. Complete guide for production-ready Kubernetes deployment with scaling and management.
+keywords: plane, self-hosting, deployment, plane installation, kubernetes, helm, k8s
+---
+
+
 # Kubernetes <Badge type="info" text="Commercial Edition" />
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Kubernetes.

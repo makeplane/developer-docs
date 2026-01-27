@@ -1,3 +1,10 @@
+---
+title: Deploy Plane with Coolify
+description: Learn how to deploy plane with coolify for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Deploy Plane with Coolify <Badge type="info" text="Commercial Edition" />
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Coolify.

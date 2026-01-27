@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Members API overview. Learn about endpoints, request/response format, and how to work with members via REST API.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Overview
 
 Members represent users who belong to a workspace or project. The Members API allows you to retrieve information about workspace and project members.

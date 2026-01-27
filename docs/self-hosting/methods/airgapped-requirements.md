@@ -1,3 +1,10 @@
+---
+title: Airgapped deployment architecture - Self-Hosted Plane
+description: Deploy Plane in airgapped environment without internet access. Complete guide for offline Plane installation.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Airgapped deployment architecture
 
 ::: info

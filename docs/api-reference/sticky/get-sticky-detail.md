@@ -1,3 +1,10 @@
+---
+title: Retrieve a sticky - Plane API
+description: Get retrieve a sticky details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Retrieve a sticky
 
 <div class="api-endpoint-badge">

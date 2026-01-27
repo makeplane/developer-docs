@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Worklogs API overview. Learn about endpoints, request/response format, and how to work with worklogs via REST API.
+keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
+---
+
+
 # Overview
 
 Worklogs enable time tracking for work items within a project, recording time spent in minutes along with descriptions and user information.

@@ -1,3 +1,10 @@
+---
+title: Update a worklog - Plane API
+description: Update a worklog via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
+---
+
+
 # Update a worklog
 
 <div class="api-endpoint-badge">

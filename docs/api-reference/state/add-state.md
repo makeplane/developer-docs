@@ -1,3 +1,10 @@
+---
+title: Create a state - Plane API
+description: Create a state via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, states, workflow, status
+---
+
+
 # Create a state
 
 <div class="api-endpoint-badge">

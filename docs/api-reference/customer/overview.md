@@ -1,3 +1,10 @@
+---
+title: Overview - Plane API
+description: Plane Customer API overview. Learn about endpoints, request/response format, and how to work with customer via REST API.
+keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+---
+
+
 # Overview
 
 Customers allow you to manage customer relationships and track customer-related work items, requests, and custom properties within a workspace.

@@ -1,3 +1,10 @@
+---
+title: Update a cycle - Plane API
+description: Update a cycle via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+---
+
+
 # Update a cycle
 
 <div class="api-endpoint-badge">

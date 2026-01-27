@@ -1,3 +1,10 @@
+---
+title: Add custom property values - Plane API
+description: Create custom property values via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Add custom property values
 
 <div class="api-endpoint-badge">

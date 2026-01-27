@@ -1,3 +1,10 @@
+---
+title: Get upload credentials - Plane API
+description: List upload credentials via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
+---
+
+
 # Get upload credentials
 
 <div class="api-endpoint-badge">

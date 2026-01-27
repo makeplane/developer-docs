@@ -1,3 +1,10 @@
+---
+title: Retrieve a label - Plane API
+description: Get retrieve a label details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+---
+
+
 # Retrieve a label
 
 <div class="api-endpoint-badge">

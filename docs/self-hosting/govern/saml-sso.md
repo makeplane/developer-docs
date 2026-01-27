@@ -1,3 +1,10 @@
+---
+title: SAML SSO - Self-Hosted Plane
+description: Configure SAML SSO authentication for Plane. Setup Security Assertion Markup Language for enterprise SSO.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # SAML SSO <Badge type="info" text="Pro" /> <Badge type="tip" text="Business" />
 
 Plane enables custom SSO via any identity provider with an official and supported implementation of SAML standards. This page cites examples from Okta, but we will soon publish provider-specific instructions in phases.

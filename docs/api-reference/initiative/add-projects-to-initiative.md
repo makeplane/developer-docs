@@ -1,3 +1,10 @@
+---
+title: Add projects to initiative - Plane API
+description: Create projects to initiative via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, projects, project management, initiatives, roadmap, planning
+---
+
+
 # Add projects to initiative
 
 <div class="api-endpoint-badge">

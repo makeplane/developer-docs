@@ -1,3 +1,10 @@
+---
+title: Understanding Plane's editions
+description: Learn how to understanding plane's editions for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Understanding Plane's editions
 
 Plane comes in four editions by how its deployed. Our Cloud is our only hosted edition as of 2025. Additionally, we offer three unique self-hosted editions tailored to meet two sets of unique needs—the open-source Community Edition, the recommended Commercial Edition, and the Airgapped Edition.

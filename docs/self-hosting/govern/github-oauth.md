@@ -1,3 +1,10 @@
+---
+title: Github OAuth - Self-Hosted Plane
+description: Configure GitHub OAuth authentication for Plane. Enable GitHub sign-in for your self-hosted Plane instance.
+keywords: plane, self-hosting, deployment, plane installation, authentication, sso, oauth, configuration, administration
+---
+
+
 # Github OAuth
 
 Plane supports GitHub OAuth so your users can sign-in with GitHub instead.

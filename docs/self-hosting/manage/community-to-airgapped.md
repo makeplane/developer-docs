@@ -1,3 +1,10 @@
+---
+title: Upgrade from Community to Airgapped Edition - Self-Hosted Plane
+description: Deploy Plane in airgapped environment without internet access. Complete guide for offline Plane installation.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Upgrade from Community to Airgapped Edition
 
 This guide walks you through migrating your existing Plane Community Edition data to an air-gapped environment. You'll backup your current installation, transfer the data, and restore it in your air-gapped setup.

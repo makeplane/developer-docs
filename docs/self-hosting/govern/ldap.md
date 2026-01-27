@@ -1,3 +1,10 @@
+---
+title: LDAP authentication - Self-Hosted Plane
+description: Setup LDAP authentication for Plane. Configure Lightweight Directory Access Protocol for directory-based authentication.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # LDAP authentication <Badge type="warning" text="Enterprise" />
 
 LDAP (Lightweight Directory Access Protocol) authentication lets your team sign in to Plane using their existing corporate credentials. Instead of creating separate Plane passwords, users authenticate through your organization's directory service.

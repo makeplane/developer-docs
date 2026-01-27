@@ -1,3 +1,10 @@
+---
+title: Create a wiki page - Plane API
+description: Create a wiki page via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, pages, documentation, notes
+---
+
+
 # Create a wiki page
 
 <div class="api-endpoint-badge">
