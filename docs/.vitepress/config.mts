@@ -1,11 +1,23 @@
 import { defineConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin)
     }
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['mermaid', 'dayjs'],
+    },
+    ssr: {
+      noExternal: ['mermaid'],
+    },
+  },
+  mermaid: {
+    // Mermaid configuration options
   },
   title: 'Plane developer documentation',
   description: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
@@ -599,4 +611,4 @@ export default defineConfig({
       copyright: 'Copyright © 2024 Plane'
     }*/
   }
-})
+}))
