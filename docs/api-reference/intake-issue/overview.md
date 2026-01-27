@@ -11,17 +11,6 @@ Intake allows guests to create work items that admins and members can review and
 
 [Learn more about Intake](https://docs.plane.so/core-concepts/intake)
 
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../inbox-issues/` endpoints in favor of `/api/v1/.../intake-issues/`.
-
-**End of support**  
-31st March 2025
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/inbox-issues/` references with `/intake-issues/` in your codebase before the support end date.
-:::
 
 ## Enable Intake
 

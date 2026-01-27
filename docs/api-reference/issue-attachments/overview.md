@@ -11,18 +11,6 @@ Allows you to manage file attachments associated with work items and Intake work
 
 [Learn more about Attachments](https://docs.plane.so/core-concepts/issues/overview#add-links-and-attachments)
 
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
-
-**End of support**  
-31st March 2026
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
-:::
-
 ## Upload process
 
 1. Get the [upload credentials](/api-reference/issue-attachments/get-upload-credentials).

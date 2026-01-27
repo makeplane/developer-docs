@@ -9,14 +9,6 @@ keywords: plane api, rest api reference, plane api authentication, api integrati
 
 The Plane API is organized around REST. Our API has predictable resource-oriented URLs, accepts application/json request bodies, returns JSON responses, and uses standard HTTP response codes, authentication, and verbs.
 
-::: warning Deprecation Notice
-We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
-
-**End of support:** 31st March 2026
-
-**What you need to do:** Replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
-:::
-
 ## Base URL
 
 All requests to the Plane Cloud API must be made to the following base URL:

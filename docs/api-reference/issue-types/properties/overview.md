@@ -11,18 +11,6 @@ Custom properties allow you to extend work items with additional fields specific
 
 [Learn more about Custom properties](https://docs.plane.so/core-concepts/issues/work-item-types#add-custom-properties)
 
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../issue-types/` endpoints in favor of `/api/v1/.../work-item-types/`.
-
-**End of support**  
-31st March 2026
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/issue-types/` references with `/work-item-types/` in your codebase before the support end date.
-:::
-
 
 <div class="api-two-column">
 <div class="api-left">

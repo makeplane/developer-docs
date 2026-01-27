@@ -9,18 +9,6 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 
 Custom property options define the available choices for dropdown-style custom properties on work items.
 
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../issue-properties/` endpoints in favor of `/api/v1/.../work-item-properties/`.
-
-**End of support**  
-31st March 2026
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/issue-properties/` references with `/work-item-properties/` in your codebase before the support end date.
-:::
-
 <div class="api-two-column">
 <div class="api-left">
 
