@@ -1,4 +1,4 @@
-# Docker AIO (All-in-One) • Commercial Edition
+# Docker AIO (All-in-One) <Badge type="info" text="Commercial Edition" />
 
 The Plane Commercial All-in-One (AIO) Docker image packages all Plane services into a single container, making it the fastest way to get Plane running. 
 
@@ -49,7 +49,7 @@ The following ports are exposed:
 2. Run the following command to deploy the Plane AIO container. Make sure to replace all placeholder values (e.g., `your-domain.com`, `user:pass`) with your actual configuration.
 
     ::: warning
-        All environment variables are required for the container to function correctly.
+    All environment variables are required for the container to function correctly.
     :::
 
     ```bash
@@ -93,7 +93,7 @@ The following ports are exposed:
 
 3. Once it's running, you can access the Plane application on the domain you provided during the deployment.
 
-4. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
+4. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
 
 ## Volume mounts
 

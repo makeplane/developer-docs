@@ -39,33 +39,33 @@ To resolve this issue, you can define a streamlined bucket policy file and apply
 
 2. **Set up and apply the policy**  
 ::: warning
-    **IMPORTANT**  
-    Make sure to execute all the `mc` commands **within the MinIO container** (either by attaching to it or using `docker exec`).
+**IMPORTANT**  
+Make sure to execute all the `mc` commands **within the MinIO container** (either by attaching to it or using `docker exec`).
 :::
 
-    - Configure MinIO alias:
-        ```bash
-        mc alias set myminio http://plane-plane-minio:9000 <minio-username> <minio-password>
-        ```
+- Configure MinIO alias:
+```bash
+mc alias set myminio http://plane-plane-minio:9000 <minio-username> <minio-password>
+```
     
-        Replace `plane-plane-minio:9000` with your MinIO server address.
+Replace `plane-plane-minio:9000` with your MinIO server address.
 
-    - Tag existing objects:
-        ```bash
-        mc find myminio/uploads --exec "mc tag set {} publicAccess=true"
-        ```
+- Tag existing objects:
+```bash
+mc find myminio/uploads --exec "mc tag set {} publicAccess=true"
+```
     
-    - Copy the policy file to the MinIO container:
-        ```bash
-        docker cp bucket-policy.json <minio-container-id>:/tmp
-        ```
+- Copy the policy file to the MinIO container:
+```bash
+docker cp bucket-policy.json <minio-container-id>:/tmp
+```
 
-        Replace `<minio-container-id>` with the actual ID of your MinIO container. You can find the container ID by running `docker ps`.
+Replace `<minio-container-id>` with the actual ID of your MinIO container. You can find the container ID by running `docker ps`.
 
-    - Apply the policy to the bucket:
-        ```bash
-        mc anonymous set-json /tmp/bucket-policy.json myminio/uploads
-        ```
+- Apply the policy to the bucket:
+```bash
+mc anonymous set-json /tmp/bucket-policy.json myminio/uploads
+```
 
 3. **Verification**  
 

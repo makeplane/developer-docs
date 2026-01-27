@@ -1,6 +1,7 @@
 # Self-host Plane
+Self-hosting allows you to have full control over your applications and data. It’s a great way to ensure privacy, control, and customization.
 
-## Intallation
+## Methods
 
 <CardGroup>
   <Card title="Docker" icon="docker" href="/self-hosting/methods/docker-compose">

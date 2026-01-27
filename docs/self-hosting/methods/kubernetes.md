@@ -1,4 +1,4 @@
-# Kubernetes
+# Kubernetes <Badge type="info" text="Commercial Edition" />
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Kubernetes.
 
@@ -24,14 +24,14 @@ Ensure you use use the latest Helm chart version.
 1. Open terminal or any other command-line app that has access to Kubernetes tools on your local system.
 2. Set the following environment variables:
 ```bash
-PLANE_VERSION=v1.16.0
+PLANE_VERSION=v2.2.1
 ```
 ```bash
 DOMAIN_NAME=<subdomain.domain.tld or domain.tld>
 ```
 
 ::: warning
-    When configuring the PLANE_VERSION environment variable, **do not** set it to `stable`. Always specify the latest version number (e.g., `1.8.0`). Using `stable` can lead to unexpected issues.
+When configuring the PLANE_VERSION environment variable, **do not** set it to `stable`. Always specify the latest version number (e.g., `1.8.0`). Using `stable` can lead to unexpected issues.
 :::
 
 3. Add the Plane helm chart repo.
@@ -46,41 +46,42 @@ helm repo add plane https://helm.plane.so/
 
     Run the following command to deploy Plane:
 
-```bash
-helm install plane-app plane/plane-enterprise \
-    --create-namespace \
-    --namespace plane \
-    --set license.licenseDomain=${DOMAIN_NAME} \
-    --set license.licenseServer=https://prime.plane.so \
-    --set planeVersion=${PLANE_VERSION} \
-    --set ingress.enabled=true \
-    --set ingress.ingressClass=nginx \
-    --set env.storageClass=longhorn \
-    --timeout 10m \
-    --wait \
-    --wait-for-jobs
-```
+    ```bash
+    helm install plane-app plane/plane-enterprise \
+        --create-namespace \
+        --namespace plane \
+        --set license.licenseDomain=${DOMAIN_NAME} \
+        --set license.licenseServer=https://prime.plane.so \
+        --set planeVersion=${PLANE_VERSION} \
+        --set ingress.enabled=true \
+        --set ingress.ingressClass=nginx \
+        --set env.storageClass=longhorn \
+        --timeout 10m \
+        --wait \
+        --wait-for-jobs
+    ```
 
-::: info
+    ::: info
     This is the minimum required to set up Plane Commercial edition. You can change the default namespace from `plane`, the default app name from `plane-app`, the default storage class from `longhorn`, and the default ingress class from `nginx` to whatever you would like to.<br/> <br/>
     You can also pass other settings referring to the **Configuration Settings** toggle section below.
-:::
+    :::
 
     - **Advanced setup**: 
-::: warning
+    ::: warning
     When self-hosting Plane for production use, it is strongly recommended to configure [external database and storage](/self-hosting/methods/kubernetes#configuration-settings). This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-:::
+    :::
 
     For more control over your setup, follow the steps below:
-        1. Run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano. 
+    
+    i. Run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano. 
 
-```bash
-helm  show values plane/plane-enterprise > values.yaml
-    vi values.yaml
-```
+    ```bash
+    helm  show values plane/plane-enterprise > values.yaml
+        vi values.yaml
+    ```
 
     Make sure you set the required environment variables listed below:
-    - `planeVersion: v1.16.0`
+    - `planeVersion: v2.2.1`
     - `license.licenseDomain: <The domain you have specified to host Plane>`
     - `license.licenseServer: https://prime.plane.so`
     - `ingress.enabled: <true | false>`
@@ -89,26 +90,26 @@ helm  show values plane/plane-enterprise > values.yaml
 
     See the **Configuration settings** toggle section for more details.
 
-    2. After saving the `values.yaml` file, run the following command to deploy Plane:
+    ii. After saving the `values.yaml` file, run the following command to deploy Plane:
 
-```bash
-helm install plane-app plane/plane-enterprise \
-    --create-namespace \
-    --namespace plane \
-    -f values.yaml \
-    --timeout 10m \
-    --wait \
-    --wait-for-jobs 
-```
-5. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
+    ```bash
+    helm install plane-app plane/plane-enterprise \
+        --create-namespace \
+        --namespace plane \
+        -f values.yaml \
+        --timeout 10m \
+        --wait \
+        --wait-for-jobs 
+    ```
+iii. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
 
-### Configuration settings
+## Configuration settings
 
 #### License
 
 | Setting | Default | Required | Description |
 |---|:---:|:---:|---|
-| planeVersion | v1.16.0	 | Yes |  Specifies the version of Plane to be deployed. Copy this from `prime.plane.so.` |
+| planeVersion | v2.2.1	 | Yes |  Specifies the version of Plane to be deployed. Copy this from `prime.plane.so.` |
 | license.licenseDomain | 'plane.example.com' | Yes | The fully-qualified domain name (FQDN) in the format `sudomain.domain.tld` or `domain.tld` that the license is bound to. It is also attached to your `ingress` host to access Plane. |
 
 #### Airgapped settings
@@ -322,7 +323,7 @@ helm install plane-app plane/plane-enterprise \
 #### Silo Deployment
 
 | Setting | Default | Required | Description |
-|---|:---:|:---:|---|
+|:---|:---|:---|---|
 | services.silo.replicas | 1 | Yes | Kubernetes helps you with scaling up/down the deployments. You can run 1 or more pods for each deployment. This key helps you setting up number of replicas you want to run for this deployment. It must be >=1 |
 | services.silo.memoryLimit | 1000Mi |  |  Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use.|
 | services.silo.cpuLimit | 500m |  |  Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use.|
@@ -566,82 +567,87 @@ If you are planning to use 3rd party ingress providers, here is the available ro
 ::: details Install Community Edition 
   The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
 
-### Prerequisites
+#### Prerequisites
 
-    - A working Kubernetes cluster
-    - `kubectl` and `helm` on the client system that you will use to install our Helm charts
+- A working Kubernetes cluster
+- `kubectl` and `helm` on the client system that you will use to install our Helm charts
 
-### Installation
+#### Installation
 
-    1. Open Terminal or any other command-line app that has access to Kubernetes tools on your local system.
-    1. Add the Helm Repo
+1. Open Terminal or any other command-line app that has access to Kubernetes tools on your local system.
+2. Add the Helm Repo
 
-```bash
-helm repo add makeplane https://helm.plane.so/
+    ```bash
+    helm repo add makeplane https://helm.plane.so/
     helm repo update
-```
+    ```
 
-    1. Set-up and customization
-    - Quick setup
+3. Use one of the following ways to deploy Plane:
+    - **Quick setup**
 
     This is the fastest way to deploy Plane with default settings. This will create stateful deployments for Postgres, Redis, and Minio with a persistent volume claim using the `longhorn` storage class. This also sets up the ingress routes for you using `nginx` ingress class.
 
-::: tip To customize this, see `Custom ingress routes` below. :::
+    ::: tip 
+    To customize this, see `Custom ingress routes` below. 
+    :::
 
     Continue to be on the same Terminal window as you have so far, copy the code below, and paste it on your Terminal screen.
 
-```bash
-helm install plane-app makeplane/plane-ce \
-    --create-namespace \
-    --namespace plane-ce \
-    --set planeVersion=stable \
-    --set ingress.appHost="plane.example.com" \
-    --set ingress.minioHost="plane-minio.example.com" \
-    --set ingress.ingressClass=nginx \
-    --set postgres.storageClass=longhorn \
-    --set redis.storageClass=longhorn \
-    --set minio.storageClass=longhorn \
-    --timeout 10m \
-    --wait \
-    --wait-for-jobs
-```
+    ```bash
+    helm install plane-app makeplane/plane-ce \
+        --create-namespace \
+        --namespace plane-ce \
+        --set planeVersion=stable \
+        --set ingress.appHost="plane.example.com" \
+        --set ingress.minioHost="plane-minio.example.com" \
+        --set ingress.ingressClass=nginx \
+        --set postgres.storageClass=longhorn \
+        --set redis.storageClass=longhorn \
+        --set minio.storageClass=longhorn \
+        --timeout 10m \
+        --wait \
+        --wait-for-jobs
+    ```
 
-::: tip 
+    ::: tip 
     This is the minimum required to set up Plane-CE. You can change the default namespace from `plane-ce`, the default app name from `plane-app`, the default storage class from `[postgres, redis, minio].storageClass`, and the default ingress class from `ingress.ingressClass` to whatever you would like to.
 
     You can also pass other settings referring to `Configuration Settings` section.
-:::
-    - Advanced setup
-        For more control over your set-up, run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano. 
+    :::
 
-```bash
-helm  show values makeplane/plane-ce > values.yaml
-    vi values.yaml
-```
+    - **Advanced setup**
+    For more control over your set-up, run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano. 
 
-::: tip See `Available customizations` for more details. :::
+    ```bash
+    helm  show values makeplane/plane-ce > values.yaml
+        vi values.yaml
+    ```
+
+    ::: tip 
+    See **Configuration settings** below for more details. 
+    :::
 
     After saving the `values.yaml` file, continue to be on the same Terminal window as on the previous steps, copy the code below, and paste it on your Terminal screen.
 
-```bash
-helm install plane-app makeplane/plane-ce \
-    --create-namespace \
-    --namespace plane-ce \
-    -f values.yaml \
-    --timeout 10m \
-    --wait \
-    --wait-for-jobs 
-```
+    ```bash
+    helm install plane-app makeplane/plane-ce \
+        --create-namespace \
+        --namespace plane-ce \
+        -f values.yaml \
+        --timeout 10m \
+        --wait \
+        --wait-for-jobs 
+    ```
 
-### Configuration settings
+    #### Configuration settings
 
-    #### Plane Version
+    ##### Plane Version
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
     | planeVersion | v1.1.0 | Yes | |
 
-    #### Postgres DB Setup
+    ##### Postgres DB Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -662,7 +668,7 @@ helm install plane-app makeplane/plane-ce \
     | postgres.labels | {} | | This key allows you to set custom labels for the stateful deployment of postgres. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | postgres.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of postgres. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### Redis/Valkey Setup
+    ##### Redis/Valkey Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -680,7 +686,7 @@ helm install plane-app makeplane/plane-ce \
     | redis.labels | {} | | This key allows you to set custom labels for the stateful deployment of redis. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | redis.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of redis. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### RabbitMQ Setup
+    ##### RabbitMQ Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -701,7 +707,7 @@ helm install plane-app makeplane/plane-ce \
     | rabbitmq.labels | {} | | This key allows you to set custom labels for the stateful deployment of rabbitmq. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | rabbitmq.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of rabbitmq. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### Doc Store (Minio/S3) Setup
+    ##### Doc Store (Minio/S3) Setup
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -727,7 +733,7 @@ helm install plane-app makeplane/plane-ce \
     | minio.labels | {} | | This key allows you to set custom labels for the stateful deployment of minio. This is useful for organizing and selecting resources in your Kubernetes cluster. |
     | minio.annotations | {} | | This key allows you to set custom annotations for the stateful deployment of minio. This is useful for adding metadata or configuration hints to your resources. |
 
-    #### Web Deployment
+    ##### Web Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -745,7 +751,7 @@ helm install plane-app makeplane/plane-ce \
     | web.labels | {} | | Custom labels to add to the web deployment |
     | web.annotations | {} | | Custom annotations to add to the web deployment |
 
-    #### Space Deployment
+    ##### Space Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -763,7 +769,7 @@ helm install plane-app makeplane/plane-ce \
     | space.labels | {} | | Custom labels to add to the space deployment |
     | space.annotations | {} | | Custom annotations to add to the space deployment |
 
-    #### Admin Deployment
+    ##### Admin Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -781,7 +787,7 @@ helm install plane-app makeplane/plane-ce \
     | admin.labels | {} | | Custom labels to add to the admin deployment |
     | admin.annotations | {} | | Custom annotations to add to the admin deployment |
 
-    #### Live Service Deployment
+    ##### Live Service Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -800,7 +806,7 @@ helm install plane-app makeplane/plane-ce \
     | live.labels | {} | | Custom labels to add to the live deployment |
     | live.annotations | {} | | Custom annotations to add to the live deployment |
 
-    #### API Deployment
+    ##### API Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -821,7 +827,7 @@ helm install plane-app makeplane/plane-ce \
     | api.labels | {} | | Custom labels to add to the API deployment |
     | api.annotations | {} | | Custom annotations to add to the API deployment |
 
-    #### Worker Deployment
+    ##### Worker Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -837,7 +843,7 @@ helm install plane-app makeplane/plane-ce \
     | worker.labels | {} | | Custom labels to add to the worker deployment |
     | worker.annotations | {} | | Custom annotations to add to the worker deployment |
 
-    #### Beat-Worker Deployment
+    ##### Beat-Worker Deployment
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|
@@ -853,7 +859,7 @@ helm install plane-app makeplane/plane-ce \
     | beatworker.labels | {} | | Custom labels to add to the beat-worker deployment |
     | beatworker.annotations | {} | | Custom annotations to add to the beat-worker deployment |
 
-    #### Common Environment Settings
+    ##### Common Environment Settings
 
     | Setting | Default | Required | Description |
     |---------|---------|----------|-------------|

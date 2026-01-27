@@ -1,4 +1,5 @@
 # Reset password
+Users can reset their password through the terminal of the Plane application. You need to login to backend docker container and run the below command for resetting a user’s password.
 
 1. Get the container id for **plane-api**.
     ```bash

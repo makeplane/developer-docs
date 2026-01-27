@@ -1,6 +1,10 @@
 ---
 layout: home
 title: Plane Developers
+head:
+  - - meta
+    - http-equiv: refresh
+      content: 0;url=/self-hosting/overview
 hero:
   name: Plane Developers
   text: API Reference & Self-hosting Guides

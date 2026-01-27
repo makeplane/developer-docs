@@ -1,4 +1,4 @@
-# Set up SSL • Commercial Edition
+# Set up SSL <Badge type="info" text="Commercial Edition" />
 
 This guide shows you how to configure SSL/TLS certificates for your self-hosted Plane instance. Plane handles certificate provisioning and renewal automatically using Let's Encrypt.
 

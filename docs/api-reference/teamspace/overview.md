@@ -4,6 +4,9 @@ Teamspaces allow you to organize teams, projects, and members within a workspace
 
 [Learn more about Teamspaces](https://docs.plane.so/core-concepts/workspaces/teamspaces)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Teamspace Object
 
 ### Attributes
@@ -41,7 +44,7 @@ Teamspaces allow you to organize teams, projects, and members within a workspace
   ID of the user who leads the teamspace.
 
 - `workspace` _uuid_
-  
+
   ID of the workspace containing the teamspace.
 
 - `created_at` _timestamp_
@@ -60,7 +63,10 @@ Teamspaces allow you to organize teams, projects, and members within a workspace
 
   ID of the user who last updated the teamspace.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE TEAMSPACE OBJECT">
 
 ```json
 {
@@ -73,3 +79,8 @@ Teamspaces allow you to organize teams, projects, and members within a workspace
 	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

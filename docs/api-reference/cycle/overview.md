@@ -4,6 +4,9 @@ Cycles are custom time periods in which a team works to complete items from thei
 
 [Learn more about Cycles](https://docs.plane.so/core-concepts/cycles)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Cycles Object
 
 ### Attributes
@@ -68,7 +71,10 @@ Cycles are custom time periods in which a team works to complete items from thei
 
   Version number of the cycle
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE CYCLES OBJECT">
 
 ```json
 {
@@ -88,3 +94,8 @@ Cycles are custom time periods in which a team works to complete items from thei
 	"owned_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

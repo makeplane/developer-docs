@@ -14,7 +14,12 @@ We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../
 To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
 :::
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Values Object
+
+### Attributes
 
 - `workspace` _uuid_
 
@@ -36,7 +41,10 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
 
   This values are auto saved and represent the id of the user that created or the updated the project.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE VALUES OBJECT">
 
 ```json
 {
@@ -60,3 +68,8 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
   "parent": null
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

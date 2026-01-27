@@ -16,6 +16,9 @@ We are deprecating all `/api/v1/.../issue-types/` endpoints in favor of `/api/v1
 To ensure uninterrupted service, replace all `/issue-types/` references with `/work-item-types/` in your codebase before the support end date.
 :::
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Work Item Type object
 
 ### Attributes
@@ -88,7 +91,10 @@ To ensure uninterrupted service, replace all `/issue-types/` references with `/w
 
   External source for the work item type (auto saved)
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE WORK ITEM TYPE OBJECT">
 
 ```json
 {
@@ -111,3 +117,8 @@ To ensure uninterrupted service, replace all `/issue-types/` references with `/w
 	"external_source": null
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

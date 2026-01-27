@@ -4,35 +4,40 @@ Members represent users who belong to a workspace or project. The Members API al
 
 [Learn more about Members](https://docs.plane.so/core-concepts/workspaces/members)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Members Object
 ### Attributes
 
-*   `id` _string_  
+*   `id` _string_
     Unique identifier for the Member
 
-*   `first_name` _string_  
+*   `first_name` _string_
     First name of the Member
 
-*   `last_name` _string_  
+*   `last_name` _string_
     Last name of the Member
 
-*   `email` _string_  
+*   `email` _string_
     Email address of the Member
 
-*   `avatar` _string_  
+*   `avatar` _string_
     Optional avatar image file reference
 
-*   `avatar_url` _string_  
+*   `avatar_url` _string_
     Publicly accessible URL for the avatar image
 
-*   `display_name` _string_  
+*   `display_name` _string_
     Display name shown across the application
 
-*   `role` _integer_  
+*   `role` _integer_
     Role of the Member in the Workspace or Project
 
+</div>
+<div class="api-right">
 
-### Example Response
+<ResponsePanel status="200" title="THE MEMBERS OBJECT">
 
 ```json
 {
@@ -46,3 +51,8 @@ Members represent users who belong to a workspace or project. The Members API al
         "role": 15
     }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

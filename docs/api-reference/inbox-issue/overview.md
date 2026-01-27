@@ -39,6 +39,9 @@ To create an Intake issue, the payload should be sent in the below format
 }
 ```
 
+<div class="api-two-column">
+<div class="api-left">
+
 ### Intake issue object
 
 **Attribute**
@@ -93,7 +96,10 @@ To create an Intake issue, the payload should be sent in the below format
 
   Id of the issue of which the current issue is duplicate of.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE INTAKE ISSUE OBJECT">
 
 ```json
 {
@@ -111,3 +117,8 @@ To create an Intake issue, the payload should be sent in the below format
     "workspace": "c467e125-59e3-44ec-b5ee-f9c1e138c611"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

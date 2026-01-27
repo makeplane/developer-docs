@@ -13,16 +13,97 @@
 }
 
 /* ================================================
+   SATOSHI FONT
+   ================================================ */
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Light.woff2') format('woff2'),
+       url('/fonts/Satoshi/Satoshi-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Regular.woff2') format('woff2'),
+       url('/fonts/Satoshi/Satoshi-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Medium.woff2') format('woff2'),
+       url('/fonts/Satoshi/Satoshi-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/Satoshi-Bold.woff2') format('woff2'),
+       url('/fonts/Satoshi/Satoshi-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ================================================
+   IBM PLEX MONO FONT (FOR CODE BLOCKS)
+   ================================================ */
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/IBMPlexMono/IBMPlexMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/IBMPlexMono/IBMPlexMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/IBMPlexMono/IBMPlexMono-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ================================================
    PLANE DEVELOPER DOCS - CUSTOM STYLES
    ================================================ */
 
-/* Brand colors */
+/* Brand colors and fonts */
 :root {
+  /* Brand colors */
   --vp-c-brand-1: #006399;
-  --vp-c-brand-2: #0078b8;
-  --vp-c-brand-3: #0088cc;
+  --vp-c-brand-2: #006399;
+  --vp-c-brand-3: #006399;
   --vp-c-brand-soft: rgba(0, 99, 153, 0.14);
   --plane-500: #006399;
+
+  /* Fonts */
+  --vp-font-family-base: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --vp-font-family-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
 /* Dark mode */
@@ -404,4 +485,89 @@ div[class*='language-'] > span.lang {
 
 .dark .card-description {
   color: #9ca3af;
+}
+
+/* ================================================
+   SEARCH BOX WIDTH IN HEADER
+   ================================================ */
+
+/* Make the header search box wider */
+.DocSearch.DocSearch-Button {
+  width: 180px !important;
+  justify-content: space-between !important;
+}
+
+@media (min-width: 768px) {
+  .DocSearch.DocSearch-Button {
+    width: 230px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .DocSearch.DocSearch-Button {
+    width: 310px !important;
+  }
+}
+
+/* ================================================
+   SIGN IN BUTTON STYLING
+   ================================================ */
+
+/* Target the Sign in link using multiple class combinations */
+.VPNavBarMenuLink.VPLink[href*="sign-in"],
+a.VPLink.VPNavBarMenuLink[href*="sign-in"],
+.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"] {
+  background: #006399 !important;
+  color: #ffffff !important;
+  padding: 6px 14px !important;
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  line-height: normal !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+}
+
+/* Hide the external link arrow icon */
+.VPNavBarMenuLink.VPLink[href*="sign-in"] .vp-external-link-icon,
+a.VPLink.VPNavBarMenuLink[href*="sign-in"] .vp-external-link-icon,
+.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"] .vp-external-link-icon,
+.VPNavBarMenuLink.VPLink[href*="sign-in"] svg,
+a.VPLink.VPNavBarMenuLink[href*="sign-in"] svg,
+.VPNavBarMenuLink.VPLink[href*="sign-in"] .VPImage,
+a.VPLink.VPNavBarMenuLink[href*="sign-in"] .VPImage {
+  display: none !important;
+}
+
+/* Also hide the icon using ::after if it's a pseudo-element */
+.VPNavBarMenuLink.VPLink[href*="sign-in"]::after,
+a.VPLink.VPNavBarMenuLink[href*="sign-in"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+.VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
+a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
+  background: #0078b8 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 99, 153, 0.25) !important;
+  text-decoration: none !important;
+}
+
+/* Dark mode variant */
+.dark .VPNavBarMenuLink.VPLink[href*="sign-in"],
+.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"] {
+  background: #006399 !important;
+  color: #ffffff !important;
+}
+
+.dark .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
+.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
+  background: #0078b8 !important;
+  box-shadow: 0 2px 8px rgba(0, 99, 153, 0.35) !important;
 }

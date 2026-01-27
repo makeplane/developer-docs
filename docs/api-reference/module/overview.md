@@ -4,6 +4,9 @@ Modules are smaller, focused projects that help you group and organize issues wi
 
 [Learn more about Modules](https://docs.plane.so/core-concepts/modules)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Module Object
 
 ### Attributes
@@ -89,7 +92,10 @@ Modules are smaller, focused projects that help you group and organize issues wi
 
   Description in plain text format
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE MODULE OBJECT">
 
 ```json
 {
@@ -113,3 +119,8 @@ Modules are smaller, focused projects that help you group and organize issues wi
 	"members": []
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

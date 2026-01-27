@@ -2,6 +2,9 @@
 
 Users represent the people who use Plane. The Users API allows you to retrieve information about the current authenticated user.
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The User Object
 
 ### Attributes
@@ -34,7 +37,10 @@ Users represent the people who use Plane. The Users API allows you to retrieve i
 
   Display name of the user
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE USER OBJECT">
 
 ```json
 {
@@ -47,3 +53,8 @@ Users represent the people who use Plane. The Users API allows you to retrieve i
 	"display_name": "John Doe"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

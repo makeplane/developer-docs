@@ -14,7 +14,12 @@ We are deprecating all `/api/v1/.../issue-properties/` endpoints in favor of `/a
 To ensure uninterrupted service, replace all `/issue-properties/` references with `/work-item-properties/` in your codebase before the support end date.
 :::
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Options Object
+
+### Attributes
 
 - `workspace` _uuid_
 
@@ -36,7 +41,10 @@ To ensure uninterrupted service, replace all `/issue-properties/` references wit
 
   This values are auto saved and represent the id of the user that created or the updated the project.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE OPTIONS OBJECT">
 
 ```json
 {
@@ -60,3 +68,8 @@ To ensure uninterrupted service, replace all `/issue-properties/` references wit
   "parent": null
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

@@ -1,5 +1,4 @@
-# Deploy Plane with Podman Quadlets • Commercial Edition
-
+# Deploy Plane with Podman Quadlets <Badge type="info" text="Commercial Edition" />
 This guide shows you the steps to deploy a self-hosted instance of Plane using Podman Quadlets.
 
 ## Prerequisites
@@ -45,16 +44,17 @@ Before we start, make sure you've got these covered:
 The installation script sets up Plane and configures all required services. You have two options:
 
 ### Without sudo access
-    ```bash
-    ./install.sh --domain your-domain.com --base-dir /your/custom/path
-    ```
-    This installs Plane in your specified directory, which is useful if you want to maintain control over the installation location.
+
+```bash
+./install.sh --domain your-domain.com --base-dir /your/custom/path
+```
+This installs Plane in your specified directory, which is useful if you want to maintain control over the installation location.
 
 ### With sudo access
-    ```bash
-    ./install.sh --domain your-domain.com
-    ```
-    This installs Plane in `/opt/plane`, which is a standard system location.
+```bash
+./install.sh --domain your-domain.com
+```
+This installs Plane in `/opt/plane`, which is a standard system location.
 
 ::: info
 Systemd configurations are installed in `~/.config/containers/systemd/`
@@ -63,7 +63,6 @@ Systemd configurations are installed in `~/.config/containers/systemd/`
 ## Start Plane
 
 ::: warning
-**Important**  
 Note that you should run these commands without `sudo`.
 :::
 
@@ -94,7 +93,7 @@ Note that you should run these commands without `sudo`.
 
     The startup sequence is important: network first, then dependencies, followed by backend services, and finally frontend services.
 
-6. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
+6. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
 
 ### Verify service status
 Check that all services are running correctly:
@@ -124,8 +123,8 @@ Your Plane installation should now be running successfully with Podman Quadlets.
 ## Troubleshoot
 
 To debug service issues, examine the logs using:
-    ```bash
-    journalctl --user -u <service-name> --no-pager
-    ```
+```bash
+journalctl --user -u <service-name> --no-pager
+```
 
 The logs will provide detailed information about any configuration issues or errors that may occur.

@@ -22,6 +22,9 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
 2. [Upload the file](/api-reference/issue-attachments/upload-file) to storage.
 3. [Complete attachment upload](/api-reference/issue-attachments/complete-upload) to notify server.
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Attachment Object
 
 ### Attributes
@@ -29,100 +32,100 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
 *   `id` _string_
 
     Unique identifier for the attachment
-    
+
 *   `created_at` , `updated_at`, `deleted_at` _timestamp_
-    
+
     Timestamp when the attachment was created, when it was last modified or deleted
 
-*   `attributes` _object_ 
+*   `attributes` _object_
 
     Contains file metadata:
- 
-    *   `name` _string_ 
+
+    *   `name` _string_
 
     Original filename of the attachment
 
-    *   `size` _integer_ 
+    *   `size` _integer_
 
     File size in bytes
 
-    *   `type` _string_ 
+    *   `type` _string_
 
     MIME type of the file
-    
+
 *   `asset` _string_
-    
+
     Storage path/identifier for the attachment file
 
 *   `entity_type` _string_
-    
+
     Always `ISSUE_ATTACHMENT` for work item attachments
 
 *   `entity_identifier` _string_
-    
+
     Entity identifier for the attachment
 
 *   `is_deleted` _boolean_
-    
+
     Whether the attachment has been deleted
 
 *   `is_archived` _boolean_
-    
+
     Whether the attachment has been archived
 
 *   `external_id` _string_ or _null_
-    
+
     External identifier if the issue and its attachments are imported to Plane
 
 *   `external_source` _string_ or _null_
-    
+
     Name of the source if the issue and its attachments are imported to Plane
 
-*   `size` _integer_ 
+*   `size` _integer_
 
     File size in bytes
 
-*   `is_uploaded` _boolean_ 
+*   `is_uploaded` _boolean_
 
     Whether the file has been successfully uploaded
 
-*   `storage_metadata` _object_ 
+*   `storage_metadata` _object_
 
     Cloud storage metadata:
 
-    *   `ETag` _string_ 
+    *   `ETag` _string_
 
     Storage provider's entity tag
 
-    *   `Metadata` _object_ 
+    *   `Metadata` _object_
 
     Additional storage metadata
 
-    *   `ContentType` _object_ 
+    *   `ContentType` _object_
 
     MIME type of stored file
 
-    *   `LastModified` _timestamp_ 
+    *   `LastModified` _timestamp_
 
     Last modification time in storage
 
-    *   `ContentLength` _integer_ 
+    *   `ContentLength` _integer_
 
     File size in bytes
 
-*   `created_by` _string_ 
+*   `created_by` _string_
 
     ID of user who created the attachment
 
-*   `updated_by` _string_ 
+*   `updated_by` _string_
 
     ID of user who last modified the attachment
 
-*   `deleted_by` _string_ 
+*   `deleted_by` _string_
 
     ID of user who deleted the attachment
 
-*   `workspace` _string_ 
+*   `workspace` _string_
 
     ID of workspace containing the attachment
 
@@ -150,8 +153,10 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
 
     ID of page if attachment is associated with a page
 
-    
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE ATTACHMENT OBJECT">
 
 ```json
 {
@@ -186,3 +191,8 @@ To ensure uninterrupted service, replace all `/issues/` references with `/work-i
     "issue": "7ba090-7702-4e26-a61e-aa6b866f7",
     }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

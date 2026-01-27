@@ -1,16 +1,95 @@
-# Custom domain
+# Configure custom domain <Badge type="info" text="Commercial Edition" />
 
-::: info
-With the Commercial Edition, you can set up a custom domain right during installation. If you ever need to change the domain later, just contact our support team for assistance until we ship out a feature that lets you handle domain changes yourself.
+During installation, you configure a domain for your instance. If you need to change that domain later, whether you're moving to a production domain, switching to a different hostname, or updating your DNS configuration, this guide walks you through the process.
+
+:::info
+**Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
+
+If you're running Kubernetes or another deployment method, the environment variable names are the same, but the configuration method differs based on your setup.
 :::
+
+:::warning
+**Plan for downtime**  
+Changing domains requires restarting Plane services. Your instance will be unavailable for a few minutes during the restart. Plan accordingly or notify your users.
+:::
+
+## Check current domain configuration
+
+First, see which environment variables currently reference your old domain. This helps you identify exactly what needs updating.
+
+```bash
+cat /opt/plane/plane.env | grep <old_domain>
+```
+
+**Example output:**
+```env
+DOMAIN_NAME=localhost
+SITE_ADDRESS=http://localhost
+WEB_URL=http://localhost
+CORS_ALLOWED_ORIGINS=http://localhost,https://localhost
+```
+
+This shows you all the variables that contain your current domain. You'll update each of these in the next step.
+
+## Update domain in environment file
+
+1. Open the Plane environment configuration file:
+    ```bash
+    vim /opt/plane/plane.env
+    ```
+
+2. Find and update these environment variables with your new domain:
+
+    - **DOMAIN_NAME**
+
+    Set this to your bare domain name without protocol:
+    ```env
+    DOMAIN_NAME=plane.company.com
+    ```
+
+    Don't include `http://` or `https://` here, just the hostname.
+
+    - **SITE_ADDRESS**
+
+    Set this to your full domain URL:
+    ```env
+    SITE_ADDRESS=https://plane.company.com
+    ```
+
+    Include the protocol (`https://` for SSL, `http://` if you haven't set up SSL yet).
+
+    - **WEB_URL**
+
+    This should match your SITE_ADDRESS:
+    ```env
+    WEB_URL=https://plane.company.com
+    ```
+
+    Again, include the full protocol.
+
+    **CORS_ALLOWED_ORIGINS**
+
+    List all domains that should be allowed to make cross-origin requests to your Plane instance. This typically includes both HTTP and HTTPS versions of your domain:
+    ```env
+    CORS_ALLOWED_ORIGINS=https://plane.company.com,http://plane.company.com
+    ```
+
+    Separate multiple entries with commas, no spaces. If you have multiple domains or subdomains that need access, add them all here.
+
+## Restart Plane services
+
+Apply your configuration changes by restarting Plane:
+    ```bash
+    sudo prime-cli restart
+    ```
+
+This process typically takes a few minutes. You'll see output indicating the status of each service as it restarts.
 
 ::: details Community Edition
 
 Our steps differ slightly depending on whether you are hosting on a public IP or a private/internal IP. Follow the steps listed below.
 
-## Update configuration in .env file
-
-::: warningThis step is mandatory for you to host Plane on a custom domain.:::
+#### Update configuration in .env file
 
 Open your project's `.env` file in a text editor. This file contains configuration settings for your application. Locate the following lines:
 
@@ -28,7 +107,7 @@ CORS_ALLOWED_ORIGINS=https://example.com
 
 If you are hosting Plane on a public IP, then follow the steps here. However, if you are hosting Plane on an internal IP then follow these steps.
 
-## Set DNS A record (for public IP)
+#### Set DNS A record (for public IP)
 
 If your server has a public IP address, you need to configure the DNS A record to point to this IP address. This allows users to access your application using your custom domain name. Here’s how to do it:
 
@@ -38,7 +117,7 @@ If your server has a public IP address, you need to configure the DNS A record t
 - Add a new A record with the hostname set to `@` (or your subdomain if applicable) and the IP address set to your server's public IP address.
 - Save the changes. It may take some time for the DNS changes to propagate.
 
-## Configure reverse proxy (for internal IP)
+#### Configure reverse proxy (for internal IP)
 
 If your server is behind a firewall or router and has an internal IP address, you'll need to set up a reverse proxy to route requests from your custom domain to your server. Follow these steps:
 

@@ -1,4 +1,4 @@
-# Deploy Plane with Portainer • Commercial Edition
+# Deploy Plane with Portainer <Badge type="info" text="Commercial Edition" />
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Portainer.
 
@@ -19,9 +19,9 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using P
         ```bash
         curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
         ```
-    ::: warning
-    The `<plane-version>` value should be v1.8.2 or higher.
-    :::
+        ::: warning
+        The `<plane-version>` value should be v1.8.2 or higher.
+        :::
 
 2. Click **+ Add stack** on Portainer.
 
@@ -51,4 +51,4 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using P
 7. Click **Deploy the stack**.
     That's it! Once the deployment is complete, Plane should be up and running on your configured domain.
 
-8. If you've purchased a paid plan, [activate your license key](https://docs.plane.so/workspaces-and-users/manage-licenses#activate-license) to unlock premium features.
+8. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.

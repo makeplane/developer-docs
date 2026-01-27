@@ -3,6 +3,9 @@
 Epics help you group related tasks into a larger work item, providing a hierarchical structure for managing complex projects. Use epics to break down major objectives into smaller, manageable pieces while keeping everything organized.
 [Learn more about Epics](https://docs.plane.so/core-concepts/issues/epics).
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Epics Object
 ### Attributes
 
@@ -51,7 +54,7 @@ Epics help you group related tasks into a larger work item, providing a hierarch
     ID of the work item type for the epic.
 
 - `estimate_point` string
-    
+
     ID of the estimate point, or null if not estimated.
 
 - `point` integer
@@ -59,7 +62,7 @@ Epics help you group related tasks into a larger work item, providing a hierarch
     Point value for the epic, or null.
 
 - `start_date` string
-    
+
     Start date of the epic in YYYY-MM-DD format.
 
 - `target_date` string
@@ -67,11 +70,11 @@ Epics help you group related tasks into a larger work item, providing a hierarch
     Target completion date in YYYY-MM-DD format.
 
 - `parent` string
-    
+
     ID of the parent work item, or null if no parent.
 
 - `sequence_id` integer
-    
+
     Auto-generated sequential identifier for the epic within the project.
 
 - `sort_order` number
@@ -91,11 +94,11 @@ Epics help you group related tasks into a larger work item, providing a hierarch
     Time at which the epic was archived, or null if not archived.
 
 - `project` string
-    
+
     ID of the project containing this epic.
 
 - `workspace` string
-    
+
     ID of the workspace containing this epic.
 
 - `external_id` string
@@ -111,7 +114,7 @@ Epics help you group related tasks into a larger work item, providing a hierarch
     Time at which the epic was deleted, or null if not deleted.
 
 - `created_at` timestamp
-    
+
     Time at which the epic was created.
 
 - `updated_at` timestamp
@@ -126,7 +129,10 @@ Epics help you group related tasks into a larger work item, providing a hierarch
 
     ID of the user who last updated the epic.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE EPICS OBJECT">
 
 ```json
 {
@@ -165,3 +171,8 @@ Epics help you group related tasks into a larger work item, providing a hierarch
   "updated_by": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

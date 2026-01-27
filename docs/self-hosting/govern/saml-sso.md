@@ -1,6 +1,4 @@
-# SAML SSO
-
-> **Plan**: Pro, Business
+# SAML SSO <Badge type="info" text="Pro" /> <Badge type="tip" text="Business" />
 
 Plane enables custom SSO via any identity provider with an official and supported implementation of SAML standards. This page cites examples from Okta, but we will soon publish provider-specific instructions in phases.
 

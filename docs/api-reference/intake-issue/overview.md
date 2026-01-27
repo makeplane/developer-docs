@@ -37,6 +37,9 @@ To create an Intake work item, the payload should be sent in the below format
 }
 ```
 
+<div class="api-two-column">
+<div class="api-left">
+
 ### The Intake Object
 
 **Attribute**
@@ -91,7 +94,10 @@ To create an Intake work item, the payload should be sent in the below format
 
   Id of the work item of which the current work item is duplicate of.
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE INTAKE OBJECT">
 
 ```json
 {
@@ -109,3 +115,8 @@ To create an Intake work item, the payload should be sent in the below format
     "workspace": "c467e125-59e3-44ec-b5ee-f9c1e138c611"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

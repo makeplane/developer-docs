@@ -1,4 +1,4 @@
-# Configure external PostgreSQL, Redis and S3 storage
+# Configure externalservices <Badge type="info" text="Commercial Edition" />
 
 The Prime CLI lets you easily configure your Commercial Edition instance, providing options to customize the PostgreSQL database, Redis, external storage, and other advanced settings.
 

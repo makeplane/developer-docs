@@ -1,4 +1,4 @@
-# Move your Plane instance to a new server • Commercial Edition
+# Move Plane instance to a new server <Badge type="info" text="Commercial Edition" />
 
 Switching to another machine is straightforward on the Commercial Edition. 
 
@@ -15,7 +15,7 @@ If you need to change your domain during migration, contact our support team for
 
 ## Steps
 1. **Delink licenses**  
-Log in to Plane on your current server. Head to each paid workspace like Pro or Business and [delink the licenses](https://docs.plane.so/workspaces-and-users/upgrade-plan#delink-license-key). This will free up the licenses for activation on your new server. Ideally, you have just one paid workspace.
+Log in to Plane on your current server. Head to each paid workspace like Pro or Business and [delink the licenses](/self-hosting/manage/manage-licenses/activate-pro-and-business#delink-license-key). This will free up the licenses for activation on your new server. Ideally, you have just one paid workspace.
 
 2. **Backup data**  
 Create a backup of your Plane instance with ↓:
@@ -42,6 +42,6 @@ On the new server, restore your data with ↓:
     Follow the prompts during the restore process to make sure everything is set up correctly.
 
 6. **Reactivate license**  
-Finally, [reactivate your license keys](https://docs.plane.so/workspaces-and-users/upgrade-plan#self-hosted-only) on the new instance.
+Finally, [reactivate your license keys](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) on the new instance.
 
 This should get your Plane instance up and running on the new server.

@@ -5,6 +5,9 @@ Projects organize your team's work within a workspace. Each project contains wor
 [Learn more about Projects](https://docs.plane.so/core-concepts/projects/overview)
 
 
+<div class="api-two-column">
+<div class="api-left">
+
 ### The Project Object
 
 ### Attributes
@@ -124,7 +127,10 @@ Projects organize your team's work within a workspace. Each project contains wor
 
   Default state which will be used when the issues will be auto closed
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE PROJECT OBJECT">
 
 ```json
 {
@@ -162,3 +168,8 @@ Projects organize your team's work within a workspace. Each project contains wor
   "default_state": null
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

@@ -4,7 +4,12 @@ Links attach external resources to work items, allowing you to reference documen
 
 [Learn more about Links](https://docs.plane.so/core-concepts/work-items/overview#add-links-and-attachments)
 
+<div class="api-two-column">
+<div class="api-left">
+
 ## The Link Object
+
+### Attributes
 
 - `title` _string_
 
@@ -38,7 +43,10 @@ Links attach external resources to work items, allowing you to reference documen
 
   The issue which the link is attached to
 
-### Example Response
+</div>
+<div class="api-right">
+
+<ResponsePanel status="200" title="THE LINK OBJECT">
 
 ```json
 {
@@ -55,3 +63,8 @@ Links attach external resources to work items, allowing you to reference documen
 	"issue": "e1c25c66-5bb8-465e-a818-92a483423443"
 }
 ```
+
+</ResponsePanel>
+
+</div>
+</div>

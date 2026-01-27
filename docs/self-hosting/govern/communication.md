@@ -1,5 +1,7 @@
 # Configure SMTP for email notifications
 
+Either during your set-up or sometime later, you will want to set SMTP settings to let your users get emails to reset passwords, onboard themselves right, and get notifications for changes, and receive exports of your data.
+
 ::: info
 Plane currently supports SMTP authentication only via email and password. OAuth-based SMTP configurations aren’t supported.
 :::
