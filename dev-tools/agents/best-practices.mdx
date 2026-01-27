@@ -29,22 +29,26 @@ Send a `thought` activity within the first few seconds of receiving a webhook:
 <Tab title="TypeScript">
 
 ```typescript
-async function handleWebhook(webhook: AgentRunActivityWebhook) {
+import { PlaneClient } from '@makeplane/plane-node-sdk';
+
+async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+  const planeClient = new PlaneClient({
+    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    accessToken: credentials.bot_token,
+  });
+
   const agentRunId = webhook.agent_run.id;
-  
+
   // IMMEDIATELY acknowledge receipt
-  await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-    type: "thought",
-    content: {
-      type: "thought",
-      body: "Received your request. Analyzing...",
-    },
+  await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+    type: 'thought',
+    content: { type: 'thought', body: 'Received your request. Analyzing...' },
   });
 
   // Now proceed with actual processing
   // This can take longer since user knows agent is working
   const result = await processRequest(webhook);
-  
+
   // ... rest of the logic
 }
 ```
@@ -53,23 +57,30 @@ async function handleWebhook(webhook: AgentRunActivityWebhook) {
 <Tab title="Python">
 
 ```python
-async def handle_webhook(webhook: dict):
+from plane import PlaneClient
+from plane.models.agent_runs import CreateAgentRunActivity
+
+def handle_webhook(webhook: dict, credentials: dict):
+    plane_client = PlaneClient(
+        base_url=os.getenv("PLANE_API_URL", "https://api.plane.so"),
+        access_token=credentials["bot_token"],
+    )
+
     agent_run_id = webhook["agent_run"]["id"]
-    
+
     # IMMEDIATELY acknowledge receipt
     plane_client.agent_runs.activities.create(
-        workspace_slug=workspace_slug,
-        agent_run_id=agent_run_id,
-        type="thought",
-        content={
-            "type": "thought",
-            "body": "Received your request. Analyzing...",
-        },
+        workspace_slug=credentials["workspace_slug"],
+        run_id=agent_run_id,
+        data=CreateAgentRunActivity(
+            type="thought",
+            content={"type": "thought", "body": "Received your request. Analyzing..."},
+        ),
     )
 
     # Now proceed with actual processing
-    result = await process_request(webhook)
-    
+    result = process_request(webhook)
+
     # ... rest of the logic
 ```
 
@@ -108,24 +119,29 @@ When a user wants to stop an agent run, Plane sends a `stop` signal with the act
 <Tab title="TypeScript">
 
 ```typescript
-async function handleWebhook(webhook: AgentRunActivityWebhook) {
+async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+  const planeClient = new PlaneClient({
+    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    accessToken: credentials.bot_token,
+  });
+
   const signal = webhook.agent_run_activity.signal;
   const agentRunId = webhook.agent_run.id;
 
   // ALWAYS check for stop signal first
-  if (signal === "stop") {
+  if (signal === 'stop') {
     // Cancel any ongoing work
     cancelOngoingTasks(agentRunId);
-    
+
     // Acknowledge the stop
-    await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-      type: "response",
+    await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+      type: 'response',
       content: {
-        type: "response",
+        type: 'response',
         body: "Understood. I've stopped processing your previous request.",
       },
     });
-    
+
     return; // Exit early
   }
 
@@ -137,7 +153,12 @@ async function handleWebhook(webhook: AgentRunActivityWebhook) {
 <Tab title="Python">
 
 ```python
-async def handle_webhook(webhook: dict):
+def handle_webhook(webhook: dict, credentials: dict):
+    plane_client = PlaneClient(
+        base_url=os.getenv("PLANE_API_URL", "https://api.plane.so"),
+        access_token=credentials["bot_token"],
+    )
+
     signal = webhook["agent_run_activity"]["signal"]
     agent_run_id = webhook["agent_run"]["id"]
 
@@ -145,18 +166,20 @@ async def handle_webhook(webhook: dict):
     if signal == "stop":
         # Cancel any ongoing work
         cancel_ongoing_tasks(agent_run_id)
-        
+
         # Acknowledge the stop
         plane_client.agent_runs.activities.create(
-            workspace_slug=workspace_slug,
-            agent_run_id=agent_run_id,
-            type="response",
-            content={
-                "type": "response",
-                "body": "Understood. I've stopped processing your previous request.",
-            },
+            workspace_slug=credentials["workspace_slug"],
+            run_id=agent_run_id,
+            data=CreateAgentRunActivity(
+                type="response",
+                content={
+                    "type": "response",
+                    "body": "Understood. I've stopped processing your previous request.",
+                },
+            ),
         )
-        
+
         return  # Exit early
 
     # Continue with normal processing...
@@ -215,23 +238,34 @@ Graceful error handling is crucial for a good user experience.
 ### Always Catch and Report Errors
 
 ```typescript
-async function handleWebhook(webhook: AgentRunActivityWebhook) {
+async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+  const planeClient = new PlaneClient({
+    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    accessToken: credentials.bot_token,
+  });
+
   const agentRunId = webhook.agent_run.id;
 
   try {
-    await createThought("Processing your request...");
-    
+    await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+      type: 'thought',
+      content: { type: 'thought', body: 'Processing your request...' },
+    });
+
     // Your logic here...
     const result = await processRequest(webhook);
-    
-    await createResponse(result);
-    
+
+    await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+      type: 'response',
+      content: { type: 'response', body: result },
+    });
+
   } catch (error) {
     // ALWAYS inform the user about errors
-    await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-      type: "error",
+    await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+      type: 'error',
       content: {
-        type: "error",
+        type: 'error',
         body: getUserFriendlyErrorMessage(error),
       },
     });
@@ -240,14 +274,14 @@ async function handleWebhook(webhook: AgentRunActivityWebhook) {
 
 function getUserFriendlyErrorMessage(error: Error): string {
   // Map technical errors to user-friendly messages
-  if (error.message.includes("rate limit")) {
+  if (error.message.includes('rate limit')) {
     return "I'm receiving too many requests right now. Please try again in a few minutes.";
   }
-  if (error.message.includes("timeout")) {
-    return "The operation took too long. Please try a simpler request or try again later.";
+  if (error.message.includes('timeout')) {
+    return 'The operation took too long. Please try a simpler request or try again later.';
   }
   // Generic fallback
-  return "I encountered an unexpected error. Please try again or contact support if the issue persists.";
+  return 'I encountered an unexpected error. Please try again or contact support if the issue persists.';
 }
 ```
 
@@ -272,15 +306,15 @@ For multi-turn conversations, maintain context from previous activities.
 ```typescript
 // Get all activities for context
 const activities = await planeClient.agentRuns.activities.list(
-  workspaceSlug,
+  credentials.workspace_slug,
   agentRunId
 );
 
 // Build conversation history
 const history = activities.results
-  .filter(a => a.type === "prompt" || a.type === "response")
+  .filter(a => a.type === 'prompt' || a.type === 'response')
   .map(a => ({
-    role: a.type === "prompt" ? "user" : "assistant",
+    role: a.type === 'prompt' ? 'user' : 'assistant',
     content: a.content.body,
   }));
 

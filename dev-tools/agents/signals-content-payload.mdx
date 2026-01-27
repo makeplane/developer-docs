@@ -70,19 +70,19 @@ Sent by Plane when a user requests to stop the agent. Your agent should:
 **Handling the stop signal:**
 
 ```typescript
-if (webhook.agent_run_activity.signal === "stop") {
+if (webhook.agent_run_activity.signal === 'stop') {
   // Cancel ongoing work
   await cancelAllPendingTasks();
-  
+
   // Acknowledge the stop - this transitions run to "stopped" status
-  await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-    type: "response",
+  await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+    type: 'response',
     content: {
-      type: "response",
+      type: 'response',
       body: "I've stopped working on your request.",
     },
   });
-  
+
   return;
 }
 ```
@@ -94,15 +94,15 @@ Used when your agent needs the user to authenticate with an external service. Re
 **Creating an auth request:**
 
 ```typescript
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "elicitation",
+await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+  type: 'elicitation',
   content: {
-    type: "elicitation",
-    body: "I need access to your GitHub account to proceed. Please authenticate using the link below.",
+    type: 'elicitation',
+    body: 'I need access to your GitHub account to proceed. Please authenticate using the link below.',
   },
-  signal: "auth_request",
+  signal: 'auth_request',
   signal_metadata: {
-    url: "https://your-agent.com/auth/github?session=abc123",
+    url: 'https://your-agent.com/auth/github?session=abc123',
   },
 });
 ```
@@ -117,18 +117,18 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
 Used when presenting options for the user to choose from. Useful for disambiguation or multi-choice scenarios.
 
 ```typescript
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "elicitation",
+await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+  type: 'elicitation',
   content: {
-    type: "elicitation",
-    body: "Which project would you like me to search?\n\n1. Frontend App\n2. Backend API\n3. Mobile App",
+    type: 'elicitation',
+    body: 'Which project would you like me to search?\n\n1. Frontend App\n2. Backend API\n3. Mobile App',
   },
-  signal: "select",
+  signal: 'select',
   signal_metadata: {
     options: [
-      { id: "frontend", label: "Frontend App" },
-      { id: "backend", label: "Backend API" },
-      { id: "mobile", label: "Mobile App" },
+      { id: 'frontend', label: 'Frontend App' },
+      { id: 'backend', label: 'Backend API' },
+      { id: 'mobile', label: 'Mobile App' },
     ],
   },
 });
@@ -166,11 +166,11 @@ interface ThoughtContent {
 <Tab title="TypeScript">
 
 ```typescript
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "thought",
+await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+  type: 'thought',
   content: {
-    type: "thought",
-    body: "Analyzing the codebase for potential issues...",
+    type: 'thought',
+    body: 'Analyzing the codebase for potential issues...',
   },
 });
 ```
@@ -179,14 +179,18 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
 <Tab title="Python">
 
 ```python
+from plane.models.agent_runs import CreateAgentRunActivity
+
 plane_client.agent_runs.activities.create(
-    workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="thought",
-    content={
-        "type": "thought",
-        "body": "Analyzing the codebase for potential issues...",
-    },
+    workspace_slug=credentials["workspace_slug"],
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="thought",
+        content={
+            "type": "thought",
+            "body": "Analyzing the codebase for potential issues...",
+        },
+    ),
 )
 ```
 
@@ -248,33 +252,33 @@ interface ActionContent {
 
 ```typescript
 // Before executing the action
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "action",
+await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+  type: 'action',
   content: {
-    type: "action",
-    action: "fetchWeather",
+    type: 'action',
+    action: 'fetchWeather',
     parameters: {
-      location: "San Francisco",
+      location: 'San Francisco',
     },
   },
 });
 
 // Execute the actual action
-const weatherData = await fetchWeather("San Francisco");
+const weatherData = await fetchWeather('San Francisco');
 
 // After execution, report the result
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "action",
+await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+  type: 'action',
   content: {
-    type: "action",
-    action: "fetchWeather",
+    type: 'action',
+    action: 'fetchWeather',
     parameters: {
-      location: "San Francisco",
+      location: 'San Francisco',
       result: `Temperature: ${weatherData.temp}°F, Conditions: ${weatherData.conditions}`,
     },
   },
   content_metadata: {
-    result: weatherData,  // Store full result in metadata
+    result: weatherData, // Store full result in metadata
   },
 });
 ```
@@ -283,18 +287,20 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
 <Tab title="Python">
 
 ```python
+from plane.models.agent_runs import CreateAgentRunActivity
+
 # Before executing the action
 plane_client.agent_runs.activities.create(
-    workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="action",
-    content={
-        "type": "action",
-        "action": "fetchWeather",
-        "parameters": {
-            "location": "San Francisco",
+    workspace_slug=credentials["workspace_slug"],
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="action",
+        content={
+            "type": "action",
+            "action": "fetchWeather",
+            "parameters": {"location": "San Francisco"},
         },
-    },
+    ),
 )
 
 # Execute the actual action
@@ -302,20 +308,20 @@ weather_data = fetch_weather("San Francisco")
 
 # After execution, report the result
 plane_client.agent_runs.activities.create(
-    workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="action",
-    content={
-        "type": "action",
-        "action": "fetchWeather",
-        "parameters": {
-            "location": "San Francisco",
-            "result": f"Temperature: {weather_data['temp']}°F, Conditions: {weather_data['conditions']}",
+    workspace_slug=credentials["workspace_slug"],
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="action",
+        content={
+            "type": "action",
+            "action": "fetchWeather",
+            "parameters": {
+                "location": "San Francisco",
+                "result": f"Temperature: {weather_data['temp']}°F, Conditions: {weather_data['conditions']}",
+            },
         },
-    },
-    content_metadata={
-        "result": weather_data,
-    },
+        content_metadata={"result": weather_data},
+    ),
 )
 ```
 
@@ -369,15 +375,19 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
 <Tab title="Python">
 
 ```python
+from plane.models.agent_runs import CreateAgentRunActivity
+
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="response",
-    content={
-        "type": "response",
-        "body": "Here's the weather in San Francisco:\n\n🌤️ **68°F** - Partly Cloudy\n\nExpect mild conditions throughout the day.",
-    },
-    signal="continue",
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="response",
+        content={
+            "type": "response",
+            "body": "Here's the weather in San Francisco:\n\n🌤️ **68°F** - Partly Cloudy\n\nExpect mild conditions throughout the day.",
+        },
+        signal="continue",
+    ),
 )
 ```
 
@@ -408,7 +418,7 @@ interface ElicitationContent {
 ```json
 {
   "type": "elicitation",
-  "body": "I found multiple projects matching your query. Which one would you like me to focus on?\n\n1. Project Alpha (12 open issues)\n2. Project Beta (8 open issues)\n3. Project Gamma (23 open issues)"
+  "body": "I found multiple projects matching your query. Which one would you like me to focus on?\n\n1. Project Alpha (12 open work items)\n2. Project Beta (8 open work items)\n3. Project Gamma (23 open work items)"
 }
 ```
 
@@ -422,7 +432,7 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   type: "elicitation",
   content: {
     type: "elicitation",
-    body: "To generate the report, I need a few details:\n\n- What date range should I cover?\n- Should I include completed issues or only open ones?",
+    body: "To generate the report, I need a few details:\n\n- What date range should I cover?\n- Should I include completed work items or only open ones?",
   },
 });
 ```
@@ -431,14 +441,18 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
 <Tab title="Python">
 
 ```python
+from plane.models.agent_runs import CreateAgentRunActivity
+
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="elicitation",
-    content={
-        "type": "elicitation",
-        "body": "To generate the report, I need a few details:\n\n- What date range should I cover?\n- Should I include completed issues or only open ones?",
-    },
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="elicitation",
+        content={
+            "type": "elicitation",
+            "body": "To generate the report, I need a few details:\n\n- What date range should I cover?\n- Should I include completed work items or only open ones?",
+        },
+    ),
 )
 ```
 
@@ -496,18 +510,22 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
 <Tab title="Python">
 
 ```python
+from plane.models.agent_runs import CreateAgentRunActivity
+
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="error",
-    content={
-        "type": "error",
-        "body": "I was unable to access the GitHub repository. Please ensure the integration is properly configured.",
-    },
-    signal_metadata={
-        "error_code": "GITHUB_ACCESS_DENIED",
-        "retryable": True,
-    },
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="error",
+        content={
+            "type": "error",
+            "body": "I was unable to access the GitHub repository. Please ensure the integration is properly configured.",
+        },
+        signal_metadata={
+            "error_code": "GITHUB_ACCESS_DENIED",
+            "retryable": True,
+        },
+    ),
 )
 ```
 
@@ -582,6 +600,9 @@ User: @WeatherBot What's the weather in Tokyo?
 
 Use `content_metadata` to store additional structured data about an activity:
 
+<Tabs>
+<Tab title="TypeScript">
+
 ```typescript
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   type: "action",
@@ -605,6 +626,42 @@ await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   },
 });
 ```
+
+</Tab>
+<Tab title="Python">
+
+```python
+from plane.models.agent_runs import CreateAgentRunActivity
+
+plane_client.agent_runs.activities.create(
+    workspace_slug=workspace_slug,
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="action",
+        content={
+            "type": "action",
+            "action": "analyzeCode",
+            "parameters": {
+                "file": "src/index.ts",
+                "result": "Found 3 potential issues",
+            },
+        },
+        content_metadata={
+            "analysis_results": {
+                "issues": [
+                    {"line": 42, "severity": "warning", "message": "Unused variable"},
+                    {"line": 78, "severity": "error", "message": "Type mismatch"},
+                    {"line": 156, "severity": "info", "message": "Consider refactoring"},
+                ],
+                "processing_time_ms": 1250,
+            },
+        },
+    ),
+)
+```
+
+</Tab>
+</Tabs>
 
 ## Signal Metadata
 
@@ -648,45 +705,139 @@ Use `signal_metadata` to provide additional context for signals:
 
 Here's a comprehensive example showing all activity types:
 
+<Tabs>
+<Tab title="TypeScript">
+
 ```typescript
+import { PlaneClient } from '@makeplane/plane-node-sdk';
+
+const planeClient = new PlaneClient({
+  baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+  accessToken: botToken,
+});
+
 // 1. Thought - Show reasoning (ephemeral)
-await createActivity({
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   type: "thought",
   content: { type: "thought", body: "Analyzing the request..." },
 });
 
 // 2. Action - Tool invocation (ephemeral)
-await createActivity({
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   type: "action",
-  content: { 
+  content: {
     type: "action",
-    action: "searchIssues",
+    action: "searchWorkItems",
     parameters: { query: "bug", status: "open" },
   },
 });
 
 // 3. Response - Final answer (creates comment)
-await createActivity({
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   type: "response",
   content: { type: "response", body: "Found 5 open bugs." },
   signal: "continue",
 });
 
 // 4. Elicitation - Ask for input (creates comment, awaits response)
-await createActivity({
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   type: "elicitation",
   content: { type: "elicitation", body: "Which bug should I prioritize?" },
   signal: "select",
-  signal_metadata: { options: [...] },
+  signal_metadata: {
+    options: [
+      { id: "bug-1", label: "AUTH-123: Login timeout" },
+      { id: "bug-2", label: "API-456: Rate limiting" },
+    ],
+  },
 });
 
 // 5. Error - Report failure (creates comment)
-await createActivity({
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
   type: "error",
   content: { type: "error", body: "Unable to access the database." },
   signal_metadata: { error_code: "DB_CONNECTION_FAILED" },
 });
 ```
+
+</Tab>
+<Tab title="Python">
+
+```python
+from plane import PlaneClient
+from plane.models.agent_runs import CreateAgentRunActivity
+
+plane_client = PlaneClient(
+    base_url=os.getenv("PLANE_API_URL", "https://api.plane.so"),
+    access_token=bot_token,
+)
+
+# 1. Thought - Show reasoning (ephemeral)
+plane_client.agent_runs.activities.create(
+    workspace_slug=workspace_slug,
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="thought",
+        content={"type": "thought", "body": "Analyzing the request..."},
+    ),
+)
+
+# 2. Action - Tool invocation (ephemeral)
+plane_client.agent_runs.activities.create(
+    workspace_slug=workspace_slug,
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="action",
+        content={
+            "type": "action",
+            "action": "searchWorkItems",
+            "parameters": {"query": "bug", "status": "open"},
+        },
+    ),
+)
+
+# 3. Response - Final answer (creates comment)
+plane_client.agent_runs.activities.create(
+    workspace_slug=workspace_slug,
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="response",
+        content={"type": "response", "body": "Found 5 open bugs."},
+        signal="continue",
+    ),
+)
+
+# 4. Elicitation - Ask for input (creates comment, awaits response)
+plane_client.agent_runs.activities.create(
+    workspace_slug=workspace_slug,
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="elicitation",
+        content={"type": "elicitation", "body": "Which bug should I prioritize?"},
+        signal="select",
+        signal_metadata={
+            "options": [
+                {"id": "bug-1", "label": "AUTH-123: Login timeout"},
+                {"id": "bug-2", "label": "API-456: Rate limiting"},
+            ],
+        },
+    ),
+)
+
+# 5. Error - Report failure (creates comment)
+plane_client.agent_runs.activities.create(
+    workspace_slug=workspace_slug,
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="error",
+        content={"type": "error", "body": "Unable to access the database."},
+        signal_metadata={"error_code": "DB_CONNECTION_FAILED"},
+    ),
+)
+```
+
+</Tab>
+</Tabs>
 
 ## Next Steps
 

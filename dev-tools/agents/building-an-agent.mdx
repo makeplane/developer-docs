@@ -1,10 +1,30 @@
 ---
 title: Building an Agent
 sidebarTitle: Building an Agent
-description: Step-by-step guide to creating a Plane agent, including OAuth setup, webhook handling, and activity creation using the Node.js and Python SDKs.
+description: Step-by-step guide to creating a Plane agent, including OAuth setup, webhook handling, and activity creation.
 ---
 
 <Note>Plane Agents are currently in **Beta**. Please send any feedback to support@plane.so.</Note>
+
+## Prerequisites
+
+Before building an agent, make sure you have completed the following:
+
+<Steps>
+  <Step title="Build a Plane App">
+    Follow the [Build a Plane App](/dev-tools/build-plane-app) guide to understand OAuth flows, deployment, and webhook handling.
+  </Step>
+  <Step title="Get Your Bot Token">
+    Complete the [Bot Token Flow](/dev-tools/build-plane-app#bot-token-flow-recommended-for-agents--automation) to obtain a `bot_token` for your agent. This token is used for all API calls.
+  </Step>
+  <Step title="Set Up Webhook Handling">
+    Ensure your server can [receive and verify webhooks](/dev-tools/build-plane-app#webhook-payload-structure) from Plane.
+  </Step>
+</Steps>
+
+<Info>
+This guide assumes you have a working OAuth app with webhook handling. If not, complete the [Build a Plane App](/dev-tools/build-plane-app) guide first.
+</Info>
 
 ## Creating an Agent
 
@@ -91,156 +111,167 @@ An **AgentRunActivity** represents a single message or action within an Agent Ru
 
 ### Creating Activities
 
-Your agent communicates back to users by creating activities. Here's how to create activities using the official SDKs:
+Your agent communicates back to users by creating activities. We recommend using the official SDKs which provide typed helpers and insulate your code from API changes.
 
-#### Using the Node.js SDK
+#### Install the SDK
 
 <Tabs>
-<Tab title="Installation">
+<Tab title="Node.js">
 
 ```bash
 npm install @makeplane/plane-node-sdk
 ```
 
 </Tab>
-<Tab title="Creating Activities">
-
-```typescript
-import { PlaneClient } from "@makeplane/plane-node-sdk";
-
-// Initialize the client with your bot token
-const planeClient = new PlaneClient({
-  baseUrl: "https://api.plane.so",
-  accessToken: botToken,
-});
-
-// Create a thought activity (ephemeral)
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "thought",
-  content: {
-    type: "thought",
-    body: "Analyzing the user's request about weather data...",
-  },
-});
-
-// Create an action activity (ephemeral)
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "action",
-  content: {
-    type: "action",
-    action: "getWeather",
-    parameters: { location: "San Francisco" },
-  },
-});
-
-// Create a response activity (creates a comment)
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "response",
-  content: {
-    type: "response",
-    body: "The weather in San Francisco is currently 68°F with partly cloudy skies.",
-  },
-  signal: "continue",
-});
-
-// Create an elicitation activity (asks user for input)
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "elicitation",
-  content: {
-    type: "elicitation",
-    body: "Which city would you like me to check the weather for?",
-  },
-});
-
-// Create an error activity
-await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "error",
-  content: {
-    type: "error",
-    body: "Unable to fetch weather data. Please try again later.",
-  },
-});
-```
-
-</Tab>
-</Tabs>
-
-#### Using the Python SDK
-
-<Tabs>
-<Tab title="Installation">
+<Tab title="Python">
 
 ```bash
 pip install plane-sdk
 ```
 
 </Tab>
-<Tab title="Creating Activities">
+</Tabs>
+
+#### Activity Examples
+
+<Tabs>
+<Tab title="TypeScript">
+
+```typescript
+import { PlaneClient } from '@makeplane/plane-node-sdk';
+
+// Initialize the client with your bot token
+const planeClient = new PlaneClient({
+  baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+  accessToken: botToken,
+});
+
+// Create a thought activity (ephemeral - shows agent's reasoning)
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
+  type: 'thought',
+  content: {
+    type: 'thought',
+    body: "Analyzing the user's request about weather data...",
+  },
+});
+
+// Create an action activity (ephemeral - shows tool usage)
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
+  type: 'action',
+  content: {
+    type: 'action',
+    action: 'getWeather',
+    parameters: { location: 'San Francisco' },
+  },
+});
+
+// Create a response activity (creates a visible comment)
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
+  type: 'response',
+  content: {
+    type: 'response',
+    body: 'The weather in San Francisco is currently 68°F with partly cloudy skies.',
+  },
+  signal: 'continue',
+});
+
+// Create an elicitation activity (asks user for input)
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
+  type: 'elicitation',
+  content: {
+    type: 'elicitation',
+    body: 'Which city would you like me to check the weather for?',
+  },
+});
+
+// Create an error activity
+await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
+  type: 'error',
+  content: {
+    type: 'error',
+    body: 'Unable to fetch weather data. Please try again later.',
+  },
+});
+```
+
+</Tab>
+<Tab title="Python">
 
 ```python
 from plane import PlaneClient
+from plane.models.agent_runs import CreateAgentRunActivity
 
 # Initialize the client with your bot token
 plane_client = PlaneClient(
-    base_url="https://api.plane.so",
+    base_url=os.getenv("PLANE_API_URL", "https://api.plane.so"),
     access_token=bot_token,
 )
 
-# Create a thought activity (ephemeral)
+# Create a thought activity (ephemeral - shows agent's reasoning)
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="thought",
-    content={
-        "type": "thought",
-        "body": "Analyzing the user's request about weather data...",
-    },
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="thought",
+        content={
+            "type": "thought",
+            "body": "Analyzing the user's request about weather data...",
+        },
+    ),
 )
 
-# Create an action activity (ephemeral)
+# Create an action activity (ephemeral - shows tool usage)
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="action",
-    content={
-        "type": "action",
-        "action": "getWeather",
-        "parameters": {"location": "San Francisco"},
-    },
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="action",
+        content={
+            "type": "action",
+            "action": "getWeather",
+            "parameters": {"location": "San Francisco"},
+        },
+    ),
 )
 
-# Create a response activity (creates a comment)
+# Create a response activity (creates a visible comment)
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="response",
-    content={
-        "type": "response",
-        "body": "The weather in San Francisco is currently 68°F with partly cloudy skies.",
-    },
-    signal="continue",
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="response",
+        content={
+            "type": "response",
+            "body": "The weather in San Francisco is currently 68°F with partly cloudy skies.",
+        },
+        signal="continue",
+    ),
 )
 
 # Create an elicitation activity (asks user for input)
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="elicitation",
-    content={
-        "type": "elicitation",
-        "body": "Which city would you like me to check the weather for?",
-    },
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="elicitation",
+        content={
+            "type": "elicitation",
+            "body": "Which city would you like me to check the weather for?",
+        },
+    ),
 )
 
 # Create an error activity
 plane_client.agent_runs.activities.create(
     workspace_slug=workspace_slug,
-    agent_run_id=agent_run_id,
-    type="error",
-    content={
-        "type": "error",
-        "body": "Unable to fetch weather data. Please try again later.",
-    },
+    run_id=agent_run_id,
+    data=CreateAgentRunActivity(
+        type="error",
+        content={
+            "type": "error",
+            "body": "Unable to fetch weather data. Please try again later.",
+        },
+    ),
 )
 ```
 
@@ -426,13 +457,13 @@ Triggered when a user sends a prompt to your agent (initial mention or follow-up
 
 ### Handling Webhooks
 
-Here's a complete example of handling agent webhooks:
+Here's a complete example of handling agent webhooks using the SDKs:
 
 <Tabs>
 <Tab title="TypeScript">
 
 ```typescript
-import { PlaneClient } from "@makeplane/plane-node-sdk";
+import { PlaneClient } from '@makeplane/plane-node-sdk';
 
 interface AgentRunActivityWebhook {
   action: string;
@@ -452,65 +483,45 @@ interface AgentRunActivityWebhook {
 
 async function handleWebhook(
   webhook: AgentRunActivityWebhook,
-  credentials: { access_token: string; workspace_slug: string }
+  credentials: { bot_token: string; workspace_slug: string }
 ) {
   // Only handle agent_run_activity webhooks
-  if (webhook.type !== "agent_run_activity") {
+  if (webhook.type !== 'agent_run_activity') {
     return;
   }
 
   const planeClient = new PlaneClient({
-    baseUrl: "https://api.plane.so",
-    accessToken: credentials.access_token,
+    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    accessToken: credentials.bot_token,
   });
 
   const agentRunId = webhook.agent_run.id;
-  const userPrompt = webhook.agent_run_activity.content.body || "";
+  const userPrompt = webhook.agent_run_activity.content.body || '';
   const signal = webhook.agent_run_activity.signal;
 
   // Check for stop signal
-  if (signal === "stop") {
-    await planeClient.agentRuns.activities.create(
-      credentials.workspace_slug,
-      agentRunId,
-      {
-        type: "response",
-        content: {
-          type: "response",
-          body: "Stopping as requested.",
-        },
-      }
-    );
+  if (signal === 'stop') {
+    await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+      type: 'response',
+      content: { type: 'response', body: 'Stopping as requested.' },
+    });
     return;
   }
 
-  // Send initial thought
-  await planeClient.agentRuns.activities.create(
-    credentials.workspace_slug,
-    agentRunId,
-    {
-      type: "thought",
-      content: {
-        type: "thought",
-        body: "Processing your request...",
-      },
-    }
-  );
+  // Send initial thought (ephemeral - shows processing status)
+  await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+    type: 'thought',
+    content: { type: 'thought', body: 'Processing your request...' },
+  });
 
-  // Process the request and send response
+  // Process the request (implement your logic here)
   const response = await processUserRequest(userPrompt);
 
-  await planeClient.agentRuns.activities.create(
-    credentials.workspace_slug,
-    agentRunId,
-    {
-      type: "response",
-      content: {
-        type: "response",
-        body: response,
-      },
-    }
-  );
+  // Send the response (creates a visible comment)
+  await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
+    type: 'response',
+    content: { type: 'response', body: response },
+  });
 }
 ```
 
@@ -519,15 +530,17 @@ async function handleWebhook(
 
 ```python
 from plane import PlaneClient
+from plane.models.agent_runs import CreateAgentRunActivity
 
 def handle_webhook(webhook: dict, credentials: dict):
+    """Handle incoming agent webhook."""
     # Only handle agent_run_activity webhooks
     if webhook.get("type") != "agent_run_activity":
         return
 
     plane_client = PlaneClient(
-        base_url="https://api.plane.so",
-        access_token=credentials["access_token"],
+        base_url=os.getenv("PLANE_API_URL", "https://api.plane.so"),
+        access_token=credentials["bot_token"],
     )
 
     agent_run_id = webhook["agent_run"]["id"]
@@ -538,37 +551,35 @@ def handle_webhook(webhook: dict, credentials: dict):
     if signal == "stop":
         plane_client.agent_runs.activities.create(
             workspace_slug=credentials["workspace_slug"],
-            agent_run_id=agent_run_id,
-            type="response",
-            content={
-                "type": "response",
-                "body": "Stopping as requested.",
-            },
+            run_id=agent_run_id,
+            data=CreateAgentRunActivity(
+                type="response",
+                content={"type": "response", "body": "Stopping as requested."},
+            ),
         )
         return
 
-    # Send initial thought
+    # Send initial thought (ephemeral - shows processing status)
     plane_client.agent_runs.activities.create(
         workspace_slug=credentials["workspace_slug"],
-        agent_run_id=agent_run_id,
-        type="thought",
-        content={
-            "type": "thought",
-            "body": "Processing your request...",
-        },
+        run_id=agent_run_id,
+        data=CreateAgentRunActivity(
+            type="thought",
+            content={"type": "thought", "body": "Processing your request..."},
+        ),
     )
 
-    # Process the request and send response
+    # Process the request (implement your logic here)
     response = process_user_request(user_prompt)
 
+    # Send the response (creates a visible comment)
     plane_client.agent_runs.activities.create(
         workspace_slug=credentials["workspace_slug"],
-        agent_run_id=agent_run_id,
-        type="response",
-        content={
-            "type": "response",
-            "body": response,
-        },
+        run_id=agent_run_id,
+        data=CreateAgentRunActivity(
+            type="response",
+            content={"type": "response", "body": response},
+        ),
     )
 ```
 
