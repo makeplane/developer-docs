@@ -1,5 +1,5 @@
 ---
-title: Create a work item comment - Plane API
+title: Create a work item comment
 description: Create a work item comment via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---

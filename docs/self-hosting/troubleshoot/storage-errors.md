@@ -1,5 +1,5 @@
 ---
-title: Storage errors - Self-Hosted Plane
+title: Storage errors
 description: Configure external database and storage for Plane. Setup PostgreSQL, Redis, and S3-compatible storage services.
 keywords: plane, self-hosting, deployment, plane installation
 ---

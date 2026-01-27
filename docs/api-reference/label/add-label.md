@@ -1,5 +1,5 @@
 ---
-title: Create a label - Plane API
+title: Create a label
 description: Create a label via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization
 ---

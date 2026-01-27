@@ -1,5 +1,5 @@
 ---
-title: List all project members - Plane API
+title: List all project members
 description: List all project members via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---

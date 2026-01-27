@@ -1,5 +1,5 @@
 ---
-title: Overview - Plane API
+title: Overview
 description: Plane Properties API overview. Learn about endpoints, request/response format, and how to work with properties via REST API.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

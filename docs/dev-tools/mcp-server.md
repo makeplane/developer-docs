@@ -1,5 +1,5 @@
 ---
-title: MCP server - Plane Developers
+title: MCP server
 description: Setup MCP Server for Plane. Integrate Plane with Model Context Protocol for AI-powered project management.
 keywords: plane, developer tools, integrations, extensions, mcp server, protocol, integration
 ---

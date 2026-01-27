@@ -1,5 +1,5 @@
 ---
-title: Overview - Self-Hosted Plane
+title: Overview
 description: Configure authentication methods for self-hosted Plane. Setup OAuth, SSO, SAML, OIDC, LDAP and other authentication providers.
 keywords: plane, self-hosting, deployment, plane installation, authentication, sso, oauth, configuration, administration
 ---

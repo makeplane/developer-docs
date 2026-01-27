@@ -1,5 +1,5 @@
 ---
-title: Retrieve a wiki page - Plane API
+title: Retrieve a wiki page
 description: List retrieve a wiki page via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, pages, documentation, notes
 ---

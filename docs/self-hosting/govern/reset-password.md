@@ -1,5 +1,5 @@
 ---
-title: Reset password - Self-Hosted Plane
+title: Reset password
 description: Learn how to reset password for self-hosted Plane. Complete guide with step-by-step instructions.
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---

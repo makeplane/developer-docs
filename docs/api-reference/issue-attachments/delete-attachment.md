@@ -1,5 +1,5 @@
 ---
-title: Delete an attachment - Plane API
+title: Delete an attachment
 description: Delete an attachment via Plane API. HTTP DELETE request for removing resources.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---

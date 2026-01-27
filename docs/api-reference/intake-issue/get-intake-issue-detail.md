@@ -1,5 +1,5 @@
 ---
-title: Retrieve an intake work item - Plane API
+title: Retrieve an intake work item
 description: Get retrieve an intake work item details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---

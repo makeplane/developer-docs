@@ -1,5 +1,5 @@
 ---
-title: Add epics to initiative - Plane API
+title: Add epics to initiative
 description: Create epics to initiative via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning, epics, features, stories
 ---

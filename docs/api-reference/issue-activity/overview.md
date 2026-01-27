@@ -1,5 +1,5 @@
 ---
-title: Overview - Plane API
+title: Overview
 description: Plane Issue-Activity API overview. Learn about endpoints, request/response format, and how to work with issue-activity via REST API.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

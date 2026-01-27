@@ -1,5 +1,5 @@
 ---
-title: Plane API Documentation - REST API Reference
+title: Plane API Documentation
 description: Complete REST API reference for Plane. Learn authentication, HTTP methods, pagination, rate limiting, and how to integrate Plane with your applications programmatically.
 keywords: plane api, rest api reference, plane api authentication, api integration, plane api key, plane endpoints, work items api, projects api
 ---

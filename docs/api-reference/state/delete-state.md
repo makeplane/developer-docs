@@ -1,5 +1,5 @@
 ---
-title: Delete a state - Plane API
+title: Delete a state
 description: Delete a state via Plane API. HTTP DELETE request for removing resources.
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---

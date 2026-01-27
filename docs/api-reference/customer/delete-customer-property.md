@@ -1,5 +1,5 @@
 ---
-title: Delete a customer property - Plane API
+title: Delete a customer property
 description: Delete a customer property via Plane API. HTTP DELETE request for removing resources.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

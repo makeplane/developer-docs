@@ -1,5 +1,5 @@
 ---
-title: Webhooks - Plane Developers
+title: Webhooks
 description: Configure webhooks for Plane. Setup real-time event notifications and automate workflows with webhook integrations.
 keywords: plane, developer tools, integrations, extensions, webhooks, automation, events
 ---

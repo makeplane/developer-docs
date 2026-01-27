@@ -1,5 +1,5 @@
 ---
-title: Update a link - Plane API
+title: Update a link
 description: Update a link via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration
 ---

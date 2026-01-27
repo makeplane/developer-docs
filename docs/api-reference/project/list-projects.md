@@ -1,5 +1,5 @@
 ---
-title: List all projects - Plane API
+title: List all projects
 description: List all projects via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---

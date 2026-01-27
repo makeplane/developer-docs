@@ -1,5 +1,5 @@
 ---
-title: Create an initiative label - Plane API
+title: Create an initiative label
 description: Create an initiative label via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
 ---

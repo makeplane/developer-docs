@@ -1,5 +1,5 @@
 ---
-title: Update a customer property - Plane API
+title: Update a customer property
 description: Update a customer property via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

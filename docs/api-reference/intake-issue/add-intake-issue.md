@@ -1,5 +1,5 @@
 ---
-title: Create an intake work item - Plane API
+title: Create an intake work item
 description: Create an intake work item via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---

@@ -1,5 +1,5 @@
 ---
-title: Instance admin and God mode - Self-Hosted Plane
+title: Instance admin and God mode
 description: Configure Plane instance admin settings. Learn about God mode and administrative controls for self-hosted Plane.
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---

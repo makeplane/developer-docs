@@ -1,5 +1,5 @@
 ---
-title: LDAP authentication - Self-Hosted Plane
+title: LDAP authentication
 description: Setup LDAP authentication for Plane. Configure Lightweight Directory Access Protocol for directory-based authentication.
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---

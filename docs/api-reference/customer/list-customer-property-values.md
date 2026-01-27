@@ -1,5 +1,5 @@
 ---
-title: List all customer property values - Plane API
+title: List all customer property values
 description: List all customer property values via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

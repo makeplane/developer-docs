@@ -1,5 +1,5 @@
 ---
-title: Retrieve a sticky - Plane API
+title: Retrieve a sticky
 description: Get retrieve a sticky details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration
 ---

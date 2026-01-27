@@ -1,5 +1,5 @@
 ---
-title: Retrieve a teamspace - Plane API
+title: Retrieve a teamspace
 description: Get retrieve a teamspace details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration
 ---

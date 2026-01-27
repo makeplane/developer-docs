@@ -1,5 +1,5 @@
 ---
-title: List all projects in an initiative - Plane API
+title: List all projects in an initiative
 description: List all projects in an initiative via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, projects, project management, initiatives, roadmap, planning
 ---

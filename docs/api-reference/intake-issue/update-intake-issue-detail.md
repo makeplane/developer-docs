@@ -1,5 +1,5 @@
 ---
-title: Update an intake work item - Plane API
+title: Update an intake work item
 description: Update an intake work item via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---

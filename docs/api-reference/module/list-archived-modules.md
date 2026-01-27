@@ -1,5 +1,5 @@
 ---
-title: List all archived modules - Plane API
+title: List all archived modules
 description: List all archived modules via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, modules, features
 ---

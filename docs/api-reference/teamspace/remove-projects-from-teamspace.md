@@ -1,5 +1,5 @@
 ---
-title: Remove projects from teamspace - Plane API
+title: Remove projects from teamspace
 description: Delete projects from teamspace via Plane API. HTTP DELETE request for removing resources.
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---

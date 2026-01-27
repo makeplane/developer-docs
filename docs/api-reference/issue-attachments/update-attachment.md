@@ -1,5 +1,5 @@
 ---
-title: Update an attachment - Plane API
+title: Update an attachment
 description: Update an attachment via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---

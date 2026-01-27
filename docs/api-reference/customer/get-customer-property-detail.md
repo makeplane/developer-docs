@@ -1,5 +1,5 @@
 ---
-title: Retrieve a customer property - Plane API
+title: Retrieve a customer property
 description: Get retrieve a customer property details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

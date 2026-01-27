@@ -1,5 +1,5 @@
 ---
-title: Create a customer request - Plane API
+title: Create a customer request
 description: Create a customer request via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

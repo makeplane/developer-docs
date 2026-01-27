@@ -1,5 +1,5 @@
 ---
-title: Retrieve an initiative - Plane API
+title: Retrieve an initiative
 description: Get retrieve an initiative details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---

@@ -1,5 +1,5 @@
 ---
-title: List intake issues - Plane API
+title: List intake issues
 description: List intake issues via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

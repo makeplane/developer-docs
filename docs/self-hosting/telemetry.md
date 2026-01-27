@@ -1,5 +1,5 @@
 ---
-title: Data collection and usage - Self-Hosted Plane
+title: Data collection and usage
 description: Learn how to data collection and usage for self-hosted Plane. Complete guide with step-by-step instructions.
 keywords: plane, self-hosting, deployment, plane installation
 ---

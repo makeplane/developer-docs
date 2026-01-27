@@ -1,5 +1,5 @@
 ---
-title: Update a work item type - Plane API
+title: Update a work item type
 description: Update a work item type via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

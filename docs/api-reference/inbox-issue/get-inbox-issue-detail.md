@@ -1,5 +1,5 @@
 ---
-title: Get intake issue detail - Plane API
+title: Get intake issue detail
 description: Get intake issue detail details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

@@ -1,5 +1,5 @@
 ---
-title: Update dropdown options - Plane API
+title: Update dropdown options
 description: Update dropdown options via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

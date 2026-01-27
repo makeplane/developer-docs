@@ -1,5 +1,5 @@
 ---
-title: List custom properties - Plane API
+title: List custom properties
 description: List custom properties via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

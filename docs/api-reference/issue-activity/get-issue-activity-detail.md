@@ -1,5 +1,5 @@
 ---
-title: Retrieve a work item activity - Plane API
+title: Retrieve a work item activity
 description: Get retrieve a work item activity details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

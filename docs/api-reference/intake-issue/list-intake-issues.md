@@ -1,5 +1,5 @@
 ---
-title: List all intake work items - Plane API
+title: List all intake work items
 description: List all intake work items via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---

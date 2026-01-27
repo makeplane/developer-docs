@@ -1,5 +1,5 @@
 ---
-title: Configure custom domain - Self-Hosted Plane
+title: Configure custom domain
 description: Configure custom domain for self-hosted Plane. Setup your own domain name for your Plane instance.
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---

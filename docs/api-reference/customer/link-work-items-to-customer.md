@@ -1,5 +1,5 @@
 ---
-title: Link work items to customer - Plane API
+title: Link work items to customer
 description: Link work items to customer API endpoint. Request format, parameters, and response examples for Plane REST API.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, customers, crm, customer management
 ---

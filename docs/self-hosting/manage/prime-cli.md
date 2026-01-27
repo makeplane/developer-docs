@@ -1,5 +1,5 @@
 ---
-title: Command line tools - Self-Hosted Plane
+title: Command line tools
 description: Learn how to command line tools for self-hosted Plane. Complete guide with step-by-step instructions.
 keywords: plane, self-hosting, deployment, plane installation
 ---

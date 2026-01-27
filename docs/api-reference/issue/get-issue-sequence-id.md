@@ -1,5 +1,5 @@
 ---
-title: Retrieve a work item by identifier - Plane API
+title: Retrieve a work item by identifier
 description: List retrieve a work item by identifier via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

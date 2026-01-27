@@ -1,5 +1,5 @@
 ---
-title: List all stickies - Plane API
+title: List all stickies
 description: List all stickies via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration
 ---

@@ -1,5 +1,5 @@
 ---
-title: Delete a work item comment - Plane API
+title: Delete a work item comment
 description: Delete a work item comment via Plane API. HTTP DELETE request for removing resources.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---

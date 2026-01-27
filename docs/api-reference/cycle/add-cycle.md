@@ -1,5 +1,5 @@
 ---
-title: Create a cycle - Plane API
+title: Create a cycle
 description: Create a cycle via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
 ---

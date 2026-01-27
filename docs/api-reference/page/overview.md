@@ -1,5 +1,5 @@
 ---
-title: Overview - Plane API
+title: Overview
 description: Plane Page API overview. Learn about endpoints, request/response format, and how to work with page via REST API.
 keywords: plane, plane api, rest api, api integration, pages, documentation, notes
 ---

@@ -1,5 +1,5 @@
 ---
-title: Remove work item from module - Plane API
+title: Remove work item from module
 description: Delete work item from module via Plane API. HTTP DELETE request for removing resources.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, modules, features
 ---

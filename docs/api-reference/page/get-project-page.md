@@ -1,5 +1,5 @@
 ---
-title: Retrieve a project page - Plane API
+title: Retrieve a project page
 description: List retrieve a project page via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, projects, project management, pages, documentation, notes
 ---

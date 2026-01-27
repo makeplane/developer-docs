@@ -1,5 +1,5 @@
 ---
-title: One-click deploy - Self-Hosted Plane
+title: One-click deploy
 description: Learn how to one-click deploy for self-hosted Plane. Complete guide with step-by-step instructions.
 keywords: plane, self-hosting, deployment, plane installation
 ---

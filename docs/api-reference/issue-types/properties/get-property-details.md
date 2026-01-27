@@ -1,5 +1,5 @@
 ---
-title: Retrieve a custom property - Plane API
+title: Retrieve a custom property
 description: Get retrieve a custom property details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

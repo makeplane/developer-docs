@@ -1,5 +1,5 @@
 ---
-title: Delete an initiative - Plane API
+title: Delete an initiative
 description: Delete an initiative via Plane API. HTTP DELETE request for removing resources.
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---

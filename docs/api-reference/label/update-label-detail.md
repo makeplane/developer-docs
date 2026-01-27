@@ -1,5 +1,5 @@
 ---
-title: Update a label - Plane API
+title: Update a label
 description: Update a label via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization
 ---

@@ -1,5 +1,5 @@
 ---
-title: CLI errors - Self-Hosted Plane
+title: CLI errors
 description: Troubleshoot cli errors. Common issues, error messages, and solutions for self-hosted Plane.
 keywords: plane, self-hosting, deployment, plane installation
 ---

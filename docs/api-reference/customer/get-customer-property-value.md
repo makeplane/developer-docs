@@ -1,5 +1,5 @@
 ---
-title: Retrieve a customer property value - Plane API
+title: Retrieve a customer property value
 description: List retrieve a customer property value via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

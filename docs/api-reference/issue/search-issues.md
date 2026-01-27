@@ -1,5 +1,5 @@
 ---
-title: Search work items - Plane API
+title: Search work items
 description: Search work items via Plane API. Full-text search with filters and advanced query parameters.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

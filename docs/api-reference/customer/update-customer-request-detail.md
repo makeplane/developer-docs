@@ -1,5 +1,5 @@
 ---
-title: Update a customer request - Plane API
+title: Update a customer request
 description: Update a customer request via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

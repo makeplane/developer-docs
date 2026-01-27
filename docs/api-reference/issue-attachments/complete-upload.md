@@ -1,5 +1,5 @@
 ---
-title: Complete upload - Plane API
+title: Complete upload
 description: Complete upload API endpoint. Request format, parameters, and response examples for Plane REST API.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---

@@ -1,5 +1,5 @@
 ---
-title: Retrieve a customer request - Plane API
+title: Retrieve a customer request
 description: Get retrieve a customer request details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---

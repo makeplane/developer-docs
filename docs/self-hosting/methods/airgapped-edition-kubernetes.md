@@ -1,5 +1,5 @@
 ---
-title: Deploy Plane with airgapped Kubernetes <Badge type="tip" text="Business" />
+title: Deploy Plane with airgapped Kubernetes
 description: Deploy Plane on Kubernetes using Helm charts. Complete guide for production-ready Kubernetes deployment with scaling and management.
 keywords: plane, self-hosting, deployment, plane installation, kubernetes, helm, k8s
 ---

@@ -1,5 +1,5 @@
 ---
-title: Add work items to cycle - Plane API
+title: Add work items to cycle
 description: Create work items to cycle via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
 ---

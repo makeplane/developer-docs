@@ -1,5 +1,5 @@
 ---
-title: Archive a module - Plane API
+title: Archive a module
 description: Archive a module API endpoint. Request format, parameters, and response examples for Plane REST API.
 keywords: plane, plane api, rest api, api integration, modules, features
 ---

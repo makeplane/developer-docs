@@ -1,5 +1,5 @@
 ---
-title: View container logs - Self-Hosted Plane
+title: View container logs
 description: Learn how to view container logs for self-hosted Plane. Complete guide with step-by-step instructions.
 keywords: plane, self-hosting, deployment, plane installation
 ---

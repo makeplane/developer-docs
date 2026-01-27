@@ -81,6 +81,7 @@ export default defineConfig({
         {
           text: 'Install',
           items: [
+            { text: 'Overview', link: '/self-hosting/methods/overview' },
             {
               text: 'Docker',
               collapsed: true,

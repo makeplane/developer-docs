@@ -1,5 +1,5 @@
 ---
-title: Installation errors - Self-Hosted Plane
+title: Installation errors
 description: Troubleshoot installation errors. Common issues, error messages, and solutions for self-hosted Plane.
 keywords: plane, self-hosting, deployment, plane installation
 ---

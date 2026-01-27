@@ -1,5 +1,5 @@
 ---
-title: Activate Enterprise license - Self-Hosted Plane
+title: Activate Enterprise license
 description: Learn how to activate enterprise license for self-hosted Plane. Complete guide with step-by-step instructions.
 keywords: plane, self-hosting, deployment, plane installation
 ---

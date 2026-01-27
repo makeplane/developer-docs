@@ -1,5 +1,5 @@
 ---
-title: List all teamspace members - Plane API
+title: List all teamspace members
 description: List all teamspace members via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration
 ---

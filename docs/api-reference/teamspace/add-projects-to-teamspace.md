@@ -1,5 +1,5 @@
 ---
-title: Add projects to teamspace - Plane API
+title: Add projects to teamspace
 description: Create projects to teamspace via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---

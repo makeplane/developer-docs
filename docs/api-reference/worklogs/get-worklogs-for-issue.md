@@ -1,5 +1,5 @@
 ---
-title: List all worklogs for a work item - Plane API
+title: List all worklogs for a work item
 description: List all worklogs for a work item via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, time tracking, worklogs, time management
 ---

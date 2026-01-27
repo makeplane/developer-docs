@@ -1,5 +1,5 @@
 ---
-title: Environment variables reference - Self-Hosted Plane
+title: Environment variables reference
 description: Configure environment variables for Plane. Complete reference of all configuration options and settings.
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---

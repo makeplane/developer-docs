@@ -1,5 +1,5 @@
 ---
-title: Configure externalservices - Self-Hosted Plane
+title: Configure externalservices
 description: Configure external database and storage for Plane. Setup PostgreSQL, Redis, and S3-compatible storage services.
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---

@@ -1,5 +1,5 @@
 ---
-title: Backup and restore data - Self-Hosted Plane
+title: Backup and restore data
 description: Backup and restore Plane data. Complete guide for backing up database, storage, and configuration files.
 keywords: plane, self-hosting, deployment, plane installation, backup, restore, data management
 ---

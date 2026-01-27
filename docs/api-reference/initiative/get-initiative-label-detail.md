@@ -1,5 +1,5 @@
 ---
-title: Retrieve an initiative label - Plane API
+title: Retrieve an initiative label
 description: Get retrieve an initiative label details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
 ---

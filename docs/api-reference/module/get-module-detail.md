@@ -1,5 +1,5 @@
 ---
-title: Retrieve a module - Plane API
+title: Retrieve a module
 description: Get retrieve a module details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, modules, features
 ---

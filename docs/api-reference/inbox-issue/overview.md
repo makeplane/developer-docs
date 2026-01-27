@@ -1,5 +1,5 @@
 ---
-title: Overview - Plane API
+title: Overview
 description: Plane Inbox-Issue API overview. Learn about endpoints, request/response format, and how to work with inbox-issue via REST API.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

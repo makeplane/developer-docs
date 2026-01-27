@@ -1,5 +1,5 @@
 ---
-title: OIDC SSO - Self-Hosted Plane
+title: OIDC SSO
 description: Setup OIDC SSO authentication for Plane. Configure OpenID Connect single sign-on for enterprise authentication.
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---

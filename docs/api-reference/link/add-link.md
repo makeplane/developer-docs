@@ -1,5 +1,5 @@
 ---
-title: Create a link - Plane API
+title: Create a link
 description: Create a link via Plane API. HTTP POST request format, required fields, and example responses.
 keywords: plane, plane api, rest api, api integration
 ---

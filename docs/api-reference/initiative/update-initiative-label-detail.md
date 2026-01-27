@@ -1,5 +1,5 @@
 ---
-title: Update an initiative label - Plane API
+title: Update an initiative label
 description: Update an initiative label via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
 ---

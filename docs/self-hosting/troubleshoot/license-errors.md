@@ -1,5 +1,5 @@
 ---
-title: License errors - Self-Hosted Plane
+title: License errors
 description: Manage Plane licenses for Pro, Business, and Enterprise editions. Activation guide for commercial Plane licenses.
 keywords: plane, self-hosting, deployment, plane installation
 ---

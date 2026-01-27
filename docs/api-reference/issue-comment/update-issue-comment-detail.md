@@ -1,5 +1,5 @@
 ---
-title: Update a work item comment - Plane API
+title: Update a work item comment
 description: Update a work item comment via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---

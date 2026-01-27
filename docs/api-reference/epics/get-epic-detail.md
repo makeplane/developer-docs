@@ -1,5 +1,5 @@
 ---
-title: Retrieve an epic - Plane API
+title: Retrieve an epic
 description: Get retrieve an epic details via Plane API. Retrieve complete information for a specific resource.
 keywords: plane, plane api, rest api, api integration, epics, features, stories
 ---

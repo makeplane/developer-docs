@@ -1,5 +1,5 @@
 ---
-title: List all states - Plane API
+title: List all states
 description: List all states via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---

@@ -1,5 +1,5 @@
 ---
-title: Update a custom property - Plane API
+title: Update a custom property
 description: Update a custom property via Plane API. HTTP PATCH request format, editable fields, and example responses.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---

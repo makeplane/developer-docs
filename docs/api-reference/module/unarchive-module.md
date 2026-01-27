@@ -1,5 +1,5 @@
 ---
-title: Restore a module - Plane API
+title: Restore a module
 description: Restore a module API endpoint. Request format, parameters, and response examples for Plane REST API.
 keywords: plane, plane api, rest api, api integration, modules, features
 ---

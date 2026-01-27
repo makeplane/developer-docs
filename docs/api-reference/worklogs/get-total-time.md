@@ -1,5 +1,5 @@
 ---
-title: Get total time for each work item - Plane API
+title: Get total time for each work item
 description: List total time for each work item via Plane API. HTTP GET request with pagination, filtering, and query parameters.
 keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
 ---
