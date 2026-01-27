@@ -586,6 +586,15 @@ export default withMermaid(defineConfig({
             { text: 'Webhooks', link: '/dev-tools/intro-webhooks' },
             { text: 'MCP Server', link: '/dev-tools/mcp-server' }
           ]
+        },
+        {
+          text: 'Agents',
+          items: [
+            { text: 'Overview', link: '/dev-tools/agents/overview' },
+            { text: 'Building an Agent', link: '/dev-tools/agents/building-an-agent' },
+            { text: 'Best Practices', link: '/dev-tools/agents/best-practices' },
+            { text: 'Signals & Content Payload', link: '/dev-tools/agents/signals-content-payload' }
+          ]
         }
       ],
 
