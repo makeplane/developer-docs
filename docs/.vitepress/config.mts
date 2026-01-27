@@ -7,17 +7,30 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     }
   },
-  title: 'Developers',
-  description: 'Plane API Documentation and Self-hosting Guides',
+  title: ' ',
+  description: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
 
   head: [
     ['link', { rel: 'icon', href: '/logo/favicon-32x32.png' }],
+
+    // Open Graph meta tags
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: 'Developer documentation | Plane' }],
+    ['meta', { property: 'og:description', content: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.' }],
+    ['meta', { property: 'og:image', content: 'https://media.docs.plane.so/logo/og-docs.web' }],
+    ['meta', { property: 'og:url', content: 'https://developers.plane.so' }],
+
+    // Twitter Card meta tags
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: 'Developer documentation | Plane' }],
+    ['meta', { name: 'twitter:description', content: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.' }],
+    ['meta', { name: 'twitter:image', content: 'https://media.docs.plane.so/logo/og-docs.web' }],
   ],
 
   themeConfig: {
     logo: {
-      light: 'https://media.docs.plane.so/logo/new-logo-white.png',
-      dark: 'https://media.docs.plane.so/logo/new-logo-dark.png'
+      light: '/logo/dev-logo-watermark-light.png',
+      dark: '/logo/dev-logo-watermark-dark.png'
     },
 
     outline: {
