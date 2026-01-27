@@ -1,3 +1,10 @@
+---
+title: List all work items
+description: List all work items via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # List all work items
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Workspaces and teams
+description: Workspaces and teams. Complete guide and documentation for Plane.
+keywords: plane
+---
+
+
 # Workspaces and teams
 
 Since April 15 when Plane One was announced, we have communicated on our website and Discord that One will have one workspace linked to one domain and one license.

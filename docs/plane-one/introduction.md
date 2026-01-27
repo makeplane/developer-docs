@@ -1,3 +1,10 @@
+---
+title: Meet Plane One
+description: Meet Plane One. Complete guide and documentation for Plane.
+keywords: plane
+---
+
+
 # Meet Plane One
 
 [Plane One](https://plane.so/one) is our first licensed self-hosted edition for growing teams serious about staying in control. One unlocks security, governance, and project management features scale-ups need to manage their instance and projects better.

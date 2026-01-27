@@ -1,3 +1,10 @@
+---
+title: Mandatory checkpoint at v0.14.0
+description: Upgrade self-hosted Plane to the latest version. Step-by-step guide for updating your Plane installation safely.
+keywords: plane, self-hosting, deployment, plane installation, upgrade, migration, update
+---
+
+
 # Mandatory checkpoint at v0.14.0 <Badge type="info" text="Community Edition" />
 
 If you’re upgrading from `v0.13.2` or below, there are some additional migration steps due to significant changes in the self-hosting setup. Follow these instructions to migrate your data to the new volume structure in `v0.14.0`.

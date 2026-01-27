@@ -1,3 +1,10 @@
+---
+title: Update module details
+description: Update module details via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, modules, features
+---
+
+
 # Update module details
 
 <div class="api-endpoint-badge">

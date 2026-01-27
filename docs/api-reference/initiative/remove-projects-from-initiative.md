@@ -1,3 +1,10 @@
+---
+title: Remove projects from initiative
+description: Delete projects from initiative via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, projects, project management, initiatives, roadmap, planning
+---
+
+
 # Remove projects from initiative
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Unlink work item from customer
+description: Unlink work item from customer API endpoint. Request format, parameters, and response examples for Plane REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, customers, crm, customer management
+---
+
+
 # Unlink work item from customer
 
 <div class="api-endpoint-badge">

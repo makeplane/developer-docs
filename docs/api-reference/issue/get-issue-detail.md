@@ -1,3 +1,10 @@
+---
+title: Retrieve a work item by ID
+description: Get retrieve a work item by id details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Retrieve a work item by ID
 
 <div class="api-endpoint-badge">

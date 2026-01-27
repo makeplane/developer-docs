@@ -1,3 +1,10 @@
+---
+title: Build a Plane app
+description: Create custom Plane apps and integrations using OAuth 2.0. Learn how to build webhooks, automate workflows, and extend Plane with third-party tools and services.
+keywords: plane app development, plane oauth, plane webhooks, plane integration, build plane app, plane api integration, oauth 2.0 plane
+---
+
+
 # Build a Plane app <Badge type="info" text="Pro" />
 
 ## Introduction

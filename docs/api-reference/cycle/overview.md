@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane Cycle API overview. Learn about endpoints, request/response format, and how to work with cycle via REST API.
+keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+---
+
+
 # Overview
 
 Cycles are custom time periods in which a team works to complete items from their backlog. At the end of a cycle, the team typically has a new version of their project or product ready.

@@ -1,20 +1,15 @@
+---
+title: Overview
+description: Plane Issue-Comment API overview. Learn about endpoints, request/response format, and how to work with issue-comment via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
+---
+
+
 # Overview
 
 Comments allow team members to discuss and collaborate on work items by adding text, mentions, and attachments.
 
 [Learn more about Work Item Comments](https://docs.plane.so/core-concepts/issues/overview#comment-on-work-items)
-
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
-
-**End of support**  
-31st March 2026
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
-:::
 
 <div class="api-two-column">
 <div class="api-left">

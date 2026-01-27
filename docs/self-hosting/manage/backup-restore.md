@@ -1,3 +1,10 @@
+---
+title: Backup and restore data
+description: Backup and restore Plane data. Complete guide for backing up database, storage, and configuration files.
+keywords: plane, self-hosting, deployment, plane installation, backup, restore, data management
+---
+
+
 # Backup and restore data <Badge type="info" text="Commercial Edition" />
 
 Backing up your data regularly helps prevent data loss and allows you to restore your system quickly if necessary. Follow these instructions to back up and restore your data using Plane’s command-line interface.

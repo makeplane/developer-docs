@@ -1,3 +1,10 @@
+---
+title: List all epics
+description: List all epics via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, epics, features, stories
+---
+
+
 # List all epics
 
 <div class="api-endpoint-badge">

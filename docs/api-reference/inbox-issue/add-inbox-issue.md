@@ -1,3 +1,10 @@
+---
+title: Add intake issue
+description: Create intake issue via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Add intake issue
 
 <div class="api-endpoint-badge">

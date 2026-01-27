@@ -1,3 +1,10 @@
+---
+title: Configure Slack for Plane integration
+description: Learn how to configure slack for plane integration for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure Slack for Plane integration <Badge type="info" text="Pro" />
 
 This guide walks you through setting up a Slack App to enable Slack integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for Slack, you’ll need to set up the necessary authentication, permissions, and event subscriptions to ensure seamless communication between Plane and Slack.

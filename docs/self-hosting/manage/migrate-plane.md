@@ -1,3 +1,10 @@
+---
+title: Move Plane instance to a new server
+description: Migrate Plane between servers or environments. Guide for moving your Plane installation to new infrastructure.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Move Plane instance to a new server <Badge type="info" text="Commercial Edition" />
 
 Switching to another machine is straightforward on the Commercial Edition. 

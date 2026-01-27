@@ -1,3 +1,10 @@
+---
+title: Storage errors
+description: Configure external database and storage for Plane. Setup PostgreSQL, Redis, and S3-compatible storage services.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Storage errors
 
 This guide is designed to help you resolve common issues encountered while configuring storage in Plane. Each section includes potential causes and step-by-step solutions for identified problems.

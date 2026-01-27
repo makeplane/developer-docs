@@ -1,3 +1,10 @@
+---
+title: List all work items in a module
+description: List all work items in a module via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, modules, features
+---
+
+
 # List all work items in a module
 
 <div class="api-endpoint-badge">

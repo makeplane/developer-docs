@@ -1,3 +1,10 @@
+---
+title: List all customer requests
+description: List all customer requests via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+---
+
+
 # List all customer requests
 
 <div class="api-endpoint-badge">

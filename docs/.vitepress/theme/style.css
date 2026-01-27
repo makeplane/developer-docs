@@ -13,6 +13,80 @@
 }
 
 /* ================================================
+   THEME VARIANTS
+   ================================================ */
+
+@custom-variant light (&:where([data-theme*="light"], [data-theme*="light"] *));
+@custom-variant dark (&:where([data-theme*="dark"], [data-theme*="dark"] *));
+
+/* ================================================
+   COLOR SYSTEM
+   ================================================ */
+
+@layer base {
+  :root {
+    /* Alpha colors - for transparency effects */
+    --alpha-white-0: oklch(1 0 0 / 0%);
+    --alpha-white-200: oklch(1 0 0 / 10%);
+    --alpha-white-500: oklch(1 0 0 / 30%);
+    --alpha-white-700: oklch(1 0 0 / 50%);
+    --alpha-black-0: oklch(0.1482 0.0034 196.79 / 0%);
+    --alpha-black-200: oklch(0.1482 0.0034 196.79 / 10%);
+    --alpha-black-500: oklch(0.1482 0.0034 196.79 / 30%);
+    --alpha-black-700: oklch(0.1482 0.0034 196.79 / 50%);
+
+    /* Neutral colors - for text and backgrounds */
+    --neutral-white: oklch(1 0 0);
+    --neutral-100: oklch(0.9848 0.0003 230.66);
+    --neutral-200: oklch(0.9696 0.0007 230.67);
+    --neutral-300: oklch(0.9543 0.001 230.67);
+    --neutral-500: oklch(0.9235 0.001733 230.6853);
+    --neutral-700: oklch(0.8612 0.0032 230.71);
+    --neutral-800: oklch(0.6668 0.0079 230.82);
+    --neutral-1000: oklch(0.5288 0.0083 230.88);
+    --neutral-1100: oklch(0.4377 0.0066 230.87);
+    --neutral-1200: oklch(0.2378 0.0029 230.83);
+    --neutral-black: oklch(0.1472 0.0034 230.83);
+
+    /* Brand colors */
+    --brand-100: oklch(0.9847 0.0083 236.56);
+    --brand-300: oklch(0.9428 0.0341 230.22);
+    --brand-500: oklch(0.8414 0.0947 233.08);
+    --brand-700: oklch(0.6766 0.1665 243.91);
+    --brand-900: oklch(0.4347 0.104093 242.4823);
+    --brand-default: oklch(0.4799 0.1158 242.91);
+
+    /* Semantic colors */
+    --green-100: oklch(0.9819 0.0181 155.83);
+    --green-500: oklch(0.7914 0.2091 151.66);
+    --green-700: oklch(0.632 0.185972 147.3695);
+    --amber-100: oklch(0.9869 0.0214 95.28);
+    --amber-500: oklch(0.829 0.1712 81.04);
+    --amber-700: oklch(0.6671 0.1685 53.38);
+    --red-100: oklch(0.9705 0.0129 17.38);
+    --red-500: oklch(0.7022 0.1892 22.23);
+    --red-700: oklch(0.583 0.238666 28.4765);
+
+    /* Font sizes */
+    --text-xs: 0.75rem; /* 12px */
+    --text-sm: 0.875rem; /* 14px */
+    --text-base: 1rem; /* 16px */
+    --text-lg: 1.125rem; /* 18px */
+    --text-xl: 1.25rem; /* 20px */
+    --text-2xl: 1.5rem; /* 24px */
+    --text-3xl: 1.875rem; /* 30px */
+    --text-4xl: 2.25rem; /* 36px */
+
+    /* Font weights */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  }
+}
+
+/* ================================================
    SATOSHI FONT
    ================================================ */
 
@@ -358,7 +432,7 @@ div[class*='language-'] > span.lang {
 .vp-doc h2 {
   border-top: none !important;
   margin-top: 32px;
-  padding-top: 0;
+
 }
 
 .vp-doc h3 {

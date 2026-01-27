@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane Project API overview. Learn about endpoints, request/response format, and how to work with project via REST API.
+keywords: plane, plane api, rest api, api integration, projects, project management
+---
+
+
 # Overview
 
 Projects organize your team's work within a workspace. Each project contains work items, cycles, modules, and other resources. 

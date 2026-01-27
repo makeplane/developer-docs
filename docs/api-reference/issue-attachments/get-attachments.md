@@ -1,3 +1,10 @@
+---
+title: List all attachments
+description: List all attachments via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
+---
+
+
 # List all attachments
 
 <div class="api-endpoint-badge">

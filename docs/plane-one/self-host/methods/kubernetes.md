@@ -1,3 +1,10 @@
+---
+title: Kubernetes
+description: Kubernetes. Complete guide and documentation for Plane.
+keywords: plane
+---
+
+
 # Kubernetes
 
 ## Pre-requisite

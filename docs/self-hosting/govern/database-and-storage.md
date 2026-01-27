@@ -1,3 +1,10 @@
+---
+title: Configure externalservices
+description: Configure external database and storage for Plane. Setup PostgreSQL, Redis, and S3-compatible storage services.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure externalservices <Badge type="info" text="Commercial Edition" />
 
 The Prime CLI lets you easily configure your Commercial Edition instance, providing options to customize the PostgreSQL database, Redis, external storage, and other advanced settings.

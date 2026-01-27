@@ -1,3 +1,10 @@
+---
+title: List all initiatives
+description: List all initiatives via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+---
+
+
 # List all initiatives
 
 <div class="api-endpoint-badge">

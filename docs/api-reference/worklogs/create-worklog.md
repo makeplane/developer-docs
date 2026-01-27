@@ -1,3 +1,10 @@
+---
+title: Create a worklog
+description: Create a worklog via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
+---
+
+
 # Create a worklog
 
 <div class="api-endpoint-badge">

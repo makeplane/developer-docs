@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane Sticky API overview. Learn about endpoints, request/response format, and how to work with sticky via REST API.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Overview
 
 Stickies are workspace-level notes that allow you to capture quick thoughts, ideas, or important reminders.

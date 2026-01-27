@@ -1,38 +1,70 @@
-# Self-host Plane
-Self-hosting allows you to have full control over your applications and data. It’s a great way to ensure privacy, control, and customization.
+---
+title: Deploy Plane on your infrastructure
+description: Deploy Plane on your own infrastructure with Docker, Kubernetes, or Podman. Complete self-hosting guides for open-source project management with full control and customization.
+keywords: self-host plane, plane docker, plane kubernetes, self-hosted project management, docker compose plane, kubernetes helm plane, on-premise deployment
+---
 
-## Methods
+
+# Deploy Plane on your infrastructure
+
+Take complete control of your project management infrastructure by deploying Plane on your own servers. Self-hosting Plane gives you full ownership of your data and the flexibility to deploy wherever you need - from a single Docker container to enterprise Kubernetes clusters.
+
+## Why self-host Plane?
+
+**Data sovereignty and privacy**  
+Keep all your project data within your own infrastructure. Perfect for organizations with strict data residency requirements or privacy regulations.
+
+**Complete control**  
+Customize every aspect of Plane to match your workflows. Control when and how updates are applied, and integrate with your existing tools and infrastructure.
+
+**Compliance and security**  
+Meet regulatory requirements like GDPR, HIPAA, SOC 2, or industry-specific standards by maintaining full control over data storage and access.
+
+**No vendor lock-in**  
+Your data remains accessible in open formats. Migrate, backup, or customize without restrictions.
+
+## Deployment methods
+
+Choose the deployment method that best fits your infrastructure and team size:
 
 <CardGroup>
-  <Card title="Docker" icon="docker" href="/self-hosting/methods/docker-compose">
-    Learn how to run Plane on docker.
+  <Card title="Docker Compose" icon="docker" href="/self-hosting/methods/docker-compose">
+    Quick setup with minimal configuration, ideal for small to medium teams.
   </Card>
   <Card title="Kubernetes" icon="kubernetes" href="/self-hosting/methods/kubernetes">
-    Run Plane on a kubernetes cluster using helm package manager.
+    Production-grade deployment using Helm for high availability and auto-scaling.
   </Card>
 </CardGroup>
 
+[Other deployment methods](/self-hosting/methods/overview)
 
-## Governance
+## System requirements
+- **CPU:** 2 cores
+- **RAM:** 4GB (8GB recommended for production)
+- **OS:** Linux (Ubuntu 20.04+, Debian 10+, CentOS 8+), macOS, or Windows with WSL2
+
+## Configuration and governance
+
+Once deployed, configure your Plane instance to match your organization's needs:
 
 <CardGroup>
-  <Card title="Instance admin and God mode" icon="user-star" href="/self-hosting/govern/instance-admin">
-    Learn how to configure your instance.
+  <Card title="Instance Admin and God Mode" icon="user-star" href="/self-hosting/govern/instance-admin">
+    Configure instance-wide settings, manage users, and access God Mode for advanced administrative controls.
   </Card>
   <Card title="Authentication" icon="key-round" href="/self-hosting/govern/authentication">
-    Setup authentication methods on your Plane instance.
+    Set up SSO, OAuth, LDAP, or other authentication methods. Support for Google, GitHub, GitLab, and custom providers.
   </Card>
 </CardGroup>
-
 
 <CardGroup>
-  <Card title="Communication" icon="mail" href="/self-hosting/govern/communication">
-    Send emails by setting up SMTP configuration.
+  <Card title="Email and communication" icon="mail" href="/self-hosting/govern/communication">
+    Configure SMTP for email notifications, invitations, and alerts. Integrate with SendGrid, AWS SES, or your own mail server.
   </Card>
-  <Card title="Managed services" icon="database" href="/self-hosting/govern/database-and-storage.html">
-    Configure external database and storage
+  <Card title="External services" icon="database" href="/self-hosting/govern/database-and-storage">
+    Connect to managed databases (PostgreSQL, Redis) and cloud storage (S3, MinIO, GCS) for scalable, production-ready deployments.
   </Card>
 </CardGroup>
+
   
 
 

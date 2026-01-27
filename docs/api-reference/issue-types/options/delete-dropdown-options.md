@@ -1,3 +1,10 @@
+---
+title: Delete dropdown options
+description: Delete dropdown options via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Delete dropdown options
 
 <div class="api-endpoint-badge">

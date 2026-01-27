@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane Teamspace API overview. Learn about endpoints, request/response format, and how to work with teamspace via REST API.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Overview
 
 Teamspaces allow you to organize teams, projects, and members within a workspace, providing a way to group related work and manage access at a team level.

@@ -1,3 +1,10 @@
+---
+title: Delete a sticky
+description: Delete a sticky via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Delete a sticky
 
 <div class="api-endpoint-badge">

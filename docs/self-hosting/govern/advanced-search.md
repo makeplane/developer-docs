@@ -1,3 +1,10 @@
+---
+title: Configure OpenSearch for advanced search
+description: Learn how to configure opensearch for advanced search for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure OpenSearch for advanced search <Badge type="info" text="Pro" />
 
 

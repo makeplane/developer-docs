@@ -1,3 +1,10 @@
+---
+title: Create a customer
+description: Create a customer via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+---
+
+
 # Create a customer
 
 <div class="api-endpoint-badge">

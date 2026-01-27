@@ -1,3 +1,10 @@
+---
+title: Retrieve a project
+description: Get retrieve a project details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, projects, project management
+---
+
+
 # Retrieve a project
 
 <div class="api-endpoint-badge">

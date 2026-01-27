@@ -1,3 +1,10 @@
+---
+title: Data collection and usage
+description: Learn how to data collection and usage for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Data collection and usage
 
 Plane collects anonymized data to enhance your user experience, ensure product stability, and drive continuous improvements. This article talks about what we collect, what we don't, and how we use collected data.

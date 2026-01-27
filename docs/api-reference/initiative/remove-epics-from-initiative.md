@@ -1,3 +1,10 @@
+---
+title: Remove epics from initiative
+description: Delete epics from initiative via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning, epics, features, stories
+---
+
+
 # Remove epics from initiative
 
 <div class="api-endpoint-badge">

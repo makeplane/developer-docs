@@ -7,27 +7,49 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     }
   },
-  title: ' ',
+  title: 'Plane developer documentation',
   description: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
+
+  // SEO: Generate sitemap automatically
+  sitemap: {
+    hostname: 'https://developers.plane.so'
+  },
+
+  // SEO: Clean URLs without .html extension
+  cleanUrls: true,
+
+  // SEO: Title template for all pages
+  titleTemplate: ':title | Plane',
 
   head: [
     ['link', { rel: 'icon', href: '/logo/favicon-32x32.png' }],
+
+    // SEO: Basic meta tags
+    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
+    ['meta', { name: 'author', content: 'Plane' }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    ['meta', { name: 'keywords', content: 'plane, api, self-hosting, project management, developer documentation, kubernetes, docker, rest api, webhooks, plane api' }],
+    ['meta', { name: 'theme-color', content: '#3b82f6' }],
+
+    // SEO: Canonical URL
+    ['link', { rel: 'canonical', href: 'https://developers.plane.so' }],
 
     // Open Graph meta tags
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'Developer documentation | Plane' }],
     ['meta', { property: 'og:description', content: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.' }],
-    ['meta', { property: 'og:image', content: 'https://media.docs.plane.so/logo/og-docs.web' }],
+    ['meta', { property: 'og:image', content: 'https://media.docs.plane.so/logo/og-docs.webp' }],
     ['meta', { property: 'og:url', content: 'https://developers.plane.so' }],
 
     // Twitter Card meta tags
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Developer documentation | Plane' }],
     ['meta', { name: 'twitter:description', content: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.' }],
-    ['meta', { name: 'twitter:image', content: 'https://media.docs.plane.so/logo/og-docs.web' }],
+    ['meta', { name: 'twitter:image', content: 'https://media.docs.plane.so/logo/og-docs.webp' }],
   ],
 
   themeConfig: {
+    siteTitle: false,
     logo: {
       light: '/logo/dev-logo-watermark-light.png',
       dark: '/logo/dev-logo-watermark-dark.png'
@@ -59,6 +81,7 @@ export default defineConfig({
         {
           text: 'Install',
           items: [
+            { text: 'Overview', link: '/self-hosting/methods/overview' },
             {
               text: 'Docker',
               collapsed: true,
@@ -133,9 +156,6 @@ export default defineConfig({
         {
           text: 'Manage',
           items: [
-            { text: 'Upgrade Community to Commercial Edition', link: '/self-hosting/upgrade-from-community' },
-            { text: 'Upgrade Community to Airgapped Edition', link: '/self-hosting/manage/community-to-airgapped' },
-            { text: 'Backup and restore', link: '/self-hosting/manage/backup-restore' },
             {
               text: 'Update Plane',
               collapsed: true,
@@ -153,6 +173,9 @@ export default defineConfig({
                 { text: 'Activate Airgapped', link: '/self-hosting/manage/manage-licenses/activate-airgapped' }
               ]
             },
+            { text: 'Backup and restore', link: '/self-hosting/manage/backup-restore' },
+            { text: 'Upgrade Community to Commercial Edition', link: '/self-hosting/upgrade-from-community' },
+            { text: 'Upgrade Community to Airgapped Edition', link: '/self-hosting/manage/community-to-airgapped' },
             { text: 'View Logs', link: '/self-hosting/manage/view-logs' },
             { text: 'Migrate Plane', link: '/self-hosting/manage/migrate-plane' },
             { text: 'Prime CLI', link: '/self-hosting/manage/prime-cli' }

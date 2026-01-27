@@ -1,3 +1,10 @@
+---
+title: Remove labels from initiative
+description: Delete labels from initiative via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+---
+
+
 # Remove labels from initiative
 
 <div class="api-endpoint-badge">

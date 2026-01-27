@@ -1,3 +1,10 @@
+---
+title: Activate Pro and Business licenses
+description: Learn how to activate pro and business licenses for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Activate Pro and Business licenses
 
 Pro and Business plan licenses are activated at the workspace level as each license is tied to a specific workspace. 

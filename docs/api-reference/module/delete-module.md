@@ -1,3 +1,10 @@
+---
+title: Delete a module
+description: Delete a module via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, modules, features
+---
+
+
 # Delete a module
 
 <div class="api-endpoint-badge">

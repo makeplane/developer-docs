@@ -1,3 +1,10 @@
+---
+title: Create a custom property
+description: Create a custom property via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Create a custom property
 
 <div class="api-endpoint-badge">

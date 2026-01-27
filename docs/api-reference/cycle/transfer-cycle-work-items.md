@@ -1,3 +1,10 @@
+---
+title: Transfer cycle work items
+description: Transfer cycle work items API endpoint. Request format, parameters, and response examples for Plane REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
+---
+
+
 # Transfer cycle work items
 
 <div class="api-endpoint-badge">

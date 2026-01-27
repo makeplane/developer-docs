@@ -1,3 +1,10 @@
+---
+title: List all dropdown options
+description: List all dropdown options via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # List all dropdown options
 
 <div class="api-endpoint-badge">

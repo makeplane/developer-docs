@@ -1,3 +1,10 @@
+---
+title: Update Plane version
+description: Upgrade self-hosted Plane to the latest version. Step-by-step guide for updating your Plane installation safely.
+keywords: plane, self-hosting, deployment, plane installation, upgrade, migration, update
+---
+
+
 # Update Plane version <Badge type="info" text="Commercial Edition" />
 
 Keeping Plane up to date ensures you’re using the latest features, improvements, and security fixes. Here’s how to upgrade your Plane installation with a single command.

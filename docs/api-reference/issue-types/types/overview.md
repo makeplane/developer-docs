@@ -1,20 +1,15 @@
+---
+title: Overview
+description: Plane Types API overview. Learn about endpoints, request/response format, and how to work with types via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Overview
 
 Work item types categorize different kinds of work in your project (e.g., "Task", "Bug", "Feature").
 
 [Learn more about Work Item Types](https://docs.plane.so/core-concepts/issues/work-item-types)
-
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../issue-types/` endpoints in favor of `/api/v1/.../work-item-types/`.
-
-**End of support**  
-31st March 2026
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/issue-types/` references with `/work-item-types/` in your codebase before the support end date.
-:::
 
 <div class="api-two-column">
 <div class="api-left">

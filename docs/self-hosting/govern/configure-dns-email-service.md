@@ -1,3 +1,10 @@
+---
+title: Configure DNS for Intake Email
+description: Learn how to configure dns for intake email for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure DNS for Intake Email <Badge type="tip" text="Business" />
 
 This guide explains how to configure DNS settings to enable the [Intake Email](https://docs.plane.so/intake/intake-email) feature for your self-hosted Plane instance. These configurations enable your server to accept messages sent to your project's dedicated Intake address, which are then  converted into work items in your project's Intake section.

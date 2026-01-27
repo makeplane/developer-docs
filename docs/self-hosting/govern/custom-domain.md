@@ -1,3 +1,10 @@
+---
+title: Configure custom domain
+description: Configure custom domain for self-hosted Plane. Setup your own domain name for your Plane instance.
+keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+---
+
+
 # Configure custom domain <Badge type="info" text="Commercial Edition" />
 
 During installation, you configure a domain for your instance. If you need to change that domain later, whether you're moving to a production domain, switching to a different hostname, or updating your DNS configuration, this guide walks you through the process.

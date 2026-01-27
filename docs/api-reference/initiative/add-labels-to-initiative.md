@@ -1,3 +1,10 @@
+---
+title: Add labels to initiative
+description: Create labels to initiative via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+---
+
+
 # Add labels to initiative
 
 <div class="api-endpoint-badge">

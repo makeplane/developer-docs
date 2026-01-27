@@ -1,3 +1,10 @@
+---
+title: Update a teamspace
+description: Update a teamspace via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Update a teamspace
 
 <div class="api-endpoint-badge">

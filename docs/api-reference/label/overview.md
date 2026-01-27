@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane Label API overview. Learn about endpoints, request/response format, and how to work with label via REST API.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+---
+
+
 # Overview
 
 Labels are tags that help you categorize and organize work items in your project.

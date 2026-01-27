@@ -1,3 +1,10 @@
+---
+title: Deploy Plane with Airgapped Docker
+description: Deploy Plane in airgapped environment without internet access. Complete guide for offline Plane installation.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Deploy Plane with Airgapped Docker <Badge type="tip" text="Business" /> 
 
 :::info

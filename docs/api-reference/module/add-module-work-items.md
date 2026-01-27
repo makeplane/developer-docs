@@ -1,3 +1,10 @@
+---
+title: Add work items to module
+description: Create work items to module via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, modules, features
+---
+
+
 # Add work items to module
 
 <div class="api-endpoint-badge">

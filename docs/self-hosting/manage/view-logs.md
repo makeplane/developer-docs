@@ -1,3 +1,10 @@
+---
+title: View container logs
+description: Learn how to view container logs for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # View container logs
 
 If you need to check the logs for troubleshooting or to monitor what’s happening in specific Plane services like the API or Worker, you can access them directly from the command line.

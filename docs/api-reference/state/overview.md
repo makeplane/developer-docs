@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane State API overview. Learn about endpoints, request/response format, and how to work with state via REST API.
+keywords: plane, plane api, rest api, api integration, states, workflow, status
+---
+
+
 # Overview
 
 States represent the current status of a work item in your project workflow.

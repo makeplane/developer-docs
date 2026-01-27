@@ -1,20 +1,16 @@
+---
+title: Overview
+description: Plane Intake-Issue API overview. Learn about endpoints, request/response format, and how to work with intake-issue via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
+---
+
+
 # Overview
 
 Intake allows guests to create work items that admins and members can review and move into a project.
 
 [Learn more about Intake](https://docs.plane.so/core-concepts/intake)
 
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../inbox-issues/` endpoints in favor of `/api/v1/.../intake-issues/`.
-
-**End of support**  
-31st March 2025
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/inbox-issues/` references with `/intake-issues/` in your codebase before the support end date.
-:::
 
 ## Enable Intake
 

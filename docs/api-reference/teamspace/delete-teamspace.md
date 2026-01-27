@@ -1,3 +1,10 @@
+---
+title: Delete a teamspace
+description: Delete a teamspace via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Delete a teamspace
 
 <div class="api-endpoint-badge">

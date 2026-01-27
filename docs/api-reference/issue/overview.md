@@ -1,20 +1,15 @@
+---
+title: Overview
+description: Plane Issue API overview. Learn about endpoints, request/response format, and how to work with issue via REST API.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # Overview
 
 Work items are the fundamental unit of work in Plane. They represent tasks that need to be accomplished — assignable, trackable, and actionable to-dos in your project management workflow.
 
 [Learn more about Work Items](https://docs.plane.so/core-concepts/issues/overview)
-
-::: warning
-**Deprecation notice**
-
-We are deprecating all `/api/v1/.../issues/` endpoints in favor of `/api/v1/.../work-items/`.
-
-**End of support**  
-31st March 2026
-
-**What you need to do**  
-To ensure uninterrupted service, replace all `/issues/` references with `/work-items/` in your codebase before the support end date.
-:::
 
 <div class="api-two-column">
 <div class="api-left">

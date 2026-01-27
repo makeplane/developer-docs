@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane User API overview. Learn about endpoints, request/response format, and how to work with user via REST API.
+keywords: plane, plane api, rest api, api integration
+---
+
+
 # Overview
 
 Users represent the people who use Plane. The Users API allows you to retrieve information about the current authenticated user.

@@ -1,3 +1,10 @@
+---
+title: Create a module
+description: Create a module via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, modules, features
+---
+
+
 # Create a module
 
 <div class="api-endpoint-badge">

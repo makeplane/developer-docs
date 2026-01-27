@@ -1,3 +1,10 @@
+---
+title: List all work item types
+description: List all work item types via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+---
+
+
 # List all work item types
 
 <div class="api-endpoint-badge">

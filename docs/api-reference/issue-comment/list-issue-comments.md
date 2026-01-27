@@ -1,3 +1,10 @@
+---
+title: List all work item comments
+description: List all work item comments via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
+---
+
+
 # List all work item comments
 
 <div class="api-endpoint-badge">

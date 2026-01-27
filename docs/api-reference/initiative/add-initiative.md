@@ -1,3 +1,10 @@
+---
+title: Create an initiative
+description: Create an initiative via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+---
+
+
 # Create an initiative
 
 <div class="api-endpoint-badge">

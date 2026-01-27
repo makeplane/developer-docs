@@ -1,3 +1,10 @@
+---
+title: Delete a customer
+description: Delete a customer via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+---
+
+
 # Delete a customer
 
 <div class="api-endpoint-badge">

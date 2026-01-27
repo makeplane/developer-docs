@@ -1,3 +1,10 @@
+---
+title: Overview
+description: Plane Initiative API overview. Learn about endpoints, request/response format, and how to work with initiative via REST API.
+keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+---
+
+
 # Overview
 
 Initiatives are high-level strategic goals that help organize and track work across multiple projects, epics, and work items, providing a way to group related work and measure progress toward larger objectives.

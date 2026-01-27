@@ -1,3 +1,10 @@
+---
+title: Command line tools
+description: Learn how to command line tools for self-hosted Plane. Complete guide with step-by-step instructions.
+keywords: plane, self-hosting, deployment, plane installation
+---
+
+
 # Command line tools
 
 Our command-line tool is here to make managing your Plane instance simple. You can handle installs, upgrades, and general management without needing to be a Docker expert.

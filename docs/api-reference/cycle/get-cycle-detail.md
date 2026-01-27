@@ -1,3 +1,10 @@
+---
+title: Retrieve a cycle
+description: Get retrieve a cycle details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+---
+
+
 # Retrieve a cycle
 
 <div class="api-endpoint-badge">

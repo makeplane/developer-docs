@@ -1,3 +1,10 @@
+---
+title: Update a project
+description: Update a project via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, projects, project management
+---
+
+
 # Update a project
 
 <div class="api-endpoint-badge">

@@ -1,3 +1,10 @@
+---
+title: Docker
+description: Docker. Complete guide and documentation for Plane.
+keywords: plane
+---
+
+
 # Docker
 
 Plane One supports a standard Docker-based installation via our own command-line interface called the Prime CLI.
