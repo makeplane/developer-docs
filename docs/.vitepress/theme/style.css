@@ -567,7 +567,6 @@ div[class*='language-'] > span.lang {
 
 /* Make the header search box wider */
 .DocSearch.DocSearch-Button {
-  width: 180px !important;
   justify-content: space-between !important;
 }
 
@@ -646,50 +645,4 @@ a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
   box-shadow: 0 2px 8px rgba(0, 99, 153, 0.35) !important;
 }
 
-
-/* ================================================
-   MOBILE HORIZONTAL SCROLL FIX
-   ================================================ */
-
-html,
-body {
-  overflow-x: hidden;
-}
-
-/* ================================================
-   HERO VERTICAL SCROLL FIX
-   ================================================ */
-
-/* Remove scrollbar from hero section */
-.VPHero,
-.VPHomeHero,
-.VPHome,
-.VPContent.is-home {
-  overflow: visible !important;
-  overflow-x: hidden !important;
-  overflow-y: visible !important;
-}
-
-/* Target the hero container specifically */
-.VPHero .container,
-.VPHero .main,
-.VPHero .content {
-  overflow: visible !important;
-}
-
-/* Hide any scrollbars in the hero */
-.VPHero::-webkit-scrollbar,
-.VPHome::-webkit-scrollbar,
-.VPContent.is-home::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-
-.VPHero,
-.VPHome,
-.VPContent.is-home {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
 
