@@ -18,17 +18,17 @@ hero:
 features:
   - icon: 🚀
     title: Self-hosting
-    details: Deploy Plane on your infrastructure with Docker, Kubernetes, or Podman. Complete guides for configuration, authentication, and management.
+    details: Deploy Plane on your infrastructure with Docker, Kubernetes, or other methods. Complete guides for configuration, authentication, and management.
     link: /self-hosting/overview
     linkText: View deployment guides
   - icon: 📡
     title: REST API
-    details: 187+ endpoints to manage projects, work items, cycles, modules, and more. Full authentication, pagination, and error handling documentation.
+    details: 180+ endpoints to manage projects, work items, cycles, modules, and more.
     link: /api-reference/introduction
     linkText: Explore API docs
   - icon: 🔧
     title: Webhooks
-    details: Automate workflows with real-time webhooks for project events, issue updates, and team activities.
+    details: Automate workflows with real-time webhooks for project events, work item updates, and team activities.
     link: /dev-tools/intro-webhooks
     linkText: Configure webhooks
   - icon: 🔌
@@ -45,7 +45,7 @@ features:
 
 ## Quick start guides
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 2rem 0;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 1rem; margin: 2rem 0; max-width: 100%; overflow: hidden;">
 
 <div style="border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 1.5rem;">
 

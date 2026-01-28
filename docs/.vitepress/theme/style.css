@@ -567,7 +567,6 @@ div[class*='language-'] > span.lang {
 
 /* Make the header search box wider */
 .DocSearch.DocSearch-Button {
-  width: 180px !important;
   justify-content: space-between !important;
 }
 
@@ -645,3 +644,5 @@ a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
   background: #0078b8 !important;
   box-shadow: 0 2px 8px rgba(0, 99, 153, 0.35) !important;
 }
+
+
