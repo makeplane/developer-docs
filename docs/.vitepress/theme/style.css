@@ -646,85 +646,14 @@ a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
   box-shadow: 0 2px 8px rgba(0, 99, 153, 0.35) !important;
 }
 
+
 /* ================================================
    MOBILE HORIZONTAL SCROLL FIX
    ================================================ */
 
-/* Prevent horizontal overflow on the main content */
 html,
 body {
   overflow-x: hidden;
-  max-width: 100vw;
-}
-
-.VPDoc,
-.VPContent,
-.content,
-.content-container,
-.main {
-  overflow-x: hidden;
-  max-width: 100%;
-}
-
-/* Ensure code blocks scroll horizontally instead of overflowing */
-div[class*='language-'] {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-div[class*='language-'] pre {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-div[class*='language-'] code {
-  white-space: pre;
-  word-break: normal;
-  overflow-wrap: normal;
-}
-
-/* Fix long URLs and paths in API badges */
-.api-endpoint-badge {
-  flex-wrap: wrap;
-  max-width: 100%;
-}
-
-.api-endpoint-badge .path {
-  word-break: break-all;
-  overflow-wrap: anywhere;
-  max-width: 100%;
-}
-
-/* Ensure tables scroll on mobile */
-.vp-doc table {
-  display: block;
-  overflow-x: auto;
-  max-width: 100%;
-}
-
-/* Fix any inline code that might overflow */
-.vp-doc :not(pre) > code {
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
-
-/* Mobile-specific fixes */
-@media (max-width: 768px) {
-  .vp-doc {
-    overflow-x: hidden;
-  }
-
-  /* Ensure content doesn't overflow on mobile */
-  .vp-doc > div {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  /* Make sure pre blocks are scrollable */
-  pre {
-    max-width: calc(100vw - 48px);
-    overflow-x: auto;
-  }
 }
 
 /* ================================================
