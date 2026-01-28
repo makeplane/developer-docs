@@ -1,0 +1,30 @@
+{
+  "name": "plane-docs",
+  "version": "1.0.0",
+  "description": "Plane Developer Documentation",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "plane",
+    "documentation",
+    "api"
+  ],
+  "author": "Plane",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-tabs": "^0.7.3",
+    "vue": "^3.5.26"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.562.0"
+  }
+}

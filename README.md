@@ -1,29 +1,72 @@
-# Plane developer documentation
+# Plane Developer Documentation
 
-This repository hosts comprehensive developer documentation for Plane, accessible at [developers.plane.so](https://developers.plane.so). If you are looking for the product documentation, see [Plane documentation](https://github.com/makeplane/docs)
+Official developer documentation for [Plane](https://plane.so) - an open-source project management platform.
 
-## Overview
+This repository contains comprehensive guides for REST API integration, self-hosting deployments, and building custom applications on the Plane platform.
 
-The Plane documentation provides detailed information on the following topics:
+## Documentation Sections
 
-- Setting up and managing a self-hosted instance of Plane.
-- API Reference
-- Webhooks
+- **[Self-Hosting](https://developers.plane.so/self-hosting/overview)** - Deploy Plane on your own infrastructure with Docker, Kubernetes, or other platforms
+- **[API Reference](https://developers.plane.so/api-reference/introduction)** - Complete REST API documentation for integrating with Plane
+- **[Developer Tools](https://developers.plane.so/dev-tools/build-plane-app)** - Build custom apps, webhooks, and extensions
 
-## Raising Issues
+## Tech Stack
 
-If you encounter any issues with our documentation or have suggestions for improvements, we encourage you to follow these steps:
+- [VitePress](https://vitepress.dev/) - Static site generator
+- [Vue 3](https://vuejs.org/) - Custom components
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
 
-1. **Check Existing Issues**: Before raising a new issue, please verify if a similar issue already exists.
-2. **Raise an Issue**: If you don't find an existing issue that matches your concern, feel free to create a new one. Provide as much detail as possible to clearly explain the problem or enhancement you're proposing.
+## Local Development
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm
+
+### Setup
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
+The development server runs at `http://localhost:5173` with hot reload enabled.
+
+## Project Structure
+
+```
+docs/
+├── .vitepress/
+│   ├── config.mts          # VitePress configuration
+│   ├── theme/              # Custom Vue theme
+│   │   ├── components/     # Custom Vue components
+│   │   └── style.css       # Global styles
+│   └── public/             # Static assets (images, logos)
+├── api-reference/          # REST API documentation
+├── self-hosting/           # Deployment and configuration guides
+├── dev-tools/              # Developer tools and extensions
+└── plane-one/              # Plane One (licensed edition) docs
+```
 
 ## Contributing
 
-Are you interested in contributing to our documentation? We welcome contributions from the community! You can contribute by:
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to this documentation.
 
-- Fixing bugs in the existing documentation.
-- Adding new guides or tutorials.
+## Community
 
-To get started with contributing, please refer to our [Contribution Guide](/CONTRIBUTING.md). We appreciate contributions related to self-hosting, core product functionality, and integrations with other applications.
+- [GitHub](https://github.com/makeplane/plane) - Main Plane repository
+- [Discord](https://discord.com/invite/A92xrEGCge) - Community chat
+- [Twitter](https://twitter.com/planepowers) - Updates and announcements
 
-Thank you for considering contributing to Plane documentation. Your contributions help improve the overall user experience and make information more accessible to all users. Let's work together to make Plane documentation even better!
+## License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
