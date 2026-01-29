@@ -3,13 +3,13 @@ title: Agents Overview
 description: Learn how to build AI agents that integrate with Plane workspaces, enabling automated task handling, intelligent responses, and seamless collaboration.
 ---
 
-# Agents Overview
+# Agents overview
 
 ::: info
 Plane Agents are currently in **Beta**. Please send any feedback to support@plane.so.
 :::
 
-## What are Agents in Plane?
+## What are agents in Plane?
 
 Agents in Plane are AI-powered applications that can interact with your workspace similar to how human users do. They can be @mentioned in work item comments, receive prompts from users, and respond with intelligent actions. Agents enable automation and AI assistance directly within your project management workflow.
 
@@ -20,11 +20,11 @@ Key capabilities of Plane agents:
 - **Activity tracking** — All agent interactions are tracked through the Agent Run system
 - **Real-time responses** — Agents can send thoughts, actions, and responses back to users
 
-## Agent Installation
+## Agent installation
 
 Agents are installed as OAuth applications in your Plane workspace. When you create an OAuth app with the **Enable App Mentions** option enabled, it becomes an agent that users can mention and interact with.
 
-### Installation Flow
+### Installation flow
 
 1. A workspace admin installs your agent via the OAuth consent flow
 2. Plane creates a **bot user** for your agent in that workspace
@@ -37,7 +37,7 @@ When installed, agents appear in the mention picker alongside regular workspace 
 Agents installed in your workspace do not count as billable users.
 :::
 
-## Agent Run Lifecycle
+## Agent Run lifecycle
 
 The Agent Run system tracks the complete lifecycle of an agent interaction, from when a user mentions the agent to when the agent completes its task.
 
@@ -61,7 +61,7 @@ An **Agent Run Activity** is a single unit of communication within an Agent Run.
 - **Elicitation** — A question from the agent requesting user input
 - **Error** — An error message from the agent
 
-### How Agent Run Works
+### How Agent Run works
 
 The Agent Run flow consists of three main phases:
 
@@ -100,7 +100,7 @@ sequenceDiagram
    - Work item and project context
    - Workspace information
 
-#### Phase 3: Agent Response
+#### Phase 3: Agent response
 
 1. Your agent processes the webhook and starts working
 2. The agent sends activities back to Plane via the API:
@@ -110,7 +110,7 @@ sequenceDiagram
 3. Plane updates the Agent Run status based on activities
 4. Non-ephemeral activities (response, elicitation) create comment replies visible to users
 
-### Agent Run States
+### Agent Run states
 
 Agent Runs transition through various states based on activities:
 
@@ -125,7 +125,7 @@ Agent Runs transition through various states based on activities:
 | `failed` | The run encountered an error and cannot continue |
 | `stale` | The run has not been updated in 5 minutes and is considered stale |
 
-### Continuing a Conversation
+### Continuing a conversation
 
 When a user replies to an agent's response:
 
@@ -135,6 +135,6 @@ When a user replies to an agent's response:
 
 This enables multi-turn conversations where users and agents can have back-and-forth interactions.
 
-## Next Steps
+## Next steps
 
 Ready to build your own agent? Continue to [Building an Agent](/dev-tools/agents/building-an-agent) to learn how to create and deploy your first Plane agent.

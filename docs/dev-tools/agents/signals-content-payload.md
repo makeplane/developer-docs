@@ -3,7 +3,7 @@ title: Signals & Content Payload
 description: Detailed reference for activity signals and content payload structures in Plane agents.
 ---
 
-# Signals & Content Payload
+# Signals and content payload
 
 ::: info
 Plane Agents are currently in **Beta**. Please send any feedback to support@plane.so.
@@ -22,7 +22,7 @@ Understanding these components is essential for building agents that communicate
 
 Signals are metadata that modify how an activity should be interpreted or handled. They provide additional context about the sender's intent—guiding how the activity should be processed or responded to.
 
-### Available Signals
+### Available signals
 
 | Signal | Description | Use Case |
 |--------|-------------|----------|
@@ -137,7 +137,7 @@ await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentR
 });
 ```
 
-## Content Payload Types
+## Content payload types
 
 The `content` field contains the actual message or action. Its structure varies based on the activity type.
 
@@ -548,25 +548,25 @@ interface PromptContent {
 }
 ```
 
-## Ephemeral Activities
+## Ephemeral activities
 
 Ephemeral activities are temporary and won't create comment replies. They're useful for showing agent progress without cluttering the conversation thread.
 
-### Automatically Ephemeral Types
+### Automatically ephemeral types
 
 The following activity types are automatically marked as ephemeral:
 - `thought`
 - `action`
 - `error`
 
-### Ephemeral Behavior
+### Ephemeral behavior
 
 - Ephemeral activities appear temporarily in the Agent UI
 - They're replaced when the next activity arrives
 - They don't create permanent comment replies
 - Useful for real-time progress updates
 
-### Visual Example
+### Visual example
 
 ```
 User: @WeatherBot What's the weather in Tokyo?
@@ -584,7 +584,7 @@ getWeather(35.6762, 139.6503) → 72°F, Clear
 The weather in Tokyo is currently 72°F with clear skies.
 ```
 
-## Content Metadata
+## Content metadata
 
 Use `content_metadata` to store additional structured data about an activity:
 
@@ -648,7 +648,7 @@ plane_client.agent_runs.activities.create(
 ```
 :::
 
-## Signal Metadata
+## Signal metadata
 
 Use `signal_metadata` to provide additional context for signals:
 
@@ -686,7 +686,7 @@ Use `signal_metadata` to provide additional context for signals:
 }
 ```
 
-## Complete Activity Creation Reference
+## Complete activity creation reference
 
 Here's a comprehensive example showing all activity types:
 
@@ -821,7 +821,7 @@ plane_client.agent_runs.activities.create(
 ```
 :::
 
-## Next Steps
+## Next steps
 
 - Review [Best Practices](/dev-tools/agents/best-practices) for building responsive agents
 - See [Building an Agent](/dev-tools/agents/building-an-agent) for implementation examples

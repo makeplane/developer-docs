@@ -596,9 +596,9 @@ export default withMermaid(defineConfig({
               collapsed: false,
               items: [
                 { text: 'Overview', link: '/dev-tools/agents/overview' },
-                { text: 'Building an Agent', link: '/dev-tools/agents/building-an-agent' },
-                { text: 'Best Practices', link: '/dev-tools/agents/best-practices' },
-                { text: 'Signals & Content Payload', link: '/dev-tools/agents/signals-content-payload' }
+                { text: 'Building an agent', link: '/dev-tools/agents/building-an-agent' },
+                { text: 'Best practices', link: '/dev-tools/agents/best-practices' },
+                { text: 'Signals and content payload', link: '/dev-tools/agents/signals-content-payload' }
               ]
             },
             { text: 'Webhooks', link: '/dev-tools/intro-webhooks' },

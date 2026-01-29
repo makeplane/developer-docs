@@ -1,9 +1,9 @@
 ---
-title: Best Practices
+title: Best practices
 description: Guidelines for building responsive, user-friendly Plane agents that provide a seamless experience.
 ---
 
-# Best Practices
+# Best practices
 
 ::: info
 Plane Agents are currently in **Beta**. Please send any feedback to support@plane.so.
@@ -13,11 +13,11 @@ Plane Agents are currently in **Beta**. Please send any feedback to support@plan
 
 Building a great agent experience requires thoughtful design around responsiveness, error handling, and user communication. This guide covers best practices to ensure your agent feels native to Plane and provides a seamless experience for users.
 
-## Sending Immediate Thought Activity
+## Sending immediate thought activity
 
 When your agent receives a webhook, users are waiting for a response. The most important best practice is to **acknowledge the request immediately**.
 
-### Why Immediate Acknowledgment Matters
+### Why immediate acknowledgment matters
 
 - Users see that your agent is active and processing their request
 - Prevents the Agent Run from being marked as `stale` (5-minute timeout)
@@ -87,7 +87,7 @@ def handle_webhook(webhook: dict, credentials: dict):
 ```
 :::
 
-### Thought Activity Best Practices
+### Thought activity best practices
 
 - Keep thoughts concise but informative
 - Update thoughts as you progress through different stages
@@ -103,11 +103,11 @@ def handle_webhook(webhook: dict, credentials: dict):
 - "Executing database query SELECT * FROM..."
 - Generic messages like "Working..." repeated multiple times
 
-## Acknowledging Important Signals
+## Acknowledging important signals
 
 Signals communicate user intent beyond the message content. Your agent **must** handle the `stop` signal appropriately.
 
-### The Stop Signal
+### The stop signal
 
 When a user wants to stop an agent run, Plane sends a `stop` signal with the activity. Your agent should:
 
@@ -185,18 +185,18 @@ def handle_webhook(webhook: dict, credentials: dict):
 ```
 :::
 
-### Signal Considerations
+### Signal considerations
 
 | Signal | How to Handle |
 |--------|---------------|
 | `continue` | Default behavior, proceed with processing |
 | `stop` | Immediately halt and confirm |
 
-## Progress Communication
+## Progress communication
 
 For long-running tasks, keep users informed with progress updates.
 
-### Multi-Step Operations
+### Multi-step operations
 
 When your agent performs multiple steps, send thought activities for each:
 
@@ -219,7 +219,7 @@ const summary = await generateSummary(searchResults);
 await createResponse(`Here's what I found: ${summary}`);
 ```
 
-### Avoiding Information Overload
+### Avoiding information overload
 
 While progress updates are important, too many can be overwhelming:
 
@@ -228,11 +228,11 @@ While progress updates are important, too many can be overwhelming:
 - **Don't** expose technical implementation details
 - **Do** explain what value is being created for the user
 
-## Error Handling
+## Error handling
 
 Graceful error handling is crucial for a good user experience.
 
-### Always Catch and Report Errors
+### Always catch and report errors
 
 ```typescript
 async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
@@ -282,7 +282,7 @@ function getUserFriendlyErrorMessage(error: Error): string {
 }
 ```
 
-### Error Message Guidelines
+### Error message guidelines
 
 **Do:**
 - Use clear, non-technical language
@@ -294,11 +294,11 @@ function getUserFriendlyErrorMessage(error: Error): string {
 - Blame the user for errors
 - Leave users without any feedback
 
-## Handling Conversation Context
+## Handling conversation context
 
 For multi-turn conversations, maintain context from previous activities.
 
-### Fetching Previous Activities
+### Fetching previous activities
 
 ```typescript
 // Get all activities for context
@@ -319,18 +319,18 @@ const history = activities.results
 const response = await processWithContext(newPrompt, history);
 ```
 
-### Context Best Practices
+### Context best practices
 
 - Retrieve relevant history, not every single activity
 - Filter to meaningful exchanges (prompts and responses)
 - Consider summarizing long histories to save tokens/processing
 - Don't assume infinite context availability
 
-## Rate Limiting and Timeouts
+## Rate limiting and timeouts
 
 Be mindful of Plane's API limits and your own processing time.
 
-### Stale Run Prevention
+### Stale run prevention
 
 Agent Runs are marked as `stale` after 5 minutes of inactivity. For long operations:
 
@@ -351,7 +351,7 @@ async function longRunningTask(agentRunId: string) {
 }
 ```
 
-### Webhook Response Time
+### Webhook response time
 
 - Return HTTP 200 from your webhook handler quickly (within seconds)
 - Process the actual agent logic asynchronously
@@ -367,29 +367,29 @@ app.post("/webhook", async (req, res) => {
 });
 ```
 
-## Summary Checklist
+## Summary checklist
 
 **Responsiveness**
 - Send thought within seconds of webhook
 - Return webhook response quickly
 - Send heartbeats for long operations
 
-**Signal Handling**
+**Signal handling**
 - Always check for `stop` signal first
 - Handle all signal types appropriately
 - Confirm when stopping
 
-**Error Handling**
+**Error handling**
 - Wrap processing in try/catch
 - Always send error activity on failure
 - Use friendly error messages
 
-**User Experience**
+**User experience**
 - Progress updates for long tasks
 - Clear, non-technical communication
 - Maintain conversation context
 
-## Next Steps
+## Next steps
 
 - Learn about [Signals & Content Payload](/dev-tools/agents/signals-content-payload) for advanced activity handling
 - Review the [Building an Agent](/dev-tools/agents/building-an-agent) guide for implementation details

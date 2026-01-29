@@ -3,7 +3,7 @@ title: Building an Agent
 description: Step-by-step guide to creating a Plane agent, including OAuth setup, webhook handling, and activity creation.
 ---
 
-# Building an Agent
+# Building an agent
 
 ::: info
 Plane Agents are currently in **Beta**. Please send any feedback to support@plane.so.
@@ -13,17 +13,17 @@ Plane Agents are currently in **Beta**. Please send any feedback to support@plan
 
 Before building an agent, make sure you have completed the following:
 
-1. **Build a Plane App** — Follow the [Build a Plane App](/dev-tools/build-plane-app) guide to understand OAuth flows, deployment, and webhook handling.
+1. **Build a Plane app** — Follow the [Build a Plane App](/dev-tools/build-plane-app) guide to understand OAuth flows, deployment, and webhook handling.
 
-2. **Get Your Bot Token** — Complete the [Bot Token Flow](/dev-tools/build-plane-app#bot-token-flow) to obtain a `bot_token` for your agent. This token is used for all API calls.
+2. **Get your bot token** — Complete the [Bot Token Flow](/dev-tools/build-plane-app#bot-token-flow) to obtain a `bot_token` for your agent. This token is used for all API calls.
 
-3. **Set Up Webhook Handling** — Ensure your server can [receive and verify webhooks](/dev-tools/build-plane-app#handling-webhooks) from Plane.
+3. **Set up webhook handling** — Ensure your server can [receive and verify webhooks](/dev-tools/build-plane-app#handling-webhooks) from Plane.
 
 ::: info
 This guide assumes you have a working OAuth app with webhook handling. If not, complete the [Build a Plane App](/dev-tools/build-plane-app) guide first.
 :::
 
-## Creating an Agent
+## Creating an agent
 
 Building a Plane agent involves three main steps:
 
@@ -31,7 +31,7 @@ Building a Plane agent involves three main steps:
 2. Implement the OAuth flow to install your agent in workspaces
 3. Handle webhooks and create activities to respond to users
 
-### OAuth App Creation
+### OAuth app creation
 
 To create an agent, you first need to [register an OAuth application](/dev-tools/build-plane-app#create-an-oauth-application) with the **Enable App Mentions** checkbox enabled.
 
@@ -48,7 +48,7 @@ To create an agent, you first need to [register an OAuth application](/dev-tools
 The "Enable App Mentions" checkbox is what transforms a regular OAuth app into an agent that can be @mentioned in work items.
 :::
 
-### Setting Is Mentionable
+### Setting is mentionable
 
 When you enable app mentions during OAuth app creation, your application becomes mentionable in work item comments. This means:
 
@@ -58,7 +58,7 @@ When you enable app mentions during OAuth app creation, your application becomes
 
 After installation, your agent appears alongside workspace members in the mention autocomplete.
 
-## Agent Interaction
+## Agent interaction
 
 Once your agent is installed via the [OAuth consent flow](/dev-tools/build-plane-app#bot-token-flow) and users start mentioning it, you need to handle the interactions through Agent Runs and Activities.
 
@@ -66,7 +66,7 @@ Once your agent is installed via the [OAuth consent flow](/dev-tools/build-plane
 
 An **AgentRun** tracks a complete interaction session between a user and your agent.
 
-#### Key Fields
+#### Key fields
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -91,7 +91,7 @@ An **AgentRun** tracks a complete interaction session between a user and your ag
 
 An **AgentRunActivity** represents a single message or action within an Agent Run.
 
-#### Key Fields
+#### Key fields
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -106,7 +106,7 @@ An **AgentRunActivity** represents a single message or action within an Agent Ru
 | `actor` | UUID | The user or bot that created the activity |
 | `comment` | UUID | Associated comment (for non-ephemeral activities) |
 
-### Creating Activities
+### Creating activities
 
 Your agent communicates back to users by creating activities. We recommend using the official SDKs which provide typed helpers and insulate your code from API changes.
 
@@ -126,7 +126,7 @@ pip install plane-sdk
 ```
 :::
 
-#### Activity Examples
+#### Activity examples
 
 :::tabs key:language
 == TypeScript {#typescript}
@@ -269,7 +269,7 @@ plane_client.agent_runs.activities.create(
 ```
 :::
 
-### Content Payload Types
+### Content payload types
 
 The `content` field structure varies based on the activity type:
 
@@ -358,7 +358,7 @@ Signals provide additional context about how an activity should be interpreted:
 
 See [Signals & Content Payload](/dev-tools/agents/signals-content-payload) for detailed information.
 
-### Ephemeral Activities
+### Ephemeral activities
 
 Activities with `ephemeral: true` are temporary and don't create comments. They're useful for showing agent progress without cluttering the conversation.
 
@@ -369,11 +369,11 @@ The following activity types are automatically marked as ephemeral:
 
 Ephemeral activities are displayed temporarily in the UI and replaced when the next activity arrives.
 
-## AgentRun Webhooks
+## AgentRun webhooks
 
 Your agent receives webhooks when users interact with it. There are two main webhook events:
 
-### AgentRun Create Webhook
+### AgentRun create webhook
 
 Triggered when a new Agent Run is created (user first mentions your agent).
 
@@ -404,7 +404,7 @@ Triggered when a new Agent Run is created (user first mentions your agent).
 }
 ```
 
-### AgentRun Activity Webhook
+### AgentRun activity webhook
 
 Triggered when a user sends a prompt to your agent (initial mention or follow-up).
 
@@ -446,7 +446,7 @@ Triggered when a user sends a prompt to your agent (initial mention or follow-up
 }
 ```
 
-### Handling Webhooks
+### Handling webhooks
 
 Here's a complete example of handling agent webhooks using the SDKs:
 
@@ -574,7 +574,7 @@ def handle_webhook(webhook: dict, credentials: dict):
 ```
 :::
 
-## Next Steps
+## Next steps
 
 - Learn about [Best Practices](/dev-tools/agents/best-practices) for building responsive agents
 - Explore [Signals & Content Payload](/dev-tools/agents/signals-content-payload) for advanced activity handling
