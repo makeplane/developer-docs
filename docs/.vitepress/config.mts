@@ -14,6 +14,7 @@ export default withMermaid(defineConfig({
   vite: {
     optimizeDeps: {
       include: [
+        'lucide-vue-next',
         'mermaid',
         '@braintree/sanitize-url',
         'dayjs',
@@ -217,7 +218,8 @@ export default withMermaid(defineConfig({
           text: 'API Reference',
           items: [
             { text: 'Introduction', link: '/api-reference/introduction' },
-            { text: 'Project',
+            {
+              text: 'Project',
               collapsed: true,
               items: [
                 { text: 'Overview', link: '/api-reference/project/overview' },
