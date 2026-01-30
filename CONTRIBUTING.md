@@ -1,52 +1,163 @@
-# Contribution Guide for Plane Docs
+# Contributing to Plane Developer Documentation
 
-Thank you for considering contributing to Plane docs! Your contributions help improve the quality and accessibility of our documentation for all users. Please follow the guidelines outlined below to ensure a smooth contribution process.
+Thank you for your interest in contributing to Plane's developer documentation. This guide will help you get started.
 
-### 1. Create a New Issue (if it doesn't exist)
-If you encounter a problem or wish to suggest an improvement in the documentation that hasn't been addressed yet, please create a new issue. Be sure to check existing issues to avoid duplication. Include a clear description of the problem or enhancement you're suggesting.
+## Getting Started
 
-### 2. Create a New Branch from Master
-Before making any changes, create a new branch from the `master` branch. This branch will contain your proposed changes and keep the `master` branch clean for stable releases.
+### Prerequisites
 
-```bash
-git checkout master
-git pull origin master
-git checkout -b <branch-name>
+- Node.js 18 or higher
+- pnpm package manager
+
+### Local Setup
+
+1. Fork and clone the repository:
+   ```bash
+   git clone https://github.com/makeplane/developer-docs.git
+   cd developer-docs
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Start the development server:
+   ```bash
+   pnpm dev
+   ```
+
+4. Open `http://localhost:5173` in your browser
+
+## Documentation Structure
+
+### Content Directories
+
+| Directory | Purpose |
+|-----------|---------|
+| `docs/api-reference/` | REST API endpoint documentation |
+| `docs/self-hosting/` | Deployment and configuration guides |
+| `docs/dev-tools/` | Developer tools, webhooks, and extensions |
+| `docs/plane-one/` | Plane One (licensed edition) documentation |
+
+### Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `docs/.vitepress/config.mts` | Navigation, sidebar, and site settings |
+| `docs/.vitepress/theme/style.css` | Global CSS styles |
+| `docs/.vitepress/theme/components/` | Custom Vue components |
+
+## Writing Documentation
+
+### File Format
+
+All documentation is written in Markdown with VitePress extensions.
+
+### Frontmatter
+
+Each page should include frontmatter:
+
+```yaml
+---
+title: Page Title
+description: Brief description for SEO
+---
 ```
 
-### 3. Make Changes in the Appropriate Page
-Navigate to the relevant documentation page in the repository and make your changes. Ensure that your changes align with our style guide and maintain consistency across the documentation.
+### Custom Components
 
-### 4. Preview your changes
-Make sure you are visually happy with your changes.
+The documentation includes custom Vue components for enhanced formatting:
 
-1. Run `npx mint dev`
-1. A url will be printed to your console. Open it in your browser.
-1. Visit your pages and confirm they look correct.
+- `<Card>` - Feature highlight cards
+- `<CardGroup>` - Grouped card layouts
+- `<ApiParam>` - API parameter documentation
+- `<CodePanel>` - Code examples with syntax highlighting
+- `<ResponsePanel>` - API response examples
 
-### 5. Fix broken links
+### Images
 
-1. Run `npx mint broken-links`
-2. Fix all reported broken links
+Place images in `docs/.vitepress/public/images/` and reference them with absolute paths:
 
-### 6. Raise a Pull Request (PR)
-Once your changes are ready, raise a pull request (PR) to merge your branch into the `master` branch. Please provide a descriptive title and detailed description of your changes.
-
-### 7. Leave a Clear Commit Message
-When committing your changes, leave a clear and concise message that links to the corresponding issue (if applicable) and explains the fix or enhancement you've made.
-
-```bash
-git add .
-git commit -m "Fixes #<issue-number>: Description of the fix or enhancement"
+```markdown
+![Alt text](/images/category/image-name.png)
 ```
 
-### 8. Link the Issue to the Pull Request
-In your pull request description, be sure to reference the related issue using GitHub's syntax (`#<issue-number>`). This links the PR to the issue and helps maintain context.
+## Making Changes
 
-### 9. Sign the Contributor License Agreement (CLA)
-Before we can merge your contribution, you must sign our contributor license agreement (CLA). This agreement ensures that your contributions comply with our licensing terms.
+### Branch Naming
 
-### 10. Assign a Reviewer from Our Team
-Once your PR is submitted, a member of our team will be assigned to review your changes. They will provide feedback and may request revisions if necessary. Please respond promptly to any review comments to expedite the merging process.
+Use descriptive branch names:
+- `docs/add-webhook-guide`
+- `fix/typo-in-api-reference`
+- `update/kubernetes-deployment`
 
-Thank you for contributing to our documentation! We appreciate your efforts in making our product documentation more comprehensive and user-friendly. If you have any questions or need assistance, feel free to reach out to our team. Happy contributing!
+### Commit Messages
+
+Write clear, concise commit messages:
+- `Add webhook payload examples`
+- `Fix broken link in self-hosting guide`
+- `Update Docker Compose instructions for v1.0`
+
+### Pull Requests
+
+1. Create a branch from `preview`
+2. Make your changes
+3. Test locally with `pnpm dev`
+4. Build and verify with `pnpm build && pnpm preview`
+5. Submit a pull request to the `preview` branch
+
+### PR Guidelines
+
+- Provide a clear description of changes
+- Link related issues if applicable
+- Ensure the build passes
+- Request review from maintainers
+
+## Style Guide
+
+### Writing Style
+
+- Use clear, concise language
+- Write in second person ("you" instead of "we")
+- Use active voice
+- Include code examples where helpful
+
+### Code Examples
+
+- Provide working, tested examples
+- Include necessary context and imports
+- Use syntax highlighting with language identifiers
+
+```python
+import requests
+
+response = requests.get(
+    "https://api.plane.so/api/v1/workspaces/",
+    headers={"X-API-Key": "your-api-key"}
+)
+```
+
+### API Documentation
+
+When documenting API endpoints:
+- Include the HTTP method and path
+- List all parameters with types and descriptions
+- Show request and response examples
+- Note any authentication requirements
+
+## Reporting Issues
+
+Found an error or have a suggestion? [Open an issue](https://github.com/makeplane/developer-docs/issues/new) with:
+
+- Clear description of the problem or suggestion
+- Link to the affected page
+- Screenshots if applicable
+
+## Questions
+
+For questions about contributing, reach out on [Discord](https://discord.com/invite/A92xrEGCge) or open a discussion on GitHub.
+
+## License
+
+By contributing, you agree that your contributions will be licensed under the Apache License 2.0.
