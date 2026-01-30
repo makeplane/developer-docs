@@ -39,9 +39,9 @@ Before we start, make sure you've got these covered:
 
 5. Download and extract Podman Quadlets.    
     ```bash
-    curl -fsSL https://prime.plane.so/releases/<plane-version>/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
-    tar -xzf podman-quadlets.tar.gz
-    cd podman-quadlets
+    mkdir podman-quadlets
+    curl -fsSL https://prime.plane.so/releases/v2.3.1/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
+    tar -xvzf podman-quadlets.tar.gz -C podman-quadlets
     ```
 
     The directory contains an `install.sh` script that will handle the installation and configuration.
@@ -66,6 +66,23 @@ This installs Plane in `/opt/plane`, which is a standard system location.
 ::: info
 Systemd configurations are installed in `~/.config/containers/systemd/`
 :::
+
+## Configure external services (optional)
+
+If you use external services for database, Redis, RabbitMQ, OpenSearch, or object storage (MinIO/S3), edit `plane.env` in your Plane installation directory (e.g. `/opt/plane` or your custom path from `--base-dir`) before starting services.
+See [Environment variables](/self-hosting/govern/environment-variables) for more details.
+
+- **Database** — In the **DB SETTINGS** section, set `DATABASE_URL` or individual variables (`PGHOST`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, `POSTGRES_PORT`).
+
+- **Redis** — In the **REDIS SETTINGS** section, set `REDIS_URL` or `REDIS_HOST` and `REDIS_PORT`.
+
+- **RabbitMQ** — Set `AMQP_URL` (e.g. `amqp://username:password@your-rabbitmq-host:5672/vhost`).
+
+- **OpenSearch** — Set `OPENSEARCH_ENABLED=1`, `OPENSEARCH_URL`, and optionally `OPENSEARCH_USERNAME` and `OPENSEARCH_PASSWORD`. See [Configure OpenSearch for advanced search](/self-hosting/govern/advanced-search).
+
+- **MinIO / S3** — In the **DATA STORE SETTINGS** section, set `USE_MINIO=0` for external S3, then set `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_ENDPOINT_URL`, and `AWS_S3_BUCKET_NAME`.
+
+After editing `plane.env`, start or restart services as described in [Start Plane](#start-plane) so the changes take effect.
 
 ## Start Plane
 
