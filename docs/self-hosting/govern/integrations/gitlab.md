@@ -82,8 +82,7 @@ Fill in the application details with the following configuration:
   The redirect URI depends on your Plane deployment:
 
   **For Plane Cloud:**
-  `     https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback
-  `
+  `    https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback`
 
 **For Plane Self-Hosted:**
 `     https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback

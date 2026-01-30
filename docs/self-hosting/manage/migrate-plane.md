@@ -26,15 +26,15 @@ If you need to change your domain during migration, contact our support team for
     Log in to Plane on your current server. Head to each paid workspace like Pro or Business and [delink the licenses](/self-hosting/manage/manage-licenses/activate-pro-and-business#delink-license-key). This will free up the licenses for activation on your new server. Ideally, you have just one paid workspace.
 
 2.  **Backup data**  
-    Create a backup of your Plane instance with ↓:
+     Create a backup of your Plane instance with ↓:
     `bash
 prime-cli backup
 `
     This command will generate a backup file in the path: `/opt/plane/backups`.
 
-        ::: warning
-        **Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
-        :::
+            ::: warning
+            **Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
+            :::
 
 3.  **Set up Plane on the new server**  
     Follow the [installation guide](/self-hosting/methods/docker-compose#install-plane) to deploy Plane on the new instance.

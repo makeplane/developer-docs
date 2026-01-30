@@ -26,7 +26,7 @@ Mandatory for Docker Compose deployments only.
 Before configuring DNS records for Intake Email, secure your email domain with an SSL/TLS certificate. This ensures encrypted communication between mail servers and improves email trust and deliverability.
 
 1.  **Install Certbot**  
-    Update your system and install Certbot.
+     Update your system and install Certbot.
     `bash
 sudo apt update && sudo apt install certbot
 `
@@ -98,7 +98,7 @@ sudo apt install python3-certbot-apache
         :::
 
 2.  **Add an MX Record**  
-    This record directs email traffic to your mail server.
+     This record directs email traffic to your mail server.
     `bash
 Type: MX
 Host: <mail-domain>           # Example: intake.example.com

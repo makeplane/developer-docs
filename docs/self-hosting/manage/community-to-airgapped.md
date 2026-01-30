@@ -32,13 +32,13 @@ Make sure you already have Commercial Airgapped Edition installed on a fresh mac
    ```
    This will create a backup of the plane community instance in the `backup/` folder with the timestamp as the folder name.
    `bash
- backup/
- └── 20250605-0938
-     ├── pgdata.tar.gz
-     ├── rabbitmq_data.tar.gz
-     ├── redisdata.tar.gz
-     └── uploads.tar.gz
- `
+backup/
+└── 20250605-0938
+    ├── pgdata.tar.gz
+    ├── rabbitmq_data.tar.gz
+    ├── redisdata.tar.gz
+    └── uploads.tar.gz
+`
 
 ## Restore data on Airgapped instance
 

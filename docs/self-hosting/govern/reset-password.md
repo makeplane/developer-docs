@@ -22,8 +22,8 @@ Users can reset their password through the terminal of the Plane application. Yo
 
 3. Run the reset password command.
    `bash
- python manage.py reset_password <email>
- `
+python manage.py reset_password <email>
+`
    ::: tip
    The email should be of an already existing user on the Plane application. If the email is not attached to any user the command will throw an error.
    :::
