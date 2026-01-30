@@ -4,7 +4,6 @@ description: Manage your license. Complete guide and documentation for Plane.
 keywords: plane
 ---
 
-
 # Manage your license
 
 After you purchase Plane One, you can log in to our customer portal(https://prime.plane.so) and find your license in the portal.

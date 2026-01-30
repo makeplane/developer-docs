@@ -4,7 +4,6 @@ description: Update an initiative label via Plane API. HTTP PATCH request format
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
 ---
 
-
 # Update an initiative label
 
 <div class="api-endpoint-badge">
@@ -113,22 +112,19 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/label-uuid/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "color": "example-color",
-  "sort_order": 1
-})
-  }
-);
+const response = await fetch('https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/label-uuid/', {
+  method: 'PATCH',
+  headers: {
+    'X-API-Key': 'your-api-key',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: 'example-name',
+    description: 'example-description',
+    color: 'example-color',
+    sort_order: 1,
+  }),
+});
 const data = await response.json();
 ```
 

@@ -24,12 +24,12 @@ Signals are metadata that modify how an activity should be interpreted or handle
 
 ### Available signals
 
-| Signal | Description | Use Case |
-|--------|-------------|----------|
-| `continue` | Default signal, indicates normal flow | Standard responses, ongoing conversation |
-| `stop` | User requested to stop the agent | Cancellation, abort operations |
-| `auth_request` | Agent needs external authentication | OAuth flows, API key collection |
-| `select` | Agent presenting options for selection | Multiple choice questions |
+| Signal         | Description                            | Use Case                                 |
+| -------------- | -------------------------------------- | ---------------------------------------- |
+| `continue`     | Default signal, indicates normal flow  | Standard responses, ongoing conversation |
+| `stop`         | User requested to stop the agent       | Cancellation, abort operations           |
+| `auth_request` | Agent needs external authentication    | OAuth flows, API key collection          |
+| `select`       | Agent presenting options for selection | Multiple choice questions                |
 
 ### Signal: `continue`
 
@@ -111,6 +111,7 @@ await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentR
 ```
 
 **Requirements:**
+
 - The URL must start with `https://`
 - The URL should be a secure endpoint on your agent's server
 - After authentication, redirect the user back or notify completion
@@ -149,8 +150,8 @@ Internal reasoning or progress updates from the agent. Automatically marked as e
 
 ```typescript
 interface ThoughtContent {
-  type: "thought";
-  body: string;  // The thought message
+  type: 'thought';
+  body: string; // The thought message
 }
 ```
 
@@ -195,9 +196,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Best practices for thoughts:**
+
 - Keep them concise and user-meaningful
 - Use to show progress, not internal implementation
 - Update as you move through stages of processing
@@ -210,9 +213,10 @@ Describes a tool invocation or external action. Automatically marked as ephemera
 
 ```typescript
 interface ActionContent {
-  type: "action";
-  action: string;       // Name of the tool/action
-  parameters: {         // Key-value pairs of parameters
+  type: 'action';
+  action: string; // Name of the tool/action
+  parameters: {
+    // Key-value pairs of parameters
     [key: string]: string;
   };
 }
@@ -323,9 +327,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Parameter requirements:**
+
 - All parameter keys must be strings
 - All parameter values must be strings
 - Use `content_metadata` to store complex/structured data
@@ -338,8 +344,8 @@ A final response to the user. Creates a comment reply visible to users.
 
 ```typescript
 interface ResponseContent {
-  type: "response";
-  body: string;  // The response message (supports Markdown)
+  type: 'response';
+  body: string; // The response message (supports Markdown)
 }
 ```
 
@@ -359,12 +365,12 @@ interface ResponseContent {
 
 ```typescript
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "response",
+  type: 'response',
   content: {
-    type: "response",
+    type: 'response',
     body: "Here's the weather in San Francisco:\n\n**68°F** - Partly Cloudy\n\nExpect mild conditions throughout the day.",
   },
-  signal: "continue",
+  signal: 'continue',
 });
 ```
 
@@ -386,9 +392,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Response best practices:**
+
 - Use Markdown for formatting
 - Be clear and concise
 - Include relevant context
@@ -402,8 +410,8 @@ Requests clarification or input from the user. Creates a comment and sets the Ag
 
 ```typescript
 interface ElicitationContent {
-  type: "elicitation";
-  body: string;  // The question or request (supports Markdown)
+  type: 'elicitation';
+  body: string; // The question or request (supports Markdown)
 }
 ```
 
@@ -423,10 +431,10 @@ interface ElicitationContent {
 
 ```typescript
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "elicitation",
+  type: 'elicitation',
   content: {
-    type: "elicitation",
-    body: "To generate the report, I need a few details:\n\n- What date range should I cover?\n- Should I include completed work items or only open ones?",
+    type: 'elicitation',
+    body: 'To generate the report, I need a few details:\n\n- What date range should I cover?\n- Should I include completed work items or only open ones?',
   },
 });
 ```
@@ -448,9 +456,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Elicitation best practices:**
+
 - Ask specific, answerable questions
 - Provide options when possible
 - Don't ask too many questions at once
@@ -464,8 +474,8 @@ Reports an error or failure. Creates a comment and sets the Agent Run status to 
 
 ```typescript
 interface ErrorContent {
-  type: "error";
-  body: string;  // The error message (supports Markdown)
+  type: 'error';
+  body: string; // The error message (supports Markdown)
 }
 ```
 
@@ -485,13 +495,13 @@ interface ErrorContent {
 
 ```typescript
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "error",
+  type: 'error',
   content: {
-    type: "error",
-    body: "I was unable to access the GitHub repository. Please ensure the integration is properly configured.",
+    type: 'error',
+    body: 'I was unable to access the GitHub repository. Please ensure the integration is properly configured.',
   },
   signal_metadata: {
-    error_code: "GITHUB_ACCESS_DENIED",
+    error_code: 'GITHUB_ACCESS_DENIED',
     retryable: true,
   },
 });
@@ -518,9 +528,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Error best practices:**
+
 - Use friendly, non-technical language
 - Suggest next steps when possible
 - Store detailed error info in `signal_metadata`
@@ -534,8 +546,8 @@ This type is **user-generated only**. Your agent cannot create prompt activities
 
 ```typescript
 interface PromptContent {
-  type: "prompt";
-  body: string;  // The user's message
+  type: 'prompt';
+  body: string; // The user's message
 }
 ```
 
@@ -555,6 +567,7 @@ Ephemeral activities are temporary and won't create comment replies. They're use
 ### Automatically ephemeral types
 
 The following activity types are automatically marked as ephemeral:
+
 - `thought`
 - `action`
 - `error`
@@ -593,21 +606,21 @@ Use `content_metadata` to store additional structured data about an activity:
 
 ```typescript
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "action",
+  type: 'action',
   content: {
-    type: "action",
-    action: "analyzeCode",
+    type: 'action',
+    action: 'analyzeCode',
     parameters: {
-      file: "src/index.ts",
-      result: "Found 3 potential issues",
+      file: 'src/index.ts',
+      result: 'Found 3 potential issues',
     },
   },
   content_metadata: {
     analysis_results: {
       issues: [
-        { line: 42, severity: "warning", message: "Unused variable" },
-        { line: 78, severity: "error", message: "Type mismatch" },
-        { line: 156, severity: "info", message: "Consider refactoring" },
+        { line: 42, severity: 'warning', message: 'Unused variable' },
+        { line: 78, severity: 'error', message: 'Type mismatch' },
+        { line: 156, severity: 'info', message: 'Consider refactoring' },
       ],
       processing_time_ms: 1250,
     },
@@ -646,6 +659,7 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 ## Signal metadata
@@ -703,45 +717,45 @@ const planeClient = new PlaneClient({
 
 // 1. Thought - Show reasoning (ephemeral)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "thought",
-  content: { type: "thought", body: "Analyzing the request..." },
+  type: 'thought',
+  content: { type: 'thought', body: 'Analyzing the request...' },
 });
 
 // 2. Action - Tool invocation (ephemeral)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "action",
+  type: 'action',
   content: {
-    type: "action",
-    action: "searchWorkItems",
-    parameters: { query: "bug", status: "open" },
+    type: 'action',
+    action: 'searchWorkItems',
+    parameters: { query: 'bug', status: 'open' },
   },
 });
 
 // 3. Response - Final answer (creates comment)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "response",
-  content: { type: "response", body: "Found 5 open bugs." },
-  signal: "continue",
+  type: 'response',
+  content: { type: 'response', body: 'Found 5 open bugs.' },
+  signal: 'continue',
 });
 
 // 4. Elicitation - Ask for input (creates comment, awaits response)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "elicitation",
-  content: { type: "elicitation", body: "Which bug should I prioritize?" },
-  signal: "select",
+  type: 'elicitation',
+  content: { type: 'elicitation', body: 'Which bug should I prioritize?' },
+  signal: 'select',
   signal_metadata: {
     options: [
-      { id: "bug-1", label: "AUTH-123: Login timeout" },
-      { id: "bug-2", label: "API-456: Rate limiting" },
+      { id: 'bug-1', label: 'AUTH-123: Login timeout' },
+      { id: 'bug-2', label: 'API-456: Rate limiting' },
     ],
   },
 });
 
 // 5. Error - Report failure (creates comment)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: "error",
-  content: { type: "error", body: "Unable to access the database." },
-  signal_metadata: { error_code: "DB_CONNECTION_FAILED" },
+  type: 'error',
+  content: { type: 'error', body: 'Unable to access the database.' },
+  signal_metadata: { error_code: 'DB_CONNECTION_FAILED' },
 });
 ```
 
@@ -819,6 +833,7 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 ## Next steps

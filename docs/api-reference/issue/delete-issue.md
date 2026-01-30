@@ -4,7 +4,6 @@ description: Delete a work item via Plane API. HTTP DELETE request for removing 
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Delete a work item
 
 <div class="api-endpoint-badge">
@@ -74,13 +73,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/',
   {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

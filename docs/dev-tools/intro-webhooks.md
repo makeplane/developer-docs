@@ -4,10 +4,10 @@ description: Configure webhooks for Plane. Setup real-time event notifications a
 keywords: plane, developer tools, integrations, extensions, webhooks, automation, events
 ---
 
-
 # Webhooks
 
 A webhook triggers a HTTP POST request on the specified url, whenever there is a change in an event. Like a new project is created, updated or deleted then a webhook can be triggered to receive the required payload.
+
 ## Creating a webhook
 
 `url` You are required to provide a url in which you want the payloads to be triggered.
@@ -25,13 +25,11 @@ After you create the webhook, a secret key will be created automatically and wil
 
 ```
 
-
-|Header           |Description                                                         |
-|-----------------|--------------------------------------------------------------------|
-|X-Plane-Delivery |It is a randomly generated UUID for uniquely identifying the payload|
-|X-Plane-Event    |It describes the event for which the webhook triggered              |
-|X-Plane-Signature|A signature is generated based on the secret and the payload        |
-
+| Header            | Description                                                          |
+| ----------------- | -------------------------------------------------------------------- |
+| X-Plane-Delivery  | It is a randomly generated UUID for uniquely identifying the payload |
+| X-Plane-Event     | It describes the event for which the webhook triggered               |
+| X-Plane-Signature | A signature is generated based on the secret and the payload         |
 
 ### Webhook Payload Example for the project `update`
 
@@ -76,7 +74,6 @@ After you create the webhook, a secret key will be created automatically and wil
 
 ```
 
-
 User can choose the things for which they want the webhook to be triggered.
 
 Currently Plane supports the following events for which webhook can be trigged:
@@ -105,19 +102,18 @@ if not hmac.compare_digest(expected_signature, received_signature):
 
 ```
 
-
 ## How webhook works
 
 Your webhook consumer is a simple HTTP endpoint. It must satisfy the following conditions:
 
-*   It's available in a publicly accessible non-localhost URL.
-*   It will respond to the Plane Webhook push (HTTP POST request) with a `HTTP 200` ("OK") response.
+- It's available in a publicly accessible non-localhost URL.
+- It will respond to the Plane Webhook push (HTTP POST request) with a `HTTP 200` ("OK") response.
 
 If a delivery fails (i.e. server unavailable or responded with a non-200 HTTP status code), the push will be retried a couple of times. Here an exponential backoff delay is used: the attempt will be retried after approximately 10 minutes, then 30 minutes, and so on.
 
 The webhooks are triggered for POST, PATCH, and DELETE requests.
 
-*   For DELETE requests, the response only includes the ID of the deleted entity.
+- For DELETE requests, the response only includes the ID of the deleted entity.
 
 ```
 "action":"delete",
@@ -130,8 +126,7 @@ The webhooks are triggered for POST, PATCH, and DELETE requests.
 
 ```
 
-
-*   However, for both POST and PATCH requests, the complete payload is sent in the response.
+- However, for both POST and PATCH requests, the complete payload is sent in the response.
 
 ```
 "event":"issue",
@@ -141,7 +136,6 @@ The webhooks are triggered for POST, PATCH, and DELETE requests.
 "data":{ ... }
 
 ```
-
 
 ::: info
 Whenever an issue is added to the module, the corresponding issue webhook will be triggered. Similarly, any updates made to the cycle issue will also activate the issue webhook.

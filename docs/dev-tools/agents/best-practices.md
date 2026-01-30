@@ -34,7 +34,10 @@ Send a `thought` activity within the first few seconds of receiving a webhook:
 ```typescript
 import { PlaneClient } from '@makeplane/plane-node-sdk';
 
-async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+async function handleWebhook(
+  webhook: AgentRunActivityWebhook,
+  credentials: { bot_token: string; workspace_slug: string },
+) {
   const planeClient = new PlaneClient({
     baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
     accessToken: credentials.bot_token,
@@ -85,6 +88,7 @@ def handle_webhook(webhook: dict, credentials: dict):
 
     # ... rest of the logic
 ```
+
 :::
 
 ### Thought activity best practices
@@ -94,13 +98,15 @@ def handle_webhook(webhook: dict, credentials: dict):
 - Use thoughts to explain what the agent is doing, not technical details
 
 **Good examples:**
+
 - "Analyzing your question about project timelines..."
 - "Searching for relevant work items..."
 - "Preparing response with the requested data..."
 
 **Avoid:**
+
 - "Initializing LLM context with temperature 0.7..."
-- "Executing database query SELECT * FROM..."
+- "Executing database query SELECT \* FROM..."
 - Generic messages like "Working..." repeated multiple times
 
 ## Acknowledging important signals
@@ -119,7 +125,10 @@ When a user wants to stop an agent run, Plane sends a `stop` signal with the act
 == TypeScript {#typescript}
 
 ```typescript
-async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+async function handleWebhook(
+  webhook: AgentRunActivityWebhook,
+  credentials: { bot_token: string; workspace_slug: string },
+) {
   const planeClient = new PlaneClient({
     baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
     accessToken: credentials.bot_token,
@@ -183,14 +192,15 @@ def handle_webhook(webhook: dict, credentials: dict):
 
     # Continue with normal processing...
 ```
+
 :::
 
 ### Signal considerations
 
-| Signal | How to Handle |
-|--------|---------------|
+| Signal     | How to Handle                             |
+| ---------- | ----------------------------------------- |
 | `continue` | Default behavior, proceed with processing |
-| `stop` | Immediately halt and confirm |
+| `stop`     | Immediately halt and confirm              |
 
 ## Progress communication
 
@@ -202,17 +212,17 @@ When your agent performs multiple steps, send thought activities for each:
 
 ```typescript
 // Step 1: Acknowledge
-await createThought("Understanding your request...");
+await createThought('Understanding your request...');
 
 // Step 2: First action
-await createAction("searchDocuments", { query: userQuery });
+await createAction('searchDocuments', { query: userQuery });
 const searchResults = await searchDocuments(userQuery);
 
 // Step 3: Processing
-await createThought("Found relevant information. Analyzing...");
+await createThought('Found relevant information. Analyzing...');
 
 // Step 4: Additional work
-await createAction("generateSummary", { data: searchResults });
+await createAction('generateSummary', { data: searchResults });
 const summary = await generateSummary(searchResults);
 
 // Step 5: Final response
@@ -235,7 +245,10 @@ Graceful error handling is crucial for a good user experience.
 ### Always catch and report errors
 
 ```typescript
-async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+async function handleWebhook(
+  webhook: AgentRunActivityWebhook,
+  credentials: { bot_token: string; workspace_slug: string },
+) {
   const planeClient = new PlaneClient({
     baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
     accessToken: credentials.bot_token,
@@ -256,7 +269,6 @@ async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bo
       type: 'response',
       content: { type: 'response', body: result },
     });
-
   } catch (error) {
     // ALWAYS inform the user about errors
     await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
@@ -285,11 +297,13 @@ function getUserFriendlyErrorMessage(error: Error): string {
 ### Error message guidelines
 
 **Do:**
+
 - Use clear, non-technical language
 - Suggest next steps when possible
 - Be honest about what went wrong (at a high level)
 
 **Don't:**
+
 - Expose stack traces or technical details
 - Blame the user for errors
 - Leave users without any feedback
@@ -302,15 +316,12 @@ For multi-turn conversations, maintain context from previous activities.
 
 ```typescript
 // Get all activities for context
-const activities = await planeClient.agentRuns.activities.list(
-  credentials.workspace_slug,
-  agentRunId
-);
+const activities = await planeClient.agentRuns.activities.list(credentials.workspace_slug, agentRunId);
 
 // Build conversation history
 const history = activities.results
-  .filter(a => a.type === 'prompt' || a.type === 'response')
-  .map(a => ({
+  .filter((a) => a.type === 'prompt' || a.type === 'response')
+  .map((a) => ({
     role: a.type === 'prompt' ? 'user' : 'assistant',
     content: a.content.body,
   }));
@@ -339,7 +350,7 @@ async function longRunningTask(agentRunId: string) {
   const HEARTBEAT_INTERVAL = 60000; // 1 minute
 
   const heartbeat = setInterval(async () => {
-    await createThought("Still working on your request...");
+    await createThought('Still working on your request...');
   }, HEARTBEAT_INTERVAL);
 
   try {
@@ -359,7 +370,7 @@ async function longRunningTask(agentRunId: string) {
 
 ```typescript
 // Good: Respond immediately, process async
-app.post("/webhook", async (req, res) => {
+app.post('/webhook', async (req, res) => {
   res.status(200).json({ received: true });
 
   // Process in background
@@ -370,21 +381,25 @@ app.post("/webhook", async (req, res) => {
 ## Summary checklist
 
 **Responsiveness**
+
 - Send thought within seconds of webhook
 - Return webhook response quickly
 - Send heartbeats for long operations
 
 **Signal handling**
+
 - Always check for `stop` signal first
 - Handle all signal types appropriately
 - Confirm when stopping
 
 **Error handling**
+
 - Wrap processing in try/catch
 - Always send error activity on failure
 - Use friendly error messages
 
 **User experience**
+
 - Progress updates for long tasks
 - Clear, non-technical communication
 - Maintain conversation context

@@ -5,8 +5,8 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 export default withMermaid(defineConfig({
   markdown: {
     config(md) {
-      md.use(tabsMarkdownPlugin)
-    }
+      md.use(tabsMarkdownPlugin);
+    },
   },
   mermaid: {
     // Mermaid configuration options
@@ -29,11 +29,12 @@ export default withMermaid(defineConfig({
     },
   },
   title: 'Plane developer documentation',
-  description: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
+  description:
+    'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
 
   // SEO: Generate sitemap automatically
   sitemap: {
-    hostname: 'https://developers.plane.so'
+    hostname: 'https://developers.plane.so',
   },
 
   // SEO: Clean URLs without .html extension
@@ -49,7 +50,14 @@ export default withMermaid(defineConfig({
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
     ['meta', { name: 'author', content: 'Plane' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
-    ['meta', { name: 'keywords', content: 'plane, api, self-hosting, project management, developer documentation, kubernetes, docker, rest api, webhooks, plane api' }],
+    [
+      'meta',
+      {
+        name: 'keywords',
+        content:
+          'plane, api, self-hosting, project management, developer documentation, kubernetes, docker, rest api, webhooks, plane api',
+      },
+    ],
     ['meta', { name: 'theme-color', content: '#3b82f6' }],
 
     // SEO: Canonical URL
@@ -58,14 +66,28 @@ export default withMermaid(defineConfig({
     // Open Graph meta tags
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'Developer documentation | Plane' }],
-    ['meta', { property: 'og:description', content: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.' }],
+    [
+      'meta',
+      {
+        property: 'og:description',
+        content:
+          'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.',
+      },
+    ],
     ['meta', { property: 'og:image', content: 'https://media.docs.plane.so/logo/og-docs.webp' }],
     ['meta', { property: 'og:url', content: 'https://developers.plane.so' }],
 
     // Twitter Card meta tags
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Developer documentation | Plane' }],
-    ['meta', { name: 'twitter:description', content: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.' }],
+    [
+      'meta',
+      {
+        name: 'twitter:description',
+        content:
+          'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.',
+      },
+    ],
     ['meta', { name: 'twitter:image', content: 'https://media.docs.plane.so/logo/og-docs.webp' }],
   ],
 
@@ -73,12 +95,12 @@ export default withMermaid(defineConfig({
     siteTitle: false,
     logo: {
       light: '/logo/dev-logo-watermark-light.png',
-      dark: '/logo/dev-logo-watermark-dark.png'
+      dark: '/logo/dev-logo-watermark-dark.png',
     },
 
     outline: {
       level: [2, 3],
-      label: 'On this page'
+      label: 'On this page',
     },
 
     nav: [
@@ -86,7 +108,7 @@ export default withMermaid(defineConfig({
       { text: 'API Reference', link: '/api-reference/introduction' },
       { text: 'Build and extend', link: '/dev-tools/build-plane-app' },
       { text: 'Plane Docs', link: 'https://docs.plane.so' },
-      { text: 'Sign in', link: 'https://app.plane.so/sign-in' }
+      { text: 'Sign in', link: 'https://app.plane.so/sign-in' },
     ],
 
     sidebar: {
@@ -96,8 +118,8 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'Overview', link: '/self-hosting/overview' },
             { text: 'Plane Editions', link: '/self-hosting/editions-and-versions' },
-            { text: 'Plane Architecture', link: '/self-hosting/plane-architecture' }
-          ]
+            { text: 'Plane Architecture', link: '/self-hosting/plane-architecture' },
+          ],
         },
         {
           text: 'Install',
@@ -109,8 +131,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Docker Compose', link: '/self-hosting/methods/docker-compose' },
                 { text: 'Docker AIO', link: '/self-hosting/methods/docker-aio' },
-                { text: 'Docker Swarm', link: '/self-hosting/methods/docker-swarm' }
-              ]
+                { text: 'Docker Swarm', link: '/self-hosting/methods/docker-swarm' },
+              ],
             },
             { text: 'Kubernetes', link: '/self-hosting/methods/kubernetes' },
             { text: 'Podman Quadlets', link: '/self-hosting/methods/podman-quadlets' },
@@ -121,18 +143,18 @@ export default withMermaid(defineConfig({
                 { text: 'Overview', link: '/self-hosting/methods/airgapped-requirements' },
                 { text: 'For Docker', link: '/self-hosting/methods/airgapped-edition' },
                 { text: 'For Kubernetes', link: '/self-hosting/methods/airgapped-edition-kubernetes' },
-                { text: 'Clone Docker Images', link: '/self-hosting/methods/clone-docker-images' }
-              ]
+                { text: 'Clone Docker Images', link: '/self-hosting/methods/clone-docker-images' },
+              ],
             },
             {
               text: 'Managed Platforms',
               collapsed: true,
               items: [
                 { text: 'Coolify', link: '/self-hosting/methods/coolify' },
-                { text: 'Portainer', link: '/self-hosting/methods/portainer' }
-              ]
-            }
-          ]
+                { text: 'Portainer', link: '/self-hosting/methods/portainer' },
+              ],
+            },
+          ],
         },
         {
           text: 'Configure',
@@ -148,8 +170,8 @@ export default withMermaid(defineConfig({
                 { text: 'OIDC SSO', link: '/self-hosting/govern/oidc-sso' },
                 { text: 'SAML SSO', link: '/self-hosting/govern/saml-sso' },
                 { text: 'LDAP', link: '/self-hosting/govern/ldap' },
-                { text: 'Reset Password', link: '/self-hosting/govern/reset-password' }
-              ]
+                { text: 'Reset Password', link: '/self-hosting/govern/reset-password' },
+              ],
             },
             { text: 'SMTP for email', link: '/self-hosting/govern/communication' },
             { text: 'External services', link: '/self-hosting/govern/database-and-storage' },
@@ -162,8 +184,8 @@ export default withMermaid(defineConfig({
                 { text: 'GitHub', link: '/self-hosting/govern/integrations/github' },
                 { text: 'GitLab', link: '/self-hosting/govern/integrations/gitlab' },
                 { text: 'Sentry', link: '/self-hosting/govern/integrations/sentry' },
-                { text: 'Slack', link: '/self-hosting/govern/integrations/slack' }
-              ]
+                { text: 'Slack', link: '/self-hosting/govern/integrations/slack' },
+              ],
             },
             { text: 'DNS for Intake Email', link: '/self-hosting/govern/configure-dns-email-service' },
             { text: 'OpenSearch for search', link: '/self-hosting/govern/advanced-search' },
@@ -171,8 +193,8 @@ export default withMermaid(defineConfig({
             { text: 'External reverse proxy', link: '/self-hosting/govern/reverse-proxy' },
             { text: 'Private storage buckets', link: '/self-hosting/govern/private-bucket' },
             { text: 'Environment variables', link: '/self-hosting/govern/environment-variables' },
-            { text: 'Telemetry', link: '/self-hosting/telemetry' }
-          ]
+            { text: 'Telemetry', link: '/self-hosting/telemetry' },
+          ],
         },
         {
           text: 'Manage',
@@ -182,25 +204,28 @@ export default withMermaid(defineConfig({
               collapsed: true,
               items: [
                 { text: 'Update to latest version', link: '/self-hosting/manage/upgrade-plane' },
-                { text: 'For versions before 0.14.0', link: '/self-hosting/manage/upgrade-from-0.13.2-0.14.0' }
-              ]
+                { text: 'For versions before 0.14.0', link: '/self-hosting/manage/upgrade-from-0.13.2-0.14.0' },
+              ],
             },
             {
               text: 'Manage licenses',
               collapsed: true,
               items: [
-                { text: 'Activate Pro or Business', link: '/self-hosting/manage/manage-licenses/activate-pro-and-business' },
+                {
+                  text: 'Activate Pro or Business',
+                  link: '/self-hosting/manage/manage-licenses/activate-pro-and-business',
+                },
                 { text: 'Activate Enterprise', link: '/self-hosting/manage/manage-licenses/activate-enterprise' },
-                { text: 'Activate Airgapped', link: '/self-hosting/manage/manage-licenses/activate-airgapped' }
-              ]
+                { text: 'Activate Airgapped', link: '/self-hosting/manage/manage-licenses/activate-airgapped' },
+              ],
             },
             { text: 'Backup and restore', link: '/self-hosting/manage/backup-restore' },
             { text: 'Upgrade Community to Commercial Edition', link: '/self-hosting/upgrade-from-community' },
             { text: 'Upgrade Community to Airgapped Edition', link: '/self-hosting/manage/community-to-airgapped' },
             { text: 'View Logs', link: '/self-hosting/manage/view-logs' },
             { text: 'Migrate Plane', link: '/self-hosting/manage/migrate-plane' },
-            { text: 'Prime CLI', link: '/self-hosting/manage/prime-cli' }
-          ]
+            { text: 'Prime CLI', link: '/self-hosting/manage/prime-cli' },
+          ],
         },
         {
           text: 'Troubleshoot',
@@ -208,9 +233,9 @@ export default withMermaid(defineConfig({
             { text: 'Installation Errors', link: '/self-hosting/troubleshoot/installation-errors' },
             { text: 'License Errors', link: '/self-hosting/troubleshoot/license-errors' },
             { text: 'CLI Errors', link: '/self-hosting/troubleshoot/cli-errors' },
-            { text: 'Storage Errors', link: '/self-hosting/troubleshoot/storage-errors' }
-          ]
-        }
+            { text: 'Storage Errors', link: '/self-hosting/troubleshoot/storage-errors' },
+          ],
+        },
       ],
 
       '/api-reference/': [
@@ -227,8 +252,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Projects', link: '/api-reference/project/list-projects' },
                 { text: 'Get Project', link: '/api-reference/project/get-project-detail' },
                 { text: 'Update Project', link: '/api-reference/project/update-project-detail' },
-                { text: 'Delete Project', link: '/api-reference/project/delete-project' }
-              ]
+                { text: 'Delete Project', link: '/api-reference/project/delete-project' },
+              ],
             },
             {
               text: 'State',
@@ -239,8 +264,8 @@ export default withMermaid(defineConfig({
                 { text: 'List States', link: '/api-reference/state/list-states' },
                 { text: 'Get State', link: '/api-reference/state/get-state-detail' },
                 { text: 'Update State', link: '/api-reference/state/update-state-detail' },
-                { text: 'Delete State', link: '/api-reference/state/delete-state' }
-              ]
+                { text: 'Delete State', link: '/api-reference/state/delete-state' },
+              ],
             },
             {
               text: 'Label',
@@ -251,8 +276,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Labels', link: '/api-reference/label/list-labels' },
                 { text: 'Get Label', link: '/api-reference/label/get-label-detail' },
                 { text: 'Update Label', link: '/api-reference/label/update-label-detail' },
-                { text: 'Delete Label', link: '/api-reference/label/delete-label' }
-              ]
+                { text: 'Delete Label', link: '/api-reference/label/delete-label' },
+              ],
             },
             {
               text: 'Work Item',
@@ -265,8 +290,8 @@ export default withMermaid(defineConfig({
                 { text: 'Get by Sequence ID', link: '/api-reference/issue/get-issue-sequence-id' },
                 { text: 'Search Work Items', link: '/api-reference/issue/search-issues' },
                 { text: 'Update Work Item', link: '/api-reference/issue/update-issue-detail' },
-                { text: 'Delete Work Item', link: '/api-reference/issue/delete-issue' }
-              ]
+                { text: 'Delete Work Item', link: '/api-reference/issue/delete-issue' },
+              ],
             },
             {
               text: 'Work Item Links',
@@ -277,8 +302,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Links', link: '/api-reference/link/list-links' },
                 { text: 'Get Link', link: '/api-reference/link/get-link-detail' },
                 { text: 'Update Link', link: '/api-reference/link/update-link-detail' },
-                { text: 'Delete Link', link: '/api-reference/link/delete-link' }
-              ]
+                { text: 'Delete Link', link: '/api-reference/link/delete-link' },
+              ],
             },
             {
               text: 'Work Item Activity',
@@ -286,8 +311,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Overview', link: '/api-reference/issue-activity/overview' },
                 { text: 'List Activities', link: '/api-reference/issue-activity/list-issue-activities' },
-                { text: 'Get Activity', link: '/api-reference/issue-activity/get-issue-activity-detail' }
-              ]
+                { text: 'Get Activity', link: '/api-reference/issue-activity/get-issue-activity-detail' },
+              ],
             },
             {
               text: 'Work Item Comments',
@@ -298,8 +323,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Comments', link: '/api-reference/issue-comment/list-issue-comments' },
                 { text: 'Get Comment', link: '/api-reference/issue-comment/get-issue-comment-detail' },
                 { text: 'Update Comment', link: '/api-reference/issue-comment/update-issue-comment-detail' },
-                { text: 'Delete Comment', link: '/api-reference/issue-comment/delete-issue-comment' }
-              ]
+                { text: 'Delete Comment', link: '/api-reference/issue-comment/delete-issue-comment' },
+              ],
             },
             {
               text: 'Work Item Attachments',
@@ -312,8 +337,8 @@ export default withMermaid(defineConfig({
                 { text: 'Upload File', link: '/api-reference/issue-attachments/upload-file' },
                 { text: 'Complete Upload', link: '/api-reference/issue-attachments/complete-upload' },
                 { text: 'Update Attachment', link: '/api-reference/issue-attachments/update-attachment' },
-                { text: 'Delete Attachment', link: '/api-reference/issue-attachments/delete-attachment' }
-              ]
+                { text: 'Delete Attachment', link: '/api-reference/issue-attachments/delete-attachment' },
+              ],
             },
             {
               text: 'Work Item Types',
@@ -324,8 +349,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Types', link: '/api-reference/issue-types/types/list-issue-types' },
                 { text: 'Get Type Details', link: '/api-reference/issue-types/types/get-issue-type-details' },
                 { text: 'Update Type', link: '/api-reference/issue-types/types/update-issue-types' },
-                { text: 'Delete Type', link: '/api-reference/issue-types/types/delete-issue-type' }
-              ]
+                { text: 'Delete Type', link: '/api-reference/issue-types/types/delete-issue-type' },
+              ],
             },
             {
               text: 'Custom Properties',
@@ -336,8 +361,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Properties', link: '/api-reference/issue-types/properties/list-properties' },
                 { text: 'Get Property Details', link: '/api-reference/issue-types/properties/get-property-details' },
                 { text: 'Update Property', link: '/api-reference/issue-types/properties/update-property' },
-                { text: 'Delete Property', link: '/api-reference/issue-types/properties/delete-property' }
-              ]
+                { text: 'Delete Property', link: '/api-reference/issue-types/properties/delete-property' },
+              ],
             },
             {
               text: 'Custom Property Values',
@@ -345,8 +370,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Overview', link: '/api-reference/issue-types/values/overview' },
                 { text: 'Add Property Values', link: '/api-reference/issue-types/values/add-property-values' },
-                { text: 'List Property Values', link: '/api-reference/issue-types/values/list-property-values' }
-              ]
+                { text: 'List Property Values', link: '/api-reference/issue-types/values/list-property-values' },
+              ],
             },
             {
               text: 'Custom Property Options',
@@ -357,8 +382,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Dropdown Options', link: '/api-reference/issue-types/options/list-dropdown-options' },
                 { text: 'Get Option Details', link: '/api-reference/issue-types/options/get-option-details' },
                 { text: 'Update Dropdown Options', link: '/api-reference/issue-types/options/update-dropdown-options' },
-                { text: 'Delete Dropdown Options', link: '/api-reference/issue-types/options/delete-dropdown-options' }
-              ]
+                { text: 'Delete Dropdown Options', link: '/api-reference/issue-types/options/delete-dropdown-options' },
+              ],
             },
             {
               text: 'Cycle',
@@ -376,8 +401,8 @@ export default withMermaid(defineConfig({
                 { text: 'Update Cycle', link: '/api-reference/cycle/update-cycle-detail' },
                 { text: 'Unarchive Cycle', link: '/api-reference/cycle/unarchive-cycle' },
                 { text: 'Remove Work Item', link: '/api-reference/cycle/remove-cycle-work-item' },
-                { text: 'Delete Cycle', link: '/api-reference/cycle/delete-cycle' }
-              ]
+                { text: 'Delete Cycle', link: '/api-reference/cycle/delete-cycle' },
+              ],
             },
             {
               text: 'Module',
@@ -394,8 +419,8 @@ export default withMermaid(defineConfig({
                 { text: 'Update Module', link: '/api-reference/module/update-module-detail' },
                 { text: 'Unarchive Module', link: '/api-reference/module/unarchive-module' },
                 { text: 'Remove Work Item', link: '/api-reference/module/remove-module-work-item' },
-                { text: 'Delete Module', link: '/api-reference/module/delete-module' }
-              ]
+                { text: 'Delete Module', link: '/api-reference/module/delete-module' },
+              ],
             },
             {
               text: 'Pages',
@@ -405,8 +430,8 @@ export default withMermaid(defineConfig({
                 { text: 'Add Workspace Page', link: '/api-reference/page/add-workspace-page' },
                 { text: 'Add Project Page', link: '/api-reference/page/add-project-page' },
                 { text: 'Get Workspace Page', link: '/api-reference/page/get-workspace-page' },
-                { text: 'Get Project Page', link: '/api-reference/page/get-project-page' }
-              ]
+                { text: 'Get Project Page', link: '/api-reference/page/get-project-page' },
+              ],
             },
             {
               text: 'Intake',
@@ -417,8 +442,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Intake Issues', link: '/api-reference/intake-issue/list-intake-issues' },
                 { text: 'Get Intake Issue', link: '/api-reference/intake-issue/get-intake-issue-detail' },
                 { text: 'Update Intake Issue', link: '/api-reference/intake-issue/update-intake-issue-detail' },
-                { text: 'Delete Intake Issue', link: '/api-reference/intake-issue/delete-intake-issue' }
-              ]
+                { text: 'Delete Intake Issue', link: '/api-reference/intake-issue/delete-intake-issue' },
+              ],
             },
             {
               text: 'Time Tracking',
@@ -429,8 +454,8 @@ export default withMermaid(defineConfig({
                 { text: 'Get Worklogs for Issue', link: '/api-reference/worklogs/get-worklogs-for-issue' },
                 { text: 'Get Total Time', link: '/api-reference/worklogs/get-total-time' },
                 { text: 'Update Worklog', link: '/api-reference/worklogs/update-worklog' },
-                { text: 'Delete Worklog', link: '/api-reference/worklogs/delete-worklog' }
-              ]
+                { text: 'Delete Worklog', link: '/api-reference/worklogs/delete-worklog' },
+              ],
             },
             {
               text: 'Epics',
@@ -438,8 +463,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Overview', link: '/api-reference/epics/overview' },
                 { text: 'List Epics', link: '/api-reference/epics/list-epics' },
-                { text: 'Get Epic', link: '/api-reference/epics/get-epic-detail' }
-              ]
+                { text: 'Get Epic', link: '/api-reference/epics/get-epic-detail' },
+              ],
             },
             {
               text: 'Initiatives',
@@ -450,8 +475,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Initiatives', link: '/api-reference/initiative/list-initiatives' },
                 { text: 'Get Initiative', link: '/api-reference/initiative/get-initiative-detail' },
                 { text: 'Update Initiative', link: '/api-reference/initiative/update-initiative-detail' },
-                { text: 'Delete Initiative', link: '/api-reference/initiative/delete-initiative' }
-              ]
+                { text: 'Delete Initiative', link: '/api-reference/initiative/delete-initiative' },
+              ],
             },
             {
               text: 'Initiative Labels',
@@ -461,11 +486,14 @@ export default withMermaid(defineConfig({
                 { text: 'Add Labels to Initiative', link: '/api-reference/initiative/add-labels-to-initiative' },
                 { text: 'List Initiative Labels', link: '/api-reference/initiative/list-initiative-labels' },
                 { text: 'Get Label Detail', link: '/api-reference/initiative/get-initiative-label-detail' },
-                { text: 'List Labels for Initiative', link: '/api-reference/initiative/list-initiative-labels-for-initiative' },
+                {
+                  text: 'List Labels for Initiative',
+                  link: '/api-reference/initiative/list-initiative-labels-for-initiative',
+                },
                 { text: 'Update Label', link: '/api-reference/initiative/update-initiative-label-detail' },
                 { text: 'Remove Labels', link: '/api-reference/initiative/remove-labels-from-initiative' },
-                { text: 'Delete Label', link: '/api-reference/initiative/delete-initiative-label' }
-              ]
+                { text: 'Delete Label', link: '/api-reference/initiative/delete-initiative-label' },
+              ],
             },
             {
               text: 'Initiative Projects',
@@ -473,8 +501,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Add Projects', link: '/api-reference/initiative/add-projects-to-initiative' },
                 { text: 'List Projects', link: '/api-reference/initiative/list-initiative-projects' },
-                { text: 'Remove Projects', link: '/api-reference/initiative/remove-projects-from-initiative' }
-              ]
+                { text: 'Remove Projects', link: '/api-reference/initiative/remove-projects-from-initiative' },
+              ],
             },
             {
               text: 'Initiative Epics',
@@ -482,8 +510,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Add Epics', link: '/api-reference/initiative/add-epics-to-initiative' },
                 { text: 'List Epics', link: '/api-reference/initiative/list-initiative-epics' },
-                { text: 'Remove Epics', link: '/api-reference/initiative/remove-epics-from-initiative' }
-              ]
+                { text: 'Remove Epics', link: '/api-reference/initiative/remove-epics-from-initiative' },
+              ],
             },
             {
               text: 'Customers',
@@ -497,8 +525,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Customer Work Items', link: '/api-reference/customer/list-customer-work-items' },
                 { text: 'Update Customer', link: '/api-reference/customer/update-customer-detail' },
                 { text: 'Unlink Work Item', link: '/api-reference/customer/unlink-work-item-from-customer' },
-                { text: 'Delete Customer', link: '/api-reference/customer/delete-customer' }
-              ]
+                { text: 'Delete Customer', link: '/api-reference/customer/delete-customer' },
+              ],
             },
             {
               text: 'Customer Properties',
@@ -511,8 +539,8 @@ export default withMermaid(defineConfig({
                 { text: 'Get Property Value', link: '/api-reference/customer/get-customer-property-value' },
                 { text: 'Update Property', link: '/api-reference/customer/update-customer-property-detail' },
                 { text: 'Update Property Value', link: '/api-reference/customer/update-customer-property-value' },
-                { text: 'Delete Property', link: '/api-reference/customer/delete-customer-property' }
-              ]
+                { text: 'Delete Property', link: '/api-reference/customer/delete-customer-property' },
+              ],
             },
             {
               text: 'Customer Requests',
@@ -522,8 +550,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Requests', link: '/api-reference/customer/list-customer-requests' },
                 { text: 'Get Request Detail', link: '/api-reference/customer/get-customer-request-detail' },
                 { text: 'Update Request', link: '/api-reference/customer/update-customer-request-detail' },
-                { text: 'Delete Request', link: '/api-reference/customer/delete-customer-request' }
-              ]
+                { text: 'Delete Request', link: '/api-reference/customer/delete-customer-request' },
+              ],
             },
             {
               text: 'Teamspaces',
@@ -534,8 +562,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Teamspaces', link: '/api-reference/teamspace/list-teamspaces' },
                 { text: 'Get Teamspace', link: '/api-reference/teamspace/get-teamspace-detail' },
                 { text: 'Update Teamspace', link: '/api-reference/teamspace/update-teamspace-detail' },
-                { text: 'Delete Teamspace', link: '/api-reference/teamspace/delete-teamspace' }
-              ]
+                { text: 'Delete Teamspace', link: '/api-reference/teamspace/delete-teamspace' },
+              ],
             },
             {
               text: 'Teamspace Members',
@@ -543,8 +571,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'List Members', link: '/api-reference/teamspace/list-teamspace-members' },
                 { text: 'Add Members', link: '/api-reference/teamspace/add-teamspace-members' },
-                { text: 'Remove Members', link: '/api-reference/teamspace/remove-teamspace-members' }
-              ]
+                { text: 'Remove Members', link: '/api-reference/teamspace/remove-teamspace-members' },
+              ],
             },
             {
               text: 'Teamspace Projects',
@@ -552,8 +580,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'List Projects', link: '/api-reference/teamspace/list-teamspace-projects' },
                 { text: 'Add Projects', link: '/api-reference/teamspace/add-projects-to-teamspace' },
-                { text: 'Remove Projects', link: '/api-reference/teamspace/remove-projects-from-teamspace' }
-              ]
+                { text: 'Remove Projects', link: '/api-reference/teamspace/remove-projects-from-teamspace' },
+              ],
             },
             {
               text: 'Stickies',
@@ -564,8 +592,8 @@ export default withMermaid(defineConfig({
                 { text: 'List Stickies', link: '/api-reference/sticky/list-stickies' },
                 { text: 'Get Sticky', link: '/api-reference/sticky/get-sticky-detail' },
                 { text: 'Update Sticky', link: '/api-reference/sticky/update-sticky-detail' },
-                { text: 'Delete Sticky', link: '/api-reference/sticky/delete-sticky' }
-              ]
+                { text: 'Delete Sticky', link: '/api-reference/sticky/delete-sticky' },
+              ],
             },
             {
               text: 'Members',
@@ -573,18 +601,18 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Overview', link: '/api-reference/members/overview' },
                 { text: 'Get Workspace Members', link: '/api-reference/members/get-workspace-members' },
-                { text: 'Get Project Members', link: '/api-reference/members/get-project-members' }
-              ]
+                { text: 'Get Project Members', link: '/api-reference/members/get-project-members' },
+              ],
             },
             {
               text: 'User',
               collapsed: true,
               items: [
                 { text: 'Overview', link: '/api-reference/user/overview' },
-                { text: 'Get Current User', link: '/api-reference/user/get-current-user' }
-              ]
-            }
-          ]
+                { text: 'Get Current User', link: '/api-reference/user/get-current-user' },
+              ],
+            },
+          ],
         },
       ],
 
@@ -604,26 +632,25 @@ export default withMermaid(defineConfig({
               ]
             },
             { text: 'Webhooks', link: '/dev-tools/intro-webhooks' },
-            { text: 'MCP Server', link: '/dev-tools/mcp-server' }
-          ]
-        }
+            { text: 'MCP Server', link: '/dev-tools/mcp-server' },
+          ],
+        },
       ],
-
     },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/makeplane/plane' },
       { icon: 'discord', link: 'https://discord.com/invite/A92xrEGCge' },
       { icon: 'twitter', link: 'https://twitter.com/planepowers' },
-      { icon: 'linkedin', link: 'https://www.linkedin.com/company/planepowers/' }
+      { icon: 'linkedin', link: 'https://www.linkedin.com/company/planepowers/' },
     ],
 
     search: {
-      provider: 'local'
+      provider: 'local',
     },
 
     editLink: {
-      pattern: 'https://github.com/makeplane/developer-docs/edit/main/:path'
+      pattern: 'https://github.com/makeplane/developer-docs/edit/main/:path',
     },
 
     /*footer: {

@@ -4,7 +4,6 @@ description: Delete members from teamspace via Plane API. HTTP DELETE request fo
 keywords: plane, plane api, rest api, api integration
 ---
 
-
 # Remove members from teamspace
 
 <div class="api-endpoint-badge">
@@ -82,15 +81,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch('https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/', {
+  method: 'DELETE',
+  headers: {
+    'X-API-Key': 'your-api-key',
+  },
+});
 const data = await response.json();
 ```
 

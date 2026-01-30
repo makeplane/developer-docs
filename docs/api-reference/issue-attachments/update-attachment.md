@@ -4,7 +4,6 @@ description: Update an attachment via Plane API. HTTP PATCH request format, edit
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # Update an attachment
 
 <div class="api-endpoint-badge">
@@ -182,27 +181,27 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/{attachment_id}/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/{attachment_id}/',
   {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "attributes": "example-attributes",
-  "asset": "example-asset",
-  "entity_type": "example-entity_type",
-  "entity_identifier": "example-entity_identifier",
-  "is_deleted": true,
-  "is_archived": true,
-  "external_id": "example-external_id",
-  "external_source": "example-external_source",
-  "size": 1,
-  "is_uploaded": true,
-  "storage_metadata": "example-storage_metadata"
-})
-  }
+      attributes: 'example-attributes',
+      asset: 'example-asset',
+      entity_type: 'example-entity_type',
+      entity_identifier: 'example-entity_identifier',
+      is_deleted: true,
+      is_archived: true,
+      external_id: 'example-external_id',
+      external_source: 'example-external_source',
+      size: 1,
+      is_uploaded: true,
+      storage_metadata: 'example-storage_metadata',
+    }),
+  },
 );
 const data = await response.json();
 ```

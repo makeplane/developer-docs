@@ -4,7 +4,6 @@ description: Transfer cycle work items API endpoint. Request format, parameters,
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
 ---
 
-
 # Transfer cycle work items
 
 <div class="api-endpoint-badge">
@@ -96,17 +95,17 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/transfer-issues/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/transfer-issues/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "new_cycle_id": "example-new_cycle_id"
-})
-  }
+      new_cycle_id: 'example-new_cycle_id',
+    }),
+  },
 );
 const data = await response.json();
 ```

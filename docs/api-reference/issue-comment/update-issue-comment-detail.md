@@ -4,7 +4,6 @@ description: Update a work item comment via Plane API. HTTP PATCH request format
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---
 
-
 # Update a work item comment
 
 <div class="api-endpoint-badge">
@@ -134,21 +133,21 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/comment-uuid/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/comment-uuid/',
   {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "comment_html": "example-comment_html",
-  "comment_json": "example-comment_json",
-  "access": "example-access",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id"
-})
-  }
+      comment_html: 'example-comment_html',
+      comment_json: 'example-comment_json',
+      access: 'example-access',
+      external_source: 'example-external_source',
+      external_id: 'example-external_id',
+    }),
+  },
 );
 const data = await response.json();
 ```

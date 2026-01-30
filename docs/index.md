@@ -50,15 +50,17 @@ features:
 <div style="border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 1.5rem;">
 
 ### Deploy with Docker
+
 Get Plane running in minutes with Docker Compose
 
-[Docker Compose](/self-hosting/methods/docker-compose) 
+[Docker Compose](/self-hosting/methods/docker-compose)
 
 </div>
 
 <div style="border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 1.5rem;">
 
 ### Configure Your Instance
+
 Set up authentication and connect external services to your Plane deployment.
 
 [Instance Admin](/self-hosting/govern/instance-admin) • [Configure SSO](/self-hosting/govern/authentication)
@@ -68,6 +70,7 @@ Set up authentication and connect external services to your Plane deployment.
 <div style="border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 1.5rem;">
 
 ### Manage instance
+
 Keep your instance up-to-date with the latest features and security patches.
 
 [Update guide](/self-hosting/manage/upgrade-plane) • [Manage licenses](/self-hosting/manage/manage-licenses/activate-pro-and-business)

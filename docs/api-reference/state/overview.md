@@ -4,7 +4,6 @@ description: Plane State API overview. Learn about endpoints, request/response f
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---
 
-
 # Overview
 
 States represent the current status of a work item in your project workflow.
@@ -45,7 +44,6 @@ States represent the current status of a work item in your project workflow.
 - `group` _string_ **(required)**
 
   Group to which the state belongs can only take values
-
   - backlog
   - unstarted
   - started
@@ -75,20 +73,20 @@ States represent the current status of a work item in your project workflow.
 
 ```json
 {
-	"id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
-	"created_at": "2023-11-19T17:41:45.478363Z",
-	"updated_at": "2023-11-19T17:41:45.478383Z",
-	"name": "Ideation",
-	"description": "",
-	"color": "#eb5757",
-	"workspace_slug": "ideation",
-	"sequence": 130000.0,
-	"group": "unstarted",
-	"default": false,
-	"created_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-	"updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-	"project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
-	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
+  "id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
+  "created_at": "2023-11-19T17:41:45.478363Z",
+  "updated_at": "2023-11-19T17:41:45.478383Z",
+  "name": "Ideation",
+  "description": "",
+  "color": "#eb5757",
+  "workspace_slug": "ideation",
+  "sequence": 130000.0,
+  "group": "unstarted",
+  "default": false,
+  "created_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
 

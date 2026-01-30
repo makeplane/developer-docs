@@ -19,12 +19,12 @@ Plane uses OAuth 2.0 to allow applications to access workspace data on behalf of
 2. Click **Build your own**
 3. Fill in the required details:
 
-| Field | Description |
-|-------|-------------|
-| **App Name** | Display name shown to users |
-| **Setup URL** | Entry point when users install your app. Your app redirects users to Plane's consent screen from here. |
-| **Redirect URI** | Callback URL where Plane sends users after they approve access, along with the authorization code. |
-| **Webhook URL** | Endpoint for receiving event notifications |
+| Field            | Description                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| **App Name**     | Display name shown to users                                                                            |
+| **Setup URL**    | Entry point when users install your app. Your app redirects users to Plane's consent screen from here. |
+| **Redirect URI** | Callback URL where Plane sends users after they approve access, along with the authorization code.     |
+| **Webhook URL**  | Endpoint for receiving event notifications                                                             |
 
 4. For agents that respond to @mentions, enable **"Enable App Mentions"**
 5. Save and store your **Client ID** and **Client Secret** securely
@@ -37,10 +37,10 @@ Never expose your Client Secret in client-side code or commit it to version cont
 
 Plane supports two OAuth flows:
 
-| Flow | Use When | Token Type |
-|------|----------|------------|
-| **Bot Token** (Client Credentials) | Agents, webhooks, automation, background tasks | `bot_token` |
-| **User Token** (Authorization Code) | Actions on behalf of a specific user | `access_token` |
+| Flow                                | Use When                                       | Token Type     |
+| ----------------------------------- | ---------------------------------------------- | -------------- |
+| **Bot Token** (Client Credentials)  | Agents, webhooks, automation, background tasks | `bot_token`    |
+| **User Token** (Authorization Code) | Actions on behalf of a specific user           | `access_token` |
 
 ::: info
 Most integrations should use the **Bot Token flow**. Use User Token only when you need to perform actions as a specific user.
@@ -83,10 +83,10 @@ GET https://api.plane.so/auth/o/authorize-app/
 
 After the user approves, Plane redirects to your Redirect URI with:
 
-| Parameter | Description |
-|-----------|-------------|
-| `app_installation_id` | Unique identifier for this installation |
-| `code` | Authorization code (not used in bot flow) |
+| Parameter             | Description                               |
+| --------------------- | ----------------------------------------- |
+| `app_installation_id` | Unique identifier for this installation   |
+| `code`                | Authorization code (not used in bot flow) |
 
 ### 3. Exchange for Bot Token
 
@@ -188,10 +188,10 @@ Include a random `state` parameter to prevent CSRF attacks. Verify it matches wh
 
 After approval, Plane redirects to your Redirect URI with:
 
-| Parameter | Description |
-|-----------|-------------|
-| `code` | Authorization code to exchange for tokens |
-| `state` | Your state parameter (verify this matches) |
+| Parameter | Description                                |
+| --------- | ------------------------------------------ |
+| `code`    | Authorization code to exchange for tokens  |
+| `state`   | Your state parameter (verify this matches) |
 
 ### 3. Exchange Code for Tokens
 
@@ -250,11 +250,11 @@ When events occur in Plane, webhooks are sent to your Webhook URL.
 
 ### Webhook Headers
 
-| Header | Description |
-|--------|-------------|
-| `X-Plane-Delivery` | Unique delivery ID |
-| `X-Plane-Event` | Event type (e.g., `issue`, `issue_comment`) |
-| `X-Plane-Signature` | HMAC-SHA256 signature for verification |
+| Header              | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `X-Plane-Delivery`  | Unique delivery ID                          |
+| `X-Plane-Event`     | Event type (e.g., `issue`, `issue_comment`) |
+| `X-Plane-Signature` | HMAC-SHA256 signature for verification      |
 
 ### Verify Signature
 
@@ -282,6 +282,7 @@ function verifySignature(payload: string, signature: string, secret: string): bo
   return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
 }
 ```
+
 :::
 
 ### Webhook Payload
@@ -323,10 +324,10 @@ Free ngrok URLs change on restart. Update your app settings when the URL changes
 
 Official SDKs provide OAuth helpers and typed API clients:
 
-| Language | Package |
-|----------|---------|
-| Node.js | [@makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) |
-| Python | [plane-sdk](https://pypi.org/project/plane-sdk/) |
+| Language | Package                                                                              |
+| -------- | ------------------------------------------------------------------------------------ |
+| Node.js  | [@makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) |
+| Python   | [plane-sdk](https://pypi.org/project/plane-sdk/)                                     |
 
 ```bash
 npm install @makeplane/plane-node-sdk
@@ -337,6 +338,7 @@ pip install plane-sdk
 ::: details SDK OAuth Helper Methods
 
 **Node.js:**
+
 ```typescript
 import { OAuthClient } from '@makeplane/plane-node-sdk';
 
@@ -360,6 +362,7 @@ const newToken = await oauth.getRefreshToken(refreshToken);
 ```
 
 **Python:**
+
 ```python
 from plane.client import OAuthClient
 
@@ -412,11 +415,14 @@ const WEBHOOK_SECRET = process.env.PLANE_WEBHOOK_SECRET!;
 const PLANE_API_URL = process.env.PLANE_API_URL || 'https://api.plane.so';
 
 // In-memory storage (use a database in production)
-const installations = new Map<string, {
-  botToken: string;
-  workspaceSlug: string;
-  appInstallationId: string;
-}>();
+const installations = new Map<
+  string,
+  {
+    botToken: string;
+    workspaceSlug: string;
+    appInstallationId: string;
+  }
+>();
 
 // Setup URL - redirect to Plane's consent screen
 app.get('/oauth/setup', (req, res) => {
@@ -448,19 +454,18 @@ app.get('/oauth/callback', async (req, res) => {
       }).toString(),
       {
         headers: {
-          'Authorization': `Basic ${basicAuth}`,
+          Authorization: `Basic ${basicAuth}`,
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-      }
+      },
     );
 
     const botToken = tokenRes.data.access_token;
 
     // Get workspace details
-    const installRes = await axios.get(
-      `${PLANE_API_URL}/auth/o/app-installation/?id=${appInstallationId}`,
-      { headers: { 'Authorization': `Bearer ${botToken}` } }
-    );
+    const installRes = await axios.get(`${PLANE_API_URL}/auth/o/app-installation/?id=${appInstallationId}`, {
+      headers: { Authorization: `Bearer ${botToken}` },
+    });
 
     const installation = installRes.data[0];
     const workspaceId = installation.workspace;
@@ -471,7 +476,6 @@ app.get('/oauth/callback', async (req, res) => {
 
     console.log(`Installed in workspace: ${workspaceSlug}`);
     res.send('Installation successful! You can close this window.');
-
   } catch (error) {
     console.error('OAuth error:', error);
     res.status(500).send('Installation failed');

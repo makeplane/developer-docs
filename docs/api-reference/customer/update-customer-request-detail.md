@@ -4,7 +4,6 @@ description: Update a customer request via Plane API. HTTP PATCH request format,
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Update a customer request
 
 <div class="api-endpoint-badge">
@@ -104,18 +103,18 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/',
   {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "title": "example-title",
-  "description": "example-description"
-})
-  }
+      title: 'example-title',
+      description: 'example-description',
+    }),
+  },
 );
 const data = await response.json();
 ```

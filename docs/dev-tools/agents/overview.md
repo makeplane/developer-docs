@@ -114,16 +114,16 @@ sequenceDiagram
 
 Agent Runs transition through various states based on activities:
 
-| Status | Description |
-|--------|-------------|
-| `created` | The run has been initiated but not yet started processing |
-| `in_progress` | The agent is actively processing the request |
-| `awaiting` | The agent is waiting for additional input from the user |
-| `completed` | The agent has successfully finished processing |
-| `stopping` | A stop request has been received and is being processed |
-| `stopped` | The run has been successfully stopped |
-| `failed` | The run encountered an error and cannot continue |
-| `stale` | The run has not been updated in 5 minutes and is considered stale |
+| Status        | Description                                                       |
+| ------------- | ----------------------------------------------------------------- |
+| `created`     | The run has been initiated but not yet started processing         |
+| `in_progress` | The agent is actively processing the request                      |
+| `awaiting`    | The agent is waiting for additional input from the user           |
+| `completed`   | The agent has successfully finished processing                    |
+| `stopping`    | A stop request has been received and is being processed           |
+| `stopped`     | The run has been successfully stopped                             |
+| `failed`      | The run encountered an error and cannot continue                  |
+| `stale`       | The run has not been updated in 5 minutes and is considered stale |
 
 ### Continuing a conversation
 

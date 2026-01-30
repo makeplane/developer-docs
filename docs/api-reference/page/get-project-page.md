@@ -4,7 +4,6 @@ description: List retrieve a project page via Plane API. HTTP GET request with p
 keywords: plane, plane api, rest api, api integration, projects, project management, pages, documentation, notes
 ---
 
-
 # Retrieve a project page
 
 <div class="api-endpoint-badge">
@@ -74,13 +73,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/pages/page-uuid/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/pages/page-uuid/',
   {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

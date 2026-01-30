@@ -4,7 +4,6 @@ description: List teamspace projects via Plane API. HTTP GET request with pagina
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---
 
-
 # List teamspace projects
 
 <div class="api-endpoint-badge">
@@ -25,13 +24,9 @@ Gets all the projects associated with a teamspace
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
-
-
 
 </ApiParam>
 
@@ -89,13 +84,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/',
   {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```
