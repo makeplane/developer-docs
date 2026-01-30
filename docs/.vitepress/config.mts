@@ -2,6 +2,11 @@ import { defineConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 
 export default defineConfig({
+  vite: {
+    optimizeDeps: {
+      include: ['lucide-vue-next']
+    }
+  },
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin)
@@ -197,7 +202,8 @@ export default defineConfig({
           text: 'API Reference',
           items: [
             { text: 'Introduction', link: '/api-reference/introduction' },
-            { text: 'Project',
+            {
+              text: 'Project',
               collapsed: true,
               items: [
                 { text: 'Overview', link: '/api-reference/project/overview' },
