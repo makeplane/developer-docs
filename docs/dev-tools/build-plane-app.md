@@ -1,716 +1,633 @@
 ---
-title: Build a Plane app
-description: Create custom Plane apps and integrations using OAuth 2.0. Learn how to build webhooks, automate workflows, and extend Plane with third-party tools and services.
-keywords: plane app development, plane oauth, plane webhooks, plane integration, build plane app, plane api integration, oauth 2.0 plane
+title: Build a Plane App
+description: Build and integrate an app with Plane using OAuth 2.0 authentication.
 ---
 
+# Build a Plane App
 
-# Build a Plane app <Badge type="info" text="Pro" />
-
-## Introduction
-Plane apps seamlessly integrate tools and services with Plane so you can
-use them without ever leaving your Workspace. Apps are conveniently available
-from our [marketplace](https://plane.so/marketplace/integrations), helping you
-stay focused and productive.
-
-## Why Build a Plane App?
-
-**Stop doing manual work**  
-Plane integrations eliminate repetitive tasks like copying updates between
-tools, creating work items from support tickets, and generating status reports.
-Instead of spending hours on administrative work, let your app handle it
-automatically.
-
-**Connect everything you already use**  
-Your team probably uses dozens of different tools. Plane apps create a unified
-workflow by connecting your favorite CRM, time tracking app, CI/CD pipelines,
-communication tools, and more, together into Plane. One change in Plane can
-trigger updates across your entire tech stack.
-
-**Build exactly what you need**  
-Unlike rigid SaaS platforms, Plane's open core nature means you can create
-integrations that fit your specific workflow.
-
-## Prerequisites
-
-- A [Plane](https://app.plane.so) workspace
-- Admin access to your workspace settings
-- Familiarity with OAuth 2.0 concepts (authorization code flow)
-- A backend server to handle OAuth token exchange
-
-## High-Level Workflow
-
-1. [Register your app on Plane developer portal](/dev-tools/build-plane-app#registering-your-app)
-2. [Implement OAuth flow](/dev-tools/build-plane-app#implement-oauth-flow)
-3. [Obtain and store access tokens securely](/dev-tools/build-plane-app#obtain-and-store-access-tokens-securely)
-4. [Make authenticated API requests to Plane](/dev-tools/build-plane-app#make-authenticated-api-requests-to-plane)
-5. [Handle token refresh](/dev-tools/build-plane-app#handle-token-refresh)
-
-## Registering Your App
-
-To build an OAuth application with Plane:
-
-1. Navigate to `https://app.plane.so/<workspace_slug>/settings/integrations/`.
-2. Click on the **Build your own** button.
-3. Fill out the form with the required details:
-
-   - **Setup URL**: Provide the URL that users will be redirected to when they click "Install" from the marketplace or from the app listing. This URL should initiate the OAuth flow for your application.
-   - **Redirect URIs**: Provide the URIs where Plane will send the authorization code after the user consents to the app.
-   - **Webhook URL Endpoint(Optional)**: Your service's webhook endpoint. Plane will send an HTTP `POST` request to this endpoint upon every change to the workspace in which your app was installed.
-   - **Contact Details**: Add your email or other contact information.
-   - **Organization Details(Optional)**: Optionally include your contact email, privacy policy URL, terms of service URL, and any other relevant information. This helps Plane validate and approve your application should you choose to [list in the marketplace](#listing-your-app-on-plane-marketplace).
-
-4. If you're building an agent (with or without using Plane's ADK) capable of performing operations when assigned or mentioned, enable the **Enable App Mentions** checkbox during app creation.
-5. Once the app is created, securely store the generated **Client ID** and **Client Secret**. You will need these credentials to interact with Plane's API during the OAuth flow and for making authenticated API requests.
-
-## Implement OAuth Flow
-
-### Generating Consent URL (Optional)
-
-This step is optional. This is needed only if the app should be installed from outside Plane's environment, the developer needs to generate the consent URL using the client ID generated during their app creation flow.
-
-If this flow needs to be triggered from Plane marketplace as well, then provide the URL in "Setup URL" field on application create screen to redirect the user from marketplace on clicking "Install App" button.
-
-Below are sample implementations:
-
-:::tabs key:language
-
-== Python {#python}
-
-```python
-import os
-from urllib.parse import urlencode
-
-params = {
-    "client_id": os.getenv("PLANE_CLIENT_ID"),
-    "response_type": "code",
-    "redirect_uri": os.getenv("PLANE_REDIRECT_URI"),
-    # Optional: include state if needed
-}
-
-consent_url = f"https://api.plane.so/auth/o/authorize-app/?{urlencode(params)}"
-```
-
-== TypeScript {#typescript}
-
-```typescript
-import { URLSearchParams } from 'url';
-
-const params = new URLSearchParams({
-  client_id: process.env.PLANE_CLIENT_ID!,
-  response_type: "code",
-  redirect_uri: process.env.PLANE_REDIRECT_URI!,
-  // Optional: include state if needed
-});
-
-const consentUrl = `https://api.plane.so/auth/o/authorize-app/?${params.toString()}`;
-```
+::: info
+Plane apps are currently in **Beta**. Please send any feedback to support@plane.so.
 :::
 
-There are two types of authenticated actions your application can perform:
+## Overview
 
-1. **User-authorized actions**: Actions performed on behalf of a user after they grant permission to your app via OAuth.
-2. **App-authorized actions**: Actions that the app can perform independently within the workspace where it is installed (such as responding to webhooks or automation triggers).
+Plane uses OAuth 2.0 to allow applications to access workspace data on behalf of users or as an autonomous bot. This guide covers how to register your app and implement the OAuth flow.
 
-For both these flows, Plane will make a GET request to the Redirect URI with parameters as mentioned in the following sections.
+## Create an OAuth Application
 
-We will describe how to configure and use each type in the following sections.
+1. Navigate to **Workspace Settings** → **Integrations** (`https://app.plane.so/<workspace>/settings/integrations/`)
+2. Click **Build your own**
+3. Fill in the required details:
 
-### App-Authorized Actions (Client Credentials Flow)
+| Field | Description |
+|-------|-------------|
+| **App Name** | Display name shown to users |
+| **Setup URL** | Entry point when users install your app. Your app redirects users to Plane's consent screen from here. |
+| **Redirect URI** | Callback URL where Plane sends users after they approve access, along with the authorization code. |
+| **Webhook URL** | Endpoint for receiving event notifications |
 
-When the app is installed, Plane will send both a `code` and an `app_installation_id` as part of the callback to the Redirect URI provided during consent URL generation. You can use this `app_installation_id` to request a bot token for your app.
+4. For agents that respond to @mentions, enable **"Enable App Mentions"**
+5. Save and store your **Client ID** and **Client Secret** securely
 
-Plane will make a GET request to the Redirect URI with below parameters:
+::: warning
+Never expose your Client Secret in client-side code or commit it to version control.
+:::
+
+## Choose Your Flow
+
+Plane supports two OAuth flows:
+
+| Flow | Use When | Token Type |
+|------|----------|------------|
+| **Bot Token** (Client Credentials) | Agents, webhooks, automation, background tasks | `bot_token` |
+| **User Token** (Authorization Code) | Actions on behalf of a specific user | `access_token` |
+
+::: info
+Most integrations should use the **Bot Token flow**. Use User Token only when you need to perform actions as a specific user.
+:::
+
+---
+
+## Bot Token Flow
+
+Use this flow for agents, webhook handlers, and automation that acts autonomously.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Plane
+    participant YourApp
+
+    User->>YourApp: Clicks "Install"
+    YourApp->>Plane: Redirects to consent screen
+    Plane->>User: Shows consent screen
+    User->>Plane: Approves
+    Plane->>YourApp: Redirects with app_installation_id
+    YourApp->>Plane: POST /auth/o/token/ (client_credentials)
+    Plane->>YourApp: Returns bot_token
+    YourApp->>YourApp: Store credentials
+```
+
+### 1. Redirect to Authorization
+
+When a user clicks "Install", redirect them to Plane's consent screen:
+
+```
+GET https://api.plane.so/auth/o/authorize-app/
+  ?client_id=YOUR_CLIENT_ID
+  &response_type=code
+  &redirect_uri=https://your-app.com/callback
+```
+
+### 2. Handle the Callback
+
+After the user approves, Plane redirects to your Redirect URI with:
 
 | Parameter | Description |
 |-----------|-------------|
-| code | Authorization code (present but not used for client credentials flow) |
-| app_installation_id | The unique identifier for the app installation in the workspace |
+| `app_installation_id` | Unique identifier for this installation |
+| `code` | Authorization code (not used in bot flow) |
 
-#### Examples
+### 3. Exchange for Bot Token
 
-:::tabs key:language
-== Python {#python}
+```
+POST https://api.plane.so/auth/o/token/
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic base64(client_id:client_secret)
 
-```python
-import os
-import time
-from plane.oauth.api import OAuthApi
-from plane.oauth.models import OAuthConfig
-
-# Initialize OAuth API
-def get_oauth_api():
-    oauth_config = OAuthConfig(
-        client_id=os.getenv("PLANE_CLIENT_ID"),
-        client_secret=os.getenv("PLANE_CLIENT_SECRET"),
-        redirect_uri=os.getenv("PLANE_REDIRECT_URI"),
-    )
-    return OAuthApi(
-        oauth_config=oauth_config,
-        base_url=os.getenv("PLANE_BASE_URL", "https://api.plane.so"),
-    )
-
-# Get bot token using app installation ID
-oauth_api = get_oauth_api()
-token_response = oauth_api.get_bot_token(app_installation_id)
-
-# Get app installation details
-app_installations = oauth_api.get_app_installations(
-    token_response.access_token,
-    app_installation_id,
-)
-
-if not app_installations:
-    raise Exception(f"No app installations found for app installation ID {app_installation_id}")
-
-app_installation = app_installations[0]
-bot_token = token_response.access_token
-expires_in = token_response.expires_in
+grant_type=client_credentials
+&app_installation_id=APP_INSTALLATION_ID
 ```
 
-== TypeScript {#typescript}
+**Response:**
 
-```typescript
-import axios from 'axios';
-
-// Prepare basic auth header using client_id and client_secret
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
-const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-
-// Prepare request data
-const payload = {
-  grant_type: "client_credentials",
-  app_installation_id: appInstallationId
-};
-
-// Make a POST request to fetch bot token
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
-
-// Parse the response
-const responseData = response.data;
-const botToken = responseData.access_token;
-const expiresIn = responseData.expires_in; // Token expiry in seconds
+```json
+{
+  "access_token": "pln_bot_xxxxxxxxxxxx",
+  "token_type": "Bearer",
+  "expires_in": 86400
+}
 ```
 
-:::
+### 4. Get Workspace Details
 
-### User-Authorized Actions (Authorization Code Flow)
-
-In this flow, your app exchanges the `code` received as a query parameter on the callback (to your Redirect URI) for an access token and refresh token. The access token is short-lived and must be refreshed using the refresh token when it expires. Both tokens should be securely stored.
-
-Plane will make a GET request to the Redirect URI with below parameters:
-
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| code | The authorization code that can be exchanged for an access token | Yes |
-| state | The state parameter that was passed in the authorization request | No |
-
-
-#### Examples
-
-:::tabs key:language
-== Python {#python}
-
-```python
-from plane.oauth.api import OAuthApi
-from plane.oauth.models import OAuthConfig
-
-# Initialize OAuth API
-oauth_api = get_oauth_api()  # Using the helper function from above
-
-# Exchange authorization code for access and refresh tokens
-code = "authorization_code_from_callback"
-token_response = oauth_api.exchange_code_for_token(
-    code,
-    "authorization_code",
-)
-
-# Parse the response
-access_token = token_response.access_token
-refresh_token = token_response.refresh_token
-expires_in = token_response.expires_in
+```
+GET https://api.plane.so/auth/o/app-installation/?id=APP_INSTALLATION_ID
+Authorization: Bearer YOUR_BOT_TOKEN
 ```
 
-== TypeScript {#typescript}
-
-```typescript
-import axios from 'axios';
-
-// Exchange authorization code for access and refresh tokens
-const code = "authorization_code_from_callback";
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
-const redirectUri = "your_redirect_uri";
-
-const payload = {
-  grant_type: "authorization_code",
-  code: code,
-  client_id: clientId,
-  client_secret: clientSecret,
-  redirect_uri: redirectUri
-};
-
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
-
-// Parse the response
-const responseData = response.data;
-const accessToken = responseData.access_token;
-const refreshToken = responseData.refresh_token;
-const expiresIn = responseData.expires_in;
-```
-:::
-
-### Fetching App Installation Details
-
-In both user-authorized and app-authorized flows, the `app_installation_id` identifies the app's installation within a specific workspace. It is recommended that developers fetch workspace details after OAuth is successfully completed. Plane provides an `app-installation` endpoint that works with both types of tokens.
-
-#### Examples
-
-:::tabs key:language
-== Python {#python}
-
-```python
-# Using the OAuth API to fetch app installation details
-oauth_api = get_oauth_api()
-app_installations = oauth_api.get_app_installations(
-    token,  # Either access token or bot token
-    app_installation_id,
-)
-
-if app_installations:
-    workspace_details = app_installations[0]
-    print(f"Workspace: {workspace_details.workspace_detail.name}")
-    print(f"Workspace Slug: {workspace_details.workspace_detail.slug}")
-    print(f"Bot User ID: {workspace_details.app_bot}")
-```
-
-
-== TypeScript {#typescript}
-
-
-```typescript
-import axios from 'axios';
-
-// Set authorization header with either access token or bot token
-const headers = {
-  Authorization: `Bearer ${token}`,
-};
-
-// Make GET request to fetch installation/workspace details
-const response = await axios.get(
-  `https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`,
-  { headers }
-);
-
-const workspaceDetails = response.data[0];
-```
-:::
-
-#### Sample Response
-
-The app installation endpoint returns an **array** of installation objects. Typically, you'll want to use the first element `[0]`:
+**Response:**
 
 ```json
 [
-    {
-        "id": "34b97361-8636-43dc-953e-90deedc8498f",
-        "workspace_detail": {
-            "name": "sandbox",
-            "slug": "sandbox",
-            "id": "7a2e5944-c117-4a7d-b5f4-058fe705d7d1",
-            "logo_url": null
-        },
-        "created_at": "2025-05-16T13:50:27.865821Z",
-        "updated_at": "2025-06-23T08:57:26.976742Z",
-        "deleted_at": null,
-        "status": "installed",
-        "workspace": "7a2e5944-c117-4a7d-b5f4-058fe705d7d1",
-        "application": "ab235529-388a-4f51-a55a-78272251f5f1",
-        "installed_by": "63333ab1-c605-42fc-82f7-5cd86799eca1",
-        "app_bot": "7286aaa7-9250-4851-a520-29c904fd7654", // Bot user ID for your app in this workspace
-        "webhook": "b1f4b7f1-51e8-4919-a84c-0b1143b51d2c"
-    }
+  {
+    "id": "installation-uuid",
+    "workspace": "workspace-uuid",
+    "workspace_detail": {
+      "name": "My Workspace",
+      "slug": "my-workspace"
+    },
+    "app_bot": "bot-user-uuid",
+    "status": "installed"
+  }
 ]
 ```
 
-**Key fields to note:**
-- `app_bot`: The bot user ID that represents your app in the workspace
-- `workspace_detail.slug`: The workspace slug needed for API calls
-- `workspace`: The workspace ID for identifying the workspace
-- `status`: Should be "installed" for active installations
+Store the `workspace_detail.slug` for API calls and `app_installation_id` for token refresh.
 
-## Webhook Payload Structure
+### 5. Refresh Bot Token
 
-When Plane sends webhooks to your application, the payload contains information about the event that occurred. Understanding this structure is crucial for processing webhooks effectively.
+Bot tokens expire. Request a new one using the stored `app_installation_id`:
 
-### General Webhook Structure
+```
+POST https://api.plane.so/auth/o/token/
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic base64(client_id:client_secret)
 
-All webhooks follow this general structure:
+grant_type=client_credentials
+&app_installation_id=APP_INSTALLATION_ID
+```
+
+---
+
+## User Token Flow
+
+Use this flow when your app needs to act on behalf of a specific user.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Plane
+    participant YourApp
+
+    User->>YourApp: Clicks "Connect"
+    YourApp->>Plane: Redirects to consent screen
+    Plane->>User: Shows consent screen
+    User->>Plane: Approves
+    Plane->>YourApp: Redirects with code
+    YourApp->>Plane: POST /auth/o/token/ (authorization_code)
+    Plane->>YourApp: Returns access_token + refresh_token
+    YourApp->>YourApp: Store tokens for user
+```
+
+### 1. Redirect to Authorization
+
+```
+GET https://api.plane.so/auth/o/authorize-app/
+  ?client_id=YOUR_CLIENT_ID
+  &response_type=code
+  &redirect_uri=https://your-app.com/callback
+  &state=RANDOM_STATE_VALUE
+```
+
+::: info
+Include a random `state` parameter to prevent CSRF attacks. Verify it matches when handling the callback.
+:::
+
+### 2. Handle the Callback
+
+After approval, Plane redirects to your Redirect URI with:
+
+| Parameter | Description |
+|-----------|-------------|
+| `code` | Authorization code to exchange for tokens |
+| `state` | Your state parameter (verify this matches) |
+
+### 3. Exchange Code for Tokens
+
+```
+POST https://api.plane.so/auth/o/token/
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code
+&code=AUTHORIZATION_CODE
+&client_id=YOUR_CLIENT_ID
+&client_secret=YOUR_CLIENT_SECRET
+&redirect_uri=https://your-app.com/callback
+```
+
+**Response:**
 
 ```json
 {
-  "event": "string",           // Type of event (e.g., "issue", "issue_comment", "project")
-  "action": "string",          // Action performed (e.g., "created", "updated", "deleted")
-  "webhook_id": "string",      // Unique identifier for the webhook
-  "workspace_id": "string",    // ID of the workspace where the event occurred
-  "data": {                    // Event-specific data (varies by event type)
-    "id": "string",
-    // ... other fields specific to the event
-  },
-  "activity": {                // Information about who performed the action
-    "actor": {
-      "id": "string",
-      "first_name": "string",
-      "last_name": "string",
-      "email": "string",
-      "avatar": "string",
-      "display_name": "string"
-    },
-    "field": "string",         // Field that was changed (for update events)
-    "new_value": "any",        // New value (for update events)
-    "old_value": "any"         // Previous value (for update events)
-  }
+  "access_token": "pln_xxxxxxxxxxxx",
+  "refresh_token": "pln_refresh_xxxxxxxxxxxx",
+  "token_type": "Bearer",
+  "expires_in": 86400
 }
 ```
 
-### Common Event Types
+### 4. Refresh User Token
 
-#### Issue Comment Events
+```
+POST https://api.plane.so/auth/o/token/
+Content-Type: application/x-www-form-urlencoded
 
-When someone comments on an issue:
-
-```json
-{
-  "event": "issue_comment",
-  "action": "created",
-  "webhook_id": "uuid",
-  "workspace_id": "uuid",
-  "data": {
-    "id": "comment_id",
-    "issue": "issue_id",
-    "project": "project_id",
-    "workspace": "workspace_id",
-    "comment_html": "<p>Full HTML comment content</p>",
-    "comment_stripped": "Plain text comment content",
-    "created_at": "2025-01-01T00:00:00Z",
-    "updated_at": "2025-01-01T00:00:00Z"
-  },
-  "activity": {
-    "actor": {
-      "id": "user_id",
-      "display_name": "User Name",
-      "email": "user@example.com"
-    }
-  }
-}
+grant_type=refresh_token
+&refresh_token=YOUR_REFRESH_TOKEN
+&client_id=YOUR_CLIENT_ID
+&client_secret=YOUR_CLIENT_SECRET
 ```
 
-#### Issue Events
+---
 
-When an issue is created, updated, or deleted:
+## Making API Requests
+
+Include the token in the `Authorization` header:
+
+```
+GET https://api.plane.so/api/v1/workspaces/{workspace_slug}/projects/
+Authorization: Bearer YOUR_TOKEN
+```
+
+See the [API Reference](/api-reference/introduction) for available endpoints.
+
+---
+
+## Handling Webhooks
+
+When events occur in Plane, webhooks are sent to your Webhook URL.
+
+### Webhook Headers
+
+| Header | Description |
+|--------|-------------|
+| `X-Plane-Delivery` | Unique delivery ID |
+| `X-Plane-Event` | Event type (e.g., `issue`, `issue_comment`) |
+| `X-Plane-Signature` | HMAC-SHA256 signature for verification |
+
+### Verify Signature
+
+Always verify the `X-Plane-Signature` header:
+
+:::tabs key:language
+== Python {#python}
+
+```python
+import hmac
+import hashlib
+
+def verify_signature(payload: bytes, signature: str, secret: str) -> bool:
+    expected = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected, signature)
+```
+
+== TypeScript {#typescript}
+
+```typescript
+import crypto from 'crypto';
+
+function verifySignature(payload: string, signature: string, secret: string): boolean {
+  const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+}
+```
+:::
+
+### Webhook Payload
 
 ```json
 {
   "event": "issue",
-  "action": "updated",
-  "webhook_id": "uuid",
-  "workspace_id": "uuid",
-  "data": {
-    "id": "issue_id",
-    "name": "Issue Title",
-    "description_html": "<p>Issue description</p>",
-    "priority": "high",
-    "project": "project_id",
-    "workspace": "workspace_id",
-    "assignees": ["user_id_1", "user_id_2"],
-    "labels": ["label_id_1"],
-    "state": {
-      "id": "state_id",
-      "name": "In Progress",
-      "color": "#f39c12"
-    },
-    "created_at": "2025-01-01T00:00:00Z",
-    "updated_at": "2025-01-01T00:00:00Z"
-  },
+  "action": "created",
+  "webhook_id": "webhook-uuid",
+  "workspace_id": "workspace-uuid",
+  "data": { ... },
   "activity": {
-    "actor": {
-      "id": "user_id",
-      "display_name": "User Name"
-    },
-    "field": "priority",
-    "new_value": "high",
-    "old_value": "medium"
+    "actor": { "id": "user-uuid", "display_name": "John Doe" }
   }
 }
 ```
 
-### Processing Webhooks
+See [Webhook Events](/dev-tools/intro-webhooks) for all event types.
 
-Here's how to process webhooks in your application:
+---
 
+## Local Development
 
-:::tabs key:language
-== Python {#python}
+For local development, use [ngrok](https://ngrok.com) to expose your server:
 
-```python
-from typing import Dict, Any
-from pydantic import ValidationError
-
-def handle_webhook(payload_data: Dict[str, Any]):
-    """Process incoming webhook from Plane with Pydantic validation"""
-    try:
-        # Validate webhook payload using Pydantic models
-        webhook = WebhookEvent(**payload_data)
-        print(f"Received {webhook.event} {webhook.action} event")
-        
-        # Get workspace credentials (implement your own storage)
-        credentials = get_credentials_for_workspace(webhook.workspace_id)
-        if not credentials:
-            raise Exception(f"No credentials found for workspace {webhook.workspace_id}")
-        
-        # Process specific event types with validated data
-        if webhook.event == 'issue_comment' and webhook.action == 'created':
-            comment_data = CommentEventData(**webhook.data)
-            comment_text = comment_data.comment_stripped or ""
-            
-            if '/your-command' in comment_text:
-                process_command(comment_data, credentials)
-        
-        elif webhook.event == 'issue' and webhook.action == 'updated':
-            issue_data = IssueEventData(**webhook.data)
-            
-            if webhook.activity.field == 'assignees':
-                handle_assignment_change(issue_data, credentials)
-                
-    except ValidationError as e:
-        print(f"Invalid webhook payload: {e}")
-    except Exception as e:
-        print(f"Error processing webhook: {e}")
-
-def process_command(comment_data: CommentEventData, credentials):
-    """Process custom commands from issue comments"""
-    from plane.api import WorkItemsApi
-    from plane.models import PatchedIssueRequest
-    
-    # Use the Plane API to respond to commands
-    # Implementation depends on your specific command logic
-    pass
-
-def handle_assignment_change(issue_data: IssueEventData, credentials):
-    """Handle issue assignment changes"""
-    # Your custom logic for handling assignments
-    pass
+```bash
+ngrok http 3000
 ```
 
-== TypeScript {#typescript}
+Use the generated URL (e.g., `https://abc123.ngrok.io`) for your Setup URL, Redirect URI, and Webhook URL.
 
-```typescript
-interface WebhookPayload {
-  event: string;
-  action: string;
-  webhook_id: string;
-  workspace_id: string;
-  data: any;
-  activity: {
-    actor: {
-      id: string;
-      display_name: string;
-      email?: string;
-    };
-    field?: string;
-    new_value?: any;
-    old_value?: any;
-  };
-}
-// Process incoming webhook
-async function handleWebhook(payload: WebhookPayload) {
-  console.log(`Received ${payload.event} ${payload.action} event`);
-  
-  // Get workspace credentials
-  const credentials = await getCredentialsForWorkspace(payload.workspace_id);
-  if (!credentials) {
-    throw new Error(`No credentials found for workspace ${payload.workspace_id}`);
-  }
-  
-  // Process specific event types
-  if (payload.event === 'issue_comment' && payload.action === 'created') {
-    const comment = payload.data.comment_stripped;
-    if (comment.includes('/your-command')) {
-      // Handle your custom command
-      await processCommand(payload.data, credentials);
-    }
-  }
-}
-```
+::: info
+Free ngrok URLs change on restart. Update your app settings when the URL changes.
 :::
 
-## Obtain and store access tokens securely
+---
 
-Once you have obtained the access token, you can use it to make authenticated API requests to Plane.
-Store the access token and refresh token securely in your database.
+## SDKs
 
+Official SDKs provide OAuth helpers and typed API clients:
 
-## Make authenticated API requests to Plane
+| Language | Package |
+|----------|---------|
+| Node.js | [@makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) |
+| Python | [plane-sdk](https://pypi.org/project/plane-sdk/) |
 
-For making authenticated API requests to Plane, you can use the access token obtained from the OAuth flow.
-
-API reference is available at [https://docs.plane.so/api-reference](https://docs.plane.so/api-reference).
-
-We have official SDKs for the following languages to simplify the OAuth flow and make it easier to call Plane's API.
-
-| Language | Package Link | Source Code |
-|----------|---------|-------------|
-| Node.js | [npm i @makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) | [plane-node-sdk](https://github.com/makeplane/plane-node-sdk) |
-| Python | [pip install plane-sdk](https://pypi.org/project/plane-sdk/) | [plane-python-sdk](https://github.com/makeplane/plane-python-sdk) |
-
-## Handle Token Refresh
-
-Token refresh works differently depending on the type of token you're using:
-
-### Bot Token Refresh (Client Credentials Flow)
-
-Bot tokens obtained through the client credentials flow don't use refresh tokens. Instead, when a bot token expires, you simply request a new one using the same `app_installation_id`:
-
-
-:::tabs key:language
-== Python {#python}
-
-```python
-# When bot token expires, request a new one using the same app_installation_id
-from plane.oauth.api import OAuthApi
-
-def refresh_bot_token(app_installation_id: str):
-    """Refresh an expired bot token"""
-    oauth_api = get_oauth_api()  # Using helper function from earlier examples
-    
-    # Get new bot token using the same app_installation_id
-    token_response = oauth_api.get_bot_token(app_installation_id)
-    
-    # Store the new token securely in your database
-    new_bot_token = token_response.access_token
-    expires_in = token_response.expires_in
-    
-    return new_bot_token, expires_in
-
-# Usage example
-new_token, expires_in = refresh_bot_token(app_installation_id)
+```bash
+npm install @makeplane/plane-node-sdk
+# or
+pip install plane-sdk
 ```
 
-== TypeScript {#typescript}
+::: details SDK OAuth Helper Methods
+
+**Node.js:**
+```typescript
+import { OAuthClient } from '@makeplane/plane-node-sdk';
+
+const oauth = new OAuthClient({
+  clientId: 'your_client_id',
+  clientSecret: 'your_client_secret',
+  redirectUri: 'https://your-app.com/callback',
+});
+
+// Generate authorization URL
+const authUrl = oauth.getAuthorizationUrl('code', 'state');
+
+// Exchange for bot token
+const token = await oauth.getBotToken(appInstallationId);
+
+// Exchange code for user token
+const userToken = await oauth.exchangeCodeForToken(code);
+
+// Refresh user token
+const newToken = await oauth.getRefreshToken(refreshToken);
+```
+
+**Python:**
+```python
+from plane.client import OAuthClient
+
+oauth = OAuthClient(
+    client_id="your_client_id",
+    client_secret="your_client_secret",
+)
+
+# Generate authorization URL
+auth_url = oauth.get_authorization_url(redirect_uri="...", state="state")
+
+# Exchange for bot token
+token = oauth.get_client_credentials_token(app_installation_id=app_installation_id)
+
+# Exchange code for user token
+user_token = oauth.exchange_code(code=code, redirect_uri=redirect_uri)
+
+# Refresh user token
+new_token = oauth.refresh_token(refresh_token)
+```
+
+:::
+
+---
+
+## Next Steps
+
+- [Build an Agent](/dev-tools/agents/overview) - Create AI agents that respond to @mentions
+- [API Reference](/api-reference/introduction) - Explore the full Plane API
+- [Webhook Events](/dev-tools/intro-webhooks) - All webhook event types
+- [Example: PRD Agent](https://github.com/makeplane/prd-agent) - Complete agent implementation
+
+---
+
+## Complete Examples
+
+::: details TypeScript (Express) - Full Implementation
 
 ```typescript
-// When bot token expires, request a new one using the same app_installation_id
+import express from 'express';
 import axios from 'axios';
+import crypto from 'crypto';
 
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
-const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+const app = express();
 
-const payload = {
-  grant_type: "client_credentials",
-  app_installation_id: appInstallationId  // Same ID used during initial setup
-};
+const CLIENT_ID = process.env.PLANE_CLIENT_ID!;
+const CLIENT_SECRET = process.env.PLANE_CLIENT_SECRET!;
+const REDIRECT_URI = process.env.PLANE_REDIRECT_URI!;
+const WEBHOOK_SECRET = process.env.PLANE_WEBHOOK_SECRET!;
+const PLANE_API_URL = process.env.PLANE_API_URL || 'https://api.plane.so';
 
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
+// In-memory storage (use a database in production)
+const installations = new Map<string, {
+  botToken: string;
+  workspaceSlug: string;
+  appInstallationId: string;
+}>();
+
+// Setup URL - redirect to Plane's consent screen
+app.get('/oauth/setup', (req, res) => {
+  const params = new URLSearchParams({
+    client_id: CLIENT_ID,
+    response_type: 'code',
+    redirect_uri: REDIRECT_URI,
+  });
+  res.redirect(`${PLANE_API_URL}/auth/o/authorize-app/?${params}`);
+});
+
+// OAuth callback - exchange app_installation_id for bot token
+app.get('/oauth/callback', async (req, res) => {
+  const appInstallationId = req.query.app_installation_id as string;
+
+  if (!appInstallationId) {
+    return res.status(400).send('Missing app_installation_id');
   }
-);
 
-// Parse the response
-const responseData = response.data;
-const newBotToken = responseData.access_token;
-const expiresIn = responseData.expires_in;
+  try {
+    const basicAuth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64');
+
+    // Exchange for bot token
+    const tokenRes = await axios.post(
+      `${PLANE_API_URL}/auth/o/token/`,
+      new URLSearchParams({
+        grant_type: 'client_credentials',
+        app_installation_id: appInstallationId,
+      }).toString(),
+      {
+        headers: {
+          'Authorization': `Basic ${basicAuth}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+
+    const botToken = tokenRes.data.access_token;
+
+    // Get workspace details
+    const installRes = await axios.get(
+      `${PLANE_API_URL}/auth/o/app-installation/?id=${appInstallationId}`,
+      { headers: { 'Authorization': `Bearer ${botToken}` } }
+    );
+
+    const installation = installRes.data[0];
+    const workspaceId = installation.workspace;
+    const workspaceSlug = installation.workspace_detail.slug;
+
+    // Store credentials
+    installations.set(workspaceId, { botToken, workspaceSlug, appInstallationId });
+
+    console.log(`Installed in workspace: ${workspaceSlug}`);
+    res.send('Installation successful! You can close this window.');
+
+  } catch (error) {
+    console.error('OAuth error:', error);
+    res.status(500).send('Installation failed');
+  }
+});
+
+// Webhook handler
+app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  const signature = req.headers['x-plane-signature'] as string;
+  const payload = req.body.toString();
+
+  // Verify signature
+  const expected = crypto.createHmac('sha256', WEBHOOK_SECRET).update(payload).digest('hex');
+  if (!crypto.timingSafeEqual(Buffer.from(signature || ''), Buffer.from(expected))) {
+    return res.status(403).send('Invalid signature');
+  }
+
+  const event = JSON.parse(payload);
+  console.log(`Received: ${event.event} ${event.action}`);
+
+  // Get credentials for this workspace
+  const creds = installations.get(event.workspace_id);
+  if (creds) {
+    // Process the event with creds.botToken
+  }
+
+  res.status(200).send('OK');
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
 ```
+
 :::
 
-### User Token Refresh (Authorization Code Flow)
-
-When user access tokens expire, you can use the refresh token to get a new access token:
-
-
-#### Examples
-
-:::tabs key:language
-== Python {#python}
+::: details Python (Flask) - Full Implementation
 
 ```python
-# When access token expires, use refresh token to get a new access token
-from plane.oauth.api import OAuthApi
+import os
+import hmac
+import hashlib
+import base64
+import requests as http_requests
+from flask import Flask, request, redirect
+from urllib.parse import urlencode
 
-def refresh_user_token(refresh_token: str):
-    """Refresh an expired user access token"""
-    oauth_api = get_oauth_api()  # Using helper function from earlier examples
-    
-    # Use refresh token to get new access token
-    token_response = oauth_api.exchange_code_for_token(
-        refresh_token,
-        "refresh_token",
-    )
-    
-    # Store the new tokens securely
-    new_access_token = token_response.access_token
-    new_refresh_token = token_response.refresh_token  # May be the same or new
-    expires_in = token_response.expires_in
-    
-    return new_access_token, new_refresh_token, expires_in
+app = Flask(__name__)
 
-# Usage example
-new_access_token, new_refresh_token, expires_in = refresh_user_token(stored_refresh_token)
+CLIENT_ID = os.getenv("PLANE_CLIENT_ID")
+CLIENT_SECRET = os.getenv("PLANE_CLIENT_SECRET")
+REDIRECT_URI = os.getenv("PLANE_REDIRECT_URI")
+WEBHOOK_SECRET = os.getenv("PLANE_WEBHOOK_SECRET")
+PLANE_API_URL = os.getenv("PLANE_API_URL", "https://api.plane.so")
+
+# In-memory storage (use a database in production)
+installations = {}
+
+
+@app.route("/oauth/setup")
+def oauth_setup():
+    """Redirect to Plane's consent screen."""
+    params = urlencode({
+        "client_id": CLIENT_ID,
+        "response_type": "code",
+        "redirect_uri": REDIRECT_URI,
+    })
+    return redirect(f"{PLANE_API_URL}/auth/o/authorize-app/?{params}")
+
+
+@app.route("/oauth/callback")
+def oauth_callback():
+    """Exchange app_installation_id for bot token."""
+    app_installation_id = request.args.get("app_installation_id")
+
+    if not app_installation_id:
+        return "Missing app_installation_id", 400
+
+    try:
+        # Exchange for bot token
+        credentials = f"{CLIENT_ID}:{CLIENT_SECRET}"
+        basic_auth = base64.b64encode(credentials.encode()).decode()
+
+        token_response = http_requests.post(
+            f"{PLANE_API_URL}/auth/o/token/",
+            data={
+                "grant_type": "client_credentials",
+                "app_installation_id": app_installation_id,
+            },
+            headers={
+                "Authorization": f"Basic {basic_auth}",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        )
+        token_response.raise_for_status()
+        bot_token = token_response.json()["access_token"]
+
+        # Get workspace details
+        install_response = http_requests.get(
+            f"{PLANE_API_URL}/auth/o/app-installation/",
+            params={"id": app_installation_id},
+            headers={"Authorization": f"Bearer {bot_token}"},
+        )
+        install_response.raise_for_status()
+        installation = install_response.json()[0]
+
+        workspace_id = installation["workspace"]
+        workspace_slug = installation["workspace_detail"]["slug"]
+
+        # Store credentials
+        installations[workspace_id] = {
+            "bot_token": bot_token,
+            "workspace_slug": workspace_slug,
+            "app_installation_id": app_installation_id,
+        }
+
+        print(f"Installed in workspace: {workspace_slug}")
+        return "Installation successful! You can close this window."
+
+    except Exception as e:
+        print(f"OAuth error: {e}")
+        return "Installation failed", 500
+
+
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    """Handle incoming webhooks."""
+    signature = request.headers.get("X-Plane-Signature", "")
+    payload = request.get_data()
+
+    # Verify signature
+    expected = hmac.new(
+        WEBHOOK_SECRET.encode(), payload, hashlib.sha256
+    ).hexdigest()
+
+    if not hmac.compare_digest(expected, signature):
+        return "Invalid signature", 403
+
+    event = request.get_json()
+    print(f"Received: {event['event']} {event['action']}")
+
+    # Get credentials for this workspace
+    creds = installations.get(event["workspace_id"])
+    if creds:
+        # Process the event with creds["bot_token"]
+        pass
+
+    return "OK", 200
+
+
+if __name__ == "__main__":
+    app.run(port=3000)
 ```
 
-== TypeScript {#typescript}
-
-```typescript
-// When access token expires, use refresh token to get a new access token
-const refreshPayload = {
-  grant_type: "refresh_token",
-  refresh_token: refreshToken,
-  client_id: clientId,
-  client_secret: clientSecret
-};
-
-const refreshResponse = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  refreshPayload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
-
-// Parse the refresh response
-const refreshResponseData = refreshResponse.data;
-const accessToken = refreshResponseData.access_token;
-```
 :::
 
-## Listing Your App on Plane Marketplace
+---
 
-Apps built using the OAuth flow can be listed on the Plane Marketplace: [https://plane.so/marketplace/integrations](https://plane.so/marketplace/integrations)
+## Publish to Marketplace
 
-To list your app, please contact the Plane team at [**support@plane.so**](mailto:support@plane.so).
+Apps can be listed on the [Plane Marketplace](https://plane.so/marketplace/integrations). Contact [support@plane.so](mailto:support@plane.so) to list your app.

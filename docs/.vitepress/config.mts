@@ -1,16 +1,32 @@
 import { defineConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
-  vite: {
-    optimizeDeps: {
-      include: ['lucide-vue-next']
-    }
-  },
+export default withMermaid(defineConfig({
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin)
     }
+  },
+  mermaid: {
+    // Mermaid configuration options
+  },
+  vite: {
+    optimizeDeps: {
+      include: [
+        'lucide-vue-next',
+        'mermaid',
+        '@braintree/sanitize-url',
+        'dayjs',
+        'cytoscape',
+        'cytoscape-cose-bilkent',
+        'd3',
+        'khroma',
+        'dagre-d3-es',
+        'lodash-es',
+        'dompurify',
+      ],
+    },
   },
   title: 'Plane developer documentation',
   description: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
@@ -577,6 +593,16 @@ export default defineConfig({
           text: 'Build and extend Plane',
           items: [
             { text: 'Build Plane App', link: '/dev-tools/build-plane-app' },
+            {
+              text: 'Agents',
+              collapsed: false,
+              items: [
+                { text: 'Overview', link: '/dev-tools/agents/overview' },
+                { text: 'Building an agent', link: '/dev-tools/agents/building-an-agent' },
+                { text: 'Best practices', link: '/dev-tools/agents/best-practices' },
+                { text: 'Signals and content payload', link: '/dev-tools/agents/signals-content-payload' }
+              ]
+            },
             { text: 'Webhooks', link: '/dev-tools/intro-webhooks' },
             { text: 'MCP Server', link: '/dev-tools/mcp-server' }
           ]
@@ -605,4 +631,4 @@ export default defineConfig({
       copyright: 'Copyright © 2024 Plane'
     }*/
   }
-})
+}))
