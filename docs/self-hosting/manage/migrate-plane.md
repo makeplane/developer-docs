@@ -27,22 +27,24 @@ If you need to change your domain during migration, contact our support team for
 
 2.  **Backup data**  
      Create a backup of your Plane instance with ↓:
-    `bash
-prime-cli backup
-`
+
+    ```bash
+    prime-cli backup
+    ```
+
     This command will generate a backup file in the path: `/opt/plane/backups`.
 
-                ::: warning
-                **Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
-                :::
+                    ::: warning
+                    **Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
+                    :::
 
-3.  **Set up Plane on the new server**  
+3.  **Set up Plane on the new server**
     Follow the [installation guide](/self-hosting/methods/docker-compose#install-plane) to deploy Plane on the new instance.
 
-4.  **Transfer backup files**  
+4.  **Transfer backup files**
     Copy the `backups` folder from the old server, created in step 2, to the new server. Place the backup in the folder `/opt/plane`.
 
-5.  **Restore data**  
+5.  **Restore data**
     On the new server, restore your data with ↓:
 
     ```bash
@@ -51,7 +53,7 @@ prime-cli backup
 
     Follow the prompts during the restore process to make sure everything is set up correctly.
 
-6.  **Reactivate license**  
+6.  **Reactivate license**
     Finally, [reactivate your license keys](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) on the new instance.
 
 This should get your Plane instance up and running on the new server.

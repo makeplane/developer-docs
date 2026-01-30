@@ -93,23 +93,24 @@ This upgrade path is for installations using external or managed database and ob
        If you need to change it, update the value with your managed database connection string.
 
 3.  Configure object storage 1. Find the `#DATASTORE SETTINGS` section in `plane.env` 2. Update these environment variables for your external storage:
-    `env
-USE_MINIO=0
-AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=<your-access-key>
-AWS_SECRET_ACCESS_KEY=<your-secret-key>
-AWS_S3_ENDPOINT_URL=https://s3.amazonaws.com
-AWS_S3_BUCKET_NAME=plane-uploads
-`
 
-                  :::info
-                  Setting `USE_MINIO=0` disables the local MinIO service and enables external object storage (S3 or S3-compatible services).
-                  :::
+    ```env
+    USE_MINIO=0
+    AWS_REGION=us-east-1
+    AWS_ACCESS_KEY_ID=<your-access-key>
+    AWS_SECRET_ACCESS_KEY=<your-secret-key>
+    AWS_S3_ENDPOINT_URL=https://s3.amazonaws.com
+    AWS_S3_BUCKET_NAME=plane-uploads
+    ```
 
-        3.  Restart Plane services to apply the configuration:
-            ```bash
-            prime-cli restart
-            ```
+                          :::info
+                          Setting `USE_MINIO=0` disables the local MinIO service and enables external object storage (S3 or S3-compatible services).
+                          :::
+
+                3.  Restart Plane services to apply the configuration:
+                    ```bash
+                    prime-cli restart
+                    ```
 
 Your Commercial Edition instance is now connected to your existing external database and storage.
 
@@ -118,3 +119,7 @@ Your Commercial Edition instance is now connected to your existing external data
 ## What's next
 
 - [Activate a paid plan license](/self-hosting/manage/manage-licenses/activate-pro-and-business).
+
+```
+
+```
