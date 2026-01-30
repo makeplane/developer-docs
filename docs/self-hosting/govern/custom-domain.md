@@ -29,7 +29,7 @@ cat /opt/plane/plane.env | grep <old_domain>
 
 **Example output:**
 
-```env
+```ini
 DOMAIN_NAME=localhost
 SITE_ADDRESS=http://localhost
 WEB_URL=http://localhost
@@ -51,7 +51,7 @@ This shows you all the variables that contain your current domain. You'll update
 
    Set this to your bare domain name without protocol:
 
-   ```env
+   ```ini
    DOMAIN_NAME=plane.company.com
    ```
 
@@ -60,7 +60,7 @@ This shows you all the variables that contain your current domain. You'll update
 
    Set this to your full domain URL:
 
-   ```env
+   ```ini
    SITE_ADDRESS=https://plane.company.com
    ```
 
@@ -69,7 +69,7 @@ This shows you all the variables that contain your current domain. You'll update
 
    This should match your SITE_ADDRESS:
 
-   ```env
+   ```ini
    WEB_URL=https://plane.company.com
    ```
 
@@ -79,7 +79,7 @@ This shows you all the variables that contain your current domain. You'll update
 
    List all domains that should be allowed to make cross-origin requests to your Plane instance. This typically includes both HTTP and HTTPS versions of your domain:
 
-   ```env
+   ```ini
    CORS_ALLOWED_ORIGINS=https://plane.company.com,http://plane.company.com
    ```
 
