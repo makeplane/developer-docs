@@ -4,12 +4,12 @@ description: Meet Plane One. Complete guide and documentation for Plane.
 keywords: plane
 ---
 
-
 # Meet Plane One
 
 [Plane One](https://plane.so/one) is our first licensed self-hosted edition for growing teams serious about staying in control. One unlocks security, governance, and project management features scale-ups need to manage their instance and projects better.
 
 ## Good to know
+
 1. Plane One is a self-hosted-only solution. To use our hosted Cloud editions, [go here](https://app.plane.so).
 2. Plane One only works with a domain, not with an IP addresses or `localhost`.
 3. Plane One comes with updates for two years with an option to auto-update to latest versions when they are released.
@@ -24,4 +24,5 @@ When you log in, you will see a list of your licenses. Clicking any will show yo
 ::: tipIf you are yet to get a license, do that [here](https://plane.so/one).:::
 
 ## Quickstart
+
 Plane One installs with a single command on your CLI. [Learn more](/self-hosting/methods/docker-compose).

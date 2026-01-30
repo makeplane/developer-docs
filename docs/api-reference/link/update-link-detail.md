@@ -4,7 +4,6 @@ description: Update a link via Plane API. HTTP PATCH request format, editable fi
 keywords: plane, plane api, rest api, api integration
 ---
 
-
 # Update a link
 
 <div class="api-endpoint-badge">
@@ -110,18 +109,18 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}',
   {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "url": "example-url"
-})
-  }
+      name: 'example-name',
+      url: 'example-url',
+    }),
+  },
 );
 const data = await response.json();
 ```

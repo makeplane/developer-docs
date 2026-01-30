@@ -4,7 +4,6 @@ description: Create a work item type via Plane API. HTTP POST request format, re
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Create a work item type
 
 <div class="api-endpoint-badge">
@@ -138,23 +137,23 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "logo_props": "example-logo_props",
-  "is_epic": true,
-  "is_default": true,
-  "is_active": true,
-  "level": 1
-})
-  }
+      name: 'example-name',
+      description: 'example-description',
+      logo_props: 'example-logo_props',
+      is_epic: true,
+      is_default: true,
+      is_active: true,
+      level: 1,
+    }),
+  },
 );
 const data = await response.json();
 ```

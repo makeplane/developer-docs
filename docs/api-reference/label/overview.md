@@ -4,7 +4,6 @@ description: Plane Label API overview. Learn about endpoints, request/response f
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization
 ---
 
-
 # Overview
 
 Labels are tags that help you categorize and organize work items in your project.
@@ -61,18 +60,18 @@ Labels are tags that help you categorize and organize work items in your project
 
 ```json
 {
-"id": "c7146baf-7058-496b-aa3a-df6c25a7e929",
-"created_at": "2023-11-20T06:01:03.538675Z",
-"updated_at": "2023-11-20T06:01:03.538683Z",
-"name": "High",
-"description": "",
-"color": "",
-"sort_order": 72416.0,
-"created_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-"updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-"project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
-"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
-"parent": null
+  "id": "c7146baf-7058-496b-aa3a-df6c25a7e929",
+  "created_at": "2023-11-20T06:01:03.538675Z",
+  "updated_at": "2023-11-20T06:01:03.538683Z",
+  "name": "High",
+  "description": "",
+  "color": "",
+  "sort_order": 72416.0,
+  "created_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
+  "parent": null
 }
 ```
 

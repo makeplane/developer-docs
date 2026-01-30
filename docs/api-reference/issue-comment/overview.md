@@ -4,7 +4,6 @@ description: Plane Issue-Comment API overview. Learn about endpoints, request/re
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---
 
-
 # Overview
 
 Comments allow team members to discuss and collaborate on work items by adding text, mentions, and attachments.
@@ -57,7 +56,6 @@ Comments allow team members to discuss and collaborate on work items by adding t
 - `access` _string_
 
   If the comment should be visible externally also if the project is published or not. Takes in two values
-
   - INTERNAL
   - EXTERNAL
 
@@ -100,20 +98,20 @@ Comments allow team members to discuss and collaborate on work items by adding t
 
 ```json
 {
-	"id": "f3e29f26-708d-40f0-9209-7e0de44abc49",
-	"created_at": "2023-11-20T09:26:10.383129Z",
-	"updated_at": "2023-11-20T09:26:10.383140Z",
-	"comment_stripped": "Initialf ThoughtsaMy initial thoughts on this are very  good",
-	"comment_json": {},
-	"comment_html": "<h1>Initialf Thoughts</h1>a<p>My initial thoughts on this are very  good</p>",
-	"attachments": [],
-	"access": "INTERNAL",
-	"created_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-	"updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-	"project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
-	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
-	"issue": "e1c25c66-5bb8-465e-a818-92a483423443",
-	"actor": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
+  "id": "f3e29f26-708d-40f0-9209-7e0de44abc49",
+  "created_at": "2023-11-20T09:26:10.383129Z",
+  "updated_at": "2023-11-20T09:26:10.383140Z",
+  "comment_stripped": "Initialf ThoughtsaMy initial thoughts on this are very  good",
+  "comment_json": {},
+  "comment_html": "<h1>Initialf Thoughts</h1>a<p>My initial thoughts on this are very  good</p>",
+  "attachments": [],
+  "access": "INTERNAL",
+  "created_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
+  "issue": "e1c25c66-5bb8-465e-a818-92a483423443",
+  "actor": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
 }
 ```
 

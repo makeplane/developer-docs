@@ -4,7 +4,6 @@ description: List all projects in an initiative via Plane API. HTTP GET request 
 keywords: plane, plane api, rest api, api integration, projects, project management, initiatives, roadmap, planning
 ---
 
-
 # List all projects in an initiative
 
 <div class="api-endpoint-badge">
@@ -89,13 +88,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/projects/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/projects/',
   {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

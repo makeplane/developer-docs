@@ -4,7 +4,6 @@ description: List all custom property values via Plane API. HTTP GET request wit
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # List all custom property values
 
 <div class="api-endpoint-badge">
@@ -80,13 +79,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/',
   {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

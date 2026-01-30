@@ -4,7 +4,6 @@ description: Update an intake work item via Plane API. HTTP PATCH request format
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---
 
-
 # Update an intake work item
 
 <div class="api-endpoint-badge">
@@ -96,17 +95,17 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid',
   {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "issue": "example-issue"
-})
-  }
+      issue: 'example-issue',
+    }),
+  },
 );
 const data = await response.json();
 ```

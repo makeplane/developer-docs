@@ -4,7 +4,6 @@ description: Create work items to module via Plane API. HTTP POST request format
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, modules, features
 ---
 
-
 # Add work items to module
 
 <div class="api-endpoint-badge">
@@ -96,17 +95,17 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/module-issues/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/module-issues/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "issues": "example-issues"
-})
-  }
+      issues: 'example-issues',
+    }),
+  },
 );
 const data = await response.json();
 ```

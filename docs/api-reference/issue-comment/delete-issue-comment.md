@@ -4,7 +4,6 @@ description: Delete a work item comment via Plane API. HTTP DELETE request for r
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---
 
-
 # Delete a work item comment
 
 <div class="api-endpoint-badge">
@@ -80,13 +79,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/comment-uuid/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/comment-uuid/',
   {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

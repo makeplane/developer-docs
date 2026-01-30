@@ -4,7 +4,6 @@ description: List upload credentials via Plane API. HTTP GET request with pagina
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # Get upload credentials
 
 <div class="api-endpoint-badge">
@@ -128,21 +127,21 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "type": "example-type",
-  "size": 1,
-  "external_id": "example-external_id",
-  "external_source": "example-external_source"
-})
-  }
+      name: 'example-name',
+      type: 'example-type',
+      size: 1,
+      external_id: 'example-external_id',
+      external_source: 'example-external_source',
+    }),
+  },
 );
 const data = await response.json();
 ```

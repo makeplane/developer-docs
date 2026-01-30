@@ -4,7 +4,6 @@ description: Create a worklog via Plane API. HTTP POST request format, required 
 keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
 ---
 
-
 # Create a worklog
 
 <div class="api-endpoint-badge">
@@ -104,18 +103,18 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/worklogs/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/worklogs/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "description": "example-description",
-  "duration": 1
-})
-  }
+      description: 'example-description',
+      duration: 1,
+    }),
+  },
 );
 const data = await response.json();
 ```

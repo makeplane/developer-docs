@@ -4,7 +4,6 @@ description: List retrieve a work item by identifier via Plane API. HTTP GET req
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Retrieve a work item by identifier
 
 <div class="api-endpoint-badge">
@@ -82,15 +81,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch('https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/', {
+  method: 'GET',
+  headers: {
+    'X-API-Key': 'your-api-key',
+  },
+});
 const data = await response.json();
 ```
 

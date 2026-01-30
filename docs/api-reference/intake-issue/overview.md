@@ -4,13 +4,11 @@ description: Plane Intake-Issue API overview. Learn about endpoints, request/res
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---
 
-
 # Overview
 
 Intake allows guests to create work items that admins and members can review and move into a project.
 
 [Learn more about Intake](https://docs.plane.so/core-concepts/intake)
-
 
 ## Enable Intake
 
@@ -51,7 +49,6 @@ To create an Intake work item, the payload should be sent in the below format
 - `status`
 
   the status of the work item can be in above mentioned status
-
   - \-2 - Pending
   - \-1 - Rejected
   - 0 - Snoozed
@@ -97,18 +94,18 @@ To create an Intake work item, the payload should be sent in the below format
 
 ```json
 {
-    "id": "0de4d6d1-fdc7-4849-8080-dc379ab210e3",
-    "pending_issue_count": 0,
-    "created_at": "2023-11-21T07:32:26.072634Z",
-    "updated_at": "2023-11-21T07:32:26.072648Z",
-    "name": "a dummy project with Intake",
-    "description": "",
-    "is_default": true,
-    "view_props": {},
-    "created_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
-    "updated_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
-    "project": "6436c4ae-fba7-45dc-ad4a-5440e17cb1b2",
-    "workspace": "c467e125-59e3-44ec-b5ee-f9c1e138c611"
+  "id": "0de4d6d1-fdc7-4849-8080-dc379ab210e3",
+  "pending_issue_count": 0,
+  "created_at": "2023-11-21T07:32:26.072634Z",
+  "updated_at": "2023-11-21T07:32:26.072648Z",
+  "name": "a dummy project with Intake",
+  "description": "",
+  "is_default": true,
+  "view_props": {},
+  "created_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
+  "updated_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
+  "project": "6436c4ae-fba7-45dc-ad4a-5440e17cb1b2",
+  "workspace": "c467e125-59e3-44ec-b5ee-f9c1e138c611"
 }
 ```
 

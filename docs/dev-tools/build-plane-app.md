@@ -4,10 +4,10 @@ description: Create custom Plane apps and integrations using OAuth 2.0. Learn ho
 keywords: plane app development, plane oauth, plane webhooks, plane integration, build plane app, plane api integration, oauth 2.0 plane
 ---
 
-
 # Build a Plane app <Badge type="info" text="Pro" />
 
 ## Introduction
+
 Plane apps seamlessly integrate tools and services with Plane so you can
 use them without ever leaving your Workspace. Apps are conveniently available
 from our [marketplace](https://plane.so/marketplace/integrations), helping you
@@ -53,7 +53,6 @@ To build an OAuth application with Plane:
 1. Navigate to `https://app.plane.so/<workspace_slug>/settings/integrations/`.
 2. Click on the **Build your own** button.
 3. Fill out the form with the required details:
-
    - **Setup URL**: Provide the URL that users will be redirected to when they click "Install" from the marketplace or from the app listing. This URL should initiate the OAuth flow for your application.
    - **Redirect URIs**: Provide the URIs where Plane will send the authorization code after the user consents to the app.
    - **Webhook URL Endpoint(Optional)**: Your service's webhook endpoint. Plane will send an HTTP `POST` request to this endpoint upon every change to the workspace in which your app was installed.
@@ -98,13 +97,14 @@ import { URLSearchParams } from 'url';
 
 const params = new URLSearchParams({
   client_id: process.env.PLANE_CLIENT_ID!,
-  response_type: "code",
+  response_type: 'code',
   redirect_uri: process.env.PLANE_REDIRECT_URI!,
   // Optional: include state if needed
 });
 
 const consentUrl = `https://api.plane.so/auth/o/authorize-app/?${params.toString()}`;
 ```
+
 :::
 
 There are two types of authenticated actions your application can perform:
@@ -122,10 +122,10 @@ When the app is installed, Plane will send both a `code` and an `app_installatio
 
 Plane will make a GET request to the Redirect URI with below parameters:
 
-| Parameter | Description |
-|-----------|-------------|
-| code | Authorization code (present but not used for client credentials flow) |
-| app_installation_id | The unique identifier for the app installation in the workspace |
+| Parameter           | Description                                                           |
+| ------------------- | --------------------------------------------------------------------- |
+| code                | Authorization code (present but not used for client credentials flow) |
+| app_installation_id | The unique identifier for the app installation in the workspace       |
 
 #### Examples
 
@@ -174,27 +174,23 @@ expires_in = token_response.expires_in
 import axios from 'axios';
 
 // Prepare basic auth header using client_id and client_secret
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
+const clientId = 'your_client_id';
+const clientSecret = 'your_client_secret';
 const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
 // Prepare request data
 const payload = {
-  grant_type: "client_credentials",
-  app_installation_id: appInstallationId
+  grant_type: 'client_credentials',
+  app_installation_id: appInstallationId,
 };
 
 // Make a POST request to fetch bot token
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
+const response = await axios.post('https://api.plane.so/auth/o/token/', payload, {
+  headers: {
+    Authorization: `Basic ${basicAuth}`,
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
 
 // Parse the response
 const responseData = response.data;
@@ -210,11 +206,10 @@ In this flow, your app exchanges the `code` received as a query parameter on the
 
 Plane will make a GET request to the Redirect URI with below parameters:
 
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| code | The authorization code that can be exchanged for an access token | Yes |
-| state | The state parameter that was passed in the authorization request | No |
-
+| Parameter | Description                                                      | Required |
+| --------- | ---------------------------------------------------------------- | -------- |
+| code      | The authorization code that can be exchanged for an access token | Yes      |
+| state     | The state parameter that was passed in the authorization request | No       |
 
 #### Examples
 
@@ -247,28 +242,24 @@ expires_in = token_response.expires_in
 import axios from 'axios';
 
 // Exchange authorization code for access and refresh tokens
-const code = "authorization_code_from_callback";
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
-const redirectUri = "your_redirect_uri";
+const code = 'authorization_code_from_callback';
+const clientId = 'your_client_id';
+const clientSecret = 'your_client_secret';
+const redirectUri = 'your_redirect_uri';
 
 const payload = {
-  grant_type: "authorization_code",
+  grant_type: 'authorization_code',
   code: code,
   client_id: clientId,
   client_secret: clientSecret,
-  redirect_uri: redirectUri
+  redirect_uri: redirectUri,
 };
 
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
+const response = await axios.post('https://api.plane.so/auth/o/token/', payload, {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
 
 // Parse the response
 const responseData = response.data;
@@ -276,6 +267,7 @@ const accessToken = responseData.access_token;
 const refreshToken = responseData.refresh_token;
 const expiresIn = responseData.expires_in;
 ```
+
 :::
 
 ### Fetching App Installation Details
@@ -302,9 +294,7 @@ if app_installations:
     print(f"Bot User ID: {workspace_details.app_bot}")
 ```
 
-
 == TypeScript {#typescript}
-
 
 ```typescript
 import axios from 'axios';
@@ -315,13 +305,13 @@ const headers = {
 };
 
 // Make GET request to fetch installation/workspace details
-const response = await axios.get(
-  `https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`,
-  { headers }
-);
+const response = await axios.get(`https://api.plane.so/auth/o/app-installation/?id=${app_installation_id}`, {
+  headers,
+});
 
 const workspaceDetails = response.data[0];
 ```
+
 :::
 
 #### Sample Response
@@ -330,28 +320,29 @@ The app installation endpoint returns an **array** of installation objects. Typi
 
 ```json
 [
-    {
-        "id": "34b97361-8636-43dc-953e-90deedc8498f",
-        "workspace_detail": {
-            "name": "sandbox",
-            "slug": "sandbox",
-            "id": "7a2e5944-c117-4a7d-b5f4-058fe705d7d1",
-            "logo_url": null
-        },
-        "created_at": "2025-05-16T13:50:27.865821Z",
-        "updated_at": "2025-06-23T08:57:26.976742Z",
-        "deleted_at": null,
-        "status": "installed",
-        "workspace": "7a2e5944-c117-4a7d-b5f4-058fe705d7d1",
-        "application": "ab235529-388a-4f51-a55a-78272251f5f1",
-        "installed_by": "63333ab1-c605-42fc-82f7-5cd86799eca1",
-        "app_bot": "7286aaa7-9250-4851-a520-29c904fd7654", // Bot user ID for your app in this workspace
-        "webhook": "b1f4b7f1-51e8-4919-a84c-0b1143b51d2c"
-    }
+  {
+    "id": "34b97361-8636-43dc-953e-90deedc8498f",
+    "workspace_detail": {
+      "name": "sandbox",
+      "slug": "sandbox",
+      "id": "7a2e5944-c117-4a7d-b5f4-058fe705d7d1",
+      "logo_url": null
+    },
+    "created_at": "2025-05-16T13:50:27.865821Z",
+    "updated_at": "2025-06-23T08:57:26.976742Z",
+    "deleted_at": null,
+    "status": "installed",
+    "workspace": "7a2e5944-c117-4a7d-b5f4-058fe705d7d1",
+    "application": "ab235529-388a-4f51-a55a-78272251f5f1",
+    "installed_by": "63333ab1-c605-42fc-82f7-5cd86799eca1",
+    "app_bot": "7286aaa7-9250-4851-a520-29c904fd7654", // Bot user ID for your app in this workspace
+    "webhook": "b1f4b7f1-51e8-4919-a84c-0b1143b51d2c"
+  }
 ]
 ```
 
 **Key fields to note:**
+
 - `app_bot`: The bot user ID that represents your app in the workspace
 - `workspace_detail.slug`: The workspace slug needed for API calls
 - `workspace`: The workspace ID for identifying the workspace
@@ -367,15 +358,17 @@ All webhooks follow this general structure:
 
 ```json
 {
-  "event": "string",           // Type of event (e.g., "issue", "issue_comment", "project")
-  "action": "string",          // Action performed (e.g., "created", "updated", "deleted")
-  "webhook_id": "string",      // Unique identifier for the webhook
-  "workspace_id": "string",    // ID of the workspace where the event occurred
-  "data": {                    // Event-specific data (varies by event type)
-    "id": "string",
+  "event": "string", // Type of event (e.g., "issue", "issue_comment", "project")
+  "action": "string", // Action performed (e.g., "created", "updated", "deleted")
+  "webhook_id": "string", // Unique identifier for the webhook
+  "workspace_id": "string", // ID of the workspace where the event occurred
+  "data": {
+    // Event-specific data (varies by event type)
+    "id": "string"
     // ... other fields specific to the event
   },
-  "activity": {                // Information about who performed the action
+  "activity": {
+    // Information about who performed the action
     "actor": {
       "id": "string",
       "first_name": "string",
@@ -384,9 +377,9 @@ All webhooks follow this general structure:
       "avatar": "string",
       "display_name": "string"
     },
-    "field": "string",         // Field that was changed (for update events)
-    "new_value": "any",        // New value (for update events)
-    "old_value": "any"         // Previous value (for update events)
+    "field": "string", // Field that was changed (for update events)
+    "new_value": "any", // New value (for update events)
+    "old_value": "any" // Previous value (for update events)
   }
 }
 ```
@@ -466,7 +459,6 @@ When an issue is created, updated, or deleted:
 
 Here's how to process webhooks in your application:
 
-
 :::tabs key:language
 == Python {#python}
 
@@ -480,26 +472,26 @@ def handle_webhook(payload_data: Dict[str, Any]):
         # Validate webhook payload using Pydantic models
         webhook = WebhookEvent(**payload_data)
         print(f"Received {webhook.event} {webhook.action} event")
-        
+
         # Get workspace credentials (implement your own storage)
         credentials = get_credentials_for_workspace(webhook.workspace_id)
         if not credentials:
             raise Exception(f"No credentials found for workspace {webhook.workspace_id}")
-        
+
         # Process specific event types with validated data
         if webhook.event == 'issue_comment' and webhook.action == 'created':
             comment_data = CommentEventData(**webhook.data)
             comment_text = comment_data.comment_stripped or ""
-            
+
             if '/your-command' in comment_text:
                 process_command(comment_data, credentials)
-        
+
         elif webhook.event == 'issue' and webhook.action == 'updated':
             issue_data = IssueEventData(**webhook.data)
-            
+
             if webhook.activity.field == 'assignees':
                 handle_assignment_change(issue_data, credentials)
-                
+
     except ValidationError as e:
         print(f"Invalid webhook payload: {e}")
     except Exception as e:
@@ -509,7 +501,7 @@ def process_command(comment_data: CommentEventData, credentials):
     """Process custom commands from issue comments"""
     from plane.api import WorkItemsApi
     from plane.models import PatchedIssueRequest
-    
+
     # Use the Plane API to respond to commands
     # Implementation depends on your specific command logic
     pass
@@ -543,13 +535,13 @@ interface WebhookPayload {
 // Process incoming webhook
 async function handleWebhook(payload: WebhookPayload) {
   console.log(`Received ${payload.event} ${payload.action} event`);
-  
+
   // Get workspace credentials
   const credentials = await getCredentialsForWorkspace(payload.workspace_id);
   if (!credentials) {
     throw new Error(`No credentials found for workspace ${payload.workspace_id}`);
   }
-  
+
   // Process specific event types
   if (payload.event === 'issue_comment' && payload.action === 'created') {
     const comment = payload.data.comment_stripped;
@@ -560,13 +552,13 @@ async function handleWebhook(payload: WebhookPayload) {
   }
 }
 ```
+
 :::
 
 ## Obtain and store access tokens securely
 
 Once you have obtained the access token, you can use it to make authenticated API requests to Plane.
 Store the access token and refresh token securely in your database.
-
 
 ## Make authenticated API requests to Plane
 
@@ -576,10 +568,10 @@ API reference is available at [https://docs.plane.so/api-reference](https://docs
 
 We have official SDKs for the following languages to simplify the OAuth flow and make it easier to call Plane's API.
 
-| Language | Package Link | Source Code |
-|----------|---------|-------------|
-| Node.js | [npm i @makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) | [plane-node-sdk](https://github.com/makeplane/plane-node-sdk) |
-| Python | [pip install plane-sdk](https://pypi.org/project/plane-sdk/) | [plane-python-sdk](https://github.com/makeplane/plane-python-sdk) |
+| Language | Package Link                                                                               | Source Code                                                       |
+| -------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Node.js  | [npm i @makeplane/plane-node-sdk](https://www.npmjs.com/package/@makeplane/plane-node-sdk) | [plane-node-sdk](https://github.com/makeplane/plane-node-sdk)     |
+| Python   | [pip install plane-sdk](https://pypi.org/project/plane-sdk/)                               | [plane-python-sdk](https://github.com/makeplane/plane-python-sdk) |
 
 ## Handle Token Refresh
 
@@ -588,7 +580,6 @@ Token refresh works differently depending on the type of token you're using:
 ### Bot Token Refresh (Client Credentials Flow)
 
 Bot tokens obtained through the client credentials flow don't use refresh tokens. Instead, when a bot token expires, you simply request a new one using the same `app_installation_id`:
-
 
 :::tabs key:language
 == Python {#python}
@@ -600,14 +591,14 @@ from plane.oauth.api import OAuthApi
 def refresh_bot_token(app_installation_id: str):
     """Refresh an expired bot token"""
     oauth_api = get_oauth_api()  # Using helper function from earlier examples
-    
+
     # Get new bot token using the same app_installation_id
     token_response = oauth_api.get_bot_token(app_installation_id)
-    
+
     # Store the new token securely in your database
     new_bot_token = token_response.access_token
     expires_in = token_response.expires_in
-    
+
     return new_bot_token, expires_in
 
 # Usage example
@@ -620,37 +611,33 @@ new_token, expires_in = refresh_bot_token(app_installation_id)
 // When bot token expires, request a new one using the same app_installation_id
 import axios from 'axios';
 
-const clientId = "your_client_id";
-const clientSecret = "your_client_secret";
+const clientId = 'your_client_id';
+const clientSecret = 'your_client_secret';
 const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
 const payload = {
-  grant_type: "client_credentials",
-  app_installation_id: appInstallationId  // Same ID used during initial setup
+  grant_type: 'client_credentials',
+  app_installation_id: appInstallationId, // Same ID used during initial setup
 };
 
-const response = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  payload,
-  {
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
+const response = await axios.post('https://api.plane.so/auth/o/token/', payload, {
+  headers: {
+    Authorization: `Basic ${basicAuth}`,
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
 
 // Parse the response
 const responseData = response.data;
 const newBotToken = responseData.access_token;
 const expiresIn = responseData.expires_in;
 ```
+
 :::
 
 ### User Token Refresh (Authorization Code Flow)
 
 When user access tokens expire, you can use the refresh token to get a new access token:
-
 
 #### Examples
 
@@ -664,18 +651,18 @@ from plane.oauth.api import OAuthApi
 def refresh_user_token(refresh_token: str):
     """Refresh an expired user access token"""
     oauth_api = get_oauth_api()  # Using helper function from earlier examples
-    
+
     # Use refresh token to get new access token
     token_response = oauth_api.exchange_code_for_token(
         refresh_token,
         "refresh_token",
     )
-    
+
     # Store the new tokens securely
     new_access_token = token_response.access_token
     new_refresh_token = token_response.refresh_token  # May be the same or new
     expires_in = token_response.expires_in
-    
+
     return new_access_token, new_refresh_token, expires_in
 
 # Usage example
@@ -687,26 +674,23 @@ new_access_token, new_refresh_token, expires_in = refresh_user_token(stored_refr
 ```typescript
 // When access token expires, use refresh token to get a new access token
 const refreshPayload = {
-  grant_type: "refresh_token",
+  grant_type: 'refresh_token',
   refresh_token: refreshToken,
   client_id: clientId,
-  client_secret: clientSecret
+  client_secret: clientSecret,
 };
 
-const refreshResponse = await axios.post(
-  "https://api.plane.so/auth/o/token/",
-  refreshPayload,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
-  }
-);
+const refreshResponse = await axios.post('https://api.plane.so/auth/o/token/', refreshPayload, {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
 
 // Parse the refresh response
 const refreshResponseData = refreshResponse.data;
 const accessToken = refreshResponseData.access_token;
 ```
+
 :::
 
 ## Listing Your App on Plane Marketplace

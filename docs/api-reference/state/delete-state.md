@@ -4,7 +4,6 @@ description: Delete a state via Plane API. HTTP DELETE request for removing reso
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---
 
-
 # Delete a state
 
 <div class="api-endpoint-badge">
@@ -74,13 +73,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/',
   {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

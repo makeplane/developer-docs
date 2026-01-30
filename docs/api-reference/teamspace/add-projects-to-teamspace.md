@@ -4,7 +4,6 @@ description: Create projects to teamspace via Plane API. HTTP POST request forma
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---
 
-
 # Add projects to teamspace
 
 <div class="api-endpoint-badge">
@@ -25,13 +24,9 @@ Adds projects to a teamspace
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
-
-
 
 </ApiParam>
 
@@ -90,17 +85,17 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "project_ids": "example-project_ids"
-})
-  }
+      project_ids: 'example-project_ids',
+    }),
+  },
 );
 const data = await response.json();
 ```

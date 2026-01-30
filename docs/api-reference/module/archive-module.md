@@ -4,7 +4,6 @@ description: Archive a module API endpoint. Request format, parameters, and resp
 keywords: plane, plane api, rest api, api integration, modules, features
 ---
 
-
 # Archive a module
 
 <div class="api-endpoint-badge">
@@ -74,13 +73,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/archive/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/archive/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

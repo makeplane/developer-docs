@@ -4,7 +4,6 @@ description: Restore a cycle API endpoint. Request format, parameters, and respo
 keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
 ---
 
-
 # Restore a cycle
 
 <div class="api-endpoint-badge">
@@ -74,13 +73,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/unarchive/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/unarchive/',
   {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```

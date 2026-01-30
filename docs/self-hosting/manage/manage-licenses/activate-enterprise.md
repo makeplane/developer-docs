@@ -4,7 +4,6 @@ description: Learn how to activate enterprise license for self-hosted Plane. Com
 keywords: plane, self-hosting, deployment, plane installation
 ---
 
-
 # Activate Enterprise license
 
 Enterprise plan licenses are activated at the instance level through God Mode, not through individual workspace settings. This gives instance administrators centralized control over Enterprise features across all workspaces.

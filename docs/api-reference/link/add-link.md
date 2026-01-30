@@ -4,7 +4,6 @@ description: Create a link via Plane API. HTTP POST request format, required fie
 keywords: plane, plane api, rest api, api integration
 ---
 
-
 # Create a link
 
 <div class="api-endpoint-badge">
@@ -104,18 +103,18 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/',
   {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "title": "example-title",
-  "url": "example-url"
-})
-  }
+      title: 'example-title',
+      url: 'example-url',
+    }),
+  },
 );
 const data = await response.json();
 ```

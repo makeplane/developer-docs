@@ -4,7 +4,6 @@ description: Update a label via Plane API. HTTP PATCH request format, editable f
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization
 ---
 
-
 # Update a label
 
 <div class="api-endpoint-badge">
@@ -96,17 +95,17 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid',
   {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      'X-API-Key': 'your-api-key',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-  "name": "example-name"
-})
-  }
+      name: 'example-name',
+    }),
+  },
 );
 const data = await response.json();
 ```

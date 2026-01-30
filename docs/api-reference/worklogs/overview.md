@@ -4,7 +4,6 @@ description: Plane Worklogs API overview. Learn about endpoints, request/respons
 keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
 ---
 
-
 # Overview
 
 Worklogs enable time tracking for work items within a project, recording time spent in minutes along with descriptions and user information.
@@ -18,49 +17,49 @@ Worklogs enable time tracking for work items within a project, recording time sp
 
 ### Attributes
 
-*   `id` _string_
+- `id` _string_
 
-    Unique identifier for the worklog
+  Unique identifier for the worklog
 
-*   `created_at` _timestamp_
+- `created_at` _timestamp_
 
-    Timestamp when the worklog was created
+  Timestamp when the worklog was created
 
-*   `updated_at` _timestamp_
+- `updated_at` _timestamp_
 
-    Timestamp when the worklog was last modified
+  Timestamp when the worklog was last modified
 
-*   `deleted_at` _timestamp_
+- `deleted_at` _timestamp_
 
-    Timestamp when the worklog was deleted
+  Timestamp when the worklog was deleted
 
-*   `description` _string_
+- `description` _string_
 
-    Description of the work done during the worklog
+  Description of the work done during the worklog
 
-*   `duration` _integer_
+- `duration` _integer_
 
-    Time spent on the issue, recorded in minutes
+  Time spent on the issue, recorded in minutes
 
-*   `created_by` _string_
+- `created_by` _string_
 
-    ID of user who created the worklog
+  ID of user who created the worklog
 
-*   `updated_by` _string_
+- `updated_by` _string_
 
-    ID of user who last modified the worklog
+  ID of user who last modified the worklog
 
-*   `project_id` _string_
+- `project_id` _string_
 
-    ID of project associated with the worklog
+  ID of project associated with the worklog
 
-*   `workspace_id` _string_
+- `workspace_id` _string_
 
-    ID of workspace associated with the worklog
+  ID of workspace associated with the worklog
 
-*   `logged_by` _string_
+- `logged_by` _string_
 
-    ID of the user who logged the work
+  ID of the user who logged the work
 
 </div>
 <div class="api-right">
@@ -69,17 +68,17 @@ Worklogs enable time tracking for work items within a project, recording time sp
 
 ```json
 {
-        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "created_at": "2025-01-29T21:27:54.197306+05:30",
-        "updated_at": "2025-01-29T21:27:54.197320+05:30",
-        "description": "",
-        "duration": 1,
-        "created_by": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "updated_by": null,
-        "project_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "workspace_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "logged_by": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-    }
+  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "created_at": "2025-01-29T21:27:54.197306+05:30",
+  "updated_at": "2025-01-29T21:27:54.197320+05:30",
+  "description": "",
+  "duration": 1,
+  "created_by": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "updated_by": null,
+  "project_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "workspace_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "logged_by": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
 ```
 
 </ResponsePanel>

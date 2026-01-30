@@ -4,7 +4,6 @@ description: Get retrieve a customer request details via Plane API. Retrieve com
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Retrieve a customer request
 
 <div class="api-endpoint-badge">
@@ -74,13 +73,13 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/",
+  'https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/',
   {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
+      'X-API-Key': 'your-api-key',
+    },
+  },
 );
 const data = await response.json();
 ```
