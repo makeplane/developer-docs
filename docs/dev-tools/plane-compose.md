@@ -23,7 +23,7 @@ Content-based diffing means only actual changes get pushed. Stable IDs (user-def
 Terraform-style .plane/state.json tracks what's been synced, so Plane Compose knows what changed since the last push.
 - **Built-in rate limiting**  
 Respects Plane API limits with configurable throttling (50 requests/minute by default). Monitor usage with plane rate stats.
--**Project cloning**  
+- **Project cloning**  
 Clone an existing Plane project by UUID to start working with it locally.
 - **Debug mode**   
 Comprehensive logging and error handling when you need to troubleshoot.
