@@ -30,7 +30,7 @@ Comprehensive logging and error handling when you need to troubleshoot.
 
 ## Installation
 
-Install Plane Compose globally using pipx:
+Install Plane Compose globally using pipx (recommended):
 
 ```bash
 pipx install plane-compose
@@ -78,6 +78,14 @@ my-project/
     └── state.json          # Sync state (auto-managed)
 ```
 
+::: tip
+You can set the workspace and project key directly from the command line:
+```bash
+plane init my-project --workspace myteam --project API
+```
+This saves you from having to edit plane.yaml afterward.
+:::
+
 ### Authenticate with Plane
 
 Log in using your API key:
@@ -109,6 +117,10 @@ defaults:
   workflow: standard
 ```
 
+:::tip
+The default schema includes common work item types, states, and labels. You can customize `schema/types.yaml`, `schema/workflows.yaml`, and `schema/labels.yaml` before pushing, or use the defaults and adjust later.
+:::
+
 ### Push your schema
 
 Create the project in Plane along with its work item types, states, and labels:
@@ -132,6 +144,9 @@ Edit `work/inbox.yaml` to define your work items:
   state: todo
   description: Add OAuth2 authentication
   assignee: dev@example.com
+  watchers:
+    - pm@example.com
+    - qa@example.com
 
 - id: "bug-login-css"
   title: Fix login button CSS
@@ -165,6 +180,114 @@ cd <project-name>
 ```
 
 The remote work items are pulled to `.plane/remote/items.yaml`. You can review them, make changes in `work/inbox.yaml`, and push updates back to Plane.
+
+
+## Project structure
+
+When you initialize a project, Plane Compose creates the following structure:
+
+```
+my-project/
+├── plane.yaml              # Project configuration
+├── schema/
+│   ├── types.yaml          # Work item types (task, bug, etc.)
+│   ├── workflows.yaml      # State machines
+│   └── labels.yaml         # Label definitions
+├── work/
+│   └── inbox.yaml          # Work items to create
+└── .plane/
+    └── state.json          # Sync state (auto-managed)
+```
+
+### plane.yaml
+
+The main configuration file for your project:
+
+```yaml
+workspace: myteam
+project:
+  key: API  # Short key or UUID
+  name: API Project
+
+defaults:
+  type: task
+  workflow: standard
+```
+
+### schema/types.yaml
+
+Define work item types and their fields:
+
+```yaml
+task:
+  description: A single unit of work
+  workflow: standard
+  fields:
+    - name: title
+      type: string
+      required: true
+    - name: priority
+      type: enum
+      options: [none, low, medium, high, urgent]
+```
+
+### schema/workflows.yaml
+
+Define state machines with states and transitions:
+
+```yaml
+standard:
+  states:
+    - name: backlog
+      group: unstarted
+      color: "#858585"
+    - name: in_progress
+      group: started
+      color: "#f59e0b"
+    - name: done
+      group: completed
+      color: "#22c55e"
+  initial: backlog
+  terminal: [done]
+```
+
+### schema/labels.yaml
+
+Organize labels into groups:
+
+```yaml
+groups:
+  area:
+    color: "#3b82f6"
+    labels:
+      - name: frontend
+      - name: backend
+```
+
+### work/inbox.yaml
+
+Define work items to sync with Plane:
+
+```yaml
+- id: "auth-oauth"
+  title: Implement user authentication
+  type: task
+  priority: high
+  labels: [backend, feature]
+  state: todo
+  description: Add OAuth2 authentication
+  assignee: dev@example.com
+  watchers:
+    - pm@example.com
+    - qa@example.com
+
+- id: "bug-login-css"
+  title: Fix login button CSS
+  type: bug
+  priority: medium
+  labels: [frontend, bug]
+  state: backlog
+```
 
 ## Understanding sync modes
 
