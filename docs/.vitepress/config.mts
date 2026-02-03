@@ -28,6 +28,7 @@ export default withMermaid(defineConfig({
       ],
     },
   },
+  lang: 'root',
   title: 'Plane developer documentation',
   description: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
 
@@ -631,9 +632,6 @@ export default withMermaid(defineConfig({
         appId: 'AXICJJC8RP',
         apiKey: '23df4157dee1d9a8d435cadd6cae3f26',
         indexName: 'plane_developer_docs',
-        searchParameters: {
-          facetFilters: []
-        },
         insights: true,
       }
     },
