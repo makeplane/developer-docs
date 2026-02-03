@@ -5,7 +5,7 @@ keywords: plane, self-hosting, deployment, plane installation
 ---
 
 
-# License errors
+# Errors related to licenses
 
 This guide is designed to help you resolve common issues encountered while activating the license key for a workspace. Each section includes potential causes and step-by-step solutions for identified problems.
 
