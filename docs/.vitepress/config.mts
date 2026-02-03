@@ -604,7 +604,8 @@ export default withMermaid(defineConfig({
               ]
             },
             { text: 'Webhooks', link: '/dev-tools/intro-webhooks' },
-            { text: 'MCP Server', link: '/dev-tools/mcp-server' }
+            { text: 'MCP Server', link: '/dev-tools/mcp-server' },
+            { text: 'Plane Compose', link: '/dev-tools/plane-compose' }
           ]
         }
       ],
