@@ -6,6 +6,27 @@ description: Define Plane projects, workflows, and work items in YAML files. Ver
 # Plane Compose
 Plane Compose is a command-line tool that lets you define and manage Plane projects using YAML configuration files instead of the web interface. Think of it as "infrastructure as code" for project management — you write your project structure in files, version control them with Git, and sync them with Plane.
 
+## Features
+- **Local-first workflow**  
+Define everything in YAML and version control with Git. Your project structure, work item types, workflows, and tasks all live in your repository.
+- **Bidirectional sync**  
+Push local changes to Plane or pull remote changes down. Keep your local files and Plane in sync however you prefer to work.
+**Auto-create projects**  
+Projects are created automatically in Plane when you push a schema. No need to set things up manually first.
+- **Rich schema management**  
+Define work item types with custom fields, create workflow state machines, and organize labels into groups.
+- **Two sync modes**  
+Use collaborative mode (plane push) for team-friendly additive syncing, or declarative mode (plane apply) when YAML should be the single source of truth.
+- **Intelligent change detection**  
+Content-based diffing means only actual changes get pushed. Stable IDs (user-defined or content-hashed) prevent duplicate work items.
+- **State tracking**  
+Terraform-style .plane/state.json tracks what's been synced, so Plane Compose knows what changed since the last push.
+- **Built-in rate limiting**  
+Respects Plane API limits with configurable throttling (50 requests/minute by default). Monitor usage with plane rate stats.
+-**Project cloning**  
+Clone an existing Plane project by UUID to start working with it locally.
+- **Debug mode**   
+Comprehensive logging and error handling when you need to troubleshoot.
 
 ## Installation
 
