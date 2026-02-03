@@ -11,7 +11,7 @@ Plane Compose is a command-line tool that lets you define and manage Plane proje
 Define everything in YAML and version control with Git. Your project structure, work item types, workflows, and tasks all live in your repository.
 - **Bidirectional sync**  
 Push local changes to Plane or pull remote changes down. Keep your local files and Plane in sync however you prefer to work.
-**Auto-create projects**  
+- **Auto-create projects**  
 Projects are created automatically in Plane when you push a schema. No need to set things up manually first.
 - **Rich schema management**  
 Define work item types with custom fields, create workflow state machines, and organize labels into groups.
