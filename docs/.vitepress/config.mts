@@ -28,7 +28,6 @@ export default withMermaid(defineConfig({
       ],
     },
   },
-  lang: 'root',
   title: 'Plane developer documentation',
   description: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.',
 
