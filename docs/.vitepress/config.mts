@@ -45,6 +45,13 @@ export default withMermaid(defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/logo/favicon-32x32.png' }],
 
+    // Google Analytics
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-JF828SKW90' }],
+    ['script', {}, `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JF828SKW90');`],
+
     // SEO: Basic meta tags
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
     ['meta', { name: 'author', content: 'Plane' }],
@@ -619,7 +626,15 @@ export default withMermaid(defineConfig({
     ],
 
     search: {
-      provider: 'local'
+      provider: 'algolia',
+      options: {
+        appId: 'AXICJJC8RP',
+        apiKey: '23df4157dee1d9a8d435cadd6cae3f26',
+        indexName: 'plane_developer_docs',
+
+        // Enable insights for tracking search analytics
+        insights: true,
+      }
     },
 
     editLink: {
