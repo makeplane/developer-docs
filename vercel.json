@@ -54,10 +54,6 @@
       "destination": "/self-hosting/overview"
     },
     {
-      "source": "/plane-one/manage/advanced-deploy",
-      "destination": "/self-hosting/overview"
-    },
-    {
       "source": "/plane-one/manage/prime-cli",
       "destination": "/self-hosting/manage/prime-cli"
     },
