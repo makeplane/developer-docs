@@ -631,10 +631,7 @@ export default withMermaid(defineConfig({
         appId: 'AXICJJC8RP',
         apiKey: '23df4157dee1d9a8d435cadd6cae3f26',
         indexName: 'plane_developer_docs',
-        insights: true,
-        searchParameters: {
-          hitsPerPage: 10
-        }
+        insights: true
       }
     },
 
