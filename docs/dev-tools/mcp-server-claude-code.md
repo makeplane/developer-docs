@@ -28,11 +28,11 @@ issues to support@plane.so.
 
 Choose the transport method that fits your setup.
 
-| Method | Best for | Auth |
-|--------|----------|------|
-| [HTTP with OAuth](#http-with-oauth) | Plane Cloud, interactive use | Browser-based OAuth |
-| [HTTP with PAT](#http-with-pat-token) | CI/CD, automated workflows | API key in headers |
-| [Local Stdio](#local-stdio) | Self-hosted Plane instances | Environment variables |
+| Method                                | Best for                     | Auth                  |
+| ------------------------------------- | ---------------------------- | --------------------- |
+| [HTTP with OAuth](#http-with-oauth)   | Plane Cloud, interactive use | Browser-based OAuth   |
+| [HTTP with PAT](#http-with-pat-token) | CI/CD, automated workflows   | API key in headers    |
+| [Local Stdio](#local-stdio)           | Self-hosted Plane instances  | Environment variables |
 
 ## HTTP with OAuth
 
@@ -80,11 +80,11 @@ claude mcp add-json plane '{
 
 ### Environment variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `PLANE_API_KEY` | Yes | API key from your workspace settings |
-| `PLANE_WORKSPACE_SLUG` | Yes | Your workspace slug (found in your Plane URL) |
-| `PLANE_BASE_URL` | No | API URL for self-hosted instances. Defaults to `https://api.plane.so` |
+| Variable               | Required | Description                                                           |
+| ---------------------- | -------- | --------------------------------------------------------------------- |
+| `PLANE_API_KEY`        | Yes      | API key from your workspace settings                                  |
+| `PLANE_WORKSPACE_SLUG` | Yes      | Your workspace slug (found in your Plane URL)                         |
+| `PLANE_BASE_URL`       | No       | API URL for self-hosted instances. Defaults to `https://api.plane.so` |
 
 ## Scope options
 
@@ -119,16 +119,16 @@ Inside Claude Code, run `/mcp` to check the server status and see the available 
 
 The Plane MCP Server exposes 55+ tools across these categories:
 
-| Category | Tools | Examples |
-|----------|-------|---------|
-| **Projects** | 9 | List, create, update, delete projects; get members and features |
-| **Work Items** | 7 | Create, list, search, update, delete work items |
-| **Cycles** | 12 | Manage cycles, add/remove work items, transfer, archive |
-| **Modules** | 11 | Manage modules, add/remove work items, archive |
-| **Initiatives** | 5 | Create and manage workspace-level initiatives |
-| **Intake** | 5 | Manage intake work items for triage |
-| **Work Item Properties** | 5 | Manage custom properties on work items |
-| **Users** | 1 | Get current authenticated user info |
+| Category                 | Tools | Examples                                                        |
+| ------------------------ | ----- | --------------------------------------------------------------- |
+| **Projects**             | 9     | List, create, update, delete projects; get members and features |
+| **Work Items**           | 7     | Create, list, search, update, delete work items                 |
+| **Cycles**               | 12    | Manage cycles, add/remove work items, transfer, archive         |
+| **Modules**              | 11    | Manage modules, add/remove work items, archive                  |
+| **Initiatives**          | 5     | Create and manage workspace-level initiatives                   |
+| **Intake**               | 5     | Manage intake work items for triage                             |
+| **Work Item Properties** | 5     | Manage custom properties on work items                          |
+| **Users**                | 1     | Get current authenticated user info                             |
 
 ## Examples
 
@@ -137,6 +137,7 @@ Here are common tasks you can perform by chatting with Claude Code after connect
 ### List projects in your workspace
 
 **Prompt:**
+
 ```
 List all projects in my workspace.
 ```
@@ -146,6 +147,7 @@ Claude Code calls `list_projects` and returns a summary of all projects includin
 ### Create a work item
 
 **Prompt:**
+
 ```
 Create a bug in project WEB titled "Fix login redirect loop" and assign it to me.
 ```
@@ -155,6 +157,7 @@ Claude Code calls `get_me` to find your user ID, then `create_work_item` with th
 ### Search across work items
 
 **Prompt:**
+
 ```
 Search for work items related to "authentication" across the workspace.
 ```
@@ -164,6 +167,7 @@ Claude Code calls `search_work_items` with the query string and returns matching
 ### Plan a cycle
 
 **Prompt:**
+
 ```
 Create a new cycle called "Sprint 24" in project WEB starting today and
 ending in 2 weeks. Add work items WEB-102, WEB-115, and WEB-118 to it.
@@ -174,6 +178,7 @@ Claude Code calls `create_cycle` with the name and dates, then `add_work_items_t
 ### Triage intake items
 
 **Prompt:**
+
 ```
 Show me all intake items in project MOBILE and accept the ones related to
 crash reports.
@@ -184,6 +189,7 @@ Claude Code calls `list_intake_work_items` to retrieve pending items, then `upda
 ### Get a project overview
 
 **Prompt:**
+
 ```
 Give me a summary of project BACKEND — what cycles are active, how many
 open work items are there, and who are the members?
@@ -194,6 +200,7 @@ Claude Code calls `retrieve_project`, `list_cycles`, `list_work_items`, and `get
 ### Manage modules
 
 **Prompt:**
+
 ```
 Create a module called "Auth Revamp" in project WEB and add all work items
 tagged with the "auth" label to it.
@@ -204,6 +211,7 @@ Claude Code calls `create_module`, then `list_work_items` with label filtering, 
 ### Move work items between cycles
 
 **Prompt:**
+
 ```
 Transfer all incomplete work items from "Sprint 23" to "Sprint 24" in
 project WEB.
