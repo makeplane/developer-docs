@@ -4,7 +4,6 @@ description: Setup MCP Server for Plane. Integrate Plane with Model Context Prot
 keywords: plane, developer tools, integrations, extensions, mcp server, protocol, integration
 ---
 
-
 # MCP server
 
 The [Model Context Protocol](https://modelcontextprotocol.io/overview) (MCP) is a
@@ -26,12 +25,12 @@ applications. Please send any issues to support@plane.so.
 
 The Plane MCP Server supports multiple transport methods to accommodate different deployment scenarios:
 
-| Transport | Best for | Authentication |
-|-----------|----------|----------------|
-| [HTTP with OAuth](#remote-http-with-oauth) | Cloud users, simplest setup | Browser-based OAuth |
-| [HTTP with PAT Token](#remote-http-with-pat-token) | Automated workflows, CI/CD | API key in headers |
-| [Local Stdio](#local-stdio-transport) | Self-hosted Plane instances | Environment variables |
-| [SSE (Legacy)](#sse-transport-legacy) | Existing integrations | Browser-based OAuth |
+| Transport                                          | Best for                    | Authentication        |
+| -------------------------------------------------- | --------------------------- | --------------------- |
+| [HTTP with OAuth](#remote-http-with-oauth)         | Cloud users, simplest setup | Browser-based OAuth   |
+| [HTTP with PAT Token](#remote-http-with-pat-token) | Automated workflows, CI/CD  | API key in headers    |
+| [Local Stdio](#local-stdio-transport)              | Self-hosted Plane instances | Environment variables |
+| [SSE (Legacy)](#sse-transport-legacy)              | Existing integrations       | Browser-based OAuth   |
 
 ## Remote HTTP with OAuth
 
@@ -169,6 +168,7 @@ Use this method to connect to a self-hosted Plane instance. The Stdio transport 
 - **uvx**: Comes bundled with [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 You can verify your installation by running:
+
 ```bash
 python --version
 uvx --version
@@ -194,11 +194,11 @@ uvx --version
 
 ### Environment variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `PLANE_API_KEY` | Yes | Your Plane API key |
-| `PLANE_WORKSPACE_SLUG` | Yes | Your workspace slug |
-| `PLANE_BASE_URL` | No | API URL for self-hosted instances (defaults to `https://api.plane.so`) |
+| Variable               | Required | Description                                                            |
+| ---------------------- | -------- | ---------------------------------------------------------------------- |
+| `PLANE_API_KEY`        | Yes      | Your Plane API key                                                     |
+| `PLANE_WORKSPACE_SLUG` | Yes      | Your workspace slug                                                    |
+| `PLANE_BASE_URL`       | No       | API URL for self-hosted instances (defaults to `https://api.plane.so`) |
 
 ## SSE transport (Legacy)
 

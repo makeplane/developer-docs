@@ -68,24 +68,24 @@ An **AgentRun** tracks a complete interaction session between a user and your ag
 
 #### Key fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | UUID | Unique identifier for the agent run |
-| `agent_user` | UUID | The bot user ID representing your agent |
-| `issue` | UUID | The work item where the interaction started |
-| `project` | UUID | The project containing the work item |
-| `workspace` | UUID | The workspace where the agent is installed |
-| `comment` | UUID | The comment thread for this run |
-| `source_comment` | UUID | The original comment that triggered the run |
-| `creator` | UUID | The user who initiated the run |
-| `status` | String | Current status (`created`, `in_progress`, `awaiting`, `completed`, `stopping`, `stopped`, `failed`, `stale`) |
-| `started_at` | DateTime | When the run started |
-| `ended_at` | DateTime | When the run ended (if applicable) |
-| `stopped_at` | DateTime | When a stop was requested |
-| `stopped_by` | UUID | User who requested the stop |
-| `external_link` | URL | Optional link to external dashboard/logs |
-| `error_metadata` | JSON | Error details if the run failed |
-| `type` | String | Type of run (currently `comment_thread`) |
+| Field            | Type     | Description                                                                                                  |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `id`             | UUID     | Unique identifier for the agent run                                                                          |
+| `agent_user`     | UUID     | The bot user ID representing your agent                                                                      |
+| `issue`          | UUID     | The work item where the interaction started                                                                  |
+| `project`        | UUID     | The project containing the work item                                                                         |
+| `workspace`      | UUID     | The workspace where the agent is installed                                                                   |
+| `comment`        | UUID     | The comment thread for this run                                                                              |
+| `source_comment` | UUID     | The original comment that triggered the run                                                                  |
+| `creator`        | UUID     | The user who initiated the run                                                                               |
+| `status`         | String   | Current status (`created`, `in_progress`, `awaiting`, `completed`, `stopping`, `stopped`, `failed`, `stale`) |
+| `started_at`     | DateTime | When the run started                                                                                         |
+| `ended_at`       | DateTime | When the run ended (if applicable)                                                                           |
+| `stopped_at`     | DateTime | When a stop was requested                                                                                    |
+| `stopped_by`     | UUID     | User who requested the stop                                                                                  |
+| `external_link`  | URL      | Optional link to external dashboard/logs                                                                     |
+| `error_metadata` | JSON     | Error details if the run failed                                                                              |
+| `type`           | String   | Type of run (currently `comment_thread`)                                                                     |
 
 ### AgentRunActivity
 
@@ -93,18 +93,18 @@ An **AgentRunActivity** represents a single message or action within an Agent Ru
 
 #### Key fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | UUID | Unique identifier for the activity |
-| `agent_run` | UUID | The parent Agent Run |
-| `type` | String | Activity type (`prompt`, `thought`, `action`, `response`, `elicitation`, `error`) |
-| `content` | JSON | The activity content (structure varies by type) |
-| `content_metadata` | JSON | Additional metadata about the content |
-| `ephemeral` | Boolean | If true, the activity is temporary and won't create a comment |
-| `signal` | String | Signal for how to handle the activity (`continue`, `stop`, `auth_request`, `select`) |
-| `signal_metadata` | JSON | Additional signal data |
-| `actor` | UUID | The user or bot that created the activity |
-| `comment` | UUID | Associated comment (for non-ephemeral activities) |
+| Field              | Type    | Description                                                                          |
+| ------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `id`               | UUID    | Unique identifier for the activity                                                   |
+| `agent_run`        | UUID    | The parent Agent Run                                                                 |
+| `type`             | String  | Activity type (`prompt`, `thought`, `action`, `response`, `elicitation`, `error`)    |
+| `content`          | JSON    | The activity content (structure varies by type)                                      |
+| `content_metadata` | JSON    | Additional metadata about the content                                                |
+| `ephemeral`        | Boolean | If true, the activity is temporary and won't create a comment                        |
+| `signal`           | String  | Signal for how to handle the activity (`continue`, `stop`, `auth_request`, `select`) |
+| `signal_metadata`  | JSON    | Additional signal data                                                               |
+| `actor`            | UUID    | The user or bot that created the activity                                            |
+| `comment`          | UUID    | Associated comment (for non-ephemeral activities)                                    |
 
 ### Creating activities
 
@@ -124,6 +124,7 @@ npm install @makeplane/plane-node-sdk
 ```bash
 pip install plane-sdk
 ```
+
 :::
 
 #### Activity examples
@@ -132,58 +133,58 @@ pip install plane-sdk
 == TypeScript {#typescript}
 
 ```typescript
-import { PlaneClient } from '@makeplane/plane-node-sdk';
+import { PlaneClient } from "@makeplane/plane-node-sdk";
 
 // Initialize the client with your bot token
 const planeClient = new PlaneClient({
-  baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+  baseUrl: process.env.PLANE_API_URL || "https://api.plane.so",
   accessToken: botToken,
 });
 
 // Create a thought activity (ephemeral - shows agent's reasoning)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: 'thought',
+  type: "thought",
   content: {
-    type: 'thought',
+    type: "thought",
     body: "Analyzing the user's request about weather data...",
   },
 });
 
 // Create an action activity (ephemeral - shows tool usage)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: 'action',
+  type: "action",
   content: {
-    type: 'action',
-    action: 'getWeather',
-    parameters: { location: 'San Francisco' },
+    type: "action",
+    action: "getWeather",
+    parameters: { location: "San Francisco" },
   },
 });
 
 // Create a response activity (creates a visible comment)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: 'response',
+  type: "response",
   content: {
-    type: 'response',
-    body: 'The weather in San Francisco is currently 68°F with partly cloudy skies.',
+    type: "response",
+    body: "The weather in San Francisco is currently 68°F with partly cloudy skies.",
   },
-  signal: 'continue',
+  signal: "continue",
 });
 
 // Create an elicitation activity (asks user for input)
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: 'elicitation',
+  type: "elicitation",
   content: {
-    type: 'elicitation',
-    body: 'Which city would you like me to check the weather for?',
+    type: "elicitation",
+    body: "Which city would you like me to check the weather for?",
   },
 });
 
 // Create an error activity
 await planeClient.agentRuns.activities.create(workspaceSlug, agentRunId, {
-  type: 'error',
+  type: "error",
   content: {
-    type: 'error',
-    body: 'Unable to fetch weather data. Please try again later.',
+    type: "error",
+    body: "Unable to fetch weather data. Please try again later.",
   },
 });
 ```
@@ -267,6 +268,7 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 ### Content payload types
@@ -282,6 +284,7 @@ Internal reasoning from the agent. Automatically marked as ephemeral.
   "body": "The user is asking about weather data for their location."
 }
 ```
+
 :::
 
 ::: details Action
@@ -310,6 +313,7 @@ With result:
   }
 }
 ```
+
 :::
 
 ::: details Response
@@ -321,6 +325,7 @@ A final response to the user. Creates a comment reply.
   "body": "Here's the weather forecast for San Francisco..."
 }
 ```
+
 :::
 
 ::: details Elicitation
@@ -332,6 +337,7 @@ A question requesting user input. Creates a comment and sets run to `awaiting`.
   "body": "Could you please specify which date range you're interested in?"
 }
 ```
+
 :::
 
 ::: details Error
@@ -343,18 +349,19 @@ An error message. Creates a comment and sets run to `failed`.
   "body": "I encountered an error while processing your request."
 }
 ```
+
 :::
 
 ### Signals
 
 Signals provide additional context about how an activity should be interpreted:
 
-| Signal | Description |
-|--------|-------------|
-| `continue` | Default signal, indicates the conversation can continue |
-| `stop` | User requested to stop the agent run |
+| Signal         | Description                                               |
+| -------------- | --------------------------------------------------------- |
+| `continue`     | Default signal, indicates the conversation can continue   |
+| `stop`         | User requested to stop the agent run                      |
 | `auth_request` | Agent needs user to authenticate with an external service |
-| `select` | Agent is presenting options for user to select from |
+| `select`       | Agent is presenting options for user to select from       |
 
 See [Signals & Content Payload](/dev-tools/agents/signals-content-payload) for detailed information.
 
@@ -363,6 +370,7 @@ See [Signals & Content Payload](/dev-tools/agents/signals-content-payload) for d
 Activities with `ephemeral: true` are temporary and don't create comments. They're useful for showing agent progress without cluttering the conversation.
 
 The following activity types are automatically marked as ephemeral:
+
 - `thought`
 - `action`
 - `error`
@@ -454,7 +462,7 @@ Here's a complete example of handling agent webhooks using the SDKs:
 == TypeScript {#typescript}
 
 ```typescript
-import { PlaneClient } from '@makeplane/plane-node-sdk';
+import { PlaneClient } from "@makeplane/plane-node-sdk";
 
 interface AgentRunActivityWebhook {
   action: string;
@@ -477,32 +485,32 @@ async function handleWebhook(
   credentials: { bot_token: string; workspace_slug: string }
 ) {
   // Only handle agent_run_activity webhooks
-  if (webhook.type !== 'agent_run_activity') {
+  if (webhook.type !== "agent_run_activity") {
     return;
   }
 
   const planeClient = new PlaneClient({
-    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    baseUrl: process.env.PLANE_API_URL || "https://api.plane.so",
     accessToken: credentials.bot_token,
   });
 
   const agentRunId = webhook.agent_run.id;
-  const userPrompt = webhook.agent_run_activity.content.body || '';
+  const userPrompt = webhook.agent_run_activity.content.body || "";
   const signal = webhook.agent_run_activity.signal;
 
   // Check for stop signal
-  if (signal === 'stop') {
+  if (signal === "stop") {
     await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-      type: 'response',
-      content: { type: 'response', body: 'Stopping as requested.' },
+      type: "response",
+      content: { type: "response", body: "Stopping as requested." },
     });
     return;
   }
 
   // Send initial thought (ephemeral - shows processing status)
   await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-    type: 'thought',
-    content: { type: 'thought', body: 'Processing your request...' },
+    type: "thought",
+    content: { type: "thought", body: "Processing your request..." },
   });
 
   // Process the request (implement your logic here)
@@ -510,8 +518,8 @@ async function handleWebhook(
 
   // Send the response (creates a visible comment)
   await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-    type: 'response',
-    content: { type: 'response', body: response },
+    type: "response",
+    content: { type: "response", body: response },
   });
 }
 ```
@@ -572,6 +580,7 @@ def handle_webhook(webhook: dict, credentials: dict):
         ),
     )
 ```
+
 :::
 
 ## Next steps

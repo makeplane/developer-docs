@@ -32,11 +32,14 @@ Send a `thought` activity within the first few seconds of receiving a webhook:
 == TypeScript {#typescript}
 
 ```typescript
-import { PlaneClient } from '@makeplane/plane-node-sdk';
+import { PlaneClient } from "@makeplane/plane-node-sdk";
 
-async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+async function handleWebhook(
+  webhook: AgentRunActivityWebhook,
+  credentials: { bot_token: string; workspace_slug: string }
+) {
   const planeClient = new PlaneClient({
-    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    baseUrl: process.env.PLANE_API_URL || "https://api.plane.so",
     accessToken: credentials.bot_token,
   });
 
@@ -44,8 +47,8 @@ async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bo
 
   // IMMEDIATELY acknowledge receipt
   await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-    type: 'thought',
-    content: { type: 'thought', body: 'Received your request. Analyzing...' },
+    type: "thought",
+    content: { type: "thought", body: "Received your request. Analyzing..." },
   });
 
   // Now proceed with actual processing
@@ -85,6 +88,7 @@ def handle_webhook(webhook: dict, credentials: dict):
 
     # ... rest of the logic
 ```
+
 :::
 
 ### Thought activity best practices
@@ -94,13 +98,15 @@ def handle_webhook(webhook: dict, credentials: dict):
 - Use thoughts to explain what the agent is doing, not technical details
 
 **Good examples:**
+
 - "Analyzing your question about project timelines..."
 - "Searching for relevant work items..."
 - "Preparing response with the requested data..."
 
 **Avoid:**
+
 - "Initializing LLM context with temperature 0.7..."
-- "Executing database query SELECT * FROM..."
+- "Executing database query SELECT \* FROM..."
 - Generic messages like "Working..." repeated multiple times
 
 ## Acknowledging important signals
@@ -119,9 +125,12 @@ When a user wants to stop an agent run, Plane sends a `stop` signal with the act
 == TypeScript {#typescript}
 
 ```typescript
-async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+async function handleWebhook(
+  webhook: AgentRunActivityWebhook,
+  credentials: { bot_token: string; workspace_slug: string }
+) {
   const planeClient = new PlaneClient({
-    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    baseUrl: process.env.PLANE_API_URL || "https://api.plane.so",
     accessToken: credentials.bot_token,
   });
 
@@ -129,15 +138,15 @@ async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bo
   const agentRunId = webhook.agent_run.id;
 
   // ALWAYS check for stop signal first
-  if (signal === 'stop') {
+  if (signal === "stop") {
     // Cancel any ongoing work
     cancelOngoingTasks(agentRunId);
 
     // Acknowledge the stop
     await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-      type: 'response',
+      type: "response",
       content: {
-        type: 'response',
+        type: "response",
         body: "Understood. I've stopped processing your previous request.",
       },
     });
@@ -183,14 +192,15 @@ def handle_webhook(webhook: dict, credentials: dict):
 
     # Continue with normal processing...
 ```
+
 :::
 
 ### Signal considerations
 
-| Signal | How to Handle |
-|--------|---------------|
+| Signal     | How to Handle                             |
+| ---------- | ----------------------------------------- |
 | `continue` | Default behavior, proceed with processing |
-| `stop` | Immediately halt and confirm |
+| `stop`     | Immediately halt and confirm              |
 
 ## Progress communication
 
@@ -235,9 +245,12 @@ Graceful error handling is crucial for a good user experience.
 ### Always catch and report errors
 
 ```typescript
-async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bot_token: string; workspace_slug: string }) {
+async function handleWebhook(
+  webhook: AgentRunActivityWebhook,
+  credentials: { bot_token: string; workspace_slug: string }
+) {
   const planeClient = new PlaneClient({
-    baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+    baseUrl: process.env.PLANE_API_URL || "https://api.plane.so",
     accessToken: credentials.bot_token,
   });
 
@@ -245,24 +258,23 @@ async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bo
 
   try {
     await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-      type: 'thought',
-      content: { type: 'thought', body: 'Processing your request...' },
+      type: "thought",
+      content: { type: "thought", body: "Processing your request..." },
     });
 
     // Your logic here...
     const result = await processRequest(webhook);
 
     await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-      type: 'response',
-      content: { type: 'response', body: result },
+      type: "response",
+      content: { type: "response", body: result },
     });
-
   } catch (error) {
     // ALWAYS inform the user about errors
     await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-      type: 'error',
+      type: "error",
       content: {
-        type: 'error',
+        type: "error",
         body: getUserFriendlyErrorMessage(error),
       },
     });
@@ -271,25 +283,27 @@ async function handleWebhook(webhook: AgentRunActivityWebhook, credentials: { bo
 
 function getUserFriendlyErrorMessage(error: Error): string {
   // Map technical errors to user-friendly messages
-  if (error.message.includes('rate limit')) {
+  if (error.message.includes("rate limit")) {
     return "I'm receiving too many requests right now. Please try again in a few minutes.";
   }
-  if (error.message.includes('timeout')) {
-    return 'The operation took too long. Please try a simpler request or try again later.';
+  if (error.message.includes("timeout")) {
+    return "The operation took too long. Please try a simpler request or try again later.";
   }
   // Generic fallback
-  return 'I encountered an unexpected error. Please try again or contact support if the issue persists.';
+  return "I encountered an unexpected error. Please try again or contact support if the issue persists.";
 }
 ```
 
 ### Error message guidelines
 
 **Do:**
+
 - Use clear, non-technical language
 - Suggest next steps when possible
 - Be honest about what went wrong (at a high level)
 
 **Don't:**
+
 - Expose stack traces or technical details
 - Blame the user for errors
 - Leave users without any feedback
@@ -302,16 +316,13 @@ For multi-turn conversations, maintain context from previous activities.
 
 ```typescript
 // Get all activities for context
-const activities = await planeClient.agentRuns.activities.list(
-  credentials.workspace_slug,
-  agentRunId
-);
+const activities = await planeClient.agentRuns.activities.list(credentials.workspace_slug, agentRunId);
 
 // Build conversation history
 const history = activities.results
-  .filter(a => a.type === 'prompt' || a.type === 'response')
-  .map(a => ({
-    role: a.type === 'prompt' ? 'user' : 'assistant',
+  .filter((a) => a.type === "prompt" || a.type === "response")
+  .map((a) => ({
+    role: a.type === "prompt" ? "user" : "assistant",
     content: a.content.body,
   }));
 
@@ -370,21 +381,25 @@ app.post("/webhook", async (req, res) => {
 ## Summary checklist
 
 **Responsiveness**
+
 - Send thought within seconds of webhook
 - Return webhook response quickly
 - Send heartbeats for long operations
 
 **Signal handling**
+
 - Always check for `stop` signal first
 - Handle all signal types appropriately
 - Confirm when stopping
 
 **Error handling**
+
 - Wrap processing in try/catch
 - Always send error activity on failure
 - Use friendly error messages
 
 **User experience**
+
 - Progress updates for long tasks
 - Clear, non-technical communication
 - Maintain conversation context
