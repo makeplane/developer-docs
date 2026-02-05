@@ -4,6 +4,10 @@ description: Deploy Plane on Kubernetes using Helm charts. Complete guide for pr
 keywords: plane, self-hosting, deployment, plane installation, kubernetes, helm, k8s
 search: false
 sidebar: false
+head:
+  - - meta
+    - name: robots
+      content: noindex, nofollow
 ---
 
 # Kubernetes

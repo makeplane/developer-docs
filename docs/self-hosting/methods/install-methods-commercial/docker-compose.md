@@ -4,6 +4,10 @@ description: Install Plane using Docker Compose. Step-by-step guide for deployin
 keywords: plane, self-hosting, deployment, plane installation, docker, docker compose, containerization
 search: false
 sidebar: false
+head:
+  - - meta
+    - name: robots
+      content: noindex, nofollow
 ---
 
 
