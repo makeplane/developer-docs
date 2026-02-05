@@ -2,6 +2,8 @@
 title: Docker Compose
 description: Install Plane using Docker Compose. Step-by-step guide for deploying Plane with Docker on your server with all required services.
 keywords: plane, self-hosting, deployment, plane installation, docker, docker compose, containerization
+search: false
+sidebar: false
 ---
 
 
