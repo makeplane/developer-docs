@@ -17,7 +17,7 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using C
 
 ### Procedure
 
-1. **Download the required depoyment files**
+1. **Download the required deployment files**
    - `coolify-compose.yml` – Defines Plane's services and dependencies.
 
    ```bash
