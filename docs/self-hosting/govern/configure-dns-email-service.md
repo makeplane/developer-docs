@@ -47,90 +47,94 @@ Before configuring DNS records for Intake Email, secure your email domain with a
 2.  **Generate SSL Certificate**  
     Choose the method that matches your web server setup:
 
-        For NGINX:
-        ```bash
-        sudo certbot --nginx -d <mail-domain>
-        ```
+    For NGINX:
 
-        For Apache:
-        ```bash
-        sudo certbot --apache -d <mail-domain>
-        ```
+    ```bash
+    sudo certbot --nginx -d <mail-domain>
+    ```
 
-        For standalone (no web server):
-        ```bash
-        sudo certbot certonly --standalone -d <mail-domain>
-        ```
+    For Apache:
+
+    ```bash
+    sudo certbot --apache -d <mail-domain>
+    ```
+
+    For standalone (no web server):
+
+    ```bash
+    sudo certbot certonly --standalone -d <mail-domain>
+    ```
 
 3.  **Copy Certificate Files**  
     Copy the generated certificate files to Plane's expected directory:
 
-        ```bash
-        sudo cp /etc/letsencrypt/live/<mail-domain>/fullchain.pem /opt/plane/data/email/tls/cert.pem
-        sudo cp /etc/letsencrypt/live/<mail-domain>/privkey.pem /opt/plane/data/email/tls/key.pem
-        ```
+    ```bash
+    sudo cp /etc/letsencrypt/live/<mail-domain>/fullchain.pem /opt/plane/data/email/tls/cert.pem
+    sudo cp /etc/letsencrypt/live/<mail-domain>/privkey.pem /opt/plane/data/email/tls/key.pem
+    ```
 
 4.  **Configure Environment Variables**  
     Add the following settings to your plane.env file:
 
-        ```bash
-        # If using SMTP_DOMAIN as FQDN (e.g., intake.example.com),
-        # generate a valid SSL certificate and set these paths accordingly.
-        SMTP_DOMAIN=intake.example.com
-        TLS_CERT_PATH=tls/cert.pem
-        TLS_PRIV_KEY_PATH=tls/key.pem
-        INTAKE_EMAIL_DOMAIN=intake.example.com
-        ```
+    ```bash
+    # If using SMTP_DOMAIN as FQDN (e.g., intake.example.com),
+    # generate a valid SSL certificate and set these paths accordingly.
+    SMTP_DOMAIN=intake.example.com
+    TLS_CERT_PATH=tls/cert.pem
+    TLS_PRIV_KEY_PATH=tls/key.pem
+    INTAKE_EMAIL_DOMAIN=intake.example.com
+    ```
 
-        ::: warning
-        Important: `SMTP_DOMAIN` and `INTAKE_EMAIL_DOMAIN` must be identical.
-        :::
+    ::: warning
+    Important: `SMTP_DOMAIN` and `INTAKE_EMAIL_DOMAIN` must be identical.
+    :::
 
 ## Configure DNS records
 
 1.  **Create an A Record**  
     This record points to the server running your email service.
 
-        ```bash
-        Type: A
-        Host: <host-domain>           # Example: plane.example.com
-        Value: <public-ip-address>    # Your server's public IP address
-        TTL: Auto | 3600
-        ```
+    ```bash
+    Type: A
+    Host: <host-domain>           # Example: plane.example.com
+    Value: <public-ip-address>    # Your server's public IP address
+    TTL: Auto | 3600
+    ```
 
-        ::: tip
-        You can alternatively use a CNAME record if you're using a cloud load balancer.
-        :::
+    ::: tip
+    You can alternatively use a CNAME record if you're using a cloud load balancer.
+    :::
 
 2.  **Add an MX Record**  
      This record directs email traffic to your mail server.
-    `bash
-Type: MX
-Host: <mail-domain>           # Example: intake.example.com
-Value: <host-domain>          # Same as your A record host
-Priority: 10
-TTL: Auto | 3600
-`
+
+    ```bash
+    Type: MX
+    Host: <mail-domain>           # Example: intake.example.com
+    Value: <host-domain>          # Same as your A record host
+    Priority: 10
+    TTL: Auto | 3600
+    ```
 
 3.  **Configure an SPF Record**  
     This record helps prevent email spoofing.
 
-        ```bash
-        Type: TXT
-        Host: <mail-domain>           # Example: intake.example.com
-        Value: "v=spf1 ip4:<A-record-ip-host-domain> -all"
-        TTL: Auto | 3600
-        ```
+    ```bash
+    Type: TXT
+    Host: <mail-domain>           # Example: intake.example.com
+    Value: "v=spf1 ip4:<A-record-ip-host-domain> -all"
+    TTL: Auto | 3600
+    ```
 
 4.  **Set Up a DMARC record**  
     This record specifies how receiving mail servers should handle authentication failures.
 
-        ```bash
-        Type: TXT
-        Host: _dmarc.<mail-domain>    # Example: _dmarc.intake.example.com
-        Value: "v=DMARC1; p=reject; rua=mailto:<valid-email-addr>"
-        TTL: Auto | 3600
-        ```
+    ```bash
+    Type: TXT
+    Host: _dmarc.<mail-domain>    # Example: _dmarc.intake.example.com
+    Value: "v=DMARC1; p=reject; rua=mailto:<valid-email-addr>"
+    TTL: Auto | 3600
+    ```
 
 ## Verify your configuration
 

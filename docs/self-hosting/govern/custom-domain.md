@@ -88,9 +88,10 @@ This shows you all the variables that contain your current domain. You'll update
 ## Restart Plane services
 
 Apply your configuration changes by restarting Plane:
-`bash
-    sudo prime-cli restart
-    `
+
+```bash
+sudo prime-cli restart
+```
 
 This process typically takes a few minutes. You'll see output indicating the status of each service as it restarts.
 
@@ -139,5 +140,3 @@ If your server is behind a firewall or router and has an internal IP address, yo
 - Once the reverse proxy is properly configured, ensure that your firewall/router allows incoming traffic on the necessary ports to reach your server.
 
 By following these steps, you will be able to access your self-hosted instance of Plane using your custom domain name, whether your server has a public IP address or is behind a firewall with an internal IP address.
-
-:::

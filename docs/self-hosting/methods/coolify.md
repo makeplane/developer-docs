@@ -20,13 +20,13 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using C
 1. **Download the required depoyment files**
    - `coolify-compose.yml` – Defines Plane's services and dependencies.
 
-     ```bash
-     curl -fsSL https://prime.plane.so/releases/<plane-version>/coolify-compose.yml -o coolify-compose.yml
-     ```
+   ```bash
+   curl -fsSL https://prime.plane.so/releases/<plane-version>/coolify-compose.yml -o coolify-compose.yml
+   ```
 
-     ::: warning
-     The `<plane-version>` value should be v1.8.2 or higher.
-     :::
+   ::: warning
+   The `<plane-version>` value should be v1.8.2 or higher.
+   :::
 
 2. Create a new project in Coolify.
 
