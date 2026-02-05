@@ -1,70 +1,70 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
-const STORAGE_KEY = 'plane-docs-cookie-consent'
-const showBanner = ref(false)
+const STORAGE_KEY = "plane-docs-cookie-consent";
+const showBanner = ref(false);
 
 function getConsent(): string | null {
   try {
-    return localStorage.getItem(STORAGE_KEY)
+    return localStorage.getItem(STORAGE_KEY);
   } catch {
-    return null
+    return null;
   }
 }
 
 function grantConsent() {
-  if (typeof window === 'undefined') return
+  if (typeof window === "undefined") return;
 
   // Google Analytics
-  if (typeof window.gtag === 'function') {
-    window.gtag('consent', 'update', {
-      analytics_storage: 'granted'
-    })
+  if (typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      analytics_storage: "granted",
+    });
   }
 
   // PostHog (may not be loaded if VITE_POSTHOG_KEY is unset)
   if (window.posthog?.opt_in_capturing) {
-    window.posthog.opt_in_capturing()
+    window.posthog.opt_in_capturing();
   }
 }
 
 function denyConsent() {
-  if (typeof window === 'undefined') return
+  if (typeof window === "undefined") return;
 
   // Google Analytics — consent stays denied by default, no update needed
 
   // PostHog (may not be loaded if VITE_POSTHOG_KEY is unset)
   if (window.posthog?.opt_out_capturing) {
-    window.posthog.opt_out_capturing()
+    window.posthog.opt_out_capturing();
   }
 }
 
 function accept() {
   try {
-    localStorage.setItem(STORAGE_KEY, 'granted')
+    localStorage.setItem(STORAGE_KEY, "granted");
   } catch {}
-  grantConsent()
-  showBanner.value = false
+  grantConsent();
+  showBanner.value = false;
 }
 
 function decline() {
   try {
-    localStorage.setItem(STORAGE_KEY, 'denied')
+    localStorage.setItem(STORAGE_KEY, "denied");
   } catch {}
-  denyConsent()
-  showBanner.value = false
+  denyConsent();
+  showBanner.value = false;
 }
 
 onMounted(() => {
-  const consent = getConsent()
-  if (consent === 'granted') {
-    grantConsent()
-  } else if (consent === 'denied') {
-    denyConsent()
+  const consent = getConsent();
+  if (consent === "granted") {
+    grantConsent();
+  } else if (consent === "denied") {
+    denyConsent();
   } else {
-    showBanner.value = true
+    showBanner.value = true;
   }
-})
+});
 </script>
 
 <template>
@@ -157,10 +157,14 @@ onMounted(() => {
 
 /* Transition */
 .consent-enter-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 .consent-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 .consent-enter-from {
   opacity: 0;
