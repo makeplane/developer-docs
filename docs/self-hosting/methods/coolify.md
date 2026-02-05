@@ -4,7 +4,6 @@ description: Learn how to deploy plane with coolify for self-hosted Plane. Compl
 keywords: plane, self-hosting, deployment, plane installation
 ---
 
-
 # Deploy Plane with Coolify <Badge type="info" text="Commercial Edition" />
 
 This guide shows you the steps to deploy a self-hosted instance of Plane using Coolify.
@@ -18,16 +17,16 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using C
 
 ### Procedure
 
-1. **Download the required depoyment files**  
+1. **Download the required depoyment files**
    - `coolify-compose.yml` – Defines Plane's services and dependencies.
 
-     ```bash
-     curl -fsSL https://prime.plane.so/releases/<plane-version>/coolify-compose.yml -o coolify-compose.yml
-     ```
+   ```bash
+   curl -fsSL https://prime.plane.so/releases/<plane-version>/coolify-compose.yml -o coolify-compose.yml
+   ```
 
-        ::: warning
-        The `<plane-version>` value should be v1.8.2 or higher.
-        :::
+   ::: warning
+   The `<plane-version>` value should be v1.8.2 or higher.
+   :::
 
 2. Create a new project in Coolify.
 
@@ -38,15 +37,14 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using C
 5. Copy and paste the contents of the `coolify-compose.yml` file into the editor.
 
 6. Configure external DB, Redis, RabbitMQ and any other required environment variables in the UI.
-    ::: warning
-    When self-hosting Plane for production use, it is strongly recommended to configure external database and storage. This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-    :::
-   
+   ::: warning
+   When self-hosting Plane for production use, it is strongly recommended to configure external database and storage. This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
+   :::
    - `DATABASE_URL` – Connection string for your external database.
    - `REDIS_URL` – Connection string for your external Redis instance.
    - `AMQP_URL` – Connection string for your external RabbitMQ server.
 
-8. Deploy to launch your Plane instance.
-    Once the deployment is complete, your Plane instance should be accessible on the configured domain.
+7. Deploy to launch your Plane instance.
+   Once the deployment is complete, your Plane instance should be accessible on the configured domain.
 
-9. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+8. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.

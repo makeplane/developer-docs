@@ -1,6 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
-import { onMounted, nextTick } from 'vue'
+import { onMounted, nextTick, h } from 'vue'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 
 import './style.css'
@@ -11,6 +11,7 @@ import CodePanel from './components/CodePanel.vue'
 import ResponsePanel from './components/ResponsePanel.vue'
 import Card from './components/Card.vue'
 import CardGroup from './components/CardGroup.vue'
+import CookieConsent from './components/CookieConsent.vue'
 
 /**
  * Adds 'api-page' class to hide the aside on API reference pages
@@ -108,6 +109,11 @@ function updateHashOnTabClick(event: Event) {
 
 export default {
   extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'layout-bottom': () => h(CookieConsent)
+    })
+  },
   enhanceApp({ app, router }) {
     enhanceAppWithTabs(app)
 
