@@ -4,7 +4,6 @@ description: Configure custom domain for self-hosted Plane. Setup your own domai
 keywords: plane, self-hosting, deployment, plane installation, configuration, administration
 ---
 
-
 # Configure custom domain <Badge type="info" text="Commercial Edition" />
 
 During installation, you configure a domain for your instance. If you need to change that domain later, whether you're moving to a production domain, switching to a different hostname, or updating your DNS configuration, this guide walks you through the process.
@@ -29,7 +28,8 @@ cat /opt/plane/plane.env | grep <old_domain>
 ```
 
 **Example output:**
-```env
+
+```ini
 DOMAIN_NAME=localhost
 SITE_ADDRESS=http://localhost
 WEB_URL=http://localhost
@@ -41,54 +41,56 @@ This shows you all the variables that contain your current domain. You'll update
 ## Update domain in environment file
 
 1. Open the Plane environment configuration file:
-    ```bash
-    vim /opt/plane/plane.env
-    ```
+
+   ```bash
+   vim /opt/plane/plane.env
+   ```
 
 2. Find and update these environment variables with your new domain:
+   - **DOMAIN_NAME**
 
-    - **DOMAIN_NAME**
+   Set this to your bare domain name without protocol:
 
-    Set this to your bare domain name without protocol:
-    ```env
-    DOMAIN_NAME=plane.company.com
-    ```
+   ```ini
+   DOMAIN_NAME=plane.company.com
+   ```
 
-    Don't include `http://` or `https://` here, just the hostname.
+   Don't include `http://` or `https://` here, just the hostname.
+   - **SITE_ADDRESS**
 
-    - **SITE_ADDRESS**
+   Set this to your full domain URL:
 
-    Set this to your full domain URL:
-    ```env
-    SITE_ADDRESS=https://plane.company.com
-    ```
+   ```ini
+   SITE_ADDRESS=https://plane.company.com
+   ```
 
-    Include the protocol (`https://` for SSL, `http://` if you haven't set up SSL yet).
+   Include the protocol (`https://` for SSL, `http://` if you haven't set up SSL yet).
+   - **WEB_URL**
 
-    - **WEB_URL**
+   This should match your SITE_ADDRESS:
 
-    This should match your SITE_ADDRESS:
-    ```env
-    WEB_URL=https://plane.company.com
-    ```
+   ```ini
+   WEB_URL=https://plane.company.com
+   ```
 
-    Again, include the full protocol.
+   Again, include the full protocol.
 
-    **CORS_ALLOWED_ORIGINS**
+   **CORS_ALLOWED_ORIGINS**
 
-    List all domains that should be allowed to make cross-origin requests to your Plane instance. This typically includes both HTTP and HTTPS versions of your domain:
-    ```env
-    CORS_ALLOWED_ORIGINS=https://plane.company.com,http://plane.company.com
-    ```
+   List all domains that should be allowed to make cross-origin requests to your Plane instance. This typically includes both HTTP and HTTPS versions of your domain:
 
-    Separate multiple entries with commas, no spaces. If you have multiple domains or subdomains that need access, add them all here.
+   ```ini
+   CORS_ALLOWED_ORIGINS=https://plane.company.com,http://plane.company.com
+   ```
+
+   Separate multiple entries with commas, no spaces. If you have multiple domains or subdomains that need access, add them all here.
 
 ## Restart Plane services
 
 Apply your configuration changes by restarting Plane:
-    ```bash
+`bash
     sudo prime-cli restart
-    ```
+    `
 
 This process typically takes a few minutes. You'll see output indicating the status of each service as it restarts.
 
