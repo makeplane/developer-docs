@@ -17,7 +17,7 @@ This guide shows you the steps to deploy a self-hosted instance of Plane using P
 
 ### Procedure
 
-1. **Download the required depoyment files**
+1. **Download the required deployment files**
    - `portainer-compose.yml` – Defines Plane's services and dependencies.
      ```bash
      curl -fsSL https://prime.plane.so/releases/<plane-version>/portainer-compose.yml -o portainer-compose.yml
