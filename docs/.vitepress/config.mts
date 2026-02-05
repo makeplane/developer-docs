@@ -1,6 +1,47 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type HeadConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+
+function loadEnvVar(key: string): string | undefined {
+  // process.env takes precedence (CI/hosting platforms set vars here)
+  if (key in process.env) return process.env[key] || undefined
+  // Fall back to .env file for local development
+  try {
+    const envFile = readFileSync(resolve(process.cwd(), '.env'), 'utf-8')
+    const match = envFile.match(new RegExp(`^${key}=(.+)$`, 'm'))
+    return match?.[1]?.trim()
+  } catch {
+    return undefined
+  }
+}
+
+const posthogKey = loadEnvVar('VITE_POSTHOG_KEY')
+const algoliaAppId = loadEnvVar('VITE_ALGOLIA_APP_ID')
+const algoliaApiKey = loadEnvVar('VITE_ALGOLIA_API_KEY')
+const algoliaIndexName = loadEnvVar('VITE_ALGOLIA_INDEX_NAME')
+
+const searchConfig = algoliaAppId && algoliaApiKey && algoliaIndexName
+  ? {
+    provider: 'algolia' as const,
+    options: {
+      appId: algoliaAppId,
+      apiKey: algoliaApiKey,
+      indexName: algoliaIndexName,
+      insights: true
+    }
+  }
+  : { provider: 'local' as const }
+
+const posthogHead: HeadConfig[] = posthogKey
+  ? [
+    ['script', {}, `
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('${posthogKey}',{api_host:'https://us.posthog.com', opt_out_capturing_by_default: true, persistence: 'memory'});
+      `]
+  ]
+  : []
 
 export default withMermaid(defineConfig({
   markdown: {
@@ -44,6 +85,22 @@ export default withMermaid(defineConfig({
 
   head: [
     ['link', { rel: 'icon', href: '/logo/favicon-32x32.png' }],
+
+    // Google Analytics with Consent Mode v2
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-JF828SKW90' }],
+    ['script', {}, `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-JF828SKW90');`],
+
+    // PostHog Analytics (loaded only when VITE_POSTHOG_KEY is set)
+    ...posthogHead,
 
     // SEO: Basic meta tags
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
@@ -605,7 +662,8 @@ export default withMermaid(defineConfig({
             },
             { text: 'Webhooks', link: '/dev-tools/intro-webhooks' },
             { text: 'MCP Server', link: '/dev-tools/mcp-server' },
-            { text: 'MCP Server for Claude Code', link: '/dev-tools/mcp-server-claude-code' }
+            { text: 'MCP Server for Claude Code', link: '/dev-tools/mcp-server-claude-code' },
+            { text: 'Plane Compose', link: '/dev-tools/plane-compose' }
           ]
         }
       ],
@@ -619,9 +677,7 @@ export default withMermaid(defineConfig({
       { icon: 'linkedin', link: 'https://www.linkedin.com/company/planepowers/' }
     ],
 
-    search: {
-      provider: 'local'
-    },
+    search: searchConfig,
 
     editLink: {
       pattern: 'https://github.com/makeplane/developer-docs/edit/main/:path'
