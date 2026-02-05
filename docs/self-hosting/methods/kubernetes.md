@@ -31,14 +31,14 @@ Ensure you use use the latest Helm chart version.
 1. Open terminal or any other command-line app that has access to Kubernetes tools on your local system.
 2. Set the following environment variables:
 ```bash
-PLANE_VERSION=v2.2.1
+PLANE_VERSION=v2.3.1
 ```
 ```bash
 DOMAIN_NAME=<subdomain.domain.tld or domain.tld>
 ```
 
 ::: warning
-When configuring the PLANE_VERSION environment variable, **do not** set it to `stable`. Always specify the latest version number (e.g., `1.8.0`). Using `stable` can lead to unexpected issues.
+When configuring the PLANE_VERSION environment variable, **do not** set it to `stable`. Always specify the latest version number (e.g., `2.3.1`). Using `stable` can lead to unexpected issues.
 :::
 
 3. Add the Plane helm chart repo.
@@ -54,7 +54,7 @@ helm repo add plane https://helm.plane.so/
     Run the following command to deploy Plane:
 
     ```bash
-    helm install plane-app plane/plane-enterprise \
+    helm upgrade --install plane-app plane/plane-enterprise \
         --create-namespace \
         --namespace plane \
         --set license.licenseDomain=${DOMAIN_NAME} \
@@ -70,6 +70,7 @@ helm repo add plane https://helm.plane.so/
 
     ::: info
     This is the minimum required to set up Plane Commercial edition. You can change the default namespace from `plane`, the default app name from `plane-app`, the default storage class from `longhorn`, and the default ingress class from `nginx` to whatever you would like to.<br/> <br/>
+    To use a custom StorageClass, add `--set env.storageClass=<your-storageclass-name>` to the command above.<br/> <br/>
     You can also pass other settings referring to the **Configuration Settings** toggle section below.
     :::
 
@@ -88,7 +89,7 @@ helm repo add plane https://helm.plane.so/
     ```
 
     Make sure you set the required environment variables listed below:
-    - `planeVersion: v2.2.1`
+    - `planeVersion: v2.3.1`
     - `license.licenseDomain: <The domain you have specified to host Plane>`
     - `license.licenseServer: https://prime.plane.so`
     - `ingress.enabled: <true | false>`
@@ -100,7 +101,7 @@ helm repo add plane https://helm.plane.so/
     ii. After saving the `values.yaml` file, run the following command to deploy Plane:
 
     ```bash
-    helm install plane-app plane/plane-enterprise \
+    helm upgrade --install plane-app plane/plane-enterprise \
         --create-namespace \
         --namespace plane \
         -f values.yaml \
@@ -116,7 +117,7 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 
 | Setting | Default | Required | Description |
 |---|:---:|:---:|---|
-| planeVersion | v2.2.1	 | Yes |  Specifies the version of Plane to be deployed. Copy this from `prime.plane.so.` |
+| planeVersion | v2.3.1 | Yes | Specifies the version of Plane to be deployed. Copy this from prime.plane.so. |
 | license.licenseDomain | 'plane.example.com' | Yes | The fully-qualified domain name (FQDN) in the format `sudomain.domain.tld` or `domain.tld` that the license is bound to. It is also attached to your `ingress` host to access Plane. |
 
 #### Airgapped settings
@@ -126,7 +127,16 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | airgapped.enabled | false | No |  Specifies the airgapped mode the Plane API runs in. |
 | airgapped.s3SecretName | "" | No | Name of the Secret that contains the CA certificate (.crt). The Secret must include a data key whose filename matches the basename of `airgapped.s3SecretKey` (default: `s3-custom-ca.crt`). Used to override S3’s CA when `airgapped.enabled=true`. Applying this secret looks like: `kubectl -n plane create secret generic plane-s3-ca \ --from-file=s3-custom-ca.crt=/path/to/your/ca.crt` | 
 | airgapped.s3SecretKey | "" | No | Key name of the secret to load the Custom Root CA from `airgapped.s3SecretName` |
-    
+
+#### Docker Registry
+
+| Setting | Default | Required | Description |
+|---|:---:|:---:|---|
+| dockerRegistry.enabled | false | No | Enable to configure image pull secrets for pulling images from a private docker registry. When enabled, you can either provide credentials to create a new secret or use an existing Kubernetes secret. |
+| dockerRegistry.existingSecret |  | No | Name of an existing Kubernetes secret containing docker registry credentials. When specified, the chart will use this secret for `imagePullSecrets` instead of creating a new one. The secret should be of type `kubernetes.io/dockerconfigjson`. If left empty, credentials below will be used to create a new secret. |
+| dockerRegistry.registry | index.docker.io/v1/ | No | Docker registry URL. Only used when `dockerRegistry.existingSecret` is empty. |
+| dockerRegistry.loginid |  | No | Login ID / Username for the docker registry. Only used when `dockerRegistry.existingSecret` is empty. |
+| dockerRegistry.password |  | No | Password or Token for the docker registry. Only used when `dockerRegistry.existingSecret` is empty. |
 
 #### Postgres
 
@@ -140,12 +150,11 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | env.pgdb_username | plane |  | Database credentials are requried to access the hosted stateful deployment of `postgres`.  Use this key to set the username for the stateful deployment. |
 | env.pgdb_password | plane |  | Database credentials are requried to access the hosted stateful deployment of `postgres`.  Use this key to set the password for the stateful deployment. |
 | env.pgdb_name | plane |  |  Database name to be used while setting up stateful deployment of `Postgres`|
-| services.postgres.assign_cluster_ip | false |  | This key allows you to set the node selector for the stateful deployment of postgres. This is useful when you want to run the deployment on specific nodes in your Kubernetes cluster.|
-| services.postgres.nodeSelector | {} |  | Set it to `true` if you want to assign `ClusterIP` to the service |
+| services.postgres.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
+| services.postgres.nodeSelector | {} |  | This key allows you to set the node selector for the stateful deployment of postgres. This is useful when you want to run the deployment on specific nodes in your Kubernetes cluster. |
 | services.postgres.tolerations	 | [] |  | This key allows you to set the tolerations for the stateful deployment of postgres. This is useful when you want to run the deployment on nodes with specific taints in your Kubernetes cluster.|
 | services.postgres.affinity | {} |  | This key allows you to set the affinity rules for the stateful deployment of postgres. This is useful when you want to control how pods are scheduled on nodes in your Kubernetes cluster. |
-| services.postgres.labels | {} |  | Set it to `true` if you want to assign `ClusterIP` to the service |
-| services.postgres.nodeSelector | {} |  | This key allows you to set custom labels for the stateful deployment of postgres. This is useful for organizing and selecting resources in your Kubernetes cluster.
+| services.postgres.labels | {} |  | This key allows you to set custom labels for the stateful deployment of postgres. This is useful for organizing and selecting resources in your Kubernetes cluster. |
 | services.postgres.annotations	 | {} |  | This key allows you to set custom annotations for the stateful deployment of postgres. This is useful for adding metadata or configuration hints to your resources. |
 | env.pgdb_remote_url |  |  | Users can also decide to use the remote hosted database and link to Plane deployment. Ignoring all the above keys, set `services.postgres.local_setup` to `false` and set this key with remote connection url. |
 
@@ -154,12 +163,12 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | Setting | Default | Required | Description |
 |---|:---:|:---:|---|
 | services.redis.local_setup | true |  | Plane uses `redis` to cache the session authentication and other static data. This database can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. aws rds or similar services). Set this to  `true` when you choose to setup stateful deployment of `redis`. Mark it as `false` when using a remotely hosted database |
-| services.redis.image | `valkey/valkey:7.2.5-alpine` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `redis`. (must be set when `services.redis.local_setup=true`)|
+| services.redis.image | `valkey/valkey:7.2.11-alpine` |  | Using this key, user must provide the docker image name to setup the stateful deployment of `redis`. (must be set when `services.redis.local_setup=true`)|
 | services.redis.pullPolicy	 | IfNotPresent |  | Using this key, user can set the pull policy for the stateful deployment of redis. (must be set when services.redis.local_setup=true) |
 | services.redis.servicePort | 6379 |  | This key sets the default port number to be used while setting up stateful deployment of `redis`. |
 | services.redis.volumeSize | 500Mi |  | While setting up the stateful deployment, while creating the persistant volume, volume allocation size need to be provided. This key helps you set the volume allocation size. Unit of this value must be in Mi (megabyte) or Gi (gigabyte) |
 | services.redis.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
-| services.redis.nodeSelector | 0 |  | This key allows you to set the node selector for the stateful deployment of redis. This is useful when you want to run the deployment on specific nodes in your Kubernetes cluster. |
+| services.redis.nodeSelector | {} |  | This key allows you to set the node selector for the stateful deployment of redis. This is useful when you want to run the deployment on specific nodes in your Kubernetes cluster. |
 | services.redis.tolerations | [] |  | This key allows you to set the tolerations for the stateful deployment of redis. This is useful when you want to run the deployment on nodes with specific taints in your Kubernetes cluster. |
 | services.redis.affinity | {}	 |  | This key allows you to set the affinity rules for the stateful deployment of redis. This is useful when you want to control how pods are scheduled on nodes in your Kubernetes cluster. |
 | services.redis.labels | {} |  | This key allows you to set custom labels for the stateful deployment of redis. This is useful for organizing and selecting resources in your Kubernetes cluster. |
@@ -186,6 +195,32 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | services.rabbitmq.annotations | {} |  | This key allows you to set custom annotations for the stateful deployment of rabbitmq. This is useful for adding metadata or configuration hints to your resources. |
 | services.rabbitmq.external_rabbitmq_url |  |  | Users can also decide to use the remote hosted service and link to Plane deployment. Ignoring all the above keys, set `services.rabbitmq.local_setup` to `false` and set this key with remote connection url. |
 
+#### OpenSearch Setup
+
+| Setting | Default | Required | Description |
+|---|:---:|:---:|---|
+| services.opensearch.local_setup | false |  | Plane uses `opensearch` as the search and analytics engine. This can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. AWS OpenSearch Service or similar services). Set this to `true` when you choose to setup stateful deployment of `opensearch`. Mark it as `false` when using a remotely hosted service |
+| services.opensearch.image | opensearchproject/opensearch:3.3.2 |  | Using this key, user must provide the docker image name to setup the stateful deployment of `opensearch`. (must be set when `services.opensearch.local_setup=true`) |
+| services.opensearch.pullPolicy | IfNotPresent |  | Using this key, user can set the pull policy for the stateful deployment of `opensearch`. (must be set when `services.opensearch.local_setup=true`) |
+| services.opensearch.servicePort | 9200 |  | This key sets the default port number to be used while setting up stateful deployment of `opensearch`. |
+| services.opensearch.volumeSize | 5Gi |  | While setting up the stateful deployment, while creating the persistant volume, volume allocation size need to be provided. Unit of this value must be in Mi (megabyte) or Gi (gigabyte) |
+| services.opensearch.username | plane |  | Credentials are required to access the hosted stateful deployment of `opensearch`. Use this key to set the username for the stateful deployment. |
+| services.opensearch.password | Secure@Pass#123!%^&* |  | Credentials are required to access the hosted stateful deployment of `opensearch`. Use this key to set the password. **Password Complexity Requirements:** Must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character (e.g., `!@#$%^&*`). |
+| services.opensearch.memoryLimit | 3Gi |  | Every deployment in kubernetes can be set to use maximum memory they are allowed to use. This key sets the memory limit for this deployment to use. |
+| services.opensearch.cpuLimit | 750m |  | Every deployment in kubernetes can be set to use maximum cpu they are allowed to use. This key sets the cpu limit for this deployment to use. |
+| services.opensearch.memoryRequest | 2Gi |  | Every deployment in kubernetes can be set to use minimum memory they are allowed to use. This key sets the memory request for this deployment to use. |
+| services.opensearch.cpuRequest | 500m |  | Every deployment in kubernetes can be set to use minimum cpu they are allowed to use. This key sets the cpu request for this deployment to use. |
+| services.opensearch.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
+| services.opensearch.nodeSelector | {} |  | This key allows you to set the node selector for the stateful deployment of opensearch. This is useful when you want to run the deployment on specific nodes in your Kubernetes cluster. |
+| services.opensearch.tolerations | [] |  | This key allows you to set the tolerations for the stateful deployment of opensearch. This is useful when you want to run the deployment on nodes with specific taints in your Kubernetes cluster. |
+| services.opensearch.affinity | {} |  | This key allows you to set the affinity rules for the stateful deployment of opensearch. This is useful when you want to control how pods are scheduled on nodes in your Kubernetes cluster. |
+| services.opensearch.labels | {} |  | This key allows you to set custom labels for the stateful deployment of opensearch. This is useful for organizing and selecting resources in your Kubernetes cluster. |
+| services.opensearch.annotations | {} |  | This key allows you to set custom annotations for the stateful deployment of opensearch. This is useful for adding metadata or configuration hints to your resources. |
+| env.opensearch_remote_url |  |  | Users can also decide to use the remote hosted service and link to Plane deployment. Set `services.opensearch.local_setup` to `false` and set this key with remote connection url. |
+| env.opensearch_remote_username |  |  | Username for remote OpenSearch service. Required when `services.opensearch.local_setup=false` and `env.opensearch_remote_url` is set. Note: This is not a secret and should be configured in values.yaml, not in external secrets. |
+| env.opensearch_remote_password |  |  | Password for remote OpenSearch service. Required when `services.opensearch.local_setup=false` and `env.opensearch_remote_url` is set. Can be configured in values.yaml or provided via external secrets (`opensearch_existingSecret` with `OPENSEARCH_PASSWORD`). **Password Complexity Requirements:** Must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character. |
+| env.opensearch_index_prefix | plane_ |  | Prefix to be used for OpenSearch indices. This helps organize indices in a multi-tenant or multi-environment setup. |
+
 #### Doc Store (Minio\/S3) Setup
 
 | Setting | Default | Required | Description |
@@ -193,7 +228,7 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | services.minio.local_setup | true |  | Plane uses `minio` as the default file storage drive. This storage can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. aws S3 or similar services). Set this to  `true` when you choose to setup stateful deployment of `minio`. Mark it as `false` when using a remotely hosted database |
 | services.minio.image | minio/minio:latest |  | Using this key, user must provide the docker image name to setup the stateful deployment of `minio`. (must be set when `services.minio.local_setup=true`)|
 | services.minio.image_mc | minio/mc:latest |  | Using this key, user must provide the docker image name to setup the job deployment of `minio client`. (must be set when `services.minio.local_setup=true`)|
-| services.minio.pullPolicy | services.minio.pullPolicy	 |  | Using this key, user can set the pull policy for the stateful deployment of minio. (must be set when services.minio.local_setup=true) |
+| services.minio.pullPolicy | IfNotPresent |  | Using this key, user can set the pull policy for the stateful deployment of minio. (must be set when services.minio.local_setup=true) |
 | services.minio.volumeSize | 3Gi |  | While setting up the stateful deployment, while creating the persistant volume, volume allocation size need to be provided. This key helps you set the volume allocation size. Unit of this value must be in Mi (megabyte) or Gi (gigabyte) |
 | services.minio.root_user | admin |  |  Storage credentials are requried to access the hosted stateful deployment of `minio`.  Use this key to set the username for the stateful deployment. |
 | services.minio.root_password | password |  | Storage credentials are requried to access the hosted stateful deployment of `minio`.  Use this key to set the password for the stateful deployment. |
@@ -210,6 +245,7 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | env.aws_secret_access_key |  |  | External `S3` (or compatible) storage service provides `secret access key` for the application to connect and do the necessary upload or download operations. To be provided when `services.minio.local_setup=false`  |
 | env.aws_region |  |  | External `S3` (or compatible) storage service providers creates any buckets in user selected region. This is also shared with the user as `region` for the application to connect and do the necessary upload or download operations. To be provided when `services.minio.local_setup=false`  |
 | env.aws_s3_endpoint_url |  |  | External `S3` (or compatible) storage service providers shares a `endpoint_url` for the integration purpose for the application to connect and do the necessary upload or download operations. To be provided when `services.minio.local_setup=false`  |
+| env.use_storage_proxy | false |  | When set to `true`, all S3 (or compatible) file GET requests from the browser are proxied through Plane's API service instead of accessing the S3 endpoint directly. Enable this if your storage endpoint is not accessible publicly or you want to control download access through the API. |
 
 #### Web Deployment
 
@@ -320,6 +356,7 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | env.sentry_dsn |  |  | (optional) API service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry-provided DSN for this integration.|
 | env.sentry_environment |  |  | (optional) API service deployment comes with some of the preconfigured integration. Sentry is one among those. Here user can set the Sentry environment name (as configured in Sentry) for this integration.|
 | env.api_key_rate_limit | 60/minute |  | (optional) User can set the maximum number of requests the API can handle in a given time frame. |
+| env.web_url |  |  | (optional) Custom Web URL for the application. If not set, it will be auto-generated based on the license domain and SSL settings. |
 | services.api.assign_cluster_ip | false |  | Set it to `true` if you want to assign `ClusterIP` to the service |
 | services.api.nodeSelector | {} |  | This key allows you to set the node selector for the deployment of api. This is useful when you want to run the deployment on specific nodes in your Kubernetes cluster. |
 | services.api.tolerations | [] |  | This key allows you to set the tolerations for the deployment of api. This is useful when you want to run the deployment on nodes with specific taints in your Kubernetes cluster. |
@@ -412,7 +449,11 @@ iii. If you've purchased a paid plan, [activate your license key](/self-hosting/
 | services.email_service.affinity | {} | | This key allows you to set the affinity rules for the deployment of `email_service`. This is useful when you want to control how pods are scheduled on nodes in your Kubernetes cluster. |
 | services.email_service.labels | {} | | Custom labels to add to the email service deployment |
 | services.email_service.annotations | {} | | Custom annotations to add to the email service deployment |
-| env.email_service_envs.smtp_domain | | Yes | The SMTP Domain to be used with email service |                                         |          |                                                          |
+| env.email_service_envs.smtp_domain | | Yes | The SMTP Domain to be used with email service |
+
+::: info
+When the email service is enabled, the cert-issuer will be automatically created to handle TLS certificates for the email service.
+:::
 
 #### Outbox Poller Service Deployment
 
@@ -497,6 +538,12 @@ To configure the external secrets for your application, you need to define speci
 | pgdb_existingSecret | POSTGRES_PASSWORD | Required if `postgres.local_setup=true` | Password for PostgreSQL database | plane |
 | | POSTGRES_DB | Required if `postgres.local_setup=true` | Name of the PostgreSQL database | plane |
 | | POSTGRES_USER | Required if `postgres.local_setup=true` | PostgreSQL user | plane |
+| opensearch_existingSecret | OPENSEARCH_ENABLED | Yes | Flag to enable OpenSearch | 1 (enabled) or 0 (disabled) |
+| | OPENSEARCH_URL | Required if OpenSearch is enabled | OpenSearch connection URL | **k8s service example:** `http://plane-opensearch.plane-ns.svc.cluster.local:9200` **external service example:** `https://your-opensearch-host:9200` |
+| | OPENSEARCH_USERNAME | Required if OpenSearch is enabled | Username for OpenSearch | **local setup:** plane **remote setup:** your_remote_username |
+| | OPENSEARCH_PASSWORD | Required if OpenSearch is enabled | Password for OpenSearch | **local setup:** Secure@Pass#123!%^&* **remote setup:** your_remote_password |
+| | OPENSEARCH_INITIAL_ADMIN_PASSWORD | Required if `opensearch.local_setup=true` | Initial admin password for local OpenSearch | Secure@Pass#123!%^&* |
+| | OPENSEARCH_INDEX_PREFIX | Optional | Prefix for OpenSearch indices | plane_ |
 | doc_store_existingSecret | USE_MINIO | Yes | Flag to enable MinIO as the storage backend | 1 |
 | | MINIO_ROOT_USER | Yes | MinIO root user | admin |
 | | MINIO_ROOT_PASSWORD | Yes | MinIO root password | password |
@@ -537,7 +584,7 @@ To configure the external secrets for your application, you need to define speci
 | ssl.createIssuer | false | | Kubernets cluster setup supports creating issuer type resource. After deployment, this is step towards creating secure access to the ingress url. Issuer is required for you generate SSL certifiate. Kubernetes can be configured to use any of the certificate authority to generate SSL (depending on CertManager configuration). Set it to true to create the issuer. Applicable only when ingress.enabled=true |
 | ssl.issuer | http | | CertManager configuration allows user to create issuers using http or any of the other DNS Providers like cloudflare, digitalocean, etc. As of now Plane supports http, cloudflare, digitalocean |
 | ssl.token | | | To create issuers using DNS challenge, set the issuer api token of dns provider like cloudflare or digitalocean (not required for http) |
-| ssl.server | | | Issuer creation configuration need the certificate generation authority server url. Default URL is the Let's Encrypt server |
+| ssl.server | https://acme-v02.api.letsencrypt.org/directory | | Issuer creation configuration need the certificate generation authority server url. Default URL is the Let's Encrypt server |
 | ssl.email | plane@example.com | | Certificate generation authority needs a valid email id before generating certificate. Required when ssl.createIssuer=true |
 | ssl.generateCerts | false | | After creating the issuers, user can still not create the certificate untill sure of configuration. Setting this to true will try to generate SSL certificate and associate with ingress. Applicable only when ingress.enabled=true and ssl.createIssuer=true |
 | ssl.tls_secret_name | | | If you have a custom TLS secret name, set this to the name of the secret. Applicable only when ingress.enabled=true and ssl.createIssuer=false |
@@ -557,19 +604,22 @@ To configure the external secrets for your application, you need to define speci
 
 ## Custom Ingress Routes
 
-If you are planning to use 3rd party ingress providers, here is the available route configuration
+If you are planning to use 3rd party ingress providers, here is the available route configuration.
 
-| Host | Path | Service |
-|---    |:---:|---|
-| plane.example.com | `/` | `<http://plane-app-web.plane:3000>` |
-| plane.example.com | `/spaces/*`  | `<http://plane-app-space.plane:3000>` |
-| plane.example.com | `/god-mode/*` | `<http://plane-app-admin.plane:3000>` |
-| plane.example.com | `/live/*` | `<http://plane-app-live.plane:3000>` |
-| plane.example.com | `/api/*`  |  `<http://plane-app-api.plane:8000>` |
-| plane.example.com | `/auth/*` | `<http://plane-app-api.plane:8000>` |
-| plane.example.com | `/uploads/*` | `<http://plane-app-minio.plane:9000>` |
-| plane-minio.example.com | `/` | `<http://plane-app-minio.plane:9090>` |
-| plane-mq.example.com | `/` | `<http://plane-app-rabbitmq.plane:15672>` | (Optional) if using local setup, this will enable management console access |
+| Host | Path | Service | Required |
+|---    |:---:|---|:---:|
+| plane.example.com | `/` | `<http://plane-app-web.plane:3000>` | Yes |
+| plane.example.com | `/spaces/*`  | `<http://plane-app-space.plane:3000>` | Yes |
+| plane.example.com | `/god-mode/*` | `<http://plane-app-admin.plane:3000>` | Yes |
+| plane.example.com | `/live/*` | `<http://plane-app-live.plane:3000>` | Yes |
+| plane.example.com | `/silo/*` | `<http://plane-app-silo.plane:3000>` | Yes |
+| plane.example.com | `/api/*`  |  `<http://plane-app-api.plane:8000>` | Yes |
+| plane.example.com | `/auth/*` | `<http://plane-app-api.plane:8000>` | Yes |
+| plane.example.com | `/graphql/*` | `<http://plane-app-api.plane:8000>` | Yes |
+| plane.example.com | `/marketplace/*` | `<http://plane-app-api.plane:8000>` | Yes |
+| plane.example.com | `/uploads/*` | `<http://plane-app-minio.plane:9000>` | Yes (only if using local setup) |
+| plane-minio.example.com | `/` | `<http://plane-app-minio.plane:9090>` | Optional (if using local setup, enables MinIO console access) |
+| plane-mq.example.com | `/` | `<http://plane-app-rabbitmq.plane:15672>` | Optional (if using local setup, enables management console access) |
   
 ::: details Install Community Edition 
   The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
