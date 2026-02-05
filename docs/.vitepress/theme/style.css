@@ -97,36 +97,40 @@
    ================================================ */
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi/Satoshi-Light.woff2') format('woff2'),
-       url('/fonts/Satoshi/Satoshi-Light.woff') format('woff');
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi/Satoshi-Light.woff2") format("woff2"),
+    url("/fonts/Satoshi/Satoshi-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi/Satoshi-Regular.woff2') format('woff2'),
-       url('/fonts/Satoshi/Satoshi-Regular.woff') format('woff');
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi/Satoshi-Regular.woff2") format("woff2"),
+    url("/fonts/Satoshi/Satoshi-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi/Satoshi-Medium.woff2') format('woff2'),
-       url('/fonts/Satoshi/Satoshi-Medium.woff') format('woff');
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi/Satoshi-Medium.woff2") format("woff2"),
+    url("/fonts/Satoshi/Satoshi-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi/Satoshi-Bold.woff2') format('woff2'),
-       url('/fonts/Satoshi/Satoshi-Bold.woff') format('woff');
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi/Satoshi-Bold.woff2") format("woff2"),
+    url("/fonts/Satoshi/Satoshi-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -137,32 +141,32 @@
    ================================================ */
 
 @font-face {
-  font-family: 'IBM Plex Mono';
-  src: url('/fonts/IBMPlexMono/IBMPlexMono-Regular.ttf') format('truetype');
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono/IBMPlexMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'IBM Plex Mono';
-  src: url('/fonts/IBMPlexMono/IBMPlexMono-Medium.ttf') format('truetype');
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono/IBMPlexMono-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'IBM Plex Mono';
-  src: url('/fonts/IBMPlexMono/IBMPlexMono-SemiBold.ttf') format('truetype');
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono/IBMPlexMono-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'IBM Plex Mono';
-  src: url('/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf') format('truetype');
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono/IBMPlexMono-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -182,8 +186,11 @@
   --plane-500: #006399;
 
   /* Fonts */
-  --vp-font-family-base: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --vp-font-family-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --vp-font-family-base:
+    "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --vp-font-family-mono:
+    "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
 }
 
 /* Dark mode */
@@ -395,23 +402,23 @@
    CODE BLOCKS - DARK MODE FIX
    ================================================ */
 
-div[class*='language-'] {
+div[class*="language-"] {
   border-radius: 8px !important;
   overflow: hidden;
   border: 1px solid #e5e7eb;
   background: #fafafa !important;
 }
 
-.dark div[class*='language-'] {
+.dark div[class*="language-"] {
   background: #0f0f0f !important;
   border-color: #2a2a2a !important;
 }
 
-div[class*='language-'] pre {
+div[class*="language-"] pre {
   background: transparent !important;
 }
 
-.dark div[class*='language-'] pre {
+.dark div[class*="language-"] pre {
   background: transparent !important;
 }
 
@@ -421,7 +428,7 @@ div[class*='language-'] pre {
 }
 
 /* Language label */
-div[class*='language-'] > span.lang {
+div[class*="language-"] > span.lang {
   color: #9ca3af;
   font-size: 12px;
 }
@@ -438,7 +445,6 @@ div[class*='language-'] > span.lang {
 .vp-doc h2 {
   border-top: none !important;
   margin-top: 32px;
-
 }
 
 .vp-doc h3 {
@@ -650,5 +656,3 @@ a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
   background: #0078b8 !important;
   box-shadow: 0 2px 8px rgba(0, 99, 153, 0.35) !important;
 }
-
-

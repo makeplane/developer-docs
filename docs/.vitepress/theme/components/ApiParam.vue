@@ -1,13 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 defineProps({
   name: String,
   type: String,
-  required: Boolean
-})
+  required: Boolean,
+});
 
-const isExpanded = ref(true)
+const isExpanded = ref(true);
 </script>
 
 <template>
@@ -15,7 +15,14 @@ const isExpanded = ref(true)
     <div class="param-row" @click="isExpanded = !isExpanded">
       <span class="expand-icon" :class="{ expanded: isExpanded }">
         <svg width="8" height="8" viewBox="0 0 8 8">
-          <path d="M2 1L6 4L2 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path
+            d="M2 1L6 4L2 7"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </span>
       <code class="param-name">{{ name }}</code>

@@ -1,32 +1,32 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 const props = defineProps({
   status: {
     type: [String, Number],
-    default: '200'
-  }
-})
+    default: "200",
+  },
+});
 
-const copied = ref(false)
+const copied = ref(false);
 
 const copyCode = async (event) => {
-  const panel = event.target.closest('.response-panel')
-  const codeBlock = panel?.querySelector('pre code')
+  const panel = event.target.closest(".response-panel");
+  const codeBlock = panel?.querySelector("pre code");
   if (codeBlock) {
-    await navigator.clipboard.writeText(codeBlock.textContent)
-    copied.value = true
-    setTimeout(() => copied.value = false, 2000)
+    await navigator.clipboard.writeText(codeBlock.textContent);
+    copied.value = true;
+    setTimeout(() => (copied.value = false), 2000);
   }
-}
+};
 
 const statusClass = () => {
-  const code = parseInt(props.status)
-  if (code >= 200 && code < 300) return 'status-success'
-  if (code >= 400 && code < 500) return 'status-warning'
-  if (code >= 500) return 'status-error'
-  return ''
-}
+  const code = parseInt(props.status);
+  if (code >= 200 && code < 300) return "status-success";
+  if (code >= 400 && code < 500) return "status-warning";
+  if (code >= 500) return "status-error";
+  return "";
+};
 </script>
 
 <template>
@@ -37,12 +37,20 @@ const statusClass = () => {
         <span class="status-code" :class="statusClass()">{{ status }}</span>
       </div>
       <button class="copy-btn" @click="copyCode" title="Copy response">
-        <svg v-if="!copied" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        <svg
+          v-if="!copied"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
         </svg>
         <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
-          <polyline points="20 6 9 17 4 12"/>
+          <polyline points="20 6 9 17 4 12" />
         </svg>
       </button>
     </div>
@@ -135,7 +143,7 @@ const statusClass = () => {
   background: #374151;
 }
 
-.response-body :deep(div[class*='language-']) {
+.response-body :deep(div[class*="language-"]) {
   margin: 0 !important;
   border-radius: 0 !important;
   border: none !important;
