@@ -24,12 +24,12 @@ Signals are metadata that modify how an activity should be interpreted or handle
 
 ### Available signals
 
-| Signal | Description | Use Case |
-|--------|-------------|----------|
-| `continue` | Default signal, indicates normal flow | Standard responses, ongoing conversation |
-| `stop` | User requested to stop the agent | Cancellation, abort operations |
-| `auth_request` | Agent needs external authentication | OAuth flows, API key collection |
-| `select` | Agent presenting options for selection | Multiple choice questions |
+| Signal         | Description                            | Use Case                                 |
+| -------------- | -------------------------------------- | ---------------------------------------- |
+| `continue`     | Default signal, indicates normal flow  | Standard responses, ongoing conversation |
+| `stop`         | User requested to stop the agent       | Cancellation, abort operations           |
+| `auth_request` | Agent needs external authentication    | OAuth flows, API key collection          |
+| `select`       | Agent presenting options for selection | Multiple choice questions                |
 
 ### Signal: `continue`
 
@@ -73,15 +73,15 @@ Sent by Plane when a user requests to stop the agent. Your agent should:
 **Handling the stop signal:**
 
 ```typescript
-if (webhook.agent_run_activity.signal === 'stop') {
+if (webhook.agent_run_activity.signal === "stop") {
   // Cancel ongoing work
   await cancelAllPendingTasks();
 
   // Acknowledge the stop - this transitions run to "stopped" status
   await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-    type: 'response',
+    type: "response",
     content: {
-      type: 'response',
+      type: "response",
       body: "I've stopped working on your request.",
     },
   });
@@ -98,19 +98,20 @@ Used when your agent needs the user to authenticate with an external service. Re
 
 ```typescript
 await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-  type: 'elicitation',
+  type: "elicitation",
   content: {
-    type: 'elicitation',
-    body: 'I need access to your GitHub account to proceed. Please authenticate using the link below.',
+    type: "elicitation",
+    body: "I need access to your GitHub account to proceed. Please authenticate using the link below.",
   },
-  signal: 'auth_request',
+  signal: "auth_request",
   signal_metadata: {
-    url: 'https://your-agent.com/auth/github?session=abc123',
+    url: "https://your-agent.com/auth/github?session=abc123",
   },
 });
 ```
 
 **Requirements:**
+
 - The URL must start with `https://`
 - The URL should be a secure endpoint on your agent's server
 - After authentication, redirect the user back or notify completion
@@ -121,17 +122,17 @@ Used when presenting options for the user to choose from. Useful for disambiguat
 
 ```typescript
 await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-  type: 'elicitation',
+  type: "elicitation",
   content: {
-    type: 'elicitation',
-    body: 'Which project would you like me to search?\n\n1. Frontend App\n2. Backend API\n3. Mobile App',
+    type: "elicitation",
+    body: "Which project would you like me to search?\n\n1. Frontend App\n2. Backend API\n3. Mobile App",
   },
-  signal: 'select',
+  signal: "select",
   signal_metadata: {
     options: [
-      { id: 'frontend', label: 'Frontend App' },
-      { id: 'backend', label: 'Backend API' },
-      { id: 'mobile', label: 'Mobile App' },
+      { id: "frontend", label: "Frontend App" },
+      { id: "backend", label: "Backend API" },
+      { id: "mobile", label: "Mobile App" },
     ],
   },
 });
@@ -150,7 +151,7 @@ Internal reasoning or progress updates from the agent. Automatically marked as e
 ```typescript
 interface ThoughtContent {
   type: "thought";
-  body: string;  // The thought message
+  body: string; // The thought message
 }
 ```
 
@@ -170,10 +171,10 @@ interface ThoughtContent {
 
 ```typescript
 await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-  type: 'thought',
+  type: "thought",
   content: {
-    type: 'thought',
-    body: 'Analyzing the codebase for potential issues...',
+    type: "thought",
+    body: "Analyzing the codebase for potential issues...",
   },
 });
 ```
@@ -195,9 +196,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Best practices for thoughts:**
+
 - Keep them concise and user-meaningful
 - Use to show progress, not internal implementation
 - Update as you move through stages of processing
@@ -211,8 +214,9 @@ Describes a tool invocation or external action. Automatically marked as ephemera
 ```typescript
 interface ActionContent {
   type: "action";
-  action: string;       // Name of the tool/action
-  parameters: {         // Key-value pairs of parameters
+  action: string; // Name of the tool/action
+  parameters: {
+    // Key-value pairs of parameters
     [key: string]: string;
   };
 }
@@ -253,27 +257,27 @@ interface ActionContent {
 ```typescript
 // Before executing the action
 await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-  type: 'action',
+  type: "action",
   content: {
-    type: 'action',
-    action: 'fetchWeather',
+    type: "action",
+    action: "fetchWeather",
     parameters: {
-      location: 'San Francisco',
+      location: "San Francisco",
     },
   },
 });
 
 // Execute the actual action
-const weatherData = await fetchWeather('San Francisco');
+const weatherData = await fetchWeather("San Francisco");
 
 // After execution, report the result
 await planeClient.agentRuns.activities.create(credentials.workspace_slug, agentRunId, {
-  type: 'action',
+  type: "action",
   content: {
-    type: 'action',
-    action: 'fetchWeather',
+    type: "action",
+    action: "fetchWeather",
     parameters: {
-      location: 'San Francisco',
+      location: "San Francisco",
       result: `Temperature: ${weatherData.temp}°F, Conditions: ${weatherData.conditions}`,
     },
   },
@@ -323,9 +327,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Parameter requirements:**
+
 - All parameter keys must be strings
 - All parameter values must be strings
 - Use `content_metadata` to store complex/structured data
@@ -339,7 +345,7 @@ A final response to the user. Creates a comment reply visible to users.
 ```typescript
 interface ResponseContent {
   type: "response";
-  body: string;  // The response message (supports Markdown)
+  body: string; // The response message (supports Markdown)
 }
 ```
 
@@ -386,9 +392,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Response best practices:**
+
 - Use Markdown for formatting
 - Be clear and concise
 - Include relevant context
@@ -403,7 +411,7 @@ Requests clarification or input from the user. Creates a comment and sets the Ag
 ```typescript
 interface ElicitationContent {
   type: "elicitation";
-  body: string;  // The question or request (supports Markdown)
+  body: string; // The question or request (supports Markdown)
 }
 ```
 
@@ -448,9 +456,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Elicitation best practices:**
+
 - Ask specific, answerable questions
 - Provide options when possible
 - Don't ask too many questions at once
@@ -465,7 +475,7 @@ Reports an error or failure. Creates a comment and sets the Agent Run status to 
 ```typescript
 interface ErrorContent {
   type: "error";
-  body: string;  // The error message (supports Markdown)
+  body: string; // The error message (supports Markdown)
 }
 ```
 
@@ -518,9 +528,11 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 **Error best practices:**
+
 - Use friendly, non-technical language
 - Suggest next steps when possible
 - Store detailed error info in `signal_metadata`
@@ -535,7 +547,7 @@ This type is **user-generated only**. Your agent cannot create prompt activities
 ```typescript
 interface PromptContent {
   type: "prompt";
-  body: string;  // The user's message
+  body: string; // The user's message
 }
 ```
 
@@ -555,6 +567,7 @@ Ephemeral activities are temporary and won't create comment replies. They're use
 ### Automatically ephemeral types
 
 The following activity types are automatically marked as ephemeral:
+
 - `thought`
 - `action`
 - `error`
@@ -646,6 +659,7 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 ## Signal metadata
@@ -694,10 +708,10 @@ Here's a comprehensive example showing all activity types:
 == TypeScript {#typescript}
 
 ```typescript
-import { PlaneClient } from '@makeplane/plane-node-sdk';
+import { PlaneClient } from "@makeplane/plane-node-sdk";
 
 const planeClient = new PlaneClient({
-  baseUrl: process.env.PLANE_API_URL || 'https://api.plane.so',
+  baseUrl: process.env.PLANE_API_URL || "https://api.plane.so",
   accessToken: botToken,
 });
 
@@ -819,6 +833,7 @@ plane_client.agent_runs.activities.create(
     ),
 )
 ```
+
 :::
 
 ## Next steps

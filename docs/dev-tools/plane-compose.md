@@ -4,29 +4,31 @@ description: Define Plane projects, workflows, and work items in YAML files. Ver
 ---
 
 # Plane Compose
+
 Plane Compose is a command-line tool that lets you define and manage Plane projects using YAML configuration files instead of the web interface. Think of it as "infrastructure as code" for project management — you write your project structure in files, version control them with Git, and sync them with Plane.
 
 ## Features
+
 - **Local-first workflow**  
-Define everything in YAML and version control with Git. Your project structure, work item types, workflows, and tasks all live in your repository.
+  Define everything in YAML and version control with Git. Your project structure, work item types, workflows, and tasks all live in your repository.
 - **Bidirectional sync**  
-Push local changes to Plane or pull remote changes down. Keep your local files and Plane in sync however you prefer to work.
+  Push local changes to Plane or pull remote changes down. Keep your local files and Plane in sync however you prefer to work.
 - **Auto-create projects**  
-Projects are created automatically in Plane when you push a schema. No need to set things up manually first.
+  Projects are created automatically in Plane when you push a schema. No need to set things up manually first.
 - **Rich schema management**  
-Define work item types with custom fields, create workflow state machines, and organize labels into groups.
+  Define work item types with custom fields, create workflow state machines, and organize labels into groups.
 - **Two sync modes**  
-Use collaborative mode (plane push) for team-friendly additive syncing, or declarative mode (plane apply) when YAML should be the single source of truth.
+  Use collaborative mode (plane push) for team-friendly additive syncing, or declarative mode (plane apply) when YAML should be the single source of truth.
 - **Intelligent change detection**  
-Content-based diffing means only actual changes get pushed. Stable IDs (user-defined or content-hashed) prevent duplicate work items.
+  Content-based diffing means only actual changes get pushed. Stable IDs (user-defined or content-hashed) prevent duplicate work items.
 - **State tracking**  
-Terraform-style .plane/state.json tracks what's been synced, so Plane Compose knows what changed since the last push.
+  Terraform-style .plane/state.json tracks what's been synced, so Plane Compose knows what changed since the last push.
 - **Built-in rate limiting**  
-Respects Plane API limits with configurable throttling (50 requests/minute by default). Monitor usage with plane rate stats.
+  Respects Plane API limits with configurable throttling (50 requests/minute by default). Monitor usage with plane rate stats.
 - **Project cloning**  
-Clone an existing Plane project by UUID to start working with it locally.
-- **Debug mode**   
-Comprehensive logging and error handling when you need to troubleshoot.
+  Clone an existing Plane project by UUID to start working with it locally.
+- **Debug mode**  
+  Comprehensive logging and error handling when you need to troubleshoot.
 
 ## Installation
 
@@ -80,9 +82,11 @@ my-project/
 
 ::: tip
 You can set the workspace and project key directly from the command line:
+
 ```bash
 plane init my-project --workspace myteam --project API
 ```
+
 This saves you from having to edit plane.yaml afterward.
 :::
 
@@ -181,7 +185,6 @@ cd <project-name>
 
 The remote work items are pulled to `.plane/remote/items.yaml`. You can review them, make changes in `work/inbox.yaml`, and push updates back to Plane.
 
-
 ## Project structure
 
 When you initialize a project, Plane Compose creates the following structure:
@@ -206,7 +209,7 @@ The main configuration file for your project:
 ```yaml
 workspace: myteam
 project:
-  key: API  # Short key or UUID
+  key: API # Short key or UUID
   name: API Project
 
 defaults:
@@ -402,7 +405,7 @@ groups:
       - name: frontend
       - name: backend
       - name: infrastructure
-  
+
   priority:
     color: "#ef4444"
     labels:
@@ -432,17 +435,17 @@ plane schema push --dry-run  # Preview first
 
 Each work item in your YAML files can include these fields:
 
-| Field | Description |
-|-------|-------------|
-| `id` | Stable identifier for tracking (recommended) |
-| `title` | Work item title (required) |
-| `type` | Work item type (defaults to value in `plane.yaml`) |
-| `priority` | `none`, `low`, `medium`, `high`, or `urgent` |
-| `state` | Current state from the workflow |
-| `labels` | List of label names |
-| `description` | Detailed description |
-| `assignee` | Email of the assignee |
-| `watchers` | List of watcher emails |
+| Field         | Description                                        |
+| ------------- | -------------------------------------------------- |
+| `id`          | Stable identifier for tracking (recommended)       |
+| `title`       | Work item title (required)                         |
+| `type`        | Work item type (defaults to value in `plane.yaml`) |
+| `priority`    | `none`, `low`, `medium`, `high`, or `urgent`       |
+| `state`       | Current state from the workflow                    |
+| `labels`      | List of label names                                |
+| `description` | Detailed description                               |
+| `assignee`    | Email of the assignee                              |
+| `watchers`    | List of watcher emails                             |
 
 ### Using stable IDs
 
@@ -512,8 +515,8 @@ plane push
 ```yaml
 workspace: my-workspace
 project:
-  key: PROJ           # User-defined short key
-  uuid: abc-123       # Auto-added after schema push
+  key: PROJ # User-defined short key
+  uuid: abc-123 # Auto-added after schema push
   name: My Project
 
 defaults:
@@ -529,14 +532,14 @@ apply_scope:
 
 ### Environment variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `PLANE_API_URL` | `https://api.plane.so` | API endpoint |
-| `PLANE_API_TIMEOUT` | `30` | Request timeout in seconds |
-| `PLANE_RATE_LIMIT_PER_MINUTE` | `50` | Maximum requests per minute |
-| `PLANE_DEBUG` | `false` | Enable debug mode |
-| `PLANE_VERBOSE` | `false` | Enable verbose output |
-| `PLANE_LOG_TO_FILE` | `false` | Write logs to file |
+| Variable                      | Default                | Description                 |
+| ----------------------------- | ---------------------- | --------------------------- |
+| `PLANE_API_URL`               | `https://api.plane.so` | API endpoint                |
+| `PLANE_API_TIMEOUT`           | `30`                   | Request timeout in seconds  |
+| `PLANE_RATE_LIMIT_PER_MINUTE` | `50`                   | Maximum requests per minute |
+| `PLANE_DEBUG`                 | `false`                | Enable debug mode           |
+| `PLANE_VERBOSE`               | `false`                | Enable verbose output       |
+| `PLANE_LOG_TO_FILE`           | `false`                | Write logs to file          |
 
 ### Credentials storage
 
@@ -548,59 +551,59 @@ Logs are written to `~/.config/plane-compose/plane.log` when debug mode is enabl
 
 ### Project management
 
-| Command | Description |
-|---------|-------------|
-| `plane init [path]` | Initialize a new project |
-| `plane status` | Show sync status |
+| Command              | Description                       |
+| -------------------- | --------------------------------- |
+| `plane init [path]`  | Initialize a new project          |
+| `plane status`       | Show sync status                  |
 | `plane clone <uuid>` | Clone an existing project by UUID |
 
 ### Authentication
 
-| Command | Description |
-|---------|-------------|
-| `plane auth login` | Authenticate with API key |
-| `plane auth whoami` | Show current user |
+| Command             | Description               |
+| ------------------- | ------------------------- |
+| `plane auth login`  | Authenticate with API key |
+| `plane auth whoami` | Show current user         |
 | `plane auth logout` | Remove stored credentials |
 
 ### Schema management
 
-| Command | Description |
-|---------|-------------|
-| `plane schema validate` | Validate local schema files |
-| `plane schema push` | Push schema to Plane |
-| `plane schema push --dry-run` | Preview schema changes |
+| Command                       | Description                 |
+| ----------------------------- | --------------------------- |
+| `plane schema validate`       | Validate local schema files |
+| `plane schema push`           | Push schema to Plane        |
+| `plane schema push --dry-run` | Preview schema changes      |
 
 ### Work items (collaborative mode)
 
-| Command | Description |
-|---------|-------------|
-| `plane push` | Push new/updated work items |
-| `plane push --dry-run` | Preview changes |
-| `plane push --force` | Push without confirmation |
-| `plane pull` | Pull work items from Plane |
-| `plane sync` | Run schema push + push together |
+| Command                | Description                     |
+| ---------------------- | ------------------------------- |
+| `plane push`           | Push new/updated work items     |
+| `plane push --dry-run` | Preview changes                 |
+| `plane push --force`   | Push without confirmation       |
+| `plane pull`           | Pull work items from Plane      |
+| `plane sync`           | Run schema push + push together |
 
 ### Work items (declarative mode)
 
-| Command | Description |
-|---------|-------------|
-| `plane apply` | Declarative sync with delete support |
-| `plane apply --dry-run` | Preview creates/updates/deletes |
-| `plane apply --force` | Apply without confirmation |
+| Command                 | Description                          |
+| ----------------------- | ------------------------------------ |
+| `plane apply`           | Declarative sync with delete support |
+| `plane apply --dry-run` | Preview creates/updates/deletes      |
+| `plane apply --force`   | Apply without confirmation           |
 
 ### Monitoring
 
-| Command | Description |
-|---------|-------------|
-| `plane rate stats` | Show rate limit statistics |
+| Command            | Description                 |
+| ------------------ | --------------------------- |
+| `plane rate stats` | Show rate limit statistics  |
 | `plane rate reset` | Reset rate limit statistics |
 
 ### Global options
 
-| Option | Description |
-|--------|-------------|
+| Option            | Description           |
+| ----------------- | --------------------- |
 | `--verbose`, `-v` | Enable verbose output |
-| `--debug` | Enable debug logging |
+| `--debug`         | Enable debug logging  |
 
 ## Troubleshooting
 
