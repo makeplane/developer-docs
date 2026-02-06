@@ -4,7 +4,6 @@ description: List intake issues via Plane API. HTTP GET request with pagination,
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # List intake issues
 
 <div class="api-endpoint-badge">
@@ -25,13 +24,9 @@ Gets all the intake issue of a project
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
-
-
 
 </ApiParam>
 
@@ -72,8 +67,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

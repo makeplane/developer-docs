@@ -4,7 +4,6 @@ description: Delete intake issue via Plane API. HTTP DELETE request for removing
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Delete intake issue
 
 <div class="api-endpoint-badge">
@@ -25,25 +24,17 @@ Deletes an intake issue
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
-
-
 
 </ApiParam>
 
 <ApiParam name="inbox_id" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="work_item_id" type="string" :required="true">
-
-
 
 </ApiParam>
 
@@ -84,8 +75,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

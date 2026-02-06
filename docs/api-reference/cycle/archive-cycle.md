@@ -4,7 +4,6 @@ description: Archive a cycle API endpoint. Request format, parameters, and respo
 keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
 ---
 
-
 # Archive a cycle
 
 <div class="api-endpoint-badge">
@@ -78,8 +77,8 @@ const response = await fetch(
   {
     method: "POST",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

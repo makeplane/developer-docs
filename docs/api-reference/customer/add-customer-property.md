@@ -4,7 +4,6 @@ description: Create a customer property via Plane API. HTTP POST request format,
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Create a customer property
 
 <div class="api-endpoint-badge">
@@ -195,33 +194,30 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "display_name": "example-display_name",
-  "description": "example-description",
-  "property_type": "example-property_type",
-  "relation_type": "example-relation_type",
-  "is_required": true,
-  "is_multi": true,
-  "is_active": true,
-  "sort_order": 1,
-  "default_value": "example-default_value",
-  "settings": "example-settings",
-  "validation_rules": "example-validation_rules",
-  "logo_props": "example-logo_props",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    display_name: "example-display_name",
+    description: "example-description",
+    property_type: "example-property_type",
+    relation_type: "example-relation_type",
+    is_required: true,
+    is_multi: true,
+    is_active: true,
+    sort_order: 1,
+    default_value: "example-default_value",
+    settings: "example-settings",
+    validation_rules: "example-validation_rules",
+    logo_props: "example-logo_props",
+    external_source: "example-external_source",
+    external_id: "example-external_id",
+  }),
+});
 const data = await response.json();
 ```
 

@@ -4,7 +4,6 @@ description: List all customer work items via Plane API. HTTP GET request with p
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, customers, crm, customer management
 ---
 
-
 # List all customer work items
 
 <div class="api-endpoint-badge">
@@ -72,8 +71,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

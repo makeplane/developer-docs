@@ -4,7 +4,6 @@ description: Update a cycle via Plane API. HTTP PATCH request format, editable f
 keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
 ---
 
-
 # Update a cycle
 
 <div class="api-endpoint-badge">
@@ -157,18 +156,18 @@ const response = await fetch(
     method: "PATCH",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "start_date": "example-start_date",
-  "end_date": "example-end_date",
-  "owned_by": "example-owned_by",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id",
-  "timezone": "example-timezone"
-})
+      name: "example-name",
+      description: "example-description",
+      start_date: "example-start_date",
+      end_date: "example-end_date",
+      owned_by: "example-owned_by",
+      external_source: "example-external_source",
+      external_id: "example-external_id",
+      timezone: "example-timezone",
+    }),
   }
 );
 const data = await response.json();

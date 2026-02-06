@@ -4,7 +4,6 @@ description: Delete a customer request via Plane API. HTTP DELETE request for re
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Delete a customer request
 
 <div class="api-endpoint-badge">
@@ -78,8 +77,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

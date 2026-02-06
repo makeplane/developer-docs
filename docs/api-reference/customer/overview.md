@@ -4,7 +4,6 @@ description: Plane Customer API overview. Learn about endpoints, request/respons
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Overview
 
 Customers allow you to manage customer relationships and track customer-related work items, requests, and custom properties within a workspace.
@@ -57,12 +56,12 @@ Customers allow you to manage customer relationships and track customer-related 
 
 ```json
 {
-	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-	"created_at": "2023-11-19T11:56:55.176802Z",
-	"updated_at": "2023-11-19T11:56:55.176809Z",
-	"name": "Acme Corporation",
-	"email": "contact@acme.com",
-	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "created_at": "2023-11-19T11:56:55.176802Z",
+  "updated_at": "2023-11-19T11:56:55.176809Z",
+  "name": "Acme Corporation",
+  "email": "contact@acme.com",
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
 

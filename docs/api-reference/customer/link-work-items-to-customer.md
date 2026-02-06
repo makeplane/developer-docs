@@ -4,7 +4,6 @@ description: Link work items to customer API endpoint. Request format, parameter
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, customers, crm, customer management
 ---
 
-
 # Link work items to customer
 
 <div class="api-endpoint-badge">
@@ -95,11 +94,11 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "issue_ids": "example-issue_ids"
-})
+      issue_ids: "example-issue_ids",
+    }),
   }
 );
 const data = await response.json();
