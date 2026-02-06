@@ -4,7 +4,6 @@ description: List all archived cycles via Plane API. HTTP GET request with pagin
 keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
 ---
 
-
 # List all archived cycles
 
 <div class="api-endpoint-badge">
@@ -72,8 +71,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

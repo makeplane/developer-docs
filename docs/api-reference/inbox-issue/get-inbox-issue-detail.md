@@ -4,7 +4,6 @@ description: Get intake issue detail details via Plane API. Retrieve complete in
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Get intake issue detail
 
 <div class="api-endpoint-badge">
@@ -25,19 +24,13 @@ Gets the details of an intake issue
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="work_item_id" type="string" :required="true">
-
-
 
 </ApiParam>
 
@@ -78,8 +71,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

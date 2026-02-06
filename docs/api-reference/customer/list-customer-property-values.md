@@ -4,7 +4,6 @@ description: List all customer property values via Plane API. HTTP GET request w
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # List all customer property values
 
 <div class="api-endpoint-badge">
@@ -111,8 +110,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

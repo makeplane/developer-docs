@@ -4,7 +4,6 @@ description: Create a customer via Plane API. HTTP POST request format, required
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Create a customer
 
 <div class="api-endpoint-badge">
@@ -91,20 +90,17 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "email": "example-email"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    email: "example-email",
+  }),
+});
 const data = await response.json();
 ```
 

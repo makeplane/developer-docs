@@ -4,7 +4,6 @@ description: Create work items to cycle via Plane API. HTTP POST request format,
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
 ---
 
-
 # Add work items to cycle
 
 <div class="api-endpoint-badge">
@@ -101,11 +100,11 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "issues": "example-issues"
-})
+      issues: "example-issues",
+    }),
   }
 );
 const data = await response.json();

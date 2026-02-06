@@ -4,7 +4,6 @@ description: Create intake issue via Plane API. HTTP POST request format, requir
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Add intake issue
 
 <div class="api-endpoint-badge">
@@ -25,13 +24,9 @@ Adds an intake issue in a project
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
-
-
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
-
-
 
 </ApiParam>
 
@@ -95,11 +90,11 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "issue": "example-issue"
-})
+      issue: "example-issue",
+    }),
   }
 );
 const data = await response.json();

@@ -4,7 +4,6 @@ description: Update a customer property value via Plane API. HTTP PATCH request 
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Update a customer property value
 
 <div class="api-endpoint-badge">
@@ -101,11 +100,11 @@ const response = await fetch(
     method: "PATCH",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "values": "example-values"
-})
+      values: "example-values",
+    }),
   }
 );
 const data = await response.json();

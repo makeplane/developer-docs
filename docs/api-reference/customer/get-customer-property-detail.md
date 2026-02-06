@@ -4,7 +4,6 @@ description: Get retrieve a customer property details via Plane API. Retrieve co
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
-
 # Retrieve a customer property
 
 <div class="api-endpoint-badge">
@@ -67,15 +66,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/{property_id}/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/{property_id}/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 
