@@ -83,6 +83,14 @@ Number of results to skip for pagination.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.comments:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -92,7 +100,8 @@ Number of results to skip for pagination.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

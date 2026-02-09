@@ -38,6 +38,14 @@ Gets all the intake issue of a project
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.intakes:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -47,7 +55,8 @@ Gets all the intake issue of a project
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/inbox-issues/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

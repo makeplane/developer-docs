@@ -38,6 +38,14 @@ The unique identifier for the initiative.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -47,7 +55,8 @@ The unique identifier for the initiative.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

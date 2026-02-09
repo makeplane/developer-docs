@@ -59,6 +59,14 @@ Email address of the customer.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`customers:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -69,6 +77,7 @@ Email address of the customer.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",

@@ -101,6 +101,14 @@ Whether this property allows multiple values.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_item_properties:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -111,6 +119,7 @@ Whether this property allows multiple values.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/{property_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "display_name": "example-display_name",

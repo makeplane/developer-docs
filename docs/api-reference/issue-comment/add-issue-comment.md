@@ -83,6 +83,14 @@ ID from the external source.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.comments:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -93,6 +101,7 @@ ID from the external source.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "comment_html": "example-comment_html",

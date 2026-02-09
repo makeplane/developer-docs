@@ -101,6 +101,14 @@ Timezone for the cycle.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.cycles:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -111,6 +119,7 @@ Timezone for the cycle.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",

@@ -53,6 +53,14 @@ Array of initiative label IDs to add to the initiative.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -63,6 +71,7 @@ Array of initiative label IDs to add to the initiative.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/labels/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "label_ids": "example-label_ids"

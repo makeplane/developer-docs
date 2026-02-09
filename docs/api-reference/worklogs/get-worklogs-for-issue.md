@@ -44,6 +44,14 @@ The unique identifier of the work item
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.worklogs:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -54,6 +62,7 @@ The unique identifier of the work item
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/worklogs/" \
   -H "X-API-Key: $PLANE_API_KEY"
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

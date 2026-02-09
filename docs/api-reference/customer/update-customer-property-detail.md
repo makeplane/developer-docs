@@ -137,6 +137,14 @@ External ID from the external source.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`customers.properties:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -147,6 +155,7 @@ External ID from the external source.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/{property_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",

@@ -32,6 +32,14 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`workspaces.members:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -41,7 +49,8 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/members/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

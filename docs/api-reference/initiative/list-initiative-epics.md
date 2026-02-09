@@ -59,6 +59,14 @@ Number of results to skip for pagination.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives.epics:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -68,7 +76,8 @@ Number of results to skip for pagination.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/epics/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

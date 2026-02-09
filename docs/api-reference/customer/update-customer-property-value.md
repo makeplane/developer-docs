@@ -59,6 +59,14 @@ Array of values to set for the property.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`customers.property_values:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -69,6 +77,7 @@ Array of values to set for the property.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/property-values/{property_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "values": "example-values"

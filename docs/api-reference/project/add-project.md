@@ -59,7 +59,16 @@ Description of the project.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects:write`
+
 </div>
+
+</div>
+
 <div class="api-right">
 
 <CodePanel title="Create a project" :languages="['cURL', 'Python', 'JavaScript']">
@@ -69,6 +78,7 @@ Description of the project.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",
@@ -135,4 +145,5 @@ const data = await response.json();
 </ResponsePanel>
 
 </div>
+
 </div>

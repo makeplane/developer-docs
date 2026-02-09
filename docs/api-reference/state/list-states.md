@@ -38,6 +38,14 @@ The unique identifier of the project.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.states:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -48,6 +56,7 @@ The unique identifier of the project.
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/" \
   -H "X-API-Key: $PLANE_API_KEY"
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

@@ -110,6 +110,14 @@ To add or update options on an OPTION property after creation, you can use the A
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_item_properties:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -120,6 +128,7 @@ To add or update options on an OPTION property after creation, you can use the A
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "display_name": "example-display_name",

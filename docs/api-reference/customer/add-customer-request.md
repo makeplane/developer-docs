@@ -59,6 +59,14 @@ Description of the request.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`customers.requests:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -69,6 +77,7 @@ Description of the request.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "title": "example-title",

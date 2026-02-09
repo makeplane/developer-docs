@@ -79,6 +79,14 @@ For single-value properties:
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_item_property_values:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -89,6 +97,7 @@ For single-value properties:
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "value": "example-value"
