@@ -67,6 +67,7 @@ Authorization: Basic base64(client_id:client_secret)
 
 grant_type=client_credentials
 &app_installation_id=APP_INSTALLATION_ID
+&scope=scopeA scopeB scopeC
 ```
 
 **Response:**
@@ -75,7 +76,8 @@ grant_type=client_credentials
 {
   "access_token": "pln_bot_xxxxxxxxxxxx",
   "token_type": "Bearer",
-  "expires_in": 86400
+  "expires_in": 86400,
+  "scope": "scopeA scopeB scopeC"
 }
 ```
 
@@ -116,6 +118,7 @@ Authorization: Basic base64(client_id:client_secret)
 
 grant_type=client_credentials
 &app_installation_id=APP_INSTALLATION_ID
+&scope=scopeA scopeB scopeC
 ```
 
 ---
@@ -148,6 +151,7 @@ GET https://api.plane.so/auth/o/authorize-app/
   &response_type=code
   &redirect_uri=https://your-app.com/callback
   &state=RANDOM_STATE_VALUE
+  &scope=scopeA scopeB scopeC
 ```
 
 ::: info
@@ -183,7 +187,8 @@ grant_type=authorization_code
   "access_token": "pln_xxxxxxxxxxxx",
   "refresh_token": "pln_refresh_xxxxxxxxxxxx",
   "token_type": "Bearer",
-  "expires_in": 86400
+  "expires_in": 86400,
+  "scope": "scopeA scopeB scopeC"
 }
 ```
 
