@@ -4,7 +4,6 @@ description: List all attachments via Plane API. HTTP GET request with paginatio
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # List all attachments
 
 <div class="api-endpoint-badge">
@@ -83,6 +82,14 @@ Number of results to skip for pagination.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.attachments:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -92,7 +99,8 @@ Number of results to skip for pagination.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -117,8 +125,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

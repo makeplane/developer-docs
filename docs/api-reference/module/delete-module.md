@@ -44,6 +44,14 @@ The unique identifier for the module.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.modules:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -53,7 +61,8 @@ The unique identifier for the module.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

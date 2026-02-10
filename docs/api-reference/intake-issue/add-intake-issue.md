@@ -53,6 +53,14 @@ An object containing the intake issue details, including a required `name` field
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.intakes:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -63,6 +71,7 @@ An object containing the intake issue details, including a required `name` field
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "issue": "example-issue"

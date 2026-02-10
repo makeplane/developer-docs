@@ -4,7 +4,6 @@ description: Delete projects from initiative via Plane API. HTTP DELETE request 
 keywords: plane, plane api, rest api, api integration, projects, project management, initiatives, roadmap, planning
 ---
 
-
 # Remove projects from initiative
 
 <div class="api-endpoint-badge">
@@ -53,6 +52,14 @@ Array of project IDs to remove from the initiative.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives.projects:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -62,7 +69,8 @@ Array of project IDs to remove from the initiative.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/projects/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -87,8 +95,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

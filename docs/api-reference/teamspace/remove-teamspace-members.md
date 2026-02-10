@@ -53,6 +53,14 @@ Array of user IDs to remove from the teamspace.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`teamspaces.members:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -62,7 +70,8 @@ Array of user IDs to remove from the teamspace.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

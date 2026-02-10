@@ -59,6 +59,14 @@ Hex color code for the state (e.g., "#eb5757").
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.states:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -69,6 +77,7 @@ Hex color code for the state (e.g., "#eb5757").
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",

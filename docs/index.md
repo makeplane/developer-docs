@@ -34,7 +34,7 @@ features:
   - icon: 🔌
     title: OAuth Apps
     details: Build custom integrations using OAuth 2.0. Complete guides for app registration, token management, and API access.
-    link: /dev-tools/build-plane-app
+    link: /dev-tools/build-plane-app/overview
     linkText: Build an app
   - icon: 🤖
     title: MCP Server

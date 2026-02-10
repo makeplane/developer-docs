@@ -89,6 +89,14 @@ Hierarchical level of the work item type.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_item_types:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -99,6 +107,7 @@ Hierarchical level of the work item type.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",

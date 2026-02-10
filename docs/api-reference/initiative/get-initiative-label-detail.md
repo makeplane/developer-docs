@@ -38,6 +38,14 @@ The unique identifier for the initiative label.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives.labels:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -47,7 +55,8 @@ The unique identifier for the initiative label.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/label-uuid/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

@@ -89,6 +89,14 @@ Whether this option is currently active.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_item_property_options:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -99,6 +107,7 @@ Whether this option is currently active.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",

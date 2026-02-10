@@ -65,6 +65,14 @@ URL of the external resource.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.links:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -75,6 +83,7 @@ URL of the external resource.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "title": "example-title",

@@ -141,7 +141,7 @@ export default withMermaid(defineConfig({
     nav: [
       { text: 'Self-hosting', link: '/self-hosting/overview' },
       { text: 'API Reference', link: '/api-reference/introduction' },
-      { text: 'Build and extend', link: '/dev-tools/build-plane-app' },
+      { text: 'Build and extend', link: '/dev-tools/build-plane-app/overview' },
       { text: 'Plane Docs', link: 'https://docs.plane.so' },
       { text: 'Sign in', link: 'https://app.plane.so/sign-in' }
     ],
@@ -649,7 +649,17 @@ export default withMermaid(defineConfig({
         {
           text: 'Build and extend Plane',
           items: [
-            { text: 'Build Plane App', link: '/dev-tools/build-plane-app' },
+            {
+              text: 'Build Plane App', collapsed: false, items: [
+                { text: 'Overview', link: '/dev-tools/build-plane-app/overview' },
+                { text: 'Create an OAuth application', link: '/dev-tools/build-plane-app/create-oauth-application' },
+                { text: 'Choose token Flow', link: '/dev-tools/build-plane-app/choose-token-flow' },
+                { text: 'Handling webhooks', link: '/dev-tools/build-plane-app/webhooks' },
+                { text: 'OAuth scopes', link: '/dev-tools/build-plane-app/oauth-scopes' },
+                { text: 'SDKs', link: '/dev-tools/build-plane-app/sdks' },
+                { text: 'Complete examples', link: '/dev-tools/build-plane-app/examples' }
+              ]
+            },
             {
               text: 'Agents',
               collapsed: false,

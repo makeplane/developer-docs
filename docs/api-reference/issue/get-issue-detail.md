@@ -4,7 +4,6 @@ description: Get retrieve a work item by id details via Plane API. Retrieve comp
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Retrieve a work item by ID
 
 <div class="api-endpoint-badge">
@@ -59,6 +58,14 @@ Comma-separated list of fields to expand. Possible values: `type`, `module`, `la
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -68,7 +75,8 @@ Comma-separated list of fields to expand. Possible values: `type`, `module`, `la
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -93,8 +101,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

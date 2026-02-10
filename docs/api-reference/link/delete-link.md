@@ -50,6 +50,14 @@ The unique identifier for the link.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.links:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -59,7 +67,8 @@ The unique identifier for the link.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

@@ -4,7 +4,6 @@ description: List upload credentials via Plane API. HTTP GET request with pagina
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # Get upload credentials
 
 <div class="api-endpoint-badge">
@@ -83,6 +82,14 @@ External source system (for integration tracking).
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.attachments:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -93,6 +100,7 @@ External source system (for integration tracking).
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",
@@ -133,15 +141,15 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "type": "example-type",
-  "size": 1,
-  "external_id": "example-external_id",
-  "external_source": "example-external_source"
-})
+      name: "example-name",
+      type: "example-type",
+      size: 1,
+      external_id: "example-external_id",
+      external_source: "example-external_source",
+    }),
   }
 );
 const data = await response.json();

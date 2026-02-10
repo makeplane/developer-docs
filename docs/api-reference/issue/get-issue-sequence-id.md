@@ -4,7 +4,6 @@ description: List retrieve a work item by identifier via Plane API. HTTP GET req
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Retrieve a work item by identifier
 
 <div class="api-endpoint-badge">
@@ -53,6 +52,14 @@ Comma-separated list of fields to expand. Possible values: `type`, `module`, `la
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -62,7 +69,8 @@ Comma-separated list of fields to expand. Possible values: `type`, `module`, `la
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -82,15 +90,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

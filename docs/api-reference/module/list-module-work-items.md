@@ -44,6 +44,14 @@ The unique identifier for the module.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.modules:read` `projects.work_items:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -53,7 +61,8 @@ The unique identifier for the module.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/module-issues/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

@@ -89,6 +89,14 @@ ID of the user who leads the teamspace.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`teamspaces:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -99,6 +107,7 @@ ID of the user who leads the teamspace.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",

@@ -44,6 +44,14 @@ The unique identifier for the page.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.pages:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -53,7 +61,8 @@ The unique identifier for the page.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/pages/page-uuid/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

@@ -37,6 +37,14 @@ The unique identifier for the customer property.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`customers.properties:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -47,6 +55,7 @@ The unique identifier for the customer property.
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/{property_id}/" \
   -H "X-API-Key: $PLANE_API_KEY"
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

@@ -4,7 +4,6 @@ description: Get retrieve an intake work item details via Plane API. Retrieve co
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---
 
-
 # Retrieve an intake work item
 
 <div class="api-endpoint-badge">
@@ -44,6 +43,14 @@ The unique identifier of the work item
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.intakes:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -53,7 +60,8 @@ The unique identifier of the work item
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -78,8 +86,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

@@ -82,8 +82,9 @@ The file to be uploaded
 
 ```bash
 curl -X POST \
-  "https://api.plane.sohttps://planefs-uploads.s3.amazonaws.com/" \
+  "https://planefs-uploads.s3.amazonaws.com/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "Content-Type": "example-Content-Type",

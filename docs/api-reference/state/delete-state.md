@@ -44,6 +44,14 @@ The unique identifier for the state.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.states:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -54,6 +62,7 @@ The unique identifier for the state.
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY"
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

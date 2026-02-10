@@ -52,6 +52,14 @@ Array of work item IDs to link to the customer.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`customers.work_items:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -62,6 +70,7 @@ Array of work item IDs to link to the customer.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "issue_ids": "example-issue_ids"
