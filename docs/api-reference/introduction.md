@@ -57,7 +57,7 @@ It is important to keep your API key confidential to prevent unauthorized access
 
 ### Using an OAuth Token
 
-If your application uses [OAuth](/dev-tools/build-plane-app/) to obtain user authorization (for example, a Plane app you've built), you can authenticate API requests with the OAuth access token. Include the token in the `Authorization` header as a Bearer token:
+If your application uses [OAuth](/dev-tools/build-plane-app/overview) to obtain user authorization (for example, a Plane app you've built), you can authenticate API requests with the OAuth access token. Include the token in the `Authorization` header as a Bearer token:
 
 ```
 Authorization: Bearer <your-oauth-access-token>
