@@ -1,13 +1,13 @@
 ---
-title: Handling Webhooks
+title: Handling webhooks
 description: How to receive and verify webhooks from Plane.
 ---
 
-# Handling Webhooks
+# Handling webhooks
 
 When events occur in Plane, webhooks are sent to your Webhook URL.
 
-## Webhook Headers
+## Webhook headers
 
 | Header              | Description                                 |
 | ------------------- | ------------------------------------------- |
@@ -15,7 +15,7 @@ When events occur in Plane, webhooks are sent to your Webhook URL.
 | `X-Plane-Event`     | Event type (e.g., `issue`, `issue_comment`) |
 | `X-Plane-Signature` | HMAC-SHA256 signature for verification      |
 
-## Verify Signature
+## Verify signature
 
 Always verify the `X-Plane-Signature` header:
 
@@ -44,7 +44,7 @@ function verifySignature(payload: string, signature: string, secret: string): bo
 
 :::
 
-## Webhook Payload
+## Webhook payload
 
 ```json
 {

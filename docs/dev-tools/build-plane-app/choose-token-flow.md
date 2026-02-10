@@ -1,9 +1,9 @@
 ---
-title: Choose Your Flow
+title: Choose token flow
 description: Decide between Bot Token and User Token flows and learn how to implement them.
 ---
 
-# Choose Your Flow
+# Choose token flow
 
 Plane supports two OAuth flows:
 
@@ -18,7 +18,7 @@ Most integrations should use the **Bot Token flow**. Use User Token only when yo
 
 ---
 
-## Bot Token Flow
+## Bot token flow
 
 Use this flow for agents, webhook handlers, and automation that acts autonomously.
 
@@ -38,7 +38,7 @@ sequenceDiagram
     YourApp->>YourApp: Store credentials
 ```
 
-### 1. Redirect to Authorization
+### 1. Redirect to authorization
 
 When a user clicks "Install", redirect them to Plane's consent screen:
 
@@ -49,7 +49,7 @@ GET https://api.plane.so/auth/o/authorize-app/
   &redirect_uri=https://your-app.com/callback
 ```
 
-### 2. Handle the Callback
+### 2. Handle the callback
 
 After the user approves, Plane redirects to your Redirect URI with:
 
@@ -58,7 +58,7 @@ After the user approves, Plane redirects to your Redirect URI with:
 | `app_installation_id` | Unique identifier for this installation   |
 | `code`                | Authorization code (not used in bot flow) |
 
-### 3. Exchange for Bot Token
+### 3. Exchange for bot token
 
 ```
 POST https://api.plane.so/auth/o/token/
@@ -81,7 +81,7 @@ grant_type=client_credentials
 }
 ```
 
-### 4. Get Workspace Details
+### 4. Get workspace details
 
 ```
 GET https://api.plane.so/auth/o/app-installation/?id=APP_INSTALLATION_ID
@@ -107,7 +107,7 @@ Authorization: Bearer YOUR_BOT_TOKEN
 
 Store the `workspace_detail.slug` for API calls and `app_installation_id` for token refresh.
 
-### 5. Refresh Bot Token
+### 5. Refresh bot token
 
 Bot tokens expire. Request a new one using the stored `app_installation_id`:
 
@@ -123,7 +123,7 @@ grant_type=client_credentials
 
 ---
 
-## User Token Flow
+## User token flow
 
 Use this flow when your app needs to act on behalf of a specific user.
 
@@ -143,7 +143,7 @@ sequenceDiagram
     YourApp->>YourApp: Store tokens for user
 ```
 
-### 1. Redirect to Authorization
+### 1. Redirect to authorization
 
 ```
 GET https://api.plane.so/auth/o/authorize-app/
@@ -158,7 +158,7 @@ GET https://api.plane.so/auth/o/authorize-app/
 Include a random `state` parameter to prevent CSRF attacks. Verify it matches when handling the callback.
 :::
 
-### 2. Handle the Callback
+### 2. Handle the callback
 
 After approval, Plane redirects to your Redirect URI with:
 
@@ -167,7 +167,7 @@ After approval, Plane redirects to your Redirect URI with:
 | `code`    | Authorization code to exchange for tokens  |
 | `state`   | Your state parameter (verify this matches) |
 
-### 3. Exchange Code for Tokens
+### 3. Exchange code for tokens
 
 ```
 POST https://api.plane.so/auth/o/token/
@@ -192,7 +192,7 @@ grant_type=authorization_code
 }
 ```
 
-### 4. Refresh User Token
+### 4. Refresh user token
 
 ```
 POST https://api.plane.so/auth/o/token/
@@ -203,3 +203,16 @@ grant_type=refresh_token
 &client_id=YOUR_CLIENT_ID
 &client_secret=YOUR_CLIENT_SECRET
 ```
+
+---
+
+## Making API requests
+
+Include the token in the `Authorization` header:
+
+```
+GET https://api.plane.so/api/v1/workspaces/{workspace_slug}/projects/
+Authorization: Bearer YOUR_TOKEN
+```
+
+See the [API Reference](/api-reference/introduction) for available endpoints.

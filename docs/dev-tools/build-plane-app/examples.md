@@ -1,13 +1,13 @@
 ---
-title: Complete Examples
+title: Complete examples
 description: Full code examples for Node.js (Express) and Python (Flask).
 ---
 
-# Complete Examples
+# Complete examples
 
-::: details TypeScript (Express) - Full Implementation
+::: code-group
 
-```typescript
+```typescript [TypeScript (Express)]
 import express from "express";
 import axios from "axios";
 import crypto from "crypto";
@@ -114,11 +114,7 @@ app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
 app.listen(3000, () => console.log("Server running on http://localhost:3000"));
 ```
 
-:::
-
-::: details Python (Flask) - Full Implementation
-
-```python
+```python [Python (Flask)]
 import os
 import hmac
 import hashlib
@@ -235,3 +231,14 @@ if __name__ == "__main__":
 ```
 
 :::
+
+## Next Steps
+
+- [Build an Agent](/dev-tools/agents/overview) - Create AI agents that respond to @mentions
+- [API Reference](/api-reference/introduction) - Explore the full Plane API
+- [Webhook Events](/dev-tools/intro-webhooks) - All webhook event types
+- [Example: PRD Agent](https://github.com/makeplane/prd-agent) - Complete agent implementation
+
+## Publish to Marketplace
+
+Apps can be listed on the [Plane Marketplace](https://plane.so/marketplace/integrations). Contact [support@plane.so](mailto:support@plane.so) to list your app.

@@ -1,4 +1,9 @@
-# OAuth Scopes
+---
+title: OAuth Scopes
+description: All OAuth scopes available when building a Plane app.
+---
+
+# OAuth scopes
 
 This document lists all OAuth scopes available when building a Plane app. Request only the scopes your app needs.
 

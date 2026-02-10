@@ -18,11 +18,11 @@ npm install @makeplane/plane-node-sdk
 pip install plane-sdk
 ```
 
-::: details SDK OAuth Helper Methods
+#### OAuth helper methods
 
-**Node.js:**
+::: code-group
 
-```typescript
+```typescript [Node.js]
 import { OAuthClient } from "@makeplane/plane-node-sdk";
 
 const oauth = new OAuthClient({
@@ -44,9 +44,7 @@ const userToken = await oauth.exchangeCodeForToken(code);
 const newToken = await oauth.getRefreshToken(refreshToken);
 ```
 
-**Python:**
-
-```python
+```python [Python]
 from plane.client import OAuthClient
 
 oauth = OAuthClient(

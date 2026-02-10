@@ -652,15 +652,12 @@ export default withMermaid(defineConfig({
             {
               text: 'Build Plane App', collapsed: false, items: [
                 { text: 'Overview', link: '/dev-tools/build-plane-app/overview' },
-                { text: 'Create an OAuth Application', link: '/dev-tools/build-plane-app/create-oauth-application' },
-                { text: 'Choose Your Flow', link: '/dev-tools/build-plane-app/choose-token-flow' },
-                { text: 'Making API Requests', link: '/dev-tools/build-plane-app/making-api-requests' },
-                { text: 'Handling Webhooks', link: '/dev-tools/build-plane-app/webhooks' },
-                { text: 'Local Development', link: '/dev-tools/build-plane-app/local-development' },
-                { text: 'OAuth Scopes', link: '/dev-tools/build-plane-app/oauth-scopes' },
+                { text: 'Create an OAuth application', link: '/dev-tools/build-plane-app/create-oauth-application' },
+                { text: 'Choose token Flow', link: '/dev-tools/build-plane-app/choose-token-flow' },
+                { text: 'Handling webhooks', link: '/dev-tools/build-plane-app/webhooks' },
+                { text: 'OAuth scopes', link: '/dev-tools/build-plane-app/oauth-scopes' },
                 { text: 'SDKs', link: '/dev-tools/build-plane-app/sdks' },
-                { text: 'Complete Examples', link: '/dev-tools/build-plane-app/examples' },
-                { text: 'Next Steps', link: '/dev-tools/build-plane-app/next-steps' }
+                { text: 'Complete examples', link: '/dev-tools/build-plane-app/examples' }
               ]
             },
             {

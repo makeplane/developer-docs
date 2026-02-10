@@ -3,7 +3,7 @@ title: Build a Plane App
 description: Build and integrate an app with Plane using OAuth 2.0 authentication.
 ---
 
-# Build a Plane App
+# Build a Plane app
 
 ::: info
 Plane apps are currently in **Beta**. Please send any feedback to support@plane.so.
@@ -13,7 +13,7 @@ Plane apps are currently in **Beta**. Please send any feedback to support@plane.
 
 Plane uses OAuth 2.0 to allow applications to access workspace data on behalf of users or as an autonomous bot. This comprehensive guide covers everything you need to build, integrate, and deploy apps that extend Plane's functionality.
 
-## What You Can Build
+## What you can build
 
 Plane apps enable you to:
 
@@ -23,9 +23,9 @@ Plane apps enable you to:
 - **Custom Dashboards** - Build analytics and reporting tools using Plane's data
 - **Webhook Handlers** - React to events in real-time as they happen in Plane
 
-## Key Concepts
+## Key concepts
 
-### OAuth 2.0 Flows
+### OAuth 2.0 flows
 
 Plane supports two authentication flows:
 
@@ -34,7 +34,7 @@ Plane supports two authentication flows:
 
 Most integrations should use the **Bot Token flow**. See [Choose Your Flow](/dev-tools/build-plane-app/choose-token-flow) for detailed implementation guides.
 
-### App Components
+### App components
 
 A complete Plane app typically includes:
 
@@ -44,11 +44,11 @@ A complete Plane app typically includes:
 4. **Webhook URL** - Endpoint for receiving real-time event notifications
 5. **API Integration** - Code that interacts with Plane's REST API
 
-## Getting Started
+## Getting started
 
 Follow these steps to build your first Plane app:
 
-### 1. Create an OAuth Application
+### 1. Create an OAuth application
 
 Register your app in Plane to get credentials:
 - Navigate to **Workspace Settings** → **Integrations**
@@ -57,7 +57,7 @@ Register your app in Plane to get credentials:
 
 [Learn more →](/dev-tools/build-plane-app/create-oauth-application)
 
-### 2. Choose Your Authentication Flow
+### 2. Choose your authentication flow
 
 Decide between Bot Token or User Token based on your use case:
 - **Bot Token** - For agents, webhooks, and automation
@@ -75,16 +75,7 @@ Set up the OAuth flow to obtain access tokens:
 
 [Learn more →](/dev-tools/build-plane-app/choose-token-flow)
 
-### 4. Make API Requests
-
-Use your access token to interact with Plane's API:
-- Include token in `Authorization` header
-- Access workspace data, projects, and work items
-- Create, update, and manage resources
-
-[Learn more →](/dev-tools/build-plane-app/making-api-requests)
-
-### 5. Handle Webhooks
+### 4. Handle webhooks
 
 Set up webhook handlers to receive real-time events:
 - Verify webhook signatures for security
@@ -93,16 +84,19 @@ Set up webhook handlers to receive real-time events:
 
 [Learn more →](/dev-tools/build-plane-app/webhooks)
 
-## Development Tools
+## Development tools
 
-### Local Development
+::: tip Local Development
+For local development, use [ngrok](https://ngrok.com) to expose your server:
 
-Use ngrok to expose your local server for testing:
 ```bash
 ngrok http 3000
 ```
 
-[Learn more →](/dev-tools/build-plane-app/local-development)
+Use the generated URL (e.g., `https://abc123.ngrok.io`) for your Setup URL, Redirect URI, and Webhook URL.
+
+Free ngrok URLs change on restart. Update your app settings when the URL changes.
+:::
 
 ### Official SDKs
 
@@ -113,7 +107,7 @@ Speed up development with official SDKs for Node.js and Python:
 
 [Learn more →](/dev-tools/build-plane-app/sdks)
 
-### Complete Examples
+### Complete examples
 
 See full working implementations:
 - TypeScript (Express) example
@@ -122,9 +116,8 @@ See full working implementations:
 
 [Learn more →](/dev-tools/build-plane-app/examples)
 
-## Quick Links
+## Quick links
 
 - [API Reference](/api-reference/introduction) - Explore all available endpoints
 - [Build an Agent](/dev-tools/agents/overview) - Create AI agents for Plane
 - [Webhook Events](/dev-tools/intro-webhooks) - All webhook event types
-- [Next Steps](/dev-tools/build-plane-app/next-steps) - What to do after building your app
