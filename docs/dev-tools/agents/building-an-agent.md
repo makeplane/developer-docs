@@ -42,7 +42,8 @@ To create an agent, you first need to [register an OAuth application](/dev-tools
    - **Redirect URIs**: Where Plane sends the authorization code after consent
    - **Webhook URL Endpoint**: Your service's webhook endpoint for receiving events
 4. **Enable the "Enable App Mentions" checkbox** — This is required for agents
-5. Save and securely store your **Client ID** and **Client Secret**
+5. **Choose the "Agent Run" scopes** — This is required for agents to be able to create run activities and get run details. See [OAuth Scopes](/dev-tools/build-plane-app/oauth-scopes#agent-run-scopes) for more information on the available scopes.
+6. Save and securely store your **Client ID** and **Client Secret**
 
 ::: info
 The "Enable App Mentions" checkbox is what transforms a regular OAuth app into an agent that can be @mentioned in work items.
