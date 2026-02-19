@@ -4,7 +4,6 @@ description: Delete an attachment via Plane API. HTTP DELETE request for removin
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # Delete an attachment
 
 <div class="api-endpoint-badge">
@@ -50,6 +49,14 @@ The unique identifier of the attachment.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.attachments:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -59,7 +66,8 @@ The unique identifier of the attachment.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/{attachment_id}/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -84,8 +92,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

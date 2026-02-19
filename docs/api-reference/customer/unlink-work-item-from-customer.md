@@ -43,6 +43,14 @@ The unique identifier for the work item.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`customers.work_items:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -52,7 +60,8 @@ The unique identifier for the work item.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/work-item-uuid/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

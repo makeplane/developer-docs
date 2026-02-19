@@ -4,7 +4,6 @@ description: Update an initiative via Plane API. HTTP PATCH request format, edit
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---
 
-
 # Update an initiative
 
 <div class="api-endpoint-badge">
@@ -107,6 +106,14 @@ Current state of the initiative. Possible values: `DRAFT`, `PLANNED`, `ACTIVE`, 
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -117,6 +124,7 @@ Current state of the initiative. Possible values: `DRAFT`, `PLANNED`, `ACTIVE`, 
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",
@@ -161,28 +169,25 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "description_html": "example-description_html",
-  "description_stripped": "example-description_stripped",
-  "description_binary": "example-description_binary",
-  "lead": "example-lead",
-  "start_date": "example-start_date",
-  "end_date": "example-end_date",
-  "logo_props": "example-logo_props",
-  "state": "example-state"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description: "example-description",
+    description_html: "example-description_html",
+    description_stripped: "example-description_stripped",
+    description_binary: "example-description_binary",
+    lead: "example-lead",
+    start_date: "example-start_date",
+    end_date: "example-end_date",
+    logo_props: "example-logo_props",
+    state: "example-state",
+  }),
+});
 const data = await response.json();
 ```
 

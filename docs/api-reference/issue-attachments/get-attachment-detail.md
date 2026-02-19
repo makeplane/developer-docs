@@ -4,7 +4,6 @@ description: Get retrieve an attachment details via Plane API. Retrieve complete
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # Retrieve an attachment
 
 <div class="api-endpoint-badge">
@@ -50,7 +49,15 @@ The unique identifier of the attachment
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items.attachments:read`
+
 </div>
+</div>
+
 <div class="api-right">
 
 <CodePanel title="Retrieve an attachment" :languages="['cURL', 'Python', 'JavaScript']">
@@ -59,7 +66,8 @@ The unique identifier of the attachment
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/{attachment_id}/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -84,8 +92,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

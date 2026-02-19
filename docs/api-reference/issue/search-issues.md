@@ -4,7 +4,6 @@ description: Search work items via Plane API. Full-text search with filters and 
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Search work items
 
 <div class="api-endpoint-badge">
@@ -53,6 +52,14 @@ Filter results to a specific project by ID.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -62,7 +69,8 @@ Filter results to a specific project by ID.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -82,15 +90,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

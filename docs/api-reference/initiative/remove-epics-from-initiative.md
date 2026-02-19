@@ -4,7 +4,6 @@ description: Delete epics from initiative via Plane API. HTTP DELETE request for
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning, epics, features, stories
 ---
 
-
 # Remove epics from initiative
 
 <div class="api-endpoint-badge">
@@ -53,6 +52,14 @@ Array of epic IDs to remove from the initiative.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives.epics:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -62,7 +69,8 @@ Array of epic IDs to remove from the initiative.
 ```bash
 curl -X DELETE \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/epics/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -82,15 +90,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/epics/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/epics/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

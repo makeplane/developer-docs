@@ -58,6 +58,14 @@ ID of the target cycle to transfer work items to.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.cycles:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -68,6 +76,7 @@ ID of the target cycle to transfer work items to.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/transfer-issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "new_cycle_id": "example-new_cycle_id"

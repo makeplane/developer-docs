@@ -55,13 +55,30 @@ X-API-Key: <Your-API-Key>
 
 It is important to keep your API key confidential to prevent unauthorized access to your account.
 
+### Using an OAuth Token
+
+If your application uses [OAuth](/dev-tools/build-plane-app/overview) to obtain user authorization (for example, a Plane app you've built), you can authenticate API requests with the OAuth access token. Include the token in the `Authorization` header as a Bearer token:
+
+```
+Authorization: Bearer <your-oauth-access-token>
+```
+
+The access token is scoped to the permissions (scopes) the user granted when authorizing your app. See [OAuth scopes](/dev-tools/build-plane-app/oauth-scopes) for the full list of available scopes.
+
 ### Example of an Authenticated API Request
 
-**Request:**
+**Using an API key:**
 ```
 GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/
 Headers:
   X-API-Key: plane_api_<token>
+```
+
+**Using an OAuth token:**
+```
+GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/
+Headers:
+  Authorization: Bearer <your-oauth-access-token>
 ```
 
 **Response:**

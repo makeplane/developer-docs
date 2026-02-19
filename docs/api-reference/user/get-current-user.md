@@ -17,6 +17,14 @@ keywords: plane, plane api, rest api, api integration
 
 Retrieves information about the currently authenticated user.
 
+<div class="params-section">
+
+### Scopes
+
+`profile:read`
+
+</div>
+
 </div>
 <div class="api-right">
 

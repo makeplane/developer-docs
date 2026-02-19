@@ -4,7 +4,6 @@ description: List all initiative labels via Plane API. HTTP GET request with pag
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
 ---
 
-
 # List all initiative labels
 
 <div class="api-endpoint-badge">
@@ -53,6 +52,14 @@ Number of results to skip for pagination.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`initiatives.labels:read`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -62,7 +69,8 @@ Number of results to skip for pagination.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -82,15 +90,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

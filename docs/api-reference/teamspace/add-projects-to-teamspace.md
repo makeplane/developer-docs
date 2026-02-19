@@ -53,6 +53,14 @@ Array of project IDs to add to the teamspace
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`teamspaces.projects:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -63,6 +71,7 @@ Array of project IDs to add to the teamspace
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "project_ids": "example-project_ids"

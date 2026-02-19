@@ -4,7 +4,6 @@ description: Update a work item via Plane API. HTTP PATCH request format, editab
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Update a work item
 
 <div class="api-endpoint-badge">
@@ -125,6 +124,14 @@ Target completion date in YYYY-MM-DD format.
 </div>
 </div>
 
+<div class="params-section">
+
+### Scopes
+
+`projects.work_items:write`
+
+</div>
+
 </div>
 <div class="api-right">
 
@@ -135,6 +142,7 @@ Target completion date in YYYY-MM-DD format.
 curl -X PATCH \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "example-name",
@@ -189,22 +197,22 @@ const response = await fetch(
     method: "PATCH",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "description_html": "example-description_html",
-  "state": "example-state",
-  "priority": "example-priority",
-  "assignees": "example-assignees",
-  "labels": "example-labels",
-  "parent": "example-parent",
-  "estimate_point": "example-estimate_point",
-  "type": "example-type",
-  "module": "example-module",
-  "start_date": "example-start_date",
-  "target_date": "example-target_date"
-})
+      name: "example-name",
+      description_html: "example-description_html",
+      state: "example-state",
+      priority: "example-priority",
+      assignees: "example-assignees",
+      labels: "example-labels",
+      parent: "example-parent",
+      estimate_point: "example-estimate_point",
+      type: "example-type",
+      module: "example-module",
+      start_date: "example-start_date",
+      target_date: "example-target_date",
+    }),
   }
 );
 const data = await response.json();

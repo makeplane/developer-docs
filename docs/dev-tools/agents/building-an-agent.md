@@ -13,14 +13,14 @@ Plane Agents are currently in **Beta**. Please send any feedback to support@plan
 
 Before building an agent, make sure you have completed the following:
 
-1. **Build a Plane app** — Follow the [Build a Plane App](/dev-tools/build-plane-app) guide to understand OAuth flows, deployment, and webhook handling.
+1. **Build a Plane app** — Follow the [Build a Plane App](/dev-tools/build-plane-app/overview) guide to understand OAuth flows, deployment, and webhook handling.
 
-2. **Get your bot token** — Complete the [Bot Token Flow](/dev-tools/build-plane-app#bot-token-flow) to obtain a `bot_token` for your agent. This token is used for all API calls.
+2. **Get your bot token** — Complete the [Bot Token Flow](/dev-tools/build-plane-app/choose-token-flow) to obtain a `bot_token` for your agent. This token is used for all API calls.
 
-3. **Set up webhook handling** — Ensure your server can [receive and verify webhooks](/dev-tools/build-plane-app#handling-webhooks) from Plane.
+3. **Set up webhook handling** — Ensure your server can [receive and verify webhooks](/dev-tools/build-plane-app/webhooks) from Plane.
 
 ::: info
-This guide assumes you have a working OAuth app with webhook handling. If not, complete the [Build a Plane App](/dev-tools/build-plane-app) guide first.
+This guide assumes you have a working OAuth app with webhook handling. If not, complete the [Build a Plane App](/dev-tools/build-plane-app/overview) guide first.
 :::
 
 ## Creating an agent
@@ -33,7 +33,7 @@ Building a Plane agent involves three main steps:
 
 ### OAuth app creation
 
-To create an agent, you first need to [register an OAuth application](/dev-tools/build-plane-app#create-an-oauth-application) with the **Enable App Mentions** checkbox enabled.
+To create an agent, you first need to [register an OAuth application](/dev-tools/build-plane-app/create-oauth-application) with the **Enable App Mentions** checkbox enabled.
 
 1. Navigate to `https://app.plane.so/<workspace_slug>/settings/integrations/`
 2. Click on **Build your own** button
@@ -60,7 +60,7 @@ After installation, your agent appears alongside workspace members in the mentio
 
 ## Agent interaction
 
-Once your agent is installed via the [OAuth consent flow](/dev-tools/build-plane-app#bot-token-flow) and users start mentioning it, you need to handle the interactions through Agent Runs and Activities.
+Once your agent is installed via the [OAuth consent flow](/dev-tools/build-plane-app/choose-token-flow) and users start mentioning it, you need to handle the interactions through Agent Runs and Activities.
 
 ### AgentRun
 
