@@ -153,6 +153,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'Overview', link: '/self-hosting/overview' },
             { text: 'Plane Editions', link: '/self-hosting/editions-and-versions' },
+            { text: 'All releases', link: '/self-hosting/all-releases' },
             { text: 'Plane Architecture', link: '/self-hosting/plane-architecture' }
           ]
         },
