@@ -1,7 +1,7 @@
 ---
 title: Configure SMTP for email notifications
 description: Configure SMTP email settings for Plane. Setup email notifications and communication for your self-hosted instance.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+keywords: plane smtp, email notifications, smtp configuration, email setup, self-hosting, plane email, mail server
 ---
 
 

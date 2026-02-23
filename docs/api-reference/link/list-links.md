@@ -1,7 +1,7 @@
 ---
 title: List all links
 description: List all links via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, list links, get all links, work item links, issue links, rest api, api integration
 ---
 
 

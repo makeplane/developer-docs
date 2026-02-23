@@ -1,7 +1,7 @@
 ---
 title: Data collection and usage
-description: Learn how to data collection and usage for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Understand what telemetry data Plane collects, how it is used, and how to opt out. Privacy-focused data collection for self-hosted instances.
+keywords: plane telemetry, data collection, plane privacy, analytics opt-out, plane usage data, self-hosted privacy
 ---
 
 

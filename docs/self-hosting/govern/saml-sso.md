@@ -1,7 +1,7 @@
 ---
 title: SAML SSO
 description: Configure SAML SSO authentication for Plane. Setup Security Assertion Markup Language for enterprise SSO.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+keywords: plane saml, saml sso, enterprise sso, saml configuration, identity provider, okta, azure ad, self-hosting
 ---
 
 

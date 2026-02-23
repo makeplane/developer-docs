@@ -1,6 +1,6 @@
 ---
 title: Delete a module
-description: Delete a module via Plane API. HTTP DELETE request for removing resources.
+description: Permanently delete a module via Plane API. Removes the module and disassociates its work items. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, modules, features
 ---
 

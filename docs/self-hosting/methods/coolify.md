@@ -1,7 +1,7 @@
 ---
 title: Deploy Plane with Coolify
-description: Learn how to deploy plane with coolify for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Deploy Plane using Coolify, an open-source PaaS. One-click deployment with automatic SSL, domain configuration, and container management.
+keywords: plane coolify, coolify deployment, plane paas, one-click deployment, plane hosting platform, self-hosting
 ---
 
 # Deploy Plane with Coolify <Badge type="info" text="Commercial Edition" />

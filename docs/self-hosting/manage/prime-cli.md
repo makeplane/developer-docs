@@ -1,7 +1,7 @@
 ---
 title: Command line tools
-description: Learn how to command line tools for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Use Plane Prime CLI for managing your self-hosted instance. Commands for setup, configuration, upgrades, and troubleshooting from the terminal.
+keywords: plane cli, prime cli, command line tools, plane management, plane setup commands, self-hosting, plane terminal
 ---
 
 

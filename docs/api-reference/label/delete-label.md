@@ -1,6 +1,6 @@
 ---
 title: Delete a label
-description: Delete a label via Plane API. HTTP DELETE request for removing resources.
+description: Delete a label from a project via Plane API. Removes the label and disassociates it from all work items. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization
 ---
 

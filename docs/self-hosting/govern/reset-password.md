@@ -1,7 +1,7 @@
 ---
 title: Reset password
-description: Learn how to reset password for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Reset user and admin passwords for self-hosted Plane. Recover access to your instance using CLI commands or database operations.
+keywords: plane password reset, admin password recovery, plane account recovery, self-hosting, plane login issues
 ---
 
 

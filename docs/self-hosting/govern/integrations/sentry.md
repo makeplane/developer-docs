@@ -1,7 +1,7 @@
 ---
 title: Configure Sentry for Plane integration
-description: Learn how to configure sentry for plane integration for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Connect Sentry error monitoring to your self-hosted Plane instance. Automatically create work items from Sentry alerts and track error resolution.
+keywords: plane sentry integration, error tracking, sentry alerts, bug tracking, error monitoring, self-hosting, plane devops
 ---
 
 

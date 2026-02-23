@@ -1,6 +1,6 @@
 ---
 title: Delete an initiative
-description: Delete an initiative via Plane API. HTTP DELETE request for removing resources.
+description: Permanently delete an initiative via Plane API. Removes the initiative and disassociates linked epics, projects, and labels. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---
 

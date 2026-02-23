@@ -1,7 +1,7 @@
 ---
 title: Activate Airgapped Edition license
-description: Deploy Plane in airgapped environment without internet access. Complete guide for offline Plane installation.
-keywords: plane, self-hosting, deployment, plane installation
+description: Activate and configure your Plane Airgapped Edition license. Offline license activation for air-gapped environments without internet access.
+keywords: plane airgapped license, offline activation, air-gapped deployment, plane license key, self-hosting
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: Deploy Plane with Podman Quadlets
 description: Install Plane using Podman Quadlets. Guide for deploying Plane with Podman as a Docker alternative with systemd integration.
-keywords: plane, self-hosting, deployment, plane installation
+keywords: plane podman, podman quadlets, systemd containers, docker alternative, rootless containers, plane podman deployment, self-hosting
 ---
 
 

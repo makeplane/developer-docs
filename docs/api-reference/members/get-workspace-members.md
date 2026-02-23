@@ -1,7 +1,7 @@
 ---
 title: Get all workspace members
 description: List all workspace members via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, workspace members, list members, member roles, user management, rest api, api integration
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: Update a teamspace
 description: Update a teamspace via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, update teamspace, modify team, team management, workspace teams, rest api, api integration
 ---
 
 

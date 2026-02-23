@@ -1,7 +1,7 @@
 ---
 title: Overview
 description: Plane Link API overview. Learn about endpoints, request/response format, and how to work with link via REST API.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, rest api, work item links, issue links, url references, link management, plane integration
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: License errors
-description: Manage Plane licenses for Pro, Business, and Enterprise editions. Activation guide for commercial Plane licenses.
-keywords: plane, self-hosting, deployment, plane installation
+description: Troubleshoot Plane license activation errors. Fix common issues with Pro, Business, Enterprise, and Airgapped license keys.
+keywords: plane license errors, license activation issues, license troubleshooting, plane license fix, commercial license, self-hosting
 ---
 
 

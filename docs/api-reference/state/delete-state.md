@@ -1,6 +1,6 @@
 ---
 title: Delete a state
-description: Delete a state via Plane API. HTTP DELETE request for removing resources.
+description: Delete a workflow state from a project via Plane API. The state must not be in use by any work items. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---
 

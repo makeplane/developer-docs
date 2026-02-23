@@ -1,7 +1,7 @@
 ---
 title: Configure external secrets for Kubernetes deployments
-description: Learn how to configure external secrets for kubernetes deployments for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Use external secrets operators with Plane on Kubernetes. Integrate AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault for secure configuration.
+keywords: plane external secrets, kubernetes secrets, vault integration, aws secrets manager, secret management, self-hosting
 ---
 
 

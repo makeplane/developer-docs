@@ -1,7 +1,7 @@
 ---
 title: Remove members from teamspace
 description: Delete members from teamspace via Plane API. HTTP DELETE request for removing resources.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, remove teamspace members, team management, workspace teams, rest api, api integration
 ---
 
 

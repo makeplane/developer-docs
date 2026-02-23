@@ -1,7 +1,7 @@
 ---
 title: Understanding Plane's editions
-description: Learn how to understanding plane's editions for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Compare Plane Community, Pro, Business, and Enterprise editions. Understand features, pricing tiers, and version differences for self-hosted deployments.
+keywords: plane editions, plane community edition, plane pro, plane enterprise, plane business, self-hosting comparison, plane pricing tiers
 ---
 
 

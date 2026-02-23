@@ -1,7 +1,7 @@
 ---
 title: View container logs
-description: Learn how to view container logs for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: View and debug container logs for self-hosted Plane. Monitor Docker and Kubernetes service logs to troubleshoot issues.
+keywords: plane logs, container logs, docker logs, kubernetes logs, plane debugging, plane troubleshooting, self-hosting
 ---
 
 

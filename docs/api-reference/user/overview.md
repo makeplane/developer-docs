@@ -1,7 +1,7 @@
 ---
 title: Overview
 description: Plane User API overview. Learn about endpoints, request/response format, and how to work with user via REST API.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, user profile, current user, user account, authentication, rest api, api integration
 ---
 
 

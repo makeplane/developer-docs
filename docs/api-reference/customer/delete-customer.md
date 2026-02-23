@@ -1,6 +1,6 @@
 ---
 title: Delete a customer
-description: Delete a customer via Plane API. HTTP DELETE request for removing resources.
+description: Permanently delete a customer record via Plane API. Removes the customer and unlinks associated work items. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 

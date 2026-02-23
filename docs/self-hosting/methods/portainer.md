@@ -1,7 +1,7 @@
 ---
 title: Deploy Plane with Portainer
-description: Learn how to deploy plane with portainer for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Deploy and manage Plane using Portainer container management UI. Visual Docker management with stack deployment and monitoring.
+keywords: plane portainer, portainer deployment, docker management ui, plane container management, portainer stack, self-hosting
 ---
 
 # Deploy Plane with Portainer <Badge type="info" text="Commercial Edition" />

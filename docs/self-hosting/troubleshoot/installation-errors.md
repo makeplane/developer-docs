@@ -1,7 +1,7 @@
 ---
 title: Installation errors
 description: Troubleshoot installation errors. Common issues, error messages, and solutions for self-hosted Plane.
-keywords: plane, self-hosting, deployment, plane installation
+keywords: plane installation errors, deployment issues, docker errors, kubernetes errors, plane setup troubleshooting, self-hosting
 ---
 
 

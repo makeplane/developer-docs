@@ -1,6 +1,7 @@
 ---
 title: Handling webhooks
-description: How to receive and verify webhooks from Plane.
+description: Receive and verify webhooks from Plane in your application. Learn about webhook headers, signature verification, event types, and payload handling.
+keywords: plane webhooks, webhook verification, plane event notifications, webhook signature, plane webhook handler, real-time events, plane webhook payload
 ---
 
 # Handling webhooks

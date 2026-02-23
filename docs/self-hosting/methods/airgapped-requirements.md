@@ -1,7 +1,7 @@
 ---
 title: Airgapped deployment architecture
-description: Deploy Plane in airgapped environment without internet access. Complete guide for offline Plane installation.
-keywords: plane, self-hosting, deployment, plane installation
+description: System requirements and architecture overview for Plane airgapped deployments. Hardware specs, network topology, and prerequisites for offline installations.
+keywords: plane airgapped requirements, air-gapped architecture, offline prerequisites, system requirements, airgapped planning, self-hosting
 ---
 
 

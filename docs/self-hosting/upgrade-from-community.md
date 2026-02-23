@@ -1,7 +1,7 @@
 ---
 title: Upgrade from Community to Commercial Edition
 description: Upgrade self-hosted Plane to the latest version. Step-by-step guide for updating your Plane installation safely.
-keywords: plane, self-hosting, deployment, plane installation, upgrade, migration, update
+keywords: plane upgrade community to commercial, edition migration, plane pro upgrade, plane business upgrade, self-hosting upgrade
 ---
 
 # Upgrade from Community to Commercial Edition

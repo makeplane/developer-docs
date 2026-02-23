@@ -1,6 +1,6 @@
 ---
 title: Delete a work item
-description: Delete a work item via Plane API. HTTP DELETE request for removing resources.
+description: Permanently delete a work item via Plane API. Removes the issue and its associated comments, links, and attachments. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Configure external reverse proxy
-description: Learn how to configure external reverse proxy for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Configure Nginx, Caddy, or Traefik as a reverse proxy for self-hosted Plane. Setup upstream proxying, headers, and WebSocket support.
+keywords: plane reverse proxy, nginx proxy, traefik, caddy, upstream proxy, proxy configuration, self-hosting
 ---
 
 
