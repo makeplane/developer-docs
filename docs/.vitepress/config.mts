@@ -125,6 +125,8 @@ export default withMermaid(defineConfig({
 
   transformPageData(pageData) {
     const head = pageData.frontmatter.head ??= []
+
+    // Inject canonical URL if not already defined in frontmatter
     const hasCanonical = head.some(
       ([tag, attrs]) => tag === 'link' && attrs?.rel === 'canonical'
     )
@@ -133,6 +135,12 @@ export default withMermaid(defineConfig({
         .replace(/index\.md$/, '')
         .replace(/\.md$/, '')
       head.push(['link', { rel: 'canonical', href: canonicalUrl }])
+    }
+
+    // Inject frontmatter keywords as a meta tag (VitePress doesn't do this natively)
+    const keywords = pageData.frontmatter.keywords
+    if (keywords) {
+      head.push(['meta', { name: 'keywords', content: keywords }])
     }
   },
 
