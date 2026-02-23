@@ -1,7 +1,7 @@
 ---
 title: One-click deploy
-description: Learn how to one-click deploy for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Deploy Plane instantly with one-click installers on popular cloud providers. Quick setup on AWS, DigitalOcean, Render, and Railway.
+keywords: plane one-click deploy, cloud deployment, aws plane, digitalocean plane, quick install, plane cloud hosting, self-hosting
 ---
 
 

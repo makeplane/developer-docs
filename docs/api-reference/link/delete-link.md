@@ -1,7 +1,7 @@
 ---
 title: Delete a link
-description: Delete a link via Plane API. HTTP DELETE request for removing resources.
-keywords: plane, plane api, rest api, api integration
+description: Remove a URL link from a work item via Plane API. Deletes the link reference without affecting the target URL. Returns 204 on success.
+keywords: plane api, delete link, remove link, work item link, issue link, rest api, api integration
 ---
 
 

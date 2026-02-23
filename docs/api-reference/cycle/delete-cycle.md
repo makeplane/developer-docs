@@ -1,6 +1,6 @@
 ---
 title: Delete a cycle
-description: Delete a cycle via Plane API. HTTP DELETE request for removing resources.
+description: Permanently delete a cycle via Plane API. Removes the cycle and disassociates its work items. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
 ---
 

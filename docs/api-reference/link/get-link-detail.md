@@ -1,7 +1,7 @@
 ---
 title: Retrieve a link
 description: Get retrieve a link details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, get link detail, retrieve link, work item link, issue link, rest api, api integration
 ---
 
 

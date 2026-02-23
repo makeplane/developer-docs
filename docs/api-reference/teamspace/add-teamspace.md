@@ -1,7 +1,7 @@
 ---
 title: Create a teamspace
 description: Create a teamspace via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, create teamspace, add team, team management, workspace teams, rest api, api integration
 ---
 
 

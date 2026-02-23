@@ -1,7 +1,7 @@
 ---
 title: Overview
 description: Plane Members API overview. Learn about endpoints, request/response format, and how to work with members via REST API.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, members, workspace members, team members, member roles, user management, rest api, api integration
 ---
 
 

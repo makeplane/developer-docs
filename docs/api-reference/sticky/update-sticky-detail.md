@@ -1,7 +1,7 @@
 ---
 title: Update a sticky
 description: Update a sticky via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, update sticky, modify note, sticky note, rest api, api integration
 ---
 
 

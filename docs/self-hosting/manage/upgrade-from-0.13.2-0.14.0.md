@@ -1,7 +1,7 @@
 ---
 title: Mandatory checkpoint at v0.14.0
 description: Upgrade self-hosted Plane to the latest version. Step-by-step guide for updating your Plane installation safely.
-keywords: plane, self-hosting, deployment, plane installation, upgrade, migration, update
+keywords: plane v0.14 upgrade, mandatory checkpoint, plane migration 0.13, breaking changes, version upgrade, self-hosting update
 ---
 
 

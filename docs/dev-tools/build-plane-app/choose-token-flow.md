@@ -1,6 +1,7 @@
 ---
 title: Choose token flow
-description: Decide between Bot Token and User Token flows and learn how to implement them.
+description: Decide between Bot Token and User Token flows for your Plane app. Compare client credentials and authorization code grant types for different use cases.
+keywords: plane token flow, bot token, user token, oauth flow, client credentials, authorization code, plane api authentication, plane access token
 ---
 
 # Choose token flow

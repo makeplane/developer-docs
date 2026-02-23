@@ -1,7 +1,7 @@
 ---
 title: Configure Slack for Plane integration
-description: Learn how to configure slack for plane integration for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Connect Slack to your self-hosted Plane instance. Get notifications for work item updates and interact with Plane from Slack channels.
+keywords: plane slack integration, slack notifications, slack bot, workspace notifications, slack webhook, self-hosting, plane communication
 ---
 
 

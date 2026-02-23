@@ -1,7 +1,7 @@
 ---
 title: Update Plane version
 description: Upgrade self-hosted Plane to the latest version. Step-by-step guide for updating your Plane installation safely.
-keywords: plane, self-hosting, deployment, plane installation, upgrade, migration, update
+keywords: plane version upgrade, update plane, plane latest version, upgrade guide, self-hosting update, plane migration
 ---
 
 

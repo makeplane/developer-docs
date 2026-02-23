@@ -1,7 +1,7 @@
 ---
 title: Activate Enterprise license
-description: Learn how to activate enterprise license for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Activate your Plane Enterprise Edition license. Enable advanced features including SAML SSO, audit logs, and custom roles for your self-hosted instance.
+keywords: plane enterprise license, license activation, enterprise edition, plane enterprise features, self-hosting
 ---
 
 

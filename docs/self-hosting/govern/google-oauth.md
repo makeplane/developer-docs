@@ -1,7 +1,7 @@
 ---
 title: Google OAuth
 description: Setup Google OAuth authentication for Plane. Step-by-step guide to enable Google sign-in for your self-hosted instance.
-keywords: plane, self-hosting, deployment, plane installation, authentication, sso, oauth, configuration, administration
+keywords: plane google oauth, google sign-in, google authentication, google login, oauth provider, self-hosting, plane sso
 ---
 
 

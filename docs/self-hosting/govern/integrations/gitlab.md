@@ -1,7 +1,7 @@
 ---
 title: Configure GitLab for Plane integration
-description: Learn how to configure gitlab for plane integration for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Connect GitLab to your self-hosted Plane instance. Sync merge requests and commits with Plane work items for development workflow tracking.
+keywords: plane gitlab integration, gitlab sync, merge request tracking, gitlab webhook, self-hosting, plane devops
 ---
 
 

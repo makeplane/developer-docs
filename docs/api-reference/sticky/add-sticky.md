@@ -1,7 +1,7 @@
 ---
 title: Create a sticky
 description: Create a sticky via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, create sticky, add note, sticky note, quick capture, rest api, api integration
 ---
 
 

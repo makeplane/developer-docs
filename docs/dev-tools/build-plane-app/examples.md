@@ -1,6 +1,7 @@
 ---
-title: Complete examples
-description: Full code examples for Node.js (Express) and Python (Flask).
+title: Plane app code examples
+description: Full code examples for building Plane OAuth apps with Node.js (Express) and Python (Flask). Includes bot token flow, user token flow, and webhook handling.
+keywords: plane app example, plane oauth example, plane node.js integration, plane python integration, plane express app, plane flask app, plane api code sample
 ---
 
 # Complete examples

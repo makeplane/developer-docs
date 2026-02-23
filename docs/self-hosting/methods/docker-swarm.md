@@ -1,7 +1,7 @@
 ---
 title: Deploy Plane with Docker Swarm
 description: Deploy Plane on Docker Swarm cluster. Guide for running Plane in a distributed Docker Swarm environment with high availability.
-keywords: plane, self-hosting, deployment, plane installation, docker, docker compose, containerization
+keywords: plane docker swarm, swarm deployment, distributed containers, high availability, plane cluster, docker orchestration, self-hosting
 ---
 
 # Deploy Plane with Docker Swarm <Badge type="info" text="Commercial Edition" />

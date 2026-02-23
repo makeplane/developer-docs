@@ -1,7 +1,7 @@
 ---
 title: Create a link
 description: Create a link via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, create link, add url reference, work item link, issue link, rest api, api integration
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: Add members to teamspace
 description: Create members to teamspace via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, add teamspace members, invite team members, team management, workspace teams, rest api, api integration
 ---
 
 

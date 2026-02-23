@@ -1,7 +1,7 @@
 ---
 title: List teamspace projects
 description: List teamspace projects via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, projects, project management
+keywords: plane api, teamspace projects, team project management, team collaboration, workspace teams, rest api, api integration
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: CLI errors
 description: Troubleshoot cli errors. Common issues, error messages, and solutions for self-hosted Plane.
-keywords: plane, self-hosting, deployment, plane installation
+keywords: plane cli errors, prime cli troubleshooting, command line issues, plane cli fix, self-hosting troubleshooting
 ---
 
 

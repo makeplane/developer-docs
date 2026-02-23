@@ -1,6 +1,7 @@
 ---
 title: Plane Compose
 description: Define Plane projects, workflows, and work items in YAML files. Version control your project structure and sync bidirectionally with Plane using the command line.
+keywords: plane compose, plane yaml, infrastructure as code, plane cli, plane project configuration, plane version control, plane sync, plane command line tool
 ---
 
 # Plane Compose

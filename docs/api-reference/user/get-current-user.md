@@ -1,7 +1,7 @@
 ---
 title: Retrieve current user
 description: List retrieve current user via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, get current user, user profile, authenticated user, user details, rest api, api integration
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: Delete a sticky
-description: Delete a sticky via Plane API. HTTP DELETE request for removing resources.
-keywords: plane, plane api, rest api, api integration
+description: Delete a sticky note via Plane API. Permanently removes the note from your workspace. Returns 204 on success.
+keywords: plane api, delete sticky, remove note, sticky note, rest api, api integration
 ---
 
 

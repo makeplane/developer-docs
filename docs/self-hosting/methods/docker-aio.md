@@ -1,7 +1,7 @@
 ---
 title: Docker AIO (All-in-One)
 description: Deploy Plane with Docker All-in-One (AIO) setup. Quick installation guide for running Plane in a single Docker container.
-keywords: plane, self-hosting, deployment, plane installation, docker, docker compose, containerization
+keywords: plane docker aio, all-in-one container, single container deployment, quick install, plane docker setup, self-hosting
 ---
 
 

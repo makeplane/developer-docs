@@ -1,7 +1,7 @@
 ---
 title: Set up SSL
 description: Configure SSL/TLS certificates for Plane. Setup HTTPS encryption for secure self-hosted Plane deployment.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration, ssl, https, security
+keywords: plane ssl, https setup, tls certificate, ssl configuration, lets encrypt, secure deployment, self-hosting security
 ---
 
 

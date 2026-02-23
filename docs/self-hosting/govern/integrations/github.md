@@ -1,7 +1,7 @@
 ---
 title: Configure GitHub for Plane integration
-description: Learn how to configure github for plane integration for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Connect GitHub to your self-hosted Plane instance. Sync pull requests, commits, and branches with Plane work items for seamless development tracking.
+keywords: plane github integration, github sync, pull request tracking, commit linking, github app, self-hosting, plane devops
 ---
 
 

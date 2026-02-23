@@ -1,6 +1,6 @@
 ---
 title: Delete an attachment
-description: Delete an attachment via Plane API. HTTP DELETE request for removing resources.
+description: Delete a file attachment from a work item via Plane API. Permanently removes the uploaded file. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 

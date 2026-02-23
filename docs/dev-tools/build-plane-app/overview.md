@@ -1,6 +1,7 @@
 ---
 title: Build a Plane App
-description: Build and integrate an app with Plane using OAuth 2.0 authentication.
+description: Build and integrate an app with Plane using OAuth 2.0 authentication. Covers bot tokens, user tokens, webhooks, and API access for custom integrations.
+keywords: build plane app, plane oauth app, plane integration, plane api app, oauth 2.0 plane, plane developer platform, custom plane integration, plane third-party app
 ---
 
 # Build a Plane app

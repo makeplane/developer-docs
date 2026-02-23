@@ -1,7 +1,7 @@
 ---
 title: Clone Docker images to your private registry
-description: Learn how to clone docker images to your private registry for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, docker, docker compose, containerization
+description: Mirror Plane Docker images to your private container registry. Pull, tag, and push images for airgapped or restricted network deployments.
+keywords: plane docker images, private registry, container mirroring, docker pull, image cloning, airgapped docker, self-hosting
 ---
 
 

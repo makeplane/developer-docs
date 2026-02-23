@@ -1,6 +1,7 @@
 ---
 title: Building an Agent
 description: Step-by-step guide to creating a Plane agent, including OAuth setup, webhook handling, and activity creation.
+keywords: build plane agent, plane agent tutorial, oauth agent setup, plane webhook handler, agent activity api, plane bot development, ai agent integration
 ---
 
 # Building an agent

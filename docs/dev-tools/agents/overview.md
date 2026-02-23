@@ -1,6 +1,7 @@
 ---
 title: Agents Overview
 description: Learn how to build AI agents that integrate with Plane workspaces, enabling automated task handling, intelligent responses, and seamless collaboration.
+keywords: plane agents, ai agents, plane automation, workspace integration, plane bot, ai-powered project management, plane developer tools, agent api
 ---
 
 # Agents overview

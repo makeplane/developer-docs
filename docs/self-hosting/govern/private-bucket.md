@@ -1,7 +1,7 @@
 ---
 title: Switch from public to private buckets • Commercial Edition
-description: Learn how to switch from public to private buckets • commercial edition for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Switch Plane storage from public to private S3 buckets. Secure file uploads with signed URLs and access control for commercial editions.
+keywords: plane private bucket, s3 private storage, signed urls, secure file uploads, storage migration, self-hosting, plane storage security
 ---
 
 

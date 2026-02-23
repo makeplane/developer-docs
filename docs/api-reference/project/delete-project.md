@@ -1,6 +1,6 @@
 ---
 title: Delete a project
-description: Delete a project via Plane API. HTTP DELETE request for removing resources.
+description: Permanently delete a project and all its data via Plane API. This action is irreversible and removes all work items, cycles, and modules within the project.
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Signals & Content Payload
-description: Detailed reference for activity signals and content payload structures in Plane agents.
+description: Detailed reference for activity signals and content payload structures in Plane agents. Includes signal types, payload formats, and content examples.
+keywords: plane agent signals, activity payload, agent content structure, plane agent events, agent activity signals, plane webhook payload, agent data format
 ---
 
 # Signals and content payload

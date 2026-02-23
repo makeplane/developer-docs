@@ -1,7 +1,7 @@
 ---
 title: Configure OpenSearch for advanced search
-description: Learn how to configure opensearch for advanced search for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Enable full-text search in Plane with OpenSearch. Configure advanced search indexing for work items, projects, and pages in your self-hosted instance.
+keywords: plane opensearch, full-text search, advanced search, search indexing, elasticsearch, self-hosting, plane search
 ---
 
 

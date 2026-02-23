@@ -1,6 +1,7 @@
 ---
 title: Create an OAuth Application
-description: Register your app to get Client ID and Secret.
+description: Register your Plane OAuth application to get Client ID and Secret. Configure setup URL, redirect URI, and webhook endpoints for your integration.
+keywords: plane oauth application, create plane app, client id secret, plane app registration, oauth credentials, plane workspace integration, plane api authentication
 ---
 
 # Create an OAuth Application

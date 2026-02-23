@@ -1,7 +1,7 @@
 ---
 title: Configure DNS for Intake Email
-description: Learn how to configure dns for intake email for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation, configuration, administration
+description: Configure DNS MX records for Plane intake email. Route incoming emails to create work items automatically in your self-hosted instance.
+keywords: plane dns configuration, mx records, intake email, email to issue, self-hosting, plane email setup, dns setup
 ---
 
 # Configure DNS for Intake Email <Badge type="tip" text="Business" />

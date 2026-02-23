@@ -1,6 +1,7 @@
 ---
-title: Best practices
-description: Guidelines for building responsive, user-friendly Plane agents that provide a seamless experience.
+title: Agent best practices
+description: Guidelines for building responsive, user-friendly Plane agents that provide a seamless experience. Covers error handling, response patterns, and user communication.
+keywords: plane agent best practices, agent design patterns, plane bot guidelines, agent error handling, responsive agents, plane agent development
 ---
 
 # Best practices

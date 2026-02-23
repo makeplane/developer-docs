@@ -1,6 +1,7 @@
 ---
-title: SDKs
-description: Official SDKs to build apps faster.
+title: Plane SDKs
+description: Official Plane SDKs for Node.js and Python. Get typed API clients and OAuth helpers to build Plane integrations faster.
+keywords: plane sdk, plane node sdk, plane python sdk, plane api client, plane-node-sdk, plane-sdk, plane npm package, plane pypi package, plane developer tools
 ---
 
 # SDKs

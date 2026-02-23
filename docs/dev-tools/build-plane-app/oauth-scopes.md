@@ -1,6 +1,7 @@
 ---
 title: OAuth Scopes
-description: All OAuth scopes available when building a Plane app.
+description: Complete reference of all OAuth scopes available when building a Plane app. Includes read and write permissions for projects, work items, cycles, modules, and more.
+keywords: plane oauth scopes, plane api permissions, oauth read write scopes, plane app authorization, plane api access control, workspace scopes, project scopes
 ---
 
 # OAuth scopes

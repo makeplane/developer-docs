@@ -1,6 +1,6 @@
 ---
 title: Delete an intake work item
-description: Delete an intake work item via Plane API. HTTP DELETE request for removing resources.
+description: Delete an intake work item via Plane API. Permanently removes the submission from the intake queue. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---
 

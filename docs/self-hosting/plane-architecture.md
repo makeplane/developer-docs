@@ -1,7 +1,7 @@
 ---
 title: Plane self-hosted architecture
-description: Learn how to plane self-hosted architecture for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Understand Plane self-hosted architecture including web server, API, workers, database, Redis, and storage components. System requirements and service topology.
+keywords: plane architecture, plane system design, plane components, plane services, postgresql, redis, minio, plane infrastructure
 ---
 
 

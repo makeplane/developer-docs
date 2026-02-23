@@ -1,6 +1,6 @@
 ---
 title: Delete a worklog
-description: Delete a worklog via Plane API. HTTP DELETE request for removing resources.
+description: Delete a time tracking worklog entry via Plane API. Removes the logged time from the work item. Returns 204 on success.
 keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
 ---
 

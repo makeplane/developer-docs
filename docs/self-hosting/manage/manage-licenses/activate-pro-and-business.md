@@ -1,7 +1,7 @@
 ---
 title: Activate Pro and Business licenses
-description: Learn how to activate pro and business licenses for self-hosted Plane. Complete guide with step-by-step instructions.
-keywords: plane, self-hosting, deployment, plane installation
+description: Activate your Plane Pro or Business Edition license. Upgrade from Community Edition to unlock advanced project management features.
+keywords: plane pro license, plane business license, license activation, commercial edition, plane upgrade, self-hosting
 ---
 
 

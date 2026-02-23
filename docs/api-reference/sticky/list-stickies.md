@@ -1,7 +1,7 @@
 ---
 title: List all stickies
 description: List all stickies via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration
+keywords: plane api, list stickies, get all notes, sticky notes, quick notes, rest api, api integration
 ---
 
 
