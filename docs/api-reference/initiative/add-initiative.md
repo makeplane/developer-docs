@@ -4,7 +4,6 @@ description: Create an initiative via Plane API. HTTP POST request format, requi
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---
 
-
 # Create an initiative
 
 <div class="api-endpoint-badge">
@@ -164,28 +163,25 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "description_html": "example-description_html",
-  "description_stripped": "example-description_stripped",
-  "description_binary": "example-description_binary",
-  "lead": "example-lead",
-  "start_date": "example-start_date",
-  "end_date": "example-end_date",
-  "logo_props": "example-logo_props",
-  "state": "example-state"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description: "example-description",
+    description_html: "example-description_html",
+    description_stripped: "example-description_stripped",
+    description_binary: "example-description_binary",
+    lead: "example-lead",
+    start_date: "example-start_date",
+    end_date: "example-end_date",
+    logo_props: "example-logo_props",
+    state: "example-state",
+  }),
+});
 const data = await response.json();
 ```
 

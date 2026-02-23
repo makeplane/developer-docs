@@ -4,7 +4,6 @@ description: List all work items in a module via Plane API. HTTP GET request wit
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, modules, features
 ---
 
-
 # List all work items in a module
 
 <div class="api-endpoint-badge">
@@ -87,8 +86,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

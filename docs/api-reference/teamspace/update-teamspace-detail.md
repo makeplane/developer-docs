@@ -4,7 +4,6 @@ description: Update a teamspace via Plane API. HTTP PATCH request format, editab
 keywords: plane api, update teamspace, modify team, team management, workspace teams, rest api, api integration
 ---
 
-
 # Update a teamspace
 
 <div class="api-endpoint-badge">
@@ -146,25 +145,22 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description_json": "example-description_json",
-  "description_html": "example-description_html",
-  "description_stripped": "example-description_stripped",
-  "description_binary": "example-description_binary",
-  "logo_props": "example-logo_props",
-  "lead": "example-lead"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description_json: "example-description_json",
+    description_html: "example-description_html",
+    description_stripped: "example-description_stripped",
+    description_binary: "example-description_binary",
+    logo_props: "example-logo_props",
+    lead: "example-lead",
+  }),
+});
 const data = await response.json();
 ```
 

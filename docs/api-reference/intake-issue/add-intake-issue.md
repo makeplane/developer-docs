@@ -4,7 +4,6 @@ description: Create an intake work item via Plane API. HTTP POST request format,
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---
 
-
 # Create an intake work item
 
 <div class="api-endpoint-badge">
@@ -104,11 +103,11 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "issue": "example-issue"
-})
+      issue: "example-issue",
+    }),
   }
 );
 const data = await response.json();

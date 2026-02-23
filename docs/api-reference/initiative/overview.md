@@ -4,7 +4,6 @@ description: Plane Initiative API overview. Learn about endpoints, request/respo
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---
 
-
 # Overview
 
 Initiatives are high-level strategic goals that help organize and track work across multiple projects, epics, and work items, providing a way to group related work and measure progress toward larger objectives.
@@ -89,17 +88,17 @@ Initiatives are high-level strategic goals that help organize and track work acr
 
 ```json
 {
-	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-	"created_at": "2023-11-19T11:56:55.176802Z",
-	"updated_at": "2023-11-19T11:56:55.176809Z",
-	"name": "Q1 Product Launch",
-	"description": "Launch new product features in Q1",
-	"description_html": "<p>Launch new product features in Q1</p>",
-	"lead": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-	"start_date": "2024-01-01",
-	"end_date": "2024-03-31",
-	"state": "ACTIVE",
-	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "created_at": "2023-11-19T11:56:55.176802Z",
+  "updated_at": "2023-11-19T11:56:55.176809Z",
+  "name": "Q1 Product Launch",
+  "description": "Launch new product features in Q1",
+  "description_html": "<p>Launch new product features in Q1</p>",
+  "lead": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "start_date": "2024-01-01",
+  "end_date": "2024-03-31",
+  "state": "ACTIVE",
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
 

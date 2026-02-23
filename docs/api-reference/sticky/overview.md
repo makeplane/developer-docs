@@ -4,7 +4,6 @@ description: Plane Sticky API overview. Learn about endpoints, request/response 
 keywords: plane api, sticky notes, quick notes, personal notes, workspace stickies, rest api, api integration
 ---
 
-
 # Overview
 
 Stickies are workspace-level notes that allow you to capture quick thoughts, ideas, or important reminders.
@@ -89,17 +88,17 @@ Stickies are workspace-level notes that allow you to capture quick thoughts, ide
 
 ```json
 {
-	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-	"created_at": "2023-11-19T11:56:55.176802Z",
-	"updated_at": "2023-11-19T11:56:55.176809Z",
-	"name": "Important Note",
-	"description": {},
-	"description_html": "<p>This is an important note</p>",
-	"color": "#FF5733",
-	"background_color": "#FFF9E6",
-	"sort_order": 1000.0,
-	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
-	"owner": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "created_at": "2023-11-19T11:56:55.176802Z",
+  "updated_at": "2023-11-19T11:56:55.176809Z",
+  "name": "Important Note",
+  "description": {},
+  "description_html": "<p>This is an important note</p>",
+  "color": "#FF5733",
+  "background_color": "#FFF9E6",
+  "sort_order": 1000.0,
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
+  "owner": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
 }
 ```
 

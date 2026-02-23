@@ -4,7 +4,6 @@ description: Delete projects from teamspace via Plane API. HTTP DELETE request f
 keywords: plane api, remove projects from teamspace, team project management, team collaboration, workspace teams, rest api, api integration
 ---
 
-
 # Remove projects from teamspace
 
 <div class="api-endpoint-badge">
@@ -96,8 +95,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

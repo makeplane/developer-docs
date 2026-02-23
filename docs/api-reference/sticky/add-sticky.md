@@ -4,7 +4,6 @@ description: Create a sticky via Plane API. HTTP POST request format, required f
 keywords: plane api, create sticky, add note, sticky note, quick capture, rest api, api integration
 ---
 
-
 # Create a sticky
 
 <div class="api-endpoint-badge">
@@ -124,23 +123,20 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description_html": "example-description_html",
-  "logo_props": "example-logo_props",
-  "color": "example-color",
-  "background_color": "example-background_color"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/stickies/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description_html: "example-description_html",
+    logo_props: "example-logo_props",
+    color: "example-color",
+    background_color: "example-background_color",
+  }),
+});
 const data = await response.json();
 ```
 

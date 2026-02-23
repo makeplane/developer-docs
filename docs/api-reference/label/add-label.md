@@ -4,7 +4,6 @@ description: Create a label via Plane API. HTTP POST request format, required fi
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization
 ---
 
-
 # Create a label
 
 <div class="api-endpoint-badge">
@@ -98,19 +97,16 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+  }),
+});
 const data = await response.json();
 ```
 

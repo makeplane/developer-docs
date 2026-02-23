@@ -4,7 +4,6 @@ description: Create a module via Plane API. HTTP POST request format, required f
 keywords: plane, plane api, rest api, api integration, modules, features
 ---
 
-
 # Create a module
 
 <div class="api-endpoint-badge">
@@ -162,27 +161,24 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "start_date": "example-start_date",
-  "target_date": "example-target_date",
-  "status": "example-status",
-  "lead": "example-lead",
-  "members": "example-members",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description: "example-description",
+    start_date: "example-start_date",
+    target_date: "example-target_date",
+    status: "example-status",
+    lead: "example-lead",
+    members: "example-members",
+    external_source: "example-external_source",
+    external_id: "example-external_id",
+  }),
+});
 const data = await response.json();
 ```
 

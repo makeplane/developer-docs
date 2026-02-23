@@ -4,7 +4,6 @@ description: Delete a label from a project via Plane API. Removes the label and 
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization
 ---
 
-
 # Delete a label
 
 <div class="api-endpoint-badge">
@@ -87,8 +86,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

@@ -4,11 +4,9 @@ description: Plane Values API overview. Learn about endpoints, request/response 
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Overview
 
 Custom property values store the actual data entered into custom properties for specific work items.
-
 
 <div class="api-two-column">
 <div class="api-left">

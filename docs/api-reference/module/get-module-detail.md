@@ -4,7 +4,6 @@ description: Get retrieve a module details via Plane API. Retrieve complete info
 keywords: plane, plane api, rest api, api integration, modules, features
 ---
 
-
 # Retrieve a module
 
 <div class="api-endpoint-badge">
@@ -87,8 +86,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

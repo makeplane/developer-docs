@@ -4,7 +4,6 @@ description: Create labels to initiative via Plane API. HTTP POST request format
 keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
 ---
 
-
 # Add labels to initiative
 
 <div class="api-endpoint-badge">
@@ -104,11 +103,11 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "label_ids": "example-label_ids"
-})
+      label_ids: "example-label_ids",
+    }),
   }
 );
 const data = await response.json();

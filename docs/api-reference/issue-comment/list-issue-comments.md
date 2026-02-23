@@ -4,7 +4,6 @@ description: List all work item comments via Plane API. HTTP GET request with pa
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---
 
-
 # List all work item comments
 
 <div class="api-endpoint-badge">
@@ -126,8 +125,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

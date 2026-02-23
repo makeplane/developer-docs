@@ -4,7 +4,6 @@ description: Create a custom property via Plane API. HTTP POST request format, r
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Create a custom property
 
 <div class="api-endpoint-badge">
@@ -95,6 +94,7 @@ Whether this property allows multiple values.
 <ApiParam name="options" type="object[]">
 
 Array of option objects for OPTION type properties. This field can be used while creating a property with type OPTION to set options on the custom property during creation itself. Each option object can contain:
+
 - `name` (string): Name of the option
 - `description` (string): Description of the option
 - `is_active` (boolean): Whether the option is active
@@ -175,18 +175,18 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "display_name": "example-display_name",
-  "description": "example-description",
-  "default_value": "example-default_value",
-  "validation_rules": "example-validation_rules",
-  "is_required": true,
-  "is_active": true,
-  "is_multi": true,
-  "options": "example-options"
-})
+      display_name: "example-display_name",
+      description: "example-description",
+      default_value: "example-default_value",
+      validation_rules: "example-validation_rules",
+      is_required: true,
+      is_active: true,
+      is_multi: true,
+      options: "example-options",
+    }),
   }
 );
 const data = await response.json();

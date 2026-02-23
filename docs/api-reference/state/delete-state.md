@@ -4,7 +4,6 @@ description: Delete a workflow state from a project via Plane API. The state mus
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---
 
-
 # Delete a state
 
 <div class="api-endpoint-badge">
@@ -87,8 +86,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

@@ -4,7 +4,6 @@ description: Delete a sticky note via Plane API. Permanently removes the note fr
 keywords: plane api, delete sticky, remove note, sticky note, rest api, api integration
 ---
 
-
 # Delete a sticky
 
 <div class="api-endpoint-badge">
@@ -76,15 +75,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

@@ -4,7 +4,6 @@ description: Remove a URL link from a work item via Plane API. Deletes the link 
 keywords: plane api, delete link, remove link, work item link, issue link, rest api, api integration
 ---
 
-
 # Delete a link
 
 <div class="api-endpoint-badge">
@@ -93,8 +92,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

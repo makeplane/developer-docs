@@ -4,7 +4,6 @@ description: List total time for each work item via Plane API. HTTP GET request 
 keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
 ---
 
-
 # Get total time for each work item
 
 <div class="api-endpoint-badge">
@@ -81,8 +80,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

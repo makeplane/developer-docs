@@ -4,7 +4,6 @@ description: List all links via Plane API. HTTP GET request with pagination, fil
 keywords: plane api, list links, get all links, work item links, issue links, rest api, api integration
 ---
 
-
 # List all links
 
 <div class="api-endpoint-badge">
@@ -87,8 +86,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

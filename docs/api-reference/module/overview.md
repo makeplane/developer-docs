@@ -4,7 +4,6 @@ description: Plane Module API overview. Learn about endpoints, request/response 
 keywords: plane, plane api, rest api, api integration, modules, features
 ---
 
-
 # Overview
 
 Modules are smaller, focused projects that help you group and organize issues within a specific time frame. They allow you to break down your work into manageable chunks and track progress towards specific goals or objectives.
@@ -51,7 +50,6 @@ Modules are smaller, focused projects that help you group and organize issues wi
   It describes the status of the module
 
   The status can be
-
   - backlog
   - planned
   - in-progress
@@ -106,24 +104,24 @@ Modules are smaller, focused projects that help you group and organize issues wi
 
 ```json
 {
-	"id": "b69b19ae-261f-428c-899f-dd58efaa36c0",
-	"created_at": "2023-11-19T11:48:21.130161Z",
-	"updated_at": "2023-11-19T11:48:21.130168Z",
-	"name": "module stesting",
-	"description": "",
-	"description_text": null,
-	"description_html": null,
-	"start_date": null,
-	"target_date": null,
-	"status": "planned",
-	"view_props": {},
-	"sort_order": 55535.0,
-	"created_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
-	"updated_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
-	"project": "6436c4ae-fba7-45dc-ad4a-5440e17cb1b2",
-	"workspace": "c467e125-59e3-44ec-b5ee-f9c1e138c611",
-	"lead": null,
-	"members": []
+  "id": "b69b19ae-261f-428c-899f-dd58efaa36c0",
+  "created_at": "2023-11-19T11:48:21.130161Z",
+  "updated_at": "2023-11-19T11:48:21.130168Z",
+  "name": "module stesting",
+  "description": "",
+  "description_text": null,
+  "description_html": null,
+  "start_date": null,
+  "target_date": null,
+  "status": "planned",
+  "view_props": {},
+  "sort_order": 55535.0,
+  "created_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
+  "updated_by": "0649cb9d-05c8-4ef4-8e8b-d108ccddd42c",
+  "project": "6436c4ae-fba7-45dc-ad4a-5440e17cb1b2",
+  "workspace": "c467e125-59e3-44ec-b5ee-f9c1e138c611",
+  "lead": null,
+  "members": []
 }
 ```
 

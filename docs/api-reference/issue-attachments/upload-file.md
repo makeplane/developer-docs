@@ -4,7 +4,6 @@ description: Upload file API endpoint. Request format, parameters, and response 
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # Upload file
 
 <div class="api-endpoint-badge">
@@ -125,26 +124,23 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.sohttps://planefs-uploads.s3.amazonaws.com/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "Content-Type": "example-Content-Type",
-  "key": "example-key",
-  "x-amz-algorithm": "example-x-amz-algorithm",
-  "x-amz-credential": "example-x-amz-credential",
-  "x-amz-date": "example-x-amz-date",
-  "policy": "example-policy",
-  "x-amz-signature": "example-x-amz-signature",
-  "file": "example-file"
-})
-  }
-);
+const response = await fetch("https://api.plane.sohttps://planefs-uploads.s3.amazonaws.com/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    "Content-Type": "example-Content-Type",
+    key: "example-key",
+    "x-amz-algorithm": "example-x-amz-algorithm",
+    "x-amz-credential": "example-x-amz-credential",
+    "x-amz-date": "example-x-amz-date",
+    policy: "example-policy",
+    "x-amz-signature": "example-x-amz-signature",
+    file: "example-file",
+  }),
+});
 const data = await response.json();
 ```
 
