@@ -48,70 +48,65 @@ When configuring the PLANE_VERSION environment variable, **do not** set it to `s
 helm repo add plane https://helm.plane.so/
 ```
 
-4.  Use one of the following ways to deploy Plane: - **Quick setup**:  
-     This is the fastest way to deploy Plane with the default settings. This will create stateful deployments for Postgres, Redis/Valkey, and Minio with a persistent volume claim using the `longhorn` storage class. This also sets up the Ingress routes for you using `nginx` ingress class. To customize these settings, see the [Custom ingress routes](#custom-ingress-routes).
+4.  Use one of the following ways to deploy Plane:
 
-            Run the following command to deploy Plane:
+    - **Quick setup**:
+      This is the fastest way to deploy Plane with the default settings. This will create stateful deployments for Postgres, Redis/Valkey, and Minio with a persistent volume claim using the `longhorn` storage class. This also sets up the Ingress routes for you using `nginx` ingress class. To customize these settings, see the [Custom ingress routes](#custom-ingress-routes).
 
-        ```bash
-        helm upgrade --install plane-app plane/plane-enterprise \
-            --create-namespace \
-            --namespace plane \
-            --set license.licenseDomain=${DOMAIN_NAME} \
-            --set license.licenseServer=https://prime.plane.so \
-            --set planeVersion=${PLANE_VERSION} \
-            --set ingress.enabled=true \
-            --set ingress.ingressClass=nginx \
-            --set env.storageClass=longhorn \
-            --timeout 10m \
-            --wait \
-            --wait-for-jobs
-        ```
+      Run the following command to deploy Plane:
 
-        ::: info
-        This is the minimum required to set up Plane Commercial edition. You can change the default namespace from `plane`, the default app name from `plane-app`, the default storage class from `longhorn`, and the default ingress class from `nginx` to whatever you would like to.<br/> <br/>
-        To use a custom StorageClass, add `--set env.storageClass=<your-storageclass-name>` to the command above.<br/> <br/>
-        You can also pass other settings referring to the **Configuration Settings** toggle section below.
-        :::
+      ```
+      helm upgrade --install plane-app plane/plane-enterprise \
+          --create-namespace \
+          --namespace plane \
+          --set license.licenseDomain=${DOMAIN_NAME} \
+          --set license.licenseServer=https://prime.plane.so \
+          --set planeVersion=${PLANE_VERSION} \
+          --set ingress.enabled=true \
+          --set ingress.ingressClass=nginx \
+          --set env.storageClass=longhorn \
+          --timeout 10m \
+          --wait \
+          --wait-for-jobs
+      ```
 
-            - **Advanced setup**:
-            ::: warning
-            When self-hosting Plane for production use, it is strongly recommended to configure [external database and storage](/self-hosting/methods/kubernetes#configuration-settings). This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-            :::
+      ::: info
+      This is the minimum required to set up Plane Commercial edition. You can change the default namespace from `plane`, the default app name from `plane-app`, the default storage class from `longhorn`, and the default ingress class from `nginx` to whatever you would like to.<br/> <br/>
+      To use a custom StorageClass, add `--set env.storageClass=<your-storageclass-name>` to the command above.<br/> <br/>
+      You can also pass other settings referring to the **Configuration Settings** toggle section below.
+      :::
 
-            For more control over your setup, follow the steps below:
+    - **Advanced setup**:
 
-            i. Run the script below to download the `values.yaml` file and and edit using any editor like Vim or Nano.
+      ::: warning
+      When self-hosting Plane for production use, it is strongly recommended to configure [external database and storage](/self-hosting/methods/kubernetes#configuration-settings). This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
+      :::
 
-        Make sure you set the required environment variables listed below:
-        - `planeVersion: v2.3.1`
-        - `license.licenseDomain: <The domain you have specified to host Plane>`
-        - `license.licenseServer: https://prime.plane.so`
-        - `ingress.enabled: <true | false>`
-        - `ingress.ingressClass: <nginx or any other ingress class configured in your cluster>`
-        - `env.storageClass: <longhorn or any other storage class configured in your cluster>`
+      For more control over your setup, follow the steps below:
 
-            Make sure you set the required environment variables listed below:
-            - `planeVersion: v2.2.1`
-            - `license.licenseDomain: <The domain you have specified to host Plane>`
-            - `license.licenseServer: https://prime.plane.so`
-            - `ingress.enabled: <true | false>`
-            - `ingress.ingressClass: <nginx or any other ingress class configured in your cluster>`
-            - `env.storageClass: <longhorn or any other storage class configured in your cluster>`
+      i. Run the script below to download the `values.yaml` file and edit using any editor like Vim or Nano.
 
-            See the **Configuration settings** toggle section for more details.
+      Make sure you set the required environment variables listed below:
+      - `planeVersion: v2.3.1`
+      - `license.licenseDomain: <The domain you have specified to host Plane>`
+      - `license.licenseServer: https://prime.plane.so`
+      - `ingress.enabled: <true | false>`
+      - `ingress.ingressClass: <nginx or any other ingress class configured in your cluster>`
+      - `env.storageClass: <longhorn or any other storage class configured in your cluster>`
 
-        ```bash
-        helm upgrade --install plane-app plane/plane-enterprise \
-            --create-namespace \
-            --namespace plane \
-            -f values.yaml \
-            --timeout 10m \
-            --wait \
-            --wait-for-jobs
-        ```
+      See the **Configuration settings** toggle section for more details.
 
-    iii. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+      ```bash
+      helm upgrade --install plane-app plane/plane-enterprise \
+          --create-namespace \
+          --namespace plane \
+          -f values.yaml \
+          --timeout 10m \
+          --wait \
+          --wait-for-jobs
+      ```
+
+      ii. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
 
 ## Configuration settings
 
