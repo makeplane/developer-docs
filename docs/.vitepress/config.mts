@@ -109,9 +109,6 @@ export default withMermaid(defineConfig({
     ['meta', { name: 'keywords', content: 'plane, api, self-hosting, project management, developer documentation, kubernetes, docker, rest api, webhooks, plane api' }],
     ['meta', { name: 'theme-color', content: '#3b82f6' }],
 
-    // SEO: Canonical URL
-    ['link', { rel: 'canonical', href: 'https://developers.plane.so' }],
-
     // Open Graph meta tags
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'Developer documentation | Plane' }],
@@ -125,6 +122,18 @@ export default withMermaid(defineConfig({
     ['meta', { name: 'twitter:description', content: 'Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.' }],
     ['meta', { name: 'twitter:image', content: 'https://media.docs.plane.so/logo/og-docs.webp' }],
   ],
+
+  transformPageData(pageData) {
+    const canonicalUrl = `https://developers.plane.so/${pageData.relativePath}`
+      .replace(/index\.md$/, '')
+      .replace(/\.md$/, '')
+
+    pageData.frontmatter.head ??= []
+    pageData.frontmatter.head.push([
+      'link',
+      { rel: 'canonical', href: canonicalUrl }
+    ])
+  },
 
   themeConfig: {
     siteTitle: false,
