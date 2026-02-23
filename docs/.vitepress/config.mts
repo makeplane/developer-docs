@@ -124,15 +124,16 @@ export default withMermaid(defineConfig({
   ],
 
   transformPageData(pageData) {
-    const canonicalUrl = `https://developers.plane.so/${pageData.relativePath}`
-      .replace(/index\.md$/, '')
-      .replace(/\.md$/, '')
-
-    pageData.frontmatter.head ??= []
-    pageData.frontmatter.head.push([
-      'link',
-      { rel: 'canonical', href: canonicalUrl }
-    ])
+    const head = pageData.frontmatter.head ??= []
+    const hasCanonical = head.some(
+      ([tag, attrs]) => tag === 'link' && attrs?.rel === 'canonical'
+    )
+    if (!hasCanonical) {
+      const canonicalUrl = `https://developers.plane.so/${pageData.relativePath}`
+        .replace(/index\.md$/, '')
+        .replace(/\.md$/, '')
+      head.push(['link', { rel: 'canonical', href: canonicalUrl }])
+    }
   },
 
   themeConfig: {
