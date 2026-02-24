@@ -86,25 +86,27 @@ This upgrade path is for installations using external or managed database and ob
     1. Find the `DATABASE_URL` environment variable.
     2. Verify it points to your external database:
 
-    ```ini
-    DATABASE_URL=postgresql://user:password@your-db-host:5432/plane
-    ```
+        ```ini
+        DATABASE_URL=postgresql://user:password@your-db-host:5432/plane
+        ```
 
-    If you need to change it, update the value with your managed database connection string.
-    3.  Configure object storage 1. Find the `#DATASTORE SETTINGS` section in `plane.env` 2. Update these environment variables for your external storage:
+        If you need to change it, update the value with your managed database connection string. 
+    3. Configure object storage 
+        1. Find the `#DATASTORE SETTINGS` section in `plane.env` 
+        2. Update these environment variables for your external storage:
 
-    ```ini
-    USE_MINIO=0
-    AWS_REGION=us-east-1
-    AWS_ACCESS_KEY_ID=<your-access-key>
-    AWS_SECRET_ACCESS_KEY=<your-secret-key>
-    AWS_S3_ENDPOINT_URL=https://s3.amazonaws.com
-    AWS_S3_BUCKET_NAME=plane-uploads
-    ```
+        ```ini
+        USE_MINIO=0
+        AWS_REGION=us-east-1
+        AWS_ACCESS_KEY_ID=<your-access-key>
+        AWS_SECRET_ACCESS_KEY=<your-secret-key>
+        AWS_S3_ENDPOINT_URL=https://s3.amazonaws.com
+        AWS_S3_BUCKET_NAME=plane-uploads
+        ```
 
-    :::info
-    Setting `USE_MINIO=0` disables the local MinIO service and enables external object storage (S3 or S3-compatible services).
-    :::
+        :::info
+        Setting `USE_MINIO=0` disables the local MinIO service and enables external object storage (S3 or S3-compatible services).
+        :::
 
 3.  Restart Plane services to apply the configuration:
     ```bash

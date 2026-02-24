@@ -34,13 +34,13 @@ pnpm fix:format           # Auto-fix Prettier formatting
 
 Used directly in markdown files — defined in `docs/.vitepress/theme/components/`:
 
-| Component | Usage |
-|-----------|-------|
-| `<ApiParam>` | API parameter with name, type, required badge, expandable details |
-| `<CodePanel>` | Multi-language code tabs (cURL, Python, JavaScript) |
-| `<ResponsePanel>` | Syntax-highlighted API response JSON |
-| `<Card>` | Feature card with icon, title, description |
-| `<CardGroup cols="N">` | Responsive grid layout (2, 3, or 4 columns) |
+| Component              | Usage                                                             |
+| ---------------------- | ----------------------------------------------------------------- |
+| `<ApiParam>`           | API parameter with name, type, required badge, expandable details |
+| `<CodePanel>`          | Multi-language code tabs (cURL, Python, JavaScript)               |
+| `<ResponsePanel>`      | Syntax-highlighted API response JSON                              |
+| `<Card>`               | Feature card with icon, title, description                        |
+| `<CardGroup cols="N">` | Responsive grid layout (2, 3, or 4 columns)                       |
 
 ## API Documentation Pattern
 

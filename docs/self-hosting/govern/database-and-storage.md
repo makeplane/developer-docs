@@ -49,6 +49,7 @@ Avoid using special characters in your PostgreSQL password.
   - **s3:PutObject**  
     To upload new assets using the presigned url.
   2. Configure the CORS policy on your bucket to enable presigned uploads. Use the example policy below, making sure to replace `<YOUR_DOMAIN>` with your actual domain.
+
   ```
   [
         {
