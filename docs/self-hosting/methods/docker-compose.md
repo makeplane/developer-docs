@@ -88,7 +88,7 @@ The Commercial edition comes with a free plan and the flexibility to upgrade to 
     ./setup.sh
     ```
     This will prompt you with the below options.
-    ```list
+    ```bash
     Select a Action you want to perform:
        1) Install (arm64)
        2) Start
