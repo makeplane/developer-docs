@@ -4,7 +4,6 @@ description: Create a wiki page via Plane API. HTTP POST request format, require
 keywords: plane, plane api, rest api, api integration, pages, documentation, notes
 ---
 
-
 # Create a wiki page
 
 <div class="api-endpoint-badge">
@@ -100,20 +99,17 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/pages/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description_html": "example-description_html"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/pages/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description_html: "example-description_html",
+  }),
+});
 const data = await response.json();
 ```
 

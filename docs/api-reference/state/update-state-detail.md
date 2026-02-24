@@ -4,7 +4,6 @@ description: Update a state via Plane API. HTTP PATCH request format, editable f
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---
 
-
 # Update a state
 
 <div class="api-endpoint-badge">
@@ -110,11 +109,11 @@ const response = await fetch(
     method: "PATCH",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "name": "example-name"
-})
+      name: "example-name",
+    }),
   }
 );
 const data = await response.json();

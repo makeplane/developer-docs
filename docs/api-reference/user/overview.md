@@ -4,7 +4,6 @@ description: Plane User API overview. Learn about endpoints, request/response fo
 keywords: plane api, user profile, current user, user account, authentication, rest api, api integration
 ---
 
-
 # Overview
 
 Users represent the people who use Plane. The Users API allows you to retrieve information about the current authenticated user.
@@ -51,13 +50,13 @@ Users represent the people who use Plane. The Users API allows you to retrieve i
 
 ```json
 {
-	"id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-	"first_name": "John",
-	"last_name": "Doe",
-	"email": "john.doe@example.com",
-	"avatar": "avatar-123",
-	"avatar_url": "https://example.com/avatars/avatar-123.png",
-	"display_name": "John Doe"
+  "id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@example.com",
+  "avatar": "avatar-123",
+  "avatar_url": "https://example.com/avatars/avatar-123.png",
+  "display_name": "John Doe"
 }
 ```
 

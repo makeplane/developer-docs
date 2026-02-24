@@ -4,7 +4,6 @@ description: Update a project via Plane API. HTTP PATCH request format, editable
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---
 
-
 # Update a project
 
 <div class="api-endpoint-badge">
@@ -106,20 +105,17 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description: "example-description",
+  }),
+});
 const data = await response.json();
 ```
 

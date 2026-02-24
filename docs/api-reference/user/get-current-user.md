@@ -4,7 +4,6 @@ description: List retrieve current user via Plane API. HTTP GET request with pag
 keywords: plane api, get current user, user profile, authenticated user, user details, rest api, api integration
 ---
 
-
 # Retrieve current user
 
 <div class="api-endpoint-badge">
@@ -54,15 +53,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/users/me/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/users/me/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

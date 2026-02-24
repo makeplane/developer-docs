@@ -4,7 +4,6 @@ description: Plane Types API overview. Learn about endpoints, request/response f
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Overview
 
 Work item types categorize different kinds of work in your project (e.g., "Task", "Bug", "Feature").
@@ -93,23 +92,23 @@ Work item types categorize different kinds of work in your project (e.g., "Task"
 
 ```json
 {
-	"id": "d6af3c13-3459-43ab-b91c-c33ef2fd7131",
-	"name": "Postman work item type",
-	"description": "Postman work item type description",
-	"logo_props": {},
-	"is_epic": false,
-	"is_default": false,
-	"is_active": true,
-	"level": 0,
-	"workspace": "70b6599f-9313-4c0d-b5c0-406a13a05647",
-	"project": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-	"created_at": "2024-10-23T06:54:46.169344Z",
-	"updated_at": "2024-10-23T06:54:46.169390Z",
-	"created_by": "9d6d1ecd-bf73-4169-80c8-7dee79b217f4",
-	"updated_by": "9d6d1ecd-bf73-4169-80c8-7dee79b217f4",
-	"deleted_at": null,
-	"external_id": null,
-	"external_source": null
+  "id": "d6af3c13-3459-43ab-b91c-c33ef2fd7131",
+  "name": "Postman work item type",
+  "description": "Postman work item type description",
+  "logo_props": {},
+  "is_epic": false,
+  "is_default": false,
+  "is_active": true,
+  "level": 0,
+  "workspace": "70b6599f-9313-4c0d-b5c0-406a13a05647",
+  "project": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "created_at": "2024-10-23T06:54:46.169344Z",
+  "updated_at": "2024-10-23T06:54:46.169390Z",
+  "created_by": "9d6d1ecd-bf73-4169-80c8-7dee79b217f4",
+  "updated_by": "9d6d1ecd-bf73-4169-80c8-7dee79b217f4",
+  "deleted_at": null,
+  "external_id": null,
+  "external_source": null
 }
 ```
 

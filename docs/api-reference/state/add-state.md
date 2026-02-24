@@ -4,7 +4,6 @@ description: Create a state via Plane API. HTTP POST request format, required fi
 keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---
 
-
 # Create a state
 
 <div class="api-endpoint-badge">
@@ -106,20 +105,17 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "color": "example-color"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    color: "example-color",
+  }),
+});
 const data = await response.json();
 ```
 

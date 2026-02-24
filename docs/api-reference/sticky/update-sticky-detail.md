@@ -4,7 +4,6 @@ description: Update a sticky via Plane API. HTTP PATCH request format, editable 
 keywords: plane api, update sticky, modify note, sticky note, rest api, api integration
 ---
 
-
 # Update a sticky
 
 <div class="api-endpoint-badge">
@@ -130,23 +129,20 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "description_html": "example-description_html",
-  "logo_props": "example-logo_props",
-  "color": "example-color",
-  "background_color": "example-background_color"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    description_html: "example-description_html",
+    logo_props: "example-logo_props",
+    color: "example-color",
+    background_color: "example-background_color",
+  }),
+});
 const data = await response.json();
 ```
 

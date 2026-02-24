@@ -4,13 +4,11 @@ description: Plane Project API overview. Learn about endpoints, request/response
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---
 
-
 # Overview
 
-Projects organize your team's work within a workspace. Each project contains work items, cycles, modules, and other resources. 
+Projects organize your team's work within a workspace. Each project contains work items, cycles, modules, and other resources.
 
 [Learn more about Projects](https://docs.plane.so/core-concepts/projects/overview)
-
 
 <div class="api-two-column">
 <div class="api-left">
@@ -66,7 +64,6 @@ Projects organize your team's work within a workspace. Each project contains wor
 - `network` _integer_
 
   Is the project public or secret it takes in two values either (0,2)
-
   - **0 - Secret**
   - **2 - Public**
 

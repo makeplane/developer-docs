@@ -4,13 +4,11 @@ description: Plane Properties API overview. Learn about endpoints, request/respo
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Overview
 
 Custom properties allow you to extend work items with additional fields specific to your workflow and processes.
 
 [Learn more about Custom properties](https://docs.plane.so/core-concepts/issues/work-item-types#add-custom-properties)
-
 
 <div class="api-two-column">
 <div class="api-left">

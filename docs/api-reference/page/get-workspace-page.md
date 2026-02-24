@@ -4,7 +4,6 @@ description: List retrieve a wiki page via Plane API. HTTP GET request with pagi
 keywords: plane, plane api, rest api, api integration, pages, documentation, notes
 ---
 
-
 # Retrieve a wiki page
 
 <div class="api-endpoint-badge">
@@ -76,15 +75,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

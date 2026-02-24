@@ -4,7 +4,6 @@ description: Permanently delete an initiative via Plane API. Removes the initiat
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---
 
-
 # Delete an initiative
 
 <div class="api-endpoint-badge">
@@ -76,15 +75,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

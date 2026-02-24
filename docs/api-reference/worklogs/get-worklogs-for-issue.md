@@ -4,7 +4,6 @@ description: List all worklogs for a work item via Plane API. HTTP GET request w
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, time tracking, worklogs, time management
 ---
 
-
 # List all worklogs for a work item
 
 <div class="api-endpoint-badge">
@@ -87,8 +86,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

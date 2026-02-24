@@ -4,7 +4,6 @@ description: Update module details via Plane API. HTTP PATCH request format, edi
 keywords: plane, plane api, rest api, api integration, modules, features
 ---
 
-
 # Update module details
 
 <div class="api-endpoint-badge">
@@ -174,19 +173,19 @@ const response = await fetch(
     method: "PATCH",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "start_date": "example-start_date",
-  "target_date": "example-target_date",
-  "status": "example-status",
-  "lead": "example-lead",
-  "members": "example-members",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id"
-})
+      name: "example-name",
+      description: "example-description",
+      start_date: "example-start_date",
+      target_date: "example-target_date",
+      status: "example-status",
+      lead: "example-lead",
+      members: "example-members",
+      external_source: "example-external_source",
+      external_id: "example-external_id",
+    }),
   }
 );
 const data = await response.json();

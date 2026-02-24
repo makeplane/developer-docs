@@ -4,7 +4,6 @@ description: Update a custom property via Plane API. HTTP PATCH request format, 
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Update a custom property
 
 <div class="api-endpoint-badge">
@@ -164,17 +163,17 @@ const response = await fetch(
     method: "PATCH",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "display_name": "example-display_name",
-  "description": "example-description",
-  "default_value": "example-default_value",
-  "validation_rules": "example-validation_rules",
-  "is_required": true,
-  "is_active": true,
-  "is_multi": true
-})
+      display_name: "example-display_name",
+      description: "example-description",
+      default_value: "example-default_value",
+      validation_rules: "example-validation_rules",
+      is_required: true,
+      is_active: true,
+      is_multi: true,
+    }),
   }
 );
 const data = await response.json();

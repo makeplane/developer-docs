@@ -4,7 +4,6 @@ description: Get retrieve option details details via Plane API. Retrieve complet
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Retrieve option details
 
 <div class="api-endpoint-badge">
@@ -93,8 +92,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

@@ -4,7 +4,6 @@ description: List all dropdown options via Plane API. HTTP GET request with pagi
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # List all dropdown options
 
 <div class="api-endpoint-badge">
@@ -87,8 +86,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

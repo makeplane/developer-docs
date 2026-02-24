@@ -4,7 +4,6 @@ description: Get retrieve a link details via Plane API. Retrieve complete inform
 keywords: plane api, get link detail, retrieve link, work item link, issue link, rest api, api integration
 ---
 
-
 # Retrieve a link
 
 <div class="api-endpoint-badge">
@@ -93,8 +92,8 @@ const response = await fetch(
   {
     method: "GET",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

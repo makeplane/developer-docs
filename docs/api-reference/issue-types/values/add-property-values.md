@@ -4,7 +4,6 @@ description: Create custom property values via Plane API. HTTP POST request form
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Add custom property values
 
 <div class="api-endpoint-badge">
@@ -59,6 +58,7 @@ The unique identifier for the custom property.
 <ApiParam name="value" type="string | boolean | number | string[]" :required="true">
 
 The value type depends on the property type:
+
 - TEXT/URL/EMAIL/FILE: string
 - DATETIME: string (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)
 - DECIMAL: number (int or float)
@@ -67,11 +67,13 @@ The value type depends on the property type:
 - OPTION/RELATION (multi, when is_multi=True): list of strings (UUIDs) or single string
 
 For multi-value properties (is_multi=True):
+
 - Accept either a single UUID string or a list of UUID strings
 - Multiple records are created
 - Response will be a list of values
 
 For single-value properties:
+
 - Only one value is allowed per work item/property combination
 
 </ApiParam>
@@ -130,11 +132,11 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "value": "example-value"
-})
+      value: "example-value",
+    }),
   }
 );
 const data = await response.json();

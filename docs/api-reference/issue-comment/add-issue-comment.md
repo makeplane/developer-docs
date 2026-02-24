@@ -4,7 +4,6 @@ description: Create a work item comment via Plane API. HTTP POST request format,
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---
 
-
 # Create a work item comment
 
 <div class="api-endpoint-badge">
@@ -142,15 +141,15 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "comment_html": "example-comment_html",
-  "comment_json": "example-comment_json",
-  "access": "example-access",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id"
-})
+      comment_html: "example-comment_html",
+      comment_json: "example-comment_json",
+      access: "example-access",
+      external_source: "example-external_source",
+      external_id: "example-external_id",
+    }),
   }
 );
 const data = await response.json();

@@ -4,7 +4,6 @@ description: Update dropdown options via Plane API. HTTP PATCH request format, e
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Update dropdown options
 
 <div class="api-endpoint-badge">
@@ -82,8 +81,6 @@ Whether this option is currently active.
 
 <ApiParam name="parent" type="string">
 
-
-
 </ApiParam>
 
 </div>
@@ -148,15 +145,15 @@ const response = await fetch(
     method: "PATCH",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "name": "example-name",
-  "description": "example-description",
-  "is_default": true,
-  "is_active": true,
-  "parent": "example-parent"
-})
+      name: "example-name",
+      description: "example-description",
+      is_default: true,
+      is_active: true,
+      parent: "example-parent",
+    }),
   }
 );
 const data = await response.json();

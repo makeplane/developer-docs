@@ -4,7 +4,6 @@ description: Get retrieve a teamspace details via Plane API. Retrieve complete i
 keywords: plane api, get teamspace detail, retrieve team, team management, workspace teams, rest api, api integration
 ---
 
-
 # Retrieve a teamspace
 
 <div class="api-endpoint-badge">
@@ -76,15 +75,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

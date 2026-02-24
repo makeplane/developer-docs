@@ -4,7 +4,6 @@ description: Delete a time tracking worklog entry via Plane API. Removes the log
 keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
 ---
 
-
 # Delete a worklog
 
 <div class="api-endpoint-badge">
@@ -93,8 +92,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

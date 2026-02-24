@@ -4,7 +4,6 @@ description: Plane Issue-Activity API overview. Learn about endpoints, request/r
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
-
 # Overview
 
 Work item activity represents the history of all changes made to a work item, including property changes, comments, and other modifications.
@@ -95,23 +94,23 @@ Work item activity represents the history of all changes made to a work item, in
 
 ```json
 {
-    "id": "35612f5b-3eff-4130-b91c-c976ff887a20",
-    "created_at": "2023-11-19T11:56:55.452555Z",
-    "updated_at": "2023-11-19T11:56:55.452561Z",
-    "verb": "created",
-    "field": null,
-    "old_value": null,
-    "new_value": null,
-    "comment": "created the work item",
-    "attachments": [],
-    "old_identifier": null,
-    "new_identifier": null,
-    "epoch": 1700395015.0,
-    "project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
-    "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
-    "issue": "e1c25c66-5bb8-465e-a818-92a483423443",
-    "issue_comment": null,
-    "actor": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
+  "id": "35612f5b-3eff-4130-b91c-c976ff887a20",
+  "created_at": "2023-11-19T11:56:55.452555Z",
+  "updated_at": "2023-11-19T11:56:55.452561Z",
+  "verb": "created",
+  "field": null,
+  "old_value": null,
+  "new_value": null,
+  "comment": "created the work item",
+  "attachments": [],
+  "old_identifier": null,
+  "new_identifier": null,
+  "epoch": 1700395015.0,
+  "project": "4af68566-94a4-4eb3-94aa-50dc9427067b",
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4",
+  "issue": "e1c25c66-5bb8-465e-a818-92a483423443",
+  "issue_comment": null,
+  "actor": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
 }
 ```
 

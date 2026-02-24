@@ -12,17 +12,20 @@ Thank you for your interest in contributing to Plane's developer documentation. 
 ### Local Setup
 
 1. Fork and clone the repository:
+
    ```bash
    git clone https://github.com/makeplane/developer-docs.git
    cd developer-docs
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Start the development server:
+
    ```bash
    pnpm dev
    ```
@@ -33,20 +36,20 @@ Thank you for your interest in contributing to Plane's developer documentation. 
 
 ### Content Directories
 
-| Directory | Purpose |
-|-----------|---------|
-| `docs/api-reference/` | REST API endpoint documentation |
-| `docs/self-hosting/` | Deployment and configuration guides |
-| `docs/dev-tools/` | Developer tools, webhooks, and extensions |
-| `docs/plane-one/` | Plane One (licensed edition) documentation |
+| Directory             | Purpose                                    |
+| --------------------- | ------------------------------------------ |
+| `docs/api-reference/` | REST API endpoint documentation            |
+| `docs/self-hosting/`  | Deployment and configuration guides        |
+| `docs/dev-tools/`     | Developer tools, webhooks, and extensions  |
+| `docs/plane-one/`     | Plane One (licensed edition) documentation |
 
 ### Configuration Files
 
-| File | Purpose |
-|------|---------|
-| `docs/.vitepress/config.mts` | Navigation, sidebar, and site settings |
-| `docs/.vitepress/theme/style.css` | Global CSS styles |
-| `docs/.vitepress/theme/components/` | Custom Vue components |
+| File                                | Purpose                                |
+| ----------------------------------- | -------------------------------------- |
+| `docs/.vitepress/config.mts`        | Navigation, sidebar, and site settings |
+| `docs/.vitepress/theme/style.css`   | Global CSS styles                      |
+| `docs/.vitepress/theme/components/` | Custom Vue components                  |
 
 ## Writing Documentation
 
@@ -88,6 +91,7 @@ Place images in `docs/.vitepress/public/images/` and reference them with absolut
 ### Branch Naming
 
 Use descriptive branch names:
+
 - `docs/add-webhook-guide`
 - `fix/typo-in-api-reference`
 - `update/kubernetes-deployment`
@@ -95,6 +99,7 @@ Use descriptive branch names:
 ### Commit Messages
 
 Write clear, concise commit messages:
+
 - `Add webhook payload examples`
 - `Fix broken link in self-hosting guide`
 - `Update Docker Compose instructions for v1.0`
@@ -141,6 +146,7 @@ response = requests.get(
 ### API Documentation
 
 When documenting API endpoints:
+
 - Include the HTTP method and path
 - List all parameters with types and descriptions
 - Show request and response examples

@@ -4,7 +4,6 @@ description: Create a project via Plane API. HTTP POST request format, required 
 keywords: plane, plane api, rest api, api integration, projects, project management
 ---
 
-
 # Create a project
 
 <div class="api-endpoint-badge">
@@ -109,21 +108,18 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "name": "example-name",
-  "identifier": "example-identifier",
-  "description": "example-description"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "example-name",
+    identifier: "example-identifier",
+    description: "example-description",
+  }),
+});
 const data = await response.json();
 ```
 

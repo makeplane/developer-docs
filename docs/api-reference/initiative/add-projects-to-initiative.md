@@ -4,7 +4,6 @@ description: Create projects to initiative via Plane API. HTTP POST request form
 keywords: plane, plane api, rest api, api integration, projects, project management, initiatives, roadmap, planning
 ---
 
-
 # Add projects to initiative
 
 <div class="api-endpoint-badge">
@@ -104,11 +103,11 @@ const response = await fetch(
     method: "POST",
     headers: {
       "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-  "project_ids": "example-project_ids"
-})
+      project_ids: "example-project_ids",
+    }),
   }
 );
 const data = await response.json();

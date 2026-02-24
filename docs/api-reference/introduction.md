@@ -4,7 +4,6 @@ description: Complete REST API reference for Plane. Learn authentication, HTTP m
 keywords: plane api, rest api reference, plane api authentication, api integration, plane api key, plane endpoints, work items api, projects api
 ---
 
-
 # Plane API Documentation
 
 The Plane API is organized around REST. Our API has predictable resource-oriented URLs, accepts application/json request bodies, returns JSON responses, and uses standard HTTP response codes, authentication, and verbs.
@@ -68,6 +67,7 @@ The access token is scoped to the permissions (scopes) the user granted when aut
 ### Example of an Authenticated API Request
 
 **Using an API key:**
+
 ```
 GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/
 Headers:
@@ -75,6 +75,7 @@ Headers:
 ```
 
 **Using an OAuth token:**
+
 ```
 GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/
 Headers:
@@ -82,6 +83,7 @@ Headers:
 ```
 
 **Response:**
+
 ```json
 {
   [ ... ]
@@ -105,7 +107,7 @@ Headers:
 HTTP defines a set of request methods, also known as HTTP verbs, to indicate the desired action for a given resource.
 
 | Verb   | Description                                         | Example                         |
-|--------|-----------------------------------------------------|---------------------------------|
+| ------ | --------------------------------------------------- | ------------------------------- |
 | GET    | Requests a representation of the specified resource | Fetch all issues from a project |
 | POST   | Submits an entity to the specified resource         | Create a project                |
 | DELETE | Deletes the specified resource                      | Delete a module-issue           |
@@ -116,7 +118,7 @@ HTTP defines a set of request methods, also known as HTTP verbs, to indicate the
 ### Success Responses
 
 | Status Code    | Description                                                                                         |
-|----------------|-----------------------------------------------------------------------------------------------------|
+| -------------- | --------------------------------------------------------------------------------------------------- |
 | 200 OK         | The request succeeded, and a new resource was created, generally sent in GET or PATCH requests.     |
 | 201 Created    | The request is succeeded, and a new resource was created, generally sent in POST or PATCH requests. |
 | 204 No Content | The request is succeeded, and no body is sent, generally comes from the DELETE request.             |
@@ -124,7 +126,7 @@ HTTP defines a set of request methods, also known as HTTP verbs, to indicate the
 ### Error Responses
 
 | Status Code               | Description                                                                                                                                                                           |
-|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 400 Bad Request           | The server cannot or will not process the request due to something that is perceived to be a client error.                                                                            |
 | 401 Unauthorized          | Although the HTTP standard specifies "unauthorized", semantically, this response means "unauthenticated". That is, the client must authenticate itself to get the requested response. |
 | 404 Not Found             | The server cannot find the requested resource. This means the URL is not recognized.                                                                                                  |
@@ -159,26 +161,28 @@ The cursor is a string formatted as `value:offset:is_prev`, where:
 
 The paginated response includes the following fields:
 
-| Field               | Description                                                |
-|---------------------|------------------------------------------------------------|
-| `next_cursor`       | Cursor string for the next page.                           |
-| `prev_cursor`       | Cursor string for the previous page.                       |
+| Field               | Description                                                          |
+| ------------------- | -------------------------------------------------------------------- |
+| `next_cursor`       | Cursor string for the next page.                                     |
+| `prev_cursor`       | Cursor string for the previous page.                                 |
 | `next_page_results` | Boolean indicating if there are more results after the current page. |
 | `prev_page_results` | Boolean indicating if there are results before the current page.     |
-| `count`             | Total number of items on the current page.                 |
-| `total_pages`       | Estimated total number of pages.                           |
-| `total_results`     | Total number of items across all pages.                    |
-| `extra_stats`       | Additional statistics, if any.                             |
-| `results`           | Array of items for the current page.                       |
+| `count`             | Total number of items on the current page.                           |
+| `total_pages`       | Estimated total number of pages.                                     |
+| `total_results`     | Total number of items across all pages.                              |
+| `extra_stats`       | Additional statistics, if any.                                       |
+| `results`           | Array of items for the current page.                                 |
 
 ### Example: Fetching the First Page
 
 **Request:**
+
 ```
 GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/?per_page=20
 ```
 
 **Response:**
+
 ```json
 {
   "next_cursor": "20:1:0",
@@ -196,11 +200,13 @@ GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/?per_pa
 ### Example: Fetching the Next Page
 
 **Request:**
+
 ```
 GET /api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items?per_page=20&cursor=20:1:0
 ```
 
 **Response:**
+
 ```json
 {
   "next_cursor": "20:2:0",

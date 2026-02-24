@@ -4,7 +4,6 @@ description: Delete a teamspace via Plane API. Removes the team grouping and dis
 keywords: plane api, delete teamspace, remove team, team management, workspace teams, rest api, api integration
 ---
 
-
 # Delete a teamspace
 
 <div class="api-endpoint-badge">
@@ -76,15 +75,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

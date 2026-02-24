@@ -4,7 +4,6 @@ description: Delete a comment from a work item via Plane API. Permanently remove
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
 ---
 
-
 # Delete a work item comment
 
 <div class="api-endpoint-badge">
@@ -93,8 +92,8 @@ const response = await fetch(
   {
     method: "DELETE",
     headers: {
-      "X-API-Key": "your-api-key"
-    }
+      "X-API-Key": "your-api-key",
+    },
   }
 );
 const data = await response.json();

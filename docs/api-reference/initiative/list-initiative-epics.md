@@ -4,7 +4,6 @@ description: List all epics for an initiative via Plane API. HTTP GET request wi
 keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning, epics, features, stories
 ---
 
-
 # List all epics for an initiative
 
 <div class="api-endpoint-badge">
@@ -97,15 +96,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/epics/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key"
-    }
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/epics/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key",
+  },
+});
 const data = await response.json();
 ```
 

@@ -4,7 +4,6 @@ description: Plane Issue-Attachments API overview. Learn about endpoints, reques
 keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
-
 # Overview
 
 Allows you to manage file attachments associated with work items and Intake work items. You can upload new attachments and retrieve existing attachments for a specific work item.
@@ -24,129 +23,121 @@ Allows you to manage file attachments associated with work items and Intake work
 
 ### Attributes
 
-*   `id` _string_
+- `id` _string_
 
-    Unique identifier for the attachment
+  Unique identifier for the attachment
 
-*   `created_at` , `updated_at`, `deleted_at` _timestamp_
+- `created_at` , `updated_at`, `deleted_at` _timestamp_
 
-    Timestamp when the attachment was created, when it was last modified or deleted
+  Timestamp when the attachment was created, when it was last modified or deleted
 
-*   `attributes` _object_
+- `attributes` _object_
 
-    Contains file metadata:
+  Contains file metadata:
+  - `name` _string_
 
-    *   `name` _string_
+  Original filename of the attachment
+  - `size` _integer_
 
-    Original filename of the attachment
+  File size in bytes
+  - `type` _string_
 
-    *   `size` _integer_
+  MIME type of the file
 
-    File size in bytes
+- `asset` _string_
 
-    *   `type` _string_
+  Storage path/identifier for the attachment file
 
-    MIME type of the file
+- `entity_type` _string_
 
-*   `asset` _string_
+  Always `ISSUE_ATTACHMENT` for work item attachments
 
-    Storage path/identifier for the attachment file
+- `entity_identifier` _string_
 
-*   `entity_type` _string_
+  Entity identifier for the attachment
 
-    Always `ISSUE_ATTACHMENT` for work item attachments
+- `is_deleted` _boolean_
 
-*   `entity_identifier` _string_
+  Whether the attachment has been deleted
 
-    Entity identifier for the attachment
+- `is_archived` _boolean_
 
-*   `is_deleted` _boolean_
+  Whether the attachment has been archived
 
-    Whether the attachment has been deleted
+- `external_id` _string_ or _null_
 
-*   `is_archived` _boolean_
+  External identifier if the issue and its attachments are imported to Plane
 
-    Whether the attachment has been archived
+- `external_source` _string_ or _null_
 
-*   `external_id` _string_ or _null_
+  Name of the source if the issue and its attachments are imported to Plane
 
-    External identifier if the issue and its attachments are imported to Plane
+- `size` _integer_
 
-*   `external_source` _string_ or _null_
+  File size in bytes
 
-    Name of the source if the issue and its attachments are imported to Plane
+- `is_uploaded` _boolean_
 
-*   `size` _integer_
+  Whether the file has been successfully uploaded
 
-    File size in bytes
+- `storage_metadata` _object_
 
-*   `is_uploaded` _boolean_
+  Cloud storage metadata:
+  - `ETag` _string_
 
-    Whether the file has been successfully uploaded
+  Storage provider's entity tag
+  - `Metadata` _object_
 
-*   `storage_metadata` _object_
+  Additional storage metadata
+  - `ContentType` _object_
 
-    Cloud storage metadata:
+  MIME type of stored file
+  - `LastModified` _timestamp_
 
-    *   `ETag` _string_
+  Last modification time in storage
+  - `ContentLength` _integer_
 
-    Storage provider's entity tag
+  File size in bytes
 
-    *   `Metadata` _object_
+- `created_by` _string_
 
-    Additional storage metadata
+  ID of user who created the attachment
 
-    *   `ContentType` _object_
+- `updated_by` _string_
 
-    MIME type of stored file
+  ID of user who last modified the attachment
 
-    *   `LastModified` _timestamp_
+- `deleted_by` _string_
 
-    Last modification time in storage
+  ID of user who deleted the attachment
 
-    *   `ContentLength` _integer_
+- `workspace` _string_
 
-    File size in bytes
+  ID of workspace containing the attachment
 
-*   `created_by` _string_
+- `project` _string_
 
-    ID of user who created the attachment
+  ID of project containing the work item
 
-*   `updated_by` _string_
+- `issue` _string_
 
-    ID of user who last modified the attachment
+  ID of work item containing the attachment
 
-*   `deleted_by` _string_
+- `user` _string_
 
-    ID of user who deleted the attachment
+  ID of user associated with the attachment
 
-*   `workspace` _string_
+- `draft_issue` _string_
 
-    ID of workspace containing the attachment
+  ID of draft work item if applicable
 
-*   `project` _string_
+- `comment` _string_
 
-    ID of project containing the work item
+  ID of comment if attachment is associated with a comment
 
-*   `issue` _string_
+- `page` _string_
 
-    ID of work item containing the attachment
-
-*   `user` _string_
-
-    ID of user associated with the attachment
-
-*   `draft_issue` _string_
-
-    ID of draft work item if applicable
-
-*   `comment` _string_
-
-    ID of comment if attachment is associated with a comment
-
-*   `page` _string_
-
-    ID of page if attachment is associated with a page
+  ID of page if attachment is associated with a page
 
 </div>
 <div class="api-right">
@@ -155,36 +146,36 @@ Allows you to manage file attachments associated with work items and Intake work
 
 ```json
 {
-    "id": "8caf3ed5-4f57-9674-76c4fce146b2",
-    "created_at": "2024-10-30T09:32:32.815273Z",
-    "updated_at": "2024-10-30T09:32:35.533136Z",
-    "deleted_at": null,
-    "attributes": {
-        "name": "plane-logo.png",
-        "size": 135686,
-        "type": "image/png"
-    },
-    "asset": "9b8aab8a-9052-fc735350abe8/6893d862ecb740d4b7f9f6542cda539c-plane.png",
-    "entity_type": "ISSUE_ATTACHMENT",
-    "is_deleted": false,
-    "is_archived": false,
-    "external_id": null,
-    "external_source": null,
-    "size": 135686.0,
-    "is_uploaded": true,
-    "storage_metadata": {
-        "ETag": "\"72d0d4be99999fe60c2fbc08c8b\"",
-        "Metadata": {},
-        "ContentType": "image/png",
-        "LastModified": "2024-10-30T09:32:34+00:00",
-        "ContentLength": 135686
-    },
-    "created_by": "575de6bf-e120-43bb-9f6a-eae276210575",
-    "updated_by": "575de6bf-e120-43bb-9f6a-eae276210575",
-    "workspace": "9b8aab8a-9s6a-99ac-fc735350abe8",
-    "project": "1790bd-5262-42fb-ac55-568c19a5",
-    "issue": "7ba090-7702-4e26-a61e-aa6b866f7",
-    }
+  "id": "8caf3ed5-4f57-9674-76c4fce146b2",
+  "created_at": "2024-10-30T09:32:32.815273Z",
+  "updated_at": "2024-10-30T09:32:35.533136Z",
+  "deleted_at": null,
+  "attributes": {
+    "name": "plane-logo.png",
+    "size": 135686,
+    "type": "image/png"
+  },
+  "asset": "9b8aab8a-9052-fc735350abe8/6893d862ecb740d4b7f9f6542cda539c-plane.png",
+  "entity_type": "ISSUE_ATTACHMENT",
+  "is_deleted": false,
+  "is_archived": false,
+  "external_id": null,
+  "external_source": null,
+  "size": 135686.0,
+  "is_uploaded": true,
+  "storage_metadata": {
+    "ETag": "\"72d0d4be99999fe60c2fbc08c8b\"",
+    "Metadata": {},
+    "ContentType": "image/png",
+    "LastModified": "2024-10-30T09:32:34+00:00",
+    "ContentLength": 135686
+  },
+  "created_by": "575de6bf-e120-43bb-9f6a-eae276210575",
+  "updated_by": "575de6bf-e120-43bb-9f6a-eae276210575",
+  "workspace": "9b8aab8a-9s6a-99ac-fc735350abe8",
+  "project": "1790bd-5262-42fb-ac55-568c19a5",
+  "issue": "7ba090-7702-4e26-a61e-aa6b866f7"
+}
 ```
 
 </ResponsePanel>

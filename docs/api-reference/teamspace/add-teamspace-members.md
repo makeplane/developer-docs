@@ -4,7 +4,6 @@ description: Create members to teamspace via Plane API. HTTP POST request format
 keywords: plane api, add teamspace members, invite team members, team management, workspace teams, rest api, api integration
 ---
 
-
 # Add members to teamspace
 
 <div class="api-endpoint-badge">
@@ -98,19 +97,16 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-  "member_ids": "example-member_ids"
-})
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    member_ids: "example-member_ids",
+  }),
+});
 const data = await response.json();
 ```
 

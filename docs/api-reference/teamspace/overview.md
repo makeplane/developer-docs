@@ -4,7 +4,6 @@ description: Plane Teamspace API overview. Learn about endpoints, request/respon
 keywords: plane api, teamspace, team management, team collaboration, workspace teams, rest api, api integration
 ---
 
-
 # Overview
 
 Teamspaces allow you to organize teams, projects, and members within a workspace, providing a way to group related work and manage access at a team level.
@@ -77,13 +76,13 @@ Teamspaces allow you to organize teams, projects, and members within a workspace
 
 ```json
 {
-	"id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-	"created_at": "2023-11-19T11:56:55.176802Z",
-	"updated_at": "2023-11-19T11:56:55.176809Z",
-	"name": "Engineering Team",
-	"description_html": "<p>Engineering team workspace</p>",
-	"lead": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-	"workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "created_at": "2023-11-19T11:56:55.176802Z",
+  "updated_at": "2023-11-19T11:56:55.176809Z",
+  "name": "Engineering Team",
+  "description_html": "<p>Engineering team workspace</p>",
+  "lead": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "workspace": "cd4ab5a2-1a5f-4516-a6c6-8da1a9fa5be4"
 }
 ```
 
