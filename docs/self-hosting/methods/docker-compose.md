@@ -34,7 +34,7 @@ Ensure you're using the **latest version of Docker Compose**. Check your Docker 
 
 1.  `ssh` into your machine as the root user (or user with sudo access) per the norms of your hosting provider.
 2.  Run the command below:
-    ```
+    ```bash
     curl -fsSL https://prime.plane.so/install/ | sh -
     ```
 3.  Follow the instructions on the terminal. Hit `Enter` or `Return` to continue.
@@ -61,7 +61,7 @@ The Commercial edition comes with a free plan and the flexibility to upgrade to 
     ```
   - **Option 2**  
     Install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-- OS with bash scripting enabled (Ubuntu, Linux AMI, macos). Windows systems need to have [gitbash](https://git-scm.com/download/win).
+- OS with bash scripting enabled (Ubuntu, Linux AMI, macOS). Windows systems need to have [gitbash](https://git-scm.com/download/win).
 - User context used must have access to docker services. In most cases, use `sudo su` to switch as root user.
 - Use the terminal (or gitbash) window to run all the future steps.
 
