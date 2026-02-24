@@ -69,7 +69,7 @@ To configure Slack integration, you'll need to create a Slack App within your or
     "slash_commands": [
       {
         "command": "/plane",
-        "url": "https://[YOUR_DOMAIN]silo/api/slack/command/",
+        "url": "https://[YOUR_DOMAIN]/silo/api/slack/command/",
         "description": "Create issue in Plane",
         "should_escape": false
       }
@@ -78,8 +78,8 @@ To configure Slack integration, you'll need to create a Slack App within your or
   },
   "oauth_config": {
     "redirect_urls": [
-      "https://[YOUR_DOMAIN]silo/api/slack/team/auth/callback/",
-      "https://[YOUR_DOMAIN]silo/api/slack/user/auth/callback/"
+      "https://[YOUR_DOMAIN]/silo/api/slack/team/auth/callback/",
+      "https://[YOUR_DOMAIN]/silo/api/slack/user/auth/callback/"
     ],
     "scopes": {
       "user": ["chat:write", "identify", "im:read", "im:write", "links:write", "links:read"],
@@ -110,13 +110,13 @@ To configure Slack integration, you'll need to create a Slack App within your or
   },
   "settings": {
     "event_subscriptions": {
-      "request_url": "https://[YOUR_DOMAIN]silo/api/slack/events",
+      "request_url": "https://[YOUR_DOMAIN]/silo/api/slack/events",
       "bot_events": ["link_shared", "message.channels", "message.im"]
     },
     "interactivity": {
       "is_enabled": true,
-      "request_url": "https://[YOUR_DOMAIN]silo/api/slack/action/",
-      "message_menu_options_url": "https://[YOUR_DOMAIN]silo/api/slack/options/"
+      "request_url": "https://[YOUR_DOMAIN]/silo/api/slack/action/",
+      "message_menu_options_url": "https://[YOUR_DOMAIN]/silo/api/slack/options/"
     },
     "org_deploy_enabled": false,
     "socket_mode_enabled": false,
@@ -147,15 +147,15 @@ shortcuts:
     description: Links thread with an existing work item
 slash_commands:
     - command: /plane
-    url: https://[YOUR_DOMAIN]silo/api/slack/command/
+    url: https://[YOUR_DOMAIN]/silo/api/slack/command/
     description: Create issue in Plane
     should_escape: false
 unfurl_domains:
     - [YOUR_DOMAIN]
 oauth_config:
 redirect_urls:
-    - https://[YOUR_DOMAIN]silo/api/slack/team/auth/callback/
-    - https://[YOUR_DOMAIN]silo/api/slack/user/auth/callback/
+    - https://[YOUR_DOMAIN]/silo/api/slack/team/auth/callback/
+    - https://[YOUR_DOMAIN]/silo/api/slack/user/auth/callback/
 scopes:
     user:
         - chat:write
@@ -188,15 +188,15 @@ scopes:
         - commands
 settings:
 event_subscriptions:
-    request_url: https://[YOUR_DOMAIN]silo/api/slack/events
+    request_url: https://[YOUR_DOMAIN]/silo/api/slack/events
     bot_events:
         - link_shared
         - message.channels
          - message.im
     interactivity:
         is_enabled: true
-        request_url: https://[YOUR_DOMAIN]silo/api/slack/action/
-        message_menu_options_url: https://[YOUR_DOMAIN]silo/api/slack/options/
+        request_url: https://[YOUR_DOMAIN]/silo/api/slack/action/
+        message_menu_options_url: https://[YOUR_DOMAIN]/silo/api/slack/options/
         org_deploy_enabled: false
         socket_mode_enabled: false
         token_rotation_enabled: true

@@ -133,38 +133,38 @@ Consider these alternatives:
 
    ```yaml
    services:
-   # Database and infrastructure images
-   redis:
-     local_setup: true # Set to false if using external service
-     image: valkey/valkey:7.2.11-alpine
+     # Database and infrastructure images
+     redis:
+       local_setup: true # Set to false if using external service
+       image: valkey/valkey:7.2.11-alpine
 
-   postgres:
-     local_setup: true # Set to false if using external service
-     image: postgres:15.7-alpine
+     postgres:
+       local_setup: true # Set to false if using external service
+       image: postgres:15.7-alpine
 
-   rabbitmq:
-     local_setup: true # Set to false if using external service
-     image: rabbitmq:3.13.6-management-alpine
-     external_rabbitmq_url: "" # Required only if using remote RabbitMQ
+     rabbitmq:
+       local_setup: true # Set to false if using external service
+       image: rabbitmq:3.13.6-management-alpine
+       external_rabbitmq_url: "" # Required only if using remote RabbitMQ
 
-   minio:
-     local_setup: true # Set to false if using external service
-     image: minio/minio:latest
-     image_mc: minio/mc:latest
+     minio:
+       local_setup: true # Set to false if using external service
+       image: minio/minio:latest
+       image_mc: minio/mc:latest
    ```
 
    **Environment variables:**
 
    ```yaml
    env:
-   storageClass: ""
-   remote_redis_url: "" # Required only if using remote Redis
-   pgdb_remote_url: "" # Required only if using remote PostgreSQL
-   # Required if MinIO local_setup is false
-   aws_access_key: ""
-   aws_secret_access_key: ""
-   aws_region: ""
-   aws_s3_endpoint_url: ""
+     storageClass: ""
+     remote_redis_url: "" # Required only if using remote Redis
+     pgdb_remote_url: "" # Required only if using remote PostgreSQL
+     # Required if MinIO local_setup is false
+     aws_access_key: ""
+     aws_secret_access_key: ""
+     aws_region: ""
+     aws_s3_endpoint_url: ""
    ```
 
    c. **Configure integrations and importers**
@@ -173,32 +173,32 @@ Consider these alternatives:
 
    ```yaml
    services:
-   silo:
-     enabled: true
-     connectors:
-     slack:
-       enabled: false
-       client_id: ""
-       client_secret: ""
-     github:
-       enabled: false
-       client_id: ""
-       client_secret: ""
-       app_name: ""
-       app_id: ""
-       private_key: ""
-     gitlab:
-       enabled: false
-       client_id: ""
-       client_secret: ""
+     silo:
+       enabled: true
+       connectors:
+         slack:
+           enabled: false
+           client_id: ""
+           client_secret: ""
+         github:
+           enabled: false
+           client_id: ""
+           client_secret: ""
+           app_name: ""
+           app_id: ""
+           private_key: ""
+         gitlab:
+           enabled: false
+           client_id: ""
+           client_secret: ""
 
    env:
-   silo_envs:
-     batch_size: 100
-     mq_prefetch_count: 1
-     request_interval: 400
-     hmac_secret_key: ""
-     aes_secret_key: "dsOdt7YrvxsTIFJ37pOaEVvLxN8KGBCr"
+     silo_envs:
+       batch_size: 100
+       mq_prefetch_count: 1
+       request_interval: 400
+       hmac_secret_key: ""
+       aes_secret_key: "dsOdt7YrvxsTIFJ37pOaEVvLxN8KGBCr"
    ```
 
    d. **Configure intake email**
