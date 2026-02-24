@@ -11,9 +11,10 @@ This guide provides a comprehensive overview of all environment variables used i
 ## Where to find the .env file
 
 The environment file for Plane Commercial Edition is located at:
-`bash
-    /opt/plane/plane.env
-    `
+
+```bash
+/opt/plane/plane.env
+```
 
 This is where you'll make all configuration changes. Remember to restart the instance after making changes to ensure they take effect.
 
@@ -164,9 +165,10 @@ This guide provides a comprehensive overview of all environment variables availa
 ## Where to find the environment file
 
 The environment configuration file is located at:
-`bash
-    plane-selfhost/plane-app/plane.env
-    `
+
+```bash
+plane-selfhost/plane-app/plane.env
+```
 
 ## Environment Variables
 

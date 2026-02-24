@@ -72,37 +72,37 @@ After creating and configuring the GitLab application and configuring the instan
 3. From the dropdown menu that appears, select **Edit profile**.
 4. Look for and select the **Applications** option within this menu.
 5. On the Applications page, click **Add new application** to begin configuring your OAuth application.
-  
-  Fill in the application details with the following configuration:
 
-  - **Name**
-    Enter a descriptive name for your application (e.g., `Plane Local Dev` or `Plane Integration`).
+Fill in the application details with the following configuration:
 
-  - **Redirect URI**
-    The redirect URI depends on your Plane deployment:
+- **Name**
+  Enter a descriptive name for your application (e.g., `Plane Local Dev` or `Plane Integration`).
 
-    **For Plane Cloud:**
-    
-    `https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback`
+- **Redirect URI**
+  The redirect URI depends on your Plane deployment:
 
-    **For Plane Self-Hosted:**
-    
-    `https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback`
+  **For Plane Cloud:**
 
-  Replace `<your-domain>` with your actual Plane instance domain.
+  `https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback`
 
-  - **Confidential**
-    Keep the **Confidential** checkbox enabled. This ensures the application uses a client secret for secure authentication.
+  **For Plane Self-Hosted:**
 
-  - **Scopes**
-    Select the following scopes to grant Plane the necessary permissions:
+  `https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback`
 
-  - **api** - Grants complete read/write access to the API, including all groups and projects
-  - **read_api** - Grants read access to the API, including all groups and projects
-  - **read_user** - Grants read-only access to your profile information
-  - **read_repository** - Grants read-only access to repositories on private projects
-  - **profile** - Grants read-only access to the user's profile data using OpenID Connect
-  - **email** - Grants read-only access to the user's primary email address using OpenID Connect
+Replace `<your-domain>` with your actual Plane instance domain.
+
+- **Confidential**
+  Keep the **Confidential** checkbox enabled. This ensures the application uses a client secret for secure authentication.
+
+- **Scopes**
+  Select the following scopes to grant Plane the necessary permissions:
+
+- **api** - Grants complete read/write access to the API, including all groups and projects
+- **read_api** - Grants read access to the API, including all groups and projects
+- **read_user** - Grants read-only access to your profile information
+- **read_repository** - Grants read-only access to repositories on private projects
+- **profile** - Grants read-only access to the user's profile data using OpenID Connect
+- **email** - Grants read-only access to the user's primary email address using OpenID Connect
 
 6. Click **Save application** to create the OAuth application.
 
