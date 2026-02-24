@@ -4,47 +4,54 @@ description: Install Plane using Podman Quadlets. Guide for deploying Plane with
 keywords: plane podman, podman quadlets, systemd containers, docker alternative, rootless containers, plane podman deployment, self-hosting
 ---
 
-
 # Deploy Plane with Podman Quadlets <Badge type="info" text="Commercial Edition" />
+
 This guide shows you the steps to deploy a self-hosted instance of Plane using Podman Quadlets.
 
 ## Prerequisites
+
 Before we start, make sure you've got these covered:
 
 - A non-root user account with `systemd --user support` (most modern Linux setups have this)
 - Podman version **4.4 or higher**
 
 ## Set up Podman
+
 1. Add the Podman repository.
-    ```bash
-    echo 'deb http://download.opensuse.org/repositories/home:/alvistack/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
-    ```
+
+   ```bash
+   echo 'deb http://download.opensuse.org/repositories/home:/alvistack/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
+   ```
 
 2. Add the GPG key.
-    ```bash
-    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
-    ```
+
+   ```bash
+   curl -fsSL https://download.opensuse.org/repositories/home:alvistack/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+   ```
 
 3. Refresh your package lists.
-    ```bash
-    sudo apt update
-    ```
+
+   ```bash
+   sudo apt update
+   ```
 
 4. Install Podman and its dependencies.
-    ```bash
-    sudo apt install -y podman uidmap netavark passt
-    ```
 
-    The `uidmap` package handles user namespace mapping, `netavark` takes care of networking, and `passt` helps with network connectivity. 
+   ```bash
+   sudo apt install -y podman uidmap netavark passt
+   ```
 
-5. Download and extract Podman Quadlets.    
-    ```bash
-    mkdir podman-quadlets
-    curl -fsSL https://prime.plane.so/releases/v2.3.1/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
-    tar -xvzf podman-quadlets.tar.gz -C podman-quadlets
-    ```
+   The `uidmap` package handles user namespace mapping, `netavark` takes care of networking, and `passt` helps with network connectivity.
 
-    The directory contains an `install.sh` script that will handle the installation and configuration.
+5. Download and extract Podman Quadlets.
+
+   ```bash
+   mkdir podman-quadlets
+   curl -fsSL https://prime.plane.so/releases/v2.3.1/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
+   tar -xvzf podman-quadlets.tar.gz -C podman-quadlets
+   ```
+
+   The directory contains an `install.sh` script that will handle the installation and configuration.
 
 ## Install Plane
 
@@ -55,12 +62,15 @@ The installation script sets up Plane and configures all required services. You 
 ```bash
 ./install.sh --domain your-domain.com --base-dir /your/custom/path
 ```
+
 This installs Plane in your specified directory, which is useful if you want to maintain control over the installation location.
 
 ### With sudo access
+
 ```bash
 ./install.sh --domain your-domain.com
 ```
+
 This installs Plane in `/opt/plane`, which is a standard system location.
 
 ::: info
@@ -91,62 +101,72 @@ Note that you should run these commands without `sudo`.
 :::
 
 1. Reload systemd to recognize new configurations.
-    ```bash
-    systemctl --user daemon-reload
-    ```
+
+   ```bash
+   systemctl --user daemon-reload
+   ```
 
 2. Start the network service.
-    ```bash
-    systemctl --user start plane-nw-network.service
-    ```
+
+   ```bash
+   systemctl --user start plane-nw-network.service
+   ```
 
 3. Start core dependencies.
-    ```bash
-    systemctl --user start plane-{db,redis,mq,minio}.service
-    ```
+
+   ```bash
+   systemctl --user start plane-{db,redis,mq,minio}.service
+   ```
 
 4. Start backend services.
-    ```bash
-    systemctl --user start {api,worker,beat-worker,migrator,monitor}.service
-    ```
+
+   ```bash
+   systemctl --user start {api,worker,beat-worker,migrator,monitor}.service
+   ```
 
 5. Start frontend services.
-    ```bash
-    systemctl --user start {web,space,admin,live,proxy}.service
-    ```
 
-    The startup sequence is important: network first, then dependencies, followed by backend services, and finally frontend services.
+   ```bash
+   systemctl --user start {web,space,admin,live,proxy}.service
+   ```
+
+   The startup sequence is important: network first, then dependencies, followed by backend services, and finally frontend services.
 
 6. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
 
 ### Verify service status
+
 Check that all services are running correctly:
 
 1. Check network status.
-    ```bash
-    systemctl --user status plane-nw-network.service
-    ```
+
+   ```bash
+   systemctl --user status plane-nw-network.service
+   ```
 
 2. Check core dependencies.
-    ```bash
-    systemctl --user status plane-{db,redis,mq,minio}.service
-    ```
+
+   ```bash
+   systemctl --user status plane-{db,redis,mq,minio}.service
+   ```
 
 3. Check backend services.
-    ```bash
-    systemctl --user status {api,worker,beat-worker,migrator,monitor}.service
-    ```
+
+   ```bash
+   systemctl --user status {api,worker,beat-worker,migrator,monitor}.service
+   ```
 
 4. Check frontend services.
-    ```bash
-    systemctl --user status {web,space,admin,live,proxy}.service
-    ```
+   ```bash
+   systemctl --user status {web,space,admin,live,proxy}.service
+   ```
 
 Your Plane installation should now be running successfully with Podman Quadlets. This setup provides automatic service restart capabilities and standard systemd management commands for maintaining your installation.
 
 ## Troubleshoot
 
 To debug service issues, examine the logs using:
+
 ```bash
 journalctl --user -u <service-name> --no-pager
 ```

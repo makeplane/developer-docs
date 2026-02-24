@@ -4,15 +4,14 @@ description: Enable full-text search in Plane with OpenSearch. Configure advance
 keywords: plane opensearch, full-text search, advanced search, search indexing, elasticsearch, self-hosting, plane search
 ---
 
-
 # Configure OpenSearch for advanced search <Badge type="info" text="Pro" />
-
 
 Plane uses OpenSearch to provide advanced search capabilities across your workspace. This guide walks you through setting up OpenSearch integration on your self-hosted instance.
 
 ## Before you begin
 
 You'll need:
+
 - An OpenSearch 2.x instance (self-hosted or managed service like AWS OpenSearch).
 
 ## What you get with advanced search
@@ -28,54 +27,59 @@ Users can access advanced search using the global search shortcut (Cmd/Ctrl + K)
 
 ## Configure OpenSearch
 
-Set environment variables in your Plane configuration. See [Environment variables reference](/self-hosting/govern/environment-variables#opensearch) for details. 
+Set environment variables in your Plane configuration. See [Environment variables reference](/self-hosting/govern/environment-variables#opensearch) for details.
 
 ### For Docker deployments
 
 1. **Add configuration to your environment file**
 
    Edit `/opt/plane/plane.env`.
-    ```bash
-    # OpenSearch Settings
-    OPENSEARCH_ENABLED=1
-    OPENSEARCH_URL=https://your-opensearch-instance:9200/
-    OPENSEARCH_USERNAME=admin
-    OPENSEARCH_PASSWORD=your-secure-password
-    OPENSEARCH_INDEX_PREFIX=plane
-    ```
+
+   ```bash
+   # OpenSearch Settings
+   OPENSEARCH_ENABLED=1
+   OPENSEARCH_URL=https://your-opensearch-instance:9200/
+   OPENSEARCH_USERNAME=admin
+   OPENSEARCH_PASSWORD=your-secure-password
+   OPENSEARCH_INDEX_PREFIX=plane
+   ```
 
 2. **Restart Plane services**
-    ```bash
-    prime-cli restart
-    ```
+
+   ```bash
+   prime-cli restart
+   ```
 
    or if managing containers directly:
-    ```bash
-    docker compose down
-    docker compose up -d
-    ```
+
+   ```bash
+   docker compose down
+   docker compose up -d
+   ```
 
 3. **Create search indices**
 
    Access the API container and create the necessary indices:
-    ```bash
-    # Access the API container
-    docker exec -it plane-api-1 sh
 
-    # Create all search indices (run once)
-    python manage.py manage_search_index index rebuild --force
-    ```
+   ```bash
+   # Access the API container
+   docker exec -it plane-api-1 sh
+
+   # Create all search indices (run once)
+   python manage.py manage_search_index index rebuild --force
+   ```
 
 4. **Index your existing data**
 
    Index all existing content into OpenSearch:
-    ```bash
-    # For small datasets
-    python manage.py manage_search_index document index --force
 
-    # For large datasets (recommended)
-    python manage.py manage_search_index --background document index --force
-    ```
+   ```bash
+   # For small datasets
+   python manage.py manage_search_index document index --force
+
+   # For large datasets (recommended)
+   python manage.py manage_search_index --background document index --force
+   ```
 
    The background option processes indexing through Celery workers, which is better for instances with large amounts of data.
 
@@ -86,59 +90,65 @@ The Plane Helm chart provides auto-setup for OpenSearch. If you're using your ow
 1. **Configure Helm values**
 
    Get the current values file:
-    ```bash
-    helm show values plane/plane-enterprise > values.yaml
-    ```
+
+   ```bash
+   helm show values plane/plane-enterprise > values.yaml
+   ```
 
    Edit `values.yaml` to add OpenSearch configuration:
-    ```yaml
-    env:
-        # OpenSearch configuration
-        opensearch_remote_url: 'https://your-opensearch-instance:9200/'
-        opensearch_remote_username: 'admin'
-        opensearch_remote_password: 'your-secure-password'
-        opensearch_index_prefix: 'plane'
-    ```
+
+   ```yaml
+   env:
+     # OpenSearch configuration
+     opensearch_remote_url: "https://your-opensearch-instance:9200/"
+     opensearch_remote_username: "admin"
+     opensearch_remote_password: "your-secure-password"
+     opensearch_index_prefix: "plane"
+   ```
 
    Refer to the [Plane Helm chart documentation](https://artifacthub.io/packages/helm/makeplane/plane-enterprise?modal=values&path=env.opensearch_remote_url) for complete values structure.
 
 2. **Upgrade your deployment**
-    ```bash
-    helm upgrade --install plane-app plane/plane-enterprise \
-        --create-namespace \
-        --namespace plane \
-        -f values.yaml \
-        --timeout 10m \
-        --wait \
-        --wait-for-jobs
-    ```
+
+   ```bash
+   helm upgrade --install plane-app plane/plane-enterprise \
+       --create-namespace \
+       --namespace plane \
+       -f values.yaml \
+       --timeout 10m \
+       --wait \
+       --wait-for-jobs
+   ```
 
 3. **Create search indices**
 
    Run these commands in the API pod.
-    ```bash
-    # Get the API pod name
-    API_POD=$(kubectl get pods -n plane --no-headers | grep api | head -1 | awk '{print $1}')
 
-    # Create all search indices (run once)
-    kubectl exec -n plane $API_POD -- python manage.py manage_search_index index rebuild --force
-    ```
+   ```bash
+   # Get the API pod name
+   API_POD=$(kubectl get pods -n plane --no-headers | grep api | head -1 | awk '{print $1}')
+
+   # Create all search indices (run once)
+   kubectl exec -n plane $API_POD -- python manage.py manage_search_index index rebuild --force
+   ```
 
 4. **Index your existing data**
-    Run these commands in the API pod.
-    ```bash
-    # For small datasets
-    kubectl exec -n plane $API_POD -- python manage.py manage_search_index document index --force
+   Run these commands in the API pod.
 
-    # For large datasets (recommended)
-    kubectl exec -n plane $API_POD -- python manage.py manage_search_index --background document index --force
-    ```
+   ```bash
+   # For small datasets
+   kubectl exec -n plane $API_POD -- python manage.py manage_search_index document index --force
+
+   # For large datasets (recommended)
+   kubectl exec -n plane $API_POD -- python manage.py manage_search_index --background document index --force
+   ```
 
 ## Verify the setup
 
 ### Check OpenSearch connection
 
 Test that Plane can connect to your OpenSearch instance:
+
 ```bash
 # Access your API container or pod
 docker exec -it plane-api-1 sh  # For Docker
@@ -150,6 +160,7 @@ python manage.py shell
 ```
 
 Then run:
+
 ```python
 from django.conf import settings
 from opensearchpy import OpenSearch
@@ -171,6 +182,7 @@ print(client.cat.indices(format='json'))
 ### Verify indices were created
 
 List all created indices:
+
 ```bash
 python manage.py manage_search_index list
 ```
@@ -189,6 +201,7 @@ You should see indices for work items, projects, cycles, modules, pages, and oth
 ### Resync data
 
 If search results become stale or inconsistent, resync your data:
+
 ```bash
 python manage.py manage_search_index document index --force
 ```
@@ -198,6 +211,7 @@ This reindexes all content without recreating the index structure.
 ### Complete rebuild
 
 For a complete reset (recreates indices and reindexes all data):
+
 ```bash
 # Recreate all indices
 python manage.py manage_search_index index rebuild --force
@@ -213,11 +227,13 @@ Use this if index structure needs updating or if you're experiencing persistent 
 Check API logs OpenSearch-related errors:
 
 **Docker:**
+
 ```bash
 docker compose logs api | grep -i opensearch
 ```
 
 **Kubernetes:**
+
 ```bash
 kubectl logs -n plane -l app.kubernetes.io/component=api | grep -i opensearch
 ```
@@ -247,6 +263,7 @@ Instead, Plane batches updates through Redis. When a signal fires, the update go
 The batching pattern also provides resilience. If OpenSearch is temporarily unavailable, updates accumulate in Redis and process once connectivity returns. This requires Redis 6.2+ which supports the LPOP count operation needed for efficient batch retrieval.
 
 ### The complete flow
+
 ![OpenSeach flow](/images/open-search/opensearch-flow.webp)
 
 When you search, queries bypass this synchronization process entirely. The Plane API sends your search query directly to OpenSearch, which returns results almost instantly. Your database isn't involved in search queries at all — this is the key to search performance.
@@ -259,16 +276,16 @@ The answer lies in how different entities need different search behaviors. Work 
 
 Each index is optimized for its content type:
 
-| Index | Content | Search Features |
-|-------|---------|-----------------|
-| `{prefix}_issues` | Work items | Full-text search, field weighting (title > description), state filtering |
-| `{prefix}_issue_comments` | Comments | Comment search within work items, parent-child relationships |
-| `{prefix}_projects` | Projects | Project discovery, metadata filtering (dates, counts, status) |
-| `{prefix}_cycles` | Cycles | Cycle search, time-based filtering and aggregations |
-| `{prefix}_modules` | Modules | Module/sprint search, planning aggregations |
-| `{prefix}_pages` | Pages | Page content search, rich text analysis for long-form content |
-| `{prefix}_workspaces` | Workspaces | Workspace search and discovery |
-| `{prefix}_issue_views` | Saved views | Saved view search and filtering |
-| `{prefix}_teamspaces` | Teamspaces | Teamspace discovery |
+| Index                     | Content     | Search Features                                                          |
+| ------------------------- | ----------- | ------------------------------------------------------------------------ |
+| `{prefix}_issues`         | Work items  | Full-text search, field weighting (title > description), state filtering |
+| `{prefix}_issue_comments` | Comments    | Comment search within work items, parent-child relationships             |
+| `{prefix}_projects`       | Projects    | Project discovery, metadata filtering (dates, counts, status)            |
+| `{prefix}_cycles`         | Cycles      | Cycle search, time-based filtering and aggregations                      |
+| `{prefix}_modules`        | Modules     | Module/sprint search, planning aggregations                              |
+| `{prefix}_pages`          | Pages       | Page content search, rich text analysis for long-form content            |
+| `{prefix}_workspaces`     | Workspaces  | Workspace search and discovery                                           |
+| `{prefix}_issue_views`    | Saved views | Saved view search and filtering                                          |
+| `{prefix}_teamspaces`     | Teamspaces  | Teamspace discovery                                                      |
 
 The `{prefix}` is whatever you configured in `OPENSEARCH_INDEX_PREFIX`, or empty if you didn't set a prefix. This prefix exists because you might run multiple Plane instances pointing to the same OpenSearch cluster. The prefix prevents different instances from accidentally sharing or conflicting with each other's indices.

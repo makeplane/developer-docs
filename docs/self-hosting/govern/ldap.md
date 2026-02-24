@@ -4,7 +4,6 @@ description: Setup LDAP authentication for Plane. Configure Lightweight Director
 keywords: plane ldap, ldap authentication, active directory, directory service, ldap configuration, enterprise authentication, self-hosting
 ---
 
-
 # LDAP authentication <Badge type="warning" text="Enterprise" />
 
 LDAP (Lightweight Directory Access Protocol) authentication lets your team sign in to Plane using their existing corporate credentials. Instead of creating separate Plane passwords, users authenticate through your organization's directory service.
@@ -22,131 +21,139 @@ You'll need:
 ## Configure LDAP authentication
 
 1. Sign in to your Plane instance in [God Mode](/self-hosting/govern/instance-admin).
-    ![Turn on LDAP](/images/ldap/enable-ldap.webp)
+   ![Turn on LDAP](/images/ldap/enable-ldap.webp)
 2. Select **Authentication** from the left pane.
-3. Click **Configure** next to **LDAP** at the bottom of the page. 
+3. Click **Configure** next to **LDAP** at the bottom of the page.
 4. Enter your LDAP server details.
-    ![LDAP configuration](/images/ldap/ldap-configuration.webp)
-    - **Server URI (required)**
-        This is the address of your LDAP server. Include the protocol and port number.
+   ![LDAP configuration](/images/ldap/ldap-configuration.webp)
+   - **Server URI (required)**
+     This is the address of your LDAP server. Include the protocol and port number.
 
-        **Format:**
-        - For unencrypted connections: `ldap://hostname:389`
-        - For encrypted connections (recommended): `ldaps://hostname:636`
+     **Format:**
+     - For unencrypted connections: `ldap://hostname:389`
+     - For encrypted connections (recommended): `ldaps://hostname:636`
 
-        **Examples:**
-        ```
-        ldap://ldap.company.com:389
-        ldaps://ad.company.com:636
-        ldap://192.168.1.100:389
-        ```
+     **Examples:**
 
-    - **Bind DN (required)**
+     ```
+     ldap://ldap.company.com:389
+     ldaps://ad.company.com:636
+     ldap://192.168.1.100:389
+     ```
 
-        This is the username of the service account that Plane will use to search your directory. Think of it as Plane's "read-only" account on your LDAP server.
+   - **Bind DN (required)**
 
-        The format varies depending on your directory service:
+     This is the username of the service account that Plane will use to search your directory. Think of it as Plane's "read-only" account on your LDAP server.
 
-        **Active Directory examples:**
-        ```
-        cn=PlaneService,ou=Service Accounts,dc=company,dc=com
-        plane-svc@company.com
-        ```
+     The format varies depending on your directory service:
 
-        **OpenLDAP examples:**
-        ```
-        cn=admin,dc=example,dc=com
-        cn=readonly,ou=services,dc=example,dc=com
-        ```
+     **Active Directory examples:**
 
-    - **Bind Password (required)**
+     ```
+     cn=PlaneService,ou=Service Accounts,dc=company,dc=com
+     plane-svc@company.com
+     ```
 
-        Enter the password for your service account (Bind DN). Plane encrypts and stores this securely in its database.
+     **OpenLDAP examples:**
 
-    - **User Search Base (required)**
+     ```
+     cn=admin,dc=example,dc=com
+     cn=readonly,ou=services,dc=example,dc=com
+     ```
 
-        This defines where in your directory Plane should look for users. Think of it as the "starting folder" for user searches.
+   - **Bind Password (required)**
 
-        Use the most specific path possible for better performance.
+     Enter the password for your service account (Bind DN). Plane encrypts and stores this securely in its database.
 
-        **Examples:**
-        ```
-        ou=users,dc=example,dc=com
-        ou=employees,ou=people,dc=company,dc=com
-        cn=users,dc=company,dc=local
-        ```
+   - **User Search Base (required)**
 
-    - **User Search Filter (optional)**
+     This defines where in your directory Plane should look for users. Think of it as the "starting folder" for user searches.
 
-        This tells Plane how to find users when they try to sign in. Use `{username}` as a placeholder - Plane replaces it with whatever the user types in the login field.
+     Use the most specific path possible for better performance.
 
-        **Common filters by directory type:**
+     **Examples:**
 
-        | Directory Type | Filter | What it does |
-        |----------------|--------|--------------|
-        | OpenLDAP | `(uid={username})` | Searches by user ID |
-        | Active Directory | `(sAMAccountName={username})` | Searches by Windows login name |
-        | Active Directory | `(userPrincipalName={username})` | Searches by email-style username |
-        | Any | `(mail={username})` | Searches by email address |
+     ```
+     ou=users,dc=example,dc=com
+     ou=employees,ou=people,dc=company,dc=com
+     cn=users,dc=company,dc=local
+     ```
 
-        **Default:** If you don't specify a filter, Plane uses `(uid={username})`.
+   - **User Search Filter (optional)**
 
-        **Combined filter example:**\
-        If you want users to sign in with either their username OR email:
-        ```
-        (|(uid={username})(mail={username}))
-        ```
+     This tells Plane how to find users when they try to sign in. Use `{username}` as a placeholder - Plane replaces it with whatever the user types in the login field.
 
-    - **User Attributes (optional)**
+     **Common filters by directory type:**
 
-        List the LDAP attributes Plane should retrieve to create user profiles. Plane uses these to populate the user's display name and email in Plane.
+     | Directory Type   | Filter                           | What it does                     |
+     | ---------------- | -------------------------------- | -------------------------------- |
+     | OpenLDAP         | `(uid={username})`               | Searches by user ID              |
+     | Active Directory | `(sAMAccountName={username})`    | Searches by Windows login name   |
+     | Active Directory | `(userPrincipalName={username})` | Searches by email-style username |
+     | Any              | `(mail={username})`              | Searches by email address        |
 
-        **How Plane maps attributes:**
+     **Default:** If you don't specify a filter, Plane uses `(uid={username})`.
 
-        | Plane needs | LDAP provides (in order of preference) |
-        |-------------|----------------------------------------|
-        | Email address | `mail`, `userPrincipalName` |
-        | First name | `givenName`, or first part of `cn` if `givenName` is missing |
-        | Last name | `sn`, or last part of `cn` if `sn` is missing |
+     **Combined filter example:**\
+      If you want users to sign in with either their username OR email:
 
-        **Recommended setting:**
-        ```
-        mail,cn,givenName,sn,userPrincipalName,displayName
-        ```
+     ```
+     (|(uid={username})(mail={username}))
+     ```
 
-        **Default:** If you don't specify attributes, Plane uses `mail,cn,givenName,sn`.
+   - **User Attributes (optional)**
 
-    - **Provider Name (optional)**
+     List the LDAP attributes Plane should retrieve to create user profiles. Plane uses these to populate the user's display name and email in Plane.
 
-        This is the label that appears on Plane's login button. Choose something your team will recognize.
+     **How Plane maps attributes:**
 
-        **Examples:**
-        - `Corporate Directory`
-        - `Company SSO`
-        - `Active Directory`
+     | Plane needs   | LDAP provides (in order of preference)                       |
+     | ------------- | ------------------------------------------------------------ |
+     | Email address | `mail`, `userPrincipalName`                                  |
+     | First name    | `givenName`, or first part of `cn` if `givenName` is missing |
+     | Last name     | `sn`, or last part of `cn` if `sn` is missing                |
 
-        **Default:** If you don't specify a name, Plane shows `LDAP`.
+     **Recommended setting:**
 
-        The login button will display as: **"Sign in with [Provider Name]"**
+     ```
+     mail,cn,givenName,sn,userPrincipalName,displayName
+     ```
+
+     **Default:** If you don't specify attributes, Plane uses `mail,cn,givenName,sn`.
+
+   - **Provider Name (optional)**
+
+     This is the label that appears on Plane's login button. Choose something your team will recognize.
+
+     **Examples:**
+     - `Corporate Directory`
+     - `Company SSO`
+     - `Active Directory`
+
+     **Default:** If you don't specify a name, Plane shows `LDAP`.
+
+     The login button will display as: **"Sign in with [Provider Name]"**
 
 5. Click **Save changes** to apply your LDAP settings. Plane will validate the connection to your LDAP server.
 
 6. Users will see **Sign in with LDAP** on Plane's login page and can use their directory credentials to sign in.
-    ![Sign in using LDAP](/images/ldap/sign-in-ldap.webp)
+   ![Sign in using LDAP](/images/ldap/sign-in-ldap.webp)
 
 ## How LDAP authentication works
 
 LDAP authentication in Plane works through a two-phase process. First, Plane locates the user in your directory, then it verifies their credentials. This separation is fundamental to how LDAP works and explains why you need both a service account (Bind DN) and the user's own credentials.
 
 ### The service account pattern
+
 Unlike simpler authentication systems where you might directly check a username and password against a database, LDAP uses what's called a "bind" operation. Plane needs to authenticate twice: once as itself (using the Bind DN) to search your directory, and once as the user to verify their password.
 
 This is why you configure a Bind DN and password - it's Plane's identity on your LDAP server. Think of it as Plane introducing itself before asking about your users. The Bind DN only needs read access because Plane is just looking up information, never modifying your directory.
 
 ### The authentication flow
+
 When a user tries to sign in, here's what happens behind the scenes:
 
-**Connection and service authentication**   
+**Connection and service authentication**  
 Plane connects to your LDAP server using the Server URI, then authenticates using the Bind DN credentials. If this fails, no users can sign in; the service account must work first.
 
 **User search**  
@@ -162,6 +169,7 @@ Once authentication succeeds, Plane retrieves the User Attributes you configured
 Finally, Plane creates a session for the user and redirects them into the workspace. From this point on, the user's session works identically to any other Plane session. The LDAP interaction is complete.
 
 ### Why search filters matter
+
 The User Search Filter determines sign-in flexibility. A simple filter like `(uid={username})` requires exact usernames, but you can make it more flexible:
 
 `(mail={username})` lets users sign in with email
@@ -170,6 +178,7 @@ The User Search Filter determines sign-in flexibility. A simple filter like `(ui
 Filters can also restrict access: `(&(uid={username})(memberOf=cn=plane-users,ou=groups,dc=company,dc=com))` only permits specific group members.
 
 ### The role of user attributes
+
 User Attributes tell Plane which LDAP fields to retrieve after authentication. This is separate from the search filter. The filter finds the user, the attributes populate their profile.
 
 Plane specifically looks for email addresses (required) and names (optional). If your LDAP server uses different attribute names, you need to include them.

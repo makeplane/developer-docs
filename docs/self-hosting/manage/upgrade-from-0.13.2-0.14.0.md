@@ -4,52 +4,58 @@ description: Upgrade self-hosted Plane to the latest version. Step-by-step guide
 keywords: plane v0.14 upgrade, mandatory checkpoint, plane migration 0.13, breaking changes, version upgrade, self-hosting update
 ---
 
-
 # Mandatory checkpoint at v0.14.0 <Badge type="info" text="Community Edition" />
 
 If you’re upgrading from `v0.13.2` or below, there are some additional migration steps due to significant changes in the self-hosting setup. Follow these instructions to migrate your data to the new volume structure in `v0.14.0`.
 
 1. First, stop the running `v0.13-2` (or older) instance of Plane. If it's still running, you might hit a "ports not available" error, which will prevent the `v0.14-0` containers from starting up correctly.
-    ```bash
-    docker compose down
-    ```
+
+   ```bash
+   docker compose down
+   ```
 
 2. Create a new folder for `v0.14-0` to ensure a clean installation.
 
-    ```bash
-    mkdir plane-selfhost
-    cd plane-selfhost
-    ```
+   ```bash
+   mkdir plane-selfhost
+   cd plane-selfhost
+   ```
 
 3. Set up the environment variable for the `RELEASE` variable, then download and prepare the installation script:
-    ```bash
-    export RELEASE=v0.14-dev
-    curl -fsSL https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/install.sh | sed -e 's@BRANCH=${BRANCH:-master}@BRANCH='"$RELEASE"'@' -e 's@APP_RELEASE="stable"@APP_RELEASE='"$RELEASE"'@' > setup.sh
-    chmod +x setup.sh
-    ```
+
+   ```bash
+   export RELEASE=v0.14-dev
+   curl -fsSL https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/install.sh | sed -e 's@BRANCH=${BRANCH:-master}@BRANCH='"$RELEASE"'@' -e 's@APP_RELEASE="stable"@APP_RELEASE='"$RELEASE"'@' > setup.sh
+   chmod +x setup.sh
+   ```
 
 4. Execute the script to install Plane:
-    ```bash
-    ./setup.sh install
-    ```
+
+   ```bash
+   ./setup.sh install
+   ```
 
 5. Start up your new v0.14-0 Plane instance:
-    ```bash
-    ./setup.sh start
-    ```
+
+   ```bash
+   ./setup.sh start
+   ```
 
 6. Now stop the instance to initialize the new Docker volumes:
-    ```bash
-    ./setup.sh stop
-    ```
+
+   ```bash
+   ./setup.sh stop
+   ```
 
 7. Download the migration script:
+
    ```bash
    curl -fsSL -o migrate.sh https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/migration-0.13-0.14.sh
    chmod +x migrate.sh
    ```
 
-8. Run the migration script: 
+8. Run the migration script:
+
    ```bash
    ./migrate.sh
    ```
@@ -93,7 +99,8 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
    In this example, `plane-013-dev` is the prefix for `v0.13.2`, and `plane-app` is the prefix for `v0.14.0`.
 
 10. Return to the original terminal, enter the source volume prefix `plane-013-dev` and destination volume prefix `plane-app`, and press ENTER:
-     ```bash
+
+    ```bash
     Provide the Source Volume Prefix : plane-013-dev
     Provide the Destination Volume Prefix : plane-app
     ```
@@ -101,6 +108,7 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
     If there are any issues, an error will appear. For a successful migration, there will be no error, and the process will exit quietly.
 
 11. Restart the upgraded v0.14.0 instance with:
+
     ```bash
     ./setup.sh restart
     ```
@@ -109,6 +117,6 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
 
 13. Once logged in, just click **Save Changes** to finalize your setup.
 
-14. You’re all set! Log in to your updated `v0.14-0` instance to check if all of your data has migrated successfully. 
+14. You’re all set! Log in to your updated `v0.14-0` instance to check if all of your data has migrated successfully.
 
 15. Now, [update to the latest version](/self-hosting/manage/upgrade-plane#update-version).

@@ -106,11 +106,11 @@ Write clear, concise commit messages:
 
 ### Pull Requests
 
-1. Create a branch from `preview`
+1. Create a branch from `master`
 2. Make your changes
 3. Test locally with `pnpm dev`
 4. Build and verify with `pnpm build && pnpm preview`
-5. Submit a pull request to the `preview` branch
+5. Submit a pull request to the `master` branch
 
 ### PR Guidelines
 

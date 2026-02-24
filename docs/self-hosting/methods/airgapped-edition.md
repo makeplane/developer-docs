@@ -4,8 +4,7 @@ description: Deploy Plane in airgapped environment without internet access. Comp
 keywords: plane airgapped, offline deployment, air-gapped docker, plane offline install, disconnected environment, self-hosting
 ---
 
-
-# Deploy Plane with Airgapped Docker <Badge type="tip" text="Business" /> 
+# Deploy Plane with Airgapped Docker <Badge type="tip" text="Business" />
 
 :::info
 Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
@@ -26,119 +25,124 @@ Before starting, ensure you have:
 While Docker can run stateful services with persistent volumes, we strongly recommend using external managed services for better reliability in backup/restore operations and disaster recovery.
 
 Consider these alternatives:
+
 - **MinIO**: Replace with AWS S3, Google Cloud Storage, or any S3-compatible service
 - **Redis**: Replace with Valkey or a managed Redis service
 - **PostgreSQL**: Use a managed PostgreSQL service
 - **RabbitMQ**: Use a managed message queue service
 - **OpenSearch**: Use a managed OpenSearch or Elasticsearch service
-:::
+  :::
 
 ## Install Plane
 
-1. **Prepare Docker images for airgapped environment**  
+1. **Prepare Docker images for airgapped environment**
 
-    Refer to [this document](/self-hosting/methods/clone-docker-images) to download the Docker images from the Plane artifact registry to your internal registry.
+   Refer to [this document](/self-hosting/methods/clone-docker-images) to download the Docker images from the Plane artifact registry to your internal registry.
 
-    :::info
-    This process will NOT download or clone these infrastructure images:
-    - `valkey/valkey:7.2.11-alpine`
-    - `postgres:15.7-alpine`
-    - `rabbitmq:3.13.6-management-alpine`
-    - `minio/minio:latest`
-    - `minio/mc:latest`
-    - `opensearchproject/opensearch:3.3.2`
+   :::info
+   This process will NOT download or clone these infrastructure images:
+   - `valkey/valkey:7.2.11-alpine`
+   - `postgres:15.7-alpine`
+   - `rabbitmq:3.13.6-management-alpine`
+   - `minio/minio:latest`
+   - `minio/mc:latest`
+   - `opensearchproject/opensearch:3.3.2`
 
-    If you're using local infrastructure services, you'll need to pull and transfer these images separately.
-    :::
+   If you're using local infrastructure services, you'll need to pull and transfer these images separately.
+   :::
 
 2. **Download Docker Compose configuration**
 
-    ```bash
-    # Download docker-compose.yml
-    curl -fsSL https://prime.plane.so/releases/<plane-version>/docker-compose.yml -o docker-compose.yml
+   ```bash
+   # Download docker-compose.yml
+   curl -fsSL https://prime.plane.so/releases/<plane-version>/docker-compose.yml -o docker-compose.yml
 
-    # Download environment template
-    curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
-    ```
+   # Download environment template
+   curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
+   ```
 
 3. **Configure environment variables**
 
-    Edit the `plane.env` file to configure your deployment:
+   Edit the `plane.env` file to configure your deployment:
 
-    ```bash
-    # Generate a unique machine signature
-    export MACHINE_SIGNATURE=$(uuidgen)
+   ```bash
+   # Generate a unique machine signature
+   export MACHINE_SIGNATURE=$(uuidgen)
 
-    # Set your domain
-    export DOMAIN_NAME=plane.yourcompany.com
-    export WEB_URL=https://plane.yourcompany.com
-    export CORS_ALLOWED_ORIGINS=https://plane.yourcompany.com
-    ```
+   # Set your domain
+   export DOMAIN_NAME=plane.yourcompany.com
+   export WEB_URL=https://plane.yourcompany.com
+   export CORS_ALLOWED_ORIGINS=https://plane.yourcompany.com
+   ```
 
-    **Update image references** in `docker-compose.yml` to point to your private registry:
+   **Update image references** in `docker-compose.yml` to point to your private registry:
 
-    ```yaml
-    services:
-      web:
-        image: your-registry.io/plane/web-commercial:${APP_RELEASE_VERSION}
-      
-      api:
-        image: your-registry.io/plane/backend-commercial:${APP_RELEASE_VERSION}
-      
-      space:
-        image: your-registry.io/plane/space-commercial:${APP_RELEASE_VERSION}
-      
-      admin:
-        image: your-registry.io/plane/admin-commercial:${APP_RELEASE_VERSION}
-      
-      live:
-        image: your-registry.io/plane/live-commercial:${APP_RELEASE_VERSION}
-      
-      monitor:
-        image: your-registry.io/plane/monitor-commercial:${APP_RELEASE_VERSION}
-      
-      silo:
-        image: your-registry.io/plane/silo-commercial:${APP_RELEASE_VERSION}
-    ```
+   ```yaml
+   services:
+     web:
+       image: your-registry.io/plane/web-commercial:${APP_RELEASE_VERSION}
 
-    **Infrastructure services** (if using local setup):
-    ```yaml
-    services:
-      redis:
-        image: valkey/valkey:7.2.11-alpine
-      
-      postgres:
-        image: postgres:15.7-alpine
-      
-      rabbitmq:
-        image: rabbitmq:3.13.6-management-alpine
-      
-      minio:
-        image: minio/minio:latest
-    ```
+     api:
+       image: your-registry.io/plane/backend-commercial:${APP_RELEASE_VERSION}
+
+     space:
+       image: your-registry.io/plane/space-commercial:${APP_RELEASE_VERSION}
+
+     admin:
+       image: your-registry.io/plane/admin-commercial:${APP_RELEASE_VERSION}
+
+     live:
+       image: your-registry.io/plane/live-commercial:${APP_RELEASE_VERSION}
+
+     monitor:
+       image: your-registry.io/plane/monitor-commercial:${APP_RELEASE_VERSION}
+
+     silo:
+       image: your-registry.io/plane/silo-commercial:${APP_RELEASE_VERSION}
+   ```
+
+   **Infrastructure services** (if using local setup):
+
+   ```yaml
+   services:
+     redis:
+       image: valkey/valkey:7.2.11-alpine
+
+     postgres:
+       image: postgres:15.7-alpine
+
+     rabbitmq:
+       image: rabbitmq:3.13.6-management-alpine
+
+     minio:
+       image: minio/minio:latest
+   ```
 
 ## Start Plane
 
 1. Start the services:
-    ```bash
-    docker compose --env-file plane.env up -d
-    ```
+
+   ```bash
+   docker compose --env-file plane.env up -d
+   ```
 
 2. Watch the logs to make sure everything starts properly.
-    - To monitor the database migration process:
-    ```bash
-    docker compose logs -f migrator
-    ```
+   - To monitor the database migration process:
 
-    - To monitor the API service startup:
-    ```bash
-    docker compose logs -f api
-    ```
+   ```bash
+   docker compose logs -f migrator
+   ```
 
-    The API is healthy when you see: `api-1   listening at`
+   - To monitor the API service startup:
 
-    Once all services are running smoothly, you can access Plane by opening your browser and going to the domain you configured. 
-    
-    You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
+   ```bash
+   docker compose logs -f api
+   ```
+
+   The API is healthy when you see: `api-1   listening at`
+
+   Once all services are running smoothly, you can access Plane by opening your browser and going to the domain you configured.
+
+   You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
 
 3. [Activate your license key](/self-hosting/manage/manage-licenses/activate-airgapped)

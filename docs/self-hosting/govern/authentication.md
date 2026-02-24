@@ -4,7 +4,6 @@ description: Configure authentication methods for self-hosted Plane. Setup OAuth
 keywords: plane authentication, auth providers, sso setup, oauth configuration, saml, oidc, ldap, self-hosting security
 ---
 
-
 # Overview
 
 Plane offers several methods you can choose from to let your users log in to your Plane instance. Configure these methods in Authentication on /god-mode of your instance.

@@ -4,7 +4,6 @@ description: Understand Plane self-hosted architecture including web server, API
 keywords: plane architecture, plane system design, plane components, plane services, postgresql, redis, minio, plane infrastructure
 ---
 
-
 # Plane self-hosted architecture
 
 Plane consists of multiple services working together to provide project management capabilities.

@@ -4,7 +4,6 @@ description: Troubleshoot installation errors. Common issues, error messages, an
 keywords: plane installation errors, deployment issues, docker errors, kubernetes errors, plane setup troubleshooting, self-hosting
 ---
 
-
 # Installation errors
 
 This guide is designed to help you resolve common issues encountered while installing Plane. Each section includes potential causes and step-by-step solutions for identified problems.

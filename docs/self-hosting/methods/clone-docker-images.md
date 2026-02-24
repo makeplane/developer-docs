@@ -4,7 +4,6 @@ description: Mirror Plane Docker images to your private container registry. Pull
 keywords: plane docker images, private registry, container mirroring, docker pull, image cloning, airgapped docker, self-hosting
 ---
 
-
 # Clone Docker images to your private registry
 
 ::: info
@@ -21,11 +20,13 @@ This guide shows you how to copy Docker images from the Plane artifact registry 
 Crane is a tool for interacting with remote container images and registries. Install it on a machine with internet access.
 
 **macOS:**
+
 ```bash
 brew install crane
 ```
 
 **Linux:**
+
 ```bash
 # Download the latest release
 VERSION=$(curl -s https://api.github.com/repos/google/go-containerregistry/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
@@ -37,6 +38,7 @@ crane version
 ```
 
 **Windows (using WSL or Git Bash):**
+
 ```bash
 # Download and extract
 curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_Windows_x86_64.tar.gz" | tar xz crane.exe
@@ -45,6 +47,7 @@ curl -sL "https://github.com/google/go-containerregistry/releases/latest/downloa
 ## Plane images to copy
 
 The following Plane Commercial images need to be transferred to your private registry:
+
 ```
 artifacts.plane.so/makeplane/admin-commercial:${APP_RELEASE_VERSION}
 artifacts.plane.so/makeplane/web-commercial:${APP_RELEASE_VERSION}
@@ -65,11 +68,12 @@ artifacts.plane.so/makeplane/email-commercial:${APP_RELEASE_VERSION}
 - `rabbitmq:3.13.6-management-alpine`
 - `minio/minio:latest`
 - `minio/mc:latest`
-:::
+  :::
 
 ## Configure environment variables
 
 Set your version and destination registry before copying images.
+
 ```bash
 # Set your Plane version
 export APP_RELEASE_VERSION="v2.1.0"  # Replace with your desired version
@@ -79,6 +83,7 @@ export DESTINATION_REGISTRY="your-registry.io/your-namespace"
 ```
 
 **Example destination registry values:**
+
 ```bash
 # Docker Hub
 export DESTINATION_REGISTRY="docker.io/yourcompany"
@@ -101,26 +106,31 @@ export DESTINATION_REGISTRY="yourregistry.azurecr.io/plane"
 Before copying images, authenticate crane to your destination registry.
 
 **Docker Hub:**
+
 ```bash
 crane auth login docker.io -u YOUR_USERNAME -p YOUR_PASSWORD
 ```
 
 **Google Container Registry:**
+
 ```bash
 gcloud auth configure-docker
 ```
 
 **AWS ECR:**
+
 ```bash
 aws ecr get-login-password --region REGION | crane auth login --username AWS --password-stdin AWS_ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com
 ```
 
 **Azure Container Registry:**
+
 ```bash
 az acr login --name YOUR_REGISTRY_NAME
 ```
 
 **Harbor or other private registries:**
+
 ```bash
 crane auth login your-registry.com -u YOUR_USERNAME -p YOUR_PASSWORD
 ```
@@ -132,6 +142,7 @@ You can copy images individually or use the provided script to copy all images a
 ### Option 1: Copy individual images
 
 **Basic image copy:**
+
 ```bash
 crane copy \
   artifacts.plane.so/makeplane/backend-commercial:${APP_RELEASE_VERSION} \
@@ -139,6 +150,7 @@ crane copy \
 ```
 
 **Copy with specific platform (architecture):**
+
 ```bash
 crane copy \
   --platform linux/amd64 \
@@ -147,6 +159,7 @@ crane copy \
 ```
 
 **Verify source image before copying:**
+
 ```bash
 # Check if source image exists
 crane manifest artifacts.plane.so/makeplane/backend-commercial:${APP_RELEASE_VERSION}
@@ -156,6 +169,7 @@ crane ls artifacts.plane.so/makeplane/backend-commercial
 ```
 
 **Verify image after copying:**
+
 ```bash
 # Get image digest
 crane digest ${DESTINATION_REGISTRY}/backend-commercial:${APP_RELEASE_VERSION}
@@ -167,6 +181,7 @@ crane manifest ${DESTINATION_REGISTRY}/backend-commercial:${APP_RELEASE_VERSION}
 ### Option 2: Copy all images with a script
 
 Create a file named `copy-plane-images.sh`:
+
 ```bash
 #!/bin/bash
 
@@ -208,10 +223,10 @@ echo ""
 for IMAGE in "${IMAGES[@]}"; do
     SOURCE="${SOURCE_REGISTRY}/${IMAGE}"
     DESTINATION="${DESTINATION_REGISTRY}/${IMAGE}"
-    
+
     echo "Copying: ${SOURCE} -> ${DESTINATION}"
     crane copy "${SOURCE}" "${DESTINATION}"
-    
+
     if [ $? -eq 0 ]; then
         echo "✓ Successfully copied ${IMAGE}"
     else
@@ -225,6 +240,7 @@ echo "All images copied successfully!"
 ```
 
 Make the script executable and run it:
+
 ```bash
 chmod +x copy-plane-images.sh
 ./copy-plane-images.sh
@@ -239,6 +255,7 @@ The script will copy all Plane images to your destination registry. Each image c
 **Error:** `unauthorized: authentication required`
 
 **Solution:** Re-authenticate to your destination registry:
+
 ```bash
 crane auth login your-destination-registry.com
 ```
@@ -274,9 +291,11 @@ Verify your credentials are correct and that you have push permissions to the re
 **Solution:**
 
 - Verify the source image exists:
+
 ```bash
   crane ls artifacts.plane.so/makeplane/backend-commercial
 ```
+
 - Check that you're using the correct version tag
 - Ensure `APP_RELEASE_VERSION` is set correctly
 - Verify the image name is spelled correctly

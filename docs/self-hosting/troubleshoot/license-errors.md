@@ -4,7 +4,6 @@ description: Troubleshoot Plane license activation errors. Fix common issues wit
 keywords: plane license errors, license activation issues, license troubleshooting, plane license fix, commercial license, self-hosting
 ---
 
-
 # Errors related to licenses
 
 This guide is designed to help you resolve common issues encountered while activating the license key for a workspace. Each section includes potential causes and step-by-step solutions for identified problems.
@@ -20,7 +19,6 @@ If the issue persists after syncing or you see other errors, continue with the s
 <div style="color: red"> 
     Error: Your license is invalid or already in use. 
 </div>
-
 
 - This issue usually occurs when your server has trouble connecting to ours to verify the license. Try running `prime-cli restart`, and it should resolve the problem.
 
@@ -45,9 +43,9 @@ Updating typically resolves this issue. If the problem persists, double-check yo
     Error: Payment server is not configured
 </div>
 
-This usually occurs when the environment confiuration is incorrect. The  Env variable `payment_server_url` is missing in the setup. In this case, follow the below steps.
+This usually occurs when the environment confiuration is incorrect. The Env variable `payment_server_url` is missing in the setup. In this case, follow the below steps.
 
 1. Backup the `plane.env` file. See [Backup plane.env](/self-hosting/manage/backup-restore#backup-plane-env).
 2. Run `prime-cli repair` to allow Prime CLI to attempt automatic fixes to the `plane.env` file.
 3. Try activating your workspace with the license key.
-3. If needed, you can configure the instance in [God mode](/self-hosting/govern/instance-admin#settings) or adjust the environment variables directly in the new plane.env file.
+4. If needed, you can configure the instance in [God mode](/self-hosting/govern/instance-admin#settings) or adjust the environment variables directly in the new plane.env file.

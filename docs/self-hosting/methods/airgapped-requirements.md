@@ -4,7 +4,6 @@ description: System requirements and architecture overview for Plane airgapped d
 keywords: plane airgapped requirements, air-gapped architecture, offline prerequisites, system requirements, airgapped planning, self-hosting
 ---
 
-
 # Airgapped deployment architecture
 
 ::: info
@@ -32,16 +31,16 @@ For a detailed breakdown of Plane's services and infrastructure dependencies, se
 **Critical guarantees for airgapped environments**
 
 - **No telemetry**  
-Plane does not send application data, usage metrics, or telemetry outside the cluster. No analytics, crash reports, or usage statistics leave your network.
+  Plane does not send application data, usage metrics, or telemetry outside the cluster. No analytics, crash reports, or usage statistics leave your network.
 
 - **Offline licensing**  
-License validation happens through uploaded license files downloaded from the Prime portal. No internet connection required after initial license file transfer.
+  License validation happens through uploaded license files downloaded from the Prime portal. No internet connection required after initial license file transfer.
 
 - **Zero external dependencies**  
-After initial image import, no external network connectivity is required for Plane to operate. All features work entirely within your isolated environment.
+  After initial image import, no external network connectivity is required for Plane to operate. All features work entirely within your isolated environment.
 
 - **Internal-only communication**  
-All service-to-service communication stays within your cluster. Services never attempt to reach external APIs, CDNs, or third-party services.
+  All service-to-service communication stays within your cluster. Services never attempt to reach external APIs, CDNs, or third-party services.
 
 ### How integrations stay internal
 
@@ -73,11 +72,13 @@ Deploying airgapped Plane via Kubernetes requires preparing all dependencies to 
 **Supported versions:** Kubernetes 1.31 – 1.33
 
 **Required components:**
+
 - IngressClass configured
 - StorageClass available
 - cert-manager configured with an internal CA
 
 **Node requirements:**
+
 - Ensure node OS dependencies and container runtime packages are available from mirrored package repositories like apt, yum, or offline bundles
 
 ### Scaling
@@ -87,6 +88,7 @@ Horizontal scaling is handled via replica counts configurable in `values.yaml`.
 Plane avoids using StatefulSets where possible due to the complexity of scaling stateful workloads in Kubernetes. The `monitor` service uses a StatefulSet.
 
 **For airgapped clusters:**
+
 - Ensure metrics-server images are mirrored if using HPA
 - If using node autoscaling, ensure node images are pre-loaded and registries accessible on bootstrap
 

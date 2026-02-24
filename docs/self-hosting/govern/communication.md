@@ -4,7 +4,6 @@ description: Configure SMTP email settings for Plane. Setup email notifications 
 keywords: plane smtp, email notifications, smtp configuration, email setup, self-hosting, plane email, mail server
 ---
 
-
 # Configure SMTP for email notifications
 
 Either during your set-up or sometime later, you will want to set SMTP settings to let your users get emails to reset passwords, onboard themselves right, and get notifications for changes, and receive exports of your data.
@@ -35,7 +34,6 @@ Navigate to `Email` in `/god-mode`and you will see ↓.
   - **Password**\
     Specify the password for the SMTP configuration here.
 
-
 ::: tip
 **Google Workspaces**
 
@@ -43,7 +41,6 @@ If your Plane instance is not accessible on the internet, Gmail may block profil
 
 To resolve this issue, you must configure the Image URL proxy allowlist in your Google Workspace settings to include your Plane instance's URL. Refer to Google’s documentation for instructions: [Allowlist image URLs](https://support.google.com/a/answer/3299041?hl=en).
 :::
-
 
 ## Configuration for popular email services providers
 

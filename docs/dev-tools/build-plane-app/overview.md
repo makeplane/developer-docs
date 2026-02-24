@@ -52,6 +52,7 @@ Follow these steps to build your first Plane app:
 ### 1. Create an OAuth application
 
 Register your app in Plane to get credentials:
+
 - Navigate to **Workspace Settings** → **Integrations**
 - Configure your app's URLs and permissions
 - Store your **Client ID** and **Client Secret** securely
@@ -61,6 +62,7 @@ Register your app in Plane to get credentials:
 ### 2. Choose your authentication flow
 
 Decide between Bot Token or User Token based on your use case:
+
 - **Bot Token** - For agents, webhooks, and automation
 - **User Token** - For user-specific actions and permissions
 
@@ -69,6 +71,7 @@ Decide between Bot Token or User Token based on your use case:
 ### 3. Implement OAuth
 
 Set up the OAuth flow to obtain access tokens:
+
 - Redirect users to Plane's consent screen
 - Handle the callback with authorization code
 - Exchange code for access tokens
@@ -79,6 +82,7 @@ Set up the OAuth flow to obtain access tokens:
 ### 4. Handle webhooks
 
 Set up webhook handlers to receive real-time events:
+
 - Verify webhook signatures for security
 - Process events like work item updates, comments, and more
 - Respond to events with automated actions
@@ -102,6 +106,7 @@ Free ngrok URLs change on restart. Update your app settings when the URL changes
 ### Official SDKs
 
 Speed up development with official SDKs for Node.js and Python:
+
 - OAuth helpers for token management
 - Typed API clients for all endpoints
 - Built-in error handling and retries
@@ -111,6 +116,7 @@ Speed up development with official SDKs for Node.js and Python:
 ### Complete examples
 
 See full working implementations:
+
 - TypeScript (Express) example
 - Python (Flask) example
 - OAuth flow, webhooks, and API integration

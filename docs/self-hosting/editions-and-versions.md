@@ -4,7 +4,6 @@ description: Compare Plane Community, Pro, Business, and Enterprise editions. Un
 keywords: plane editions, plane community edition, plane pro, plane enterprise, plane business, self-hosting comparison, plane pricing tiers
 ---
 
-
 # Understanding Plane's editions
 
 Plane comes in four editions by how its deployed. Our Cloud is our only hosted edition as of 2025. Additionally, we offer three unique self-hosted editions tailored to meet two sets of unique needs—the open-source Community Edition, the recommended Commercial Edition, and the Airgapped Edition.
@@ -43,21 +42,20 @@ Built for organizations with strict security and compliance requirements, the Ai
 
 The Airgapped Edition offers:
 
-- **Complete isolation** 
-Operates entirely within your network perimeter with no external dependencies or outbound connections.
+- **Complete isolation**
+  Operates entirely within your network perimeter with no external dependencies or outbound connections.
 
-- **Full feature parity** 
-Includes all features available in the standard Commercial Edition, including advanced work management, security controls, and governance tools
+- **Full feature parity**
+  Includes all features available in the standard Commercial Edition, including advanced work management, security controls, and governance tools
 
-- **Version updates** 
- Updates from your own docker registry.
+- **Version updates**
+  Updates from your own docker registry.
 
-- **Self-contained architecture** 
-All services, dependencies, and resources are bundled for deployment in restricted networks
+- **Self-contained architecture**
+  All services, dependencies, and resources are bundled for deployment in restricted networks
 
-- **Compliance-ready** 
-Designed to meet requirements for environments that prohibit external network communication
-
+- **Compliance-ready**
+  Designed to meet requirements for environments that prohibit external network communication
 
 ## Why we separate editions
 
@@ -82,7 +80,6 @@ Each of our editions is built on a distinct codebase. Versions with each differ 
 - Be intentful and deliberate with changes to the Community Edition
 
 For both the Commercial, Airgapped, and Community Editions, version updates are in your control. Regular updates ensure you’re benefiting from the latest features and improvements. See [Update Plane](/self-hosting/manage/upgrade-plane) for how to upgrade your versions.
-
 
 ## Changelog
 

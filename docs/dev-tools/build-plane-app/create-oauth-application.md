@@ -6,7 +6,12 @@ keywords: plane oauth application, create plane app, client id secret, plane app
 
 # Create an OAuth Application
 
-1. Navigate to **Workspace Settings** → **Integrations**. `https://app.plane.so/<workspace>/settings/integrations/`
+1. Navigate to **Workspace Settings** → **Integrations**.
+
+```text
+https://app.plane.so/<workspace>/settings/integrations/
+```
+
 2. Click **Build your own**.
 3. Fill in the required details:
 

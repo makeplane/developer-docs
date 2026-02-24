@@ -4,32 +4,34 @@ description: Configure Nginx, Caddy, or Traefik as a reverse proxy for self-host
 keywords: plane reverse proxy, nginx proxy, traefik, caddy, upstream proxy, proxy configuration, self-hosting
 ---
 
-
 # Configure external reverse proxy <Badge type="info" text="Commercial Edition" />
 
-This page provides configuration for setting up an external reverse proxy with Plane. 
+This page provides configuration for setting up an external reverse proxy with Plane.
 
 ## Plane environment setup
 
 Make sure to update the following environment variables in your plane.env file.
 
 1. Assign free ports for Plane to listen on. Update the following variables with two different unsused ports:
-    ```bash
-    LISTEN_HTTP_PORT=
-    LISTEN_HTTPS_PORT=
-    ```
+
+   ```bash
+   LISTEN_HTTP_PORT=
+   LISTEN_HTTPS_PORT=
+   ```
 
 2. Update the SITE_ADDRESS variable to `:80`
-    ```bash
-      SITE_ADDRESS=:80
-    ```
-    This is required so that generated links and redirects work correctly behind the proxy:
+
+   ```bash
+     SITE_ADDRESS=:80
+   ```
+
+   This is required so that generated links and redirects work correctly behind the proxy:
 
 3. After editing plane.env, restart your instance so the changes take effect:
    ```bash
    sudo prime-cli restart
    ```
- 
+
 ::: warning
 **Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.
 :::
@@ -39,29 +41,27 @@ Make sure to update the following environment variables in your plane.env file.
 1. Choose the appropriate [configuration template](#configuration-templates) for your reverse proxy.
 
 2. Replace the following placeholders:
-    - `<domain>`   
-    Your Plane application's domain name.
-    - `<plane-host-ip>`  
-    The IP address where Plane is hosted.
-    - `<plane-host-port>`   
-    The port Plane listens on.
-    
+   - `<domain>`  
+     Your Plane application's domain name.
+   - `<plane-host-ip>`  
+     The IP address where Plane is hosted.
+   - `<plane-host-port>`  
+     The port Plane listens on.
 3. For Traefik, also update `your-email@example.com` with your email.
 
 Ensure that your reverse proxy setup follows the template provided, and that the forwarded headers and ports are correctly set to match the environment variable configuration.
 
-
 ## Configuration templates
 
 All configurations include:
+
 - Automatic HTTPS redirection
 - WebSocket support
 - Standard proxy headers
 - SSL/TLS certificate management
-    - NGINX: Uses Certbot
-    - Caddy: Handles certificates automatically
-    - Traefik: Uses Let’s Encrypt
-
+  - NGINX: Uses Certbot
+  - Caddy: Handles certificates automatically
+  - Traefik: Uses Let’s Encrypt
 
 ::: details NGINX configuration
 
@@ -71,13 +71,13 @@ server {
 
     location / {
         proxy_pass http://<plane-host-ip>:<plane-host-port>/;
-        
+
         # Set headers for proxied request
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Forwarded-Host  $host;
         proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header X-Real-IP         $remote_addr;
-        
+
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_set_header Host $http_host;
@@ -106,8 +106,8 @@ server {
 
 :::
 
-
 ::: details Caddy configuration
+
 ```bash
 <domain> {
     tls {
@@ -122,7 +122,7 @@ server {
         header_up X-Real-IP {remote_host}
         header_up X-Forwarded-For {remote_host}
         header_up Host {http.request.host}
-        
+
         header_up Upgrade {http.request.header.Upgrade}
         header_up Connection {http.request.header.Connection}
 
@@ -142,6 +142,7 @@ server {
 :::
 
 ::: details Traefik configuration
+
 ```bash
 entryPoints:
   web:
@@ -152,7 +153,7 @@ entryPoints:
           to: websecure
           scheme: https
           permanent: true
-  
+
   websecure:
     address: ":443"
 
@@ -189,7 +190,7 @@ providers:
               dialTimeout: 30s
               responseHeaderTimeout: 30s
               idleConnTimeout: 90s
-    
+
     middlewares:
       headers:
         headers:
@@ -197,4 +198,5 @@ providers:
             X-Forwarded-Proto: "https"
             X-Real-IP: "{{ .RemoteAddr }}"
 ```
+
 :::

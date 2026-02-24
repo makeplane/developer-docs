@@ -4,7 +4,6 @@ description: Setup OIDC SSO authentication for Plane. Configure OpenID Connect s
 keywords: plane oidc, openid connect, sso configuration, single sign-on, oidc provider, enterprise sso, self-hosting
 ---
 
-
 # OIDC SSO <Badge type="info" text="Pro" /> <Badge type="tip" text="Business" />
 
 Plane enables custom SSO via any identity provider with an official and supported implementation of OIDC standards. This page cites examples from Okta, but we will soon publish provider-specific instructions in phases.
@@ -18,21 +17,21 @@ You will need to configure values on your IdP first and then on Plane later.
 Create a Plane client or application per your IdP's documentation and configure ↓.
 
 ::: tip
-  `domain.tld` is the domain that you have hosted your Plane app on.
+`domain.tld` is the domain that you have hosted your Plane app on.
 :::
 
-| **Config**     | **Key**                                               |
-|----------------|-------------------------------------------------------|
-| Origin URL     | `http(s)://domain.tld/auth/oidc/`                     |
-| Callback URL   | `http(s)://domain.tld/auth/oidc/callback/`            |
-| Logout URL     | `http(s)://domain.tld/auth/oidc/logout/`              |
+| **Config**   | **Key**                                    |
+| ------------ | ------------------------------------------ |
+| Origin URL   | `http(s)://domain.tld/auth/oidc/`          |
+| Callback URL | `http(s)://domain.tld/auth/oidc/callback/` |
+| Logout URL   | `http(s)://domain.tld/auth/oidc/logout/`   |
 
 ### On Plane
 
 Go to `/god-mode/authentication/oidc` on your Plane app and find the configs ↓.
 
 ::: tip
-  Your IdP will generate some of the following configs for you. Others, you will specify yourself. Just copy them over to each field.
+Your IdP will generate some of the following configs for you. Others, you will specify yourself. Just copy them over to each field.
 :::
 
 ![OIDC Configuration](/images/custom-sso/oidc-oauth.png)
@@ -59,6 +58,6 @@ Go to `/god-mode/authentication/oidc` on your Plane app and find the configs ↓
 
   To test if this URL is right, see if clicking the `Login with <name of your IdP>` button brings up your IdP's authentication screen.
 
-   ![Login with Okta](/images/custom-sso/okta-signin.webp)
+  ![Login with Okta](/images/custom-sso/okta-signin.webp)
 
 - Finally, choose a name for your IdP on Plane so you can recognize this set of configs.
