@@ -16,6 +16,10 @@ Disallow: /search
 # Sitemap location
 Sitemap: https://developers.plane.so/sitemap.xml
 
+# LLMs.txt - AI-friendly site documentation
+# https://llmstxt.org/
+LLMs-txt: https://developers.plane.so/llms.txt
+
 # Crawl-delay for polite crawling (optional)
 # Crawl-delay: 1
 

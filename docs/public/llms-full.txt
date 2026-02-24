@@ -1,0 +1,417 @@
+# Plane Developer Documentation
+
+> Plane is an open-source project management platform. This site covers self-hosting guides, REST API reference, and developer tools for building on Plane.
+
+Docs: https://developers.plane.so
+Concise version: https://developers.plane.so/llms.txt
+
+---
+
+## Self-Hosting
+
+### Self-host Plane
+
+- [Overview](https://developers.plane.so/self-hosting/overview)
+- [Plane Editions](https://developers.plane.so/self-hosting/editions-and-versions)
+- [Plane Architecture](https://developers.plane.so/self-hosting/plane-architecture)
+
+### Install
+
+- [Overview](https://developers.plane.so/self-hosting/methods/overview)
+
+#### Docker
+
+- [Docker Compose](https://developers.plane.so/self-hosting/methods/docker-compose)
+- [Docker AIO](https://developers.plane.so/self-hosting/methods/docker-aio)
+- [Docker Swarm](https://developers.plane.so/self-hosting/methods/docker-swarm)
+
+#### Other Methods
+
+- [Kubernetes](https://developers.plane.so/self-hosting/methods/kubernetes)
+- [Podman Quadlets](https://developers.plane.so/self-hosting/methods/podman-quadlets)
+
+#### Airgapped Edition
+
+- [Overview](https://developers.plane.so/self-hosting/methods/airgapped-requirements)
+- [For Docker](https://developers.plane.so/self-hosting/methods/airgapped-edition)
+- [For Kubernetes](https://developers.plane.so/self-hosting/methods/airgapped-edition-kubernetes)
+- [Clone Docker Images](https://developers.plane.so/self-hosting/methods/clone-docker-images)
+
+#### Managed Platforms
+
+- [Coolify](https://developers.plane.so/self-hosting/methods/coolify)
+- [Portainer](https://developers.plane.so/self-hosting/methods/portainer)
+
+### Configure
+
+- [Instance Admin](https://developers.plane.so/self-hosting/govern/instance-admin)
+
+#### Authentication
+
+- [Overview](https://developers.plane.so/self-hosting/govern/authentication)
+- [Google OAuth](https://developers.plane.so/self-hosting/govern/google-oauth)
+- [GitHub OAuth](https://developers.plane.so/self-hosting/govern/github-oauth)
+- [OIDC SSO](https://developers.plane.so/self-hosting/govern/oidc-sso)
+- [SAML SSO](https://developers.plane.so/self-hosting/govern/saml-sso)
+- [LDAP](https://developers.plane.so/self-hosting/govern/ldap)
+- [Reset Password](https://developers.plane.so/self-hosting/govern/reset-password)
+
+#### Services and Infrastructure
+
+- [SMTP for email](https://developers.plane.so/self-hosting/govern/communication)
+- [External services](https://developers.plane.so/self-hosting/govern/database-and-storage)
+- [Custom domain](https://developers.plane.so/self-hosting/govern/custom-domain)
+- [SSL](https://developers.plane.so/self-hosting/govern/configure-ssl)
+
+#### Integrations
+
+- [GitHub](https://developers.plane.so/self-hosting/govern/integrations/github)
+- [GitLab](https://developers.plane.so/self-hosting/govern/integrations/gitlab)
+- [Sentry](https://developers.plane.so/self-hosting/govern/integrations/sentry)
+- [Slack](https://developers.plane.so/self-hosting/govern/integrations/slack)
+
+#### Advanced Configuration
+
+- [DNS for Intake Email](https://developers.plane.so/self-hosting/govern/configure-dns-email-service)
+- [OpenSearch for search](https://developers.plane.so/self-hosting/govern/advanced-search)
+- [External secrets](https://developers.plane.so/self-hosting/govern/external-secrets)
+- [External reverse proxy](https://developers.plane.so/self-hosting/govern/reverse-proxy)
+- [Private storage buckets](https://developers.plane.so/self-hosting/govern/private-bucket)
+- [Environment variables](https://developers.plane.so/self-hosting/govern/environment-variables)
+- [Telemetry](https://developers.plane.so/self-hosting/telemetry)
+
+### Manage
+
+#### Update Plane
+
+- [Update to latest version](https://developers.plane.so/self-hosting/manage/upgrade-plane)
+- [For versions before 0.14.0](https://developers.plane.so/self-hosting/manage/upgrade-from-0.13.2-0.14.0)
+
+#### Manage Licenses
+
+- [Activate Pro or Business](https://developers.plane.so/self-hosting/manage/manage-licenses/activate-pro-and-business)
+- [Activate Enterprise](https://developers.plane.so/self-hosting/manage/manage-licenses/activate-enterprise)
+- [Activate Airgapped](https://developers.plane.so/self-hosting/manage/manage-licenses/activate-airgapped)
+
+#### Operations
+
+- [Backup and restore](https://developers.plane.so/self-hosting/manage/backup-restore)
+- [Upgrade Community to Commercial Edition](https://developers.plane.so/self-hosting/upgrade-from-community)
+- [Upgrade Community to Airgapped Edition](https://developers.plane.so/self-hosting/manage/community-to-airgapped)
+- [View Logs](https://developers.plane.so/self-hosting/manage/view-logs)
+- [Migrate Plane](https://developers.plane.so/self-hosting/manage/migrate-plane)
+- [Prime CLI](https://developers.plane.so/self-hosting/manage/prime-cli)
+
+### Troubleshoot
+
+- [Installation Errors](https://developers.plane.so/self-hosting/troubleshoot/installation-errors)
+- [License Errors](https://developers.plane.so/self-hosting/troubleshoot/license-errors)
+- [CLI Errors](https://developers.plane.so/self-hosting/troubleshoot/cli-errors)
+- [Storage Errors](https://developers.plane.so/self-hosting/troubleshoot/storage-errors)
+
+---
+
+## API Reference
+
+- [Introduction](https://developers.plane.so/api-reference/introduction)
+
+### Project
+
+- [Overview](https://developers.plane.so/api-reference/project/overview)
+- [Create Project](https://developers.plane.so/api-reference/project/add-project)
+- [List Projects](https://developers.plane.so/api-reference/project/list-projects)
+- [Get Project](https://developers.plane.so/api-reference/project/get-project-detail)
+- [Update Project](https://developers.plane.so/api-reference/project/update-project-detail)
+- [Delete Project](https://developers.plane.so/api-reference/project/delete-project)
+
+### State
+
+- [Overview](https://developers.plane.so/api-reference/state/overview)
+- [Create State](https://developers.plane.so/api-reference/state/add-state)
+- [List States](https://developers.plane.so/api-reference/state/list-states)
+- [Get State](https://developers.plane.so/api-reference/state/get-state-detail)
+- [Update State](https://developers.plane.so/api-reference/state/update-state-detail)
+- [Delete State](https://developers.plane.so/api-reference/state/delete-state)
+
+### Label
+
+- [Overview](https://developers.plane.so/api-reference/label/overview)
+- [Create Label](https://developers.plane.so/api-reference/label/add-label)
+- [List Labels](https://developers.plane.so/api-reference/label/list-labels)
+- [Get Label](https://developers.plane.so/api-reference/label/get-label-detail)
+- [Update Label](https://developers.plane.so/api-reference/label/update-label-detail)
+- [Delete Label](https://developers.plane.so/api-reference/label/delete-label)
+
+### Work Item
+
+- [Overview](https://developers.plane.so/api-reference/issue/overview)
+- [Create Work Item](https://developers.plane.so/api-reference/issue/add-issue)
+- [List Work Items](https://developers.plane.so/api-reference/issue/list-issues)
+- [Get Work Item](https://developers.plane.so/api-reference/issue/get-issue-detail)
+- [Get by Sequence ID](https://developers.plane.so/api-reference/issue/get-issue-sequence-id)
+- [Search Work Items](https://developers.plane.so/api-reference/issue/search-issues)
+- [Update Work Item](https://developers.plane.so/api-reference/issue/update-issue-detail)
+- [Delete Work Item](https://developers.plane.so/api-reference/issue/delete-issue)
+
+### Work Item Links
+
+- [Overview](https://developers.plane.so/api-reference/link/overview)
+- [Add Link](https://developers.plane.so/api-reference/link/add-link)
+- [List Links](https://developers.plane.so/api-reference/link/list-links)
+- [Get Link](https://developers.plane.so/api-reference/link/get-link-detail)
+- [Update Link](https://developers.plane.so/api-reference/link/update-link-detail)
+- [Delete Link](https://developers.plane.so/api-reference/link/delete-link)
+
+### Work Item Activity
+
+- [Overview](https://developers.plane.so/api-reference/issue-activity/overview)
+- [List Activities](https://developers.plane.so/api-reference/issue-activity/list-issue-activities)
+- [Get Activity](https://developers.plane.so/api-reference/issue-activity/get-issue-activity-detail)
+
+### Work Item Comments
+
+- [Overview](https://developers.plane.so/api-reference/issue-comment/overview)
+- [Add Comment](https://developers.plane.so/api-reference/issue-comment/add-issue-comment)
+- [List Comments](https://developers.plane.so/api-reference/issue-comment/list-issue-comments)
+- [Get Comment](https://developers.plane.so/api-reference/issue-comment/get-issue-comment-detail)
+- [Update Comment](https://developers.plane.so/api-reference/issue-comment/update-issue-comment-detail)
+- [Delete Comment](https://developers.plane.so/api-reference/issue-comment/delete-issue-comment)
+
+### Work Item Attachments
+
+- [Overview](https://developers.plane.so/api-reference/issue-attachments/overview)
+- [Get Attachments](https://developers.plane.so/api-reference/issue-attachments/get-attachments)
+- [Get Attachment Detail](https://developers.plane.so/api-reference/issue-attachments/get-attachment-detail)
+- [Get Upload Credentials](https://developers.plane.so/api-reference/issue-attachments/get-upload-credentials)
+- [Upload File](https://developers.plane.so/api-reference/issue-attachments/upload-file)
+- [Complete Upload](https://developers.plane.so/api-reference/issue-attachments/complete-upload)
+- [Update Attachment](https://developers.plane.so/api-reference/issue-attachments/update-attachment)
+- [Delete Attachment](https://developers.plane.so/api-reference/issue-attachments/delete-attachment)
+
+### Work Item Types
+
+- [Overview](https://developers.plane.so/api-reference/issue-types/types/overview)
+- [Add Type](https://developers.plane.so/api-reference/issue-types/types/add-issue-type)
+- [List Types](https://developers.plane.so/api-reference/issue-types/types/list-issue-types)
+- [Get Type Details](https://developers.plane.so/api-reference/issue-types/types/get-issue-type-details)
+- [Update Type](https://developers.plane.so/api-reference/issue-types/types/update-issue-types)
+- [Delete Type](https://developers.plane.so/api-reference/issue-types/types/delete-issue-type)
+
+### Custom Properties
+
+- [Overview](https://developers.plane.so/api-reference/issue-types/properties/overview)
+- [Add Property](https://developers.plane.so/api-reference/issue-types/properties/add-property)
+- [List Properties](https://developers.plane.so/api-reference/issue-types/properties/list-properties)
+- [Get Property Details](https://developers.plane.so/api-reference/issue-types/properties/get-property-details)
+- [Update Property](https://developers.plane.so/api-reference/issue-types/properties/update-property)
+- [Delete Property](https://developers.plane.so/api-reference/issue-types/properties/delete-property)
+
+### Custom Property Values
+
+- [Overview](https://developers.plane.so/api-reference/issue-types/values/overview)
+- [Add Property Values](https://developers.plane.so/api-reference/issue-types/values/add-property-values)
+- [List Property Values](https://developers.plane.so/api-reference/issue-types/values/list-property-values)
+
+### Custom Property Options
+
+- [Overview](https://developers.plane.so/api-reference/issue-types/options/overview)
+- [Add Dropdown Options](https://developers.plane.so/api-reference/issue-types/options/add-dropdown-options)
+- [List Dropdown Options](https://developers.plane.so/api-reference/issue-types/options/list-dropdown-options)
+- [Get Option Details](https://developers.plane.so/api-reference/issue-types/options/get-option-details)
+- [Update Dropdown Options](https://developers.plane.so/api-reference/issue-types/options/update-dropdown-options)
+- [Delete Dropdown Options](https://developers.plane.so/api-reference/issue-types/options/delete-dropdown-options)
+
+### Cycle
+
+- [Overview](https://developers.plane.so/api-reference/cycle/overview)
+- [Create Cycle](https://developers.plane.so/api-reference/cycle/add-cycle)
+- [Add Work Items](https://developers.plane.so/api-reference/cycle/add-cycle-work-items)
+- [Transfer Work Items](https://developers.plane.so/api-reference/cycle/transfer-cycle-work-items)
+- [Archive Cycle](https://developers.plane.so/api-reference/cycle/archive-cycle)
+- [List Cycles](https://developers.plane.so/api-reference/cycle/list-cycles)
+- [Get Cycle](https://developers.plane.so/api-reference/cycle/get-cycle-detail)
+- [List Cycle Work Items](https://developers.plane.so/api-reference/cycle/list-cycle-work-items)
+- [List Archived Cycles](https://developers.plane.so/api-reference/cycle/list-archived-cycles)
+- [Update Cycle](https://developers.plane.so/api-reference/cycle/update-cycle-detail)
+- [Unarchive Cycle](https://developers.plane.so/api-reference/cycle/unarchive-cycle)
+- [Remove Work Item](https://developers.plane.so/api-reference/cycle/remove-cycle-work-item)
+- [Delete Cycle](https://developers.plane.so/api-reference/cycle/delete-cycle)
+
+### Module
+
+- [Overview](https://developers.plane.so/api-reference/module/overview)
+- [Create Module](https://developers.plane.so/api-reference/module/add-module)
+- [Add Work Items](https://developers.plane.so/api-reference/module/add-module-work-items)
+- [Archive Module](https://developers.plane.so/api-reference/module/archive-module)
+- [List Modules](https://developers.plane.so/api-reference/module/list-modules)
+- [Get Module](https://developers.plane.so/api-reference/module/get-module-detail)
+- [List Module Work Items](https://developers.plane.so/api-reference/module/list-module-work-items)
+- [List Archived Modules](https://developers.plane.so/api-reference/module/list-archived-modules)
+- [Update Module](https://developers.plane.so/api-reference/module/update-module-detail)
+- [Unarchive Module](https://developers.plane.so/api-reference/module/unarchive-module)
+- [Remove Work Item](https://developers.plane.so/api-reference/module/remove-module-work-item)
+- [Delete Module](https://developers.plane.so/api-reference/module/delete-module)
+
+### Pages
+
+- [Overview](https://developers.plane.so/api-reference/page/overview)
+- [Add Workspace Page](https://developers.plane.so/api-reference/page/add-workspace-page)
+- [Add Project Page](https://developers.plane.so/api-reference/page/add-project-page)
+- [Get Workspace Page](https://developers.plane.so/api-reference/page/get-workspace-page)
+- [Get Project Page](https://developers.plane.so/api-reference/page/get-project-page)
+
+### Intake
+
+- [Overview](https://developers.plane.so/api-reference/intake-issue/overview)
+- [Add Intake Issue](https://developers.plane.so/api-reference/intake-issue/add-intake-issue)
+- [List Intake Issues](https://developers.plane.so/api-reference/intake-issue/list-intake-issues)
+- [Get Intake Issue](https://developers.plane.so/api-reference/intake-issue/get-intake-issue-detail)
+- [Update Intake Issue](https://developers.plane.so/api-reference/intake-issue/update-intake-issue-detail)
+- [Delete Intake Issue](https://developers.plane.so/api-reference/intake-issue/delete-intake-issue)
+
+### Time Tracking
+
+- [Overview](https://developers.plane.so/api-reference/worklogs/overview)
+- [Create Worklog](https://developers.plane.so/api-reference/worklogs/create-worklog)
+- [Get Worklogs for Issue](https://developers.plane.so/api-reference/worklogs/get-worklogs-for-issue)
+- [Get Total Time](https://developers.plane.so/api-reference/worklogs/get-total-time)
+- [Update Worklog](https://developers.plane.so/api-reference/worklogs/update-worklog)
+- [Delete Worklog](https://developers.plane.so/api-reference/worklogs/delete-worklog)
+
+### Epics
+
+- [Overview](https://developers.plane.so/api-reference/epics/overview)
+- [List Epics](https://developers.plane.so/api-reference/epics/list-epics)
+- [Get Epic](https://developers.plane.so/api-reference/epics/get-epic-detail)
+
+### Initiatives
+
+- [Overview](https://developers.plane.so/api-reference/initiative/overview)
+- [Create Initiative](https://developers.plane.so/api-reference/initiative/add-initiative)
+- [List Initiatives](https://developers.plane.so/api-reference/initiative/list-initiatives)
+- [Get Initiative](https://developers.plane.so/api-reference/initiative/get-initiative-detail)
+- [Update Initiative](https://developers.plane.so/api-reference/initiative/update-initiative-detail)
+- [Delete Initiative](https://developers.plane.so/api-reference/initiative/delete-initiative)
+
+### Initiative Labels
+
+- [Add Label](https://developers.plane.so/api-reference/initiative/add-initiative-label)
+- [Add Labels to Initiative](https://developers.plane.so/api-reference/initiative/add-labels-to-initiative)
+- [List Initiative Labels](https://developers.plane.so/api-reference/initiative/list-initiative-labels)
+- [Get Label Detail](https://developers.plane.so/api-reference/initiative/get-initiative-label-detail)
+- [List Labels for Initiative](https://developers.plane.so/api-reference/initiative/list-initiative-labels-for-initiative)
+- [Update Label](https://developers.plane.so/api-reference/initiative/update-initiative-label-detail)
+- [Remove Labels](https://developers.plane.so/api-reference/initiative/remove-labels-from-initiative)
+- [Delete Label](https://developers.plane.so/api-reference/initiative/delete-initiative-label)
+
+### Initiative Projects
+
+- [Add Projects](https://developers.plane.so/api-reference/initiative/add-projects-to-initiative)
+- [List Projects](https://developers.plane.so/api-reference/initiative/list-initiative-projects)
+- [Remove Projects](https://developers.plane.so/api-reference/initiative/remove-projects-from-initiative)
+
+### Initiative Epics
+
+- [Add Epics](https://developers.plane.so/api-reference/initiative/add-epics-to-initiative)
+- [List Epics](https://developers.plane.so/api-reference/initiative/list-initiative-epics)
+- [Remove Epics](https://developers.plane.so/api-reference/initiative/remove-epics-from-initiative)
+
+### Customers
+
+- [Overview](https://developers.plane.so/api-reference/customer/overview)
+- [Add Customer](https://developers.plane.so/api-reference/customer/add-customer)
+- [Link Work Items](https://developers.plane.so/api-reference/customer/link-work-items-to-customer)
+- [List Customers](https://developers.plane.so/api-reference/customer/list-customers)
+- [Get Customer](https://developers.plane.so/api-reference/customer/get-customer-detail)
+- [List Customer Work Items](https://developers.plane.so/api-reference/customer/list-customer-work-items)
+- [Update Customer](https://developers.plane.so/api-reference/customer/update-customer-detail)
+- [Unlink Work Item](https://developers.plane.so/api-reference/customer/unlink-work-item-from-customer)
+- [Delete Customer](https://developers.plane.so/api-reference/customer/delete-customer)
+
+### Customer Properties
+
+- [Add Property](https://developers.plane.so/api-reference/customer/add-customer-property)
+- [List Properties](https://developers.plane.so/api-reference/customer/list-customer-properties)
+- [Get Property Detail](https://developers.plane.so/api-reference/customer/get-customer-property-detail)
+- [List Property Values](https://developers.plane.so/api-reference/customer/list-customer-property-values)
+- [Get Property Value](https://developers.plane.so/api-reference/customer/get-customer-property-value)
+- [Update Property](https://developers.plane.so/api-reference/customer/update-customer-property-detail)
+- [Update Property Value](https://developers.plane.so/api-reference/customer/update-customer-property-value)
+- [Delete Property](https://developers.plane.so/api-reference/customer/delete-customer-property)
+
+### Customer Requests
+
+- [Add Request](https://developers.plane.so/api-reference/customer/add-customer-request)
+- [List Requests](https://developers.plane.so/api-reference/customer/list-customer-requests)
+- [Get Request Detail](https://developers.plane.so/api-reference/customer/get-customer-request-detail)
+- [Update Request](https://developers.plane.so/api-reference/customer/update-customer-request-detail)
+- [Delete Request](https://developers.plane.so/api-reference/customer/delete-customer-request)
+
+### Teamspaces
+
+- [Overview](https://developers.plane.so/api-reference/teamspace/overview)
+- [Create Teamspace](https://developers.plane.so/api-reference/teamspace/add-teamspace)
+- [List Teamspaces](https://developers.plane.so/api-reference/teamspace/list-teamspaces)
+- [Get Teamspace](https://developers.plane.so/api-reference/teamspace/get-teamspace-detail)
+- [Update Teamspace](https://developers.plane.so/api-reference/teamspace/update-teamspace-detail)
+- [Delete Teamspace](https://developers.plane.so/api-reference/teamspace/delete-teamspace)
+
+### Teamspace Members
+
+- [List Members](https://developers.plane.so/api-reference/teamspace/list-teamspace-members)
+- [Add Members](https://developers.plane.so/api-reference/teamspace/add-teamspace-members)
+- [Remove Members](https://developers.plane.so/api-reference/teamspace/remove-teamspace-members)
+
+### Teamspace Projects
+
+- [List Projects](https://developers.plane.so/api-reference/teamspace/list-teamspace-projects)
+- [Add Projects](https://developers.plane.so/api-reference/teamspace/add-projects-to-teamspace)
+- [Remove Projects](https://developers.plane.so/api-reference/teamspace/remove-projects-from-teamspace)
+
+### Stickies
+
+- [Overview](https://developers.plane.so/api-reference/sticky/overview)
+- [Add Sticky](https://developers.plane.so/api-reference/sticky/add-sticky)
+- [List Stickies](https://developers.plane.so/api-reference/sticky/list-stickies)
+- [Get Sticky](https://developers.plane.so/api-reference/sticky/get-sticky-detail)
+- [Update Sticky](https://developers.plane.so/api-reference/sticky/update-sticky-detail)
+- [Delete Sticky](https://developers.plane.so/api-reference/sticky/delete-sticky)
+
+### Members
+
+- [Overview](https://developers.plane.so/api-reference/members/overview)
+- [Get Workspace Members](https://developers.plane.so/api-reference/members/get-workspace-members)
+- [Get Project Members](https://developers.plane.so/api-reference/members/get-project-members)
+
+### User
+
+- [Overview](https://developers.plane.so/api-reference/user/overview)
+- [Get Current User](https://developers.plane.so/api-reference/user/get-current-user)
+
+---
+
+## Developer Tools
+
+### Build Plane App
+
+- [Overview](https://developers.plane.so/dev-tools/build-plane-app/overview)
+- [Create an OAuth application](https://developers.plane.so/dev-tools/build-plane-app/create-oauth-application)
+- [Choose token Flow](https://developers.plane.so/dev-tools/build-plane-app/choose-token-flow)
+- [Handling webhooks](https://developers.plane.so/dev-tools/build-plane-app/webhooks)
+- [OAuth scopes](https://developers.plane.so/dev-tools/build-plane-app/oauth-scopes)
+- [SDKs](https://developers.plane.so/dev-tools/build-plane-app/sdks)
+- [Complete examples](https://developers.plane.so/dev-tools/build-plane-app/examples)
+
+### Agents
+
+- [Overview](https://developers.plane.so/dev-tools/agents/overview)
+- [Building an agent](https://developers.plane.so/dev-tools/agents/building-an-agent)
+- [Best practices](https://developers.plane.so/dev-tools/agents/best-practices)
+- [Signals and content payload](https://developers.plane.so/dev-tools/agents/signals-content-payload)
+
+### Other Tools
+
+- [Webhooks](https://developers.plane.so/dev-tools/intro-webhooks)
+- [MCP Server](https://developers.plane.so/dev-tools/mcp-server)
+- [MCP Server for Claude Code](https://developers.plane.so/dev-tools/mcp-server-claude-code)
+- [Plane Compose](https://developers.plane.so/dev-tools/plane-compose)
