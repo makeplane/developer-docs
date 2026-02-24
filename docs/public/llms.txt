@@ -1,0 +1,52 @@
+# Plane Developer Documentation
+
+> Plane is an open-source project management platform. This site covers self-hosting guides, REST API reference, and developer tools for building on Plane.
+
+Docs: https://developers.plane.so
+Full LLM-friendly content: https://developers.plane.so/llms-full.txt
+
+## Self-Hosting
+
+Guides for deploying and managing your own Plane instance.
+
+- [Overview](https://developers.plane.so/self-hosting/overview): Introduction to self-hosting Plane
+- [Plane Editions](https://developers.plane.so/self-hosting/editions-and-versions): Community, Pro, Business, and Enterprise editions
+- [Plane Architecture](https://developers.plane.so/self-hosting/plane-architecture): System architecture overview
+- [Install Methods](https://developers.plane.so/self-hosting/methods/overview): Docker Compose, Docker AIO, Docker Swarm, Kubernetes, Podman, Airgapped, and managed platforms
+- [Configure](https://developers.plane.so/self-hosting/govern/instance-admin): Authentication, SMTP, SSL, custom domains, external services, integrations, and environment variables
+- [Manage](https://developers.plane.so/self-hosting/manage/upgrade-plane): Updates, licenses, backup/restore, migration, and Prime CLI
+- [Troubleshoot](https://developers.plane.so/self-hosting/troubleshoot/installation-errors): Installation, license, CLI, and storage errors
+
+## API Reference
+
+REST API for interacting with Plane programmatically. 180+ endpoints across 25+ resource categories.
+
+- [Introduction](https://developers.plane.so/api-reference/introduction): Authentication, base URL, rate limits, and conventions
+- [Projects](https://developers.plane.so/api-reference/project/overview): Create, list, get, update, and delete projects
+- [Work Items](https://developers.plane.so/api-reference/issue/overview): Create, list, search, update, and delete work items (issues)
+- [Cycles](https://developers.plane.so/api-reference/cycle/overview): Sprint-like time-boxed iterations
+- [Modules](https://developers.plane.so/api-reference/module/overview): Group work items into feature modules
+- [States](https://developers.plane.so/api-reference/state/overview): Custom workflow states
+- [Labels](https://developers.plane.so/api-reference/label/overview): Categorize and tag work items
+- [Work Item Types](https://developers.plane.so/api-reference/issue-types/types/overview): Custom work item types and properties
+- [Pages](https://developers.plane.so/api-reference/page/overview): Workspace and project documentation pages
+- [Intake](https://developers.plane.so/api-reference/intake-issue/overview): Intake issues from external sources
+- [Time Tracking](https://developers.plane.so/api-reference/worklogs/overview): Work logs and time tracking
+- [Epics](https://developers.plane.so/api-reference/epics/overview): Large bodies of work spanning multiple items
+- [Initiatives](https://developers.plane.so/api-reference/initiative/overview): Strategic goals with labels, projects, and epics
+- [Customers](https://developers.plane.so/api-reference/customer/overview): Customer management with properties and requests
+- [Teamspaces](https://developers.plane.so/api-reference/teamspace/overview): Team organization with members and projects
+- [Stickies](https://developers.plane.so/api-reference/sticky/overview): Quick notes and reminders
+- [Members](https://developers.plane.so/api-reference/members/overview): Workspace and project membership
+- [User](https://developers.plane.so/api-reference/user/overview): Current user profile
+
+## Developer Tools
+
+Build integrations, agents, and extend Plane with developer tools.
+
+- [Build Plane App](https://developers.plane.so/dev-tools/build-plane-app/overview): OAuth apps, token flows, scopes, SDKs, and examples
+- [Agents](https://developers.plane.so/dev-tools/agents/overview): Build AI agents that interact with Plane
+- [Webhooks](https://developers.plane.so/dev-tools/intro-webhooks): Real-time event notifications
+- [MCP Server](https://developers.plane.so/dev-tools/mcp-server): Model Context Protocol server for AI assistants
+- [MCP Server for Claude Code](https://developers.plane.so/dev-tools/mcp-server-claude-code): Claude Code integration via MCP
+- [Plane Compose](https://developers.plane.so/dev-tools/plane-compose): AI-powered natural language interface for Plane
