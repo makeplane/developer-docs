@@ -4,7 +4,6 @@ description: Connect GitLab to your self-hosted Plane instance. Sync merge reque
 keywords: plane gitlab integration, gitlab sync, merge request tracking, gitlab webhook, self-hosting, plane devops
 ---
 
-
 # Configure GitLab for Plane integration <Badge type="info" text="Pro" />
 
 This guide walks you through setting up a GitLab application to enable GitLab integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for GitLab, you’ll need to create an application, configure authentication, and set the necessary permissions to ensure seamless integration.
@@ -12,10 +11,10 @@ This guide walks you through setting up a GitLab application to enable GitLab in
 This guide covers configuration for both:
 
 - **[GitLab.com](/self-hosting/govern/integrations/gitlab#gitlab-cloud)**
-The standard cloud-hosted GitLab service
+  The standard cloud-hosted GitLab service
 
 - **[GitLab Self-managed](/self-hosting/govern/integrations/gitlab#gitlab-self-managed)**
-Self-hosted GitLab instances for organizations with specific compliance or security requirements
+  Self-hosted GitLab instances for organizations with specific compliance or security requirements
 
 In this guide, you’ll:
 
@@ -25,7 +24,7 @@ In this guide, you’ll:
 ::: warning
 **Activate GitLab integration**
 
-After creating and configuring the GitLab application and configuring the instance as detailed on this page, you'll need to [setup the GitLab integration](https://docs.plane.so/integrations/gitlab) within Plane. 
+After creating and configuring the GitLab application and configuring the instance as detailed on this page, you'll need to [setup the GitLab integration](https://docs.plane.so/integrations/gitlab) within Plane.
 :::
 
 ## Create GitLab Application
@@ -41,28 +40,28 @@ After creating and configuring the GitLab application and configuring the instan
 3. Navigate to the **Applications** tab.
 
 4. Click on **Add new application** to begin the setup.
-    ![Add GitLab application](/images/integrations/gitlab/add-gitlab-application.webp)
+   ![Add GitLab application](/images/integrations/gitlab/add-gitlab-application.webp)
 
 5. Provide a **Name** for your application.
 
 6. Enter the following **Redirect URI**, replacing [YOUR_DOMAIN] with your actual domain:
-    ```bash
-    https://[YOUR_DOMAIN]/silo/api/gitlab/auth/callback
-    ```
+   ```bash
+   https://[YOUR_DOMAIN]/silo/api/gitlab/auth/callback
+   ```
 7. Check the **Confidential** box.
 
-    ![Add app details](/images/integrations/gitlab/add-app-details.webp)
+   ![Add app details](/images/integrations/gitlab/add-app-details.webp)
 
 8. Set permissions by selecting the required **Scopes**. The table below explains each scope:
 
-    |Permission|Explanation|
-    |----------|-----------|
-    |`api`|Grants full read/write access to the API, including all groups, projects, container registry, dependency proxy, and package registry. Required for API requests.|
-    |`read_api`|Allows read-only access to all groups, projects, container registry, and package registry.|
-    |`read_user`|Grants read-only access to user profiles via the /user API endpoint, including username, public email, and full name. Also provides access to /users endpoints.|
-    |`read_repository`|Enables read-only access to repositories in private projects via Git-over-HTTP or the Repository Files API.|
-    |`profile`|Grants read-only access to the user's profile data using OpenID Connect.|
-    |`email`|Provides read-only access to the user's primary email address using OpenID Connect.|
+   | Permission        | Explanation                                                                                                                                                      |
+   | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | `api`             | Grants full read/write access to the API, including all groups, projects, container registry, dependency proxy, and package registry. Required for API requests. |
+   | `read_api`        | Allows read-only access to all groups, projects, container registry, and package registry.                                                                       |
+   | `read_user`       | Grants read-only access to user profiles via the /user API endpoint, including username, public email, and full name. Also provides access to /users endpoints.  |
+   | `read_repository` | Enables read-only access to repositories in private projects via Git-over-HTTP or the Repository Files API.                                                      |
+   | `profile`         | Grants read-only access to the user's profile data using OpenID Connect.                                                                                         |
+   | `email`           | Provides read-only access to the user's primary email address using OpenID Connect.                                                                              |
 
 9. Click **Save Application** to finalize the setup.
 
@@ -77,28 +76,26 @@ After creating and configuring the GitLab application and configuring the instan
 Fill in the application details with the following configuration:
 
 - **Name**
-Enter a descriptive name for your application (e.g., `Plane Local Dev` or `Plane Integration`).
+  Enter a descriptive name for your application (e.g., `Plane Local Dev` or `Plane Integration`).
 
 - **Redirect URI**
-The redirect URI depends on your Plane deployment:
+  The redirect URI depends on your Plane deployment:
 
- **For Plane Cloud:**
-    ```
-    https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback
-    ```
+  **For Plane Cloud:**
+  `     https://silo.plane.so/api/oauth/gitlab-enterprise/auth/callback
+    `
 
 **For Plane Self-Hosted:**
-    ```
-    https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback
-    ```
+`     https://<your-domain>/silo/api/oauth/gitlab-enterprise/auth/callback
+    `
 
 Replace `<your-domain>` with your actual Plane instance domain.
 
 - **Confidential**
-Keep the **Confidential** checkbox enabled. This ensures the application uses a client secret for secure authentication.
+  Keep the **Confidential** checkbox enabled. This ensures the application uses a client secret for secure authentication.
 
 - **Scopes**
-Select the following scopes to grant Plane the necessary permissions:
+  Select the following scopes to grant Plane the necessary permissions:
 
 - **api** - Grants complete read/write access to the API, including all groups and projects
 - **read_api** - Grants read access to the API, including all groups and projects
@@ -111,7 +108,6 @@ Select the following scopes to grant Plane the necessary permissions:
 
 :::
 
-
 ## Configure Plane instance
 
 :::tabs key:gitlab-edition
@@ -119,14 +115,15 @@ Select the following scopes to grant Plane the necessary permissions:
 == GitLab Cloud {#gitlab-cloud}
 
 1. Copy the **Application ID** and **Secret** from the newly created application.
-    ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
+   ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
 
 2. Add these environment variables with the values to your Plane instance's `.env` file.
 
-    ```bash
-    GITLAB_CLIENT_ID=<application_id>
-    GITLAB_CLIENT_SECRET=<secret>
-    ```
+   ```bash
+   GITLAB_CLIENT_ID=<application_id>
+   GITLAB_CLIENT_SECRET=<secret>
+   ```
+
 3. Save the file and restart the instance.
 
 4. Once you've completed the instance configuration, [activate the GitLab integration in Plane](https://docs.plane.so/integrations/gitlab?edition=gitlab-cloud).
@@ -134,9 +131,8 @@ Select the following scopes to grant Plane the necessary permissions:
 == GitLab Self-managed {#gitlab-self-managed}
 
 1. Copy the **Application ID** and **Secret** from the newly created application.
-    ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
+   ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
 
 2. Once you've created the application, [activate the GitLab Self-managed integration in Plane](https://docs.plane.so/integrations/gitlab?edition=gitlab-self-managed).
 
 :::
-

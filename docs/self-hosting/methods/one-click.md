@@ -4,10 +4,10 @@ description: Deploy Plane instantly with one-click installers on popular cloud p
 keywords: plane one-click deploy, cloud deployment, aws plane, digitalocean plane, quick install, plane cloud hosting, self-hosting
 ---
 
-
 # One-click deploy
 
 ::: infoThis feature is included in our paid plans, but for a limited time, our community users can access it for free.:::
+
 ### Requirements
 
 - Operating systems: Debian, Ubuntu, CentOS
@@ -45,7 +45,6 @@ Use `plane-app` [OPERATOR] to manage your Plane instance easily. Get a list of a
 ![Plane Help](/images/one-click-deploy/one-click-help.png)
 
 1. Basic operators
-
    1. `plane-app start` starts the Plane server.
    2. `plane-app restart` restarts the Plane server.
    3. `plane-app stop` stops the Plane server.
@@ -54,16 +53,15 @@ Use `plane-app` [OPERATOR] to manage your Plane instance easily. Get a list of a
 
    `plane-app --configure` will show advanced configurators.
    ![Advanced operators](/images/one-click-deploy/one-click-advanced.png)
-
-   - Change your proxy or listening port 
+   - Change your proxy or listening port
        <div> Default: 80</div>
-   - Change your domain name 
+   - Change your domain name
      <div>Default: Deployed server's public IP address</div>
-   - File upload size 
-    <div>Default: 5MB</div>
-   - Specify external database address when using an external database 
-    <div>Default: `Empty`</div>
-    <div>Default folder: `/opt/plane/data/postgres`</div>
+   - File upload size
+   <div>Default: 5MB</div>
+   - Specify external database address when using an external database
+   <div>Default: `Empty`</div>
+   <div>Default folder: `/opt/plane/data/postgres`</div>
    - Specify external Redis URL when using external Redis
      <div>Default: `Empty`</div>
      <div>Default folder: `/opt/plane/data/redis`</div>
@@ -72,7 +70,6 @@ Use `plane-app` [OPERATOR] to manage your Plane instance easily. Get a list of a
      <div>Default folder: `/opt/plane/data/minio`</div>
 
 3. Version operators
-
    1. `plane-app --upgrade` gets the latest stable version of `docker-compose.yaml`, `.env`, and Docker images
    2. `plane-app --update-installer` updates the installer and the `plane-app` utility.
    3. `plane-app --uninstall` uninstalls the Plane application and all Docker containers from the server but leaves the data stored in

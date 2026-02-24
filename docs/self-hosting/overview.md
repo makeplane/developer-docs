@@ -4,7 +4,6 @@ description: Deploy Plane on your own infrastructure with Docker, Kubernetes, or
 keywords: self-host plane, plane docker, plane kubernetes, self-hosted project management, docker compose plane, kubernetes helm plane, on-premise deployment
 ---
 
-
 # Deploy Plane on your infrastructure
 
 Take complete control of your project management infrastructure by deploying Plane on your own servers. Self-hosting Plane gives you full ownership of your data and the flexibility to deploy wherever you need - from a single Docker container to enterprise Kubernetes clusters.
@@ -39,6 +38,7 @@ Choose the deployment method that best fits your infrastructure and team size:
 [Other deployment methods](/self-hosting/methods/overview)
 
 ## System requirements
+
 - **CPU:** 2 cores
 - **RAM:** 4GB (8GB recommended for production)
 - **OS:** Linux (Ubuntu 20.04+, Debian 10+, CentOS 8+), macOS, or Windows with WSL2
@@ -64,7 +64,3 @@ Once deployed, configure your Plane instance to match your organization's needs:
     Connect to managed databases (PostgreSQL, Redis) and cloud storage (S3, MinIO, GCS) for scalable, production-ready deployments.
   </Card>
 </CardGroup>
-
-  
-
-

@@ -4,15 +4,15 @@ description: View and debug container logs for self-hosted Plane. Monitor Docker
 keywords: plane logs, container logs, docker logs, kubernetes logs, plane debugging, plane troubleshooting, self-hosting
 ---
 
-
 # View container logs
 
 If you need to check the logs for troubleshooting or to monitor what’s happening in specific Plane services like the API or Worker, you can access them directly from the command line.
 
 To view logs, start by running the command ↓:
-   ```bash
-   sudo prime-cli monitor
-   ```
+
+```bash
+sudo prime-cli monitor
+```
 
 This brings up a table where you can select which container logs you want to view.
 
@@ -27,6 +27,7 @@ This brings up a table where you can select which container logs you want to vie
 Here’s how to view logs for any service in Plane Community Edition, whether it’s the API, Worker, Redis, or others. This can be really helpful when troubleshooting or just getting insights into how each service is running.
 
 1. Start by running the setup script:
+
    ```bash
    ./setup.sh
    ```
@@ -46,6 +47,7 @@ Here’s how to view logs for any service in Plane Community Edition, whether it
 
    Action [2]: 6
    ```
+
 2. After choosing `6`, you’ll see a sub-menu listing all available services:
 
    ```
@@ -62,7 +64,7 @@ Here’s how to view logs for any service in Plane Community Edition, whether it
       10) Minio
       0) Back to Main Menu
 
-   Service: 
+   Service:
    ```
 
 3. Pick the service whose logs you’d like to check. For example, if you want to view the **API logs**, type `3`.

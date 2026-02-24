@@ -4,7 +4,6 @@ description: Configure GitHub OAuth authentication for Plane. Enable GitHub sign
 keywords: plane github oauth, github sign-in, github authentication, github login, oauth provider, self-hosting, plane sso
 ---
 
-
 # Github OAuth
 
 Plane supports GitHub OAuth so your users can sign-in with GitHub instead.

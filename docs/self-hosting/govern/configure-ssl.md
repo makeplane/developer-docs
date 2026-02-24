@@ -4,7 +4,6 @@ description: Configure SSL/TLS certificates for Plane. Setup HTTPS encryption fo
 keywords: plane ssl, https setup, tls certificate, ssl configuration, lets encrypt, secure deployment, self-hosting security
 ---
 
-
 # Set up SSL <Badge type="info" text="Commercial Edition" />
 
 This guide shows you how to configure SSL/TLS certificates for your self-hosted Plane instance. Plane handles certificate provisioning and renewal automatically using Let's Encrypt.
@@ -18,6 +17,7 @@ If you're using an external reverse proxy (nginx, Caddy, Traefik) or a load bala
 ## Before you begin
 
 Ensure you have:
+
 - A registered domain name pointing to your Plane server
 - DNS records configured (A or CNAME record pointing to your server's IP)
 - Ports 80 and 443 open on your server's firewall
@@ -32,6 +32,7 @@ Ensure you have:
 ### Open the configuration file
 
 Edit your Plane environment configuration:
+
 ```bash
 vim /opt/plane/plane.env
 ```
@@ -39,6 +40,7 @@ vim /opt/plane/plane.env
 ### Set required variables
 
 Add or update these environment variables:
+
 ```bash
 # SSL Configuration
 CERT_EMAIL=admin@yourcompany.com
@@ -60,11 +62,13 @@ Your full Plane URL **with** the `https://` protocol. This tells Plane services 
 ### DNS provider configuration (optional)
 
 If you're using Cloudflare or another DNS provider with API access, you can use DNS validation instead of HTTP validation. This is useful if:
+
 - Your server is behind a firewall that blocks port 80
 - You need wildcard certificates
 - HTTP validation isn't working due to network restrictions
 
 **For Cloudflare:**
+
 ```bash
 CERT_ACME_DNS=acme_dns cloudflare <cloudflare-api-token>
 ```
@@ -78,11 +82,13 @@ Check the [acme.sh DNS API documentation](https://github.com/acmesh-official/acm
 ## Apply SSL configuration
 
 Restart Plane to apply the SSL settings:
+
 ```bash
 sudo prime-cli restart
 ```
 
 Prime CLI will:
+
 1. Stop all Plane services
 2. Request a new SSL certificate from Let's Encrypt
 3. Configure the built-in proxy to use HTTPS
@@ -93,6 +99,7 @@ This process typically takes 30-60 seconds.
 ## Verify SSL is working
 
 Check that your Plane instance is accessible via HTTPS:
+
 ```bash
 curl -I https://plane.yourcompany.com
 ```
@@ -100,7 +107,6 @@ curl -I https://plane.yourcompany.com
 You should see a response with `HTTP/2 200` or `HTTP/1.1 200` and SSL-related headers.
 
 Visit your Plane instance in a browser at `https://plane.yourcompany.com`. You should see a secure connection (padlock icon) without certificate warnings.
-
 
 ## Using custom SSL certificates
 

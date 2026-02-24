@@ -4,7 +4,6 @@ description: Activate your Plane Enterprise Edition license. Enable advanced fea
 keywords: plane enterprise license, license activation, enterprise edition, plane enterprise features, self-hosting
 ---
 
-
 # Activate Enterprise license
 
 Enterprise plan licenses are activated at the instance level through God Mode, not through individual workspace settings. This gives instance administrators centralized control over Enterprise features across all workspaces.

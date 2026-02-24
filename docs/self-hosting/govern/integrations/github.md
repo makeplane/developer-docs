@@ -4,7 +4,6 @@ description: Connect GitHub to your self-hosted Plane instance. Sync pull reques
 keywords: plane github integration, github sync, pull request tracking, commit linking, github app, self-hosting, plane devops
 ---
 
-
 # Configure GitHub for Plane integration <Badge type="info" text="Pro" />
 
 This guide walks you through setting up a GitHub App to enable GitHub integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for GitHub, you’ll need to set up the necessary authentication, permissions, and webhooks to ensure smooth integration.
@@ -12,12 +11,13 @@ This guide walks you through setting up a GitHub App to enable GitHub integratio
 This guide covers configuration for both:
 
 - **[GitHub Cloud](/self-hosting/govern/integrations/github#github-cloud)**
-The standard cloud-hosted GitHub service
+  The standard cloud-hosted GitHub service
 
 - **[GitHub Enterprise Server](/self-hosting/govern/integrations/github#github-enterprise-server)**
-Self-hosted GitHub instances for organizations with specific compliance or security requirements
+  Self-hosted GitHub instances for organizations with specific compliance or security requirements
 
 In this guide, you’ll:
+
 1. [Create and configure a GitHub App](/self-hosting/govern/integrations/github#create-github-app)
 2. [Set up permissions and events](/self-hosting/govern/integrations/github#set-up-permissions-and-events)
 3. [Configure your Plane instance](/self-hosting/govern/integrations/github#configure-plane-instance)
@@ -25,7 +25,7 @@ In this guide, you’ll:
 ::: warning
 **Activate GitHub integration**
 
-After creating and configuring the GitHub app and configuring the instance as detailed on this page, you'll need to [setup the GitHub integration](https://docs.plane.so/integrations/github) within Plane. 
+After creating and configuring the GitHub app and configuring the instance as detailed on this page, you'll need to [setup the GitHub integration](https://docs.plane.so/integrations/github) within Plane.
 :::
 
 ## Create GitHub App
@@ -107,6 +107,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 5. In the **Post installation** section, add the below **Setup URL**.
 
    **For Plane cloud instance**
+
    ```bash
    https://silo.plane.so/api/oauth/github-enterprise/auth/callback
    ```
@@ -116,6 +117,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
    ```bash
    https://<your-plane-domain>/silo/api/oauth/github-enterprise/auth/callback
    ```
+
    Redirects users to this URL after GitHub app installation.
    ![Add setup URL](/images/integrations/github/add-setup-url.webp)
 
@@ -124,6 +126,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 7. In the **Webhook** section, add the below **Webhook URL**.
 
    **For Plane cloud instance**
+
    ```bash
    https://silo.plane.so/api/github-enterprise/github-webhook
    ```
@@ -133,50 +136,49 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
    ```bash
    https://<your-plane-domain>/silo/api/github-enterprise/github-webhook
    ```
+
    This allows Plane to receive updates from GitHub repositories.
 
    ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp)
 
 :::
 
-
 ### Set up permissions and events
 
 1. Add repository and account permissions by setting the **Access** dropdown next to each permission, as shown in the tables below.
-    ![Setup permissions](/images/integrations/github/setup-permissions.webp)
+   ![Setup permissions](/images/integrations/github/setup-permissions.webp)
 
-    **Repository permissions**
+   **Repository permissions**
 
-    |Permission&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Access&nbsp;level&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
-    |---------|---------------------|-----------|
-    |Issues|Read and write|Enables reading, creating, updating, closing, and commenting on issues within the repository.|
-    |Metadata|Read-only|Provides read-only access to repository metadata, such as its name, description, and visibility.|
-    |Pull requests|Read and write|Allows reading, creating, updating, merging, and commenting on pull requests.|
+   | Permission&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Access&nbsp;level&nbsp;&nbsp;&nbsp;&nbsp; | Purpose                                                                                          |
+   | ---------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------ |
+   | Issues                                                                       | Read and write                            | Enables reading, creating, updating, closing, and commenting on issues within the repository.    |
+   | Metadata                                                                     | Read-only                                 | Provides read-only access to repository metadata, such as its name, description, and visibility. |
+   | Pull requests                                                                | Read and write                            | Allows reading, creating, updating, merging, and commenting on pull requests.                    |
 
-    **Account permissions**
+   **Account permissions**
 
-    |Permission&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Access&nbsp;level&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
-    |---------|------------|-----------|
-    |Email addresses|Read-only|Grants access to users' email addresses, typically for notifications or communication.|
-    |Profile|Read and write|Enables access to user profile details like name, username, and avatar.|
+   | Permission&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Access&nbsp;level&nbsp;&nbsp;&nbsp;&nbsp; | Purpose                                                                                |
+   | ---------------------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------- |
+   | Email addresses                                                        | Read-only                                 | Grants access to users' email addresses, typically for notifications or communication. |
+   | Profile                                                                | Read and write                            | Enables access to user profile details like name, username, and avatar.                |
 
+2. In the **Subscribe to events** section, turn on all the required events below.
 
-2. In the **Subscribe to events** section, turn on all the required events below. 
+   ![Subscribe to events](/images/integrations/github/subscribe-to-events.webp)
 
-    ![Subscribe to events](/images/integrations/github/subscribe-to-events.webp)
-    
-    |Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Purpose|
-    |---------|------------|
-    |Installation target| This is where the repositories or organizations where your GitHub App is installed. This determines which repositories Plane can sync with.|
-    |Meta|Includes metadata about the app's configuration and setup. This is essential for maintaining integration stability.|
-    |Issue comment| Triggers when a comment is added, edited, or deleted on an issue. Useful for keeping comments synced between Plane and GitHub.|
-    |Issues|Triggers when an issue is created, updated, closed, reopened, assigned, labeled, or transferred. Ensures issue status and details remain consistent between Plane and GitHub.|
-    |Pull request|Fires when a pull request is opened, closed, merged, edited, or labeled. Essential for tracking development progress.|
-    |Pull request review|Activates when a review is submitted, edited, or dismissed. Keeps review activities aligned between Plane and GitHub.|
-    |Pull request review comment|Fires when a review comment is added, modified, or removed. Ensures feedback is reflected across both platforms.|
-    |Pull request review thread|Triggers when a review discussion thread is resolved or reopened. Helps maintain visibility on code review discussions.|
-    |Push|Activates when new commits are pushed to a repository. Useful for tracking code updates and changes.|
-    |Repository sub issues|Tracks issues within a repository that are linked to or managed by another issue. Ensures accurate synchronization of related issues.|
+   | Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Purpose                                                                                                                                                                       |
+   | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Installation target                                                                                                                                                                                                                                                           | This is where the repositories or organizations where your GitHub App is installed. This determines which repositories Plane can sync with.                                   |
+   | Meta                                                                                                                                                                                                                                                                          | Includes metadata about the app's configuration and setup. This is essential for maintaining integration stability.                                                           |
+   | Issue comment                                                                                                                                                                                                                                                                 | Triggers when a comment is added, edited, or deleted on an issue. Useful for keeping comments synced between Plane and GitHub.                                                |
+   | Issues                                                                                                                                                                                                                                                                        | Triggers when an issue is created, updated, closed, reopened, assigned, labeled, or transferred. Ensures issue status and details remain consistent between Plane and GitHub. |
+   | Pull request                                                                                                                                                                                                                                                                  | Fires when a pull request is opened, closed, merged, edited, or labeled. Essential for tracking development progress.                                                         |
+   | Pull request review                                                                                                                                                                                                                                                           | Activates when a review is submitted, edited, or dismissed. Keeps review activities aligned between Plane and GitHub.                                                         |
+   | Pull request review comment                                                                                                                                                                                                                                                   | Fires when a review comment is added, modified, or removed. Ensures feedback is reflected across both platforms.                                                              |
+   | Pull request review thread                                                                                                                                                                                                                                                    | Triggers when a review discussion thread is resolved or reopened. Helps maintain visibility on code review discussions.                                                       |
+   | Push                                                                                                                                                                                                                                                                          | Activates when new commits are pushed to a repository. Useful for tracking code updates and changes.                                                                          |
+   | Repository sub issues                                                                                                                                                                                                                                                         | Tracks issues within a repository that are linked to or managed by another issue. Ensures accurate synchronization of related issues.                                         |
 
 3. Click the **Create GitHub App** button at the bottom of the page.
 
@@ -251,6 +253,7 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
    - Private key
 
 7. Convert the Private key to convert it to base64. Since private keys are typically multi-line, they can cause parsing errors or issues when setting environment variables. To avoid this, run the following command to convert the key to base64:
+
    ```bash
    cat private_key.pem | base64 -w 0
    ```
@@ -258,7 +261,6 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 8. Once you've created the app, [activate the GitHub Enterprise integration in Plane](https://docs.plane.so/integrations/github?edition=github-enterprise#connect-github-organization).
 
 :::
-
 
 ## Troubleshooting
 
@@ -271,14 +273,18 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 This error usually occurs when the private key is not correctly generated. To fix this, follow the below steps.
 
 1. Generate a new private key.
-2. Convert the private key to base64. 
- ```bash
-   cat private_key.pem | base64 -w 0
-  ```
+2. Convert the private key to base64.
+
+```bash
+  cat private_key.pem | base64 -w 0
+```
+
 3. Add the private key to the `.env` file.
- ```bash
-   GITHUB_PRIVATE_KEY=<private_key>
- ```
+
+```bash
+  GITHUB_PRIVATE_KEY=<private_key>
+```
+
 4. Save the file and restart the instance.
 
 ### Unable to connect GitHub organization account or personal account
@@ -300,8 +306,8 @@ This error usually occurs when the callback URL is not correctly configured or t
 
 This error usually occurs when the application secret is not correctly configured. To fix this, follow the below steps.
 
-1. Delete the `plane_app_details_github` key from redis cache. ```del plane_app_details_github```.
-2. Set the `SILO_BASE_URL` in env with plane self hosted url and restart the api server. ```export SILO_BASE_URL=https://<your-domain>```
+1. Delete the `plane_app_details_github` key from redis cache. `del plane_app_details_github`.
+2. Set the `SILO_BASE_URL` in env with plane self hosted url and restart the api server. `export SILO_BASE_URL=https://<your-domain>`
 3. Run this command in api server shell `python manage.py reset_marketplace_app_secrets` to reset the application secrets.
 4. Try to connect again to the organization account to Plane.
 
