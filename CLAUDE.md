@@ -19,7 +19,7 @@ pnpm check:format         # Check Prettier formatting
 pnpm fix:format           # Auto-fix Prettier formatting
 ```
 
-**CI checks on PRs** (to `preview` and `master`): Prettier formatting + VitePress build must pass.
+**CI checks on PRs** (to `master`): Prettier formatting + VitePress build must pass.
 
 ## Architecture
 
@@ -63,6 +63,6 @@ Each endpoint page: one file per endpoint, includes path/body params, OAuth scop
 
 - **Frontmatter**: Every markdown page needs `title`, `description`, and `keywords` fields
 - **Images**: Stored in `docs/.vitepress/public/images/`, referenced with absolute paths (`/images/...`)
-- **Branch workflow**: Branch from `preview` (main branch), use `fix/`, `feat/`, `docs/`, `update/` prefixes
+- **Branch workflow**: Branch from `master`, use `fix/`, `feat/`, `docs/`, `update/` prefixes
 - **Formatting**: Prettier enforced — 120 char width, 2-space indent, semicolons, double quotes, ES5 trailing commas
 - **Sidebar updates**: When adding new pages, update the sidebar config in `docs/.vitepress/config.mts`
