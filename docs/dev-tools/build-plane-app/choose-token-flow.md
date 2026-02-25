@@ -48,6 +48,7 @@ GET https://api.plane.so/auth/o/authorize-app/
   ?client_id=YOUR_CLIENT_ID
   &response_type=code
   &redirect_uri=https://your-app.com/callback
+  &scope=scopeA scopeB scopeC
 ```
 
 ### 2. Handle the callback

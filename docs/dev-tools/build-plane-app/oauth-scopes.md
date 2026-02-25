@@ -124,6 +124,13 @@ This document lists all OAuth scopes available when building a Plane app. Reques
 | -------------- | ----------------- |
 | `profile:read` | Read user profile |
 
+## Assets scopes
+
+| Scope          | Description              |
+| -------------- | ------------------------ |
+| `assets:read`  | Read assets              |
+| `assets:write` | Create and update assets |
+
 ## Agent Run scopes
 
 | Scope                         | Description                            |
