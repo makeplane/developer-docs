@@ -152,6 +152,63 @@ This is where you'll make all configuration changes. Remember to restart the ins
 | `OPENSEARCH_PASSWORD`     | Authentication password                                     | `your-secure-password`                 |
 | `OPENSEARCH_INDEX_PREFIX` | Prefix for all index names (useful for multi-tenant setups) | (empty)                                |
 
+
+### Plane AI
+
+#### Plane AI replicas
+
+To start Plane AI services, set each replica count to `1`:
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `PI_API_REPLICAS` | Plane AI API replica count | Yes |
+| `PI_BEAT_REPLICAS` | Plane AI Beat Worker replica count | Yes |
+| `PI_WORKER_REPLICAS` | Plane AI Worker replica count | Yes |
+| `PI_MIGRATOR_REPLICAS` | Plane AI Migrator replica count | Yes |
+
+#### LLM provider API keys
+
+Plane AI supports multiple LLM providers. Configure one or more by adding their API keys.
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | API key for OpenAI models | Optional |
+| `CLAUDE_API_KEY` | API key for Anthropic models | Optional |
+| `GROQ_API_KEY` | API key for speech-to-text features | Optional |
+| `CUSTOM_LLM_ENABLED` | Set to `true` to use a custom LLM with an OpenAI-compatible API | Optional |
+| `CUSTOM_LLM_MODEL_KEY` | Identifier key for the custom model | Optional |
+| `CUSTOM_LLM_BASE_URL` | Base URL of the custom model's OpenAI-compatible endpoint | Optional |
+| `CUSTOM_LLM_API_KEY` | API key for the custom endpoint | Optional |
+| `CUSTOM_LLM_NAME` | Display name for the custom model | Optional |
+| `CUSTOM_LLM_DESCRIPTION` | Description of the custom model | Optional |
+| `CUSTOM_LLM_MAX_TOKENS` | Maximum token limit for the custom model | Optional |
+
+#### Provider base URLs
+
+Use these when routing requests through self-hosted gateways, proxies, or compatible third-party endpoints.
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `OPENAI_BASE_URL` | Custom base URL for OpenAI-compatible APIs | OpenAI |
+| `CLAUDE_BASE_URL` | Custom base URL for Claude-compatible APIs | Anthropic |
+| `COHERE_BASE_URL` | Custom base URL for Cohere APIs | Cohere |
+| `GROQ_BASE_URL` | Custom base URL for Groq APIs | Groq |
+
+#### Embedding model configuration
+
+These settings are required for semantic search and Plane AI Chat. Configure one of the following options.
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `EMBEDDING_MODEL_ID` | ID of an existing embedding model deployed in OpenSearch (works with both self-hosted and AWS OpenSearch) | Conditional |
+| `EMBEDDING_MODEL` | Embedding model to automatically deploy (e.g., `cohere/embed-v4.0`, `openai/text-embedding-3-small`, `bedrock/amazon.titan-embed-text-v1`). Self-hosted OpenSearch only. | Conditional |
+| `COHERE_API_KEY` | API key for Cohere embedding models | Conditional |
+| `BR_AWS_ACCESS_KEY_ID` | AWS access key ID for Bedrock Titan embedding | Conditional |
+| `BR_AWS_SECRET_ACCESS_KEY` | AWS secret access key for Bedrock Titan embedding | Conditional |
+| `BR_AWS_REGION` | AWS region for Bedrock Titan embedding | Conditional |
+
+For setup instructions, supported models, and IAM permissions, see [Enable Plane AI](/self-hosting/govern/plane-ai).
+
 ### API settings
 
 | Variable               | Description                                                             | Default Value |

@@ -272,6 +272,14 @@ export default withMermaid(
               },
               { text: "DNS for Intake Email", link: "/self-hosting/govern/configure-dns-email-service" },
               { text: "OpenSearch for search", link: "/self-hosting/govern/advanced-search" },
+              {
+                text: "Plane AI",
+                link: "/self-hosting/govern/plane-ai",
+                collapsed: true,
+                items: [
+                  { text: "AWS OpenSearch embedding", link: "/self-hosting/govern/aws-opensearch-embedding" },
+                ],
+              },
               { text: "External secrets", link: "/self-hosting/govern/external-secrets" },
               { text: "External reverse proxy", link: "/self-hosting/govern/reverse-proxy" },
               { text: "Private storage buckets", link: "/self-hosting/govern/private-bucket" },
