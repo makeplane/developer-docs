@@ -115,6 +115,122 @@ This upgrade path is for installations using external or managed database and ob
     ```
 
 Your Commercial Edition instance is now connected to your existing external database and storage.
+:::
+
+:::details Manual backup and restore without CLI
+
+Use this method if you prefer to back up data manually or if the setup.sh script isn't working for your environment.
+
+### What gets migrated
+
+- PostgreSQL database (all Plane data)
+- MinIO uploads (attachments, images, files)
+
+### Prerequisites
+
+- Plane CE and Commercial versions should be compatible
+- Shell access to both servers
+- Docker installed on both servers
+
+### Back up data on Community instance
+
+1. Create backup folders:
+
+   ```bash
+   mkdir -p ~/ce-backups/db
+   mkdir -p ~/ce-backups/minio/uploads
+   cd ~/ce-backups
+   ```
+
+2. Back up PostgreSQL data:
+
+   ```bash
+   docker cp plane-app-plane-db-1:/var/lib/postgresql/data/. db/
+   ```
+
+3. Back up MinIO uploads:
+
+   ```bash
+   docker cp plane-app-plane-minio-1:/export/uploads minio/uploads/
+   ```
+
+4. Verify backup sizes:
+
+   ```bash
+   du -sh db minio/uploads
+   ```
+
+   Make sure sizes look reasonable (not just a few KB).
+
+5. Transfer backup to Commercial server:
+
+   ```bash
+   scp -r ~/ce-backups user@commercial-server:/tmp/
+   ```
+
+### Restore data on Commercial instance
+
+1. Stop Plane:
+
+   ```bash
+   prime-cli stop
+   ```
+
+   Verify all containers are down:
+
+   ```bash
+   docker ps
+   ```
+
+2. Back up existing Commercial data (safety precaution):
+
+   ```bash
+   mv /opt/plane/data/db /opt/plane/data/db.bak
+   mv /opt/plane/data/minio/uploads /opt/plane/data/minio/uploads.bak
+   ```
+
+3. Restore PostgreSQL:
+
+   ```bash
+   mv /tmp/ce-backups/db /opt/plane/data/db
+   ```
+
+4. Restore MinIO uploads:
+
+   ```bash
+   mv /tmp/ce-backups/minio/uploads /opt/plane/data/minio/uploads
+   ```
+
+5. Start Plane:
+
+   ```bash
+   prime-cli restart
+   ```
+
+### Validate the migration
+
+- Login works
+- Projects are visible
+- Attachments open correctly
+
+### Rollback
+
+If something fails, restore from the backup you created in step 2:
+
+```bash
+prime-cli stop
+
+rm -rf /opt/plane/data/db
+mv /opt/plane/data/db.bak /opt/plane/data/db
+
+rm -rf /opt/plane/data/minio/uploads
+mv /opt/plane/data/minio/uploads.bak /opt/plane/data/minio/uploads
+
+prime-cli restart
+```
+
+:::
+
 
 ## What's next
 
