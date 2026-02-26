@@ -111,7 +111,7 @@ Target architecture: `amd64` or `arm64`. Defaults to `amd64`. Only applies when 
 </div>
 <div class="api-right">
 
-<CodePanel :languages="['cURL', 'Python', 'JavaScript']">
+<CodePanel :languages="['cURL']">
 <template #curl>
 
 ```bash
@@ -133,50 +133,7 @@ curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4" \
 ```
 
 </template>
-<template #python>
 
-```python
-import requests
-
-# Download standard config files
-response = requests.get(
-    "https://prime.plane.so/api/v2/setup/",
-    params={"version": "v2.3.4"},
-)
-
-with open("plane.zip", "wb") as f:
-    f.write(response.content)
-
-# Download airgapped config (ARM64)
-response = requests.get(
-    "https://prime.plane.so/api/v2/setup/",
-    params={
-        "version": "v2.3.4",
-        "airgapped": "true",
-        "platform": "arm64",
-    },
-)
-
-with open("plane.zip", "wb") as f:
-    f.write(response.content)
-```
-
-</template>
-<template #javascript>
-
-```javascript
-// Download standard config files
-const response = await fetch("https://prime.plane.so/api/v2/setup/?version=v2.3.4");
-const blob = await response.blob();
-
-// Download airgapped config (ARM64)
-const airgappedResponse = await fetch(
-  "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true&platform=arm64"
-);
-const airgappedBlob = await airgappedResponse.blob();
-```
-
-</template>
 </CodePanel>
 
 </div>
