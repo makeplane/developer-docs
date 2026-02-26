@@ -43,59 +43,15 @@ Replace `v2.3.4` with the version you need. See the [releases page](https://plan
 - `airgapped-docker-compose-{platform}.yml`
 - `variables.env`
 
----
+## Parameters
 
-## API reference
+| Parameter | Required | Default | Description |
+|-----------|----------|---------|-------------|
+| `version` | Yes | — | Release tag (e.g., `v2.3.4`) |
+| `airgapped` | No | `false` | Set to `true` for airgapped compose files |
+| `platform` | No | `amd64` | Target architecture: `amd64` or `arm64`. Only applies when `airgapped=true`. |
 
-<div class="api-endpoint-badge">
-  <span class="method get">GET</span>
-  <span class="path">/api/v2/setup/</span>
-</div>
-
-<div class="api-two-column">
-<div class="api-left">
-
-**Base URL:** `https://prime.plane.so`
-
-**Authentication:** Not required (public endpoint)
-
-<div class="params-section">
-
-### Query parameters
-
-<div class="params-list">
-
-<ApiParam name="version" type="string" :required="true">
-
-Release tag (e.g., `v2.3.4`).
-
-</ApiParam>
-
-<ApiParam name="airgapped" type="boolean">
-
-Set to `true` for airgapped compose files. Defaults to `false`.
-
-</ApiParam>
-
-<ApiParam name="platform" type="string">
-
-Target architecture: `amd64` or `arm64`. Defaults to `amd64`. Only applies when `airgapped=true`.
-
-</ApiParam>
-
-</div>
-</div>
-
-<div class="params-section">
-
-### Response
-
-**Success (200):** Returns a zip archive containing the config files.
-
-- Content-Type: `application/zip`
-- Content-Disposition: `attachment; filename="plane-{version}.zip"`
-
-### Errors
+### Error responses
 
 | Status | Cause | Response |
 |--------|-------|----------|
@@ -106,35 +62,3 @@ Target architecture: `amd64` or `arm64`. Defaults to `amd64`. Only applies when 
 | 404 | Config files missing from release | `{"error": "assets not found in release: <filenames>"}` |
 | 500 | GitHub API failure | `{"error": "Failed to fetch release information"}` |
 
-</div>
-
-</div>
-<div class="api-right">
-
-<CodePanel :languages="['cURL']">
-<template #curl>
-
-```bash
-# Download standard config files
-curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4" \
-  -o plane.zip
-
-# Download airgapped config (AMD64)
-curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true" \
-  -o plane.zip
-
-# Download airgapped config (ARM64)
-curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true&platform=arm64" \
-  -o plane.zip
-
-# Verify zip contents without extracting
-curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4" \
-  -o plane.zip && unzip -l plane.zip
-```
-
-</template>
-
-</CodePanel>
-
-</div>
-</div>
