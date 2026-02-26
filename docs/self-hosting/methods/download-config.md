@@ -31,7 +31,7 @@ curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true&platfor
 unzip plane.zip
 ```
 
-Replace `v2.3.4` with the version you need. See the [releases page](https://plane.so/changelog?category=self-hosteds) for available versions.
+Replace `v2.3.4` with the version you need. See the [releases page](https://plane.so/changelog?category=self-hosted) for available versions.
 
 ## What's in the zip
 
@@ -106,10 +106,6 @@ Target architecture: `amd64` or `arm64`. Defaults to `amd64`. Only applies when 
 
 - `airgapped-docker-compose-{platform}.yml`
 - `variables.env`
-
-## Examples
-
-### Download standard config files
 
 ### Errors
 
