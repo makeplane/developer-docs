@@ -95,18 +95,6 @@ Target architecture: `amd64` or `arm64`. Defaults to `amd64`. Only applies when 
 - Content-Type: `application/zip`
 - Content-Disposition: `attachment; filename="plane-{version}.zip"`
 
-### Zip contents by mode
-
-**Standard** (`airgapped=false` or omitted):
-
-- `docker-compose.yml`
-- `variables.env`
-
-**Airgapped** (`airgapped=true`):
-
-- `airgapped-docker-compose-{platform}.yml`
-- `variables.env`
-
 ### Errors
 
 | Status | Cause | Response |
