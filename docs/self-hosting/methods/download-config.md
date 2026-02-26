@@ -1,10 +1,10 @@
 ---
-title: Download version config
+title: Download Docker config files
 description: Download docker-compose.yml and variables.env files for a specific Plane release as a zip archive.
 keywords: plane, self-hosting, setup, docker compose, config download, version config, airgapped, variables.env
 ---
 
-# Download version config
+# Download Docker config files
 
 If you're running a custom Docker setup and don't use `prime-cli`, you can download the `docker-compose.yml` and `variables.env` files for any Plane release directly.
 
@@ -95,6 +95,8 @@ Target architecture: `amd64` or `arm64`. Defaults to `amd64`. Only applies when 
 - Content-Type: `application/zip`
 - Content-Disposition: `attachment; filename="plane-{version}.zip"`
 
+### Zip contents by mode
+
 **Standard** (`airgapped=false` or omitted):
 
 - `docker-compose.yml`
@@ -105,9 +107,9 @@ Target architecture: `amd64` or `arm64`. Defaults to `amd64`. Only applies when 
 - `airgapped-docker-compose-{platform}.yml`
 - `variables.env`
 
-</div>
+## Examples
 
-<div class="params-section">
+### Download standard config files
 
 ### Errors
 
