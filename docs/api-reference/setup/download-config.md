@@ -141,9 +141,7 @@ with open("plane.zip", "wb") as f:
 
 ```javascript
 // Download standard config files
-const response = await fetch(
-  "https://prime.plane.so/api/v2/setup/?version=v0.23.0"
-);
+const response = await fetch("https://prime.plane.so/api/v2/setup/?version=v0.23.0");
 const blob = await response.blob();
 
 // Download airgapped config (ARM64)

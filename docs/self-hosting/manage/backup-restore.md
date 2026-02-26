@@ -9,6 +9,7 @@ keywords: plane backup, plane restore, database backup, postgresql backup, data 
 Backing up your data regularly helps prevent data loss and allows you to restore your system quickly if necessary. Follow these instructions to back up and restore your data using Plane’s command-line interface.
 
 ## For Docker Compose
+
 ### Backup data
 
 ::: warning
@@ -152,15 +153,14 @@ That’s it! You’re back up and running with your restored data.
 
 :::
 
-
 ## Other deployment methods
 
 For Kubernetes, or other deployment methods, use your platform's native backup tools. Plane stores data in two places that need to be backed up:
 
-| Component | What it contains |
-|-----------|------------------|
+| Component               | What it contains                                                             |
+| ----------------------- | ---------------------------------------------------------------------------- |
 | **PostgreSQL database** | All Plane data — workspaces, projects, work items, users, comments, settings |
-| **Object storage** | Attachments, uploaded images, files (MinIO, S3, or S3-compatible storage) |
+| **Object storage**      | Attachments, uploaded images, files (MinIO, S3, or S3-compatible storage)    |
 
 ### Configuration files
 

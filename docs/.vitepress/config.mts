@@ -704,9 +704,7 @@ export default withMermaid(
               {
                 text: "Setup",
                 collapsed: true,
-                items: [
-                  { text: "Download Version Config", link: "/api-reference/setup/download-config" },
-                ],
+                items: [{ text: "Download Version Config", link: "/api-reference/setup/download-config" }],
               },
             ],
           },
