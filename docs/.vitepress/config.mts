@@ -237,6 +237,7 @@ export default withMermaid(
                   { text: "Portainer", link: "/self-hosting/methods/portainer" },
                 ],
               },
+              { text: "Download Version Config", link: "/self-hosting/methods/download-config" },
             ],
           },
           {
@@ -700,11 +701,6 @@ export default withMermaid(
                   { text: "Overview", link: "/api-reference/user/overview" },
                   { text: "Get Current User", link: "/api-reference/user/get-current-user" },
                 ],
-              },
-              {
-                text: "Setup",
-                collapsed: true,
-                items: [{ text: "Download Version Config", link: "/api-reference/setup/download-config" }],
               },
             ],
           },

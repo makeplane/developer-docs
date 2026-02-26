@@ -1,7 +1,7 @@
 ---
 title: Download version config
 description: Download docker-compose.yml and variables.env files for a given Plane release as a zip archive.
-keywords: plane, plane api, setup, docker compose, self-hosting, config download, version config, airgapped
+keywords: plane, self-hosting, setup, docker compose, config download, version config, airgapped, variables.env
 ---
 
 # Download version config
