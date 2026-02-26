@@ -14,21 +14,15 @@ Download `docker-compose.yml` and `variables.env` files for a given Plane releas
 curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|false>&platform=<amd64|arm64>" -o plane.zip
 ```
 
+**Authentication:** None required (public endpoint)
+
+## Query Parameters
+
 | Option     | Required | Default | Description                                  |
 | ---------- | -------- | ------- | -------------------------------------------- |
 | `version`  | Yes      | —       | Release tag name (e.g. `v2.3.4`)            |
 | `airgapped`| No       | `false` | Set to `true` to get airgapped compose files |
 | `platform` | No       | `amd64` | Target architecture: `amd64` or `arm64`      |
-
-**Authentication:** None required (public endpoint)
-
-## Query Parameters
-
-| Parameter   | Required | Default | Description                                  |
-| ----------- | -------- | ------- | -------------------------------------------- |
-| `version`   | Yes      | —       | Release tag name (e.g. `v2.3.4`)            |
-| `airgapped` | No       | `false` | Set to `true` to get airgapped compose files |
-| `platform`  | No       | `amd64` | Target architecture: `amd64` or `arm64`      |
 
 ## Response
 
