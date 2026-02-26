@@ -237,7 +237,7 @@ export default withMermaid(
                   { text: "Coolify", link: "/self-hosting/methods/coolify" },
                   { text: "Portainer", link: "/self-hosting/methods/portainer" },
                 ],
-              }
+              },
             ],
           },
           {
