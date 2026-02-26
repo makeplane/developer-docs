@@ -10,10 +10,6 @@ Download `docker-compose.yml` and `variables.env` files for a given Plane releas
 
 ## Endpoint
 
-```
-GET https://prime.plane.so/api/v2/setup/
-```
-
 ```bash
 curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|false>&platform=<amd64|arm64>" -o plane.zip
 ```
