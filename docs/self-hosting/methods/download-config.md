@@ -20,7 +20,7 @@ curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|fal
 
 | Option     | Required | Default | Description                                  |
 | ---------- | -------- | ------- | -------------------------------------------- |
-| `version`  | Yes      | —       | Release tag name (e.g. `v0.23.0`)            |
+| `version`  | Yes      | —       | Release tag name (e.g. `v2.3.4`)            |
 | `airgapped`| No       | `false` | Set to `true` to get airgapped compose files |
 | `platform` | No       | `amd64` | Target architecture: `amd64` or `arm64`      |
 
@@ -30,7 +30,7 @@ curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|fal
 
 | Parameter   | Required | Default | Description                                  |
 | ----------- | -------- | ------- | -------------------------------------------- |
-| `version`   | Yes      | —       | Release tag name (e.g. `v0.23.0`)            |
+| `version`   | Yes      | —       | Release tag name (e.g. `v2.3.4`)            |
 | `airgapped` | No       | `false` | Set to `true` to get airgapped compose files |
 | `platform`  | No       | `amd64` | Target architecture: `amd64` or `arm64`      |
 
@@ -58,26 +58,26 @@ curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|fal
 ### Download standard config files
 
 ```bash
-curl "https://prime.plane.so/api/v2/setup/?version=v0.23.0" -o plane.zip
+curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4" -o plane.zip
 unzip plane.zip
 ```
 
 ### Download airgapped config (AMD64)
 
 ```bash
-curl "https://prime.plane.so/api/v2/setup/?version=v0.23.0&airgapped=true" -o plane.zip
+curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true" -o plane.zip
 ```
 
 ### Download airgapped config (ARM64)
 
 ```bash
-curl "https://prime.plane.so/api/v2/setup/?version=v0.23.0&airgapped=true&platform=arm64" -o plane.zip
+curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true&platform=arm64" -o plane.zip
 ```
 
 ### Verify zip contents without extracting
 
 ```bash
-curl "https://prime.plane.so/api/v2/setup/?version=v0.23.0" -o plane.zip && unzip -l plane.zip
+curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4" -o plane.zip && unzip -l plane.zip
 ```
 
 ## Error Responses
