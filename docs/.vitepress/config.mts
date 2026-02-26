@@ -701,6 +701,13 @@ export default withMermaid(
                   { text: "Get Current User", link: "/api-reference/user/get-current-user" },
                 ],
               },
+              {
+                text: "Setup",
+                collapsed: true,
+                items: [
+                  { text: "Download Version Config", link: "/api-reference/setup/download-config" },
+                ],
+              },
             ],
           },
         ],
