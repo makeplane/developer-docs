@@ -708,7 +708,7 @@ export default withMermaid(
 
         "/dev-tools/": [
           {
-            text: "Build and extend Plane",
+            text: "Build on and extend Plane",
             items: [
               {
                 text: "Agents",
