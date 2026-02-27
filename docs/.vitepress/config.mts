@@ -738,9 +738,7 @@ export default withMermaid(
                 text: "MCP Server",
                 link: "/dev-tools/mcp-server",
                 collapsed: false,
-                items: [
-                  { text: "For Claude Code", link: "/dev-tools/mcp-server-claude-code" },
-                ],
+                items: [{ text: "For Claude Code", link: "/dev-tools/mcp-server-claude-code" }],
               },
               { text: "Plane Compose", link: "/dev-tools/plane-compose" },
               { text: "Webhooks", link: "/dev-tools/intro-webhooks" },
