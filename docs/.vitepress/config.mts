@@ -708,13 +708,23 @@ export default withMermaid(
 
         "/dev-tools/": [
           {
-            text: "Build and extend Plane",
+            text: "Build on and extend Plane",
             items: [
               {
-                text: "Build Plane App",
+                text: "Agents",
+                link: "/dev-tools/agents/overview",
                 collapsed: false,
                 items: [
-                  { text: "Overview", link: "/dev-tools/build-plane-app/overview" },
+                  { text: "Building an agent", link: "/dev-tools/agents/building-an-agent" },
+                  { text: "Best practices", link: "/dev-tools/agents/best-practices" },
+                  { text: "Signals and content payload", link: "/dev-tools/agents/signals-content-payload" },
+                ],
+              },
+              {
+                text: "Build Plane App",
+                link: "/dev-tools/build-plane-app/overview",
+                collapsed: false,
+                items: [
                   { text: "Create an OAuth application", link: "/dev-tools/build-plane-app/create-oauth-application" },
                   { text: "Choose token Flow", link: "/dev-tools/build-plane-app/choose-token-flow" },
                   { text: "Handling webhooks", link: "/dev-tools/build-plane-app/webhooks" },
@@ -723,20 +733,15 @@ export default withMermaid(
                   { text: "Complete examples", link: "/dev-tools/build-plane-app/examples" },
                 ],
               },
+
               {
-                text: "Agents",
+                text: "MCP Server",
+                link: "/dev-tools/mcp-server",
                 collapsed: false,
-                items: [
-                  { text: "Overview", link: "/dev-tools/agents/overview" },
-                  { text: "Building an agent", link: "/dev-tools/agents/building-an-agent" },
-                  { text: "Best practices", link: "/dev-tools/agents/best-practices" },
-                  { text: "Signals and content payload", link: "/dev-tools/agents/signals-content-payload" },
-                ],
+                items: [{ text: "For Claude Code", link: "/dev-tools/mcp-server-claude-code" }],
               },
-              { text: "Webhooks", link: "/dev-tools/intro-webhooks" },
-              { text: "MCP Server", link: "/dev-tools/mcp-server" },
-              { text: "MCP Server for Claude Code", link: "/dev-tools/mcp-server-claude-code" },
               { text: "Plane Compose", link: "/dev-tools/plane-compose" },
+              { text: "Webhooks", link: "/dev-tools/intro-webhooks" },
             ],
           },
         ],
