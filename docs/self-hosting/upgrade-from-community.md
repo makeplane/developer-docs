@@ -231,7 +231,6 @@ prime-cli restart
 
 :::
 
-
 ## What's next
 
 - [Activate a paid plan license](/self-hosting/manage/manage-licenses/activate-pro-and-business).

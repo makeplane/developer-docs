@@ -215,6 +215,7 @@ export default withMermaid(
                   { text: "Docker Compose", link: "/self-hosting/methods/docker-compose" },
                   { text: "Docker AIO", link: "/self-hosting/methods/docker-aio" },
                   { text: "Docker Swarm", link: "/self-hosting/methods/docker-swarm" },
+                  { text: "Download config files", link: "/self-hosting/methods/download-config" },
                 ],
               },
               { text: "Kubernetes", link: "/self-hosting/methods/kubernetes" },
