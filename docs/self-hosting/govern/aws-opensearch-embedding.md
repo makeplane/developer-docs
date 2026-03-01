@@ -38,11 +38,7 @@ Make sure you have:
        {
          "Sid": "SecretManagerAccess",
          "Effect": "Allow",
-         "Action": [
-           "secretsmanager:GetSecretValue",
-           "secretsmanager:DescribeSecret",
-           "secretsmanager:ListSecrets"
-         ],
+         "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret", "secretsmanager:ListSecrets"],
          "Resource": "*"
        }
      ]

@@ -276,9 +276,7 @@ export default withMermaid(
                 text: "Plane AI",
                 link: "/self-hosting/govern/plane-ai",
                 collapsed: true,
-                items: [
-                  { text: "AWS OpenSearch embedding", link: "/self-hosting/govern/aws-opensearch-embedding" },
-                ],
+                items: [{ text: "AWS OpenSearch embedding", link: "/self-hosting/govern/aws-opensearch-embedding" }],
               },
               { text: "External secrets", link: "/self-hosting/govern/external-secrets" },
               { text: "External reverse proxy", link: "/self-hosting/govern/reverse-proxy" },

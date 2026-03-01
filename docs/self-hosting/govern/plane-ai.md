@@ -25,6 +25,7 @@ You'll need:
 #### OpenAI
 
 Supported models:
+
 - GPT-5
 - GPT-4.1
 - GPT-5.2
@@ -32,6 +33,7 @@ Supported models:
 #### Anthropic
 
 Supported models:
+
 - Claude Sonnet 4.0
 - Claude Sonnet 4.5
 - Claude Sonnet 4.6
@@ -50,11 +52,11 @@ For reliable performance across all Plane AI features, use a custom model with a
 
 Embedding models power semantic search. Plane AI supports:
 
-| Provider | Supported models |
-|----------|-----------------|
-| **Cohere** | `cohere/embed-v4.0` |
-| **OpenAI** | `openai/text-embedding-ada-002`, `openai/text-embedding-3-small` |
-| **AWS Bedrock (Titan)** | `bedrock/amazon.titan-embed-text-v1` |
+| Provider                | Supported models                                                 |
+| ----------------------- | ---------------------------------------------------------------- |
+| **Cohere**              | `cohere/embed-v4.0`                                              |
+| **OpenAI**              | `openai/text-embedding-ada-002`, `openai/text-embedding-3-small` |
+| **AWS Bedrock (Titan)** | `bedrock/amazon.titan-embed-text-v1`                             |
 
 ## Enable Plane AI services
 
