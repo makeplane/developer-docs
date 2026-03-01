@@ -266,7 +266,15 @@ export default withMermaid(
                 collapsed: true,
                 items: [
                   { text: "GitHub", link: "/self-hosting/govern/integrations/github" },
+                  {
+                    text: "GitHub Enterprise Server",
+                    link: "/self-hosting/govern/integrations/github-enterprise",
+                  },
                   { text: "GitLab", link: "/self-hosting/govern/integrations/gitlab" },
+                  {
+                    text: "GitLab Self-managed",
+                    link: "/self-hosting/govern/integrations/gitlab-self-managed",
+                  },
                   { text: "Sentry", link: "/self-hosting/govern/integrations/sentry" },
                   { text: "Slack", link: "/self-hosting/govern/integrations/slack" },
                 ],

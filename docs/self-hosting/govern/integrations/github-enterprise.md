@@ -1,32 +1,32 @@
 ---
-title: Configure GitHub for Plane integration
-description: Connect GitHub to your self-hosted Plane instance. Sync pull requests, commits, and branches with Plane work items for seamless development tracking.
-keywords: plane github integration, github sync, pull request tracking, commit linking, github app, self-hosting, plane devops
+title: Configure GitHub Enterprise Server for Plane integration
+description: Connect GitHub Enterprise Server to your Plane instance. Sync pull requests, commits, and branches with Plane work items for seamless development tracking.
+keywords: plane github enterprise integration, github enterprise server, github sync, pull request tracking, commit linking, github app, self-hosting, plane devops
 ---
 
-# Configure GitHub for Plane integration <Badge type="info" text="Pro" />
+# Configure GitHub Enterprise Server for Plane integration <Badge type="info" text="Pro" />
 
-This guide walks you through setting up a GitHub App to enable GitHub integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don't come pre-configured for GitHub, you'll need to set up the necessary authentication, permissions, and webhooks to ensure smooth integration.
+This guide walks you through setting up a GitHub App on your GitHub Enterprise Server instance to enable GitHub integration for your Plane workspace. You'll need to set up the necessary authentication, permissions, and webhooks to ensure smooth integration.
 
 ::: info
-Looking for **GitHub Enterprise Server**? See [Configure GitHub Enterprise Server for Plane integration](/self-hosting/govern/integrations/github-enterprise).
+Looking for **GitHub Cloud**? See [Configure GitHub for Plane integration](/self-hosting/govern/integrations/github).
 :::
 
 In this guide, you'll:
 
-1. [Create and configure a GitHub App](/self-hosting/govern/integrations/github#create-github-app)
-2. [Set up permissions and events](/self-hosting/govern/integrations/github#set-up-permissions-and-events)
-3. [Configure your Plane instance](/self-hosting/govern/integrations/github#configure-plane-instance)
+1. [Create and configure a GitHub App](/self-hosting/govern/integrations/github-enterprise#create-github-app)
+2. [Set up permissions and events](/self-hosting/govern/integrations/github-enterprise#set-up-permissions-and-events)
+3. [Configure your Plane instance](/self-hosting/govern/integrations/github-enterprise#configure-plane-instance)
 
 ::: warning
-**Activate GitHub integration**
+**Activate GitHub Enterprise integration**
 
 After creating and configuring the GitHub app and configuring the instance as detailed on this page, you'll need to [setup the GitHub integration](https://docs.plane.so/integrations/github) within Plane.
 :::
 
 ## Create GitHub App
 
-To configure GitHub integration, you'll need to create a GitHub App within your organization.
+To configure GitHub Enterprise integration, you'll need to create a GitHub App within your organization.
 
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
@@ -38,9 +38,18 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**.
 
+   **For Plane cloud instance**
+
    ```bash
-   https://<your-domain>/silo/api/github/auth/callback
-   https://<your-domain>/silo/api/github/auth/user/callback
+   https://silo.plane.so/api/oauth/github-enterprise/auth/callback
+   https://silo.plane.so/api/oauth/github-enterprise/auth/user/callback
+   ```
+
+   **For Plane self-hosted instance**
+
+   ```bash
+   https://<your-domain>/silo/api/oauth/github-enterprise/auth/callback
+   https://<your-domain>/silo/api/oauth/github-enterprise/auth/user/callback
    ```
 
    These URLs allow Plane to verify and enable workspace connection with the Github App.
@@ -48,8 +57,16 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 5. In the **Post installation** section, add the below **Setup URL**.
 
+   **For Plane cloud instance**
+
    ```bash
-   https://<your-domain>/silo/api/github/auth/callback
+   https://silo.plane.so/api/oauth/github-enterprise/auth/callback
+   ```
+
+   **For Plane self-hosted instance**
+
+   ```bash
+   https://<your-plane-domain>/silo/api/oauth/github-enterprise/auth/callback
    ```
 
    Redirects users to this URL after GitHub app installation.
@@ -59,8 +76,16 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
 7. In the **Webhook** section, add the below **Webhook URL**.
 
+   **For Plane cloud instance**
+
    ```bash
-   https://<your-domain>/silo/api/github/github-webhook
+   https://silo.plane.so/api/github-enterprise/github-webhook
+   ```
+
+   **For Plane self-hosted instance**
+
+   ```bash
+   https://<your-plane-domain>/silo/api/github-enterprise/github-webhook
    ```
 
    This allows Plane to receive updates from GitHub repositories.
@@ -120,34 +145,22 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 
    ![Private keys](/images/integrations/github/private-keys.webp)
 
-5. Click **Genereate a private key**.
+5. Click **Generate a private key**.
 
 6. Retrieve the following details from the **General** tab:
    - App ID
+   - App Slug (You can find this in browser url)
    - Client ID
    - Client secret
-   - GitHub App name
    - Private key
 
-7. Before adding the Private key as an environment variable, you'll need to convert it to base64. Since private keys are typically multi-line, they can cause parsing errors or issues when setting environment variables. To avoid this, run the following command to convert the key to base64:
+7. Convert the Private key to convert it to base64. Since private keys are typically multi-line, they can cause parsing errors or issues when setting environment variables. To avoid this, run the following command to convert the key to base64:
 
    ```bash
    cat private_key.pem | base64 -w 0
    ```
 
-8. Add these environment variables with the values to your Plane instance's `.env` file.
-
-   ```bash
-   GITHUB_CLIENT_ID=<client_id>
-   GITHUB_CLIENT_SECRET=<client_secret>
-   GITHUB_APP_NAME=<app_name>
-   GITHUB_APP_ID=<app_id>
-   GITHUB_PRIVATE_KEY=<private_key>
-   ```
-
-9. Save the file and restart the instance.
-
-10. Once you've completed the instance configuration, [activate the GitHub integration in Plane](https://docs.plane.so/integrations/github).
+8. Once you've created the app, [activate the GitHub Enterprise integration in Plane](https://docs.plane.so/integrations/github?edition=github-enterprise#connect-github-organization).
 
 ## Troubleshooting
 
