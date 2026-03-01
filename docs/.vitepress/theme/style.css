@@ -601,8 +601,7 @@ div[class*="language-"] > span.lang {
 /* Target the Sign in link using multiple class combinations */
 .VPNavBarMenuLink.VPLink[href*="sign-in"],
 a.VPLink.VPNavBarMenuLink[href*="sign-in"],
-.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"]
-{
+.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"] {
   background: #006399 !important;
   color: #ffffff !important;
   padding: 6px 14px !important;
