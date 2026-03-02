@@ -20,7 +20,7 @@ curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|fal
 
 | Parameter   | Required | Default | Description                                                                  |
 | ----------- | -------- | ------- | ---------------------------------------------------------------------------- |
-| `version`   | Yes      | —       | Release tag (e.g., `v2.3.4`)                                                 |
+| `version`   | Yes      | —       | Release tag (e.g., `v2.4.04`)                                                |
 | `airgapped` | No       | `false` | Set to `true` for airgapped compose files                                    |
 | `platform`  | No       | `amd64` | Target architecture: `amd64` or `arm64`. Only applies when `airgapped=true`. |
 
@@ -41,25 +41,25 @@ curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|fal
 **Standard setup**
 
 ```bash
-curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4" -o plane.zip
+curl "https://prime.plane.so/api/v2/setup/?version=v2.4.0" -o plane.zip
 unzip plane.zip
 ```
 
 **Airgapped setup (AMD64)**
 
 ```bash
-curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true" -o plane.zip
+curl "https://prime.plane.so/api/v2/setup/?version=v2.4.0&airgapped=true" -o plane.zip
 unzip plane.zip
 ```
 
 **Airgapped setup (ARM64)**
 
 ```bash
-curl "https://prime.plane.so/api/v2/setup/?version=v2.3.4&airgapped=true&platform=arm64" -o plane.zip
+curl "https://prime.plane.so/api/v2/setup/?version=v2.4.0&airgapped=true&platform=arm64" -o plane.zip
 unzip plane.zip
 ```
 
-Replace `v2.3.4` with the version you need. See the [releases page](https://plane.so/changelog?category=self-hosted) for available versions.
+Replace `v2.4.0` with the version you need. See the [releases page](https://plane.so/changelog?category=self-hosted) for available versions.
 
 ### Error responses
 
