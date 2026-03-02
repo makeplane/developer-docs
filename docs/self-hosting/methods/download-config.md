@@ -20,7 +20,7 @@ curl "https://prime.plane.so/api/v2/setup/?version=<version>&airgapped=<true|fal
 
 | Parameter   | Required | Default | Description                                                                  |
 | ----------- | -------- | ------- | ---------------------------------------------------------------------------- |
-| `version`   | Yes      | —       | Release tag (e.g., `v2.4.04`)                                                 |
+| `version`   | Yes      | —       | Release tag (e.g., `v2.4.04`)                                                |
 | `airgapped` | No       | `false` | Set to `true` for airgapped compose files                                    |
 | `platform`  | No       | `amd64` | Target architecture: `amd64` or `arm64`. Only applies when `airgapped=true`. |
 

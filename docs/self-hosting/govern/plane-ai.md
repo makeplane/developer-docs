@@ -87,7 +87,7 @@ services:
     enabled: true
 ```
 
-This activates the PI API, worker, beat-worker, and migrator workloads. Replica counts and resource limits for each workload can be configured through the [Plane AI values block](/self-hosting/methods/kubernetes#plane-ai-pi-deployment) in your `values.yaml`.
+This activates the Plane AI API, worker, beat-worker, and migrator workloads. Replica counts and resource limits for each workload can be configured through the [Plane AI values block](/self-hosting/methods/kubernetes#plane-ai-pi-deployment) in your `values.yaml`.
 
 :::
 
