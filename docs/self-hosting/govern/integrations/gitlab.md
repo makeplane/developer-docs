@@ -1,7 +1,7 @@
 ---
 title: Configure GitLab for Plane integration
 description: Connect GitLab to your self-hosted Plane instance. Sync merge requests and commits with Plane work items for development workflow tracking.
-keywords: plane gitlab integration, gitlab.com, gitlab self-managed, gitlab sync, merge request tracking
+keywords: plane gitlab integration, gitlab cloud, gitlab self-managed, gitlab sync, merge request tracking
 ---
 
 # Configure GitLab for Plane integration <Badge type="info" text="Pro" />
