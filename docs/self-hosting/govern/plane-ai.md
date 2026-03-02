@@ -60,6 +60,10 @@ Embedding models power semantic search. Plane AI supports:
 
 ## Enable Plane AI services
 
+:::info
+For other deployment methods such as Coolify, Portainer, Docker Swarm, and Podman Quadlets, use the same [environment variables](/self-hosting/govern/environment-variables#plane-ai) defined for Docker Compose Setup.
+:::
+
 :::tabs key:deployment-method
 
 == Docker Compose {#docker-compose}
