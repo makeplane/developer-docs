@@ -60,6 +60,10 @@ Embedding models power semantic search. Plane AI supports:
 
 ## Enable Plane AI services
 
+:::tabs key:deployment-method
+
+== Docker Compose {#docker-compose}
+
 Open the `/opt/plane/plane.env` file in your preferred editor and set the replica count for Plane AI services to `1`:
 
 ```bash
@@ -68,6 +72,20 @@ PI_BEAT_REPLICAS=1
 PI_WORKER_REPLICAS=1
 PI_MIGRATOR_REPLICAS=1
 ```
+
+== Kubernetes {#kubernetes}
+
+Open your `values.yaml` file and enable the Plane AI service by setting `services.pi.enabled` to `true`:
+
+```yaml
+services:
+  pi:
+    enabled: true
+```
+
+This activates the PI API, worker, beat-worker, and migrator workloads. Replica counts and resource limits for each workload can be configured through the [Plane AI (PI) values block](/self-hosting/methods/kubernetes#plane-ai-pi-deployment) in your `values.yaml`.
+
+:::
 
 ## Configure an LLM provider
 
