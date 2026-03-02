@@ -60,7 +60,7 @@ Embedding models power semantic search. Plane AI supports:
 
 ## Enable Plane AI services
 
-:::info
+:::tip
 For other deployment methods such as Coolify, Portainer, Docker Swarm, and Podman Quadlets, use the same [environment variables](/self-hosting/govern/environment-variables#plane-ai) defined for Docker Compose Setup.
 :::
 
@@ -87,7 +87,7 @@ services:
     enabled: true
 ```
 
-This activates the PI API, worker, beat-worker, and migrator workloads. Replica counts and resource limits for each workload can be configured through the [Plane AI (PI) values block](/self-hosting/methods/kubernetes#plane-ai-pi-deployment) in your `values.yaml`.
+This activates the PI API, worker, beat-worker, and migrator workloads. Replica counts and resource limits for each workload can be configured through the [Plane AI values block](/self-hosting/methods/kubernetes#plane-ai-pi-deployment) in your `values.yaml`.
 
 :::
 
