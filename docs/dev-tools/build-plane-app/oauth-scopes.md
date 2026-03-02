@@ -135,7 +135,7 @@ This document lists all OAuth scopes available when building a Plane app. Reques
 
 | Scope                         | Description                            |
 | ----------------------------- | -------------------------------------- |
-| `agent_runs:read`             | Read agent runs                        |
-| `agent_runs:write`            | Create and update agent runs           |
-| `agent_runs.activities:read`  | Read agent run activities              |
-| `agent_runs.activities:write` | Create and update agent run activities |
+| `agents.runs:read`            | Read agent runs                        |
+| `agents.runs:write`           | Create and update agent runs           |
+| `agents.run_activities:read`  | Read agent run activities              |
+| `agents.run_activities:write` | Create and update agent run activities |
