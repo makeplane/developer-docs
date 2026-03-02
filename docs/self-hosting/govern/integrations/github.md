@@ -1,7 +1,7 @@
 ---
 title: Configure GitHub for Plane integration
 description: Connect GitHub to your self-hosted Plane instance. Sync pull requests, commits, and branches with Plane work items for seamless development tracking.
-keywords: plane github integration, github sync, pull request tracking, commit linking, github app, self-hosting, plane devops
+keywords: plane github integration, github cloud, github enterprise, github sync, pull request tracking, commit linking, github app, 
 ---
 
 # Configure GitHub for Plane integration <Badge type="info" text="Pro" />
@@ -35,6 +35,10 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
 :::tabs key:github-edition
 
 == GitHub Cloud {#github-cloud}
+
+Follow these steps to create a GitHub App, set callback URLs, and configure webhooks so Plane can sync PRs and commits from GitHub Cloud.
+
+#### GitHub Cloud
 
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
@@ -76,6 +80,9 @@ To configure GitHub integration, you'll need to create a GitHub App within your 
    ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp)
 
 == GitHub Enterprise Server {#github-enterprise-server}
+These steps cover hostname, callback URLs, and private key differences for on‑prem GitHub deployments.
+
+#### GitHub Enterprise Server
 
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 

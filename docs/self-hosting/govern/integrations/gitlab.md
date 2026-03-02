@@ -1,7 +1,7 @@
 ---
 title: Configure GitLab for Plane integration
 description: Connect GitLab to your self-hosted Plane instance. Sync merge requests and commits with Plane work items for development workflow tracking.
-keywords: plane gitlab integration, gitlab sync, merge request tracking, gitlab webhook, self-hosting, plane devops
+keywords: plane gitlab integration, gitlab.com, gitlab self-managed, gitlab sync, merge request tracking
 ---
 
 # Configure GitLab for Plane integration <Badge type="info" text="Pro" />
@@ -32,6 +32,11 @@ After creating and configuring the GitLab application and configuring the instan
 :::tabs key:gitlab-edition
 
 == GitLab Cloud {#gitlab-cloud}
+
+Follow these steps to register an application on the public GitLab service, set the redirect URI and scopes,
+and then configure your Plane instance so it can sync merge requests and commits.
+
+#### GitLab Cloud
 
 1. On the left sidebar in GitLab, select your avatar.
 
@@ -66,6 +71,10 @@ After creating and configuring the GitLab application and configuring the instan
 9. Click **Save Application** to finalize the setup.
 
 == GitLab Self-managed {#gitlab-self-managed}
+
+These instructions cover registering an OAuth app on your private GitLab server, using the correct callback URLs, and assigning the required scopes for Plane to access your repos and users.
+
+#### GitLab Self-managed
 
 1. Log in to your GitLab instance.
 2. Click on your profile icon in the top-right corner.
