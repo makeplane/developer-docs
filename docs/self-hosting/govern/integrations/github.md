@@ -1,7 +1,7 @@
 ---
 title: Configure GitHub for Plane integration
 description: Connect GitHub to your self-hosted Plane instance. Sync pull requests, commits, and branches with Plane work items for seamless development tracking.
-keywords: plane github integration, github cloud, github enterprise, github sync, pull request tracking, commit linking, github app, 
+keywords: plane github integration, github cloud, github enterprise, github sync, pull request tracking, commit linking, github app,
 ---
 
 # Configure GitHub for Plane integration <Badge type="info" text="Pro" />
