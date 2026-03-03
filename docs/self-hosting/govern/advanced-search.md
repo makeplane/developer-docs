@@ -12,7 +12,7 @@ Plane uses OpenSearch to provide advanced search capabilities across your worksp
 
 You'll need:
 
-- An OpenSearch 2.19 instance (self-hosted or managed service like AWS OpenSearch).
+- An OpenSearch instance running version 2.19 or later (self-hosted or managed service like AWS OpenSearch).
 
 ## What you get with advanced search
 
