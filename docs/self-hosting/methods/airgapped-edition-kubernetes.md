@@ -89,10 +89,10 @@ Consider these alternatives:
      enabled: true # Must be TRUE for airgapped installations
      # If using custom root CA for S3 storage
      s3Secrets:
-      - name: plane-s3-ca
-        key: s3-custom-ca.crt
-      - name: plane-s3-ca-2
-        key: s3-custom-ca-2.crt
+       - name: plane-s3-ca
+         key: s3-custom-ca.crt
+       - name: plane-s3-ca-2
+         key: s3-custom-ca-2.crt
    ```
 
    **Service images:**

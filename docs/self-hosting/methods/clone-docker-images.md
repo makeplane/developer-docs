@@ -76,7 +76,7 @@ Set your version and destination registry before copying images.
 
 ```bash
 # Set your Plane version
-export APP_RELEASE_VERSION="v2.1.0"  # Replace with your desired version
+export APP_RELEASE_VERSION="v2.4.0"  # Replace with your desired version
 
 # Set your destination registry
 export DESTINATION_REGISTRY="your-registry.io/your-namespace"
@@ -188,7 +188,7 @@ Create a file named `copy-plane-images.sh`:
 set -e
 
 # Configuration
-APP_RELEASE_VERSION="${APP_RELEASE_VERSION:-v2.1.0}"
+APP_RELEASE_VERSION="${APP_RELEASE_VERSION:-v2.4.0}"
 DESTINATION_REGISTRY="${DESTINATION_REGISTRY}"
 
 if [ -z "$DESTINATION_REGISTRY" ]; then
