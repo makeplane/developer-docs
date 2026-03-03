@@ -47,7 +47,7 @@ Before we start, make sure you've got these covered:
 
    ```bash
    mkdir podman-quadlets
-   curl -fsSL https://prime.plane.so/releases/v2.3.1/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
+   curl -fsSL https://prime.plane.so/releases/v2.4.0/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
    tar -xvzf podman-quadlets.tar.gz -C podman-quadlets
    ```
 

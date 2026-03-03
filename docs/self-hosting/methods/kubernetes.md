@@ -31,7 +31,7 @@ Ensure you use use the latest Helm chart version.
 2. Set the following environment variables:
 
 ```bash
-PLANE_VERSION=v2.3.1
+PLANE_VERSION=v2.4.0
 ```
 
 ```bash
@@ -39,7 +39,7 @@ DOMAIN_NAME=<subdomain.domain.tld or domain.tld>
 ```
 
 ::: warning
-When configuring the PLANE_VERSION environment variable, **do not** set it to `stable`. Always specify the latest version number (e.g., `2.3.1`). Using `stable` can lead to unexpected issues.
+When configuring the PLANE_VERSION environment variable, **do not** set it to `stable`. Always specify the latest version number (e.g., `2.4.0`). Using `stable` can lead to unexpected issues.
 :::
 
 3. Add the Plane helm chart repo.
@@ -86,7 +86,7 @@ helm repo add plane https://helm.plane.so/
       i. Run the script below to download the `values.yaml` file and edit using any editor like Vim or Nano.
 
       Make sure you set the required environment variables listed below:
-      - `planeVersion: v2.3.1`
+      - `planeVersion: v2.4.0`
       - `license.licenseDomain: <The domain you have specified to host Plane>`
       - `license.licenseServer: https://prime.plane.so`
       - `ingress.enabled: <true | false>`
@@ -113,16 +113,51 @@ helm repo add plane https://helm.plane.so/
 
 | Setting               |       Default       | Required | Description                                                                                                                                                                          |
 | --------------------- | :-----------------: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| planeVersion          |       v2.3.1        |   Yes    | Specifies the version of Plane to be deployed. Copy this from prime.plane.so.                                                                                                        |
+| planeVersion          |       v2.4.0        |   Yes    | Specifies the version of Plane to be deployed. Copy this from prime.plane.so.                                                                                                        |
 | license.licenseDomain | 'plane.example.com' |   Yes    | The fully-qualified domain name (FQDN) in the format `sudomain.domain.tld` or `domain.tld` that the license is bound to. It is also attached to your `ingress` host to access Plane. |
 
-#### Airgapped settings
+### Airgapped Settings
 
-| Setting                | Default | Required | Description                                                                                                                                                                                                                                                                                                                                                                                    |
-| ---------------------- | :-----: | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| airgapped.enabled      |  false  |    No    | Specifies the airgapped mode the Plane API runs in.                                                                                                                                                                                                                                                                                                                                            |
-| airgapped.s3SecretName |   ""    |    No    | Name of the Secret that contains the CA certificate (.crt). The Secret must include a data key whose filename matches the basename of `airgapped.s3SecretKey` (default: `s3-custom-ca.crt`). Used to override S3’s CA when `airgapped.enabled=true`. Applying this secret looks like: `kubectl -n plane create secret generic plane-s3-ca \ --from-file=s3-custom-ca.crt=/path/to/your/ca.crt` |
-| airgapped.s3SecretKey  |   ""    |    No    | Key name of the secret to load the Custom Root CA from `airgapped.s3SecretName`                                                                                                                                                                                                                                                                                                                |
+| Setting                | Default | Required | Description                                                                                                                                                                                                                                                                                                                                |
+| ---------------------- | :-----: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| airgapped.enabled      |  false  |    No    | Enable airgapped mode for the Plane API.                                                                                                                                                                                                                                                                                                   |
+| airgapped.s3Secrets    |   []    |    No    | List of Kubernetes Secrets containing CA certificates to install. Each entry requires `name` (Secret name) and `key` (filename in the Secret). Example: `kubectl -n plane create secret generic plane-s3-ca --from-file=s3-custom-ca.crt=/path/to/ca.crt`. Supports multiple certs (e.g. S3 + internal CA). Available in v2.4.0 and later. |
+| airgapped.s3SecretName |   ""    |    No    | **Deprecated** <br/> Name of a single Kubernetes Secret containing the S3 CA cert. Used only when `s3Secrets` is empty. Use `s3Secrets` instead.                                                                                                                                                                                           |
+| airgapped.s3SecretKey  |   ""    |    No    | **Deprecated** <br/> Key (filename) of the cert file inside the Secret. Used only when `s3Secrets` is empty. Set together with `airgapped.s3SecretName`. Use `s3Secrets` instead.                                                                                                                                                          |
+
+#### CA certificate configuration (For airgapped deployments only)
+
+Plane supports custom CA certificates for connecting to S3-compatible storage and other internal services in airgapped environments.
+
+- **New deployments:** Use `airgapped.s3Secrets` as shown in the table above.
+- **Existing deployments using `s3SecretName` and `s3SecretKey`:** Your configuration still works. Migrate only if you need to use multiple CA certificates.
+
+#### Migrating to the new configuration
+
+:::warning
+Requires Plane v2.4.0 or later.
+:::
+
+The new `s3Secrets` configuration supports multiple CA certificates, useful if you need to trust certificates from different sources (e.g., S3 endpoint CA and internal PKI). If you only need a single certificate, migration is optional.
+
+To migrate:
+
+1. Add your existing secret to the `s3Secrets` list:
+
+```yaml
+airgapped:
+  enabled: true
+  s3Secrets:
+    - name: plane-s3-ca # your existing s3SecretName value
+      key: s3-custom-ca.crt # your existing s3SecretKey value
+
+
+  # s3SecretName and s3SecretKey can be removed after migration
+```
+
+2. Remove `s3SecretName` and `s3SecretKey` from your values file.
+
+3. Upgrade your Helm release.
 
 #### Docker Registry
 

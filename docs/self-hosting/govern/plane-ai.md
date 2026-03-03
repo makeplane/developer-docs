@@ -14,7 +14,7 @@ For an overview of what Plane AI can do, see the [Plane AI](https://docs.plane.s
 
 You'll need:
 
-- An OpenSearch 2.x instance (self-hosted or AWS OpenSearch) configured for [advanced search](/self-hosting/govern/advanced-search).
+- An OpenSearch instance running version 2.19 or later (self-hosted or AWS OpenSearch) configured for [advanced search](/self-hosting/govern/advanced-search).
 - At least one LLM provider API key or a custom OpenAI-compatible endpoint.
 - At least one embedding model configured in OpenSearch.
 
