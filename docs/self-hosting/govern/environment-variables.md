@@ -190,29 +190,29 @@ To start Plane AI services, set each replica count to `1`:
 
 Plane AI supports multiple LLM providers. Configure one or more by adding their API keys.
 
-| Variable                  | Description                                                     | Required |
-| ------------------------- | --------------------------------------------------------------- | -------- |
-| **OPENAI_API_KEY**        | API key for OpenAI models                                       | Optional |
-| **CLAUDE_API_KEY**        | API key for Anthropic models                                    | Optional |
-| **GROQ_API_KEY**          | API key for speech-to-text features                             | Optional |
-| **CUSTOM_LLM_ENABLED**    | Set to `true` to use a custom LLM with an OpenAI-compatible API | Optional |
-| **CUSTOM_LLM_MODEL_KEY**  | Identifier key for the custom model                             | Optional |
-| **CUSTOM_LLM_BASE_URL**   | Base URL of the custom model's OpenAI-compatible endpoint       | Optional |
-| **CUSTOM_LLM_API_KEY**    | API key for the custom endpoint                                 | Optional |
-| **CUSTOM_LLM_NAME**       | Display name for the custom model                               | Optional |
-| **CUSTOM_LLM_DESCRIPTION**| Description of the custom model                                 | Optional |
-| **CUSTOM_LLM_MAX_TOKENS** | Maximum token limit for the custom model                        | Optional |
+| Variable                   | Description                                                     | Required |
+| -------------------------- | --------------------------------------------------------------- | -------- |
+| **OPENAI_API_KEY**         | API key for OpenAI models                                       | Optional |
+| **CLAUDE_API_KEY**         | API key for Anthropic models                                    | Optional |
+| **GROQ_API_KEY**           | API key for speech-to-text features                             | Optional |
+| **CUSTOM_LLM_ENABLED**     | Set to `true` to use a custom LLM with an OpenAI-compatible API | Optional |
+| **CUSTOM_LLM_MODEL_KEY**   | Identifier key for the custom model                             | Optional |
+| **CUSTOM_LLM_BASE_URL**    | Base URL of the custom model's OpenAI-compatible endpoint       | Optional |
+| **CUSTOM_LLM_API_KEY**     | API key for the custom endpoint                                 | Optional |
+| **CUSTOM_LLM_NAME**        | Display name for the custom model                               | Optional |
+| **CUSTOM_LLM_DESCRIPTION** | Description of the custom model                                 | Optional |
+| **CUSTOM_LLM_MAX_TOKENS**  | Maximum token limit for the custom model                        | Optional |
 
 #### Provider base URLs
 
 Use these when routing requests through self-hosted gateways, proxies, or compatible third-party endpoints.
 
-| Variable             | Description                                | Default   |
-| -------------------- | ------------------------------------------ | --------- |
-| **OPENAI_BASE_URL**  | Custom base URL for OpenAI-compatible APIs | OpenAI    |
-| **CLAUDE_BASE_URL**  | Custom base URL for Claude-compatible APIs | Anthropic |
-| **COHERE_BASE_URL**  | Custom base URL for Cohere APIs            | Cohere    |
-| **GROQ_BASE_URL**    | Custom base URL for Groq APIs              | Groq      |
+| Variable            | Description                                | Default   |
+| ------------------- | ------------------------------------------ | --------- |
+| **OPENAI_BASE_URL** | Custom base URL for OpenAI-compatible APIs | OpenAI    |
+| **CLAUDE_BASE_URL** | Custom base URL for Claude-compatible APIs | Anthropic |
+| **COHERE_BASE_URL** | Custom base URL for Cohere APIs            | Cohere    |
+| **GROQ_BASE_URL**   | Custom base URL for Groq APIs              | Groq      |
 
 #### Embedding model configuration
 
