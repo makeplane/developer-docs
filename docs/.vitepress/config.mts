@@ -320,6 +320,7 @@ export default withMermaid(
           {
             text: "Troubleshoot",
             items: [
+              { text: "Overview", link: "/self-hosting/troubleshoot/overview" },
               { text: "Installation Errors", link: "/self-hosting/troubleshoot/installation-errors" },
               { text: "License Errors", link: "/self-hosting/troubleshoot/license-errors" },
               { text: "CLI Errors", link: "/self-hosting/troubleshoot/cli-errors" },

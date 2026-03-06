@@ -3,12 +3,20 @@ title: Deployment methods
 description: Choose the best deployment method for your infrastructure. Deploy Plane with Docker, Kubernetes, Podman, or in airgapped environments.
 keywords: plane deployment methods, docker compose, kubernetes, helm, podman, airgapped deployment, self-hosting
 ---
+# Install Plane
+Choose a deployment method based on your infrastructure and requirements.
 
-# Deployment methods
+## System requirements
 
-Choose the deployment method that best fits your infrastructure, team size, and security requirements. Plane supports a wide range of deployment options from simple single-container setups to enterprise-grade Kubernetes clusters.
+- **CPU:** 2 cores (x64/AMD64 or AArch64/ARM64)
+- **RAM:** 4GB (8GB recommended for production)
+- **OS:** Ubuntu, Debian, CentOS, Amazon Linux 2 or 2023, macOS, Windows with WSL2
 
-## Container deployments
+## Deployment methods
+
+Plane supports a wide range of deployment options from simple single-container setups to enterprise-grade Kubernetes clusters.
+
+### Container deployments
 
 Core deployment methods for running Plane with containerized services:
 
@@ -28,7 +36,7 @@ Core deployment methods for running Plane with containerized services:
   </Card>
 </CardGroup>
 
-## Platform deployments
+### Platform deployments
 
 Deploy Plane using specialized platforms and orchestration tools:
 
@@ -50,7 +58,7 @@ Deploy Plane using specialized platforms and orchestration tools:
   </Card>
 </CardGroup>
 
-## Airgapped deployments
+### Airgapped deployments
 
 For environments without internet access or with strict security requirements:
 
