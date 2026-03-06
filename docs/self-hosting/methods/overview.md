@@ -3,7 +3,9 @@ title: Deployment methods
 description: Choose the best deployment method for your infrastructure. Deploy Plane with Docker, Kubernetes, Podman, or in airgapped environments.
 keywords: plane deployment methods, docker compose, kubernetes, helm, podman, airgapped deployment, self-hosting
 ---
+
 # Install Plane
+
 Choose a deployment method based on your infrastructure and requirements.
 
 ## System requirements
