@@ -15,5 +15,5 @@ Once your air-gapped installation is running, you'll need to activate your works
 4. Sign in to your Plane instance in [God Mode](/self-hosting/govern/instance-admin).
 5. Select **Billing** from the left pane.
 6. Upload the license file to activate your instance.
-    ![Upload license file](/images/activate-license/upload-airgapped-enterprise.webp)
+   ![Upload license file](/images/activate-license/upload-airgapped-enterprise.webp)
 7. Click **Activate**.
