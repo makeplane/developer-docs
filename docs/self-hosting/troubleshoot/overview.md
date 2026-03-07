@@ -10,8 +10,6 @@ When something goes wrong, start by identifying which service is affected, then 
 
 ## Identify the service
 
-## Identify the service
-
 | Problem area                                                 | Service    | Logs to check      |
 | ------------------------------------------------------------ | ---------- | ------------------ |
 | API errors, data not saving, 500 errors                      | api        | `plane-api`        |
