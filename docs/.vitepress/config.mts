@@ -307,6 +307,7 @@ export default withMermaid(
                   },
                   { text: "Activate Enterprise", link: "/self-hosting/manage/manage-licenses/activate-enterprise" },
                   { text: "Activate Airgapped", link: "/self-hosting/manage/manage-licenses/activate-airgapped" },
+                  { text: "Activate Airgapped Enterprise", link: "/self-hosting/manage/manage-licenses/activate-airgapped-enterprise" },
                 ],
               },
               { text: "Backup and restore", link: "/self-hosting/manage/backup-restore" },
