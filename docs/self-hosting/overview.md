@@ -37,12 +37,6 @@ Choose the deployment method that best fits your infrastructure and team size:
 
 [Other deployment methods](/self-hosting/methods/overview)
 
-## System requirements
-
-- **CPU:** 2 cores
-- **RAM:** 4GB (8GB recommended for production)
-- **OS:** Linux (Ubuntu 20.04+, Debian 10+, CentOS 8+), macOS, or Windows with WSL2
-
 ## Configuration and governance
 
 Once deployed, configure your Plane instance to match your organization's needs:

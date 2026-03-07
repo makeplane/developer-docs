@@ -18,13 +18,9 @@ Plane Pro and Plane Business are enabled on this edition, so the Free plan on th
 
 ### Prerequisites
 
-- A virtual or on-prem machine with at least 2 vCPUs and 4 GB RAM (8 GB RAM recommended)
-- `x64` AKA `AMD 64` or `AArch 64` AKA `ARM 64` CPUs
-- Supported operating systems:
-  - Ubuntu
-  - Debian
-  - CentOS
-  - Amazon Linux 2 or Linux 2023
+- **CPU:** 2 cores (x64/AMD64 or AArch64/ARM64)
+- **RAM:** 4GB (8GB recommended for production)
+- **OS:** Ubuntu, Debian, CentOS, Amazon Linux 2 or 2023, macOS, Windows with WSL2
 
 ::: info
 Ensure you're using the **latest version of Docker Compose**. Check your Docker Compose version with `docker-compose --version` and update if needed.

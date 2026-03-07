@@ -307,6 +307,10 @@ export default withMermaid(
                   },
                   { text: "Activate Enterprise", link: "/self-hosting/manage/manage-licenses/activate-enterprise" },
                   { text: "Activate Airgapped", link: "/self-hosting/manage/manage-licenses/activate-airgapped" },
+                  {
+                    text: "Activate Airgapped Enterprise",
+                    link: "/self-hosting/manage/manage-licenses/activate-airgapped-enterprise",
+                  },
                 ],
               },
               { text: "Backup and restore", link: "/self-hosting/manage/backup-restore" },
@@ -320,6 +324,7 @@ export default withMermaid(
           {
             text: "Troubleshoot",
             items: [
+              { text: "Overview", link: "/self-hosting/troubleshoot/overview" },
               { text: "Installation Errors", link: "/self-hosting/troubleshoot/installation-errors" },
               { text: "License Errors", link: "/self-hosting/troubleshoot/license-errors" },
               { text: "CLI Errors", link: "/self-hosting/troubleshoot/cli-errors" },
