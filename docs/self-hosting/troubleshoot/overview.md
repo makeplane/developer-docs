@@ -1,6 +1,7 @@
 ---
 title: Troubleshooting
 description: Diagnose and resolve issues with your self-hosted Plane instance.
+keywords: plane troubleshooting, self-hosted errors, docker logs, plane integration issues, plane debug
 ---
 
 # Troubleshooting
