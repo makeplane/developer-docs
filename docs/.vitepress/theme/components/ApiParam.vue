@@ -56,7 +56,7 @@ const isExpanded = ref(true);
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--vp-font-family-mono);
   font-size: 14px;
 }
 

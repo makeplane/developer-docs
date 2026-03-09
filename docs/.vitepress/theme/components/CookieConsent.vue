@@ -102,7 +102,7 @@ onMounted(() => {
 
 .consent-text {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--vp-c-text-2);
   flex: 1;
@@ -117,7 +117,7 @@ onMounted(() => {
 .consent-btn {
   padding: 6px 16px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   border: none;

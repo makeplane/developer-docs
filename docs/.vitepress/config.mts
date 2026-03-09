@@ -93,6 +93,38 @@ export default withMermaid(
     head: [
       ["link", { rel: "icon", href: "/logo/favicon-32x32.png" }],
 
+      // Font preloads for critical rendering
+      [
+        "link",
+        {
+          rel: "preload",
+          href: "/fonts/Inter/Inter-roman.var.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "",
+        },
+      ],
+      [
+        "link",
+        {
+          rel: "preload",
+          href: "/fonts/Satoshi/Satoshi-Medium.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "",
+        },
+      ],
+      [
+        "link",
+        {
+          rel: "preload",
+          href: "/fonts/Satoshi/Satoshi-Bold.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "",
+        },
+      ],
+
       // Google Analytics with Consent Mode v2
       ["script", { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-JF828SKW90" }],
       [

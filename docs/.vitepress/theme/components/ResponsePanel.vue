@@ -95,7 +95,7 @@ const statusClass = () => {
 }
 
 .response-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: #374151;
 }
@@ -105,8 +105,8 @@ const statusClass = () => {
 }
 
 .status-code {
-  font-family: ui-monospace, SFMono-Regular, monospace;
-  font-size: 13px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 14px;
   font-weight: 600;
 }
 
