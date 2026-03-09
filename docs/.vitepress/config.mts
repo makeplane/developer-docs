@@ -93,6 +93,21 @@ export default withMermaid(
     head: [
       ["link", { rel: "icon", href: "/logo/favicon-32x32.png" }],
 
+<<<<<<< Updated upstream
+=======
+      // Font preload for critical rendering
+      [
+        "link",
+        {
+          rel: "preload",
+          href: "/fonts/Inter/Inter-roman.var.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "",
+        },
+      ],
+
+>>>>>>> Stashed changes
       // Google Analytics with Consent Mode v2
       ["script", { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-JF828SKW90" }],
       [
@@ -190,8 +205,8 @@ export default withMermaid(
         { text: "Self-hosting", link: "/self-hosting/overview" },
         { text: "API Reference", link: "/api-reference/introduction" },
         { text: "Build and extend", link: "/dev-tools/build-plane-app/overview" },
-        { text: "Plane Docs", link: "https://docs.plane.so" },
-        { text: "Sign in", link: "https://app.plane.so/sign-in" },
+        { text: "Plane Docs", link: "https://docs.plane.so", noIcon: true },
+        { text: "Sign in", link: "https://app.plane.so/sign-in", noIcon: true },
       ],
 
       sidebar: {
@@ -757,13 +772,6 @@ export default withMermaid(
           },
         ],
       },
-
-      socialLinks: [
-        { icon: "github", link: "https://github.com/makeplane/plane" },
-        { icon: "discord", link: "https://discord.com/invite/A92xrEGCge" },
-        { icon: "twitter", link: "https://twitter.com/planepowers" },
-        { icon: "linkedin", link: "https://www.linkedin.com/company/planepowers/" },
-      ],
 
       search: searchConfig,
 

@@ -93,6 +93,7 @@
 }
 
 /* ================================================
+<<<<<<< Updated upstream
    SATOSHI FONT
    ================================================ */
 
@@ -132,6 +133,15 @@
     url("/fonts/Satoshi/Satoshi-Bold.woff2") format("woff2"),
     url("/fonts/Satoshi/Satoshi-Bold.woff") format("woff");
   font-weight: 700;
+=======
+   INTER VARIABLE FONT
+   ================================================ */
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-roman.var.woff2") format("woff2-variations");
+  font-weight: 100 900;
+>>>>>>> Stashed changes
   font-style: normal;
   font-display: swap;
 }
@@ -187,12 +197,85 @@
 
   /* Fonts */
   --vp-font-family-base:
+<<<<<<< Updated upstream
     "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+=======
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --vp-font-family-heading:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+>>>>>>> Stashed changes
   --vp-font-family-mono:
     "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
     monospace;
 }
 
+<<<<<<< Updated upstream
+=======
+/* ================================================
+   TYPOGRAPHY OPTIMIZATION
+   ================================================ */
+
+/* Enable Inter's OpenType features for better readability */
+body {
+  font-feature-settings: "cv01", "cv02", "cv03", "cv04", "ss01", "ss03";
+}
+
+/* Headings use Inter with weight hierarchy and tight tracking */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6,
+.VPNavBar .title,
+.VPHero .name,
+.VPHero .tagline {
+  font-family: var(--vp-font-family-heading);
+}
+
+.vp-doc h1,
+.VPHero .name {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.vp-doc h2,
+.VPHero .tagline {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.vp-doc h3 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+/* Body text: optimized spacing for readability at 16px */
+.vp-doc p,
+.vp-doc li {
+  line-height: 1.75;
+  letter-spacing: -0.011em;
+  word-spacing: 0.01em;
+}
+
+/* Navbar title: match heading style */
+.VPNavBar .title {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+>>>>>>> Stashed changes
 /* Dark mode */
 .dark {
   --vp-c-bg: #0a0a0a;
@@ -581,85 +664,378 @@ div[class*="language-"] > span.lang {
 }
 
 /* ================================================
-   SEARCH BOX WIDTH IN HEADER
+   NAVBAR TWEAKS
    ================================================ */
 
-/* Make the header search box wider */
-.DocSearch.DocSearch-Button {
-  justify-content: space-between !important;
-}
+/* Center search area in desktop navbar and make the input wider. */
+@media (min-width: 960px) {
+  .VPNavBarSearch.search {
+.VPNavBarSearch.search #docsearch {
+    width: 100%;
+    max-width: 320px;
+  }    justify-content: center;
+    flex: 1 1 520px;
+    min-width: 300px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0 !important;
+  }
 
-@media (min-width: 768px) {
-  .DocSearch.DocSearch-Button {
-    width: 230px !important;
+  .VPNavBarSearch.search #local-search,
+  .VPNavBarSearch.search #docsearch {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .VPNavBarSearch.search .DocSearch.DocSearch-Button {
+    width: 100% !important;
   }
 }
 
-@media (min-width: 1024px) {
-  .DocSearch.DocSearch-Button {
-    width: 310px !important;
-  }
-}
-
-/* ================================================
-   SIGN IN BUTTON STYLING
-   ================================================ */
-
-/* Target the Sign in link using multiple class combinations */
+/* Keep Sign in as a simple CTA without changing navbar height behavior. */
 .VPNavBarMenuLink.VPLink[href*="sign-in"],
-a.VPLink.VPNavBarMenuLink[href*="sign-in"],
-.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"] {
-  background: #006399 !important;
+a.VPLink.VPNavBarMenuLink[href*="sign-in"] {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  margin-left: 8px;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 12px !important;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 6px;
+  background: var(--vp-c-brand-1);
   color: #ffffff !important;
-  padding: 6px 14px !important;
-  margin-top: 15px !important;
-  margin-bottom: 15px !important;
-  border-radius: 6px !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  transition: all 0.2s ease !important;
-  line-height: normal !important;
+  font-weight: 500;
   text-decoration: none !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  vertical-align: middle !important;
-}
-
-/* Hide the external link arrow icon */
-.VPNavBarMenuLink.VPLink[href*="sign-in"] .vp-external-link-icon,
-a.VPLink.VPNavBarMenuLink[href*="sign-in"] .vp-external-link-icon,
-.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"] .vp-external-link-icon,
-.VPNavBarMenuLink.VPLink[href*="sign-in"] svg,
-a.VPLink.VPNavBarMenuLink[href*="sign-in"] svg,
-.VPNavBarMenuLink.VPLink[href*="sign-in"] .VPImage,
-a.VPLink.VPNavBarMenuLink[href*="sign-in"] .VPImage {
-  display: none !important;
-}
-
-/* Also hide the icon using ::after if it's a pseudo-element */
-.VPNavBarMenuLink.VPLink[href*="sign-in"]::after,
-a.VPLink.VPNavBarMenuLink[href*="sign-in"]::after {
-  display: none !important;
-  content: none !important;
 }
 
 .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
 a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
-  background: #0078b8 !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 2px 8px rgba(0, 99, 153, 0.25) !important;
+  background: var(--vp-c-brand-2);
   text-decoration: none !important;
 }
 
-/* Dark mode variant */
-.dark .VPNavBarMenuLink.VPLink[href*="sign-in"],
-.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"] {
-  background: #006399 !important;
-  color: #ffffff !important;
+/* Use mobile nav pattern on tablet widths to prevent header overflow. */
+@media (min-width: 768px) and (max-width: 959px) {
+  .VPNavBarMenu {
+    display: none !important;
+  }
+
+  .VPNavBarHamburger {
+    display: flex !important;
+  }
+
+  .VPNavScreen {
+    display: block !important;
+  }
+
+  .VPNavBarSearch {
+    flex-grow: 1 !important;
+    padding-left: 12px !important;
+  }
+
+  .DocSearch.DocSearch-Button {
+    width: min(100%, 240px) !important;
+  }
 }
 
-.dark .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
-.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
-  background: #0078b8 !important;
-  box-shadow: 0 2px 8px rgba(0, 99, 153, 0.35) !important;
+/* ================================================
+   TAB NAVIGATION BAR
+   ================================================ */
+
+:root {
+  --tab-nav-height: 44px;
+}
+
+.tab-nav {
+  position: fixed;
+  top: var(--vp-nav-height);
+  left: 0;
+  right: 0;
+  z-index: var(--vp-z-index-nav);
+  height: var(--tab-nav-height);
+  background: var(--vp-c-bg);
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.tab-nav-wrapper {
+  height: 100%;
+  padding: 0 8px 0 24px;
+}
+
+@media (min-width: 768px) {
+  .tab-nav-wrapper {
+    padding: 0 32px;
+  }
+}
+
+.tab-nav-container {
+  display: flex;
+  margin: 0 auto;
+  max-width: calc(var(--vp-layout-max-width) - 64px);
+  height: 100%;
+}
+
+.tab-nav-content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+@media (min-width: 960px) {
+  .Layout:has(.VPContent.has-sidebar) .tab-nav-wrapper {
+    padding: 0;
+  }
+
+  .Layout:has(.VPContent.has-sidebar) .tab-nav-container {
+    max-width: 100%;
+  }
+
+  .Layout:has(.VPContent.has-sidebar) .tab-nav-content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .Layout:has(.VPContent.has-sidebar) .tab-nav-content {
+    padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - 64px)) / 2));
+    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2 + 32px);
+  }
+}
+
+@media (max-width: 959px) {
+  .tab-nav {
+    display: none;
+  }
+}
+
+.tab-nav-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tab-nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-nav-link {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  text-decoration: none !important;
+  padding: 0;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+  line-height: 1;
+}
+
+.tab-nav-link:hover {
+  color: var(--vp-c-text-1);
+  text-decoration: none !important;
+}
+
+.tab-nav-link.active {
+  color: var(--vp-c-brand-1);
+  border-bottom-color: var(--vp-c-brand-1);
+}
+
+/* ================================================
+   TAB NAV - LAYOUT OFFSET OVERRIDES
+   ================================================ */
+
+/* Push content down to account for tab nav */
+@media (min-width: 960px) {
+  .VPContent {
+    padding-top: calc(var(--vp-nav-height) + var(--tab-nav-height)) !important;
+  }
+}
+
+/* Adjust sidebar internal padding */
+@media (min-width: 960px) {
+  .VPSidebar {
+    padding-top: calc(var(--vp-nav-height) + var(--tab-nav-height)) !important;
+  }
+}
+
+/* Adjust local nav (mobile breadcrumb bar at 960-1280px) */
+@media (min-width: 960px) {
+  .VPLocalNav {
+    top: calc(var(--vp-nav-height) + var(--tab-nav-height)) !important;
+  }
+}
+
+/* ================================================
+   HIDE SECTION NAV LINKS ON DESKTOP (TAB BAR REPLACES THEM)
+   ================================================ */
+
+@media (min-width: 960px) {
+  .VPNavBarMenuLink.VPLink[href="/self-hosting/overview"],
+  a.VPLink.VPNavBarMenuLink[href="/self-hosting/overview"],
+  .VPNavBarMenuLink.VPLink[href="/api-reference/introduction"],
+  a.VPLink.VPNavBarMenuLink[href="/api-reference/introduction"],
+  .VPNavBarMenuLink.VPLink[href*="/dev-tools/"],
+  a.VPLink.VPNavBarMenuLink[href*="/dev-tools/"] {
+    display: none !important;
+  }
+}
+
+/* ================================================
+   HOME PAGE STYLES
+   ================================================ */
+
+/* Hero Section */
+.home-hero {
+  padding: 80px 24px 64px;
+  text-align: center;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 48px 20px 40px;
+  }
+}
+
+.home-hero-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.home-hero-title {
+  font-family: var(--vp-font-family-heading) !important;
+  font-size: 48px !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em;
+  color: var(--vp-c-text-1) !important;
+  margin: 0 0 16px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+@media (max-width: 768px) {
+  .home-hero-title {
+    font-size: 36px !important;
+  }
+}
+
+.home-hero-tagline {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+  margin: 0 0 32px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .home-hero-tagline {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}
+
+.home-hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff !important;
+  background: var(--vp-c-brand-1);
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.home-btn-primary:hover {
+  background: #0078b8;
+  box-shadow: 0 2px 8px rgba(0, 99, 153, 0.25);
+  text-decoration: none !important;
+}
+
+.home-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--vp-c-brand-1) !important;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.home-btn-secondary:hover {
+  background: var(--vp-c-brand-soft);
+  text-decoration: none !important;
+}
+
+/* Sections */
+.home-section {
+  padding: 64px 24px;
+}
+
+@media (max-width: 768px) {
+  .home-section {
+    padding: 40px 20px;
+  }
+}
+
+.home-section-alt {
+  background: var(--vp-c-bg-soft);
+}
+
+.home-section-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+
+.home-section-title {
+  font-family: var(--vp-font-family-heading) !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: var(--vp-c-text-1) !important;
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  border: none !important;
+  letter-spacing: -0.01em;
+}
+
+.home-section-description {
+  font-size: 16px;
+  color: var(--vp-c-text-2);
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+/* Spacing between section title and card group */
+.home-section-title + .card-group {
+  margin-top: 24px;
+}
+
+.home-section-description + .card-group {
+  margin-top: 0;
 }

@@ -12,6 +12,7 @@ import ResponsePanel from "./components/ResponsePanel.vue";
 import Card from "./components/Card.vue";
 import CardGroup from "./components/CardGroup.vue";
 import CookieConsent from "./components/CookieConsent.vue";
+import TabNav from "./components/TabNav.vue";
 
 /**
  * Adds 'api-page' class to hide the aside on API reference pages
@@ -110,6 +111,7 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      "layout-top": () => h(TabNav),
       "layout-bottom": () => h(CookieConsent),
     });
   },
