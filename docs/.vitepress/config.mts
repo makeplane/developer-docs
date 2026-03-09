@@ -93,8 +93,6 @@ export default withMermaid(
     head: [
       ["link", { rel: "icon", href: "/logo/favicon-32x32.png" }],
 
-<<<<<<< Updated upstream
-=======
       // Font preload for critical rendering
       [
         "link",
@@ -106,8 +104,6 @@ export default withMermaid(
           crossorigin: "",
         },
       ],
-
->>>>>>> Stashed changes
       // Google Analytics with Consent Mode v2
       ["script", { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-JF828SKW90" }],
       [
