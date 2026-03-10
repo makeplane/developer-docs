@@ -42,10 +42,15 @@ You can provide API keys for both OpenAI and Anthropic, making all models availa
 
 #### Custom models (self-hosted or third-party)
 
-Plane AI works with any model exposed through an OpenAI-compatible API, including models served by Ollama, Groq, Cerebras, and similar runtimes. You can configure one custom model alongside your public provider keys.
+Plane AI supports custom models through two backends:
 
-:::warning
-For reliable performance across all Plane AI features, use a custom model with at least 100 billion parameters. Larger models produce better results.
+- **OpenAI-compatible endpoint** — any model exposed via an OpenAI-compatible API, including models served by Ollama, Groq, Cerebras, and similar runtimes.
+- **AWS Bedrock** — models accessed directly through Amazon Bedrock using your AWS credentials.
+
+One custom model can be configured alongside your public provider keys.
+
+::: warning
+The custom model should have at least 100 billion parameters for all Plane AI features to work reliably. Larger, more capable models yield better results.
 :::
 
 ### Embedding models
@@ -109,20 +114,22 @@ CLAUDE_API_KEY=xxxxxxxxxxxxxxxx
 
 ### Custom model
 
-Use this for self-hosted models or third-party OpenAI-compatible endpoints.
-
 ```bash
 CUSTOM_LLM_ENABLED=true
+CUSTOM_LLM_PROVIDER=openai  # or 'bedrock'
 CUSTOM_LLM_MODEL_KEY=your-model-key
-CUSTOM_LLM_BASE_URL=http://your-endpoint/v1
 CUSTOM_LLM_API_KEY=your-api-key
 CUSTOM_LLM_NAME=Your Model Name
-CUSTOM_LLM_DESCRIPTION="Optional description"
 CUSTOM_LLM_MAX_TOKENS=128000
 ```
 
-:::info
-The custom endpoint must expose an OpenAI-compatible API matching OpenAI's request and response format.
+**Additional required variables by provider:**
+
+- **OpenAI-compatible** (`openai`): `CUSTOM_LLM_BASE_URL`
+- **AWS Bedrock** (`bedrock`): `CUSTOM_LLM_AWS_REGION`
+
+::: warning
+For Bedrock, the IAM user must have `bedrock:InvokeModel` permission on the target model.
 :::
 
 ### Speech-to-text (optional)
