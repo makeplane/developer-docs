@@ -264,7 +264,7 @@ The batching pattern also provides resilience. If OpenSearch is temporarily unav
 
 ### The complete flow
 
-![OpenSeach flow](/images/open-search/opensearch-flow.webp)
+![OpenSeach flow](/images/open-search/opensearch-flow.webp#hero)
 
 When you search, queries bypass this synchronization process entirely. The Plane API sends your search query directly to OpenSearch, which returns results almost instantly. Your database isn't involved in search queries at all — this is the key to search performance.
 

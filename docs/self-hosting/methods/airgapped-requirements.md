@@ -22,7 +22,7 @@ Plane supports fully airgapped deployments where all components - application se
 
 Here's how Plane operates in an airgapped environment with internal enterprise applications:
 
-![Airgapped cluster architecture](/images/airgapped/airgapped-cluster.webp)
+![Airgapped cluster architecture](/images/airgapped/airgapped-cluster.webp#hero)
 
 This diagram illustrates a critical principle: **all OAuth flows and API communication remain internal to the airgapped cluster**. When integrating with self-hosted GitHub Enterprise, GitLab, or other internal services, the entire authentication and data exchange happens within your isolated network — no internet access required.
 

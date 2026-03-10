@@ -138,7 +138,7 @@ export default withMermaid(
             "Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.",
         },
       ],
-      ["meta", { property: "og:image", content: "https://media.docs.plane.so/logo/og-docs.webp" }],
+      ["meta", { property: "og:image", content: "https://media.docs.plane.so/logo/og-docs.webp#hero" }],
       ["meta", { property: "og:url", content: "https://developers.plane.so" }],
 
       // Twitter Card meta tags
@@ -152,7 +152,7 @@ export default withMermaid(
             "Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform.",
         },
       ],
-      ["meta", { name: "twitter:image", content: "https://media.docs.plane.so/logo/og-docs.webp" }],
+      ["meta", { name: "twitter:image", content: "https://media.docs.plane.so/logo/og-docs.webp#hero" }],
     ],
 
     transformPageData(pageData) {
@@ -319,6 +319,7 @@ export default withMermaid(
               { text: "View Logs", link: "/self-hosting/manage/view-logs" },
               { text: "Migrate Plane", link: "/self-hosting/manage/migrate-plane" },
               { text: "Prime CLI", link: "/self-hosting/manage/prime-cli" },
+              { text: "Manage users", link: "/self-hosting/manage/manage-instance-users" },
             ],
           },
           {

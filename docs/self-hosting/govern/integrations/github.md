@@ -43,10 +43,10 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
 2. Click **New GitHub App**.
-   ![Create GitHub App](/images/integrations/github/create-github-app.webp)
+   ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
 
 3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
-   ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp)
+   ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**.
 
@@ -56,7 +56,7 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
    ```
 
    These URLs allow Plane to verify and enable workspace connection with the Github App.
-   ![Add Callback URL](/images/integrations/github/add-callback-url.webp)
+   ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
 
 5. In the **Post installation** section, add the below **Setup URL**.
 
@@ -65,7 +65,7 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
    ```
 
    Redirects users to this URL after GitHub app installation.
-   ![Add setup URL](/images/integrations/github/add-setup-url.webp)
+   ![Add setup URL](/images/integrations/github/add-setup-url.webp#hero)
 
 6. Turn on **Redirect on update**.
 
@@ -77,7 +77,7 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
 
    This allows Plane to receive updates from GitHub repositories.
 
-   ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp)
+   ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#hero)
 
 == GitHub Enterprise Server {#github-enterprise-server}
 These steps cover hostname, callback URLs, and private key differences for on‑prem GitHub deployments.
@@ -87,10 +87,10 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
 2. Click **New GitHub App**.
-   ![Create GitHub App](/images/integrations/github/create-github-app.webp)
+   ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
 
 3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
-   ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp)
+   ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**.
 
@@ -109,7 +109,7 @@ These steps cover hostname, callback URLs, and private key differences for on‑
    ```
 
    These URLs allow Plane to verify and enable workspace connection with the Github App.
-   ![Add Callback URL](/images/integrations/github/add-callback-url.webp)
+   ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
 
 5. In the **Post installation** section, add the below **Setup URL**.
 
@@ -126,7 +126,7 @@ These steps cover hostname, callback URLs, and private key differences for on‑
    ```
 
    Redirects users to this URL after GitHub app installation.
-   ![Add setup URL](/images/integrations/github/add-setup-url.webp)
+   ![Add setup URL](/images/integrations/github/add-setup-url.webp#hero)
 
 6. Turn on **Redirect on update**.
 
@@ -146,14 +146,14 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 
    This allows Plane to receive updates from GitHub repositories.
 
-   ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp)
+   ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#hero)
 
 :::
 
 ### Set up permissions and events
 
 1. Add repository and account permissions by setting the **Access** dropdown next to each permission, as shown in the tables below.
-   ![Setup permissions](/images/integrations/github/setup-permissions.webp)
+   ![Setup permissions](/images/integrations/github/setup-permissions.webp#hero)
 
    **Repository permissions**
 
@@ -172,7 +172,7 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 
 2. In the **Subscribe to events** section, turn on all the required events below.
 
-   ![Subscribe to events](/images/integrations/github/subscribe-to-events.webp)
+   ![Subscribe to events](/images/integrations/github/subscribe-to-events.webp#hero)
 
    | Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Purpose                                                                                                                                                                       |
    | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -201,11 +201,11 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 
 3. In the **General** tab, under the **Client secrets** section, click **Generate a new client secret**.
 
-   ![General tab](/images/integrations/github/general-tab.webp)
+   ![General tab](/images/integrations/github/general-tab.webp#hero)
 
 4. Scroll down to the **Private keys** section.
 
-   ![Private keys](/images/integrations/github/private-keys.webp)
+   ![Private keys](/images/integrations/github/private-keys.webp#hero)
 
 5. Click **Genereate a private key**.
 
@@ -244,11 +244,11 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 
 3. In the **General** tab, under the **Client secrets** section, click **Generate a new client secret**.
 
-   ![General tab](/images/integrations/github/general-tab.webp)
+   ![General tab](/images/integrations/github/general-tab.webp#hero)
 
 4. Scroll down to the **Private keys** section.
 
-   ![Private keys](/images/integrations/github/private-keys.webp)
+   ![Private keys](/images/integrations/github/private-keys.webp#hero)
 
 5. Click **Generate a private key**.
 

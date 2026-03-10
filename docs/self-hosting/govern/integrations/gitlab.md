@@ -45,7 +45,7 @@ and then configure your Plane instance so it can sync merge requests and commits
 3. Navigate to the **Applications** tab.
 
 4. Click on **Add new application** to begin the setup.
-   ![Add GitLab application](/images/integrations/gitlab/add-gitlab-application.webp)
+   ![Add GitLab application](/images/integrations/gitlab/add-gitlab-application.webp#hero)
 
 5. Provide a **Name** for your application.
 
@@ -55,7 +55,7 @@ and then configure your Plane instance so it can sync merge requests and commits
    ```
 7. Check the **Confidential** box.
 
-   ![Add app details](/images/integrations/gitlab/add-app-details.webp)
+   ![Add app details](/images/integrations/gitlab/add-app-details.webp#hero)
 
 8. Set permissions by selecting the required **Scopes**. The table below explains each scope:
 
@@ -124,7 +124,7 @@ Replace `<your-domain>` with your actual Plane instance domain.
 == GitLab Cloud {#gitlab-cloud}
 
 1. Copy the **Application ID** and **Secret** from the newly created application.
-   ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
+   ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp#hero)
 
 2. Add these environment variables with the values to your Plane instance's `.env` file.
 
@@ -140,7 +140,7 @@ Replace `<your-domain>` with your actual Plane instance domain.
 == GitLab Self-managed {#gitlab-self-managed}
 
 1. Copy the **Application ID** and **Secret** from the newly created application.
-   ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp)
+   ![Copy credentials](/images/integrations/gitlab/copy-credentials.webp#hero)
 
 2. Once you've created the application, [activate the GitLab Self-managed integration in Plane](https://docs.plane.so/integrations/gitlab?edition=gitlab-self-managed).
 
