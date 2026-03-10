@@ -53,7 +53,6 @@ One custom model can be configured alongside your public provider keys.
 The custom model should have at least 100 billion parameters for all Plane AI features to work reliably. Larger, more capable models yield better results.
 :::
 
-
 ### Embedding models
 
 Embedding models power semantic search. Plane AI supports:
@@ -131,7 +130,7 @@ CUSTOM_LLM_MAX_TOKENS=128000
 
 ::: warning
 For Bedrock, the IAM user must have `bedrock:InvokeModel` permission on the target model.
-::: 
+:::
 
 ### Speech-to-text (optional)
 
