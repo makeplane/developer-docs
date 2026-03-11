@@ -87,8 +87,6 @@ This is where you'll make all configuration changes. Remember to restart the ins
 | **POSTGRES_PORT**         | TCP port your PostgreSQL server is listening on.                                                                                                                           | 5432                                       |
 | **PGDATA**                | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL within the same container/system.                                              | /var/lib/postgresql/data                   |
 | **DATABASE_URL**          | Full connection string for PostgreSQL. If provided, this takes precedence over individual connection parameters. Format: `postgresql://username:password@host:port/dbname` |                                            |
-| **FOLLOWER_POSTGRES_URI** | Connection string for a PostgreSQL read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                       |
-| **PLANE_PI_DATABASE_URL** | Connection string for the Plane Intelligence database. A separate database used by the PI service.                                                                         | postgresql://plane:plane@plane-db/plane_pi |
 
 ### Redis settings
 
@@ -174,6 +172,13 @@ This is where you'll make all configuration changes. Remember to restart the ins
 | **OPENSEARCH_ML_MODEL_ID**  | OpenSearch ML model ID used for embedding-based search features | (empty)                              |
 
 ### Plane AI
+
+#### Database settings
+
+| Variable                  | Description                                                                                                                                                                | Default Value                       |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| **FOLLOWER_POSTGRES_URI** | Connection string for a PostgreSQL read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                |
+| **PLANE_PI_DATABASE_URL** | Connection string for the Plane Intelligence database. A separate database used by the PI service.                                                                         | postgresql://plane:plane@plane-db/plane_pi |
 
 #### Plane AI replicas
 
