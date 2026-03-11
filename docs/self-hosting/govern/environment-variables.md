@@ -169,7 +169,6 @@ This is where you'll make all configuration changes. Remember to restart the ins
 | **OPENSEARCH_USERNAME**     | Authentication username                                         | admin                                |
 | **OPENSEARCH_PASSWORD**     | Authentication password                                         | your-secure-password                 |
 | **OPENSEARCH_INDEX_PREFIX** | Prefix for all index names (useful for multi-tenant setups)     | (empty)                              |
-| **OPENSEARCH_ML_MODEL_ID**  | OpenSearch ML model ID used for embedding-based search features | (empty)                              |
 
 ### Plane AI
 
