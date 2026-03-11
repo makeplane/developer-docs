@@ -437,6 +437,10 @@ airgapped:
 
 #### Plane AI deployment
 
+::: info Plane AI database
+Plane AI uses a separate PostgreSQL database. Create a new database (e.g. `plane_pi`) and connect it using `env.pg_pi_db_remote_url` in values, or **PLANE_PI_DATABASE_URL** when using `pi_api_env_existingSecret`.
+:::
+
 | Setting                          |                     Default                      | Required | Description                                                                                                                              |
 | -------------------------------- | :----------------------------------------------: | :------: | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | services.pi.enabled              |                      false                       |    No    | Set to `true` to enable the Plane AI service and its API, worker, beat, and migrator workloads.                                          |
