@@ -172,13 +172,6 @@ This is where you'll make all configuration changes. Remember to restart the ins
 
 ### Plane AI
 
-#### Database settings
-
-| Variable                  | Description                                                                                                                                                                | Default Value                       |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| **FOLLOWER_POSTGRES_URI** | Connection string for a PostgreSQL read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                |
-| **PLANE_PI_DATABASE_URL** | Connection string for the Plane Intelligence database. A separate database used by the PI service.                                                                         | postgresql://plane:plane@plane-db/plane_pi |
-
 #### Plane AI replicas
 
 To start Plane AI services, set each replica count to `1`:
@@ -189,6 +182,13 @@ To start Plane AI services, set each replica count to `1`:
 | **PI_BEAT_REPLICAS**     | Plane AI Beat Worker replica count | Yes      |
 | **PI_WORKER_REPLICAS**   | Plane AI Worker replica count      | Yes      |
 | **PI_MIGRATOR_REPLICAS** | Plane AI Migrator replica count    | Yes      |
+
+#### Database settings
+
+| Variable                  | Description                                                                                                                                                                | Default Value                       |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| **FOLLOWER_POSTGRES_URI** | Connection string for a PostgreSQL read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                |
+| **PLANE_PI_DATABASE_URL** | Connection string for the Plane Intelligence database. A separate database used by the PI service.                                                                     | postgresql://plane:plane@plane-db/plane_pi |
 
 #### LLM provider API keys
 
