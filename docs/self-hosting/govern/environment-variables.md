@@ -185,10 +185,14 @@ To start Plane AI services, set each replica count to `1`:
 
 #### Database settings
 
+::: info Plane AI database
+Plane AI uses a separate PostgreSQL database. Create a new database (e.g. `plane_pi`) on your PostgreSQL server, then set **PLANE_PI_DATABASE_URL** to its connection string. Example: `postgresql://user:password@host:5432/plane_pi`
+:::
+
 | Variable                  | Description                                                                                                                                                                | Default Value                       |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| **FOLLOWER_POSTGRES_URI** | Connection string for a PostgreSQL read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                |
-| **PLANE_PI_DATABASE_URL** | Connection string for the Plane Intelligence database. A separate database used by the PI service.                                                                     | postgresql://plane:plane@plane-db/plane_pi |
+| **PLANE_PI_DATABASE_URL** | Connection string for the Plane AI database. A separate database used by the PI service.                                                                     | postgresql://plane:plane@plane-db/plane_pi |
+| **FOLLOWER_POSTGRES_URI** | Connection string for a Plane PostgreSQL DB read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                |
 
 #### LLM provider API keys
 
