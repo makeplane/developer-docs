@@ -64,12 +64,12 @@ Reduce purchased seat count by 1. Defaults to `false`.
 
 ### Responses
 
-| Status | Description |
-| ------ | ----------- |
-| 204 | Member removed successfully (no body) |
-| 400 | Validation error (see below) |
-| 403 | You are not a member of this workspace |
-| 404 | Workspace or member not found |
+| Status | Description                            |
+| ------ | -------------------------------------- |
+| 204    | Member removed successfully (no body)  |
+| 400    | Validation error (see below)           |
+| 403    | You are not a member of this workspace |
+| 404    | Workspace or member not found          |
 
 **400 Validation Errors:**
 
@@ -128,20 +128,17 @@ print(response.status_code)  # 204 on success
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/members/remove/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: "jane@example.com",
-      remove_seat: true,
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/members/remove/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    email: "jane@example.com",
+    remove_seat: true,
+  }),
+});
 console.log(response.status); // 204 on success
 ```
 
