@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/api-reference",
+      "destination": "/api-reference/introduction"
+    },
+    {
       "source": "/api-reference/byoa/build-plane-app",
       "destination": "/dev-tools/build-plane-app"
     },
