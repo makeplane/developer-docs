@@ -88,6 +88,10 @@
     {
       "source": "/dev-tools/build-plane-app",
       "destination": "/dev-tools/build-plane-app/overview"
+    },
+    {
+      "source": "/self-hosting",
+      "destination": "/self-hosting/overview"
     }
   ]
 }
