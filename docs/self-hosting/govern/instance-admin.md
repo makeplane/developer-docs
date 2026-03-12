@@ -87,7 +87,7 @@ Workspace deletion is currently not supported.
 ![](/images/instance-admin/god-mode-workspaces.webp#hero)
 
 
-### User management <Badge type="warning" text="Enterprise" />
+### User management
 
 View and manage all users across the instance, invite instance admins, and control access to God Mode.
 

@@ -3,7 +3,7 @@ title: User management
 description: Manage instance users, invite instance admins, and control access to God Mode.
 ---
 
-# Manage instance users <Badge type="warning" text="Enterprise" />
+# Manage instance users
 
 User management lets instance admins view all users across the instance and manage their access. This is separate from workspace-level member management.
 
