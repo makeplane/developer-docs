@@ -16,7 +16,7 @@ sudo prime-cli monitor
 
 This brings up a table where you can select which container logs you want to view.
 
-![Container logs](/images/view-logs/container-logs.webp)
+![Container logs](/images/view-logs/container-logs.webp#hero)
 
 ::: warning
 **Prime CLI is for Docker installations only.** These commands only work on Plane instances originally installed using `prime-cli`.

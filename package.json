@@ -30,7 +30,8 @@
     "vue": "^3.5.26"
   },
   "dependencies": {
-    "lucide-vue-next": "^0.562.0"
+    "lucide-vue-next": "^0.562.0",
+    "medium-zoom": "^1.1.0"
   },
   "pnpm": {
     "overrides": {

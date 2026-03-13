@@ -81,5 +81,5 @@ As much as we'd love to understand your usage better, we agree that you should b
 
 1. Go to your instance's God Mode by appending `/god-mode` to the domain you have hosted Plane on.
 2. In the **General Settings** pane on the right, disable the **Telemetry** toggle button.
-   ![Disable telemetry](/images/disable-telemetry.webp)
+   ![Disable telemetry](/images/disable-telemetry.webp#hero)
 3. Click **Save changes**.

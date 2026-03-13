@@ -663,3 +663,198 @@ a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover {
   background: #0078b8 !important;
   box-shadow: 0 2px 8px rgba(0, 99, 153, 0.35) !important;
 }
+
+
+/* ================================================
+   HERO IMAGE STYLES
+   ================================================ */
+
+.vp-doc p:has(> img[src$="#hero"]),
+article p:has(> img[src$="#hero"]) {
+  max-width: 841px;
+  padding: 36px 56px 0px 56px;
+  background: #f1f3f3;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.vp-doc img[src$="#hero"],
+article img[src$="#hero"] {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 8px 8px 0px 0px;
+  border-width: 1px 1px 0px 1px;
+  border-style: solid;
+  border-color: #eaebeb;
+  object-fit: cover;
+  box-shadow:
+    0px 2px 4px -1px rgba(41, 47, 61, 0.04),
+    0px 4px 6px -1px rgba(41, 47, 61, 0.05);
+}
+
+.vp-doc p:has(> img[src$="#hero-tl"]),
+article p:has(> img[src$="#hero-tl"]) {
+  max-width: 841px;
+  padding: 36px 0px 0px 56px;
+  background: #f1f3f3;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.vp-doc img[src$="#hero-tl"],
+article img[src$="#hero-tl"] {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 8px 0px 0px 0px;
+  border-width: 1px 0px 0px 1px;
+  border-style: solid;
+  border-color: #eaebeb;
+  object-fit: cover;
+  box-shadow:
+    0px 2px 4px -1px rgba(41, 47, 61, 0.04),
+    0px 4px 6px -1px rgba(41, 47, 61, 0.05);
+}
+
+.vp-doc p:has(> img[src$="#hero-tr"]),
+article p:has(> img[src$="#hero-tr"]) {
+  max-width: 841px;
+  padding: 36px 56px 0px 0px;
+  background: #f1f3f3;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.vp-doc img[src$="#hero-tr"],
+article img[src$="#hero-tr"] {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 0px 8px 0px 0px;
+  border-width: 1px 1px 0px 0px;
+  border-style: solid;
+  border-color: #eaebeb;
+  object-fit: cover;
+  box-shadow:
+    0px 2px 4px -1px rgba(41, 47, 61, 0.04),
+    0px 4px 6px -1px rgba(41, 47, 61, 0.05);
+}
+
+.vp-doc p:has(> img[src$="#hero-bl"]),
+article p:has(> img[src$="#hero-bl"]) {
+  max-width: 841px;
+  padding: 0px 0px 36px 56px;
+  background: #f1f3f3;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.vp-doc img[src$="#hero-bl"],
+article img[src$="#hero-bl"] {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 0px 0px 0px 8px;
+  border-width: 0px 0px 1px 1px;
+  border-style: solid;
+  border-color: #eaebeb;
+  object-fit: cover;
+  box-shadow:
+    0px 2px 4px -1px rgba(41, 47, 61, 0.04),
+    0px 4px 6px -1px rgba(41, 47, 61, 0.05);
+}
+
+.vp-doc p:has(> img[src$="#hero-br"]),
+article p:has(> img[src$="#hero-br"]) {
+  max-width: 841px;
+  padding: 0px 56px 36px 0px;
+  background: #f1f3f3;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.vp-doc img[src$="#hero-br"],
+article img[src$="#hero-br"] {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 0px 0px 8px 0px;
+  border-width: 0px 1px 1px 0px;
+  border-style: solid;
+  border-color: #eaebeb;
+  object-fit: cover;
+  box-shadow:
+    0px 2px 4px -1px rgba(41, 47, 61, 0.04),
+    0px 4px 6px -1px rgba(41, 47, 61, 0.05);
+}
+
+/* ================================================
+   MOBILE IMAGE LAYOUT
+   ================================================ */
+
+.mobile-img-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mobile-img-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 25rem;
+  min-width: 15rem;
+  text-align: center;
+  margin: 10px;
+}
+
+/* ================================================
+   HOMEPAGE FEATURE ICONS - DARK MODE
+   ================================================ */
+
+/* Feature card icons use currentColor in SVG, but since they're
+   loaded as <img> tags, currentColor defaults to black. This filter
+   inverts them for visibility in dark mode. */
+.dark .VPFeature .VPImage {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.dark .VPFeatures .VPFeature .icon img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* ================================================
+   MEDIUM ZOOM - IMAGE LIGHTBOX
+   ================================================ */
+
+.vp-doc img {
+  cursor: zoom-in;
+}
+
+.medium-zoom-overlay {
+  z-index: 9999 !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.medium-zoom-image {
+  z-index: 10000 !important;
+}
+
+.medium-zoom-image--opened {
+  z-index: 10000 !important;
+  cursor: zoom-out;
+}

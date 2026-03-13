@@ -21,11 +21,11 @@ You'll need:
 ## Configure LDAP authentication
 
 1. Sign in to your Plane instance in [God Mode](/self-hosting/govern/instance-admin).
-   ![Turn on LDAP](/images/ldap/enable-ldap.webp)
+   ![Turn on LDAP](/images/ldap/enable-ldap.webp#hero)
 2. Select **Authentication** from the left pane.
 3. Click **Configure** next to **LDAP** at the bottom of the page.
 4. Enter your LDAP server details.
-   ![LDAP configuration](/images/ldap/ldap-configuration.webp)
+   ![LDAP configuration](/images/ldap/ldap-configuration.webp#hero)
    - **Server URI (required)**
      This is the address of your LDAP server. Include the protocol and port number.
 
@@ -137,7 +137,7 @@ You'll need:
 5. Click **Save changes** to apply your LDAP settings. Plane will validate the connection to your LDAP server.
 
 6. Users will see **Sign in with LDAP** on Plane's login page and can use their directory credentials to sign in.
-   ![Sign in using LDAP](/images/ldap/sign-in-ldap.webp)
+   ![Sign in using LDAP](/images/ldap/sign-in-ldap.webp#hero)
 
 ## How LDAP authentication works
 

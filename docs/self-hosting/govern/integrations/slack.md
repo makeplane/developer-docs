@@ -26,15 +26,15 @@ To configure Slack integration, you'll need to create a Slack App within your or
 1. Go to [Your Apps](https://api.slack.com/apps) on Slack.
 
 2. Click **Create an App**.
-   ![Create Slack App](/images/integrations/slack/create-slack-app.webp)
+   ![Create Slack App](/images/integrations/slack/create-slack-app.webp#hero)
 
 3. Choose **From a manifest**.
-   ![Choose Manifest](/images/integrations/slack/choose-from-manifest.webp)
+   ![Choose Manifest](/images/integrations/slack/choose-from-manifest.webp#hero)
 
 4. Select the workspace where you want the app installed.
 
 5. Remove the default manifest and paste the one below, making sure to update the placeholders with your actual values.
-   ![Manifest](/images/integrations/slack/app-from-manifest.webp)
+   ![Manifest](/images/integrations/slack/app-from-manifest.webp#hero)
 
 :::tabs key:manifest-file
 
@@ -205,7 +205,7 @@ event_subscriptions:
 :::
 
 6. Review the permissions and click **Create**.
-   ![Review summary](/images/integrations/slack/review-summary.webp)
+   ![Review summary](/images/integrations/slack/review-summary.webp#hero)
 
 ### Manifest reference
 
@@ -282,7 +282,7 @@ After creating your Slack app, follow these steps:
 1. Go to the **Event Subscriptions** tab.
 
 2. Click **Retry** to verify your event subscription URL.
-   ![Event subscriptions](/images/integrations/slack/event-subscriptions.webp)
+   ![Event subscriptions](/images/integrations/slack/event-subscriptions.webp#hero)
 
 3. Navigate to the **Basic Information** tab on Slack to find your `client_id` and `client_secret`.
 

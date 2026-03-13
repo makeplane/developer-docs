@@ -68,7 +68,7 @@ You will find all of the values for the fields below in the `/metadata` endpoint
 
   This will bring up the IdP's authentication screen for your users.
 
-  ![SSO URL](/images/custom-sso/okta-signin.webp)
+  ![SSO URL](/images/custom-sso/okta-signin.webp#hero)
 
 - Copy the `SLS URL` for the Plane client or app from your IdP and paste it in the `Logout URL` field on Plane's `/god-mode/authentication/saml/`.
 

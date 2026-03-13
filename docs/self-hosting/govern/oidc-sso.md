@@ -58,6 +58,6 @@ Your IdP will generate some of the following configs for you. Others, you will s
 
   To test if this URL is right, see if clicking the `Login with <name of your IdP>` button brings up your IdP's authentication screen.
 
-  ![Login with Okta](/images/custom-sso/okta-signin.webp)
+  ![Login with Okta](/images/custom-sso/okta-signin.webp#hero)
 
 - Finally, choose a name for your IdP on Plane so you can recognize this set of configs.
