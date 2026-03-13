@@ -77,18 +77,16 @@ This is where you'll make all configuration changes. Remember to restart the ins
 
 ### Database settings
 
-| Variable                  | Description                                                                                                                                                                | Default Value                              |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **PGHOST**                | Hostname or IP address of your PostgreSQL server.                                                                                                                          | plane-db                                   |
-| **PGDATABASE**            | Name of the PostgreSQL database Plane will use.                                                                                                                            | plane                                      |
-| **POSTGRES_USER**         | Username for PostgreSQL authentication.                                                                                                                                    | plane                                      |
-| **POSTGRES_PASSWORD**     | Password for PostgreSQL authentication. **Critical:** Use a strong, unique password here.                                                                                  | plane                                      |
-| **POSTGRES_DB**           | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                                                  | plane                                      |
-| **POSTGRES_PORT**         | TCP port your PostgreSQL server is listening on.                                                                                                                           | 5432                                       |
-| **PGDATA**                | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL within the same container/system.                                              | /var/lib/postgresql/data                   |
-| **DATABASE_URL**          | Full connection string for PostgreSQL. If provided, this takes precedence over individual connection parameters. Format: `postgresql://username:password@host:port/dbname` |                                            |
-| **FOLLOWER_POSTGRES_URI** | Connection string for a PostgreSQL read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                       |
-| **PLANE_PI_DATABASE_URL** | Connection string for the Plane Intelligence database. A separate database used by the PI service.                                                                         | postgresql://plane:plane@plane-db/plane_pi |
+| Variable              | Description                                                                                                                                                                | Default Value            |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| **PGHOST**            | Hostname or IP address of your PostgreSQL server.                                                                                                                          | plane-db                 |
+| **PGDATABASE**        | Name of the PostgreSQL database Plane will use.                                                                                                                            | plane                    |
+| **POSTGRES_USER**     | Username for PostgreSQL authentication.                                                                                                                                    | plane                    |
+| **POSTGRES_PASSWORD** | Password for PostgreSQL authentication. **Critical:** Use a strong, unique password here.                                                                                  | plane                    |
+| **POSTGRES_DB**       | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                                                  | plane                    |
+| **POSTGRES_PORT**     | TCP port your PostgreSQL server is listening on.                                                                                                                           | 5432                     |
+| **PGDATA**            | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL within the same container/system.                                              | /var/lib/postgresql/data |
+| **DATABASE_URL**      | Full connection string for PostgreSQL. If provided, this takes precedence over individual connection parameters. Format: `postgresql://username:password@host:port/dbname` |                          |
 
 ### Redis settings
 
@@ -164,14 +162,13 @@ This is where you'll make all configuration changes. Remember to restart the ins
 
 ### OpenSearch
 
-| Variable                    | Description                                                     | Default Value                        |
-| --------------------------- | --------------------------------------------------------------- | ------------------------------------ |
-| **OPENSEARCH_ENABLED**      | Enable OpenSearch integration                                   | 1                                    |
-| **OPENSEARCH_URL**          | OpenSearch endpoint URL                                         | https://opensearch.example.com:9200/ |
-| **OPENSEARCH_USERNAME**     | Authentication username                                         | admin                                |
-| **OPENSEARCH_PASSWORD**     | Authentication password                                         | your-secure-password                 |
-| **OPENSEARCH_INDEX_PREFIX** | Prefix for all index names (useful for multi-tenant setups)     | (empty)                              |
-| **OPENSEARCH_ML_MODEL_ID**  | OpenSearch ML model ID used for embedding-based search features | (empty)                              |
+| Variable                    | Description                                                 | Default Value                        |
+| --------------------------- | ----------------------------------------------------------- | ------------------------------------ |
+| **OPENSEARCH_ENABLED**      | Enable OpenSearch integration                               | 1                                    |
+| **OPENSEARCH_URL**          | OpenSearch endpoint URL                                     | https://opensearch.example.com:9200/ |
+| **OPENSEARCH_USERNAME**     | Authentication username                                     | admin                                |
+| **OPENSEARCH_PASSWORD**     | Authentication password                                     | your-secure-password                 |
+| **OPENSEARCH_INDEX_PREFIX** | Prefix for all index names (useful for multi-tenant setups) | (empty)                              |
 
 ### Plane AI
 
@@ -185,6 +182,17 @@ To start Plane AI services, set each replica count to `1`:
 | **PI_BEAT_REPLICAS**     | Plane AI Beat Worker replica count | Yes      |
 | **PI_WORKER_REPLICAS**   | Plane AI Worker replica count      | Yes      |
 | **PI_MIGRATOR_REPLICAS** | Plane AI Migrator replica count    | Yes      |
+
+#### Database settings
+
+::: info Plane AI database
+Plane AI uses a separate PostgreSQL database. Create a new database (e.g. `plane_pi`) on your PostgreSQL server, then set **PLANE_PI_DATABASE_URL** to its connection string. Example: `postgresql://user:password@host:5432/plane_pi`
+:::
+
+| Variable                  | Description                                                                                                                      | Default Value                              |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **PLANE_PI_DATABASE_URL** | Connection string for the Plane AI database. A separate database used by the PI service.                                         | postgresql://plane:plane@plane-db/plane_pi |
+| **FOLLOWER_POSTGRES_URI** | Connection string for a Plane PostgreSQL DB read replica. Used for read-heavy operations to reduce load on the primary database. | Same as DATABASE_URL                       |
 
 #### LLM provider API keys
 
