@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+    posthog?: {
+      opt_in_capturing?: () => void;
+      opt_out_capturing?: () => void;
+    };
+  }
+}
+
 const STORAGE_KEY = "plane-docs-cookie-consent";
 const showBanner = ref(false);
 
