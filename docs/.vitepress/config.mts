@@ -319,6 +319,7 @@ export default withMermaid(
               { text: "View Logs", link: "/self-hosting/manage/view-logs" },
               { text: "Migrate Plane", link: "/self-hosting/manage/migrate-plane" },
               { text: "Prime CLI", link: "/self-hosting/manage/prime-cli" },
+              { text: "API Server Commands", link: "/self-hosting/manage/api-server-commands" },
             ],
           },
           {
