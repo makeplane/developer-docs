@@ -10,7 +10,6 @@ An instance is a single self-managed installation of Plane on a private cloud or
 
 ::: info
 There may also be cases where a user IRL is running multiple instances, e.g., when using Plane for several clients. An `Instance admin` role will have to be declared for each of those instances, but it is okay to use the same email address for all of them.
-
 :::
 
 This role lets instance admins access `/god-mode`, a route for features that help them administer and govern their Plane instance better for all users of that instance.
@@ -43,7 +42,28 @@ Here’s what you can manage:
 - **Let Plane collect anonymous usage data**  
   Plane collects anonymized usage data (no PII) to help improve features and overall experience. You can turn this off anytime. See [Telemetry](/self-hosting/telemetry) for more info.
 
-![](/images/instance-admin/god-mode-general.webp)
+![](/images/instance-admin/god-mode-general.webp#hero)
+
+### Email
+
+Set up your SMTP server here so you can send essential emails—password resets, exports, changes to your instance—and Plane-enabled emails—onboarding, tips and tricks, new features— to all your users. [Learn more here](/self-hosting/govern/communication).
+
+![](/images/instance-admin/god-mode-email.webp#hero)
+
+### Authentication
+
+Control what SSO and OAuth services your users can use to sign up and log in to your Plane instance. You can also toggle unique code and password logins on and off from here. [Learn more here](/self-hosting/govern/authentication).
+
+- **Allow anyone to sign up without an invite**  
+  Toggle this setting off if you want your users to join the instance only if they receive an invite.
+
+Once SSO is configured, instance admins can also use SSO to log in to God Mode.
+
+::: info
+This is where you will see new SSO services and custom OAuth configs in the future.
+:::
+
+![](/images/instance-admin/god-mode-authentication.webp#hero)
 
 ### Workspaces
 
@@ -64,54 +84,26 @@ To add users to a workspace, you will need to [invite them](https://docs.plane.s
 Workspace deletion is currently not supported.
 :::
 
-![](/images/instance-admin/god-mode-workspaces.webp)
+![](/images/instance-admin/god-mode-workspaces.webp#hero)
 
-### Email
+### User management
 
-Set up your SMTP server here so you can send essential emails—password resets, exports, changes to your instance—and Plane-enabled emails—onboarding, tips and tricks, new features— to all your users. [Learn more here](/self-hosting/govern/communication).
+View and manage all users across the instance, invite instance admins, and control access to God Mode.
 
-![](/images/instance-admin/god-mode-email.webp)
+![User management](/images/instance-admin/user-management.webp#hero)
 
-### Authentication
+- View all users with their account type, status, and joining date
+- Invite new instance admins
+- Grant or remove admin access for existing users
+- Remove users from the instance
 
-Control what SSO and OAuth services your users can use to sign up and log in to your Plane instance. You can also toggle unique code and password logins on and off from here. [Learn more here](/self-hosting/govern/authentication).
-
-- **Allow anyone to sign up without an invite**  
-  Toggle this setting off if you want your users to join the instance only if they receive an invite.
-
-::: info
-This is where you will see new SSO services and custom OAuth configs in the future.
-:::
-
-![](/images/instance-admin/god-mode-authentication.webp)
-
-### Artificial intelligence
-
-Plane supports the use of AI throughout your projects. For now, we support OpenAI’s APIs and keys. You can configure them here or leave them blank if you don’t wish to offer AI features to your users. Your Plane experience remains largely unchanged if you don’t set this up.
-
-![](/images/instance-admin/god-mode-ai.webp)
+See [User management](/self-hosting/manage/manage-instance-users) for details.
 
 ### Images in Plane
 
 You can use your own third-party libraries to update images in project settings. Configure your Unsplash key here. When we add more image libraries, they will show up here.
 
-![](/images/instance-admin/god-mode-images.webp)
-
-## Add instance admin
-
-To grant a user full administrative access (including God mode) to your self-hosted Plane instance, you'll need to assign them the Instance Admin role. Instance admins have unrestricted control over all configurations and settings within the instance.
-
-To promote an existing user to Instance Admin, execute the following command in your terminal:
-
-```bash
-  docker exec <backend_container_name> /bin/bash -c "python manage.py create_instance_admin <user_email>"
-```
-
-Ensure that the provided email matches the user's registered account. This command will instantly elevate their privileges to full administrative access.
-
----
-
-Soon, we will introduce God Mode for our Cloud users as well so they can manage their workspaces better. To get notified about this, [sign up here](https://ece39166.sibforms.com/serve/MUIFANgaMWIARsq1n0lMNrch19pdY2HJm9FkSXAeq1DrCoXJBmO9Yq6SPgtzu7rL0lQBmCvvz2A2arVl5WaDxYu6YhNW4PKNAis0DMXmpRnwm5633BvXqIYILqZuyqYiGS7_QjJ0Ozh4R2uctd8RwiiTLSHWpnV2njQt6DPV5cVr8FH3K-TouNAlBScOJxbCpjj8fYo2ULsEJeAL).
+![](/images/instance-admin/god-mode-images.webp#hero)
 
 ## FAQs
 

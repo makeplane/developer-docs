@@ -18,6 +18,6 @@ Enterprise plan licenses are activated at the instance level through God Mode, n
 6. Paste your license key in the **Activate Enterprise license** field.
 7. Click **Activate**.
 
-   ![Activate Enterprise license](/images/activate-license/activate-enterprise-plan.webp)
+   ![Activate Enterprise license](/images/activate-license/activate-enterprise-plan.webp#hero)
 
 Once activated, Enterprise features become available across all workspaces on your instance.

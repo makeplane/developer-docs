@@ -1,7 +1,9 @@
 import DefaultTheme from "vitepress/theme";
 import type { Theme } from "vitepress";
-import { onMounted, nextTick, h } from "vue";
+import { onMounted, watch, nextTick, h } from "vue";
+import { useRoute } from "vitepress";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
+import mediumZoom from "medium-zoom";
 
 import "./style.css";
 import "vitepress-plugin-tabs/client";
@@ -126,27 +128,48 @@ export default {
       router.onAfterRouteChanged = () => {
         nextTick(() => {
           updateLayout();
-          handleTabHash();
-          setupTabHashUpdates();
         });
       };
+    }
+  },
+  setup() {
+    if (typeof window === "undefined") return;
+
+    const route = useRoute();
+    let zoom: ReturnType<typeof mediumZoom> | null = null;
+
+    const initZoom = () => {
+      zoom?.detach();
+      zoom = mediumZoom(".vp-doc :not(a) > img:not(.VPImage)", {
+        background: "rgba(0, 0, 0, 0.8)",
+      });
+    };
+
+    onMounted(() => {
+      initZoom();
+
+      // Delay tab hash handling to ensure tabs are rendered
+      setTimeout(() => {
+        handleTabHash();
+        setupTabHashUpdates();
+      }, 100);
 
       // Listen for hash changes
       window.addEventListener("hashchange", () => {
         nextTick(handleTabHash);
       });
-    }
-  },
-  setup() {
-    if (typeof window !== "undefined") {
-      onMounted(() => {
-        updateLayout();
-        // Delay tab hash handling to ensure tabs are rendered
-        setTimeout(() => {
+    });
+
+    // Watch for route changes
+    watch(
+      () => route.path,
+      () => {
+        nextTick(() => {
+          initZoom();
           handleTabHash();
           setupTabHashUpdates();
-        }, 100);
-      });
-    }
+        });
+      }
+    );
   },
 } satisfies Theme;

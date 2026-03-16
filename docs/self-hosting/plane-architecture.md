@@ -8,7 +8,7 @@ keywords: plane architecture, plane system design, plane components, plane servi
 
 Plane consists of multiple services working together to provide project management capabilities.
 
-![Plane architecture](/images/airgapped/plane-architecture.webp)
+![Plane architecture](/images/airgapped/plane-architecture.webp#hero)
 
 ### Frontend services
 
