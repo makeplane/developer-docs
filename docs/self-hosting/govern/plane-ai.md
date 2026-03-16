@@ -14,6 +14,7 @@ For an overview of what Plane AI can do, see the [Plane AI](https://docs.plane.s
 
 You'll need:
 
+- A **separate database** for Plane AI. Plane AI requires its own database instance; do not use the same database as your main Plane application.
 - An OpenSearch instance running version 2.19 or later (self-hosted or AWS OpenSearch) configured for [advanced search](/self-hosting/govern/advanced-search).
 - At least one LLM provider API key or a custom OpenAI-compatible endpoint.
 - At least one embedding model configured in OpenSearch.
@@ -59,6 +60,10 @@ Embedding models power semantic search. Plane AI supports:
 | **AWS Bedrock (Titan)** | `bedrock/amazon.titan-embed-text-v1`                             |
 
 ## Enable Plane AI services
+
+:::info Separate database required
+Plane AI must use its own database—do not share the main Plane application database. A dedicated database keeps AI data (e.g. chat history) isolated and avoids schema conflicts. Set **PLANE_PI_DATABASE_URL** (or the equivalent for your deployment). See the [environment variables reference](/self-hosting/govern/environment-variables#plane-ai).
+:::
 
 :::tip
 For other deployment methods such as Coolify, Portainer, Docker Swarm, and Podman Quadlets, use the same [environment variables](/self-hosting/govern/environment-variables#plane-ai) defined for Docker Compose Setup.
