@@ -86,7 +86,6 @@ Workspace deletion is currently not supported.
 
 ![](/images/instance-admin/god-mode-workspaces.webp#hero)
 
-
 ### User management
 
 View and manage all users across the instance, invite instance admins, and control access to God Mode.
@@ -100,13 +99,11 @@ View and manage all users across the instance, invite instance admins, and contr
 
 See [User management](/self-hosting/manage/manage-instance-users) for details.
 
-
 ### Images in Plane
 
 You can use your own third-party libraries to update images in project settings. Configure your Unsplash key here. When we add more image libraries, they will show up here.
 
 ![](/images/instance-admin/god-mode-images.webp#hero)
-
 
 ## FAQs
 

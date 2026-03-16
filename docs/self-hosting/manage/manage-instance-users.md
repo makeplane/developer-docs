@@ -15,14 +15,14 @@ Go to **God Mode → User Management** to see all users in the instance.
 
 The table displays:
 
-| Column | Description |
-|--------|-------------|
-| Full Name | User's full name |
-| Display Name | User's display name |
-| Email | User's email address |
+| Column       | Description            |
+| ------------ | ---------------------- |
+| Full Name    | User's full name       |
+| Display Name | User's display name    |
+| Email        | User's email address   |
 | Account Type | User or Instance Admin |
-| Status | Active or Suspended |
-| Joining Date | When the user joined |
+| Status       | Active or Suspended    |
+| Joining Date | When the user joined   |
 
 Use the search bar to find specific users.
 
@@ -55,7 +55,7 @@ Click **…** next to any user to:
 
 ## User status
 
-| Status | Description |
-|--------|-------------|
-| Active | User can access the instance |
+| Status    | Description                                        |
+| --------- | -------------------------------------------------- |
+| Active    | User can access the instance                       |
 | Suspended | User account exists but cannot access the instance |
