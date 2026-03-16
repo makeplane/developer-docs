@@ -62,7 +62,7 @@ Embedding models power semantic search. Plane AI supports:
 ## Enable Plane AI services
 
 :::info Separate database required
-Plane AI must use its own database— do not share the main Plane application database. A dedicated database keeps AI data (e.g. chat history) isolated and avoids schema conflicts. Set **PLANE_PI_DATABASE_URL** (or the equivalent for your deployment). See the [environment variables reference](/self-hosting/govern/environment-variables#plane-ai).
+Plane AI must use its own database — do not share the main Plane application database. A dedicated database keeps AI data (e.g. chat history) isolated and avoids schema conflicts. Set **PLANE_PI_DATABASE_URL** (or the equivalent for your deployment). See the [environment variables reference](/self-hosting/govern/environment-variables#plane-ai).
 :::
 
 :::tip
