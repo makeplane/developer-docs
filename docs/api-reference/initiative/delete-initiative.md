@@ -1,20 +1,20 @@
 ---
 title: Delete an initiative
-description: Permanently delete an initiative via Plane API. Removes the initiative and disassociates linked epics, projects, and labels. Returns 204 on success.
-keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+description: Delete an initiative via Plane API. HTTP request format, parameters, scopes, and example responses for delete an initiative.
+keywords: plane, plane api, rest api, api integration, initiative, delete an initiative
 ---
 
 # Delete an initiative
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/initiatives/{initiative_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/initiatives/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently deletes an initiative from a workspace. This action cannot be undone.
+Delete an initiative by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,21 @@ Permanently deletes an initiative from a workspace. This action cannot be undone
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="initiative_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Initiative ID
 
 </ApiParam>
 
-<ApiParam name="initiative_id" type="string" :required="true">
+<ApiParam name="pk" type="string" :required="true">
 
-The unique identifier for the initiative.
+Pk.
+
+</ApiParam>
+
+<ApiParam name="slug" type="string" :required="true">
+
+Workspace slug
 
 </ApiParam>
 
@@ -46,6 +52,7 @@ The unique identifier for the initiative.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Delete an initiative" :languages="['cURL', 'Python', 'JavaScript']">
@@ -53,9 +60,8 @@ The unique identifier for the initiative.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/" \
-  -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440000/" \
+  -H "X-API-Key: $PLANE_API_KEY"
 ```
 
 </template>
@@ -65,23 +71,26 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"}
 )
-print(response.json())
+print(response.status_code)
 ```
 
 </template>
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/", {
-  method: "DELETE",
-  headers: {
-    "X-API-Key": "your-api-key",
-  },
-});
-const data = await response.json();
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440000/",
+  {
+    method: "DELETE",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
+console.log(response.status);
 ```
 
 </template>
@@ -89,11 +98,10 @@ const data = await response.json();
 
 <ResponsePanel status="204">
 
-```json
-// 204 No Content
-```
+No response body.
 
 </ResponsePanel>
 
 </div>
+
 </div>

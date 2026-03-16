@@ -1,20 +1,20 @@
 ---
 title: Create a customer property
-description: Create a customer property via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: Create a customer property via Plane API. HTTP request format, parameters, scopes, and example responses for create a customer property.
+keywords: plane, plane api, rest api, api integration, customer, create a customer property
 ---
 
 # Create a customer property
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/customer-properties/</span>
+  <span class="path">/api/v1/workspaces/{slug}/customer-properties/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new customer property definition in a workspace.
+Create a new customer property in the specified workspace.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Creates a new customer property definition in a workspace.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Slug.
 
 </ApiParam>
 
@@ -37,93 +37,108 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 <div class="params-list">
 
-<ApiParam name="name" type="string">
+<ApiParam name="display_name" type="string" :required="true">
 
-Name of the property.
-
-</ApiParam>
-
-<ApiParam name="display_name" type="string">
-
-Display name of the property.
+Display name.
 
 </ApiParam>
 
-<ApiParam name="description" type="string">
+<ApiParam name="description" type="string" :required="false">
 
-Description of the property.
-
-</ApiParam>
-
-<ApiParam name="property_type" type="string">
-
-Type of the property.
+Description.
 
 </ApiParam>
 
-<ApiParam name="relation_type" type="string">
+<ApiParam name="logo_props" type="object" :required="false">
 
-Relation type of the property.
-
-</ApiParam>
-
-<ApiParam name="is_required" type="boolean">
-
-Whether the property is required.
+Logo props.
 
 </ApiParam>
 
-<ApiParam name="is_multi" type="boolean">
+<ApiParam name="sort_order" type="number" :required="false">
 
-Whether the property supports multiple values.
-
-</ApiParam>
-
-<ApiParam name="is_active" type="boolean">
-
-Whether the property is active.
+Sort order.
 
 </ApiParam>
 
-<ApiParam name="sort_order" type="number">
+<ApiParam name="property_type" type="string" :required="true">
 
-Sort order for the property.
-
-</ApiParam>
-
-<ApiParam name="default_value" type="string[]">
-
-Default values for the property.
-
-</ApiParam>
-
-<ApiParam name="settings" type="object">
-
-Settings for the property.
+- `TEXT` - Text
+- `DATETIME` - Datetime
+- `DECIMAL` - Decimal
+- `BOOLEAN` - Boolean
+- `OPTION` - Option
+- `RELATION` - Relation
+- `URL` - URL
+- `EMAIL` - Email
+- `FILE` - File
 
 </ApiParam>
 
-<ApiParam name="validation_rules" type="object">
+<ApiParam name="relation_type" type="string" :required="false">
 
-Validation rules for the property.
-
-</ApiParam>
-
-<ApiParam name="logo_props" type="object">
-
-Logo properties for the property.
+- `ISSUE` - Issue
+- `USER` - User
 
 </ApiParam>
 
-<ApiParam name="external_source" type="string">
+<ApiParam name="is_required" type="boolean" :required="false">
 
-External source identifier.
+Is required.
 
 </ApiParam>
 
-<ApiParam name="external_id" type="string">
+<ApiParam name="default_value" type="array" :required="false">
 
-External ID from the external source.
+Default value.
+
+</ApiParam>
+
+<ApiParam name="settings" type="object" :required="false">
+
+Settings.
+
+</ApiParam>
+
+<ApiParam name="is_active" type="boolean" :required="false">
+
+Is active.
+
+</ApiParam>
+
+<ApiParam name="is_multi" type="boolean" :required="false">
+
+Is multi.
+
+</ApiParam>
+
+<ApiParam name="validation_rules" type="object" :required="false">
+
+Validation rules.
+
+</ApiParam>
+
+<ApiParam name="external_source" type="string" :required="false">
+
+External source.
+
+</ApiParam>
+
+<ApiParam name="external_id" type="string" :required="false">
+
+External id.
+
+</ApiParam>
+
+<ApiParam name="created_by" type="string" :required="false">
+
+Created by.
+
+</ApiParam>
+
+<ApiParam name="updated_by" type="string" :required="false">
+
+Updated by.
 
 </ApiParam>
 
@@ -139,6 +154,7 @@ External ID from the external source.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Create a customer property" :languages="['cURL', 'Python', 'JavaScript']">
@@ -148,24 +164,26 @@ External ID from the external source.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "name": "example-name",
-  "display_name": "example-display_name",
-  "description": "example-description",
-  "property_type": "example-property_type",
-  "relation_type": "example-relation_type",
-  "is_required": true,
-  "is_multi": true,
-  "is_active": true,
+  "display_name": "Example Name",
+  "description": "Example description",
+  "logo_props": "example-value",
   "sort_order": 1,
-  "default_value": "example-default_value",
-  "settings": "example-settings",
-  "validation_rules": "example-validation_rules",
-  "logo_props": "example-logo_props",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id"
+  "property_type": "TEXT",
+  "relation_type": "ISSUE",
+  "is_required": true,
+  "default_value": [
+    "Example Name"
+  ],
+  "settings": "example-value",
+  "is_active": true,
+  "is_multi": true,
+  "validation_rules": "example-value",
+  "external_source": "github",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "created_by": "550e8400-e29b-41d4-a716-446655440000",
+  "updated_by": "550e8400-e29b-41d4-a716-446655440000"
 }'
 ```
 
@@ -179,22 +197,25 @@ response = requests.post(
     "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'name': 'example-name',
-  'display_name': 'example-display_name',
-  'description': 'example-description',
-  'property_type': 'example-property_type',
-  'relation_type': 'example-relation_type',
-  'is_required': true,
-  'is_multi': true,
-  'is_active': true,
-  'sort_order': 1,
-  'default_value': 'example-default_value',
-  'settings': 'example-settings',
-  'validation_rules': 'example-validation_rules',
-  'logo_props': 'example-logo_props',
-  'external_source': 'example-external_source',
-  'external_id': 'example-external_id'
-}
+      "display_name": "Example Name",
+      "description": "Example description",
+      "logo_props": "example-value",
+      "sort_order": 1,
+      "property_type": "TEXT",
+      "relation_type": "ISSUE",
+      "is_required": true,
+      "default_value": [
+"Example Name"
+      ],
+      "settings": "example-value",
+      "is_active": true,
+      "is_multi": true,
+      "validation_rules": "example-value",
+      "external_source": "github",
+      "external_id": "550e8400-e29b-41d4-a716-446655440000",
+      "created_by": "550e8400-e29b-41d4-a716-446655440000",
+      "updated_by": "550e8400-e29b-41d4-a716-446655440000"
+    }
 )
 print(response.json())
 ```
@@ -210,21 +231,22 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    name: "example-name",
-    display_name: "example-display_name",
-    description: "example-description",
-    property_type: "example-property_type",
-    relation_type: "example-relation_type",
-    is_required: true,
-    is_multi: true,
-    is_active: true,
+    display_name: "Example Name",
+    description: "Example description",
+    logo_props: "example-value",
     sort_order: 1,
-    default_value: "example-default_value",
-    settings: "example-settings",
-    validation_rules: "example-validation_rules",
-    logo_props: "example-logo_props",
-    external_source: "example-external_source",
-    external_id: "example-external_id",
+    property_type: "TEXT",
+    relation_type: "ISSUE",
+    is_required: true,
+    default_value: ["Example Name"],
+    settings: "example-value",
+    is_active: true,
+    is_multi: true,
+    validation_rules: "example-value",
+    external_source: "github",
+    external_id: "550e8400-e29b-41d4-a716-446655440000",
+    created_by: "550e8400-e29b-41d4-a716-446655440000",
+    updated_by: "550e8400-e29b-41d4-a716-446655440000",
   }),
 });
 const data = await response.json();
@@ -237,12 +259,23 @@ const data = await response.json();
 
 ```json
 {
-  "id": "resource-uuid",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z",
+  "name": "Example Name",
+  "display_name": "Example Name",
+  "description": "Example description",
+  "property_type": "TEXT",
+  "deleted_at": "2024-01-01T00:00:00Z",
+  "logo_props": "example-value",
+  "sort_order": 1,
+  "relation_type": "ISSUE",
+  "is_required": true
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

@@ -1,20 +1,20 @@
 ---
 title: List teamspace projects
-description: List teamspace projects via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane api, teamspace projects, team project management, team collaboration, workspace teams, rest api, api integration
+description: List teamspace projects via Plane API. HTTP request format, parameters, scopes, and example responses for list teamspace projects.
+keywords: plane, plane api, rest api, api integration, teamspace, list teamspace projects
 ---
 
 # List teamspace projects
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/projects/</span>
+  <span class="path">/api/v1/workspaces/{slug}/teamspaces/{teamspace_id}/projects/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Gets all the projects associated with a teamspace
+List all projects in a teamspace
 
 <div class="params-section">
 
@@ -22,32 +22,15 @@ Gets all the projects associated with a teamspace
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
+
+Workspace slug
 
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-</ApiParam>
-
-</div>
-</div>
-
-<div class="params-section">
-
-### Query Parameters
-
-<div class="params-list">
-
-<ApiParam name="limit" type="number">
-
-Number of results to return per page.
-
-</ApiParam>
-
-<ApiParam name="limit" type="number">
-
-Number of results to skip for pagination.
+Teamspace ID
 
 </ApiParam>
 
@@ -63,6 +46,7 @@ Number of results to skip for pagination.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="List teamspace projects" :languages="['cURL', 'Python', 'JavaScript']">
@@ -70,9 +54,8 @@ Number of results to skip for pagination.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/" \
-  -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/" \
+  -H "X-API-Key: $PLANE_API_KEY"
 ```
 
 </template>
@@ -82,7 +65,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -93,7 +76,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
   {
     method: "GET",
     headers: {
@@ -111,15 +94,31 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "grouped_by": "state",
+  "sub_grouped_by": "priority",
+  "total_count": 150,
+  "next_cursor": "20:1:0",
+  "prev_cursor": "20:0:0",
+  "next_page_results": true,
+  "prev_page_results": false,
+  "count": 20,
+  "total_pages": 8,
+  "total_results": 150,
+  "extra_stats": null,
+  "results": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Example Name",
+      "description": "Example description",
+      "identifier": "PROJ-123",
+      "network": 2
+    }
+  ]
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

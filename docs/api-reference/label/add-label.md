@@ -1,20 +1,20 @@
 ---
 title: Create a label
-description: Create a label via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+description: Create a label via Plane API. HTTP request format, parameters, scopes, and example responses for create a label.
+keywords: plane, plane api, rest api, api integration, label, create a label
 ---
 
 # Create a label
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/labels/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/labels/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new label in a project.
+Create a new label in the specified project with name, color, and description.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new label in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier of the project.
+Workspace slug
 
 </ApiParam>
 
@@ -45,7 +45,43 @@ The unique identifier of the project.
 
 <ApiParam name="name" type="string" :required="true">
 
-Name of the label.
+Name.
+
+</ApiParam>
+
+<ApiParam name="color" type="string" :required="false">
+
+Color.
+
+</ApiParam>
+
+<ApiParam name="description" type="string" :required="false">
+
+Description.
+
+</ApiParam>
+
+<ApiParam name="external_source" type="string" :required="false">
+
+External source.
+
+</ApiParam>
+
+<ApiParam name="external_id" type="string" :required="false">
+
+External id.
+
+</ApiParam>
+
+<ApiParam name="parent" type="string" :required="false">
+
+Parent.
+
+</ApiParam>
+
+<ApiParam name="sort_order" type="number" :required="false">
+
+Sort order.
 
 </ApiParam>
 
@@ -61,6 +97,7 @@ Name of the label.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Create a label" :languages="['cURL', 'Python', 'JavaScript']">
@@ -68,12 +105,15 @@ Name of the label.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/labels/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "name": "example-name"
+  "name": "Example Name",
+  "color": "#ff0000",
+  "description": "Example description",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
 }'
 ```
 
@@ -84,11 +124,15 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/labels/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'name': 'example-name'
-}
+      "name": "Example Name",
+      "color": "#ff0000",
+      "description": "Example description",
+      "external_id": "550e8400-e29b-41d4-a716-446655440000",
+      "external_source": "github"
+    }
 )
 print(response.json())
 ```
@@ -97,16 +141,23 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/", {
-  method: "POST",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    name: "example-name",
-  }),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/labels/",
+  {
+    method: "POST",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "Example Name",
+      color: "#ff0000",
+      description: "Example description",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
+    }),
+  }
+);
 const data = await response.json();
 ```
 
@@ -117,15 +168,17 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Example Name",
+  "color": "#ff4444",
+  "description": "Example description",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

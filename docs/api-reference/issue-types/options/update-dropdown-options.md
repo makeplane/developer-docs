@@ -1,20 +1,20 @@
 ---
 title: Update dropdown options
-description: Update dropdown options via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Update dropdown options via Plane API. HTTP request format, parameters, scopes, and example responses for update dropdown options.
+keywords: plane, plane api, rest api, api integration, issue types, options, update dropdown options
 ---
 
 # Update dropdown options
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-item-properties/{property_id}/options/{option_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-item-properties/{property_id}/options/{option_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Lets you modify existing options within a dropdown property.
+Update an issue property option
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Lets you modify existing options within a dropdown property.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="option_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Option id.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
 <ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the custom property.
+Property ID
 
 </ApiParam>
 
-<ApiParam name="option_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the option.
+Workspace slug
 
 </ApiParam>
 
@@ -55,31 +55,45 @@ The unique identifier for the option.
 
 <div class="params-list">
 
-<ApiParam name="name" type="string" :required="true">
+<ApiParam name="name" type="string" :required="false">
 
-Name of the option.
-
-</ApiParam>
-
-<ApiParam name="description" type="string">
-
-Description of the option.
+Name.
 
 </ApiParam>
 
-<ApiParam name="is_default" type="boolean">
+<ApiParam name="description" type="string" :required="false">
 
-Whether this is the default option for the property.
-
-</ApiParam>
-
-<ApiParam name="is_active" type="boolean">
-
-Whether this option is currently active.
+Description.
 
 </ApiParam>
 
-<ApiParam name="parent" type="string">
+<ApiParam name="is_active" type="boolean" :required="false">
+
+Is active.
+
+</ApiParam>
+
+<ApiParam name="is_default" type="boolean" :required="false">
+
+Is default.
+
+</ApiParam>
+
+<ApiParam name="external_source" type="string" :required="false">
+
+External source.
+
+</ApiParam>
+
+<ApiParam name="external_id" type="string" :required="false">
+
+External id.
+
+</ApiParam>
+
+<ApiParam name="parent" type="string" :required="false">
+
+Parent.
 
 </ApiParam>
 
@@ -95,6 +109,7 @@ Whether this option is currently active.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Update dropdown options" :languages="['cURL', 'Python', 'JavaScript']">
@@ -102,16 +117,14 @@ Whether this option is currently active.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-properties/550e8400-e29b-41d4-a716-446655440001/options/550e8400-e29b-41d4-a716-446655440002/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "name": "example-name",
-  "description": "example-description",
-  "is_default": true,
-  "is_active": true,
-  "parent": "example-parent"
+  "name": "Example Name",
+  "description": "Example description",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
 }'
 ```
 
@@ -122,15 +135,14 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-properties/550e8400-e29b-41d4-a716-446655440001/options/550e8400-e29b-41d4-a716-446655440002/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'name': 'example-name',
-  'description': 'example-description',
-  'is_default': true,
-  'is_active': true,
-  'parent': 'example-parent'
-}
+      "name": "Example Name",
+      "description": "Example description",
+      "external_id": "550e8400-e29b-41d4-a716-446655440000",
+      "external_source": "github"
+    }
 )
 print(response.json())
 ```
@@ -140,7 +152,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-properties/550e8400-e29b-41d4-a716-446655440001/options/550e8400-e29b-41d4-a716-446655440002/",
   {
     method: "PATCH",
     headers: {
@@ -148,11 +160,10 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: "example-name",
-      description: "example-description",
-      is_default: true,
-      is_active: true,
-      parent: "example-parent",
+      name: "Example Name",
+      description: "Example description",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
     }),
   }
 );
@@ -166,15 +177,23 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z",
+  "name": "Example Name",
+  "description": "Example description",
+  "deleted_at": "2024-01-01T00:00:00Z",
+  "sort_order": 1,
+  "logo_props": "example-value",
+  "is_active": true,
+  "is_default": true,
+  "external_source": "github",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

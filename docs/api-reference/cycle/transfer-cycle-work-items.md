@@ -1,20 +1,20 @@
 ---
 title: Transfer cycle work items
-description: Transfer cycle work items API endpoint. Request format, parameters, and response examples for Plane REST API.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
+description: Transfer cycle work items via Plane API. HTTP request format, parameters, scopes, and example responses for transfer cycle work items.
+keywords: plane, plane api, rest api, api integration, cycle, transfer cycle work items
 ---
 
 # Transfer cycle work items
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/transfer-issues/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/cycles/{cycle_id}/transfer-issues/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Transfers all work items from one cycle to another.
+Move incomplete work items from the current cycle to a new target cycle. Captures progress snapshot and transfers only unfinished work items.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Transfers all work items from one cycle to another.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Cycle id.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the cycle.
+Workspace slug
 
 </ApiParam>
 
@@ -51,7 +51,7 @@ The unique identifier for the cycle.
 
 <ApiParam name="new_cycle_id" type="string" :required="true">
 
-ID of the target cycle to transfer work items to.
+ID of the target cycle to transfer issues to
 
 </ApiParam>
 
@@ -67,6 +67,7 @@ ID of the target cycle to transfer work items to.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Transfer cycle work items" :languages="['cURL', 'Python', 'JavaScript']">
@@ -74,12 +75,11 @@ ID of the target cycle to transfer work items to.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/transfer-issues/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/transfer-issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "new_cycle_id": "example-new_cycle_id"
+  "new_cycle_id": "550e8400-e29b-41d4-a716-446655440000"
 }'
 ```
 
@@ -90,11 +90,11 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/transfer-issues/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/transfer-issues/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'new_cycle_id': 'example-new_cycle_id'
-}
+      "new_cycle_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
 )
 print(response.json())
 ```
@@ -104,7 +104,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/transfer-issues/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/transfer-issues/",
   {
     method: "POST",
     headers: {
@@ -112,7 +112,7 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      new_cycle_id: "example-new_cycle_id",
+      new_cycle_id: "550e8400-e29b-41d4-a716-446655440000",
     }),
   }
 );
@@ -122,19 +122,16 @@ const data = await response.json();
 </template>
 </CodePanel>
 
-<ResponsePanel status="201">
+<ResponsePanel status="200">
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "message": "Success"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

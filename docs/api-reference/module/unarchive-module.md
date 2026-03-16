@@ -1,20 +1,20 @@
 ---
 title: Restore a module
-description: Restore a module API endpoint. Request format, parameters, and response examples for Plane REST API.
-keywords: plane, plane api, rest api, api integration, modules, features
+description: Restore a module via Plane API. HTTP request format, parameters, scopes, and example responses for restore a module.
+keywords: plane, plane api, rest api, api integration, module, restore a module
 ---
 
 # Restore a module
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/unarchive/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/archived-modules/{pk}/unarchive/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Restores an archived module back to the modules list.
+Restore an archived module to active status, making it available for regular use.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Restores an archived module back to the modules list.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="pk" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Module ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="module_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the module.
+Workspace slug
 
 </ApiParam>
 
@@ -52,6 +52,7 @@ The unique identifier for the module.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Restore a module" :languages="['cURL', 'Python', 'JavaScript']">
@@ -59,9 +60,8 @@ The unique identifier for the module.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/unarchive/" \
-  -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/archived-modules/550e8400-e29b-41d4-a716-446655440000/unarchive/" \
+  -H "X-API-Key: $PLANE_API_KEY"
 ```
 
 </template>
@@ -71,10 +71,10 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/unarchive/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/archived-modules/550e8400-e29b-41d4-a716-446655440000/unarchive/",
     headers={"X-API-Key": "your-api-key"}
 )
-print(response.json())
+print(response.status_code)
 ```
 
 </template>
@@ -82,7 +82,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/unarchive/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/archived-modules/550e8400-e29b-41d4-a716-446655440000/unarchive/",
   {
     method: "DELETE",
     headers: {
@@ -90,7 +90,7 @@ const response = await fetch(
     },
   }
 );
-const data = await response.json();
+console.log(response.status);
 ```
 
 </template>
@@ -98,11 +98,10 @@ const data = await response.json();
 
 <ResponsePanel status="204">
 
-```json
-// 204 No Content
-```
+No response body.
 
 </ResponsePanel>
 
 </div>
+
 </div>

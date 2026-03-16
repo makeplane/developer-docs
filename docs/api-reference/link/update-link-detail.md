@@ -1,20 +1,20 @@
 ---
 title: Update a link
-description: Update a link via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane api, update link, modify link, work item link, issue link, rest api, api integration
+description: Update a link via Plane API. HTTP request format, parameters, scopes, and example responses for update a link.
+keywords: plane, plane api, rest api, api integration, link, update a link
 ---
 
 # Update a link
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/links/{link_id}</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/links/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing link by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Modify the URL, title, or metadata of an existing issue link.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Updates an existing link by setting the values of the parameters passed. Any par
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="issue_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Issue ID
+
+</ApiParam>
+
+<ApiParam name="pk" type="string" :required="true">
+
+Link ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the work item.
-
-</ApiParam>
-
-<ApiParam name="link_id" type="string" :required="true">
-
-The unique identifier for the link.
+Workspace slug
 
 </ApiParam>
 
@@ -55,15 +55,15 @@ The unique identifier for the link.
 
 <div class="params-list">
 
-<ApiParam name="name" type="string">
+<ApiParam name="title" type="string" :required="false">
 
-Title or description of the link.
+Title.
 
 </ApiParam>
 
-<ApiParam name="url" type="string">
+<ApiParam name="url" type="string" :required="false">
 
-URL of the external resource.
+Url.
 
 </ApiParam>
 
@@ -79,6 +79,7 @@ URL of the external resource.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Update a link" :languages="['cURL', 'Python', 'JavaScript']">
@@ -86,13 +87,12 @@ URL of the external resource.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/550e8400-e29b-41d4-a716-446655440000/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "name": "example-name",
-  "url": "example-url"
+  "url": "https://example.com/resource",
+  "title": "Example Name"
 }'
 ```
 
@@ -103,12 +103,12 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'name': 'example-name',
-  'url': 'example-url'
-}
+      "url": "https://example.com/resource",
+      "title": "Example Name"
+    }
 )
 print(response.json())
 ```
@@ -118,7 +118,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/550e8400-e29b-41d4-a716-446655440000/",
   {
     method: "PATCH",
     headers: {
@@ -126,8 +126,8 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: "example-name",
-      url: "example-url",
+      url: "https://example.com/resource",
+      title: "Example Name",
     }),
   }
 );
@@ -141,15 +141,21 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "url": "https://example.com/resource",
+  "title": "Example Name",
+  "metadata": {
+    "title": "Example Name",
+    "description": "Example description",
+    "image": "https://example.com/assets/example-image.png"
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

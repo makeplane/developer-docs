@@ -1,20 +1,20 @@
 ---
 title: Create a link
-description: Create a link via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane api, create link, add url reference, work item link, issue link, rest api, api integration
+description: Create a link via Plane API. HTTP request format, parameters, scopes, and example responses for create a link.
+keywords: plane, plane api, rest api, api integration, link, create a link
 ---
 
 # Create a link
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/links/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/links/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new link attached to a work item.
+Add a new external link to a work item with URL, title, and metadata.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Creates a new link attached to a work item.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="issue_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Issue ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the work item.
+Workspace slug
 
 </ApiParam>
 
@@ -49,15 +49,15 @@ The unique identifier for the work item.
 
 <div class="params-list">
 
-<ApiParam name="title" type="string">
+<ApiParam name="title" type="string" :required="false">
 
-Title or description of the link.
+Title.
 
 </ApiParam>
 
 <ApiParam name="url" type="string" :required="true">
 
-URL of the external resource.
+Url.
 
 </ApiParam>
 
@@ -73,6 +73,7 @@ URL of the external resource.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Create a link" :languages="['cURL', 'Python', 'JavaScript']">
@@ -80,13 +81,12 @@ URL of the external resource.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "title": "example-title",
-  "url": "example-url"
+  "url": "https://example.com/resource",
+  "title": "Example Name"
 }'
 ```
 
@@ -97,12 +97,12 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'title': 'example-title',
-  'url': 'example-url'
-}
+      "url": "https://example.com/resource",
+      "title": "Example Name"
+    }
 )
 print(response.json())
 ```
@@ -112,7 +112,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/",
   {
     method: "POST",
     headers: {
@@ -120,8 +120,8 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      title: "example-title",
-      url: "example-url",
+      url: "https://example.com/resource",
+      title: "Example Name",
     }),
   }
 );
@@ -135,15 +135,21 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "url": "https://example.com/resource",
+  "title": "Example Name",
+  "metadata": {
+    "title": "Example Name",
+    "description": "Example description",
+    "image": "https://example.com/assets/example-image.png"
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

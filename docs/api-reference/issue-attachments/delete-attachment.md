@@ -1,20 +1,20 @@
 ---
 title: Delete an attachment
-description: Delete a file attachment from a work item via Plane API. Permanently removes the uploaded file. Returns 204 on success.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
+description: Delete an attachment via Plane API. HTTP request format, parameters, scopes, and example responses for delete an attachment.
+keywords: plane, plane api, rest api, api integration, issue attachments, delete an attachment
 ---
 
 # Delete an attachment
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/attachments/{attachment_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/attachments/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently deletes an attachment from a work item. This action cannot be undone.
+Permanently remove an attachment from a work item. Records deletion activity for audit purposes.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Permanently deletes an attachment from a work item. This action cannot be undone
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="issue_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Issue id.
+
+</ApiParam>
+
+<ApiParam name="pk" type="string" :required="true">
+
+Attachment ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier of the work item.
-
-</ApiParam>
-
-<ApiParam name="attachment_id" type="string" :required="true">
-
-The unique identifier of the attachment.
+Workspace slug
 
 </ApiParam>
 
@@ -58,6 +58,7 @@ The unique identifier of the attachment.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Delete an attachment" :languages="['cURL', 'Python', 'JavaScript']">
@@ -65,9 +66,8 @@ The unique identifier of the attachment.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/{attachment_id}/" \
-  -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/550e8400-e29b-41d4-a716-446655440000/" \
+  -H "X-API-Key: $PLANE_API_KEY"
 ```
 
 </template>
@@ -77,10 +77,10 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/{attachment_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"}
 )
-print(response.json())
+print(response.status_code)
 ```
 
 </template>
@@ -88,7 +88,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/{attachment_id}/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/550e8400-e29b-41d4-a716-446655440000/",
   {
     method: "DELETE",
     headers: {
@@ -96,7 +96,7 @@ const response = await fetch(
     },
   }
 );
-const data = await response.json();
+console.log(response.status);
 ```
 
 </template>
@@ -104,11 +104,10 @@ const data = await response.json();
 
 <ResponsePanel status="204">
 
-```json
-// 204 No Content
-```
+No response body.
 
 </ResponsePanel>
 
 </div>
+
 </div>

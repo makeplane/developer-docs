@@ -1,20 +1,20 @@
 ---
 title: Update an initiative label
-description: Update an initiative label via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+description: Update an initiative label via Plane API. HTTP request format, parameters, scopes, and example responses for update an initiative label.
+keywords: plane, plane api, rest api, api integration, initiative, update an initiative label
 ---
 
 # Update an initiative label
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/initiatives/labels/{label_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/initiatives/labels/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing initiative label by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Update an initiative label by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,21 @@ Updates an existing initiative label by setting the values of the parameters pas
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="initiative_label_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Initiative label ID
 
 </ApiParam>
 
-<ApiParam name="label_id" type="string" :required="true">
+<ApiParam name="pk" type="string" :required="true">
 
-The unique identifier for the initiative label.
+Pk.
+
+</ApiParam>
+
+<ApiParam name="slug" type="string" :required="true">
+
+Workspace slug
 
 </ApiParam>
 
@@ -43,27 +49,27 @@ The unique identifier for the initiative label.
 
 <div class="params-list">
 
-<ApiParam name="name" type="string">
+<ApiParam name="name" type="string" :required="false">
 
-Name of the initiative label.
-
-</ApiParam>
-
-<ApiParam name="description" type="string">
-
-Description of the initiative label.
+Name.
 
 </ApiParam>
 
-<ApiParam name="color" type="string">
+<ApiParam name="description" type="string" :required="false">
 
-Hex color code for the initiative label (e.g., "#eb5757").
+Description.
 
 </ApiParam>
 
-<ApiParam name="sort_order" type="number">
+<ApiParam name="color" type="string" :required="false">
 
-Sort order for display purposes.
+Color.
+
+</ApiParam>
+
+<ApiParam name="sort_order" type="number" :required="false">
+
+Sort order.
 
 </ApiParam>
 
@@ -79,6 +85,7 @@ Sort order for display purposes.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Update an initiative label" :languages="['cURL', 'Python', 'JavaScript']">
@@ -86,14 +93,13 @@ Sort order for display purposes.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/label-uuid/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/550e8400-e29b-41d4-a716-446655440000/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "name": "example-name",
-  "description": "example-description",
-  "color": "example-color",
+  "name": "Example Name",
+  "description": "Example description",
+  "color": "Example Name",
   "sort_order": 1
 }'
 ```
@@ -105,14 +111,14 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/label-uuid/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'name': 'example-name',
-  'description': 'example-description',
-  'color': 'example-color',
-  'sort_order': 1
-}
+      "name": "Example Name",
+      "description": "Example description",
+      "color": "Example Name",
+      "sort_order": 1
+    }
 )
 print(response.json())
 ```
@@ -121,19 +127,22 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/label-uuid/", {
-  method: "PATCH",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    name: "example-name",
-    description: "example-description",
-    color: "example-color",
-    sort_order: 1,
-  }),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/labels/550e8400-e29b-41d4-a716-446655440000/",
+  {
+    method: "PATCH",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "Example Name",
+      description: "Example description",
+      color: "Example Name",
+      sort_order: 1,
+    }),
+  }
+);
 const data = await response.json();
 ```
 
@@ -144,7 +153,9 @@ const data = await response.json();
 
 ```json
 {
-  "id": "resource-uuid",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Example Name",
+  "description": "Example description",
   "created_at": "2024-01-01T00:00:00Z"
 }
 ```
@@ -152,4 +163,5 @@ const data = await response.json();
 </ResponsePanel>
 
 </div>
+
 </div>

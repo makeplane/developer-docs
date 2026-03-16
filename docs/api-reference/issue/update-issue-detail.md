@@ -1,20 +1,20 @@
 ---
 title: Update a work item
-description: Update a work item via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Update a work item via Plane API. HTTP request format, parameters, scopes, and example responses for update a work item.
+keywords: plane, plane api, rest api, api integration, issue, update a work item
 ---
 
 # Update a work item
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing work item by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Partially update an existing work item with the provided fields. Supports external ID validation to prevent conflicts.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Updates an existing work item by setting the values of the parameters passed. An
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="pk" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Pk.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the work item.
+Workspace slug
 
 </ApiParam>
 
@@ -49,75 +49,151 @@ The unique identifier for the work item.
 
 <div class="params-list">
 
-<ApiParam name="name" type="string">
+<ApiParam name="assignees" type="array" :required="false">
 
-Name of the work item.
-
-</ApiParam>
-
-<ApiParam name="description_html" type="string">
-
-HTML-formatted description of the work item.
+Assignees.
 
 </ApiParam>
 
-<ApiParam name="state" type="string">
+<ApiParam name="labels" type="array" :required="false">
 
-ID of the state for the work item.
-
-</ApiParam>
-
-<ApiParam name="priority" type="string">
-
-Priority level. Possible values: `none`, `urgent`, `high`, `medium`, `low`.
+Labels.
 
 </ApiParam>
 
-<ApiParam name="assignees" type="string[]">
+<ApiParam name="type_id" type="string" :required="false">
 
-Array of user IDs to assign to the work item.
-
-</ApiParam>
-
-<ApiParam name="labels" type="string[]">
-
-Array of label IDs to apply to the work item.
+Type id.
 
 </ApiParam>
 
-<ApiParam name="parent" type="string">
+<ApiParam name="parent" type="string" :required="false">
 
-ID of the parent work item.
-
-</ApiParam>
-
-<ApiParam name="estimate_point" type="string">
-
-Estimate points for the work item (0-7).
+Parent.
 
 </ApiParam>
 
-<ApiParam name="type" type="string">
+<ApiParam name="deleted_at" type="string" :required="false">
 
-ID of the work item type.
-
-</ApiParam>
-
-<ApiParam name="module" type="string">
-
-ID of the module the work item belongs to.
+Deleted at.
 
 </ApiParam>
 
-<ApiParam name="start_date" type="string">
+<ApiParam name="point" type="integer" :required="false">
 
-Start date in YYYY-MM-DD format.
+Point.
 
 </ApiParam>
 
-<ApiParam name="target_date" type="string">
+<ApiParam name="name" type="string" :required="false">
 
-Target completion date in YYYY-MM-DD format.
+Name.
+
+</ApiParam>
+
+<ApiParam name="description_html" type="string" :required="false">
+
+Description html.
+
+</ApiParam>
+
+<ApiParam name="description_stripped" type="string" :required="false">
+
+Description stripped.
+
+</ApiParam>
+
+<ApiParam name="priority" type="string" :required="false">
+
+- `urgent` - Urgent
+- `high` - High
+- `medium` - Medium
+- `low` - Low
+- `none` - None
+
+</ApiParam>
+
+<ApiParam name="start_date" type="string" :required="false">
+
+Start date.
+
+</ApiParam>
+
+<ApiParam name="target_date" type="string" :required="false">
+
+Target date.
+
+</ApiParam>
+
+<ApiParam name="sequence_id" type="integer" :required="false">
+
+Sequence id.
+
+</ApiParam>
+
+<ApiParam name="sort_order" type="number" :required="false">
+
+Sort order.
+
+</ApiParam>
+
+<ApiParam name="completed_at" type="string" :required="false">
+
+Completed at.
+
+</ApiParam>
+
+<ApiParam name="archived_at" type="string" :required="false">
+
+Archived at.
+
+</ApiParam>
+
+<ApiParam name="last_activity_at" type="string" :required="false">
+
+Last activity at.
+
+</ApiParam>
+
+<ApiParam name="is_draft" type="boolean" :required="false">
+
+Is draft.
+
+</ApiParam>
+
+<ApiParam name="external_source" type="string" :required="false">
+
+External source.
+
+</ApiParam>
+
+<ApiParam name="external_id" type="string" :required="false">
+
+External id.
+
+</ApiParam>
+
+<ApiParam name="created_by" type="string" :required="false">
+
+Created by.
+
+</ApiParam>
+
+<ApiParam name="state" type="string" :required="false">
+
+State.
+
+</ApiParam>
+
+<ApiParam name="estimate_point" type="string" :required="false">
+
+Estimate point.
+
+</ApiParam>
+
+<ApiParam name="type" type="string" :required="false">
+
+Type.
 
 </ApiParam>
 
@@ -133,6 +209,7 @@ Target completion date in YYYY-MM-DD format.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Update a work item" :languages="['cURL', 'Python', 'JavaScript']">
@@ -140,23 +217,20 @@ Target completion date in YYYY-MM-DD format.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440000/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "name": "example-name",
-  "description_html": "example-description_html",
-  "state": "example-state",
-  "priority": "example-priority",
-  "assignees": "example-assignees",
-  "labels": "example-labels",
-  "parent": "example-parent",
-  "estimate_point": "example-estimate_point",
-  "type": "example-type",
-  "module": "example-module",
-  "start_date": "example-start_date",
-  "target_date": "example-target_date"
+  "name": "Example Name",
+  "description": "Example description",
+  "priority": "medium",
+  "state": "550e8400-e29b-41d4-a716-446655440000",
+  "assignees": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "labels": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ]
 }'
 ```
 
@@ -167,22 +241,20 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'name': 'example-name',
-  'description_html': 'example-description_html',
-  'state': 'example-state',
-  'priority': 'example-priority',
-  'assignees': 'example-assignees',
-  'labels': 'example-labels',
-  'parent': 'example-parent',
-  'estimate_point': 'example-estimate_point',
-  'type': 'example-type',
-  'module': 'example-module',
-  'start_date': 'example-start_date',
-  'target_date': 'example-target_date'
-}
+      "name": "Example Name",
+      "description": "Example description",
+      "priority": "medium",
+      "state": "550e8400-e29b-41d4-a716-446655440000",
+      "assignees": [
+"550e8400-e29b-41d4-a716-446655440000"
+      ],
+      "labels": [
+"550e8400-e29b-41d4-a716-446655440000"
+      ]
+    }
 )
 print(response.json())
 ```
@@ -192,7 +264,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440000/",
   {
     method: "PATCH",
     headers: {
@@ -200,18 +272,12 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: "example-name",
-      description_html: "example-description_html",
-      state: "example-state",
-      priority: "example-priority",
-      assignees: "example-assignees",
-      labels: "example-labels",
-      parent: "example-parent",
-      estimate_point: "example-estimate_point",
-      type: "example-type",
-      module: "example-module",
-      start_date: "example-start_date",
-      target_date: "example-target_date",
+      name: "Example Name",
+      description: "Example description",
+      priority: "medium",
+      state: "550e8400-e29b-41d4-a716-446655440000",
+      assignees: ["550e8400-e29b-41d4-a716-446655440000"],
+      labels: ["550e8400-e29b-41d4-a716-446655440000"],
     }),
   }
 );
@@ -225,15 +291,20 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Example Name",
+  "description": "Example description",
+  "sequence_id": 1,
+  "priority": "high",
+  "assignees": ["550e8400-e29b-41d4-a716-446655440000"],
+  "labels": ["550e8400-e29b-41d4-a716-446655440000"],
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

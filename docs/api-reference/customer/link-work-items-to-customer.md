@@ -1,20 +1,20 @@
 ---
 title: Link work items to customer
-description: Link work items to customer API endpoint. Request format, parameters, and response examples for Plane REST API.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, customers, crm, customer management
+description: Link work items to customer via Plane API. HTTP request format, parameters, scopes, and example responses for link work items to customer.
+keywords: plane, plane api, rest api, api integration, customer, link work items to customer
 ---
 
 # Link work items to customer
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/work-items/</span>
+  <span class="path">/api/v1/workspaces/{slug}/customers/{customer_id}/issues/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Links one or more work items to a customer.
+Link one or more issues to a customer, optionally within a specific customer request.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Links one or more work items to a customer.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="customer_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Customer id.
 
 </ApiParam>
 
-<ApiParam name="customer_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the customer.
+Slug.
 
 </ApiParam>
 
@@ -43,9 +43,9 @@ The unique identifier for the customer.
 
 <div class="params-list">
 
-<ApiParam name="issue_ids" type="string[]" :required="true">
+<ApiParam name="issue_ids" type="array" :required="true">
 
-Array of work item IDs to link to the customer.
+Array of issue IDs to link
 
 </ApiParam>
 
@@ -61,6 +61,7 @@ Array of work item IDs to link to the customer.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Link work items to customer" :languages="['cURL', 'Python', 'JavaScript']">
@@ -68,12 +69,13 @@ Array of work item IDs to link to the customer.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "issue_ids": "example-issue_ids"
+  "issue_ids": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ]
 }'
 ```
 
@@ -84,11 +86,13 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/issues/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'issue_ids': 'example-issue_ids'
-}
+      "issue_ids": [
+"550e8400-e29b-41d4-a716-446655440000"
+      ]
+    }
 )
 print(response.json())
 ```
@@ -98,7 +102,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/issues/",
   {
     method: "POST",
     headers: {
@@ -106,7 +110,7 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      issue_ids: "example-issue_ids",
+      issue_ids: ["550e8400-e29b-41d4-a716-446655440000"],
     }),
   }
 );
@@ -120,15 +124,12 @@ const data = await response.json();
 
 ```json
 {
-  "id": "work-item-uuid",
-  "name": "Work Item Title",
-  "state": "state-uuid",
-  "priority": 2,
-  "created_at": "2024-01-01T00:00:00Z"
+  "detail": "Issues linked successfully"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

@@ -1,20 +1,20 @@
 ---
 title: Update a label
-description: Update a label via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+description: Update a label via Plane API. HTTP request format, parameters, scopes, and example responses for update a label.
+keywords: plane, plane api, rest api, api integration, label, update a label
 ---
 
 # Update a label
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/labels/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing label by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Partially update an existing label's properties like name, color, or description.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Updates an existing label by setting the values of the parameters passed. Any pa
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="pk" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Label ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="label_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the label.
+Workspace slug
 
 </ApiParam>
 
@@ -49,9 +49,45 @@ The unique identifier for the label.
 
 <div class="params-list">
 
-<ApiParam name="name" type="string" :required="true">
+<ApiParam name="name" type="string" :required="false">
 
-Name of the label.
+Name.
+
+</ApiParam>
+
+<ApiParam name="color" type="string" :required="false">
+
+Color.
+
+</ApiParam>
+
+<ApiParam name="description" type="string" :required="false">
+
+Description.
+
+</ApiParam>
+
+<ApiParam name="external_source" type="string" :required="false">
+
+External source.
+
+</ApiParam>
+
+<ApiParam name="external_id" type="string" :required="false">
+
+External id.
+
+</ApiParam>
+
+<ApiParam name="parent" type="string" :required="false">
+
+Parent.
+
+</ApiParam>
+
+<ApiParam name="sort_order" type="number" :required="false">
+
+Sort order.
 
 </ApiParam>
 
@@ -67,6 +103,7 @@ Name of the label.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Update a label" :languages="['cURL', 'Python', 'JavaScript']">
@@ -74,12 +111,15 @@ Name of the label.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/labels/550e8400-e29b-41d4-a716-446655440000/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "name": "example-name"
+  "name": "Example Name",
+  "color": "#00ff00",
+  "description": "Example description",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
 }'
 ```
 
@@ -90,11 +130,15 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/labels/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'name': 'example-name'
-}
+      "name": "Example Name",
+      "color": "#00ff00",
+      "description": "Example description",
+      "external_id": "550e8400-e29b-41d4-a716-446655440000",
+      "external_source": "github"
+    }
 )
 print(response.json())
 ```
@@ -104,7 +148,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/labels/550e8400-e29b-41d4-a716-446655440000/",
   {
     method: "PATCH",
     headers: {
@@ -112,7 +156,11 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: "example-name",
+      name: "Example Name",
+      color: "#00ff00",
+      description: "Example description",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
     }),
   }
 );
@@ -126,15 +174,17 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Example Name",
+  "color": "#ff4444",
+  "description": "Example description",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

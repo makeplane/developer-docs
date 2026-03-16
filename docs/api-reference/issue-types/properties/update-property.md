@@ -1,20 +1,20 @@
 ---
 title: Update a custom property
-description: Update a custom property via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Update a custom property via Plane API. HTTP request format, parameters, scopes, and example responses for update a custom property.
+keywords: plane, plane api, rest api, api integration, issue types, properties, update a custom property
 ---
 
 # Update a custom property
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-item-types/{type_id}/work-item-properties/{property_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-item-types/{type_id}/work-item-properties/{property_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing custom property by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Update an issue property
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Updates an existing custom property by setting the values of the parameters pass
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
-
-</ApiParam>
-
-<ApiParam name="type_id" type="string" :required="true">
-
-The unique identifier for the work item type.
+Project ID
 
 </ApiParam>
 
 <ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the custom property.
+Property id.
+
+</ApiParam>
+
+<ApiParam name="slug" type="string" :required="true">
+
+Workspace slug
+
+</ApiParam>
+
+<ApiParam name="type_id" type="string" :required="true">
+
+Type ID
 
 </ApiParam>
 
@@ -55,45 +55,97 @@ The unique identifier for the custom property.
 
 <div class="params-list">
 
-<ApiParam name="display_name" type="string" :required="true">
+<ApiParam name="relation_type" type="string" :required="false">
 
-Display name shown in the UI.
-
-</ApiParam>
-
-<ApiParam name="description" type="string">
-
-Description of the custom property.
+- `ISSUE` - Issue
+- `USER` - User
 
 </ApiParam>
 
-<ApiParam name="default_value" type="string[]">
+<ApiParam name="options" type="array" :required="false">
 
-Default value(s) for the property.
-
-</ApiParam>
-
-<ApiParam name="validation_rules" type="object">
-
-Validation rules applied to property values.
+List of options to create when property_type is OPTION. Each option should have 'name', optionally 'description', 'is_default', 'external_id', and 'external_source'.
 
 </ApiParam>
 
-<ApiParam name="is_required" type="boolean">
+<ApiParam name="display_name" type="string" :required="false">
 
-Whether this property is required when creating work items.
-
-</ApiParam>
-
-<ApiParam name="is_active" type="boolean">
-
-Whether this property is currently active.
+Display name.
 
 </ApiParam>
 
-<ApiParam name="is_multi" type="boolean">
+<ApiParam name="description" type="string" :required="false">
 
-Whether this property allows multiple values.
+Description.
+
+</ApiParam>
+
+<ApiParam name="property_type" type="string" :required="false">
+
+- `TEXT` - Text
+- `DATETIME` - Datetime
+- `DECIMAL` - Decimal
+- `BOOLEAN` - Boolean
+- `OPTION` - Option
+- `RELATION` - Relation
+- `URL` - URL
+- `EMAIL` - Email
+- `FILE` - File
+- `FORMULA` - Formula
+
+</ApiParam>
+
+<ApiParam name="is_required" type="boolean" :required="false">
+
+Is required.
+
+</ApiParam>
+
+<ApiParam name="default_value" type="array" :required="false">
+
+Default value.
+
+</ApiParam>
+
+<ApiParam name="settings" type="object" :required="false">
+
+Settings.
+
+</ApiParam>
+
+<ApiParam name="is_active" type="boolean" :required="false">
+
+Is active.
+
+</ApiParam>
+
+<ApiParam name="is_multi" type="boolean" :required="false">
+
+Is multi.
+
+</ApiParam>
+
+<ApiParam name="validation_rules" type="object" :required="false">
+
+Validation rules.
+
+</ApiParam>
+
+<ApiParam name="external_source" type="string" :required="false">
+
+External source.
+
+</ApiParam>
+
+<ApiParam name="external_id" type="string" :required="false">
+
+External id.
+
+</ApiParam>
+
+<ApiParam name="formula_config" type="string" :required="false">
+
+Formula config.
 
 </ApiParam>
 
@@ -109,6 +161,7 @@ Whether this property allows multiple values.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Update a custom property" :languages="['cURL', 'Python', 'JavaScript']">
@@ -116,18 +169,15 @@ Whether this property allows multiple values.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/{property_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "display_name": "example-display_name",
-  "description": "example-description",
-  "default_value": "example-default_value",
-  "validation_rules": "example-validation_rules",
-  "is_required": true,
-  "is_active": true,
-  "is_multi": true
+  "name": "Example Name",
+  "description": "Example description",
+  "property_type": "OPTION",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
 }'
 ```
 
@@ -138,17 +188,15 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/{property_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'display_name': 'example-display_name',
-  'description': 'example-description',
-  'default_value': 'example-default_value',
-  'validation_rules': 'example-validation_rules',
-  'is_required': true,
-  'is_active': true,
-  'is_multi': true
-}
+      "name": "Example Name",
+      "description": "Example description",
+      "property_type": "OPTION",
+      "external_id": "550e8400-e29b-41d4-a716-446655440000",
+      "external_source": "github"
+    }
 )
 print(response.json())
 ```
@@ -158,7 +206,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/{property_id}/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/",
   {
     method: "PATCH",
     headers: {
@@ -166,13 +214,11 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      display_name: "example-display_name",
-      description: "example-description",
-      default_value: "example-default_value",
-      validation_rules: "example-validation_rules",
-      is_required: true,
-      is_active: true,
-      is_multi: true,
+      name: "Example Name",
+      description: "Example description",
+      property_type: "OPTION",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
     }),
   }
 );
@@ -186,15 +232,23 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z",
+  "name": "Example Name",
+  "display_name": "Example Name",
+  "description": "Example description",
+  "property_type": "TEXT",
+  "deleted_at": "2024-01-01T00:00:00Z",
+  "relation_type": "ISSUE",
+  "logo_props": "example-value",
+  "sort_order": 1,
+  "is_required": true
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

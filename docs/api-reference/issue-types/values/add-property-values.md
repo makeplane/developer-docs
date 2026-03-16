@@ -1,20 +1,20 @@
 ---
 title: Add custom property values
-description: Create custom property values via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Add custom property values via Plane API. HTTP request format, parameters, scopes, and example responses for add custom property values.
+keywords: plane, plane api, rest api, api integration, issue types, values, add custom property values
 ---
 
 # Add custom property values
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/work-item-properties/{property_id}/values/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/work-item-properties/{property_id}/values/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Allows you to specify the values for a custom property.
+Create or update the property value for a work item. Acts as an upsert operation since only one value is allowed per work item/property combination.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Allows you to specify the values for a custom property.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
-
-</ApiParam>
-
-<ApiParam name="work_item_id" type="string" :required="true">
-
-The unique identifier for the work item.
+Project ID
 
 </ApiParam>
 
 <ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the custom property.
+Property ID
+
+</ApiParam>
+
+<ApiParam name="slug" type="string" :required="true">
+
+Workspace slug
+
+</ApiParam>
+
+<ApiParam name="work_item_id" type="string" :required="true">
+
+Work item id.
 
 </ApiParam>
 
@@ -55,26 +55,21 @@ The unique identifier for the custom property.
 
 <div class="params-list">
 
-<ApiParam name="value" type="string | boolean | number | string[]" :required="true">
+<ApiParam name="value" type="object" :required="true">
 
-The value type depends on the property type:
+The value to set for the property. Type depends on property type: string for text/url/email/file fields, string (UUID) or list of UUIDs for relations/options (list only when is_multi=True), string (YYYY-MM-DD) for dates, number for decimals, boolean for booleans
 
-- TEXT/URL/EMAIL/FILE: string
-- DATETIME: string (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)
-- DECIMAL: number (int or float)
-- BOOLEAN: boolean (true/false)
-- OPTION/RELATION (single): string (UUID)
-- OPTION/RELATION (multi, when is_multi=True): list of strings (UUIDs) or single string
+</ApiParam>
 
-For multi-value properties (is_multi=True):
+<ApiParam name="external_id" type="string" :required="false">
 
-- Accept either a single UUID string or a list of UUID strings
-- Multiple records are created
-- Response will be a list of values
+Optional external identifier for syncing with external systems
 
-For single-value properties:
+</ApiParam>
 
-- Only one value is allowed per work item/property combination
+<ApiParam name="external_source" type="string" :required="false">
+
+Optional external source identifier (e.g., 'github', 'jira')
 
 </ApiParam>
 
@@ -90,6 +85,7 @@ For single-value properties:
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Add custom property values" :languages="['cURL', 'Python', 'JavaScript']">
@@ -97,12 +93,13 @@ For single-value properties:
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/values/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "value": "example-value"
+  "value": "example text value",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
 }'
 ```
 
@@ -113,11 +110,13 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/values/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'value': 'example-value'
-}
+      "value": "example text value",
+      "external_id": "550e8400-e29b-41d4-a716-446655440000",
+      "external_source": "github"
+    }
 )
 print(response.json())
 ```
@@ -127,7 +126,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/values/",
   {
     method: "POST",
     headers: {
@@ -135,7 +134,9 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      value: "example-value",
+      value: "example text value",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
     }),
   }
 );
@@ -145,19 +146,24 @@ const data = await response.json();
 </template>
 </CodePanel>
 
-<ResponsePanel status="201">
+<ResponsePanel status="200">
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "property_id": "550e8400-e29b-41d4-a716-446655440000",
+  "issue_id": "550e8400-e29b-41d4-a716-446655440000",
+  "value": "Example Name",
+  "value_type": "Example Name",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

@@ -339,6 +339,22 @@ export default withMermaid(
             items: [
               { text: "Introduction", link: "/api-reference/introduction" },
               {
+                text: "Assets",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/assets/overview" },
+                  { text: "Create User Asset Upload", link: "/api-reference/assets/create-user-asset-upload" },
+                  { text: "Update User Asset", link: "/api-reference/assets/update-user-asset" },
+                  { text: "Delete User Asset", link: "/api-reference/assets/delete-user-asset" },
+                  {
+                    text: "Create Workspace Asset Upload",
+                    link: "/api-reference/assets/create-workspace-asset-upload",
+                  },
+                  { text: "Get Workspace Asset", link: "/api-reference/assets/get-workspace-asset" },
+                  { text: "Update Workspace Asset", link: "/api-reference/assets/update-workspace-asset" },
+                ],
+              },
+              {
                 text: "Project",
                 collapsed: true,
                 items: [
@@ -347,7 +363,21 @@ export default withMermaid(
                   { text: "List Projects", link: "/api-reference/project/list-projects" },
                   { text: "Get Project", link: "/api-reference/project/get-project-detail" },
                   { text: "Update Project", link: "/api-reference/project/update-project-detail" },
+                  { text: "Archive Project", link: "/api-reference/project/archive-project" },
+                  { text: "Unarchive Project", link: "/api-reference/project/unarchive-project" },
                   { text: "Delete Project", link: "/api-reference/project/delete-project" },
+                ],
+              },
+              {
+                text: "Project Features",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/project-features/overview" },
+                  { text: "Get Project Features", link: "/api-reference/project-features/get-project-features" },
+                  {
+                    text: "Update Project Features",
+                    link: "/api-reference/project-features/update-project-features",
+                  },
                 ],
               },
               {
@@ -375,16 +405,41 @@ export default withMermaid(
                 ],
               },
               {
+                text: "Project Labels",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/project-labels/overview" },
+                  { text: "Create Project Label", link: "/api-reference/project-labels/add-project-label" },
+                  { text: "List Project Labels", link: "/api-reference/project-labels/list-project-labels" },
+                  {
+                    text: "Get Project Label",
+                    link: "/api-reference/project-labels/get-project-label-detail",
+                  },
+                  {
+                    text: "Update Project Label",
+                    link: "/api-reference/project-labels/update-project-label-detail",
+                  },
+                  { text: "Delete Project Label", link: "/api-reference/project-labels/delete-project-label" },
+                ],
+              },
+              {
                 text: "Work Item",
                 collapsed: true,
                 items: [
                   { text: "Overview", link: "/api-reference/issue/overview" },
                   { text: "Create Work Item", link: "/api-reference/issue/add-issue" },
+                  { text: "Create Work Item (Create)", link: "/api-reference/issue/create-work-item-from-schema" },
                   { text: "List Work Items", link: "/api-reference/issue/list-issues" },
                   { text: "Get Work Item", link: "/api-reference/issue/get-issue-detail" },
+                  { text: "Get Work Item with Properties", link: "/api-reference/issue/get-work-item-properties" },
                   { text: "Get by Sequence ID", link: "/api-reference/issue/get-issue-sequence-id" },
                   { text: "Search Work Items", link: "/api-reference/issue/search-issues" },
+                  { text: "Advanced Search", link: "/api-reference/issue/advanced-search-work-items" },
                   { text: "Update Work Item", link: "/api-reference/issue/update-issue-detail" },
+                  {
+                    text: "Update Work Item with Properties",
+                    link: "/api-reference/issue/update-work-item-properties",
+                  },
                   { text: "Delete Work Item", link: "/api-reference/issue/delete-issue" },
                 ],
               },
@@ -443,6 +498,7 @@ export default withMermaid(
                   { text: "Add Type", link: "/api-reference/issue-types/types/add-issue-type" },
                   { text: "List Types", link: "/api-reference/issue-types/types/list-issue-types" },
                   { text: "Get Type Details", link: "/api-reference/issue-types/types/get-issue-type-details" },
+                  { text: "Get Type Schema", link: "/api-reference/issue-types/types/get-work-item-type-schema" },
                   { text: "Update Type", link: "/api-reference/issue-types/types/update-issue-types" },
                   { text: "Delete Type", link: "/api-reference/issue-types/types/delete-issue-type" },
                 ],
@@ -466,6 +522,9 @@ export default withMermaid(
                   { text: "Overview", link: "/api-reference/issue-types/values/overview" },
                   { text: "Add Property Values", link: "/api-reference/issue-types/values/add-property-values" },
                   { text: "List Property Values", link: "/api-reference/issue-types/values/list-property-values" },
+                  { text: "Get Property Value", link: "/api-reference/issue-types/values/get-property-value-detail" },
+                  { text: "Update Property Value", link: "/api-reference/issue-types/values/update-property-value" },
+                  { text: "Delete Property Value", link: "/api-reference/issue-types/values/delete-property-value" },
                 ],
               },
               {
@@ -532,6 +591,36 @@ export default withMermaid(
                   { text: "Add Project Page", link: "/api-reference/page/add-project-page" },
                   { text: "Get Workspace Page", link: "/api-reference/page/get-workspace-page" },
                   { text: "Get Project Page", link: "/api-reference/page/get-project-page" },
+                ],
+              },
+              {
+                text: "Milestones",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/milestones/overview" },
+                  { text: "Create Milestone", link: "/api-reference/milestones/add-milestone" },
+                  { text: "List Milestones", link: "/api-reference/milestones/list-milestones" },
+                  { text: "Get Milestone", link: "/api-reference/milestones/get-milestone-detail" },
+                  { text: "List Milestone Work Items", link: "/api-reference/milestones/list-milestone-work-items" },
+                  { text: "Update Milestone", link: "/api-reference/milestones/update-milestone-detail" },
+                  { text: "Delete Milestone", link: "/api-reference/milestones/delete-milestone" },
+                ],
+              },
+              {
+                text: "Work Item Pages",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/work-item-pages/overview" },
+                  { text: "Create Work Item Page Link", link: "/api-reference/work-item-pages/add-work-item-page" },
+                  { text: "List Work Item Pages", link: "/api-reference/work-item-pages/list-work-item-pages" },
+                  {
+                    text: "Get Work Item Page Link",
+                    link: "/api-reference/work-item-pages/get-work-item-page-detail",
+                  },
+                  {
+                    text: "Delete Work Item Page Link",
+                    link: "/api-reference/work-item-pages/delete-work-item-page",
+                  },
                 ],
               },
               {
@@ -703,7 +792,53 @@ export default withMermaid(
                   { text: "Overview", link: "/api-reference/members/overview" },
                   { text: "Get Workspace Members", link: "/api-reference/members/get-workspace-members" },
                   { text: "Get Project Members", link: "/api-reference/members/get-project-members" },
+                  { text: "Create Project Member", link: "/api-reference/members/add-project-member" },
+                  { text: "Get Project Member", link: "/api-reference/members/get-project-member-detail" },
+                  { text: "Update Project Member", link: "/api-reference/members/update-project-member" },
+                  { text: "Delete Project Member", link: "/api-reference/members/delete-project-member" },
                   { text: "Remove Workspace Members", link: "/api-reference/members/remove-workspace-member" },
+                ],
+              },
+              {
+                text: "Workspace Features",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/workspace-features/overview" },
+                  {
+                    text: "Get Workspace Features",
+                    link: "/api-reference/workspace-features/get-workspace-features",
+                  },
+                  {
+                    text: "Update Workspace Features",
+                    link: "/api-reference/workspace-features/update-workspace-features",
+                  },
+                ],
+              },
+              {
+                text: "Workspace Invitations",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/workspace-invitations/overview" },
+                  {
+                    text: "Create Workspace Invitation",
+                    link: "/api-reference/workspace-invitations/add-workspace-invitation",
+                  },
+                  {
+                    text: "List Workspace Invitations",
+                    link: "/api-reference/workspace-invitations/list-workspace-invitations",
+                  },
+                  {
+                    text: "Get Workspace Invitation",
+                    link: "/api-reference/workspace-invitations/get-workspace-invitation-detail",
+                  },
+                  {
+                    text: "Update Workspace Invitation",
+                    link: "/api-reference/workspace-invitations/update-workspace-invitation",
+                  },
+                  {
+                    text: "Delete Workspace Invitation",
+                    link: "/api-reference/workspace-invitations/delete-workspace-invitation",
+                  },
                 ],
               },
               {
