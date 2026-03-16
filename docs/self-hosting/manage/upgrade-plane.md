@@ -20,7 +20,7 @@ We recommend creating a backup of your data before any version updates. See [Bac
 
 You can quickly check your Plane version by clicking the **?** icon on the sidebar.
 
-![Check version number](https://media.docs.plane.so/product/check-version.webp#hero#center)
+![Check version number](https://media.docs.plane.so/product/check-version.webp#hero)
 
 ## Update version
 
