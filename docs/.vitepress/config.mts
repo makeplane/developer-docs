@@ -381,6 +381,21 @@ export default withMermaid(
                 ],
               },
               {
+                text: "Estimates",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/estimate/overview" },
+                  { text: "Create Estimate", link: "/api-reference/estimate/add-estimate" },
+                  { text: "Get Estimate", link: "/api-reference/estimate/get-estimate" },
+                  { text: "Update Estimate", link: "/api-reference/estimate/update-estimate" },
+                  { text: "Delete Estimate", link: "/api-reference/estimate/delete-estimate" },
+                  { text: "List Estimate Points", link: "/api-reference/estimate/list-estimate-points" },
+                  { text: "Create Estimate Points", link: "/api-reference/estimate/add-estimate-points" },
+                  { text: "Update Estimate Point", link: "/api-reference/estimate/update-estimate-point" },
+                  { text: "Delete Estimate Point", link: "/api-reference/estimate/delete-estimate-point" },
+                ],
+              },
+              {
                 text: "State",
                 collapsed: true,
                 items: [
