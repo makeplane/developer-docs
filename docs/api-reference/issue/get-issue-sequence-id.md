@@ -61,7 +61,8 @@ Workspace slug
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/PROJ-123/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

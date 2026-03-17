@@ -49,7 +49,8 @@ Workspace slug
 ```bash
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/members/remove/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>

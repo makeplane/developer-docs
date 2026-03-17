@@ -125,6 +125,7 @@ Updated by.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "deleted_at": "2024-01-01T00:00:00Z",

@@ -120,6 +120,7 @@ Description html.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/pages/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "name": "Example Name",

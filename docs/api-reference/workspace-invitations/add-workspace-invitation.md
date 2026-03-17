@@ -73,6 +73,7 @@ Workspace admin or owner permission required.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/invitations/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "email": "Example Name",

@@ -89,6 +89,7 @@ API key authentication or an OAuth token with equivalent access.
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/advanced-search/" \
   -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
   "query": "login",

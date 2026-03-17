@@ -70,7 +70,8 @@ Number of results per page (default: 20, max: 100)
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/?cursor=20:1:0&per_page=20" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
