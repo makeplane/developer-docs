@@ -1,6 +1,6 @@
 ---
 title: Activate Enterprise Grid license
-description: Activate your Plane Enterprise Edition license. Enable advanced features including SAML SSO, audit logs, and custom roles for your self-hosted instance.
+description: Activate your Enterprise Grid license on the Commercial Edition.
 keywords: plane enterprise license, license activation, enterprise edition, plane enterprise features, self-hosting
 ---
 
