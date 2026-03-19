@@ -717,6 +717,7 @@ export default withMermaid(
                   { text: "Overview", link: "/api-reference/members/overview" },
                   { text: "Get Workspace Members", link: "/api-reference/members/get-workspace-members" },
                   { text: "Get Project Members", link: "/api-reference/members/get-project-members" },
+                  { text: "Remove Workspace Members", link: "/api-reference/members/remove-workspace-member" },
                 ],
               },
               {

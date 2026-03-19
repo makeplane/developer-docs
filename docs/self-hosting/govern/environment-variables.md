@@ -77,18 +77,16 @@ This is where you'll make all configuration changes. Remember to restart the ins
 
 ### Database settings
 
-| Variable                  | Description                                                                                                                                                                | Default Value                              |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **PGHOST**                | Hostname or IP address of your PostgreSQL server.                                                                                                                          | plane-db                                   |
-| **PGDATABASE**            | Name of the PostgreSQL database Plane will use.                                                                                                                            | plane                                      |
-| **POSTGRES_USER**         | Username for PostgreSQL authentication.                                                                                                                                    | plane                                      |
-| **POSTGRES_PASSWORD**     | Password for PostgreSQL authentication. **Critical:** Use a strong, unique password here.                                                                                  | plane                                      |
-| **POSTGRES_DB**           | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                                                  | plane                                      |
-| **POSTGRES_PORT**         | TCP port your PostgreSQL server is listening on.                                                                                                                           | 5432                                       |
-| **PGDATA**                | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL within the same container/system.                                              | /var/lib/postgresql/data                   |
-| **DATABASE_URL**          | Full connection string for PostgreSQL. If provided, this takes precedence over individual connection parameters. Format: `postgresql://username:password@host:port/dbname` |                                            |
-| **FOLLOWER_POSTGRES_URI** | Connection string for a PostgreSQL read replica. Used for read-heavy operations to reduce load on the primary database.                                                    | Same as DATABASE_URL                       |
-| **PLANE_PI_DATABASE_URL** | Connection string for the Plane Intelligence database. A separate database used by the PI service.                                                                         | postgresql://plane:plane@plane-db/plane_pi |
+| Variable              | Description                                                                                                                                                                | Default Value            |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| **PGHOST**            | Hostname or IP address of your PostgreSQL server.                                                                                                                          | plane-db                 |
+| **PGDATABASE**        | Name of the PostgreSQL database Plane will use.                                                                                                                            | plane                    |
+| **POSTGRES_USER**     | Username for PostgreSQL authentication.                                                                                                                                    | plane                    |
+| **POSTGRES_PASSWORD** | Password for PostgreSQL authentication. **Critical:** Use a strong, unique password here.                                                                                  | plane                    |
+| **POSTGRES_DB**       | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                                                  | plane                    |
+| **POSTGRES_PORT**     | TCP port your PostgreSQL server is listening on.                                                                                                                           | 5432                     |
+| **PGDATA**            | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL within the same container/system.                                              | /var/lib/postgresql/data |
+| **DATABASE_URL**      | Full connection string for PostgreSQL. If provided, this takes precedence over individual connection parameters. Format: `postgresql://username:password@host:port/dbname` |                          |
 
 ### Redis settings
 
@@ -164,14 +162,13 @@ This is where you'll make all configuration changes. Remember to restart the ins
 
 ### OpenSearch
 
-| Variable                    | Description                                                     | Default Value                        |
-| --------------------------- | --------------------------------------------------------------- | ------------------------------------ |
-| **OPENSEARCH_ENABLED**      | Enable OpenSearch integration                                   | 1                                    |
-| **OPENSEARCH_URL**          | OpenSearch endpoint URL                                         | https://opensearch.example.com:9200/ |
-| **OPENSEARCH_USERNAME**     | Authentication username                                         | admin                                |
-| **OPENSEARCH_PASSWORD**     | Authentication password                                         | your-secure-password                 |
-| **OPENSEARCH_INDEX_PREFIX** | Prefix for all index names (useful for multi-tenant setups)     | (empty)                              |
-| **OPENSEARCH_ML_MODEL_ID**  | OpenSearch ML model ID used for embedding-based search features | (empty)                              |
+| Variable                    | Description                                                 | Default Value                        |
+| --------------------------- | ----------------------------------------------------------- | ------------------------------------ |
+| **OPENSEARCH_ENABLED**      | Enable OpenSearch integration                               | 1                                    |
+| **OPENSEARCH_URL**          | OpenSearch endpoint URL                                     | https://opensearch.example.com:9200/ |
+| **OPENSEARCH_USERNAME**     | Authentication username                                     | admin                                |
+| **OPENSEARCH_PASSWORD**     | Authentication password                                     | your-secure-password                 |
+| **OPENSEARCH_INDEX_PREFIX** | Prefix for all index names (useful for multi-tenant setups) | (empty)                              |
 
 ### Plane AI
 
@@ -186,22 +183,34 @@ To start Plane AI services, set each replica count to `1`:
 | **PI_WORKER_REPLICAS**   | Plane AI Worker replica count      | Yes      |
 | **PI_MIGRATOR_REPLICAS** | Plane AI Migrator replica count    | Yes      |
 
+#### Database settings
+
+::: info Plane AI database
+Plane AI uses a separate PostgreSQL database. Create a new database (e.g. `plane_pi`) on your PostgreSQL server, then set **PLANE_PI_DATABASE_URL** to its connection string. Example: `postgresql://user:password@host:5432/plane_pi`
+:::
+
+| Variable                  | Description                                                                                                                      | Default Value                              |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **PLANE_PI_DATABASE_URL** | Connection string for the Plane AI database. A separate database used by the PI service.                                         | postgresql://plane:plane@plane-db/plane_pi |
+| **FOLLOWER_POSTGRES_URI** | Connection string for a Plane PostgreSQL DB read replica. Used for read-heavy operations to reduce load on the primary database. | Same as DATABASE_URL                       |
+
 #### LLM provider API keys
 
 Plane AI supports multiple LLM providers. Configure one or more by adding their API keys.
 
-| Variable                   | Description                                                     | Required |
-| -------------------------- | --------------------------------------------------------------- | -------- |
-| **OPENAI_API_KEY**         | API key for OpenAI models                                       | Optional |
-| **CLAUDE_API_KEY**         | API key for Anthropic models                                    | Optional |
-| **GROQ_API_KEY**           | API key for speech-to-text features                             | Optional |
-| **CUSTOM_LLM_ENABLED**     | Set to `true` to use a custom LLM with an OpenAI-compatible API | Optional |
-| **CUSTOM_LLM_MODEL_KEY**   | Identifier key for the custom model                             | Optional |
-| **CUSTOM_LLM_BASE_URL**    | Base URL of the custom model's OpenAI-compatible endpoint       | Optional |
-| **CUSTOM_LLM_API_KEY**     | API key for the custom endpoint                                 | Optional |
-| **CUSTOM_LLM_NAME**        | Display name for the custom model                               | Optional |
-| **CUSTOM_LLM_DESCRIPTION** | Description of the custom model                                 | Optional |
-| **CUSTOM_LLM_MAX_TOKENS**  | Maximum token limit for the custom model                        | Optional |
+| Variable                  | Description                                                                                                                                            | Required |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| **OPENAI_API_KEY**        | API key for OpenAI models                                                                                                                              | Optional |
+| **CLAUDE_API_KEY**        | API key for Anthropic models                                                                                                                           | Optional |
+| **GROQ_API_KEY**          | API key for speech-to-text features                                                                                                                    | Optional |
+| **CUSTOM_LLM_ENABLED**    | Set to `true` to enable a custom LLM. Supports OpenAI-compatible endpoints and AWS Bedrock.                                                            | Optional |
+| **CUSTOM_LLM_PROVIDER**   | Backend provider for the custom model. Accepted values: `openai` (default), `bedrock`.                                                                 | Optional |
+| **CUSTOM_LLM_MODEL_KEY**  | Identifier key for the custom model (e.g. a model ID or name).                                                                                         | Optional |
+| **CUSTOM_LLM_BASE_URL**   | Base URL of the custom model's OpenAI-compatible endpoint. Required when `CUSTOM_LLM_PROVIDER=openai`.                                                 | Optional |
+| **CUSTOM_LLM_API_KEY**    | API key for authenticating with the custom endpoint. Required for `openai` provider; used as the AWS access key ID when `CUSTOM_LLM_PROVIDER=bedrock`. | Optional |
+| **CUSTOM_LLM_AWS_REGION** | AWS region for the Bedrock model (e.g. `us-east-1`). Required when `CUSTOM_LLM_PROVIDER=bedrock`.                                                      | Optional |
+| **CUSTOM_LLM_NAME**       | Display name for the custom model shown in the UI. Defaults to `Custom LLM`.                                                                           | Optional |
+| **CUSTOM_LLM_MAX_TOKENS** | Maximum token limit for the custom model. Defaults to `128000`.                                                                                        | Optional |
 
 #### Provider base URLs
 
