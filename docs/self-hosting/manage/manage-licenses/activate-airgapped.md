@@ -4,7 +4,7 @@ description: Activate and configure your Plane Airgapped Edition license. Offlin
 keywords: plane airgapped license, offline activation, air-gapped deployment, plane license key, self-hosting
 ---
 
-# Activate Airgapped Edition license
+# Activate Pro or Business on Airgapped Edition
 
 Once your air-gapped installation is running, you'll need to activate your workspace with the license file.
 

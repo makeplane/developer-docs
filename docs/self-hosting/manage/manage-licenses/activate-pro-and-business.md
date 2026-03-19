@@ -4,11 +4,11 @@ description: Activate your Plane Pro or Business Edition license. Upgrade from C
 keywords: plane pro license, plane business license, license activation, commercial edition, plane upgrade, self-hosting
 ---
 
-# Activate Pro and Business licenses
+# Activate Pro or Business on Commercial Edition
 
 Pro and Business plan licenses are activated at the workspace level as each license is tied to a specific workspace.
 
-## Activate your license
+## Activate license key
 
 Activate a paid plan license on your self-hosted Plane instance using a license key from the Prime portal.
 

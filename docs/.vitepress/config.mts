@@ -302,14 +302,27 @@ export default withMermaid(
                 collapsed: true,
                 items: [
                   {
-                    text: "Activate Pro or Business",
-                    link: "/self-hosting/manage/manage-licenses/activate-pro-and-business",
+                    text: "Commercial Edition",
+                    collapsed: true,
+                    items: [
+                      {
+                        text: "Pro or Business",
+                        link: "/self-hosting/manage/manage-licenses/activate-pro-and-business",
+                      },
+                      { text: "Enterprise Grid", link: "/self-hosting/manage/manage-licenses/activate-enterprise" },
+                    ],
                   },
-                  { text: "Activate Enterprise", link: "/self-hosting/manage/manage-licenses/activate-enterprise" },
-                  { text: "Activate Airgapped", link: "/self-hosting/manage/manage-licenses/activate-airgapped" },
+
                   {
-                    text: "Activate Airgapped Enterprise",
-                    link: "/self-hosting/manage/manage-licenses/activate-airgapped-enterprise",
+                    text: "Airgapped Edition",
+                    collapsed: true,
+                    items: [
+                      { text: "Pro or Business", link: "/self-hosting/manage/manage-licenses/activate-airgapped" },
+                      {
+                        text: "Enterprise Grid",
+                        link: "/self-hosting/manage/manage-licenses/activate-airgapped-enterprise",
+                      },
+                    ],
                   },
                 ],
               },

@@ -4,7 +4,7 @@ description: Setup LDAP authentication for Plane. Configure Lightweight Director
 keywords: plane ldap, ldap authentication, active directory, directory service, ldap configuration, enterprise authentication, self-hosting
 ---
 
-# LDAP authentication <Badge type="warning" text="Enterprise" />
+# LDAP authentication <Badge type="warning" text="Enterprise Grid" />
 
 LDAP (Lightweight Directory Access Protocol) authentication lets your team sign in to Plane using their existing corporate credentials. Instead of creating separate Plane passwords, users authenticate through your organization's directory service.
 
@@ -12,7 +12,7 @@ LDAP (Lightweight Directory Access Protocol) authentication lets your team sign 
 
 You'll need:
 
-- Plane Commercial Edition with an active Enterprise plan license.
+- Plane Commercial Edition with an active Enterprise Grid license.
   - Don't have an Enterprise license? Contact Sales at [sales@plane.so](mailto:sales@plane.so) to get started.
   - Already have a license? See how to [activate your Enterprise license](/self-hosting/manage/manage-licenses/activate-enterprise).
 - Connection details for your LDAP server.
