@@ -1,10 +1,10 @@
 ---
-title: Activate Airgapped Enterprise license
-description: Activate and configure your Plane Airgapped Edition Enterprise license. Offline license activation for air-gapped environments without internet access.
+title: Activate Enterprise Grid on Airgapped Edition
+description: Offline Enterprise Grid license activation for airgapped environments without internet access.
 keywords: plane airgapped license, offline activation, air-gapped deployment, plane license key, self-hosting
 ---
 
-# Activate Airgapped Edition Enterprise license
+# Activate Enterprise Grid on Airgapped Edition
 
 Once your air-gapped installation is running, you'll need to activate your workspace with the license file.
 
