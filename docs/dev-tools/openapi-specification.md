@@ -44,7 +44,7 @@ Open `https://{domain_name}/api/schema/` and save the page. The default format i
 
 For JSON, append the `format` query parameter:
 
-```
+```text
 https://{domain_name}/api/schema/?format=openapi-json
 ```
 
