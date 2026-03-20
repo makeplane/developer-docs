@@ -1,20 +1,20 @@
 ---
 title: Add labels to initiative
-description: Create labels to initiative via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+description: Add labels to initiative via Plane API. HTTP request format, parameters, scopes, and example responses for add labels to initiative.
+keywords: plane, plane api, rest api, api integration, initiative, add labels to initiative
 ---
 
 # Add labels to initiative
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/initiatives/{initiative_id}/labels/</span>
+  <span class="path">/api/v1/workspaces/{slug}/initiatives/{initiative_id}/labels/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Adds one or more labels to an initiative.
+Add labels to an initiative by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Adds one or more labels to an initiative.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="initiative_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Initiative ID
 
 </ApiParam>
 
-<ApiParam name="initiative_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the initiative.
+Workspace slug
 
 </ApiParam>
 
@@ -43,9 +43,9 @@ The unique identifier for the initiative.
 
 <div class="params-list">
 
-<ApiParam name="label_ids" type="string[]" :required="true">
+<ApiParam name="label_ids" type="array" :required="false">
 
-Array of initiative label IDs to add to the initiative.
+Label ids.
 
 </ApiParam>
 
@@ -56,11 +56,12 @@ Array of initiative label IDs to add to the initiative.
 
 ### Scopes
 
-`initiatives:write`
+`initiatives.labels:write`
 
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Add labels to initiative" :languages="['cURL', 'Python', 'JavaScript']">
@@ -68,12 +69,14 @@ Array of initiative label IDs to add to the initiative.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/labels/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440001/labels/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "label_ids": "example-label_ids"
+  "label_ids": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ]
 }'
 ```
 
@@ -84,11 +87,13 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/labels/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440001/labels/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'label_ids': 'example-label_ids'
-}
+      "label_ids": [
+"550e8400-e29b-41d4-a716-446655440000"
+      ]
+    }
 )
 print(response.json())
 ```
@@ -98,7 +103,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/labels/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440001/labels/",
   {
     method: "POST",
     headers: {
@@ -106,7 +111,7 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      label_ids: "example-label_ids",
+      label_ids: ["550e8400-e29b-41d4-a716-446655440000"],
     }),
   }
 );
@@ -116,11 +121,13 @@ const data = await response.json();
 </template>
 </CodePanel>
 
-<ResponsePanel status="201">
+<ResponsePanel status="200">
 
 ```json
 {
-  "id": "resource-uuid",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Example Name",
+  "description": "Example description",
   "created_at": "2024-01-01T00:00:00Z"
 }
 ```
@@ -128,4 +135,5 @@ const data = await response.json();
 </ResponsePanel>
 
 </div>
+
 </div>

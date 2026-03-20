@@ -1,20 +1,20 @@
 ---
 title: Update a work item comment
-description: Update a work item comment via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, comments, discussion, collaboration
+description: Update a work item comment via Plane API. HTTP request format, parameters, scopes, and example responses for update a work item comment.
+keywords: plane, plane api, rest api, api integration, issue comment, update a work item comment
 ---
 
 # Update a work item comment
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/comments/{comment_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/comments/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing work item comment by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Modify the content of an existing comment on a work item.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Updates an existing work item comment by setting the values of the parameters pa
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="issue_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Issue ID
+
+</ApiParam>
+
+<ApiParam name="pk" type="string" :required="true">
+
+Comment ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the work item.
-
-</ApiParam>
-
-<ApiParam name="comment_id" type="string" :required="true">
-
-The unique identifier for the comment.
+Workspace slug
 
 </ApiParam>
 
@@ -55,33 +55,40 @@ The unique identifier for the comment.
 
 <div class="params-list">
 
-<ApiParam name="comment_html" type="string">
+<ApiParam name="comment_json" type="object" :required="false">
 
-HTML-formatted version of the comment.
-
-</ApiParam>
-
-<ApiParam name="comment_json" type="object">
-
-JSON representation of the comment structure.
+Comment json.
 
 </ApiParam>
 
-<ApiParam name="access" type="string">
+<ApiParam name="comment_html" type="string" :required="false">
 
-Visibility level of the comment. Possible values: `INTERNAL`, `EXTERNAL`.
-
-</ApiParam>
-
-<ApiParam name="external_source" type="string">
-
-Identifier for the external source.
+Comment html.
 
 </ApiParam>
 
-<ApiParam name="external_id" type="string">
+<ApiParam name="access" type="string" :required="false">
 
-ID from the external source.
+- `INTERNAL` - INTERNAL
+- `EXTERNAL` - EXTERNAL
+
+</ApiParam>
+
+<ApiParam name="external_source" type="string" :required="false">
+
+External source.
+
+</ApiParam>
+
+<ApiParam name="external_id" type="string" :required="false">
+
+External id.
+
+</ApiParam>
+
+<ApiParam name="parent" type="string" :required="false">
+
+Parent.
 
 </ApiParam>
 
@@ -97,6 +104,7 @@ ID from the external source.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Update a work item comment" :languages="['cURL', 'Python', 'JavaScript']">
@@ -104,16 +112,14 @@ ID from the external source.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/comment-uuid/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/comments/550e8400-e29b-41d4-a716-446655440000/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "comment_html": "example-comment_html",
-  "comment_json": "example-comment_json",
-  "access": "example-access",
-  "external_source": "example-external_source",
-  "external_id": "example-external_id"
+  "comment_html": "<p>Example content</p>",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
 }'
 ```
 
@@ -124,15 +130,13 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/comment-uuid/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/comments/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'comment_html': 'example-comment_html',
-  'comment_json': 'example-comment_json',
-  'access': 'example-access',
-  'external_source': 'example-external_source',
-  'external_id': 'example-external_id'
-}
+      "comment_html": "<p>Example content</p>",
+      "external_id": "550e8400-e29b-41d4-a716-446655440000",
+      "external_source": "github"
+    }
 )
 print(response.json())
 ```
@@ -142,7 +146,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/comment-uuid/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/comments/550e8400-e29b-41d4-a716-446655440000/",
   {
     method: "PATCH",
     headers: {
@@ -150,11 +154,9 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      comment_html: "example-comment_html",
-      comment_json: "example-comment_json",
-      access: "example-access",
-      external_source: "example-external_source",
-      external_id: "example-external_id",
+      comment_html: "<p>Example content</p>",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
     }),
   }
 );
@@ -168,15 +170,36 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "comment_html": "<p>Example content</p>",
+  "comment_json": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "This issue has been resolved by implementing OAuth 2.0 flow."
+          }
+        ]
+      }
+    ]
+  },
+  "actor": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "first_name": "John",
+    "last_name": "Doe",
+    "display_name": "Example Name",
+    "avatar": "https://example.com/assets/example-image.png"
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

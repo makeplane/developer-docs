@@ -1,20 +1,20 @@
 ---
 title: Remove projects from teamspace
-description: Delete projects from teamspace via Plane API. HTTP DELETE request for removing resources.
-keywords: plane api, remove projects from teamspace, team project management, team collaboration, workspace teams, rest api, api integration
+description: Remove projects from teamspace via Plane API. HTTP request format, parameters, scopes, and example responses for remove projects from teamspace.
+keywords: plane, plane api, rest api, api integration, teamspace, remove projects from teamspace
 ---
 
 # Remove projects from teamspace
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/projects/</span>
+  <span class="path">/api/v1/workspaces/{slug}/teamspaces/{teamspace_id}/projects/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Removes one or more projects from a teamspace.
+Remove projects from a teamspace by its ID
 
 <div class="params-section">
 
@@ -22,30 +22,15 @@ Removes one or more projects from a teamspace.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Workspace slug
 
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-The unique identifier for the teamspace.
-
-</ApiParam>
-
-</div>
-</div>
-
-<div class="params-section">
-
-### Body Parameters
-
-<div class="params-list">
-
-<ApiParam name="project_ids" type="string[]" :required="true">
-
-Array of project IDs to remove from the teamspace.
+Teamspace ID
 
 </ApiParam>
 
@@ -61,6 +46,7 @@ Array of project IDs to remove from the teamspace.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Remove projects from teamspace" :languages="['cURL', 'Python', 'JavaScript']">
@@ -68,7 +54,7 @@ Array of project IDs to remove from the teamspace.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
@@ -80,10 +66,10 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
     headers={"X-API-Key": "your-api-key"}
 )
-print(response.json())
+print(response.status_code)
 ```
 
 </template>
@@ -91,7 +77,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
   {
     method: "DELETE",
     headers: {
@@ -99,7 +85,7 @@ const response = await fetch(
     },
   }
 );
-const data = await response.json();
+console.log(response.status);
 ```
 
 </template>
@@ -107,11 +93,10 @@ const data = await response.json();
 
 <ResponsePanel status="204">
 
-```json
-// 204 No Content
-```
+No response body.
 
 </ResponsePanel>
 
 </div>
+
 </div>

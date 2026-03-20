@@ -1,20 +1,20 @@
 ---
 title: Search work items
-description: Search work items via Plane API. Full-text search with filters and advanced query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Search work items via Plane API. HTTP request format, parameters, scopes, and example responses for search work items.
+keywords: plane, plane api, rest api, api integration, issue, search work items
 ---
 
 # Search work items
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/work-items/search/</span>
+  <span class="path">/api/v1/workspaces/{slug}/work-items/search/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Searches for work items across a workspace by text query.
+Perform semantic search across issue names, sequence IDs, and project identifiers.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Searches for work items across a workspace by text query.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Workspace slug
 
 </ApiParam>
 
@@ -37,15 +37,27 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 <div class="params-list">
 
-<ApiParam name="search" type="string" :required="true">
+<ApiParam name="limit" type="integer" :required="false">
 
-Text query to search for in work item names and descriptions.
+Maximum number of results to return
 
 </ApiParam>
 
-<ApiParam name="project" type="string">
+<ApiParam name="project_id" type="string" :required="false">
 
-Filter results to a specific project by ID.
+Project ID for filtering results within a specific project
+
+</ApiParam>
+
+<ApiParam name="search" type="string" :required="true">
+
+Search query to filter results by name, description, or identifier
+
+</ApiParam>
+
+<ApiParam name="workspace_search" type="string" :required="false">
+
+Whether to search across entire workspace or within specific project
 
 </ApiParam>
 
@@ -61,6 +73,7 @@ Filter results to a specific project by ID.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Search work items" :languages="['cURL', 'Python', 'JavaScript']">
@@ -68,7 +81,7 @@ Filter results to a specific project by ID.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=550e8400-e29b-41d4-a716-446655440000" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
@@ -80,7 +93,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=550e8400-e29b-41d4-a716-446655440000",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -90,12 +103,15 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/", {
-  method: "GET",
-  headers: {
-    "X-API-Key": "your-api-key",
-  },
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=550e8400-e29b-41d4-a716-446655440000",
+  {
+    method: "GET",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
 const data = await response.json();
 ```
 
@@ -106,15 +122,29 @@ const data = await response.json();
 
 ```json
 {
-  "id": "work-item-uuid",
-  "name": "Work Item Title",
-  "state": "state-uuid",
-  "priority": 2,
-  "created_at": "2024-01-01T00:00:00Z"
+  "issues": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Example Name",
+      "sequence_id": 123,
+      "project__identifier": "MAB",
+      "project_id": "550e8400-e29b-41d4-a716-446655440000",
+      "workspace__slug": "my-workspace"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Example Name",
+      "sequence_id": 124,
+      "project__identifier": "MAB",
+      "project_id": "550e8400-e29b-41d4-a716-446655440000",
+      "workspace__slug": "my-workspace"
+    }
+  ]
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

@@ -1,20 +1,20 @@
 ---
 title: Delete a customer request
-description: Delete a customer request via Plane API. HTTP DELETE request for removing resources.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: Delete a customer request via Plane API. HTTP request format, parameters, scopes, and example responses for delete a customer request.
+keywords: plane, plane api, rest api, api integration, customer, delete a customer request
 ---
 
 # Delete a customer request
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/requests/{request_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/customers/{customer_id}/requests/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently deletes a customer request. This action cannot be undone.
+Permanently delete a customer request and unlink any linked issue
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Permanently deletes a customer request. This action cannot be undone.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="customer_id" type="string" :required="true">
 
-The unique identifier for the customer.
+Customer id.
 
 </ApiParam>
 
-<ApiParam name="request_id" type="string" :required="true">
+<ApiParam name="pk" type="string" :required="true">
 
-The unique identifier for the request.
+Pk.
+
+</ApiParam>
+
+<ApiParam name="slug" type="string" :required="true">
+
+Slug.
 
 </ApiParam>
 
@@ -52,6 +52,7 @@ The unique identifier for the request.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Delete a customer request" :languages="['cURL', 'Python', 'JavaScript']">
@@ -59,8 +60,8 @@ The unique identifier for the request.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/550e8400-e29b-41d4-a716-446655440000/" \
+  -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
@@ -71,10 +72,10 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"}
 )
-print(response.json())
+print(response.status_code)
 ```
 
 </template>
@@ -82,7 +83,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/550e8400-e29b-41d4-a716-446655440000/",
   {
     method: "DELETE",
     headers: {
@@ -90,7 +91,7 @@ const response = await fetch(
     },
   }
 );
-const data = await response.json();
+console.log(response.status);
 ```
 
 </template>
@@ -98,11 +99,10 @@ const data = await response.json();
 
 <ResponsePanel status="204">
 
-```json
-// 204 No Content
-```
+No response body.
 
 </ResponsePanel>
 
 </div>
+
 </div>

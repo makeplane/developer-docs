@@ -1,7 +1,7 @@
 ---
 title: Retrieve current user
-description: List retrieve current user via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane api, get current user, user profile, authenticated user, user details, rest api, api integration
+description: Retrieve current user via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve current user.
+keywords: plane, plane api, rest api, api integration, user, retrieve current user
 ---
 
 # Retrieve current user
@@ -14,7 +14,7 @@ keywords: plane api, get current user, user profile, authenticated user, user de
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves information about the currently authenticated user.
+Retrieve the authenticated user's profile information including basic details.
 
 <div class="params-section">
 
@@ -25,6 +25,7 @@ Retrieves information about the currently authenticated user.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Retrieve current user" :languages="['cURL', 'Python', 'JavaScript']">
@@ -33,7 +34,8 @@ Retrieves information about the currently authenticated user.
 ```bash
 curl -X GET \
   "https://api.plane.so/api/v1/users/me/" \
-  -H "X-API-Key: $PLANE_API_KEY"
+  -H "X-API-Key: $PLANE_API_KEY" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
 
 </template>
@@ -69,12 +71,18 @@ const data = await response.json();
 
 ```json
 {
-  "id": "resource-uuid",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "user@example.com",
+  "avatar": "https://example.com/assets/example-image.png",
+  "avatar_url": "https://example.com/assets/example-image.png",
+  "display_name": "Example Name"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

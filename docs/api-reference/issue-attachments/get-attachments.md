@@ -1,20 +1,20 @@
 ---
 title: List all attachments
-description: List all attachments via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
+description: List all attachments via Plane API. HTTP request format, parameters, scopes, and example responses for list all attachments.
+keywords: plane, plane api, rest api, api integration, issue attachments, list all attachments
 ---
 
 # List all attachments
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/attachments/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/attachments/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all attachments for a work item.
+Retrieve all attachments for a work item.
 
 <div class="params-section">
 
@@ -22,60 +22,21 @@ Returns a list of all attachments for a work item.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="issue_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Issue ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project
+Project ID
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier of the work item
-
-</ApiParam>
-
-</div>
-</div>
-
-<div class="params-section">
-
-### Query Parameters
-
-<div class="params-list">
-
-<ApiParam name="issue" type="string">
-
-Filter by work item ID.
-
-</ApiParam>
-
-<ApiParam name="project" type="string">
-
-Filter by project ID.
-
-</ApiParam>
-
-<ApiParam name="workspace" type="string">
-
-Filter by workspace ID.
-
-</ApiParam>
-
-<ApiParam name="limit" type="number">
-
-Number of results to return per page.
-
-</ApiParam>
-
-<ApiParam name="offset" type="number">
-
-Number of results to skip for pagination.
+Workspace slug
 
 </ApiParam>
 
@@ -91,6 +52,7 @@ Number of results to skip for pagination.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="List all attachments" :languages="['cURL', 'Python', 'JavaScript']">
@@ -98,7 +60,7 @@ Number of results to skip for pagination.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
@@ -110,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -121,7 +83,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/",
   {
     method: "GET",
     headers: {
@@ -139,15 +101,22 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Example Name",
+  "size": 1024000,
+  "asset_url": "https://example.com/resource",
+  "attributes": {
+    "name": "Example Name",
+    "type": "image/png",
+    "size": 1024000
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>
