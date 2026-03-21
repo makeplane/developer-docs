@@ -227,14 +227,15 @@ Use these when routing requests through self-hosted gateways, proxies, or compat
 
 These settings are required for semantic search and Plane AI Chat. Configure one of the following options.
 
-| Variable                     | Description                                                                                                                                                              | Required    |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
-| **EMBEDDING_MODEL_ID**       | ID of an existing embedding model deployed in OpenSearch (works with both self-hosted and AWS OpenSearch)                                                                | Conditional |
-| **EMBEDDING_MODEL**          | Embedding model to automatically deploy (e.g., `cohere/embed-v4.0`, `openai/text-embedding-3-small`, `bedrock/amazon.titan-embed-text-v1`). Self-hosted OpenSearch only. | Conditional |
-| **COHERE_API_KEY**           | API key for Cohere embedding models                                                                                                                                      | Conditional |
-| **BR_AWS_ACCESS_KEY_ID**     | AWS access key ID for Bedrock Titan embedding                                                                                                                            | Conditional |
-| **BR_AWS_SECRET_ACCESS_KEY** | AWS secret access key for Bedrock Titan embedding                                                                                                                        | Conditional |
-| **BR_AWS_REGION**            | AWS region for Bedrock Titan embedding                                                                                                                                   | Conditional |
+| Variable                           | Description                                                                              | Required    |
+| ---------------------------------- | ---------------------------------------------------------------------------------------- | ----------- |
+| **OPENSEARCH_ML_MODEL_ID**         | ID of an existing embedding model deployed in OpenSearch.                                | Conditional |
+| **EMBEDDING_MODEL**                | Model used for generating embeddings and query construction (e.g., `cohere/embed-v4.0`). | Required    |
+| **OPENSEARCH_EMBEDDING_DIMENSION** | The dimension of the embedding model (e.g., `1536`).                                     | Required    |
+| **COHERE_API_KEY**                 | API key for Cohere embedding models                                                      | Conditional |
+| **BR_AWS_ACCESS_KEY_ID**           | AWS access key ID for Bedrock Titan embedding                                            | Conditional |
+| **BR_AWS_SECRET_ACCESS_KEY**       | AWS secret access key for Bedrock Titan embedding                                        | Conditional |
+| **BR_AWS_REGION**                  | AWS region for Bedrock Titan embedding                                                   | Conditional |
 
 For setup instructions, supported models, and IAM permissions, see [Enable Plane AI](/self-hosting/govern/plane-ai).
 
@@ -292,35 +293,37 @@ For setup instructions, supported models, and IAM permissions, see [Enable Plane
 
 ### Plane Intelligence (PI) settings
 
-| Variable                                | Description                                                                   | Default Value                         |
-| --------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------- |
-| **OPENAI_API_KEY**                      | API key for OpenAI services used by Plane Intelligence.                       |                                       |
-| **OPENAI_BASE_URL**                     | Custom base URL for OpenAI-compatible API endpoints.                          |                                       |
-| **CLAUDE_API_KEY**                      | API key for Anthropic Claude services used by Plane Intelligence.             |                                       |
-| **CLAUDE_BASE_URL**                     | Custom base URL for Claude API endpoints.                                     |                                       |
-| **GROQ_API_KEY**                        | API key for Groq services used by Plane Intelligence.                         |                                       |
-| **GROQ_BASE_URL**                       | Custom base URL for Groq API endpoints.                                       |                                       |
-| **COHERE_API_KEY**                      | API key for Cohere services used by Plane Intelligence.                       |                                       |
-| **COHERE_BASE_URL**                     | Custom base URL for Cohere API endpoints.                                     |                                       |
-| **CUSTOM_LLM_ENABLED**                  | Enable a custom OpenAI-compatible LLM provider. Set to `true` to enable.      | false                                 |
-| **CUSTOM_LLM_MODEL_KEY**                | Model key identifier for the custom LLM.                                      | gpt-oss-120b                          |
-| **CUSTOM_LLM_BASE_URL**                 | Base URL for the custom LLM API endpoint.                                     |                                       |
-| **CUSTOM_LLM_API_KEY**                  | API key for the custom LLM provider.                                          |                                       |
-| **CUSTOM_LLM_NAME**                     | Display name for the custom LLM in the Plane UI.                              | GPT-OSS-120B                          |
-| **CUSTOM_LLM_DESCRIPTION**              | Description of the custom LLM shown in the Plane UI.                          | A self-hosted OpenAI-compatible model |
-| **CUSTOM_LLM_MAX_TOKENS**               | Maximum token limit for the custom LLM.                                       | 128000                                |
-| **EMBEDDING_MODEL**                     | Model used for generating text embeddings for search features.                |                                       |
-| **BR_AWS_ACCESS_KEY_ID**                | AWS access key for Amazon Bedrock integration.                                |                                       |
-| **BR_AWS_SECRET_ACCESS_KEY**            | AWS secret key for Amazon Bedrock integration.                                |                                       |
-| **BR_AWS_SESSION_TOKEN**                | AWS session token for Amazon Bedrock integration (for temporary credentials). |                                       |
-| **FASTAPI_APP_WORKERS**                 | Number of FastAPI workers for the PI service.                                 | 1                                     |
-| **PLANE_OAUTH_STATE_EXPIRY_SECONDS**    | Expiry time (in seconds) for PI OAuth state tokens.                           | 82800                                 |
-| **CELERY_VECTOR_SYNC_ENABLED**          | Enable periodic vector synchronization for AI-powered search.                 | 0                                     |
-| **CELERY_VECTOR_SYNC_INTERVAL**         | Interval (in seconds) for vector synchronization.                             | 3                                     |
-| **CELERY_WORKSPACE_PLAN_SYNC_ENABLED**  | Enable periodic workspace plan synchronization.                               | 0                                     |
-| **CELERY_WORKSPACE_PLAN_SYNC_INTERVAL** | Interval (in seconds) for workspace plan synchronization.                     | 86400                                 |
-| **CELERY_DOCS_SYNC_ENABLED**            | Enable periodic documents synchronization for AI indexing.                    | 0                                     |
-| **CELERY_DOCS_SYNC_INTERVAL**           | Interval (in seconds) for documents synchronization.                          | 86400                                 |
+| Variable                                | Description                                                                                                                                                    | Default Value                         |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **OPENAI_API_KEY**                      | API key for OpenAI services used by Plane Intelligence.                                                                                                        |                                       |
+| **OPENAI_BASE_URL**                     | Custom base URL for OpenAI-compatible API endpoints.                                                                                                           |                                       |
+| **CLAUDE_API_KEY**                      | API key for Anthropic Claude services used by Plane Intelligence.                                                                                              |                                       |
+| **CLAUDE_BASE_URL**                     | Custom base URL for Claude API endpoints.                                                                                                                      |                                       |
+| **GROQ_API_KEY**                        | API key for Groq services used by Plane Intelligence.                                                                                                          |                                       |
+| **GROQ_BASE_URL**                       | Custom base URL for Groq API endpoints.                                                                                                                        |                                       |
+| **COHERE_API_KEY**                      | API key for Cohere services used by Plane Intelligence.                                                                                                        |                                       |
+| **COHERE_BASE_URL**                     | Custom base URL for Cohere API endpoints.                                                                                                                      |                                       |
+| **CUSTOM_LLM_ENABLED**                  | Enable a custom OpenAI-compatible LLM provider. Set to `true` to enable.                                                                                       | false                                 |
+| **CUSTOM_LLM_MODEL_KEY**                | Model key identifier for the custom LLM.                                                                                                                       | gpt-oss-120b                          |
+| **CUSTOM_LLM_BASE_URL**                 | Base URL for the custom LLM API endpoint.                                                                                                                      |                                       |
+| **CUSTOM_LLM_API_KEY**                  | API key for the custom LLM provider.                                                                                                                           |                                       |
+| **CUSTOM_LLM_NAME**                     | Display name for the custom LLM in the Plane UI.                                                                                                               | GPT-OSS-120B                          |
+| **CUSTOM_LLM_DESCRIPTION**              | Description of the custom LLM shown in the Plane UI.                                                                                                           | A self-hosted OpenAI-compatible model |
+| **CUSTOM_LLM_MAX_TOKENS**               | Maximum token limit for the custom LLM.                                                                                                                        | 128000                                |
+| **EMBEDDING_MODEL**                     | Model key for generating embeddings (e.g. `cohere/embed-v4.0`). Required for PI API startup when Plane AI is enabled.                                          |                                       |
+| **OPENSEARCH_ML_MODEL_ID**              | OpenSearch ML model ID for the deployed embedding model.                                                                                                       |                                       |
+| **OPENSEARCH_EMBEDDING_DIMENSION**      | Vector dimension for `knn_vector` fields; must match the embedding model and stay aligned with the API service. See [Plane AI](/self-hosting/govern/plane-ai). | 1536                                  |
+| **BR_AWS_ACCESS_KEY_ID**                | AWS access key for Amazon Bedrock integration.                                                                                                                 |                                       |
+| **BR_AWS_SECRET_ACCESS_KEY**            | AWS secret key for Amazon Bedrock integration.                                                                                                                 |                                       |
+| **BR_AWS_SESSION_TOKEN**                | AWS session token for Amazon Bedrock integration (for temporary credentials).                                                                                  |                                       |
+| **FASTAPI_APP_WORKERS**                 | Number of FastAPI workers for the PI service.                                                                                                                  | 1                                     |
+| **PLANE_OAUTH_STATE_EXPIRY_SECONDS**    | Expiry time (in seconds) for PI OAuth state tokens.                                                                                                            | 82800                                 |
+| **CELERY_VECTOR_SYNC_ENABLED**          | Enable periodic vector synchronization for AI-powered search.                                                                                                  | 0                                     |
+| **CELERY_VECTOR_SYNC_INTERVAL**         | Interval (in seconds) for vector synchronization.                                                                                                              | 3                                     |
+| **CELERY_WORKSPACE_PLAN_SYNC_ENABLED**  | Enable periodic workspace plan synchronization.                                                                                                                | 0                                     |
+| **CELERY_WORKSPACE_PLAN_SYNC_INTERVAL** | Interval (in seconds) for workspace plan synchronization.                                                                                                      | 86400                                 |
+| **CELERY_DOCS_SYNC_ENABLED**            | Enable periodic documents synchronization for AI indexing.                                                                                                     | 0                                     |
+| **CELERY_DOCS_SYNC_INTERVAL**           | Interval (in seconds) for documents synchronization.                                                                                                           | 86400                                 |
 
 ::: details Community Edition
 
