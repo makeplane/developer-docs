@@ -92,6 +92,16 @@ export default withMermaid(
 
     head: [
       ["link", { rel: "icon", href: "/logo/favicon-32x32.png" }],
+      [
+        "link",
+        {
+          rel: "preload",
+          href: "/fonts/Inter/InterVariable.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "",
+        },
+      ],
 
       // Google Analytics with Consent Mode v2
       ["script", { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-JF828SKW90" }],
