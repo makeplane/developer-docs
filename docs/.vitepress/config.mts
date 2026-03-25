@@ -339,22 +339,6 @@ export default withMermaid(
             items: [
               { text: "Introduction", link: "/api-reference/introduction" },
               {
-                text: "Assets",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/assets/overview" },
-                  { text: "Create User Asset Upload", link: "/api-reference/assets/create-user-asset-upload" },
-                  { text: "Update User Asset", link: "/api-reference/assets/update-user-asset" },
-                  { text: "Delete User Asset", link: "/api-reference/assets/delete-user-asset" },
-                  {
-                    text: "Create Workspace Asset Upload",
-                    link: "/api-reference/assets/create-workspace-asset-upload",
-                  },
-                  { text: "Get Workspace Asset", link: "/api-reference/assets/get-workspace-asset" },
-                  { text: "Update Workspace Asset", link: "/api-reference/assets/update-workspace-asset" },
-                ],
-              },
-              {
                 text: "Project",
                 collapsed: true,
                 items: [
@@ -378,45 +362,6 @@ export default withMermaid(
                     text: "Update Project Features",
                     link: "/api-reference/project-features/update-project-features",
                   },
-                ],
-              },
-              {
-                text: "Estimates",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/estimate/overview" },
-                  { text: "Create Estimate", link: "/api-reference/estimate/add-estimate" },
-                  { text: "Get Estimate", link: "/api-reference/estimate/get-estimate" },
-                  { text: "Update Estimate", link: "/api-reference/estimate/update-estimate" },
-                  { text: "Delete Estimate", link: "/api-reference/estimate/delete-estimate" },
-                  { text: "List Estimate Points", link: "/api-reference/estimate/list-estimate-points" },
-                  { text: "Create Estimate Points", link: "/api-reference/estimate/add-estimate-points" },
-                  { text: "Update Estimate Point", link: "/api-reference/estimate/update-estimate-point" },
-                  { text: "Delete Estimate Point", link: "/api-reference/estimate/delete-estimate-point" },
-                ],
-              },
-              {
-                text: "State",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/state/overview" },
-                  { text: "Create State", link: "/api-reference/state/add-state" },
-                  { text: "List States", link: "/api-reference/state/list-states" },
-                  { text: "Get State", link: "/api-reference/state/get-state-detail" },
-                  { text: "Update State", link: "/api-reference/state/update-state-detail" },
-                  { text: "Delete State", link: "/api-reference/state/delete-state" },
-                ],
-              },
-              {
-                text: "Label",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/label/overview" },
-                  { text: "Create Label", link: "/api-reference/label/add-label" },
-                  { text: "List Labels", link: "/api-reference/label/list-labels" },
-                  { text: "Get Label", link: "/api-reference/label/get-label-detail" },
-                  { text: "Update Label", link: "/api-reference/label/update-label-detail" },
-                  { text: "Delete Label", link: "/api-reference/label/delete-label" },
                 ],
               },
               {
@@ -453,50 +398,27 @@ export default withMermaid(
                 ],
               },
               {
-                text: "Work Item Links",
+                text: "Work Item States",
                 collapsed: true,
                 items: [
-                  { text: "Overview", link: "/api-reference/link/overview" },
-                  { text: "Add Link", link: "/api-reference/link/add-link" },
-                  { text: "List Links", link: "/api-reference/link/list-links" },
-                  { text: "Get Link", link: "/api-reference/link/get-link-detail" },
-                  { text: "Update Link", link: "/api-reference/link/update-link-detail" },
-                  { text: "Delete Link", link: "/api-reference/link/delete-link" },
+                  { text: "Overview", link: "/api-reference/state/overview" },
+                  { text: "Create State", link: "/api-reference/state/add-state" },
+                  { text: "List States", link: "/api-reference/state/list-states" },
+                  { text: "Get State", link: "/api-reference/state/get-state-detail" },
+                  { text: "Update State", link: "/api-reference/state/update-state-detail" },
+                  { text: "Delete State", link: "/api-reference/state/delete-state" },
                 ],
               },
               {
-                text: "Work Item Activity",
+                text: "Work Item Labels",
                 collapsed: true,
                 items: [
-                  { text: "Overview", link: "/api-reference/issue-activity/overview" },
-                  { text: "List Activities", link: "/api-reference/issue-activity/list-issue-activities" },
-                  { text: "Get Activity", link: "/api-reference/issue-activity/get-issue-activity-detail" },
-                ],
-              },
-              {
-                text: "Work Item Comments",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/issue-comment/overview" },
-                  { text: "Add Comment", link: "/api-reference/issue-comment/add-issue-comment" },
-                  { text: "List Comments", link: "/api-reference/issue-comment/list-issue-comments" },
-                  { text: "Get Comment", link: "/api-reference/issue-comment/get-issue-comment-detail" },
-                  { text: "Update Comment", link: "/api-reference/issue-comment/update-issue-comment-detail" },
-                  { text: "Delete Comment", link: "/api-reference/issue-comment/delete-issue-comment" },
-                ],
-              },
-              {
-                text: "Work Item Attachments",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/issue-attachments/overview" },
-                  { text: "Get Attachments", link: "/api-reference/issue-attachments/get-attachments" },
-                  { text: "Get Attachment Detail", link: "/api-reference/issue-attachments/get-attachment-detail" },
-                  { text: "Get Upload Credentials", link: "/api-reference/issue-attachments/get-upload-credentials" },
-                  { text: "Upload File", link: "/api-reference/issue-attachments/upload-file" },
-                  { text: "Complete Upload", link: "/api-reference/issue-attachments/complete-upload" },
-                  { text: "Update Attachment", link: "/api-reference/issue-attachments/update-attachment" },
-                  { text: "Delete Attachment", link: "/api-reference/issue-attachments/delete-attachment" },
+                  { text: "Overview", link: "/api-reference/label/overview" },
+                  { text: "Create Label", link: "/api-reference/label/add-label" },
+                  { text: "List Labels", link: "/api-reference/label/list-labels" },
+                  { text: "Get Label", link: "/api-reference/label/get-label-detail" },
+                  { text: "Update Label", link: "/api-reference/label/update-label-detail" },
+                  { text: "Delete Label", link: "/api-reference/label/delete-label" },
                 ],
               },
               {
@@ -555,7 +477,72 @@ export default withMermaid(
                 ],
               },
               {
-                text: "Cycle",
+                text: "Work Item Links",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/link/overview" },
+                  { text: "Add Link", link: "/api-reference/link/add-link" },
+                  { text: "List Links", link: "/api-reference/link/list-links" },
+                  { text: "Get Link", link: "/api-reference/link/get-link-detail" },
+                  { text: "Update Link", link: "/api-reference/link/update-link-detail" },
+                  { text: "Delete Link", link: "/api-reference/link/delete-link" },
+                ],
+              },
+              {
+                text: "Work Item Activity",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/issue-activity/overview" },
+                  { text: "List Activities", link: "/api-reference/issue-activity/list-issue-activities" },
+                  { text: "Get Activity", link: "/api-reference/issue-activity/get-issue-activity-detail" },
+                ],
+              },
+              {
+                text: "Work Item Comments",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/issue-comment/overview" },
+                  { text: "Add Comment", link: "/api-reference/issue-comment/add-issue-comment" },
+                  { text: "List Comments", link: "/api-reference/issue-comment/list-issue-comments" },
+                  { text: "Get Comment", link: "/api-reference/issue-comment/get-issue-comment-detail" },
+                  { text: "Update Comment", link: "/api-reference/issue-comment/update-issue-comment-detail" },
+                  { text: "Delete Comment", link: "/api-reference/issue-comment/delete-issue-comment" },
+                ],
+              },
+              {
+                text: "Work Item Attachments",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/issue-attachments/overview" },
+                  { text: "Get Attachments", link: "/api-reference/issue-attachments/get-attachments" },
+                  { text: "Get Attachment Detail", link: "/api-reference/issue-attachments/get-attachment-detail" },
+                  { text: "Get Upload Credentials", link: "/api-reference/issue-attachments/get-upload-credentials" },
+                  { text: "Upload File", link: "/api-reference/issue-attachments/upload-file" },
+                  { text: "Complete Upload", link: "/api-reference/issue-attachments/complete-upload" },
+                  { text: "Update Attachment", link: "/api-reference/issue-attachments/update-attachment" },
+                  { text: "Delete Attachment", link: "/api-reference/issue-attachments/delete-attachment" },
+                ],
+              },
+              {
+                text: "Work Item Page Links",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/work-item-pages/overview" },
+                  { text: "Create Work Item Page Link", link: "/api-reference/work-item-pages/add-work-item-page" },
+                  { text: "List Work Item Pages", link: "/api-reference/work-item-pages/list-work-item-pages" },
+                  {
+                    text: "Get Work Item Page Link",
+                    link: "/api-reference/work-item-pages/get-work-item-page-detail",
+                  },
+                  {
+                    text: "Delete Work Item Page Link",
+                    link: "/api-reference/work-item-pages/delete-work-item-page",
+                  },
+                ],
+              },
+              
+              {
+                text: "Cycles",
                 collapsed: true,
                 items: [
                   { text: "Overview", link: "/api-reference/cycle/overview" },
@@ -574,7 +561,7 @@ export default withMermaid(
                 ],
               },
               {
-                text: "Module",
+                text: "Modules",
                 collapsed: true,
                 items: [
                   { text: "Overview", link: "/api-reference/module/overview" },
@@ -603,6 +590,18 @@ export default withMermaid(
                 ],
               },
               {
+                text: "Intake",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/intake-issue/overview" },
+                  { text: "Add Intake Issue", link: "/api-reference/intake-issue/add-intake-issue" },
+                  { text: "List Intake Issues", link: "/api-reference/intake-issue/list-intake-issues" },
+                  { text: "Get Intake Issue", link: "/api-reference/intake-issue/get-intake-issue-detail" },
+                  { text: "Update Intake Issue", link: "/api-reference/intake-issue/update-intake-issue-detail" },
+                  { text: "Delete Intake Issue", link: "/api-reference/intake-issue/delete-intake-issue" },
+                ],
+              },
+              {
                 text: "Milestones",
                 collapsed: true,
                 items: [
@@ -616,32 +615,18 @@ export default withMermaid(
                 ],
               },
               {
-                text: "Work Item Pages",
+                text: "Estimates",
                 collapsed: true,
                 items: [
-                  { text: "Overview", link: "/api-reference/work-item-pages/overview" },
-                  { text: "Create Work Item Page Link", link: "/api-reference/work-item-pages/add-work-item-page" },
-                  { text: "List Work Item Pages", link: "/api-reference/work-item-pages/list-work-item-pages" },
-                  {
-                    text: "Get Work Item Page Link",
-                    link: "/api-reference/work-item-pages/get-work-item-page-detail",
-                  },
-                  {
-                    text: "Delete Work Item Page Link",
-                    link: "/api-reference/work-item-pages/delete-work-item-page",
-                  },
-                ],
-              },
-              {
-                text: "Intake",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/intake-issue/overview" },
-                  { text: "Add Intake Issue", link: "/api-reference/intake-issue/add-intake-issue" },
-                  { text: "List Intake Issues", link: "/api-reference/intake-issue/list-intake-issues" },
-                  { text: "Get Intake Issue", link: "/api-reference/intake-issue/get-intake-issue-detail" },
-                  { text: "Update Intake Issue", link: "/api-reference/intake-issue/update-intake-issue-detail" },
-                  { text: "Delete Intake Issue", link: "/api-reference/intake-issue/delete-intake-issue" },
+                  { text: "Overview", link: "/api-reference/estimate/overview" },
+                  { text: "Create Estimate", link: "/api-reference/estimate/add-estimate" },
+                  { text: "Get Estimate", link: "/api-reference/estimate/get-estimate" },
+                  { text: "Update Estimate", link: "/api-reference/estimate/update-estimate" },
+                  { text: "Delete Estimate", link: "/api-reference/estimate/delete-estimate" },
+                  { text: "List Estimate Points", link: "/api-reference/estimate/list-estimate-points" },
+                  { text: "Create Estimate Points", link: "/api-reference/estimate/add-estimate-points" },
+                  { text: "Update Estimate Point", link: "/api-reference/estimate/update-estimate-point" },
+                  { text: "Delete Estimate Point", link: "/api-reference/estimate/delete-estimate-point" },
                 ],
               },
               {
@@ -795,20 +780,6 @@ export default withMermaid(
                 ],
               },
               {
-                text: "Members",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/members/overview" },
-                  { text: "Get Workspace Members", link: "/api-reference/members/get-workspace-members" },
-                  { text: "Get Project Members", link: "/api-reference/members/get-project-members" },
-                  { text: "Create Project Member", link: "/api-reference/members/add-project-member" },
-                  { text: "Get Project Member", link: "/api-reference/members/get-project-member-detail" },
-                  { text: "Update Project Member", link: "/api-reference/members/update-project-member" },
-                  { text: "Delete Project Member", link: "/api-reference/members/delete-project-member" },
-                  { text: "Remove Workspace Members", link: "/api-reference/members/remove-workspace-member" },
-                ],
-              },
-              {
                 text: "Workspace Features",
                 collapsed: true,
                 items: [
@@ -848,6 +819,36 @@ export default withMermaid(
                     text: "Delete Workspace Invitation",
                     link: "/api-reference/workspace-invitations/delete-workspace-invitation",
                   },
+                ],
+              },
+              {
+                text: "Assets",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/assets/overview" },
+                  { text: "Create User Asset Upload", link: "/api-reference/assets/create-user-asset-upload" },
+                  { text: "Update User Asset", link: "/api-reference/assets/update-user-asset" },
+                  { text: "Delete User Asset", link: "/api-reference/assets/delete-user-asset" },
+                  {
+                    text: "Create Workspace Asset Upload",
+                    link: "/api-reference/assets/create-workspace-asset-upload",
+                  },
+                  { text: "Get Workspace Asset", link: "/api-reference/assets/get-workspace-asset" },
+                  { text: "Update Workspace Asset", link: "/api-reference/assets/update-workspace-asset" },
+                ],
+              },
+              {
+                text: "Members",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/members/overview" },
+                  { text: "Get Workspace Members", link: "/api-reference/members/get-workspace-members" },
+                  { text: "Get Project Members", link: "/api-reference/members/get-project-members" },
+                  { text: "Create Project Member", link: "/api-reference/members/add-project-member" },
+                  { text: "Get Project Member", link: "/api-reference/members/get-project-member-detail" },
+                  { text: "Update Project Member", link: "/api-reference/members/update-project-member" },
+                  { text: "Delete Project Member", link: "/api-reference/members/delete-project-member" },
+                  { text: "Remove Workspace Members", link: "/api-reference/members/remove-workspace-member" },
                 ],
               },
               {
