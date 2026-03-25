@@ -540,7 +540,7 @@ export default withMermaid(
                   },
                 ],
               },
-              
+
               {
                 text: "Cycles",
                 collapsed: true,
