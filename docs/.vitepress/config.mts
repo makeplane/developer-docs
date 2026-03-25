@@ -602,6 +602,22 @@ export default withMermaid(
                 ],
               },
               {
+                text: "Assets",
+                collapsed: true,
+                items: [
+                  { text: "Overview", link: "/api-reference/assets/overview" },
+                  { text: "Create User Asset Upload", link: "/api-reference/assets/create-user-asset-upload" },
+                  { text: "Update User Asset", link: "/api-reference/assets/update-user-asset" },
+                  { text: "Delete User Asset", link: "/api-reference/assets/delete-user-asset" },
+                  {
+                    text: "Create Workspace Asset Upload",
+                    link: "/api-reference/assets/create-workspace-asset-upload",
+                  },
+                  { text: "Get Workspace Asset", link: "/api-reference/assets/get-workspace-asset" },
+                  { text: "Update Workspace Asset", link: "/api-reference/assets/update-workspace-asset" },
+                ],
+              },
+              {
                 text: "Milestones",
                 collapsed: true,
                 items: [
@@ -819,22 +835,6 @@ export default withMermaid(
                     text: "Delete Workspace Invitation",
                     link: "/api-reference/workspace-invitations/delete-workspace-invitation",
                   },
-                ],
-              },
-              {
-                text: "Assets",
-                collapsed: true,
-                items: [
-                  { text: "Overview", link: "/api-reference/assets/overview" },
-                  { text: "Create User Asset Upload", link: "/api-reference/assets/create-user-asset-upload" },
-                  { text: "Update User Asset", link: "/api-reference/assets/update-user-asset" },
-                  { text: "Delete User Asset", link: "/api-reference/assets/delete-user-asset" },
-                  {
-                    text: "Create Workspace Asset Upload",
-                    link: "/api-reference/assets/create-workspace-asset-upload",
-                  },
-                  { text: "Get Workspace Asset", link: "/api-reference/assets/get-workspace-asset" },
-                  { text: "Update Workspace Asset", link: "/api-reference/assets/update-workspace-asset" },
                 ],
               },
               {
