@@ -1,20 +1,20 @@
 ---
 title: Remove work item from cycle
-description: Delete work item from cycle via Plane API. HTTP DELETE request for removing resources.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
+description: Remove work item from cycle via Plane API. HTTP request format, parameters, scopes, and example responses for remove work item from cycle.
+keywords: plane, plane api, rest api, api integration, cycle, remove work item from cycle
 ---
 
 # Remove work item from cycle
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/{issue_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/{issue_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Removes a work item from a cycle.
+Remove a work item from a cycle while keeping the work item in the project.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Removes a work item from a cycle.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Cycle id.
+
+</ApiParam>
+
+<ApiParam name="issue_id" type="string" :required="true">
+
+Issue id.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the cycle.
-
-</ApiParam>
-
-<ApiParam name="work_item_id" type="string" :required="true">
-
-The unique identifier for the work item.
+Workspace slug
 
 </ApiParam>
 
@@ -58,6 +58,7 @@ The unique identifier for the work item.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Remove work item from cycle" :languages="['cURL', 'Python', 'JavaScript']">
@@ -65,7 +66,7 @@ The unique identifier for the work item.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/cycle-issues/issue-uuid/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/cycle-issues/550e8400-e29b-41d4-a716-446655440001/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
@@ -77,10 +78,10 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/cycle-issues/issue-uuid/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/cycle-issues/550e8400-e29b-41d4-a716-446655440001/",
     headers={"X-API-Key": "your-api-key"}
 )
-print(response.json())
+print(response.status_code)
 ```
 
 </template>
@@ -88,7 +89,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/cycle-issues/issue-uuid/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/cycle-issues/550e8400-e29b-41d4-a716-446655440001/",
   {
     method: "DELETE",
     headers: {
@@ -96,7 +97,7 @@ const response = await fetch(
     },
   }
 );
-const data = await response.json();
+console.log(response.status);
 ```
 
 </template>
@@ -104,11 +105,10 @@ const data = await response.json();
 
 <ResponsePanel status="204">
 
-```json
-// 204 No Content
-```
+No response body.
 
 </ResponsePanel>
 
 </div>
+
 </div>

@@ -1,20 +1,20 @@
 ---
 title: Create an intake work item
-description: Create an intake work item via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
+description: Create an intake work item via Plane API. HTTP request format, parameters, scopes, and example responses for create an intake work item.
+keywords: plane, plane api, rest api, api integration, intake issue, create an intake work item
 ---
 
 # Create an intake work item
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/intake-issues/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new intake work item in a project.
+Submit a new work item to the project's intake queue for review and triage. Automatically creates the work item with default triage state and tracks activity.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new intake work item in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier of the project.
+Workspace slug
 
 </ApiParam>
 
@@ -45,7 +45,7 @@ The unique identifier of the project.
 
 <ApiParam name="issue" type="object" :required="true">
 
-An object containing the intake issue details, including a required `name` field for the intake issue name.
+Issue data for the intake issue
 
 </ApiParam>
 
@@ -61,6 +61,7 @@ An object containing the intake issue details, including a required `name` field
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Create an intake work item" :languages="['cURL', 'Python', 'JavaScript']">
@@ -68,12 +69,16 @@ An object containing the intake issue details, including a required `name` field
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "issue": "example-issue"
+  "issue": {
+    "name": "Example Name",
+    "description": "Example description",
+    "priority": "medium"
+  }
 }'
 ```
 
@@ -84,11 +89,15 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'issue': 'example-issue'
-}
+      "issue": {
+"name": "Example Name",
+"description": "Example description",
+"priority": "medium"
+      }
+    }
 )
 print(response.json())
 ```
@@ -98,7 +107,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/",
   {
     method: "POST",
     headers: {
@@ -106,7 +115,11 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      issue: "example-issue",
+      issue: {
+        name: "Example Name",
+        description: "Example description",
+        priority: "medium",
+      },
     }),
   }
 );
@@ -120,15 +133,23 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "status": 0,
+  "source": "in_app",
+  "issue": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Example Name",
+    "description": "Example description",
+    "priority": "medium",
+    "sequence_id": 124
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

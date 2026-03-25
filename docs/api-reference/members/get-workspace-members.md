@@ -1,20 +1,20 @@
 ---
 title: Get all workspace members
-description: List all workspace members via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane api, workspace members, list members, member roles, user management, rest api, api integration
+description: Get all workspace members via Plane API. HTTP request format, parameters, scopes, and example responses for get all workspace members.
+keywords: plane, plane api, rest api, api integration, members, get all workspace members
 ---
 
 # Get all workspace members
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/members/</span>
+  <span class="path">/api/v1/workspaces/{slug}/members/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all members in a workspace.
+Retrieve all users who are members of the specified workspace.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Returns a list of all members in a workspace.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Workspace slug
 
 </ApiParam>
 
@@ -40,6 +40,7 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Get all workspace members" :languages="['cURL', 'Python', 'JavaScript']">
@@ -84,13 +85,30 @@ const data = await response.json();
 <ResponsePanel status="200">
 
 ```json
-{
-  "id": "resource-uuid",
-  "created_at": "2024-01-01T00:00:00Z"
-}
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "first_name": "John",
+    "last_name": "Doe",
+    "display_name": "Example Name",
+    "email": "user@example.com",
+    "avatar": "https://example.com/assets/example-image.png",
+    "role": 20
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "display_name": "Example Name",
+    "email": "user@example.com",
+    "avatar": "https://example.com/assets/example-image.png",
+    "role": 15
+  }
+]
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

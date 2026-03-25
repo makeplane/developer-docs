@@ -1,20 +1,20 @@
 ---
 title: Add work items to module
-description: Create work items to module via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, modules, features
+description: Add work items to module via Plane API. HTTP request format, parameters, scopes, and example responses for add work items to module.
+keywords: plane, plane api, rest api, api integration, module, add work items to module
 ---
 
 # Add work items to module
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/module-issues/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/modules/{module_id}/module-issues/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Adds one or more work items to a module.
+Assign multiple work items to a module or move them from another module. Automatically handles bulk creation and updates with activity tracking.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Adds one or more work items to a module.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="module_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Module ID
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="module_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier for the module.
+Workspace slug
 
 </ApiParam>
 
@@ -49,9 +49,9 @@ The unique identifier for the module.
 
 <div class="params-list">
 
-<ApiParam name="issues" type="string[]" :required="true">
+<ApiParam name="issues" type="array" :required="true">
 
-Array of work item IDs to add to the module.
+List of issue IDs to add to the module
 
 </ApiParam>
 
@@ -67,6 +67,7 @@ Array of work item IDs to add to the module.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Add work items to module" :languages="['cURL', 'Python', 'JavaScript']">
@@ -74,12 +75,15 @@ Array of work item IDs to add to the module.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/module-issues/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/550e8400-e29b-41d4-a716-446655440001/module-issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "issues": "example-issues"
+  "issues": [
+    "550e8400-e29b-41d4-a716-446655440000",
+    "550e8400-e29b-41d4-a716-446655440000"
+  ]
 }'
 ```
 
@@ -90,11 +94,14 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/module-issues/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/550e8400-e29b-41d4-a716-446655440001/module-issues/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'issues': 'example-issues'
-}
+      "issues": [
+"550e8400-e29b-41d4-a716-446655440000",
+"550e8400-e29b-41d4-a716-446655440000"
+      ]
+    }
 )
 print(response.json())
 ```
@@ -104,7 +111,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/module-issues/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/550e8400-e29b-41d4-a716-446655440001/module-issues/",
   {
     method: "POST",
     headers: {
@@ -112,7 +119,7 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      issues: "example-issues",
+      issues: ["550e8400-e29b-41d4-a716-446655440000", "550e8400-e29b-41d4-a716-446655440000"],
     }),
   }
 );
@@ -122,19 +129,23 @@ const data = await response.json();
 </template>
 </CodePanel>
 
-<ResponsePanel status="201">
+<ResponsePanel status="200">
 
 ```json
-{
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
-}
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "module": "550e8400-e29b-41d4-a716-446655440000",
+    "issue": "550e8400-e29b-41d4-a716-446655440000",
+    "sub_issues_count": 2,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+]
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

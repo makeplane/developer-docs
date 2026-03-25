@@ -1,20 +1,20 @@
 ---
 title: Delete a project
-description: Permanently delete a project and all its data via Plane API. This action is irreversible and removes all work items, cycles, and modules within the project.
-keywords: plane, plane api, rest api, api integration, projects, project management
+description: Delete a project via Plane API. HTTP request format, parameters, scopes, and example responses for delete a project.
+keywords: plane, plane api, rest api, api integration, project, delete a project
 ---
 
 # Delete a project
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{pk}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently deletes a project and all its associated data. This action cannot be undone.
+Permanently remove a project and all its associated data from the workspace.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Permanently deletes a project and all its associated data. This action cannot be
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="pk" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier of the project
+Workspace slug
 
 </ApiParam>
 
@@ -46,6 +46,7 @@ The unique identifier of the project
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Delete a project" :languages="['cURL', 'Python', 'JavaScript']">
@@ -53,7 +54,7 @@ The unique identifier of the project
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
@@ -65,23 +66,26 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/",
     headers={"X-API-Key": "your-api-key"}
 )
-print(response.json())
+print(response.status_code)
 ```
 
 </template>
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid", {
-  method: "DELETE",
-  headers: {
-    "X-API-Key": "your-api-key",
-  },
-});
-const data = await response.json();
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/",
+  {
+    method: "DELETE",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
+console.log(response.status);
 ```
 
 </template>
@@ -89,11 +93,10 @@ const data = await response.json();
 
 <ResponsePanel status="204">
 
-```json
-// 204 No Content
-```
+No response body.
 
 </ResponsePanel>
 
 </div>
+
 </div>

@@ -1,20 +1,20 @@
 ---
 title: Retrieve a state
-description: Get retrieve a state details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, states, workflow, status
+description: Retrieve a state via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a state.
+keywords: plane, plane api, rest api, api integration, state, retrieve a state
 ---
 
 # Retrieve a state
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/states/{state_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing state by its ID.
+Retrieve details of a specific state.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Retrieves the details of an existing state by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Project ID
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier of the project.
+Workspace slug
 
 </ApiParam>
 
 <ApiParam name="state_id" type="string" :required="true">
 
-The unique identifier for the state.
+State ID
 
 </ApiParam>
 
@@ -52,6 +52,7 @@ The unique identifier for the state.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Retrieve a state" :languages="['cURL', 'Python', 'JavaScript']">
@@ -59,7 +60,7 @@ The unique identifier for the state.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/states/550e8400-e29b-41d4-a716-446655440001/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
 ```
@@ -71,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/states/550e8400-e29b-41d4-a716-446655440001/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -82,7 +83,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/states/550e8400-e29b-41d4-a716-446655440001/",
   {
     method: "GET",
     headers: {
@@ -100,15 +101,19 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Example Name",
+  "color": "#f39c12",
+  "group": "started",
+  "sequence": 2,
+  "default": false,
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>

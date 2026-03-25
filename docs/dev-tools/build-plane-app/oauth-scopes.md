@@ -97,6 +97,7 @@ This document lists all OAuth scopes available when building a Plane app. Reques
 | Scope                       | Description                          |
 | --------------------------- | ------------------------------------ |
 | `workspaces.members:read`   | Read workspace members               |
+| `workspaces.members:write`  | Manage workspace members             |
 | `workspaces.features:read`  | Read workspace features              |
 | `workspaces.features:write` | Create and update workspace features |
 

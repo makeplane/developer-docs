@@ -1,20 +1,20 @@
 ---
 title: Create a worklog
-description: Create a worklog via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
+description: Create a worklog via Plane API. HTTP request format, parameters, scopes, and example responses for create a worklog.
+keywords: plane, plane api, rest api, api integration, worklogs, create a worklog
 ---
 
 # Create a worklog
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/worklogs/</span>
+  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/worklogs/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new worklog entry for a work item.
+Create a new worklog entry
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Creates a new worklog entry for a work item.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="issue_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+Issue id.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project
+Project ID
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="slug" type="string" :required="true">
 
-The unique identifier of the work item
+Workspace slug
 
 </ApiParam>
 
@@ -49,15 +49,27 @@ The unique identifier of the work item
 
 <div class="params-list">
 
-<ApiParam name="description" type="string" :required="true">
+<ApiParam name="description" type="string" :required="false">
 
-Description of the work done during the worklog.
+Description.
 
 </ApiParam>
 
-<ApiParam name="duration" type="integer" :required="true">
+<ApiParam name="duration" type="integer" :required="false">
 
-Time spent on the issue in minutes.
+Duration.
+
+</ApiParam>
+
+<ApiParam name="created_by" type="string" :required="false">
+
+Created by.
+
+</ApiParam>
+
+<ApiParam name="updated_by" type="string" :required="false">
+
+Updated by.
 
 </ApiParam>
 
@@ -73,6 +85,7 @@ Time spent on the issue in minutes.
 </div>
 
 </div>
+
 <div class="api-right">
 
 <CodePanel title="Create a worklog" :languages="['cURL', 'Python', 'JavaScript']">
@@ -80,13 +93,15 @@ Time spent on the issue in minutes.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/worklogs/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/worklogs/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-  "description": "example-description",
-  "duration": 1
+  "description": "Example description",
+  "duration": 1,
+  "created_by": "550e8400-e29b-41d4-a716-446655440000",
+  "updated_by": "550e8400-e29b-41d4-a716-446655440000"
 }'
 ```
 
@@ -97,12 +112,14 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/worklogs/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/worklogs/",
     headers={"X-API-Key": "your-api-key"},
     json={
-  'description': 'example-description',
-  'duration': 1
-}
+      "description": "Example description",
+      "duration": 1,
+      "created_by": "550e8400-e29b-41d4-a716-446655440000",
+      "updated_by": "550e8400-e29b-41d4-a716-446655440000"
+    }
 )
 print(response.json())
 ```
@@ -112,7 +129,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/worklogs/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/worklogs/",
   {
     method: "POST",
     headers: {
@@ -120,8 +137,10 @@ const response = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      description: "example-description",
+      description: "Example description",
       duration: 1,
+      created_by: "550e8400-e29b-41d4-a716-446655440000",
+      updated_by: "550e8400-e29b-41d4-a716-446655440000",
     }),
   }
 );
@@ -135,15 +154,21 @@ const data = await response.json();
 
 ```json
 {
-  "id": "project-uuid",
-  "name": "Project Name",
-  "identifier": "PROJ",
-  "description": "Project description",
-  "created_at": "2024-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z",
+  "description": "Example description",
+  "duration": 1,
+  "created_by": "550e8400-e29b-41d4-a716-446655440000",
+  "updated_by": "550e8400-e29b-41d4-a716-446655440000",
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "workspace_id": "550e8400-e29b-41d4-a716-446655440000",
+  "logged_by": "550e8400-e29b-41d4-a716-446655440000"
 }
 ```
 
 </ResponsePanel>
 
 </div>
+
 </div>
