@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, workspace invitations, li
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/invitations/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/invitations/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ List all workspace invites for a workspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -39,6 +39,7 @@ Workspace admin or owner permission required.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -50,7 +51,7 @@ Workspace admin or owner permission required.
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/invitations/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -73,7 +74,7 @@ print(response.json())
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/invitations/", {
   method: "GET",
   headers: {
-    "X-API-Key": "your-api-key",
+    "X-API-Key": "your-api-key"
   },
 });
 const data = await response.json();

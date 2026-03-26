@@ -1,20 +1,20 @@
 ---
 title: Delete a state
-description: Delete a state via Plane API. HTTP request format, parameters, scopes, and example responses for delete a state.
-keywords: plane, plane api, rest api, api integration, state, delete a state
+description: Delete a workflow state from a project via Plane API. The state must not be in use by any work items. Returns 204 on success.
+keywords: plane, plane api, rest api, api integration, states, workflow, status
 ---
 
 # Delete a state
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/states/{state_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/states/{state_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently remove a workflow state from a project. Default states and states with existing work items cannot be deleted.
+Permanently deletes a state from a project. This action cannot be undone.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Permanently remove a workflow state from a project. Default states and states wi
 
 <div class="params-list">
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Project ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier of the project.
 
 </ApiParam>
 
 <ApiParam name="state_id" type="string" :required="true">
 
-State ID
+The unique identifier for the state.
 
 </ApiParam>
 
@@ -51,6 +51,7 @@ State ID
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -60,9 +61,9 @@ State ID
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/states/550e8400-e29b-41d4-a716-446655440001/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -72,7 +73,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/states/550e8400-e29b-41d4-a716-446655440001/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -82,15 +83,12 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/states/550e8400-e29b-41d4-a716-446655440001/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/states/state-uuid/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 console.log(response.status);
 ```
 

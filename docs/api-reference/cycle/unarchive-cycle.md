@@ -1,20 +1,20 @@
 ---
 title: Restore a cycle
-description: Restore a cycle via Plane API. HTTP request format, parameters, scopes, and example responses for restore a cycle.
-keywords: plane, plane api, rest api, api integration, cycle, restore a cycle
+description: Restore a cycle API endpoint. Request format, parameters, and response examples for Plane REST API.
+keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
 ---
 
 # Restore a cycle
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/archived-cycles/{cycle_id}/unarchive/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/archived-cycles/{cycle_id}/unarchive/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Restore an archived cycle to active status, making it available for regular use.
+Restores an archived cycle back to the active cycles list.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Restore an archived cycle to active status, making it available for regular use.
 
 <div class="params-list">
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Cycle id.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier for the cycle.
 
 </ApiParam>
 
@@ -51,6 +51,7 @@ Workspace slug
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -60,9 +61,9 @@ Workspace slug
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/archived-cycles/550e8400-e29b-41d4-a716-446655440001/unarchive/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/unarchive/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -72,7 +73,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/archived-cycles/550e8400-e29b-41d4-a716-446655440001/unarchive/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/unarchive/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -82,15 +83,12 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/archived-cycles/550e8400-e29b-41d4-a716-446655440001/unarchive/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/unarchive/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 console.log(response.status);
 ```
 

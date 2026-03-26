@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, milestones, create milest
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/milestones/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/milestones/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,13 +24,13 @@ Create a new milestone in a project.
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project id.
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Slug.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -78,6 +78,7 @@ API key authentication or an OAuth token with equivalent access.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -87,7 +88,7 @@ API key authentication or an OAuth token with equivalent access.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/milestones/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/milestones/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -106,7 +107,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/milestones/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/milestones/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "title": "Example Name",
@@ -122,22 +123,19 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/milestones/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: "Example Name",
-      target_date: "2024-01-01",
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      external_source: "github",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/milestones/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "title": "Example Name",
+  "target_date": "2024-01-01",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
+}),
+});
 const data = await response.json();
 ```
 

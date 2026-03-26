@@ -1,20 +1,20 @@
 ---
 title: Search work items
-description: Search work items via Plane API. HTTP request format, parameters, scopes, and example responses for search work items.
-keywords: plane, plane api, rest api, api integration, issue, search work items
+description: Search work items via Plane API. Full-text search with filters and advanced query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
 # Search work items
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/work-items/search/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/work-items/search/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Perform semantic search across issue names, sequence IDs, and project identifiers.
+Searches for work items across a workspace by text query.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Perform semantic search across issue names, sequence IDs, and project identifier
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -72,6 +72,7 @@ Whether to search across entire workspace or within specific project
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -81,9 +82,9 @@ Whether to search across entire workspace or within specific project
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=550e8400-e29b-41d4-a716-446655440000" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=project-uuid" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -93,7 +94,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=550e8400-e29b-41d4-a716-446655440000",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=project-uuid",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -103,15 +104,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=550e8400-e29b-41d4-a716-446655440000",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/work-items/search/?limit=10&project_id=project-uuid", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 const data = await response.json();
 ```
 

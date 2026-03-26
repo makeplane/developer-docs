@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, members, delete project m
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/project-members/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/project-members/{member_id}/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,21 +22,21 @@ Delete a project member
 
 <div class="params-list">
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="member_id" type="string" :required="true">
 
-Pk.
+The unique identifier of the member.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -51,6 +51,7 @@ Workspace slug
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -60,9 +61,9 @@ Workspace slug
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/project-members/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/project-members/member-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -72,7 +73,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/project-members/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/project-members/member-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -82,15 +83,12 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/project-members/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/project-members/member-uuid/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 console.log(response.status);
 ```
 

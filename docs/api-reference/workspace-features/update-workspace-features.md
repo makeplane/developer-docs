@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, workspace features, updat
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/features/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/features/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Update the features of a workspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -84,6 +84,7 @@ Pi.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -136,16 +137,16 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    project_grouping: true,
-    initiatives: true,
-    teams: true,
-    customers: true,
-    wiki: true,
-    pi: true,
-  }),
+  "project_grouping": true,
+  "initiatives": true,
+  "teams": true,
+  "customers": true,
+  "wiki": true,
+  "pi": true
+}),
 });
 const data = await response.json();
 ```

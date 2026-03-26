@@ -1,20 +1,20 @@
 ---
 title: Create a module
-description: Create a module via Plane API. HTTP request format, parameters, scopes, and example responses for create a module.
-keywords: plane, plane api, rest api, api integration, module, create a module
+description: Create a module via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, modules, features
 ---
 
 # Create a module
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/modules/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Create a new project module with specified name, description, and timeline.
+Creates a new module in a project.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Create a new project module with specified name, description, and timeline.
 
 <div class="params-list">
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Project ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier of the project.
 
 </ApiParam>
 
@@ -69,12 +69,12 @@ Target date.
 
 <ApiParam name="status" type="string" :required="false">
 
-- `backlog` - Backlog
-- `planned` - Planned
-- `in-progress` - In Progress
-- `paused` - Paused
-- `completed` - Completed
-- `cancelled` - Cancelled
+* `backlog` - Backlog
+* `planned` - Planned
+* `in-progress` - In Progress
+* `paused` - Paused
+* `completed` - Completed
+* `cancelled` - Cancelled
 
 </ApiParam>
 
@@ -113,6 +113,7 @@ External id.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -122,7 +123,7 @@ External id.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -143,7 +144,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -161,24 +162,21 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      description: "Example description",
-      start_date: "2024-01-01",
-      end_date: "2024-01-01",
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      external_source: "github",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "name": "Example Name",
+  "description": "Example description",
+  "start_date": "2024-01-01",
+  "end_date": "2024-01-01",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
+}),
+});
 const data = await response.json();
 ```
 

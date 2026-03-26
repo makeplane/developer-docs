@@ -1,20 +1,20 @@
 ---
 title: List all projects
-description: List all projects via Plane API. HTTP request format, parameters, scopes, and example responses for list all projects.
-keywords: plane, plane api, rest api, api integration, project, list all projects
+description: List all projects via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, projects, project management
 ---
 
 # List all projects
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieve all projects in a workspace or get details of a specific project.
+Returns a list of all projects in a workspace. Projects are returned in order of creation, with the most recently created projects appearing first.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Retrieve all projects in a workspace or get details of a specific project.
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -78,6 +78,7 @@ Number of results per page (default: 20, max: 100)
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -89,7 +90,7 @@ Number of results per page (default: 20, max: 100)
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/projects/?cursor=20:1:0&expand=assignees" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -109,15 +110,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/?cursor=20:1:0&expand=assignees",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/?cursor=20:1:0&expand=assignees", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 const data = await response.json();
 ```
 

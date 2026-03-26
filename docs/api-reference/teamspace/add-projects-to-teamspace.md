@@ -1,20 +1,20 @@
 ---
 title: Add projects to teamspace
-description: Add projects to teamspace via Plane API. HTTP request format, parameters, scopes, and example responses for add projects to teamspace.
-keywords: plane, plane api, rest api, api integration, teamspace, add projects to teamspace
+description: Create projects to teamspace via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane api, add projects to teamspace, team project management, team collaboration, workspace teams, rest api, api integration
 ---
 
 # Add projects to teamspace
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/teamspaces/{teamspace_id}/projects/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/projects/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Add projects to a teamspace
+Adds projects to a teamspace
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Add projects to a teamspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+
 
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-Teamspace ID
+
 
 </ApiParam>
 
@@ -60,6 +60,7 @@ Project ids.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -69,7 +70,7 @@ Project ids.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -87,7 +88,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "project_ids": [
@@ -102,19 +103,18 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      project_ids: ["550e8400-e29b-41d4-a716-446655440000"],
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "project_ids": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ]
+}),
+});
 const data = await response.json();
 ```
 

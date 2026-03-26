@@ -1,20 +1,20 @@
 ---
 title: Delete a custom property
-description: Delete a custom property via Plane API. HTTP request format, parameters, scopes, and example responses for delete a custom property.
-keywords: plane, plane api, rest api, api integration, issue types, properties, delete a custom property
+description: Delete a custom property via Plane API. HTTP DELETE request for removing resources.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
 # Delete a custom property
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-item-types/{type_id}/work-item-properties/{property_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-item-types/{type_id}/work-item-properties/{property_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Delete an issue property
+Permanently deletes a custom property from a work item type. This action cannot be undone.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Delete an issue property
 
 <div class="params-list">
 
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ApiParam>
+
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
-
-</ApiParam>
-
-<ApiParam name="property_id" type="string" :required="true">
-
-Property id.
-
-</ApiParam>
-
-<ApiParam name="slug" type="string" :required="true">
-
-Workspace slug
+The unique identifier of the project.
 
 </ApiParam>
 
 <ApiParam name="type_id" type="string" :required="true">
 
-Type ID
+The unique identifier for the work item type.
+
+</ApiParam>
+
+<ApiParam name="property_id" type="string" :required="true">
+
+The unique identifier for the custom property.
 
 </ApiParam>
 
@@ -57,6 +57,7 @@ Type ID
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -66,9 +67,9 @@ Type ID
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/{property_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -78,7 +79,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/{property_id}/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -88,15 +89,12 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/work-item-properties/550e8400-e29b-41d4-a716-446655440001/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/work-item-properties/{property_id}/", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 console.log(response.status);
 ```
 

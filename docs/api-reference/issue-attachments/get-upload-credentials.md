@@ -1,20 +1,20 @@
 ---
 title: Get upload credentials
-description: Get upload credentials via Plane API. HTTP request format, parameters, scopes, and example responses for get upload credentials.
-keywords: plane, plane api, rest api, api integration, issue attachments, get upload credentials
+description: List upload credentials via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
 ---
 
 # Get upload credentials
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/attachments/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/attachments/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Generate presigned URL for uploading file attachments to a work item.
+Creates a pre-signed POST form data for uploading an attachment directly to S3. This endpoint handles the first step of the two-and-a-half step upload process where you first get the upload credentials and then use them to upload the actual file.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Generate presigned URL for uploading file attachments to a work item.
 
 <div class="params-list">
 
-<ApiParam name="issue_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Issue ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier of the work item.
 
 </ApiParam>
 
@@ -90,6 +90,7 @@ External source system (for integration tracking)
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -99,7 +100,7 @@ External source system (for integration tracking)
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -119,7 +120,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -136,23 +137,20 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/attachments/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      type: "application/pdf",
-      size: 1024000,
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      external_source: "github",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/attachments/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "name": "Example Name",
+  "type": "application/pdf",
+  "size": 1024000,
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
+}),
+});
 const data = await response.json();
 ```
 

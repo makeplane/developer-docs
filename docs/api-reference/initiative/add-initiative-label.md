@@ -1,20 +1,20 @@
 ---
 title: Create an initiative label
-description: Create an initiative label via Plane API. HTTP request format, parameters, scopes, and example responses for create an initiative label.
-keywords: plane, plane api, rest api, api integration, initiative, create an initiative label
+description: Create an initiative label via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
 ---
 
 # Create an initiative label
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/initiatives/labels/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/initiatives/labels/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Create a new initiative label in the workspace
+Creates a new label for categorizing initiatives in a workspace.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Create a new initiative label in the workspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -71,6 +71,7 @@ Sort order.
 `initiatives.labels:write`
 
 </div>
+
 
 </div>
 
@@ -120,14 +121,14 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    name: "Example Name",
-    description: "Example description",
-    color: "Example Name",
-    sort_order: 1,
-  }),
+  "name": "Example Name",
+  "description": "Example description",
+  "color": "Example Name",
+  "sort_order": 1
+}),
 });
 const data = await response.json();
 ```

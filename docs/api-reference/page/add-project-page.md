@@ -1,20 +1,20 @@
 ---
 title: Create a project page
-description: Create a project page via Plane API. HTTP request format, parameters, scopes, and example responses for create a project page.
-keywords: plane, plane api, rest api, api integration, page, create a project page
+description: Create a project page via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, projects, project management, pages, documentation, notes
 ---
 
 # Create a project page
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/pages/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/pages/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Create a project page
+Creates a new page at the project level, specific to a single project.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Create a project page
 
 <div class="params-list">
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Project ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier for the project.
 
 </ApiParam>
 
@@ -51,8 +51,8 @@ Name.
 
 <ApiParam name="access" type="integer" :required="false">
 
-- `0` - Public
-- `1` - Private
+* `0` - Public
+* `1` - Private
 
 </ApiParam>
 
@@ -115,6 +115,7 @@ Description html.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -124,7 +125,7 @@ Description html.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/pages/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/pages/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -149,7 +150,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/pages/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/pages/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -171,28 +172,25 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/pages/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      access: 0,
-      color: "Example Name",
-      is_locked: true,
-      archived_at: "2024-01-01",
-      view_props: "example-value",
-      logo_props: "example-value",
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      external_source: "github",
-      description_html: "<p>Example content</p>",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/pages/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "name": "Example Name",
+  "access": 0,
+  "color": "Example Name",
+  "is_locked": true,
+  "archived_at": "2024-01-01",
+  "view_props": "example-value",
+  "logo_props": "example-value",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github",
+  "description_html": "<p>Example content</p>"
+}),
+});
 const data = await response.json();
 ```
 

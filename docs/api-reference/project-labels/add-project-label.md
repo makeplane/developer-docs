@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, project labels, create pr
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/project-labels/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/project-labels/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Create a new project label in the workspace with name, color, and description.
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -72,6 +72,7 @@ Sort order.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -118,13 +119,13 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    name: "Example Name",
-    color: "#ff0000",
-    description: "Example description",
-  }),
+  "name": "Example Name",
+  "color": "#ff0000",
+  "description": "Example description"
+}),
 });
 const data = await response.json();
 ```

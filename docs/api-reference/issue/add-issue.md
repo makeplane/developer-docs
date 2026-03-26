@@ -1,20 +1,20 @@
 ---
 title: Create a work item
-description: Create a work item via Plane API. HTTP request format, parameters, scopes, and example responses for create a work item.
-keywords: plane, plane api, rest api, api integration, issue, create a work item
+description: Create a work item via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
 # Create a work item
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Create a new work item in the specified project with the provided details.
+Creates a new work item in a project.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Create a new work item in the specified project with the provided details.
 
 <div class="params-list">
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Project ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier of the project.
 
 </ApiParam>
 
@@ -99,11 +99,11 @@ Description stripped.
 
 <ApiParam name="priority" type="string" :required="false">
 
-- `urgent` - Urgent
-- `high` - High
-- `medium` - Medium
-- `low` - Low
-- `none` - None
+* `urgent` - Urgent
+* `high` - High
+* `medium` - Medium
+* `low` - Low
+* `none` - None
 
 </ApiParam>
 
@@ -202,6 +202,7 @@ Type.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -211,7 +212,7 @@ Type.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -238,7 +239,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -262,26 +263,27 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      description: "Example description",
-      priority: "medium",
-      state: "550e8400-e29b-41d4-a716-446655440000",
-      assignees: ["550e8400-e29b-41d4-a716-446655440000"],
-      labels: ["550e8400-e29b-41d4-a716-446655440000"],
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      external_source: "github",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "name": "Example Name",
+  "description": "Example description",
+  "priority": "medium",
+  "state": "550e8400-e29b-41d4-a716-446655440000",
+  "assignees": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "labels": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
+}),
+});
 const data = await response.json();
 ```
 
@@ -297,8 +299,12 @@ const data = await response.json();
   "description": "Example description",
   "sequence_id": 1,
   "priority": "high",
-  "assignees": ["550e8400-e29b-41d4-a716-446655440000"],
-  "labels": ["550e8400-e29b-41d4-a716-446655440000"],
+  "assignees": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "labels": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
   "created_at": "2024-01-01T00:00:00Z",
   "updated_at": "2024-01-01T00:00:00Z"
 }

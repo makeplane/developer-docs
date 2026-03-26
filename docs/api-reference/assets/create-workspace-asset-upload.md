@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, assets, create workspace 
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/assets/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/assets/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Generate presigned URL for generic asset upload
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -84,6 +84,7 @@ External source system (for integration tracking)
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -136,16 +137,16 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    name: "Example Name",
-    type: "image/jpeg",
-    size: 1024000,
-    project_id: "550e8400-e29b-41d4-a716-446655440000",
-    external_id: "550e8400-e29b-41d4-a716-446655440000",
-    external_source: "github",
-  }),
+  "name": "Example Name",
+  "type": "image/jpeg",
+  "size": 1024000,
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
+}),
 });
 const data = await response.json();
 ```

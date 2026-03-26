@@ -1,20 +1,20 @@
 ---
 title: Add members to teamspace
-description: Add members to teamspace via Plane API. HTTP request format, parameters, scopes, and example responses for add members to teamspace.
-keywords: plane, plane api, rest api, api integration, teamspace, add members to teamspace
+description: Create members to teamspace via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane api, add teamspace members, invite team members, team management, workspace teams, rest api, api integration
 ---
 
 # Add members to teamspace
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/teamspaces/{teamspace_id}/members/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/members/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Add members to a teamspace
+Adds members to a teamspace
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Add members to a teamspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-Teamspace ID
+The unique identifier for the teamspace.
 
 </ApiParam>
 
@@ -60,6 +60,7 @@ Member ids.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -69,7 +70,7 @@ Member ids.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/members/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -87,7 +88,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/members/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "member_ids": [
@@ -102,19 +103,18 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/members/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      member_ids: ["550e8400-e29b-41d4-a716-446655440000"],
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "member_ids": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ]
+}),
+});
 const data = await response.json();
 ```
 

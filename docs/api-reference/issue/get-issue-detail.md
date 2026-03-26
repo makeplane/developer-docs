@@ -1,20 +1,20 @@
 ---
 title: Retrieve a work item by ID
-description: Retrieve a work item by ID via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a work item by id.
-keywords: plane, plane api, rest api, api integration, issue, retrieve a work item by id
+description: Get retrieve a work item by id details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
 # Retrieve a work item by ID
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieve details of a specific work item.
+Retrieves the details of an existing work item by its ID.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Retrieve details of a specific work item.
 
 <div class="params-list">
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Pk.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier for the work item.
 
 </ApiParam>
 
@@ -90,6 +90,7 @@ Field to order results by. Prefix with '-' for descending order
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -99,9 +100,9 @@ Field to order results by. Prefix with '-' for descending order
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440000/?expand=assignees&external_id=1234567890" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/?expand=assignees&external_id=1234567890" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -111,7 +112,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440000/?expand=assignees&external_id=1234567890",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/?expand=assignees&external_id=1234567890",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -121,15 +122,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440000/?expand=assignees&external_id=1234567890",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/?expand=assignees&external_id=1234567890", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 const data = await response.json();
 ```
 
@@ -145,8 +143,12 @@ const data = await response.json();
   "description": "Example description",
   "sequence_id": 1,
   "priority": "high",
-  "assignees": ["550e8400-e29b-41d4-a716-446655440000"],
-  "labels": ["550e8400-e29b-41d4-a716-446655440000"],
+  "assignees": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "labels": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
   "created_at": "2024-01-01T00:00:00Z",
   "updated_at": "2024-01-01T00:00:00Z"
 }

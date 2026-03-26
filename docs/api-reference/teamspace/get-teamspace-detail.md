@@ -1,20 +1,20 @@
 ---
 title: Retrieve a teamspace
-description: Retrieve a teamspace via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a teamspace.
-keywords: plane, plane api, rest api, api integration, teamspace, retrieve a teamspace
+description: Get retrieve a teamspace details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane api, get teamspace detail, retrieve team, team management, workspace teams, rest api, api integration
 ---
 
 # Retrieve a teamspace
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/teamspaces/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieve a teamspace by its ID
+Retrieves the details of an existing teamspace by its ID.
 
 <div class="params-section">
 
@@ -22,21 +22,15 @@ Retrieve a teamspace by its ID
 
 <div class="params-list">
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Pk.
-
-</ApiParam>
-
-<ApiParam name="slug" type="string" :required="true">
-
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-Teamspace ID
+The unique identifier for the teamspace.
 
 </ApiParam>
 
@@ -51,6 +45,7 @@ Teamspace ID
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -60,9 +55,9 @@ Teamspace ID
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -72,7 +67,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -82,15 +77,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 const data = await response.json();
 ```
 

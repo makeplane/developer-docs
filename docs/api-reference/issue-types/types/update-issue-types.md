@@ -1,20 +1,20 @@
 ---
 title: Update a work item type
-description: Update a work item type via Plane API. HTTP request format, parameters, scopes, and example responses for update a work item type.
-keywords: plane, plane api, rest api, api integration, issue types, types, update a work item type
+description: Update a work item type via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 ---
 
 # Update a work item type
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-item-types/{type_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-item-types/{type_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Update an issue type
+Updates an existing work item type by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Update an issue type
 
 <div class="params-list">
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Project ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier of the project.
 
 </ApiParam>
 
 <ApiParam name="type_id" type="string" :required="true">
 
-Type id.
+The unique identifier for the work item type.
 
 </ApiParam>
 
@@ -96,6 +96,7 @@ External id.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -105,7 +106,7 @@ External id.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -124,7 +125,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -140,22 +141,19 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-item-types/550e8400-e29b-41d4-a716-446655440001/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      description: "Example description",
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      external_source: "github",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "name": "Example Name",
+  "description": "Example description",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
+}),
+});
 const data = await response.json();
 ```
 
@@ -172,7 +170,9 @@ const data = await response.json();
   "name": "Example Name",
   "description": "Example description",
   "deleted_at": "2024-01-01T00:00:00Z",
-  "project_ids": ["550e8400-e29b-41d4-a716-446655440000"],
+  "project_ids": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
   "logo_props": "example-value",
   "is_epic": true,
   "is_default": true,

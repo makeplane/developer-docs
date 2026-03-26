@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, workspace invitations, cr
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/invitations/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/invitations/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Create a workspace invite
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -45,9 +45,9 @@ Email.
 
 <ApiParam name="role" type="integer" :required="false">
 
-- `20` - Admin
-- `15` - Member
-- `5` - Guest
+* `20` - Admin
+* `15` - Member
+* `5` - Guest
 
 </ApiParam>
 
@@ -61,6 +61,7 @@ Email.
 Workspace admin or owner permission required.
 
 </div>
+
 
 </div>
 
@@ -106,12 +107,12 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    email: "Example Name",
-    role: 20,
-  }),
+  "email": "Example Name",
+  "role": 20
+}),
 });
 const data = await response.json();
 ```

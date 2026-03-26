@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, estimates, update an esti
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/estimates/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/estimates/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,13 +24,13 @@ Update the estimate for a project. Only fields provided in the request will be u
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -87,7 +87,7 @@ External source identifier.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/estimates/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/estimates/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -103,7 +103,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/estimates/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/estimates/",
     headers={"X-API-Key": "your-api-key"},
     json={"description": "Updated story point scale"},
 )
@@ -115,7 +115,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/estimates/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/estimates/",
   {
     method: "PATCH",
     headers: {

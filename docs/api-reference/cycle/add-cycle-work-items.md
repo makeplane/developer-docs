@@ -1,20 +1,20 @@
 ---
 title: Add work items to cycle
-description: Add work items to cycle via Plane API. HTTP request format, parameters, scopes, and example responses for add work items to cycle.
-keywords: plane, plane api, rest api, api integration, cycle, add work items to cycle
+description: Create work items to cycle via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
 ---
 
 # Add work items to cycle
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/cycle-issues/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Assign multiple work items to a cycle. Automatically handles bulk creation and updates with activity tracking.
+Adds work items (issues) to a cycle
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Assign multiple work items to a cycle. Automatically handles bulk creation and u
 
 <div class="params-list">
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Cycle id.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier for the cycle.
 
 </ApiParam>
 
@@ -66,6 +66,7 @@ List of issue IDs to add to the cycle
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -75,7 +76,7 @@ List of issue IDs to add to the cycle
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/cycle-issues/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/cycle-issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -94,7 +95,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/cycle-issues/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/cycle-issues/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "issues": [
@@ -110,19 +111,19 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/cycles/550e8400-e29b-41d4-a716-446655440001/cycle-issues/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      issues: ["550e8400-e29b-41d4-a716-446655440000", "550e8400-e29b-41d4-a716-446655440000"],
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/cycle-issues/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "issues": [
+    "550e8400-e29b-41d4-a716-446655440000",
+    "550e8400-e29b-41d4-a716-446655440000"
+  ]
+}),
+});
 const data = await response.json();
 ```
 

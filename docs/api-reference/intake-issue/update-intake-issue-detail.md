@@ -1,20 +1,20 @@
 ---
 title: Update an intake work item
-description: Update an intake work item via Plane API. HTTP request format, parameters, scopes, and example responses for update an intake work item.
-keywords: plane, plane api, rest api, api integration, intake issue, update an intake work item
+description: Update an intake work item via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
 ---
 
 # Update an intake work item
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/intake-issues/{issue_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{issue_id}</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Modify an existing intake work item's properties or status for triage processing. Supports status changes like accept, reject, or mark as duplicate.
+Updates an existing intake work item by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Modify an existing intake work item's properties or status for triage processing
 
 <div class="params-list">
 
-<ApiParam name="issue_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Issue ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier of the work item
 
 </ApiParam>
 
@@ -51,11 +51,11 @@ Workspace slug
 
 <ApiParam name="status" type="integer" :required="false">
 
-- `-2` - Pending
-- `-1` - Rejected
-- `0` - Snoozed
-- `1` - Accepted
-- `2` - Duplicate
+* `-2` - Pending
+* `-1` - Rejected
+* `0` - Snoozed
+* `1` - Accepted
+* `2` - Duplicate
 
 </ApiParam>
 
@@ -100,6 +100,7 @@ Issue data to update in the intake issue
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -109,7 +110,7 @@ Issue data to update in the intake issue
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/550e8400-e29b-41d4-a716-446655440001/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -130,7 +131,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/550e8400-e29b-41d4-a716-446655440001/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid",
     headers={"X-API-Key": "your-api-key"},
     json={
       "status": 1,
@@ -148,24 +149,21 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/550e8400-e29b-41d4-a716-446655440001/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      status: 1,
-      issue: {
-        name: "Example Name",
-        description: "Example description",
-        priority: "high",
-      },
-    }),
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "status": 1,
+  "issue": {
+    "name": "Example Name",
+    "description": "Example description",
+    "priority": "high"
   }
-);
+}),
+});
 const data = await response.json();
 ```
 

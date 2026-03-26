@@ -1,20 +1,20 @@
 ---
 title: Update module details
-description: Update module details via Plane API. HTTP request format, parameters, scopes, and example responses for update module details.
-keywords: plane, plane api, rest api, api integration, module, update module details
+description: Update module details via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, modules, features
 ---
 
 # Update module details
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/modules/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Modify an existing module's properties like name, description, status, or timeline.
+Updates the details of a module
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Modify an existing module's properties like name, description, status, or timeli
 
 <div class="params-list">
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Module ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="module_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier for the module.
 
 </ApiParam>
 
@@ -75,12 +75,12 @@ Target date.
 
 <ApiParam name="status" type="string" :required="false">
 
-- `backlog` - Backlog
-- `planned` - Planned
-- `in-progress` - In Progress
-- `paused` - Paused
-- `completed` - Completed
-- `cancelled` - Cancelled
+* `backlog` - Backlog
+* `planned` - Planned
+* `in-progress` - In Progress
+* `paused` - Paused
+* `completed` - Completed
+* `cancelled` - Cancelled
 
 </ApiParam>
 
@@ -119,6 +119,7 @@ External id.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -128,7 +129,7 @@ External id.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -149,7 +150,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -167,24 +168,21 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/modules/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      description: "Example description",
-      start_date: "2024-01-01",
-      end_date: "2024-01-01",
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      external_source: "github",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "name": "Example Name",
+  "description": "Example description",
+  "start_date": "2024-01-01",
+  "end_date": "2024-01-01",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github"
+}),
+});
 const data = await response.json();
 ```
 

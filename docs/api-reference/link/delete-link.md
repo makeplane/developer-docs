@@ -1,20 +1,20 @@
 ---
 title: Delete a link
-description: Delete a link via Plane API. HTTP request format, parameters, scopes, and example responses for delete a link.
-keywords: plane, plane api, rest api, api integration, link, delete a link
+description: Remove a URL link from a work item via Plane API. Deletes the link reference without affecting the target URL. Returns 204 on success.
+keywords: plane api, delete link, remove link, work item link, issue link, rest api, api integration
 ---
 
 # Delete a link
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/work-items/{issue_id}/links/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/links/{link_id}</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently remove an external link from a work item.
+Permanently deletes a link from a work item. This action cannot be undone.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Permanently remove an external link from a work item.
 
 <div class="params-list">
 
-<ApiParam name="issue_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Issue ID
-
-</ApiParam>
-
-<ApiParam name="pk" type="string" :required="true">
-
-Link ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier for the work item.
+
+</ApiParam>
+
+<ApiParam name="link_id" type="string" :required="true">
+
+The unique identifier for the link.
 
 </ApiParam>
 
@@ -57,6 +57,7 @@ Workspace slug
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -66,9 +67,9 @@ Workspace slug
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -78,7 +79,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -88,15 +89,12 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/work-items/550e8400-e29b-41d4-a716-446655440001/links/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "DELETE",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}", {
+  method: "DELETE",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 console.log(response.status);
 ```
 

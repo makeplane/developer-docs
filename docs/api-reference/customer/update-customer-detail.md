@@ -1,20 +1,20 @@
 ---
 title: Update a customer
-description: Update a customer via Plane API. HTTP request format, parameters, scopes, and example responses for update a customer.
-keywords: plane, plane api, rest api, api integration, customer, update a customer
+description: Update a customer via Plane API. HTTP PATCH request format, editable fields, and example responses.
+keywords: plane, plane api, rest api, api integration, customers, crm, customer management
 ---
 
 # Update a customer
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/customers/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Update an existing customer with the provided fields.
+Updates an existing customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Update an existing customer with the provided fields.
 
 <div class="params-list">
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Pk.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="customer_id" type="string" :required="true">
 
-Slug.
+The unique identifier for the customer.
 
 </ApiParam>
 
@@ -150,6 +150,7 @@ Logo asset.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -159,7 +160,7 @@ Logo asset.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -190,7 +191,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -218,34 +219,31 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      description: "example-value",
-      description_html: "<p>Example content</p>",
-      description_stripped: "Example description",
-      email: "Example Name",
-      website_url: "https://example.com/resource",
-      logo_props: "example-value",
-      domain: "Example Name",
-      employees: 1,
-      stage: "Example Name",
-      contract_status: "Example Name",
-      revenue: "Example Name",
-      archived_at: "2024-01-01T00:00:00Z",
-      created_by: "550e8400-e29b-41d4-a716-446655440000",
-      updated_by: "550e8400-e29b-41d4-a716-446655440000",
-      logo_asset: "550e8400-e29b-41d4-a716-446655440000",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+  "name": "Example Name",
+  "description": "example-value",
+  "description_html": "<p>Example content</p>",
+  "description_stripped": "Example description",
+  "email": "Example Name",
+  "website_url": "https://example.com/resource",
+  "logo_props": "example-value",
+  "domain": "Example Name",
+  "employees": 1,
+  "stage": "Example Name",
+  "contract_status": "Example Name",
+  "revenue": "Example Name",
+  "archived_at": "2024-01-01T00:00:00Z",
+  "created_by": "550e8400-e29b-41d4-a716-446655440000",
+  "updated_by": "550e8400-e29b-41d4-a716-446655440000",
+  "logo_asset": "550e8400-e29b-41d4-a716-446655440000"
+}),
+});
 const data = await response.json();
 ```
 

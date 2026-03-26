@@ -1,20 +1,20 @@
 ---
 title: Create a wiki page
-description: Create a wiki page via Plane API. HTTP request format, parameters, scopes, and example responses for create a wiki page.
-keywords: plane, plane api, rest api, api integration, page, create a wiki page
+description: Create a wiki page via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, pages, documentation, notes
 ---
 
 # Create a wiki page
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/pages/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/pages/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Create a workspace page
+Creates a new page at the workspace level.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Create a workspace page
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -45,8 +45,8 @@ Name.
 
 <ApiParam name="access" type="integer" :required="false">
 
-- `0` - Public
-- `1` - Private
+* `0` - Public
+* `1` - Private
 
 </ApiParam>
 
@@ -109,6 +109,7 @@ Description html.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -169,20 +170,20 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    name: "Example Name",
-    access: 0,
-    color: "Example Name",
-    is_locked: true,
-    archived_at: "2024-01-01",
-    view_props: "example-value",
-    logo_props: "example-value",
-    external_id: "550e8400-e29b-41d4-a716-446655440000",
-    external_source: "github",
-    description_html: "<p>Example content</p>",
-  }),
+  "name": "Example Name",
+  "access": 0,
+  "color": "Example Name",
+  "is_locked": true,
+  "archived_at": "2024-01-01",
+  "view_props": "example-value",
+  "logo_props": "example-value",
+  "external_id": "550e8400-e29b-41d4-a716-446655440000",
+  "external_source": "github",
+  "description_html": "<p>Example content</p>"
+}),
 });
 const data = await response.json();
 ```

@@ -1,20 +1,20 @@
 ---
 title: List teamspace projects
-description: List teamspace projects via Plane API. HTTP request format, parameters, scopes, and example responses for list teamspace projects.
-keywords: plane, plane api, rest api, api integration, teamspace, list teamspace projects
+description: List teamspace projects via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane api, teamspace projects, team project management, team collaboration, workspace teams, rest api, api integration
 ---
 
 # List teamspace projects
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/teamspaces/{teamspace_id}/projects/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/projects/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-List all projects in a teamspace
+Gets all the projects associated with a teamspace
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ List all projects in a teamspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+
 
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-Teamspace ID
+
 
 </ApiParam>
 
@@ -45,6 +45,7 @@ Teamspace ID
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -54,9 +55,9 @@ Teamspace ID
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -66,7 +67,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -76,15 +77,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/550e8400-e29b-41d4-a716-446655440001/projects/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 const data = await response.json();
 ```
 

@@ -1,7 +1,7 @@
 ---
 title: Retrieve current user
-description: Retrieve current user via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve current user.
-keywords: plane, plane api, rest api, api integration, user, retrieve current user
+description: List retrieve current user via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane api, get current user, user profile, authenticated user, user details, rest api, api integration
 ---
 
 # Retrieve current user
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, user, retrieve current us
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieve the authenticated user's profile information including basic details.
+Retrieves information about the currently authenticated user.
 
 <div class="params-section">
 
@@ -23,6 +23,7 @@ Retrieve the authenticated user's profile information including basic details.
 `profile:read`
 
 </div>
+
 
 </div>
 
@@ -35,7 +36,7 @@ Retrieve the authenticated user's profile information including basic details.
 curl -X GET \
   "https://api.plane.so/api/v1/users/me/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -58,7 +59,7 @@ print(response.json())
 const response = await fetch("https://api.plane.so/api/v1/users/me/", {
   method: "GET",
   headers: {
-    "X-API-Key": "your-api-key",
+    "X-API-Key": "your-api-key"
   },
 });
 const data = await response.json();

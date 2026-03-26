@@ -32,11 +32,11 @@ Original filename of the asset
 
 MIME type of the file
 
-- `image/jpeg` - JPEG
-- `image/png` - PNG
-- `image/webp` - WebP
-- `image/jpg` - JPG
-- `image/gif` - GIF
+* `image/jpeg` - JPEG
+* `image/png` - PNG
+* `image/webp` - WebP
+* `image/jpg` - JPG
+* `image/gif` - GIF
 
 </ApiParam>
 
@@ -50,8 +50,8 @@ File size in bytes
 
 Type of user asset
 
-- `USER_AVATAR` - User Avatar
-- `USER_COVER` - User Cover
+* `USER_AVATAR` - User Avatar
+* `USER_COVER` - User Cover
 
 </ApiParam>
 
@@ -65,6 +65,7 @@ Type of user asset
 `assets:write`
 
 </div>
+
 
 </div>
 
@@ -114,14 +115,14 @@ const response = await fetch("https://api.plane.so/api/v1/assets/user-assets/", 
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    name: "Example Name",
-    type: "image/jpeg",
-    size: 1024000,
-    entity_type: "USER_AVATAR",
-  }),
+  "name": "Example Name",
+  "type": "image/jpeg",
+  "size": 1024000,
+  "entity_type": "USER_AVATAR"
+}),
 });
 const data = await response.json();
 ```

@@ -1,20 +1,20 @@
 ---
 title: Retrieve a sticky
-description: Retrieve a sticky via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a sticky.
-keywords: plane, plane api, rest api, api integration, sticky, retrieve a sticky
+description: Get retrieve a sticky details via Plane API. Retrieve complete information for a specific resource.
+keywords: plane api, get sticky detail, retrieve note, sticky note, rest api, api integration
 ---
 
 # Retrieve a sticky
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/stickies/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/stickies/{sticky_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieve a sticky by its ID
+Retrieves the details of an existing sticky by its ID.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Retrieve a sticky by its ID
 
 <div class="params-list">
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-A UUID string identifying this Sticky.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="sticky_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier for the sticky.
 
 </ApiParam>
 
@@ -45,6 +45,7 @@ Workspace slug
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -54,9 +55,9 @@ Workspace slug
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -66,7 +67,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -76,15 +77,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 const data = await response.json();
 ```
 

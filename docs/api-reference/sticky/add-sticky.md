@@ -1,20 +1,20 @@
 ---
 title: Create a sticky
-description: Create a sticky via Plane API. HTTP request format, parameters, scopes, and example responses for create a sticky.
-keywords: plane, plane api, rest api, api integration, sticky, create a sticky
+description: Create a sticky via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane api, create sticky, add note, sticky note, quick capture, rest api, api integration
 ---
 
 # Create a sticky
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/stickies/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/stickies/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Create a new sticky in the workspace
+Creates a new sticky note in a workspace.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Create a new sticky in the workspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -114,6 +114,7 @@ Updated by.
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -176,21 +177,21 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    deleted_at: "2024-01-01T00:00:00Z",
-    name: "Example Name",
-    description: "example-value",
-    description_html: "<p>Example content</p>",
-    description_stripped: "Example description",
-    logo_props: "example-value",
-    color: "Example Name",
-    background_color: "Example Name",
-    sort_order: 1,
-    created_by: "550e8400-e29b-41d4-a716-446655440000",
-    updated_by: "550e8400-e29b-41d4-a716-446655440000",
-  }),
+  "deleted_at": "2024-01-01T00:00:00Z",
+  "name": "Example Name",
+  "description": "example-value",
+  "description_html": "<p>Example content</p>",
+  "description_stripped": "Example description",
+  "logo_props": "example-value",
+  "color": "Example Name",
+  "background_color": "Example Name",
+  "sort_order": 1,
+  "created_by": "550e8400-e29b-41d4-a716-446655440000",
+  "updated_by": "550e8400-e29b-41d4-a716-446655440000"
+}),
 });
 const data = await response.json();
 ```

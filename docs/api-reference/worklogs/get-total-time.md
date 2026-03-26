@@ -1,20 +1,20 @@
 ---
 title: Get total time for each work item
-description: Get total time for each work item via Plane API. HTTP request format, parameters, scopes, and example responses for get total time for each work item.
-keywords: plane, plane api, rest api, api integration, worklogs, get total time for each work item
+description: List total time for each work item via Plane API. HTTP GET request with pagination, filtering, and query parameters.
+keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
 ---
 
 # Get total time for each work item
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/total-worklogs/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/total-worklogs/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Get project worklog summary
+Aggregates the worklogs and provides the total time spent on each issue in the project.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Get project worklog summary
 
 <div class="params-list">
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Project ID
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-Workspace slug
+The unique identifier of the project
 
 </ApiParam>
 
@@ -45,6 +45,7 @@ Workspace slug
 
 </div>
 
+
 </div>
 
 <div class="api-right">
@@ -54,9 +55,9 @@ Workspace slug
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/total-worklogs/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/total-worklogs/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -66,7 +67,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/total-worklogs/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/total-worklogs/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -76,15 +77,12 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/total-worklogs/",
-  {
-    method: "GET",
-    headers: {
-      "X-API-Key": "your-api-key",
-    },
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/total-worklogs/", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "your-api-key"
+  },
+});
 const data = await response.json();
 ```
 

@@ -17,6 +17,8 @@ Assets let you upload and manage files used across user profiles and workspaces,
 
 ### Attributes
 
+
+
 </div>
 <div class="api-right">
 

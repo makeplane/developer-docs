@@ -1,20 +1,20 @@
 ---
 title: Create an initiative
-description: Create an initiative via Plane API. HTTP request format, parameters, scopes, and example responses for create an initiative.
-keywords: plane, plane api, rest api, api integration, initiative, create an initiative
+description: Create an initiative via Plane API. HTTP POST request format, required fields, and example responses.
+keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
 ---
 
 # Create an initiative
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/initiatives/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/initiatives/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Create a new initiative in the workspace
+Creates a new initiative in a workspace.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Create a new initiative in the workspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -81,11 +81,11 @@ Logo props.
 
 <ApiParam name="state" type="string" :required="false">
 
-- `DRAFT` - Draft
-- `PLANNED` - Planned
-- `ACTIVE` - Active
-- `COMPLETED` - Completed
-- `CLOSED` - Closed
+* `DRAFT` - Draft
+* `PLANNED` - Planned
+* `ACTIVE` - Active
+* `COMPLETED` - Completed
+* `CLOSED` - Closed
 
 </ApiParam>
 
@@ -123,6 +123,7 @@ Lead.
 `initiatives:write`
 
 </div>
+
 
 </div>
 
@@ -188,22 +189,22 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
-    name: "Example Name",
-    description: "Example description",
-    description_html: "<p>Example content</p>",
-    description_stripped: "Example description",
-    start_date: "2024-01-01T00:00:00Z",
-    end_date: "2024-01-01T00:00:00Z",
-    logo_props: "example-value",
-    state: "DRAFT",
-    archived_at: "2024-01-01T00:00:00Z",
-    created_by: "550e8400-e29b-41d4-a716-446655440000",
-    updated_by: "550e8400-e29b-41d4-a716-446655440000",
-    lead: "550e8400-e29b-41d4-a716-446655440000",
-  }),
+  "name": "Example Name",
+  "description": "Example description",
+  "description_html": "<p>Example content</p>",
+  "description_stripped": "Example description",
+  "start_date": "2024-01-01T00:00:00Z",
+  "end_date": "2024-01-01T00:00:00Z",
+  "logo_props": "example-value",
+  "state": "DRAFT",
+  "archived_at": "2024-01-01T00:00:00Z",
+  "created_by": "550e8400-e29b-41d4-a716-446655440000",
+  "updated_by": "550e8400-e29b-41d4-a716-446655440000",
+  "lead": "550e8400-e29b-41d4-a716-446655440000"
+}),
 });
 const data = await response.json();
 ```
