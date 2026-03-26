@@ -18,7 +18,6 @@ Before you begin, make sure you have:
 
 - A running **Plane instance** (self-hosted or cloud) with workspace admin access
 - **Docker** and Docker Compose v2+ (for Docker deployment) _or_ **Kubernetes** v1.21+ with Helm v3+ (for Helm deployment)
-- A **public URL** where your MCP server will be reachable (e.g., `https://mcp.yourdomain.com`)
 
 ## Step 1: Create an OAuth application in Plane
 
@@ -27,7 +26,7 @@ The MCP server authenticates with Plane using OAuth 2.0. You need to register an
 1. Navigate to **Workspace Settings** → **Integrations**.
 
    ```text
-   https://app.plane.so/<workspace>/settings/integrations/
+   https://<your-plane-app-domain>/<workspace>/settings/integrations/
    ```
 
 2. Click **Build your own**.
