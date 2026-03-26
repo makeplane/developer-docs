@@ -58,6 +58,10 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
    These URLs allow Plane to verify and enable workspace connection with the Github App.
    ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
 
+   :::warning
+   Make sure to opt out of **Expire user authorization tokens** feature.
+   :::
+
 5. In the **Post installation** section, add the below **Setup URL**.
 
    ```bash
@@ -110,6 +114,9 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 
    These URLs allow Plane to verify and enable workspace connection with the Github App.
    ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
+   :::warning
+   Make sure to opt out of **Expire user authorization tokens** feature.
+   :::
 
 5. In the **Post installation** section, add the below **Setup URL**.
 
