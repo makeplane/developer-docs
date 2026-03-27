@@ -686,8 +686,13 @@ export default withMermaid(
                 collapsed: true,
                 items: [
                   { text: "Overview", link: "/api-reference/epics/overview" },
+                  { text: "Create Epic", link: "/api-reference/epics/create-epic" },
                   { text: "List Epics", link: "/api-reference/epics/list-epics" },
                   { text: "Get Epic", link: "/api-reference/epics/get-epic-detail" },
+                  { text: "Update Epic", link: "/api-reference/epics/update-epic" },
+                  { text: "Delete Epic", link: "/api-reference/epics/delete-epic" },
+                  { text: "Add Epic Work Items", link: "/api-reference/epics/add-epic-work-items" },
+                  { text: "List Epic Work Items", link: "/api-reference/epics/list-epic-work-items" },
                 ],
               },
               {

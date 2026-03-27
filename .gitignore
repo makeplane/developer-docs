@@ -1,6 +1,7 @@
 /coverage
 /src/client/shared.ts
 /src/node/shared.ts
+.cursor
 *.log
 *.tgz
 .DS_Store
