@@ -55,10 +55,10 @@ Consider these alternatives:
 
    ```bash
    # Download docker-compose.yml
-   curl -fsSL https://prime.plane.so/releases/<plane-version>/docker-compose.yml -o docker-compose.yml
+   curl -fsSL https://prime.plane.so/releases/<plane-version>/docker-compose-airgapped.yml -o docker-compose.yml
 
    # Download environment template
-   curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
+   curl -fsSL https://prime.plane.so/releases/<plane-version>/variables-airgapped.env -o plane.env
    ```
 
 3. **Configure environment variables**
