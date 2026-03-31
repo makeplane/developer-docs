@@ -1,7 +1,7 @@
 ---
 title: Add labels to initiative
-description: Create labels to initiative via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+description: Add labels to initiative via Plane API. HTTP request format, parameters, scopes, and example responses for add labels to initiative.
+keywords: plane, plane api, rest api, api integration, initiative, add labels to initiative
 ---
 
 # Add labels to initiative
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, labels, tags, categorizat
 <div class="api-two-column">
 <div class="api-left">
 
-Adds one or more labels to an initiative.
+Add labels to an initiative by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Adds one or more labels to an initiative.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="initiative_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the initiative.
 
 </ApiParam>
 
-<ApiParam name="initiative_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the initiative.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -60,7 +60,6 @@ Label ids.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -70,7 +69,7 @@ Label ids.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/labels/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/labels/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -88,7 +87,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/labels/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/labels/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "label_ids": [
@@ -103,7 +102,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/labels/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/labels/", {
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",

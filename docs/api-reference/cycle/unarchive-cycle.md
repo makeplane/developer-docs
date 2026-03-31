@@ -1,7 +1,7 @@
 ---
 title: Restore a cycle
-description: Restore a cycle API endpoint. Request format, parameters, and response examples for Plane REST API.
-keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+description: Restore a cycle via Plane API. HTTP request format, parameters, scopes, and example responses for restore a cycle.
+keywords: plane, plane api, rest api, api integration, cycle, restore a cycle
 ---
 
 # Restore a cycle
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, cycles, sprints, iteratio
 <div class="api-two-column">
 <div class="api-left">
 
-Restores an archived cycle back to the active cycles list.
+Restore an archived cycle to active status, making it available for regular use.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Restores an archived cycle back to the active cycles list.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the cycle.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the cycle.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -50,7 +50,6 @@ The unique identifier for the cycle.
 `projects.cycles:write`
 
 </div>
-
 
 </div>
 

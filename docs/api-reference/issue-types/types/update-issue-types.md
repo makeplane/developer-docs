@@ -1,7 +1,7 @@
 ---
 title: Update a work item type
-description: Update a work item type via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Update a work item type via Plane API. HTTP request format, parameters, scopes, and example responses for update a work item type.
+keywords: plane, plane api, rest api, api integration, issue types, types, update a work item type
 ---
 
 # Update a work item type
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing work item type by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Update an issue type
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Updates an existing work item type by setting the values of the parameters passe
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
 
 </ApiParam>
 
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ApiParam>
+
 <ApiParam name="type_id" type="string" :required="true">
 
-The unique identifier for the work item type.
+The unique identifier of the work item type.
 
 </ApiParam>
 
@@ -96,7 +96,6 @@ External id.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -106,7 +105,7 @@ External id.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/type-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -125,7 +124,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/type-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -141,7 +140,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/{type_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/type-uuid/", {
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",

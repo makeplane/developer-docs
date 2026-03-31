@@ -1,20 +1,20 @@
 ---
 title: Retrieve a module
-description: Get retrieve a module details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, modules, features
+description: Retrieve a module via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a module.
+keywords: plane, plane api, rest api, api integration, module, retrieve a module
 ---
 
 # Retrieve a module
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{module_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/modules/{resource_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing module by its ID.
+Retrieve details of a specific module.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Retrieves the details of an existing module by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="resource_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the resource.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="module_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the module.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -51,7 +51,6 @@ The unique identifier for the module.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -61,7 +60,7 @@ The unique identifier for the module.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/resource-id-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -73,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/resource-id-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -83,7 +82,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/module-uuid/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/resource-id-uuid/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

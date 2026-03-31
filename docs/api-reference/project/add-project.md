@@ -1,7 +1,7 @@
 ---
 title: Create a project
-description: Create a project via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, projects, project management
+description: Create a project via Plane API. HTTP request format, parameters, scopes, and example responses for create a project.
+keywords: plane, plane api, rest api, api integration, project, create a project
 ---
 
 # Create a project
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, projects, project managem
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new project in a workspace.
+Create a new project in the workspace with default states and member assignments.
 
 <div class="params-section">
 
@@ -605,7 +605,6 @@ Is time tracking enabled.
 `projects:write`
 
 </div>
-
 
 </div>
 

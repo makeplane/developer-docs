@@ -1,7 +1,7 @@
 ---
 title: Create an initiative label
-description: Create an initiative label via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+description: Create an initiative label via Plane API. HTTP request format, parameters, scopes, and example responses for create an initiative label.
+keywords: plane, plane api, rest api, api integration, initiative, create an initiative label
 ---
 
 # Create an initiative label
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, labels, tags, categorizat
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new label for categorizing initiatives in a workspace.
+Create a new initiative label in the workspace
 
 <div class="params-section">
 
@@ -71,7 +71,6 @@ Sort order.
 `initiatives.labels:write`
 
 </div>
-
 
 </div>
 

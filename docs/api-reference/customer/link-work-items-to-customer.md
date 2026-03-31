@@ -1,20 +1,20 @@
 ---
 title: Link work items to customer
-description: Link work items to customer API endpoint. Request format, parameters, and response examples for Plane REST API.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, customers, crm, customer management
+description: Link work items to customer via Plane API. HTTP request format, parameters, scopes, and example responses for link work items to customer.
+keywords: plane, plane api, rest api, api integration, customer, link work items to customer
 ---
 
 # Link work items to customer
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/work-items/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/issues/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Links one or more work items to a customer.
+Link one or more issues to a customer, optionally within a specific customer request.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Links one or more work items to a customer.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="customer_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the customer.
 
 </ApiParam>
 
-<ApiParam name="customer_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the customer.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -60,7 +60,6 @@ Array of issue IDs to link
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -70,7 +69,7 @@ Array of issue IDs to link
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/issues/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -88,7 +87,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/issues/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "issue_ids": [
@@ -103,7 +102,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/work-items/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/issues/", {
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",

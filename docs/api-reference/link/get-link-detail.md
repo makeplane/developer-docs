@@ -1,20 +1,20 @@
 ---
 title: Retrieve a link
-description: Get retrieve a link details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane api, get link detail, retrieve link, work item link, issue link, rest api, api integration
+description: Retrieve a link via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a link.
+keywords: plane, plane api, rest api, api integration, link, retrieve a link
 ---
 
 # Retrieve a link
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/links/{link_id}</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/links/{resource_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing link by its ID.
+Retrieve details of a specific work item link.
 
 <div class="params-section">
 
@@ -22,9 +22,15 @@ Retrieves the details of an existing link by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the work item.
+
+</ApiParam>
+
+<ApiParam name="resource_id" type="string" :required="true">
+
+The unique identifier of the resource.
 
 </ApiParam>
 
@@ -34,15 +40,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the work item.
-
-</ApiParam>
-
-<ApiParam name="link_id" type="string" :required="true">
-
-The unique identifier for the link.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -90,7 +90,6 @@ Number of results per page (default: 20, max: 100)
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -100,7 +99,7 @@ Number of results per page (default: 20, max: 100)
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}?cursor=20:1:0&expand=assignees" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/resource-id-uuid/?cursor=20:1:0&expand=assignees" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -112,7 +111,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}?cursor=20:1:0&expand=assignees",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/resource-id-uuid/?cursor=20:1:0&expand=assignees",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -122,7 +121,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/{link_id}?cursor=20:1:0&expand=assignees", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/links/resource-id-uuid/?cursor=20:1:0&expand=assignees", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

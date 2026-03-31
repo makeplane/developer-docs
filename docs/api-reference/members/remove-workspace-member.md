@@ -1,20 +1,20 @@
 ---
 title: Remove workspace member
-description: Remove a member from a workspace via Plane API. HTTP POST request to deactivate users across projects and teamspaces.
-keywords: plane api, remove member, delete member, workspace members, user management, rest api, api integration
+description: Remove workspace member via Plane API. HTTP request format, parameters, scopes, and example responses for remove workspace member.
+keywords: plane, plane api, rest api, api integration, members, remove workspace member
 ---
 
 # Remove workspace member
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/members/remove/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/members/remove/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Removes a member from a workspace. This deactivates them across all projects, removes them from teamspaces and pages, and optionally reduces seat count.
+Remove a member from the workspace, deactivate them from all projects, and reduce the seat count.
 
 <div class="params-section">
 
@@ -38,7 +38,6 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 `workspaces.members:write`
 
 </div>
-
 
 </div>
 

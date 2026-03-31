@@ -1,7 +1,7 @@
 ---
 title: Create a module
-description: Create a module via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, modules, features
+description: Create a module via Plane API. HTTP request format, parameters, scopes, and example responses for create a module.
+keywords: plane, plane api, rest api, api integration, module, create a module
 ---
 
 # Create a module
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, modules, features
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new module in a project.
+Create a new project module with specified name, description, and timeline.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new module in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -112,7 +112,6 @@ External id.
 `projects.modules:write`
 
 </div>
-
 
 </div>
 

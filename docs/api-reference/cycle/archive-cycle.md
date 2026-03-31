@@ -1,20 +1,20 @@
 ---
 title: Archive a cycle
-description: Archive a cycle API endpoint. Request format, parameters, and response examples for Plane REST API.
-keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+description: Archive a cycle via Plane API. HTTP request format, parameters, scopes, and example responses for archive a cycle.
+keywords: plane, plane api, rest api, api integration, cycle, archive a cycle
 ---
 
 # Archive a cycle
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/archived-cycles/{cycle_id}/archive/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/cycles/{cycle_id}/archive/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Archives a cycle, while preserving its data.
+Move a completed cycle to archived status for historical tracking. Only cycles that have ended can be archived.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Archives a cycle, while preserving its data.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the cycle.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the cycle.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -51,7 +51,6 @@ The unique identifier for the cycle.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -61,7 +60,7 @@ The unique identifier for the cycle.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/archive/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/archive/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -73,7 +72,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/archive/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/archive/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -83,7 +82,7 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/archived-cycles/cycle-uuid/archive/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/cycles/cycle-uuid/archive/", {
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key"

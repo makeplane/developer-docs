@@ -1,26 +1,32 @@
 ---
 title: Delete a teamspace
-description: Delete a teamspace via Plane API. Removes the team grouping and disassociates its members and projects. Returns 204 on success.
-keywords: plane api, delete teamspace, remove team, team management, workspace teams, rest api, api integration
+description: Delete a teamspace via Plane API. HTTP request format, parameters, scopes, and example responses for delete a teamspace.
+keywords: plane, plane api, rest api, api integration, teamspace, delete a teamspace
 ---
 
 # Delete a teamspace
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{teamspace_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/teamspaces/{resource_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Deletes a teamspace
+Delete a teamspace by its ID
 
 <div class="params-section">
 
 ### Path Parameters
 
 <div class="params-list">
+
+<ApiParam name="resource_id" type="string" :required="true">
+
+The unique identifier of the resource.
+
+</ApiParam>
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
@@ -30,7 +36,7 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-The unique identifier for the teamspace.
+The unique identifier of the teamspace.
 
 </ApiParam>
 
@@ -45,7 +51,6 @@ The unique identifier for the teamspace.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -55,7 +60,7 @@ The unique identifier for the teamspace.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/resource-id-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -67,7 +72,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/resource-id-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -77,7 +82,7 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/resource-id-uuid/", {
   method: "DELETE",
   headers: {
     "X-API-Key": "your-api-key"

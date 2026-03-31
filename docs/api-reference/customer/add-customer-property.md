@@ -1,7 +1,7 @@
 ---
 title: Create a customer property
-description: Create a customer property via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: Create a customer property via Plane API. HTTP request format, parameters, scopes, and example responses for create a customer property.
+keywords: plane, plane api, rest api, api integration, customer, create a customer property
 ---
 
 # Create a customer property
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, customers, crm, customer 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new customer property definition in a workspace.
+Create a new customer property in the specified workspace.
 
 <div class="params-section">
 
@@ -152,7 +152,6 @@ Updated by.
 `customers.properties:write`
 
 </div>
-
 
 </div>
 

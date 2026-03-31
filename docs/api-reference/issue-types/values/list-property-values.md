@@ -1,7 +1,7 @@
 ---
 title: List all custom property values
-description: List all custom property values via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: List all custom property values via Plane API. HTTP request format, parameters, scopes, and example responses for list all custom property values.
+keywords: plane, plane api, rest api, api integration, issue types, values, list all custom property values
 ---
 
 # List all custom property values
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all values for a custom property on a work item.
+Retrieve the property value(s) for a specific work item property. Returns a single value for non-multi properties, or a list for multi-value properties.
 
 <div class="params-section">
 
@@ -22,27 +22,27 @@ Returns a list of all values for a custom property on a work item.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the work item.
+The unique identifier of the property.
 
 </ApiParam>
 
-<ApiParam name="property_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the custom property.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ApiParam>
+
+<ApiParam name="work_item_id" type="string" :required="true">
+
+The unique identifier of the work item.
 
 </ApiParam>
 
@@ -57,7 +57,6 @@ The unique identifier for the custom property.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -67,7 +66,7 @@ The unique identifier for the custom property.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -79,7 +78,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -89,7 +88,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/{property_id}/values/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

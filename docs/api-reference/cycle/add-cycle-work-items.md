@@ -1,7 +1,7 @@
 ---
 title: Add work items to cycle
-description: Create work items to cycle via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
+description: Add work items to cycle via Plane API. HTTP request format, parameters, scopes, and example responses for add work items to cycle.
+keywords: plane, plane api, rest api, api integration, cycle, add work items to cycle
 ---
 
 # Add work items to cycle
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Adds work items (issues) to a cycle
+Assign multiple work items to a cycle. Automatically handles bulk creation and updates with activity tracking.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Adds work items (issues) to a cycle
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the cycle.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the cycle.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -65,7 +65,6 @@ List of issue IDs to add to the cycle
 `projects.cycles:write`
 
 </div>
-
 
 </div>
 

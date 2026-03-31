@@ -1,7 +1,7 @@
 ---
 title: Delete dropdown options
-description: Delete dropdown options via Plane API. HTTP DELETE request for removing resources.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Delete dropdown options via Plane API. HTTP request format, parameters, scopes, and example responses for delete dropdown options.
+keywords: plane, plane api, rest api, api integration, issue types, options, delete dropdown options
 ---
 
 # Delete dropdown options
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Enables you to remove specific options from a dropdown custom property.
+Delete an issue property option
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Enables you to remove specific options from a dropdown custom property.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="option_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the option.
 
 </ApiParam>
 
@@ -36,13 +36,13 @@ The unique identifier of the project.
 
 <ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the custom property.
+The unique identifier of the property.
 
 </ApiParam>
 
-<ApiParam name="option_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the option.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -57,7 +57,6 @@ The unique identifier for the option.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -67,7 +66,7 @@ The unique identifier for the option.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -79,7 +78,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -89,7 +88,7 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/", {
   method: "DELETE",
   headers: {
     "X-API-Key": "your-api-key"

@@ -1,7 +1,7 @@
 ---
 title: Remove members from teamspace
-description: Delete members from teamspace via Plane API. HTTP DELETE request for removing resources.
-keywords: plane api, remove teamspace members, team management, workspace teams, rest api, api integration
+description: Remove members from teamspace via Plane API. HTTP request format, parameters, scopes, and example responses for remove members from teamspace.
+keywords: plane, plane api, rest api, api integration, teamspace, remove members from teamspace
 ---
 
 # Remove members from teamspace
@@ -14,7 +14,7 @@ keywords: plane api, remove teamspace members, team management, workspace teams,
 <div class="api-two-column">
 <div class="api-left">
 
-Removes members from a teamspace
+Delete members from a teamspace by its ID
 
 <div class="params-section">
 
@@ -30,7 +30,7 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-The unique identifier for the teamspace.
+The unique identifier of the teamspace.
 
 </ApiParam>
 
@@ -45,7 +45,6 @@ The unique identifier for the teamspace.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -55,7 +54,7 @@ The unique identifier for the teamspace.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/teamspace-uuid/members/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -67,7 +66,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/teamspace-uuid/members/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -77,7 +76,7 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/members/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/teamspace-uuid/members/", {
   method: "DELETE",
   headers: {
     "X-API-Key": "your-api-key"

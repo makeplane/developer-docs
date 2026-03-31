@@ -1,7 +1,7 @@
 ---
 title: List all states
-description: List all states via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, states, workflow, status
+description: List all states via Plane API. HTTP request format, parameters, scopes, and example responses for list all states.
+keywords: plane, plane api, rest api, api integration, state, list all states
 ---
 
 # List all states
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, states, workflow, status
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all states in a project. States are returned in sequence order within their state groups.
+Retrieve all workflow states for a project.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Returns a list of all states in a project. States are returned in sequence order
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -77,7 +77,6 @@ Number of results per page (default: 20, max: 100)
 `projects.states:read`
 
 </div>
-
 
 </div>
 

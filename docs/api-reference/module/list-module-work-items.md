@@ -1,7 +1,7 @@
 ---
 title: List all work items in a module
-description: List all work items in a module via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, modules, features
+description: List all work items in a module via Plane API. HTTP request format, parameters, scopes, and example responses for list all work items in a module.
+keywords: plane, plane api, rest api, api integration, module, list all work items in a module
 ---
 
 # List all work items in a module
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all work items in a module.
+Retrieve all work items assigned to a module with detailed information.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Returns a list of all work items in a module.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="module_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the module.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="module_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the module.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -89,7 +89,6 @@ Number of results per page (default: 20, max: 100)
 `projects.modules:read`
 
 </div>
-
 
 </div>
 

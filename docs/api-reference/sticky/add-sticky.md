@@ -1,7 +1,7 @@
 ---
 title: Create a sticky
-description: Create a sticky via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane api, create sticky, add note, sticky note, quick capture, rest api, api integration
+description: Create a sticky via Plane API. HTTP request format, parameters, scopes, and example responses for create a sticky.
+keywords: plane, plane api, rest api, api integration, sticky, create a sticky
 ---
 
 # Create a sticky
@@ -14,7 +14,7 @@ keywords: plane api, create sticky, add note, sticky note, quick capture, rest a
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new sticky note in a workspace.
+Create a new sticky in the workspace
 
 <div class="params-section">
 
@@ -113,7 +113,6 @@ Updated by.
 `stickies:write`
 
 </div>
-
 
 </div>
 

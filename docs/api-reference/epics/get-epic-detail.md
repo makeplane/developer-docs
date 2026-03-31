@@ -1,20 +1,20 @@
 ---
 title: Retrieve an epic
-description: Get retrieve an epic details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, epics, features, stories
+description: Retrieve an epic via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve an epic.
+keywords: plane, plane api, rest api, api integration, epics, retrieve an epic
 ---
 
 # Retrieve an epic
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/epics/{epic_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/epics/{resource_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing epic by its ID.
+Retrieve an epic by id
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Retrieves the details of an existing epic by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="resource_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the resource.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier for the project.
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="epic_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the epic.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -66,7 +66,6 @@ Comma-separated list of fields to include in response
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -76,7 +75,7 @@ Comma-separated list of fields to include in response
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/epics/{epic_id}/?fields=id,name,description" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/epics/resource-id-uuid/?fields=id,name,description" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -88,7 +87,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/epics/{epic_id}/?fields=id,name,description",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/epics/resource-id-uuid/?fields=id,name,description",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -98,7 +97,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/epics/{epic_id}/?fields=id,name,description", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/epics/resource-id-uuid/?fields=id,name,description", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

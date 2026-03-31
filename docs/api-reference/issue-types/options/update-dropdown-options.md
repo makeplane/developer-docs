@@ -1,7 +1,7 @@
 ---
 title: Update dropdown options
-description: Update dropdown options via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Update dropdown options via Plane API. HTTP request format, parameters, scopes, and example responses for update dropdown options.
+keywords: plane, plane api, rest api, api integration, issue types, options, update dropdown options
 ---
 
 # Update dropdown options
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Lets you modify existing options within a dropdown property.
+Update an issue property option
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Lets you modify existing options within a dropdown property.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="option_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the option.
 
 </ApiParam>
 
@@ -36,13 +36,13 @@ The unique identifier of the project.
 
 <ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the custom property.
+The unique identifier of the property.
 
 </ApiParam>
 
-<ApiParam name="option_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the option.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -108,7 +108,6 @@ Parent.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -118,7 +117,7 @@ Parent.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -137,7 +136,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -153,7 +152,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/", {
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",

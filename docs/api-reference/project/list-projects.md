@@ -1,7 +1,7 @@
 ---
 title: List all projects
-description: List all projects via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, projects, project management
+description: List all projects via Plane API. HTTP request format, parameters, scopes, and example responses for list all projects.
+keywords: plane, plane api, rest api, api integration, project, list all projects
 ---
 
 # List all projects
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, projects, project managem
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all projects in a workspace. Projects are returned in order of creation, with the most recently created projects appearing first.
+Retrieve all projects in a workspace or get details of a specific project.
 
 <div class="params-section">
 
@@ -77,7 +77,6 @@ Number of results per page (default: 20, max: 100)
 `projects:read`
 
 </div>
-
 
 </div>
 

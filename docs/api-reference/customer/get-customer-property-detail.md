@@ -1,7 +1,7 @@
 ---
 title: Retrieve a customer property
-description: Get retrieve a customer property details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: Retrieve a customer property via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a customer property.
+keywords: plane, plane api, rest api, api integration, customer, retrieve a customer property
 ---
 
 # Retrieve a customer property
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, customers, crm, customer 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing customer property definition by its ID.
+Retrieve a specific customer property by ID.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Retrieves the details of an existing customer property definition by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="resource_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the resource.
 
 </ApiParam>
 
-<ApiParam name="property_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the customer property.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -45,7 +45,6 @@ The unique identifier for the customer property.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -55,7 +54,7 @@ The unique identifier for the customer property.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/{property_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/property-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -67,7 +66,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/{property_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/property-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -77,7 +76,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/{property_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/property-uuid/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

@@ -1,7 +1,7 @@
 ---
 title: List all customer properties
-description: List all customer properties via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: List all customer properties via Plane API. HTTP request format, parameters, scopes, and example responses for list all customer properties.
+keywords: plane, plane api, rest api, api integration, customer, list all customer properties
 ---
 
 # List all customer properties
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, customers, crm, customer 
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all customer property definitions in a workspace.
+List all customer properties in a workspace.
 
 <div class="params-section">
 
@@ -38,7 +38,6 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 `customers.properties:read`
 
 </div>
-
 
 </div>
 

@@ -1,7 +1,7 @@
 ---
 title: List all teamspaces
-description: List all teamspaces via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane api, list teamspaces, get all teams, team management, workspace teams, rest api, api integration
+description: List all teamspaces via Plane API. HTTP request format, parameters, scopes, and example responses for list all teamspaces.
+keywords: plane, plane api, rest api, api integration, teamspace, list all teamspaces
 ---
 
 # List all teamspaces
@@ -14,7 +14,7 @@ keywords: plane api, list teamspaces, get all teams, team management, workspace 
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all teamspaces in a workspace.
+List all teamspaces in the workspace
 
 <div class="params-section">
 
@@ -59,7 +59,6 @@ Number of results per page (default: 20, max: 100)
 `teamspaces:read`
 
 </div>
-
 
 </div>
 

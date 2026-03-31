@@ -1,7 +1,7 @@
 ---
 title: List all initiatives
-description: List all initiatives via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+description: List all initiatives via Plane API. HTTP request format, parameters, scopes, and example responses for list all initiatives.
+keywords: plane, plane api, rest api, api integration, initiative, list all initiatives
 ---
 
 # List all initiatives
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, initiatives, roadmap, pla
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all initiatives in a workspace.
+List all initiatives in the workspace
 
 <div class="params-section">
 
@@ -59,7 +59,6 @@ Number of results per page (default: 20, max: 100)
 `initiatives:read`
 
 </div>
-
 
 </div>
 

@@ -1,7 +1,7 @@
 ---
 title: Create an initiative
-description: Create an initiative via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+description: Create an initiative via Plane API. HTTP request format, parameters, scopes, and example responses for create an initiative.
+keywords: plane, plane api, rest api, api integration, initiative, create an initiative
 ---
 
 # Create an initiative
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, initiatives, roadmap, pla
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new initiative in a workspace.
+Create a new initiative in the workspace
 
 <div class="params-section">
 
@@ -123,7 +123,6 @@ Lead.
 `initiatives:write`
 
 </div>
-
 
 </div>
 

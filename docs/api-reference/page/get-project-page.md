@@ -1,7 +1,7 @@
 ---
 title: Retrieve a project page
-description: List retrieve a project page via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, projects, project management, pages, documentation, notes
+description: Retrieve a project page via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a project page.
+keywords: plane, plane api, rest api, api integration, page, retrieve a project page
 ---
 
 # Retrieve a project page
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, projects, project managem
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing project page by its ID.
+Get a project page by ID
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Retrieves the details of an existing project page by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="page_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the page.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier for the project.
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="page_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the page.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -50,7 +50,6 @@ The unique identifier for the page.
 `projects.pages:read`
 
 </div>
-
 
 </div>
 

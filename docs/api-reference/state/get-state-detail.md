@@ -1,7 +1,7 @@
 ---
 title: Retrieve a state
-description: Get retrieve a state details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, states, workflow, status
+description: Retrieve a state via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a state.
+keywords: plane, plane api, rest api, api integration, state, retrieve a state
 ---
 
 # Retrieve a state
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, states, workflow, status
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing state by its ID.
+Retrieve details of a specific state.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Retrieves the details of an existing state by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
 
 </ApiParam>
 
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ApiParam>
+
 <ApiParam name="state_id" type="string" :required="true">
 
-The unique identifier for the state.
+The unique identifier of the state.
 
 </ApiParam>
 
@@ -50,7 +50,6 @@ The unique identifier for the state.
 `projects.states:read`
 
 </div>
-
 
 </div>
 

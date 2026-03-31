@@ -1,7 +1,7 @@
 ---
 title: Retrieve an initiative
-description: Get retrieve an initiative details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, initiatives, roadmap, planning
+description: Retrieve an initiative via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve an initiative.
+keywords: plane, plane api, rest api, api integration, initiative, retrieve an initiative
 ---
 
 # Retrieve an initiative
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, initiatives, roadmap, pla
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing initiative by its ID.
+Retrieve an initiative by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,21 @@ Retrieves the details of an existing initiative by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="initiative_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the initiative.
 
 </ApiParam>
 
 <ApiParam name="initiative_id" type="string" :required="true">
 
-The unique identifier for the initiative.
+The unique identifier of the initiative.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -45,7 +51,6 @@ The unique identifier for the initiative.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -55,7 +60,7 @@ The unique identifier for the initiative.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -67,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -77,7 +82,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/{initiative_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

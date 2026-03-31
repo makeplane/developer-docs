@@ -1,7 +1,7 @@
 ---
 title: Create a work item type
-description: Create a work item type via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Create a work item type via Plane API. HTTP request format, parameters, scopes, and example responses for create a work item type.
+keywords: plane, plane api, rest api, api integration, issue types, types, create a work item type
 ---
 
 # Create a work item type
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new work item type in a project.
+Create a new issue type for a project
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new work item type in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -89,7 +89,6 @@ External id.
 `projects.work_item_types:write`
 
 </div>
-
 
 </div>
 

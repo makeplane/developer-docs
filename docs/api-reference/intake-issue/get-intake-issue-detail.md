@@ -1,20 +1,20 @@
 ---
 title: Retrieve an intake work item
-description: Get retrieve an intake work item details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
+description: Retrieve an intake work item via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve an intake work item.
+keywords: plane, plane api, rest api, api integration, intake issue, retrieve an intake work item
 ---
 
 # Retrieve an intake work item
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{issue_id}</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{work_item_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing intake work item by its ID.
+Retrieve details of a specific intake work item.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Retrieves the details of an existing intake work item by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the work item.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier of the work item
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -51,7 +51,6 @@ The unique identifier of the work item
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -61,7 +60,7 @@ The unique identifier of the work item
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -73,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -83,7 +82,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

@@ -1,7 +1,7 @@
 ---
 title: Create a wiki page
-description: Create a wiki page via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, pages, documentation, notes
+description: Create a wiki page via Plane API. HTTP request format, parameters, scopes, and example responses for create a wiki page.
+keywords: plane, plane api, rest api, api integration, page, create a wiki page
 ---
 
 # Create a wiki page
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, pages, documentation, not
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new page at the workspace level.
+Create a workspace page
 
 <div class="params-section">
 
@@ -108,7 +108,6 @@ Description html.
 `wiki.pages:write`
 
 </div>
-
 
 </div>
 

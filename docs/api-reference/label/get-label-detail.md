@@ -1,20 +1,20 @@
 ---
 title: Retrieve a label
-description: Get retrieve a label details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+description: Retrieve a label via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a label.
+keywords: plane, plane api, rest api, api integration, label, retrieve a label
 ---
 
 # Retrieve a label
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/labels/{label_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing label by its ID.
+Retrieve details of a specific label.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Retrieves the details of an existing label by its ID.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="label_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the label.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="label_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the label.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -51,7 +51,6 @@ The unique identifier for the label.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -61,7 +60,7 @@ The unique identifier for the label.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -73,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -83,7 +82,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/labels/label-uuid/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

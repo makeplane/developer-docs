@@ -1,7 +1,7 @@
 ---
 title: Create an intake work item
-description: Create an intake work item via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
+description: Create an intake work item via Plane API. HTTP request format, parameters, scopes, and example responses for create an intake work item.
+keywords: plane, plane api, rest api, api integration, intake issue, create an intake work item
 ---
 
 # Create an intake work item
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new intake work item in a project.
+Submit a new work item to the project's intake queue for review and triage. Automatically creates the work item with default triage state and tracks activity.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new intake work item in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -59,7 +59,6 @@ Issue data for the intake issue
 `projects.intakes:write`
 
 </div>
-
 
 </div>
 

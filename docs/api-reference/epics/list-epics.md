@@ -1,7 +1,7 @@
 ---
 title: List all epics
-description: List all epics via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, epics, features, stories
+description: List all epics via Plane API. HTTP request format, parameters, scopes, and example responses for list all epics.
+keywords: plane, plane api, rest api, api integration, epics, list all epics
 ---
 
 # List all epics
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, epics, features, stories
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all epics in a project.
+List epics
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Returns a list of all epics in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the project.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -65,7 +65,6 @@ Number of results per page (default: 20, max: 100)
 `projects.epics:read`
 
 </div>
-
 
 </div>
 

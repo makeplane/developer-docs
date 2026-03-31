@@ -21,13 +21,16 @@ This endpoint enables LLMs and MCP integrations to understand what fields are av
 when creating/updating work items.
 
 **Standard fields** are always included:
+
 - name, description_html, priority, state_id, assignee_ids, label_ids, start_date, target_date, parent_id
 
 **Custom fields** are included when:
+
 - ISSUE_TYPES feature is enabled AND
 - A type_id is provided or a default type exists for the project
 
 **Options behavior:**
+
 - state_id options are always included
 - priority options are always included
 - assignee_ids and label_ids options require `?include=members,labels`
@@ -187,6 +190,7 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
+
 
 </div>
 

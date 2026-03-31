@@ -1,7 +1,7 @@
 ---
 title: List teamspace projects
-description: List teamspace projects via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane api, teamspace projects, team project management, team collaboration, workspace teams, rest api, api integration
+description: List teamspace projects via Plane API. HTTP request format, parameters, scopes, and example responses for list teamspace projects.
+keywords: plane, plane api, rest api, api integration, teamspace, list teamspace projects
 ---
 
 # List teamspace projects
@@ -14,7 +14,7 @@ keywords: plane api, teamspace projects, team project management, team collabora
 <div class="api-two-column">
 <div class="api-left">
 
-Gets all the projects associated with a teamspace
+List all projects in a teamspace
 
 <div class="params-section">
 
@@ -24,13 +24,13 @@ Gets all the projects associated with a teamspace
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
-
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
 <ApiParam name="teamspace_id" type="string" :required="true">
 
-
+The unique identifier of the teamspace.
 
 </ApiParam>
 
@@ -45,7 +45,6 @@ Gets all the projects associated with a teamspace
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -55,7 +54,7 @@ Gets all the projects associated with a teamspace
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/teamspace-uuid/projects/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -67,7 +66,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/teamspace-uuid/projects/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -77,7 +76,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/{teamspace_id}/projects/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/teamspace-uuid/projects/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

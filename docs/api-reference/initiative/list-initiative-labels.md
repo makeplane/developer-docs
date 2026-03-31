@@ -1,7 +1,7 @@
 ---
 title: List all initiative labels
-description: List all initiative labels via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+description: List all initiative labels via Plane API. HTTP request format, parameters, scopes, and example responses for list all initiative labels.
+keywords: plane, plane api, rest api, api integration, initiative, list all initiative labels
 ---
 
 # List all initiative labels
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, labels, tags, categorizat
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all initiative labels in a workspace.
+List all initiative labels in the workspace
 
 <div class="params-section">
 
@@ -59,7 +59,6 @@ Number of results per page (default: 20, max: 100)
 `initiatives.labels:read`
 
 </div>
-
 
 </div>
 

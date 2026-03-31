@@ -1,7 +1,7 @@
 ---
 title: List all stickies
-description: List all stickies via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane api, list stickies, get all notes, sticky notes, quick notes, rest api, api integration
+description: List all stickies via Plane API. HTTP request format, parameters, scopes, and example responses for list all stickies.
+keywords: plane, plane api, rest api, api integration, sticky, list all stickies
 ---
 
 # List all stickies
@@ -14,7 +14,7 @@ keywords: plane api, list stickies, get all notes, sticky notes, quick notes, re
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all stickies in a workspace.
+List all stickies in the workspace
 
 <div class="params-section">
 
@@ -38,7 +38,6 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 `stickies:read`
 
 </div>
-
 
 </div>
 

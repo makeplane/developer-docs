@@ -1,7 +1,7 @@
 ---
 title: Create a state
-description: Create a state via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, states, workflow, status
+description: Create a state via Plane API. HTTP request format, parameters, scopes, and example responses for create a state.
+keywords: plane, plane api, rest api, api integration, state, create a state
 ---
 
 # Create a state
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, states, workflow, status
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new state in a project.
+Create a new workflow state for a project with specified name, color, and group.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new state in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -112,7 +112,6 @@ External id.
 `projects.states:write`
 
 </div>
-
 
 </div>
 

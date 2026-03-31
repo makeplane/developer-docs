@@ -1,7 +1,7 @@
 ---
 title: Delete an initiative label
-description: Delete an initiative label via Plane API. HTTP DELETE request for removing resources.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+description: Delete an initiative label via Plane API. HTTP request format, parameters, scopes, and example responses for delete an initiative label.
+keywords: plane, plane api, rest api, api integration, initiative, delete an initiative label
 ---
 
 # Delete an initiative label
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, labels, tags, categorizat
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently deletes an initiative label from a workspace. This action cannot be undone.
+Delete an initiative label by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,21 @@ Permanently deletes an initiative label from a workspace. This action cannot be 
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="initiative_label_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the initiative label.
 
 </ApiParam>
 
 <ApiParam name="label_id" type="string" :required="true">
 
-The unique identifier for the initiative label.
+The unique identifier of the label.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -44,7 +50,6 @@ The unique identifier for the initiative label.
 `initiatives.labels:write`
 
 </div>
-
 
 </div>
 

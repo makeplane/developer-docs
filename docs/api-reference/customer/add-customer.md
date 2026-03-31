@@ -1,7 +1,7 @@
 ---
 title: Create a customer
-description: Create a customer via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: Create a customer via Plane API. HTTP request format, parameters, scopes, and example responses for create a customer.
+keywords: plane, plane api, rest api, api integration, customer, create a customer
 ---
 
 # Create a customer
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, customers, crm, customer 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new customer in a workspace.
+Create a new customer in the specified workspace.
 
 <div class="params-section">
 
@@ -143,7 +143,6 @@ Logo asset.
 `customers:write`
 
 </div>
-
 
 </div>
 

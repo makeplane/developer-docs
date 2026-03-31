@@ -1,7 +1,7 @@
 ---
 title: Add dropdown options
-description: Create dropdown options via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Add dropdown options via Plane API. HTTP request format, parameters, scopes, and example responses for add dropdown options.
+keywords: plane, plane api, rest api, api integration, issue types, options, add dropdown options
 ---
 
 # Add dropdown options
@@ -14,19 +14,13 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Allows you to define a list of options for the dropdown property type.
+Create a new issue property option
 
 <div class="params-section">
 
 ### Path Parameters
 
 <div class="params-list">
-
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
@@ -36,7 +30,13 @@ The unique identifier of the project.
 
 <ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the custom property.
+The unique identifier of the property.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -102,7 +102,6 @@ Parent.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -112,7 +111,7 @@ Parent.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -131,7 +130,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -147,7 +146,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/", {
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",

@@ -1,20 +1,20 @@
 ---
 title: Retrieve a work item by identifier
-description: List retrieve a work item by identifier via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Retrieve a work item by identifier via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a work item by identifier.
+keywords: plane, plane api, rest api, api integration, issue, retrieve a work item by identifier
 ---
 
 # Retrieve a work item by identifier
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/work-items/{identifier}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/work-items/{project_identifier}-{issue_identifier}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of a work item using its readable identifier (e.g., PROJ-123).
+Retrieve a specific work item using workspace slug, project identifier, and issue identifier.
 
 <div class="params-section">
 
@@ -22,15 +22,21 @@ Retrieves the details of a work item using its readable identifier (e.g., PROJ-1
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="issue_identifier" type="integer" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The numeric issue identifier.
 
 </ApiParam>
 
-<ApiParam name="identifier" type="string" :required="true">
+<ApiParam name="project_identifier" type="string" :required="true">
 
-Work item identifier in the format PROJECT-123 (e.g., ENG-123)
+The project identifier key.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -45,7 +51,6 @@ Work item identifier in the format PROJECT-123 (e.g., ENG-123)
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -55,7 +60,7 @@ Work item identifier in the format PROJECT-123 (e.g., ENG-123)
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/PROJ-123/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -67,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/PROJ-123/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -77,7 +82,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/work-items/{identifier}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/work-items/PROJ-123/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

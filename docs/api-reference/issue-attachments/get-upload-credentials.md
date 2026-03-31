@@ -1,7 +1,7 @@
 ---
 title: Get upload credentials
-description: List upload credentials via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, attachments, files, uploads
+description: Get upload credentials via Plane API. HTTP request format, parameters, scopes, and example responses for get upload credentials.
+keywords: plane, plane api, rest api, api integration, issue attachments, get upload credentials
 ---
 
 # Get upload credentials
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a pre-signed POST form data for uploading an attachment directly to S3. This endpoint handles the first step of the two-and-a-half step upload process where you first get the upload credentials and then use them to upload the actual file.
+Generate presigned URL for uploading file attachments to a work item.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Creates a pre-signed POST form data for uploading an attachment directly to S3. 
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the work item.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier of the work item.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -89,7 +89,6 @@ External source system (for integration tracking)
 `projects.work_items.attachments:write`
 
 </div>
-
 
 </div>
 

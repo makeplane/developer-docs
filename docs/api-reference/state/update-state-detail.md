@@ -1,7 +1,7 @@
 ---
 title: Update a state
-description: Update a state via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, states, workflow, status
+description: Update a state via Plane API. HTTP request format, parameters, scopes, and example responses for update a state.
+keywords: plane, plane api, rest api, api integration, state, update a state
 ---
 
 # Update a state
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, states, workflow, status
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing state by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Partially update an existing workflow state's properties like name, color, or group.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Updates an existing state by setting the values of the parameters passed. Any pa
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
 
 </ApiParam>
 
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ApiParam>
+
 <ApiParam name="state_id" type="string" :required="true">
 
-The unique identifier for the state.
+The unique identifier of the state.
 
 </ApiParam>
 
@@ -118,7 +118,6 @@ External id.
 `projects.states:write`
 
 </div>
-
 
 </div>
 

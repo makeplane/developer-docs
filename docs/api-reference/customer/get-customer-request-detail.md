@@ -1,20 +1,20 @@
 ---
 title: Retrieve a customer request
-description: Get retrieve a customer request details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: Retrieve a customer request via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve a customer request.
+keywords: plane, plane api, rest api, api integration, customer, retrieve a customer request
 ---
 
 # Retrieve a customer request
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/requests/{request_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/requests/{resource_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves the details of an existing customer request by its ID.
+Get a specific customer request by ID
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Retrieves the details of an existing customer request by its ID.
 
 <div class="params-list">
 
+<ApiParam name="customer_id" type="string" :required="true">
+
+The unique identifier of the customer.
+
+</ApiParam>
+
+<ApiParam name="resource_id" type="string" :required="true">
+
+The unique identifier of the resource.
+
+</ApiParam>
+
 <ApiParam name="workspace_slug" type="string" :required="true">
 
 The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
-<ApiParam name="customer_id" type="string" :required="true">
-
-The unique identifier for the customer.
-
-</ApiParam>
-
-<ApiParam name="request_id" type="string" :required="true">
-
-The unique identifier for the request.
 
 </ApiParam>
 
@@ -51,7 +51,6 @@ The unique identifier for the request.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -61,7 +60,7 @@ The unique identifier for the request.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/resource-id-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -73,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/resource-id-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -83,7 +82,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/{request_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/resource-id-uuid/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

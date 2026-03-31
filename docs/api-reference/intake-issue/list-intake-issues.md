@@ -1,7 +1,7 @@
 ---
 title: List all intake work items
-description: List all intake work items via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
+description: List all intake work items via Plane API. HTTP request format, parameters, scopes, and example responses for list all intake work items.
+keywords: plane, plane api, rest api, api integration, intake issue, list all intake work items
 ---
 
 # List all intake work items
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all intake work items in a project.
+Retrieve all work items in the project's intake queue. Returns paginated results when listing all intake work items.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Returns a list of all intake work items in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier of the project
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -77,7 +77,6 @@ Number of results per page (default: 20, max: 100)
 `projects.intakes:read`
 
 </div>
-
 
 </div>
 

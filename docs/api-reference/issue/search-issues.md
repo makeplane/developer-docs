@@ -1,7 +1,7 @@
 ---
 title: Search work items
-description: Search work items via Plane API. Full-text search with filters and advanced query parameters.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Search work items via Plane API. HTTP request format, parameters, scopes, and example responses for search work items.
+keywords: plane, plane api, rest api, api integration, issue, search work items
 ---
 
 # Search work items
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Searches for work items across a workspace by text query.
+Perform semantic search across issue names, sequence IDs, and project identifiers.
 
 <div class="params-section">
 
@@ -71,7 +71,6 @@ Whether to search across entire workspace or within specific project
 `projects.work_items:read`
 
 </div>
-
 
 </div>
 

@@ -1,7 +1,7 @@
 ---
 title: List all customer requests
-description: List all customer requests via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, customers, crm, customer management
+description: List all customer requests via Plane API. HTTP request format, parameters, scopes, and example responses for list all customer requests.
+keywords: plane, plane api, rest api, api integration, customer, list all customer requests
 ---
 
 # List all customer requests
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, customers, crm, customer 
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all requests for a customer.
+List all requests for a customer with optional search filtering
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Returns a list of all requests for a customer.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="customer_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the customer.
 
 </ApiParam>
 
-<ApiParam name="customer_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the customer.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -45,7 +45,6 @@ The unique identifier for the customer.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -55,7 +54,7 @@ The unique identifier for the customer.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -67,7 +66,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -77,7 +76,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/{customer_id}/requests/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

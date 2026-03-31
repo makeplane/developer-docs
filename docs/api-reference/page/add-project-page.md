@@ -1,7 +1,7 @@
 ---
 title: Create a project page
-description: Create a project page via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, projects, project management, pages, documentation, notes
+description: Create a project page via Plane API. HTTP request format, parameters, scopes, and example responses for create a project page.
+keywords: plane, plane api, rest api, api integration, page, create a project page
 ---
 
 # Create a project page
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, projects, project managem
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new page at the project level, specific to a single project.
+Create a project page
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new page at the project level, specific to a single project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the project.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -114,7 +114,6 @@ Description html.
 `projects.pages:write`
 
 </div>
-
 
 </div>
 

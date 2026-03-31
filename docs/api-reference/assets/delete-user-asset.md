@@ -27,7 +27,7 @@ This performs a soft delete by marking the asset as deleted and updating the use
 
 <ApiParam name="asset_id" type="string" :required="true">
 
-The unique identifier of the asset.
+Asset ID
 
 </ApiParam>
 
@@ -91,6 +91,7 @@ console.log(response.status);
 No response body.
 
 </ResponsePanel>
+
 
 </div>
 

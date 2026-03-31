@@ -1,7 +1,7 @@
 ---
 title: Get all workspace members
-description: List all workspace members via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane api, workspace members, list members, member roles, user management, rest api, api integration
+description: Get all workspace members via Plane API. HTTP request format, parameters, scopes, and example responses for get all workspace members.
+keywords: plane, plane api, rest api, api integration, members, get all workspace members
 ---
 
 # Get all workspace members
@@ -14,7 +14,7 @@ keywords: plane api, workspace members, list members, member roles, user managem
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all members in a workspace.
+Retrieve all users who are members of the specified workspace.
 
 <div class="params-section">
 
@@ -38,7 +38,6 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 `workspaces.members:read`
 
 </div>
-
 
 </div>
 

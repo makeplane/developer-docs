@@ -1,7 +1,7 @@
 ---
 title: Update an initiative label
-description: Update an initiative label via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization, initiatives, roadmap, planning
+description: Update an initiative label via Plane API. HTTP request format, parameters, scopes, and example responses for update an initiative label.
+keywords: plane, plane api, rest api, api integration, initiative, update an initiative label
 ---
 
 # Update an initiative label
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, labels, tags, categorizat
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing initiative label by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Update an initiative label by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,21 @@ Updates an existing initiative label by setting the values of the parameters pas
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="initiative_label_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the initiative label.
 
 </ApiParam>
 
 <ApiParam name="label_id" type="string" :required="true">
 
-The unique identifier for the initiative label.
+The unique identifier of the label.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -77,7 +83,6 @@ Sort order.
 `initiatives.labels:write`
 
 </div>
-
 
 </div>
 

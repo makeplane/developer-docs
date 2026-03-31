@@ -1,7 +1,7 @@
 ---
 title: List all cycles
-description: List all cycles via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+description: List all cycles via Plane API. HTTP request format, parameters, scopes, and example responses for list all cycles.
+keywords: plane, plane api, rest api, api integration, cycle, list all cycles
 ---
 
 # List all cycles
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, cycles, sprints, iteratio
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all cycles in a project.
+Retrieve all cycles in a project. Supports filtering by cycle status like current, upcoming, completed, or draft.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Returns a list of all cycles in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -89,7 +89,6 @@ Number of results per page (default: 20, max: 100)
 `projects.cycles:read`
 
 </div>
-
 
 </div>
 

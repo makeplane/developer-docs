@@ -1,20 +1,20 @@
 ---
 title: Delete an intake work item
-description: Delete an intake work item via Plane API. Permanently removes the submission from the intake queue. Returns 204 on success.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, intake, triage, submissions
+description: Delete an intake work item via Plane API. HTTP request format, parameters, scopes, and example responses for delete an intake work item.
+keywords: plane, plane api, rest api, api integration, intake issue, delete an intake work item
 ---
 
 # Delete an intake work item
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{issue_id}</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{work_item_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently deletes an intake work item from a project. This action cannot be undone.
+Permanently remove an intake work item from the triage queue. Also deletes the underlying work item if it hasn't been accepted yet.
 
 <div class="params-section">
 
@@ -22,27 +22,21 @@ Permanently deletes an intake work item from a project. This action cannot be un
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the work item.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier of the work item
-
-</ApiParam>
-
-<ApiParam name="intake_id" type="string" :required="true">
-
-The unique identifier for the intake work item.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -57,7 +51,6 @@ The unique identifier for the intake work item.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -67,7 +60,7 @@ The unique identifier for the intake work item.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -79,7 +72,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -89,7 +82,7 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/issue-uuid", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/", {
   method: "DELETE",
   headers: {
     "X-API-Key": "your-api-key"

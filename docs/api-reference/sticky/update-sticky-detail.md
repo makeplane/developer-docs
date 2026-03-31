@@ -1,20 +1,20 @@
 ---
 title: Update a sticky
-description: Update a sticky via Plane API. HTTP PATCH request format, editable fields, and example responses.
-keywords: plane api, update sticky, modify note, sticky note, rest api, api integration
+description: Update a sticky via Plane API. HTTP request format, parameters, scopes, and example responses for update a sticky.
+keywords: plane, plane api, rest api, api integration, sticky, update a sticky
 ---
 
 # Update a sticky
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/stickies/{sticky_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/stickies/{resource_id}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Updates an existing sticky by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Update a sticky by its ID
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Updates an existing sticky by setting the values of the parameters passed. Any p
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="resource_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the resource.
 
 </ApiParam>
 
-<ApiParam name="sticky_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the sticky.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -120,7 +120,6 @@ Updated by.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -130,7 +129,7 @@ Updated by.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/resource-id-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -156,7 +155,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/stickies/resource-id-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "deleted_at": "2024-01-01T00:00:00Z",
@@ -179,7 +178,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/stickies/{sticky_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/stickies/resource-id-uuid/", {
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",

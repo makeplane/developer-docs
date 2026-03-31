@@ -1,7 +1,7 @@
 ---
 title: Create a worklog
-description: Create a worklog via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, time tracking, worklogs, time management
+description: Create a worklog via Plane API. HTTP request format, parameters, scopes, and example responses for create a worklog.
+keywords: plane, plane api, rest api, api integration, worklogs, create a worklog
 ---
 
 # Create a worklog
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, time tracking, worklogs, 
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new worklog entry for a work item.
+Create a new worklog entry
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Creates a new worklog entry for a work item.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the work item.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-The unique identifier of the project
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier of the work item
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -83,7 +83,6 @@ Updated by.
 `projects.work_items.worklogs:write`
 
 </div>
-
 
 </div>
 

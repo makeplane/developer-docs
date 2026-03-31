@@ -1,7 +1,7 @@
 ---
 title: Retrieve option details
-description: Get retrieve option details details via Plane API. Retrieve complete information for a specific resource.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks
+description: Retrieve option details via Plane API. HTTP request format, parameters, scopes, and example responses for retrieve option details.
+keywords: plane, plane api, rest api, api integration, issue types, options, retrieve option details
 ---
 
 # Retrieve option details
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieves information about a specific option within a dropdown property.
+Get issue property option by id
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Retrieves information about a specific option within a dropdown property.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="option_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the option.
 
 </ApiParam>
 
@@ -36,13 +36,13 @@ The unique identifier of the project.
 
 <ApiParam name="property_id" type="string" :required="true">
 
-The unique identifier for the custom property.
+The unique identifier of the property.
 
 </ApiParam>
 
-<ApiParam name="option_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the option.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -57,7 +57,6 @@ The unique identifier for the option.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -67,7 +66,7 @@ The unique identifier for the option.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -79,7 +78,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -89,7 +88,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/{property_id}/options/{option_id}/", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-properties/property-uuid/options/option-uuid/", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"

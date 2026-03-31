@@ -1,7 +1,7 @@
 ---
 title: Create a cycle
-description: Create a cycle via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane, plane api, rest api, api integration, cycles, sprints, iterations
+description: Create a cycle via Plane API. HTTP request format, parameters, scopes, and example responses for create a cycle.
+keywords: plane, plane api, rest api, api integration, cycle, create a cycle
 ---
 
 # Create a cycle
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, cycles, sprints, iteratio
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new cycle in a project.
+Create a new development cycle with specified name, description, and date range. Supports external ID tracking for integration purposes.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Creates a new cycle in a project.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -533,7 +533,6 @@ External id.
 `projects.cycles:write`
 
 </div>
-
 
 </div>
 

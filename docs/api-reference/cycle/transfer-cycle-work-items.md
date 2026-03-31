@@ -1,7 +1,7 @@
 ---
 title: Transfer cycle work items
-description: Transfer cycle work items API endpoint. Request format, parameters, and response examples for Plane REST API.
-keywords: plane, plane api, rest api, api integration, work items, issues, tasks, cycles, sprints, iterations
+description: Transfer cycle work items via Plane API. HTTP request format, parameters, scopes, and example responses for transfer cycle work items.
+keywords: plane, plane api, rest api, api integration, cycle, transfer cycle work items
 ---
 
 # Transfer cycle work items
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, work items, issues, tasks
 <div class="api-two-column">
 <div class="api-left">
 
-Transfers all work items from one cycle to another.
+Move incomplete work items from the current cycle to a new target cycle. Captures progress snapshot and transfers only unfinished work items.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Transfers all work items from one cycle to another.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="cycle_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the cycle.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="cycle_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the cycle.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -65,7 +65,6 @@ ID of the target cycle to transfer issues to
 `projects.cycles:write`
 
 </div>
-
 
 </div>
 

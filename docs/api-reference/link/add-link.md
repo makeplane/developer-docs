@@ -1,7 +1,7 @@
 ---
 title: Create a link
-description: Create a link via Plane API. HTTP POST request format, required fields, and example responses.
-keywords: plane api, create link, add url reference, work item link, issue link, rest api, api integration
+description: Create a link via Plane API. HTTP request format, parameters, scopes, and example responses for create a link.
+keywords: plane, plane api, rest api, api integration, link, create a link
 ---
 
 # Create a link
@@ -14,7 +14,7 @@ keywords: plane api, create link, add url reference, work item link, issue link,
 <div class="api-two-column">
 <div class="api-left">
 
-Creates a new link attached to a work item.
+Add a new external link to a work item with URL, title, and metadata.
 
 <div class="params-section">
 
@@ -22,9 +22,9 @@ Creates a new link attached to a work item.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+The unique identifier of the work item.
 
 </ApiParam>
 
@@ -34,9 +34,9 @@ The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="work_item_id" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-The unique identifier for the work item.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -71,7 +71,6 @@ Url.
 `projects.work_items.links:write`
 
 </div>
-
 
 </div>
 

@@ -1,7 +1,7 @@
 ---
 title: Delete a state
-description: Delete a workflow state from a project via Plane API. The state must not be in use by any work items. Returns 204 on success.
-keywords: plane, plane api, rest api, api integration, states, workflow, status
+description: Delete a state via Plane API. HTTP request format, parameters, scopes, and example responses for delete a state.
+keywords: plane, plane api, rest api, api integration, state, delete a state
 ---
 
 # Delete a state
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, states, workflow, status
 <div class="api-two-column">
 <div class="api-left">
 
-Permanently deletes a state from a project. This action cannot be undone.
+Permanently remove a workflow state from a project. Default states and states with existing work items cannot be deleted.
 
 <div class="params-section">
 
@@ -22,21 +22,21 @@ Permanently deletes a state from a project. This action cannot be undone.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
 
 </ApiParam>
 
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ApiParam>
+
 <ApiParam name="state_id" type="string" :required="true">
 
-The unique identifier for the state.
+The unique identifier of the state.
 
 </ApiParam>
 
@@ -50,7 +50,6 @@ The unique identifier for the state.
 `projects.states:write`
 
 </div>
-
 
 </div>
 

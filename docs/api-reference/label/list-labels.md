@@ -1,7 +1,7 @@
 ---
 title: List all labels
-description: List all labels via Plane API. HTTP GET request with pagination, filtering, and query parameters.
-keywords: plane, plane api, rest api, api integration, labels, tags, categorization
+description: List all labels via Plane API. HTTP request format, parameters, scopes, and example responses for list all labels.
+keywords: plane, plane api, rest api, api integration, label, list all labels
 ---
 
 # List all labels
@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, labels, tags, categorizat
 <div class="api-two-column">
 <div class="api-left">
 
-Returns a list of all labels in a project. Labels are returned in sort order.
+Retrieve all labels in a project. Supports filtering by name and color.
 
 <div class="params-section">
 
@@ -22,15 +22,15 @@ Returns a list of all labels in a project. Labels are returned in sort order.
 
 <div class="params-list">
 
-<ApiParam name="workspace_slug" type="string" :required="true">
-
-The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
-
-</ApiParam>
-
 <ApiParam name="project_id" type="string" :required="true">
 
 The unique identifier of the project.
+
+</ApiParam>
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -83,7 +83,6 @@ Number of results per page (default: 20, max: 100)
 `projects.labels:read`
 
 </div>
-
 
 </div>
 

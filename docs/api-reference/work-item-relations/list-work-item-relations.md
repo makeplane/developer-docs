@@ -1,26 +1,38 @@
 ---
-title: List project labels
-description: List project labels via Plane API. HTTP request format, parameters, scopes, and example responses for list project labels.
-keywords: plane, plane api, rest api, api integration, project labels, list project labels
+title: List work item relations
+description: List work item relations via Plane API. HTTP request format, parameters, scopes, and example responses for list work item relations.
+keywords: plane, plane api, rest api, api integration, work item relations, list work item relations
 ---
 
-# List project labels
+# List work item relations
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/project-labels/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/work-items/{work_item_id}/relations/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieve all project labels in a workspace.
+Retrieve all relationships for a work item including blocking, blocked_by, duplicate, relates_to, start_before, start_after, finish_before, and finish_after relations.
 
 <div class="params-section">
 
 ### Path Parameters
 
 <div class="params-list">
+
+<ApiParam name="work_item_id" type="string" :required="true">
+
+The unique identifier of the work item.
+
+</ApiParam>
+
+<ApiParam name="project_id" type="string" :required="true">
+
+The unique identifier of the project.
+
+</ApiParam>
 
 <ApiParam name="workspace_slug" type="string" :required="true">
 
@@ -74,7 +86,7 @@ Number of results per page (default: 20, max: 100)
 
 ### Scopes
 
-`projects.labels:read`
+`projects.work_items:read`
 
 </div>
 
@@ -83,12 +95,12 @@ Number of results per page (default: 20, max: 100)
 
 <div class="api-right">
 
-<CodePanel title="List project labels" :languages="['cURL', 'Python', 'JavaScript']">
+<CodePanel title="List work item relations" :languages="['cURL', 'Python', 'JavaScript']">
 <template #curl>
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/project-labels/?cursor=20:1:0&expand=assignees" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/relations/?cursor=20:1:0&expand=assignees" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
@@ -100,7 +112,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/project-labels/?cursor=20:1:0&expand=assignees",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/relations/?cursor=20:1:0&expand=assignees",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -110,7 +122,7 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/project-labels/?cursor=20:1:0&expand=assignees", {
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/relations/?cursor=20:1:0&expand=assignees", {
   method: "GET",
   headers: {
     "X-API-Key": "your-api-key"
@@ -126,24 +138,23 @@ const data = await response.json();
 
 ```json
 {
-  "grouped_by": "state",
-  "sub_grouped_by": "priority",
-  "total_count": 150,
-  "next_cursor": "20:1:0",
-  "prev_cursor": "20:0:0",
-  "next_page_results": true,
-  "prev_page_results": false,
-  "count": 20,
-  "total_pages": 8,
-  "total_results": 150,
-  "extra_stats": null,
-  "results": [
-    {
-      "id": "550e8400-e29b-41d4-a716-446655440000",
-      "name": "Example Name",
-      "created_at": "2024-01-01T00:00:00Z"
-    }
-  ]
+  "blocking": [
+    "550e8400-e29b-41d4-a716-446655440000",
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "blocked_by": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "duplicate": [],
+  "relates_to": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "start_after": [],
+  "start_before": [
+    "550e8400-e29b-41d4-a716-446655440000"
+  ],
+  "finish_after": [],
+  "finish_before": []
 }
 ```
 
