@@ -7,7 +7,7 @@ keywords: plane airgapped requirements, air-gapped architecture, offline prerequ
 # Airgapped deployment architecture
 
 ::: info
-Airgapped deployments are available exclusively for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [sales team](mailto:sales@plane.so) for trials, tailor-made pricing for lesser seats, and license information.
+Airgapped deployments are available exclusively for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [Sales team](mailto:sales@plane.so) for trials, exceptions to the seat cut-off, tailored pricing, and licensing info.
 :::
 
 This document explains Plane's architecture and specific requirements for airgapped deployments. Review this before beginning your airgapped installation on [Docker](/self-hosting/methods/airgapped-edition) or [Kubernetes](/self-hosting/methods/airgapped-edition-kubernetes).
