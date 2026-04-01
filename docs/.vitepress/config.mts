@@ -305,6 +305,20 @@ export default withMermaid(
                 items: [
                   { text: "Update to latest version", link: "/self-hosting/manage/upgrade-plane" },
                   { text: "For versions before 0.14.0", link: "/self-hosting/manage/upgrade-from-0.13.2-0.14.0" },
+                  {
+                    text: "Airgapped Edition",
+                    collapsed: true,
+                    items: [
+                      {
+                        text: "On Docker",
+                        link: "/self-hosting/manage/update-plane/airgapped-edition/update-airgapped-docker",
+                      },
+                      {
+                        text: "On Kubernetes",
+                        link: "/self-hosting/manage/update-plane/airgapped-edition/update-airgapped-kubernetes",
+                      },
+                    ],
+                  },
                 ],
               },
               {
