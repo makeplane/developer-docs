@@ -1,6 +1,7 @@
 ---
 title: Upgrade Airgapped Edition on Kubernetes
 description: Upgrade your airgapped Plane instance running on Kubernetes by cloning images, updating the Helm chart, and redeploying.
+keywords: plane airgapped kubernetes upgrade, air-gapped helm chart upgrade, plane offline k8s update
 ---
 
 # Update Airgapped Edition on Kubernetes

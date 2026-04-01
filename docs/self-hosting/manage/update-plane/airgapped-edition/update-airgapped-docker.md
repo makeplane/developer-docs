@@ -1,6 +1,7 @@
 ---
 title: Upgrade Airgapped Edition (Docker)
 description: Upgrade your airgapped Plane instance running on Docker by cloning images, replacing configuration files, and uploading a new license.
+keywords: plane airgapped upgrade, air-gapped docker upgrade, plane offline update
 ---
 
 # Update Airgapped Edition on Docker
