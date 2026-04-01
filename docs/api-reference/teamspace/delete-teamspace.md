@@ -85,7 +85,7 @@ print(response.status_code)
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/teamspaces/resource-id-uuid/", {
   method: "DELETE",
   headers: {
-    "X-API-Key": "your-api-key"
+    "X-API-Key": "your-api-key",
   },
 });
 console.log(response.status);

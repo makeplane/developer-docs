@@ -39,7 +39,6 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -74,7 +73,7 @@ print(response.json())
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/features/", {
   method: "GET",
   headers: {
-    "X-API-Key": "your-api-key"
+    "X-API-Key": "your-api-key",
   },
 });
 const data = await response.json();
@@ -97,7 +96,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

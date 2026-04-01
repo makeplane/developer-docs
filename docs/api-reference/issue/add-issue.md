@@ -99,11 +99,11 @@ Description stripped.
 
 <ApiParam name="priority" type="string" :required="false">
 
-* `urgent` - Urgent
-* `high` - High
-* `medium` - Medium
-* `low` - Low
-* `none` - None
+- `urgent` - Urgent
+- `high` - High
+- `medium` - Medium
+- `low` - Low
+- `none` - None
 
 </ApiParam>
 
@@ -266,22 +266,18 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "name": "Example Name",
-  "description": "Example description",
-  "priority": "medium",
-  "state": "550e8400-e29b-41d4-a716-446655440000",
-  "assignees": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
-  "labels": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github"
-}),
+    name: "Example Name",
+    description: "Example description",
+    priority: "medium",
+    state: "550e8400-e29b-41d4-a716-446655440000",
+    assignees: ["550e8400-e29b-41d4-a716-446655440000"],
+    labels: ["550e8400-e29b-41d4-a716-446655440000"],
+    external_id: "550e8400-e29b-41d4-a716-446655440000",
+    external_source: "github",
+  }),
 });
 const data = await response.json();
 ```
@@ -298,12 +294,8 @@ const data = await response.json();
   "description": "Example description",
   "sequence_id": 1,
   "priority": "high",
-  "assignees": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
-  "labels": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
+  "assignees": ["550e8400-e29b-41d4-a716-446655440000"],
+  "labels": ["550e8400-e29b-41d4-a716-446655440000"],
   "created_at": "2024-01-01T00:00:00Z",
   "updated_at": "2024-01-01T00:00:00Z"
 }

@@ -66,7 +66,6 @@ ID of the related work item to remove relation with
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -105,16 +104,19 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/relations/remove/", {
-  method: "POST",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "related_issue": "550e8400-e29b-41d4-a716-446655440000"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/relations/remove/",
+  {
+    method: "POST",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      related_issue: "550e8400-e29b-41d4-a716-446655440000",
+    }),
+  }
+);
 console.log(response.status);
 ```
 
@@ -126,7 +128,6 @@ console.log(response.status);
 No response body.
 
 </ResponsePanel>
-
 
 </div>
 

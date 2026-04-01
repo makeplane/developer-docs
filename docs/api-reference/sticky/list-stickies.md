@@ -73,7 +73,7 @@ print(response.json())
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/stickies/", {
   method: "GET",
   headers: {
-    "X-API-Key": "your-api-key"
+    "X-API-Key": "your-api-key",
   },
 });
 const data = await response.json();
@@ -100,10 +100,10 @@ const data = await response.json();
     "extra_stats": null,
     "results": [
       {
-"id": "550e8400-e29b-41d4-a716-446655440000",
-"name": "Example Name",
-"description_html": "<p>Example content</p>",
-"created_at": "2024-01-01T00:00:00Z"
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "name": "Example Name",
+        "description_html": "<p>Example content</p>",
+        "created_at": "2024-01-01T00:00:00Z"
       }
     ]
   }

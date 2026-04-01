@@ -45,8 +45,8 @@ Name.
 
 <ApiParam name="access" type="integer" :required="false">
 
-* `0` - Public
-* `1` - Private
+- `0` - Public
+- `1` - Private
 
 </ApiParam>
 
@@ -169,20 +169,20 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "name": "Example Name",
-  "access": 0,
-  "color": "Example Name",
-  "is_locked": true,
-  "archived_at": "2024-01-01",
-  "view_props": "example-value",
-  "logo_props": "example-value",
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github",
-  "description_html": "<p>Example content</p>"
-}),
+    name: "Example Name",
+    access: 0,
+    color: "Example Name",
+    is_locked: true,
+    archived_at: "2024-01-01",
+    view_props: "example-value",
+    logo_props: "example-value",
+    external_id: "550e8400-e29b-41d4-a716-446655440000",
+    external_source: "github",
+    description_html: "<p>Example content</p>",
+  }),
 });
 const data = await response.json();
 ```

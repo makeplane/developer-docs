@@ -51,11 +51,11 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 <ApiParam name="status" type="integer" :required="false">
 
-* `-2` - Pending
-* `-1` - Rejected
-* `0` - Snoozed
-* `1` - Accepted
-* `2` - Duplicate
+- `-2` - Pending
+- `-1` - Rejected
+- `0` - Snoozed
+- `1` - Accepted
+- `2` - Duplicate
 
 </ApiParam>
 
@@ -148,21 +148,24 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/", {
-  method: "PATCH",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "status": 1,
-  "issue": {
-    "name": "Example Name",
-    "description": "Example description",
-    "priority": "high"
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/",
+  {
+    method: "PATCH",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      status: 1,
+      issue: {
+        name: "Example Name",
+        description: "Example description",
+        priority: "high",
+      },
+    }),
   }
-}),
-});
+);
 const data = await response.json();
 ```
 

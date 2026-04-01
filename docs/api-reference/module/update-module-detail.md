@@ -75,12 +75,12 @@ Target date.
 
 <ApiParam name="status" type="string" :required="false">
 
-* `backlog` - Backlog
-* `planned` - Planned
-* `in-progress` - In Progress
-* `paused` - Paused
-* `completed` - Completed
-* `cancelled` - Cancelled
+- `backlog` - Backlog
+- `planned` - Planned
+- `in-progress` - In Progress
+- `paused` - Paused
+- `completed` - Completed
+- `cancelled` - Cancelled
 
 </ApiParam>
 
@@ -167,21 +167,24 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/resource-id-uuid/", {
-  method: "PATCH",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "name": "Example Name",
-  "description": "Example description",
-  "start_date": "2024-01-01",
-  "end_date": "2024-01-01",
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/modules/resource-id-uuid/",
+  {
+    method: "PATCH",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "Example Name",
+      description: "Example description",
+      start_date: "2024-01-01",
+      end_date: "2024-01-01",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
+    }),
+  }
+);
 const data = await response.json();
 ```
 

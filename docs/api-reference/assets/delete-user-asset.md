@@ -42,7 +42,6 @@ Asset ID
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -77,7 +76,7 @@ print(response.status_code)
 const response = await fetch("https://api.plane.so/api/v1/assets/user-assets/asset-uuid/", {
   method: "DELETE",
   headers: {
-    "X-API-Key": "your-api-key"
+    "X-API-Key": "your-api-key",
   },
 });
 console.log(response.status);
@@ -91,7 +90,6 @@ console.log(response.status);
 No response body.
 
 </ResponsePanel>
-
 
 </div>
 

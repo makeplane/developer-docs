@@ -78,7 +78,6 @@ API key authentication or an OAuth token with equivalent access.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -125,13 +124,13 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "query": "login",
-  "project_id": "550e8400-e29b-41d4-a716-446655440000",
-  "limit": 10
-}),
+    query: "login",
+    project_id: "550e8400-e29b-41d4-a716-446655440000",
+    limit: 10,
+  }),
 });
 const data = await response.json();
 ```
@@ -175,7 +174,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

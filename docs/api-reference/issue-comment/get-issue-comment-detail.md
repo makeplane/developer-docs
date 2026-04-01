@@ -88,12 +88,15 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/resource-id-uuid/", {
-  method: "GET",
-  headers: {
-    "X-API-Key": "your-api-key"
-  },
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/resource-id-uuid/",
+  {
+    method: "GET",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
 const data = await response.json();
 ```
 
@@ -110,13 +113,13 @@ const data = await response.json();
     "type": "doc",
     "content": [
       {
-"type": "paragraph",
-"content": [
-  {
-    "type": "text",
-    "text": "This issue has been resolved by implementing OAuth 2.0 flow."
-  }
-]
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "This issue has been resolved by implementing OAuth 2.0 flow."
+          }
+        ]
       }
     ]
   },

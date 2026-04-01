@@ -57,7 +57,6 @@ The unique identifier of the work item.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -89,12 +88,15 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/", {
-  method: "GET",
-  headers: {
-    "X-API-Key": "your-api-key"
-  },
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/",
+  {
+    method: "GET",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
 const data = await response.json();
 ```
 
@@ -118,7 +120,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

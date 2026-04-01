@@ -69,12 +69,12 @@ Sequence.
 
 <ApiParam name="group" type="string" :required="false">
 
-* `backlog` - Backlog
-* `unstarted` - Unstarted
-* `started` - Started
-* `completed` - Completed
-* `cancelled` - Cancelled
-* `triage` - Triage
+- `backlog` - Backlog
+- `unstarted` - Unstarted
+- `started` - Started
+- `completed` - Completed
+- `cancelled` - Cancelled
+- `triage` - Triage
 
 </ApiParam>
 
@@ -163,15 +163,15 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "name": "Example Name",
-  "color": "#ff0000",
-  "group": "backlog",
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github"
-}),
+    name: "Example Name",
+    color: "#ff0000",
+    group: "backlog",
+    external_id: "550e8400-e29b-41d4-a716-446655440000",
+    external_source: "github",
+  }),
 });
 const data = await response.json();
 ```

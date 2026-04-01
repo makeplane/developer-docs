@@ -106,20 +106,23 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/", {
-  method: "POST",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "issue": {
-    "name": "Example Name",
-    "description": "Example description",
-    "priority": "medium"
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/",
+  {
+    method: "POST",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      issue: {
+        name: "Example Name",
+        description: "Example description",
+        priority: "medium",
+      },
+    }),
   }
-}),
-});
+);
 const data = await response.json();
 ```
 

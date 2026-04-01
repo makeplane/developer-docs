@@ -126,18 +126,21 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/", {
-  method: "POST",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "value": "example text value",
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/",
+  {
+    method: "POST",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      value: "example text value",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
+    }),
+  }
+);
 const data = await response.json();
 ```
 

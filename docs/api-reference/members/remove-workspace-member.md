@@ -73,7 +73,7 @@ print(response.status_code)
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/members/remove/", {
   method: "POST",
   headers: {
-    "X-API-Key": "your-api-key"
+    "X-API-Key": "your-api-key",
   },
 });
 console.log(response.status);

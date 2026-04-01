@@ -78,7 +78,6 @@ Number of results per page (default: 20, max: 100)
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -110,12 +109,15 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/project-labels/?cursor=20:1:0&expand=assignees", {
-  method: "GET",
-  headers: {
-    "X-API-Key": "your-api-key"
-  },
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/project-labels/?cursor=20:1:0&expand=assignees",
+  {
+    method: "GET",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
 const data = await response.json();
 ```
 
@@ -148,7 +150,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

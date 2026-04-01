@@ -72,7 +72,6 @@ API key authentication or an OAuth token with equivalent access.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -111,16 +110,19 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/pages/", {
-  method: "POST",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "page_id": "550e8400-e29b-41d4-a716-446655440000"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/pages/",
+  {
+    method: "POST",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      page_id: "550e8400-e29b-41d4-a716-446655440000",
+    }),
+  }
+);
 const data = await response.json();
 ```
 
@@ -152,7 +154,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

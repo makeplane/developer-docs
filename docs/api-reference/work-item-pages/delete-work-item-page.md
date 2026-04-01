@@ -63,7 +63,6 @@ API key authentication or an OAuth token with equivalent access.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -95,12 +94,15 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/pages/page-uuid/", {
-  method: "DELETE",
-  headers: {
-    "X-API-Key": "your-api-key"
-  },
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/pages/page-uuid/",
+  {
+    method: "DELETE",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
 console.log(response.status);
 ```
 
@@ -112,7 +114,6 @@ console.log(response.status);
 No response body.
 
 </ResponsePanel>
-
 
 </div>
 

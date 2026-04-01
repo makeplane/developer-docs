@@ -84,7 +84,6 @@ Pi.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -137,16 +136,16 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "project_grouping": true,
-  "initiatives": true,
-  "teams": true,
-  "customers": true,
-  "wiki": true,
-  "pi": true
-}),
+    project_grouping: true,
+    initiatives: true,
+    teams: true,
+    customers: true,
+    wiki: true,
+    pi: true,
+  }),
 });
 const data = await response.json();
 ```
@@ -168,7 +167,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

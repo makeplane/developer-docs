@@ -54,7 +54,6 @@ Additional attributes to update for the asset
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -107,16 +106,16 @@ const response = await fetch("https://api.plane.so/api/v1/assets/user-assets/ass
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "attributes": {
-    "name": "Example Name",
-    "type": "image/jpeg",
-    "size": 1024000
-  },
-  "entity_type": "USER_AVATAR"
-}),
+    attributes: {
+      name: "Example Name",
+      type: "image/jpeg",
+      size: 1024000,
+    },
+    entity_type: "USER_AVATAR",
+  }),
 });
 console.log(response.status);
 ```
@@ -129,7 +128,6 @@ console.log(response.status);
 No response body.
 
 </ResponsePanel>
-
 
 </div>
 

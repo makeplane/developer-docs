@@ -26,8 +26,8 @@ Workspace invitations let admins invite users to join a workspace with specific 
   Email.
 
 - `role` _integer_
+  - `20` - Admin
 
-  * `20` - Admin
 * `15` - Member
 * `5` - Guest
 

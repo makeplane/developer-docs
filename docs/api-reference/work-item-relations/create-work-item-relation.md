@@ -53,14 +53,14 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 Type of relationship between work items
 
-* `blocking` - Blocking
-* `blocked_by` - Blocked By
-* `duplicate` - Duplicate
-* `relates_to` - Relates To
-* `start_before` - Start Before
-* `start_after` - Start After
-* `finish_before` - Finish Before
-* `finish_after` - Finish After
+- `blocking` - Blocking
+- `blocked_by` - Blocked By
+- `duplicate` - Duplicate
+- `relates_to` - Relates To
+- `start_before` - Start Before
+- `start_after` - Start After
+- `finish_before` - Finish Before
+- `finish_after` - Finish After
 
 </ApiParam>
 
@@ -80,7 +80,6 @@ Array of work item IDs to create relations with
 `projects.work_items:write`
 
 </div>
-
 
 </div>
 
@@ -128,20 +127,20 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/relations/", {
-  method: "POST",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "relation_type": "blocking",
-  "issues": [
-    "550e8400-e29b-41d4-a716-446655440000",
-    "550e8400-e29b-41d4-a716-446655440000"
-  ]
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/relations/",
+  {
+    method: "POST",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      relation_type: "blocking",
+      issues: ["550e8400-e29b-41d4-a716-446655440000", "550e8400-e29b-41d4-a716-446655440000"],
+    }),
+  }
+);
 const data = await response.json();
 ```
 
@@ -173,7 +172,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

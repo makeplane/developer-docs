@@ -85,7 +85,7 @@ print(response.json())
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/work-items/PROJ-123/", {
   method: "GET",
   headers: {
-    "X-API-Key": "your-api-key"
+    "X-API-Key": "your-api-key",
   },
 });
 const data = await response.json();
@@ -103,12 +103,8 @@ const data = await response.json();
   "description": "Example description",
   "sequence_id": 1,
   "priority": "high",
-  "assignees": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
-  "labels": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
+  "assignees": ["550e8400-e29b-41d4-a716-446655440000"],
+  "labels": ["550e8400-e29b-41d4-a716-446655440000"],
   "created_at": "2024-01-01T00:00:00Z",
   "updated_at": "2024-01-01T00:00:00Z"
 }

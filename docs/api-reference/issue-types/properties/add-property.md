@@ -51,8 +51,8 @@ The unique identifier of the work item type.
 
 <ApiParam name="relation_type" type="string" :required="false">
 
-* `ISSUE` - Issue
-* `USER` - User
+- `ISSUE` - Issue
+- `USER` - User
 
 </ApiParam>
 
@@ -76,16 +76,16 @@ Description.
 
 <ApiParam name="property_type" type="string" :required="true">
 
-* `TEXT` - Text
-* `DATETIME` - Datetime
-* `DECIMAL` - Decimal
-* `BOOLEAN` - Boolean
-* `OPTION` - Option
-* `RELATION` - Relation
-* `URL` - URL
-* `EMAIL` - Email
-* `FILE` - File
-* `FORMULA` - Formula
+- `TEXT` - Text
+- `DATETIME` - Datetime
+- `DECIMAL` - Decimal
+- `BOOLEAN` - Boolean
+- `OPTION` - Option
+- `RELATION` - Relation
+- `URL` - URL
+- `EMAIL` - Email
+- `FILE` - File
+- `FORMULA` - Formula
 
 </ApiParam>
 
@@ -200,20 +200,23 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/type-uuid/work-item-properties/", {
-  method: "POST",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "name": "Example Name",
-  "description": "Example description",
-  "property_type": "OPTION",
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/type-uuid/work-item-properties/",
+  {
+    method: "POST",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "Example Name",
+      description: "Example description",
+      property_type: "OPTION",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
+    }),
+  }
+);
 const data = await response.json();
 ```
 

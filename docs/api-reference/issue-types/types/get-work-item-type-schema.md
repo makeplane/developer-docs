@@ -86,7 +86,6 @@ Work item type ID. If not provided, returns schema for default type (when types 
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -118,12 +117,15 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/schema/?include=members&type_id=type-uuid", {
-  method: "GET",
-  headers: {
-    "X-API-Key": "your-api-key"
-  },
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/schema/?include=members&type_id=type-uuid",
+  {
+    method: "GET",
+    headers: {
+      "X-API-Key": "your-api-key",
+    },
+  }
+);
 const data = await response.json();
 ```
 
@@ -148,25 +150,25 @@ const data = await response.json();
       "type": "option",
       "required": false,
       "options": [
-{
-  "value": "urgent",
-  "label": "Urgent"
-},
-{
-  "value": "high",
-  "label": "High"
-}
+        {
+          "value": "urgent",
+          "label": "Urgent"
+        },
+        {
+          "value": "high",
+          "label": "High"
+        }
       ]
     },
     "state_id": {
       "type": "uuid",
       "required": false,
       "options": [
-{
-  "id": "...",
-  "name": "Example Name",
-  "group": "backlog"
-}
+        {
+          "id": "...",
+          "name": "Example Name",
+          "group": "backlog"
+        }
       ]
     }
   },
@@ -179,10 +181,10 @@ const data = await response.json();
       "required": true,
       "is_multi": false,
       "options": [
-{
-  "id": "...",
-  "name": "Example Name"
-}
+        {
+          "id": "...",
+          "name": "Example Name"
+        }
       ]
     }
   }
@@ -190,7 +192,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

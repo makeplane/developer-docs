@@ -45,9 +45,9 @@ Email.
 
 <ApiParam name="role" type="integer" :required="false">
 
-* `20` - Admin
-* `15` - Member
-* `5` - Guest
+- `20` - Admin
+- `15` - Member
+- `5` - Guest
 
 </ApiParam>
 
@@ -61,7 +61,6 @@ Email.
 Workspace admin or owner permission required.
 
 </div>
-
 
 </div>
 
@@ -107,12 +106,12 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "email": "Example Name",
-  "role": 20
-}),
+    email: "Example Name",
+    role: 20,
+  }),
 });
 const data = await response.json();
 ```
@@ -135,7 +134,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

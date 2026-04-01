@@ -56,21 +56,12 @@ Work item relations let you model dependencies and planning constraints between 
 
 ```json
 {
-  "blocking": [
-    "550e8400-e29b-41d4-a716-446655440000",
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
-  "blocked_by": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
+  "blocking": ["550e8400-e29b-41d4-a716-446655440000", "550e8400-e29b-41d4-a716-446655440000"],
+  "blocked_by": ["550e8400-e29b-41d4-a716-446655440000"],
   "duplicate": [],
-  "relates_to": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
+  "relates_to": ["550e8400-e29b-41d4-a716-446655440000"],
   "start_after": [],
-  "start_before": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
+  "start_before": ["550e8400-e29b-41d4-a716-446655440000"],
   "finish_after": [],
   "finish_before": []
 }

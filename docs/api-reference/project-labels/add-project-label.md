@@ -72,7 +72,6 @@ Sort order.
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -119,13 +118,13 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "POST",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "name": "Example Name",
-  "color": "#ff0000",
-  "description": "Example description"
-}),
+    name: "Example Name",
+    color: "#ff0000",
+    description: "Example description",
+  }),
 });
 const data = await response.json();
 ```
@@ -151,7 +150,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

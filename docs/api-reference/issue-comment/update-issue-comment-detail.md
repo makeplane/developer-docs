@@ -69,8 +69,8 @@ Comment html.
 
 <ApiParam name="access" type="string" :required="false">
 
-* `INTERNAL` - INTERNAL
-* `EXTERNAL` - EXTERNAL
+- `INTERNAL` - INTERNAL
+- `EXTERNAL` - EXTERNAL
 
 </ApiParam>
 
@@ -145,18 +145,21 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/resource-id-uuid/", {
-  method: "PATCH",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "comment_html": "<p>Example content</p>",
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/comments/resource-id-uuid/",
+  {
+    method: "PATCH",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      comment_html: "<p>Example content</p>",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
+    }),
+  }
+);
 const data = await response.json();
 ```
 
@@ -173,13 +176,13 @@ const data = await response.json();
     "type": "doc",
     "content": [
       {
-"type": "paragraph",
-"content": [
-  {
-    "type": "text",
-    "text": "This issue has been resolved by implementing OAuth 2.0 flow."
-  }
-]
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "This issue has been resolved by implementing OAuth 2.0 flow."
+          }
+        ]
       }
     ]
   },

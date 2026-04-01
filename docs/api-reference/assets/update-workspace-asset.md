@@ -60,7 +60,6 @@ Whether the asset has been successfully uploaded
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -103,11 +102,11 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-  "is_uploaded": true
-}),
+    is_uploaded: true,
+  }),
 });
 console.log(response.status);
 ```
@@ -120,7 +119,6 @@ console.log(response.status);
 No response body.
 
 </ResponsePanel>
-
 
 </div>
 

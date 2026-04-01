@@ -84,7 +84,6 @@ Optional external source identifier (e.g., 'github', 'jira')
 
 </div>
 
-
 </div>
 
 <div class="api-right">
@@ -123,16 +122,19 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/", {
-  method: "PATCH",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "value": "updated text value"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-items/work-item-uuid/work-item-properties/property-uuid/values/",
+  {
+    method: "PATCH",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      value: "updated text value",
+    }),
+  }
+);
 const data = await response.json();
 ```
 
@@ -156,7 +158,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-
 
 </div>
 

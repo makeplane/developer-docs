@@ -140,19 +140,22 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/type-uuid/", {
-  method: "PATCH",
-  headers: {
-    "X-API-Key": "your-api-key",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-  "name": "Example Name",
-  "description": "Example description",
-  "external_id": "550e8400-e29b-41d4-a716-446655440000",
-  "external_source": "github"
-}),
-});
+const response = await fetch(
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/work-item-types/type-uuid/",
+  {
+    method: "PATCH",
+    headers: {
+      "X-API-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "Example Name",
+      description: "Example description",
+      external_id: "550e8400-e29b-41d4-a716-446655440000",
+      external_source: "github",
+    }),
+  }
+);
 const data = await response.json();
 ```
 
@@ -169,9 +172,7 @@ const data = await response.json();
   "name": "Example Name",
   "description": "Example description",
   "deleted_at": "2024-01-01T00:00:00Z",
-  "project_ids": [
-    "550e8400-e29b-41d4-a716-446655440000"
-  ],
+  "project_ids": ["550e8400-e29b-41d4-a716-446655440000"],
   "logo_props": "example-value",
   "is_epic": true,
   "is_default": true,
