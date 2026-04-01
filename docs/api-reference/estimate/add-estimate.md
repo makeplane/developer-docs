@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, estimates, create an esti
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/estimates/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/estimates/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,13 +24,13 @@ Create a new estimate for the project.
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -99,7 +99,7 @@ External source identifier.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/estimates/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/estimates/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -117,7 +117,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/estimates/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/estimates/",
     headers={"X-API-Key": "your-api-key"},
     json={
         "name": "Story Points",
@@ -132,21 +132,18 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/estimates/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Story Points",
-      description: "Standard story point scale",
-      type: "points",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/estimates/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "Story Points",
+    description: "Standard story point scale",
+    type: "points",
+  }),
+});
 const data = await response.json();
 ```
 

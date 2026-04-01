@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, customer, update a custom
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/customer-properties/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customer-properties/{property_id}/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,15 +22,15 @@ Update an existing customer property with the provided fields.
 
 <div class="params-list">
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="resource_id" type="string" :required="true">
 
-Pk.
+The unique identifier of the resource.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Slug.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -168,7 +168,7 @@ Updated by.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/property-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -201,7 +201,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/property-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "display_name": "Example Name",
@@ -231,34 +231,31 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      display_name: "Example Name",
-      description: "Example description",
-      logo_props: "example-value",
-      sort_order: 1,
-      property_type: "TEXT",
-      relation_type: "ISSUE",
-      is_required: true,
-      default_value: ["Example Name"],
-      settings: "example-value",
-      is_active: true,
-      is_multi: true,
-      validation_rules: "example-value",
-      external_source: "github",
-      external_id: "550e8400-e29b-41d4-a716-446655440000",
-      created_by: "550e8400-e29b-41d4-a716-446655440000",
-      updated_by: "550e8400-e29b-41d4-a716-446655440000",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customer-properties/property-uuid/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    display_name: "Example Name",
+    description: "Example description",
+    logo_props: "example-value",
+    sort_order: 1,
+    property_type: "TEXT",
+    relation_type: "ISSUE",
+    is_required: true,
+    default_value: ["Example Name"],
+    settings: "example-value",
+    is_active: true,
+    is_multi: true,
+    validation_rules: "example-value",
+    external_source: "github",
+    external_id: "550e8400-e29b-41d4-a716-446655440000",
+    created_by: "550e8400-e29b-41d4-a716-446655440000",
+    updated_by: "550e8400-e29b-41d4-a716-446655440000",
+  }),
+});
 const data = await response.json();
 ```
 

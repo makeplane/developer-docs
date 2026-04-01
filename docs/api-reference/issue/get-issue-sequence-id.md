@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, issue, retrieve a work it
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/work-items/{project_identifier}-{issue_identifier}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/work-items/{project_identifier}-{issue_identifier}/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,19 +24,19 @@ Retrieve a specific work item using workspace slug, project identifier, and issu
 
 <ApiParam name="issue_identifier" type="integer" :required="true">
 
-Issue sequence ID (numeric identifier within project)
+The numeric issue identifier.
 
 </ApiParam>
 
 <ApiParam name="project_identifier" type="string" :required="true">
 
-Project identifier (unique string within workspace)
+The project identifier key.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -62,7 +62,7 @@ Workspace slug
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/work-items/PROJ-123/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>

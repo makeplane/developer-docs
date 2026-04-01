@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, customer, create a custom
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/customers/{customer_id}/requests/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/requests/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,13 +24,13 @@ Create a new request for the specified customer.
 
 <ApiParam name="customer_id" type="string" :required="true">
 
-Customer id.
+The unique identifier of the customer.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Slug.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -93,7 +93,7 @@ Work item ids.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -115,7 +115,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -134,23 +134,20 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/",
-  {
-    method: "POST",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      description: "example-value",
-      description_html: "<p>Example content</p>",
-      link: "https://example.com/resource",
-      work_item_ids: ["550e8400-e29b-41d4-a716-446655440000"],
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/", {
+  method: "POST",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "Example Name",
+    description: "example-value",
+    description_html: "<p>Example content</p>",
+    link: "https://example.com/resource",
+    work_item_ids: ["550e8400-e29b-41d4-a716-446655440000"],
+  }),
+});
 const data = await response.json();
 ```
 

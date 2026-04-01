@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, members, remove workspace
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/members/remove/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/members/remove/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Remove a member from the workspace, deactivate them from all projects, and reduc
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -50,7 +50,7 @@ Workspace slug
 curl -X POST \
   "https://api.plane.so/api/v1/workspaces/my-workspace/members/remove/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>

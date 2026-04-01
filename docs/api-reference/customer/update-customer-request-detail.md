@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, customer, update a custom
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/customers/{customer_id}/requests/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/requests/{resource_id}/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,19 +24,19 @@ Update an existing customer request with the provided fields.
 
 <ApiParam name="customer_id" type="string" :required="true">
 
-Customer id.
+The unique identifier of the customer.
 
 </ApiParam>
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="resource_id" type="string" :required="true">
 
-Pk.
+The unique identifier of the resource.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Slug.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -99,7 +99,7 @@ Work item ids.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/resource-id-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -121,7 +121,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/resource-id-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -141,7 +141,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/requests/550e8400-e29b-41d4-a716-446655440000/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/requests/resource-id-uuid/",
   {
     method: "PATCH",
     headers: {

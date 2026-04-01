@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, issue, advanced search wo
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/work-items/advanced-search/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/work-items/advanced-search/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Search for work items with advanced filters and search query.
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 

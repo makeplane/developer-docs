@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, intake issue, update an i
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/projects/{project_id}/intake-issues/{issue_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/intake-issues/{work_item_id}/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,21 +22,21 @@ Modify an existing intake work item's properties or status for triage processing
 
 <div class="params-list">
 
-<ApiParam name="issue_id" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-Issue ID
+The unique identifier of the work item.
 
 </ApiParam>
 
 <ApiParam name="project_id" type="string" :required="true">
 
-Project ID
+The unique identifier of the project.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -109,7 +109,7 @@ Issue data to update in the intake issue
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/550e8400-e29b-41d4-a716-446655440001/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -130,7 +130,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/550e8400-e29b-41d4-a716-446655440001/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "status": 1,
@@ -149,7 +149,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/550e8400-e29b-41d4-a716-446655440000/intake-issues/550e8400-e29b-41d4-a716-446655440001/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/intake-issues/work-item-uuid/",
   {
     method: "PATCH",
     headers: {

@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, customer, unlink work ite
 
 <div class="api-endpoint-badge">
   <span class="method delete">DELETE</span>
-  <span class="path">/api/v1/workspaces/{slug}/customers/{customer_id}/issues/{issue_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/issues/{work_item_id}/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,19 +24,19 @@ Remove the link between an issue and a customer/customer request.
 
 <ApiParam name="customer_id" type="string" :required="true">
 
-Customer id.
+The unique identifier of the customer.
 
 </ApiParam>
 
-<ApiParam name="issue_id" type="string" :required="true">
+<ApiParam name="work_item_id" type="string" :required="true">
 
-Issue id.
+The unique identifier of the work item.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Slug.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -60,9 +60,9 @@ Slug.
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/issues/550e8400-e29b-41d4-a716-446655440001/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/issues/work-item-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -72,7 +72,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/issues/550e8400-e29b-41d4-a716-446655440001/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/issues/work-item-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -83,7 +83,7 @@ print(response.status_code)
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/issues/550e8400-e29b-41d4-a716-446655440001/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/issues/work-item-uuid/",
   {
     method: "DELETE",
     headers: {

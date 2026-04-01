@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, customer, create a custom
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/customer-properties/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customer-properties/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Create a new customer property in the specified workspace.
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Slug.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 

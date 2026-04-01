@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, initiative, add projects 
 
 <div class="api-endpoint-badge">
   <span class="method post">POST</span>
-  <span class="path">/api/v1/workspaces/{slug}/initiatives/{initiative_id}/projects/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/initiatives/{initiative_id}/projects/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,13 +24,13 @@ Add projects to an initiative by its ID
 
 <ApiParam name="initiative_id" type="string" :required="true">
 
-Initiative ID
+The unique identifier of the initiative.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -69,7 +69,7 @@ Project ids.
 
 ```bash
 curl -X POST \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440001/projects/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/projects/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -87,7 +87,7 @@ curl -X POST \
 import requests
 
 response = requests.post(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440001/projects/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/projects/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "project_ids": [
@@ -103,7 +103,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440001/projects/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/projects/",
   {
     method: "POST",
     headers: {

@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, project labels, list proj
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/project-labels/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/project-labels/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Retrieve all project labels in a workspace.
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -89,7 +89,7 @@ Number of results per page (default: 20, max: 100)
 curl -X GET \
   "https://api.plane.so/api/v1/workspaces/my-workspace/project-labels/?cursor=20:1:0&expand=assignees" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>

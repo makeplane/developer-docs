@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, customer, retrieve a cust
 
 <div class="api-endpoint-badge">
   <span class="method get">GET</span>
-  <span class="path">/api/v1/workspaces/{slug}/customers/{customer_id}/property-values/{property_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/customers/{customer_id}/property-values/{property_id}/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,19 +24,19 @@ Retrieve values for a specific property of a customer.
 
 <ApiParam name="customer_id" type="string" :required="true">
 
-Customer id.
+The unique identifier of the customer.
 
 </ApiParam>
 
 <ApiParam name="property_id" type="string" :required="true">
 
-Property id.
+The unique identifier of the property.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Slug.
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -60,9 +60,9 @@ Slug.
 
 ```bash
 curl -X GET \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/property-values/550e8400-e29b-41d4-a716-446655440001/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/property-values/property-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -72,7 +72,7 @@ curl -X GET \
 import requests
 
 response = requests.get(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/property-values/550e8400-e29b-41d4-a716-446655440001/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/property-values/property-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.json())
@@ -83,7 +83,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/550e8400-e29b-41d4-a716-446655440001/property-values/550e8400-e29b-41d4-a716-446655440001/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/customers/customer-uuid/property-values/property-uuid/",
   {
     method: "GET",
     headers: {

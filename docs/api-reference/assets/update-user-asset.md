@@ -63,7 +63,7 @@ Additional attributes to update for the asset
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/assets/user-assets/550e8400-e29b-41d4-a716-446655440002/" \
+  "https://api.plane.so/api/v1/assets/user-assets/asset-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -84,7 +84,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/assets/user-assets/550e8400-e29b-41d4-a716-446655440002/",
+    "https://api.plane.so/api/v1/assets/user-assets/asset-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "attributes": {
@@ -102,7 +102,7 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/assets/user-assets/550e8400-e29b-41d4-a716-446655440002/", {
+const response = await fetch("https://api.plane.so/api/v1/assets/user-assets/asset-uuid/", {
   method: "PATCH",
   headers: {
     "X-API-Key": "your-api-key",

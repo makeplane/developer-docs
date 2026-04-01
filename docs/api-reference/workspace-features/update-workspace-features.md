@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, workspace features, updat
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/features/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/features/</span>
 </div>
 
 <div class="api-two-column">
@@ -22,9 +22,9 @@ Update the features of a workspace
 
 <div class="params-list">
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 

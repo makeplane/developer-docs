@@ -51,9 +51,9 @@ Asset ID
 
 ```bash
 curl -X DELETE \
-  "https://api.plane.so/api/v1/assets/user-assets/550e8400-e29b-41d4-a716-446655440002/" \
+  "https://api.plane.so/api/v1/assets/user-assets/asset-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
-  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
+  # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN"
 ```
 
 </template>
@@ -63,7 +63,7 @@ curl -X DELETE \
 import requests
 
 response = requests.delete(
-    "https://api.plane.so/api/v1/assets/user-assets/550e8400-e29b-41d4-a716-446655440002/",
+    "https://api.plane.so/api/v1/assets/user-assets/asset-uuid/",
     headers={"X-API-Key": "your-api-key"}
 )
 print(response.status_code)
@@ -73,7 +73,7 @@ print(response.status_code)
 <template #javascript>
 
 ```javascript
-const response = await fetch("https://api.plane.so/api/v1/assets/user-assets/550e8400-e29b-41d4-a716-446655440002/", {
+const response = await fetch("https://api.plane.so/api/v1/assets/user-assets/asset-uuid/", {
   method: "DELETE",
   headers: {
     "X-API-Key": "your-api-key",

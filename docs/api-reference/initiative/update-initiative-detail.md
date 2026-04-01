@@ -8,7 +8,7 @@ keywords: plane, plane api, rest api, api integration, initiative, update an ini
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{slug}/initiatives/{pk}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/initiatives/{initiative_id}/</span>
 </div>
 
 <div class="api-two-column">
@@ -24,19 +24,19 @@ Update an initiative by its ID
 
 <ApiParam name="initiative_id" type="string" :required="true">
 
-Initiative ID
+The unique identifier of the initiative.
 
 </ApiParam>
 
-<ApiParam name="pk" type="string" :required="true">
+<ApiParam name="initiative_id" type="string" :required="true">
 
-Pk.
+The unique identifier of the initiative.
 
 </ApiParam>
 
-<ApiParam name="slug" type="string" :required="true">
+<ApiParam name="workspace_slug" type="string" :required="true">
 
-Workspace slug
+The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
 
 </ApiParam>
 
@@ -145,7 +145,7 @@ Lead.
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440000/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -172,7 +172,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440000/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/",
     headers={"X-API-Key": "your-api-key"},
     json={
       "name": "Example Name",
@@ -196,30 +196,27 @@ print(response.json())
 <template #javascript>
 
 ```javascript
-const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/550e8400-e29b-41d4-a716-446655440000/",
-  {
-    method: "PATCH",
-    headers: {
-      "X-API-Key": "your-api-key",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "Example Name",
-      description: "Example description",
-      description_html: "<p>Example content</p>",
-      description_stripped: "Example description",
-      start_date: "2024-01-01T00:00:00Z",
-      end_date: "2024-01-01T00:00:00Z",
-      logo_props: "example-value",
-      state: "DRAFT",
-      archived_at: "2024-01-01T00:00:00Z",
-      created_by: "550e8400-e29b-41d4-a716-446655440000",
-      updated_by: "550e8400-e29b-41d4-a716-446655440000",
-      lead: "550e8400-e29b-41d4-a716-446655440000",
-    }),
-  }
-);
+const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/initiatives/initiative-uuid/", {
+  method: "PATCH",
+  headers: {
+    "X-API-Key": "your-api-key",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "Example Name",
+    description: "Example description",
+    description_html: "<p>Example content</p>",
+    description_stripped: "Example description",
+    start_date: "2024-01-01T00:00:00Z",
+    end_date: "2024-01-01T00:00:00Z",
+    logo_props: "example-value",
+    state: "DRAFT",
+    archived_at: "2024-01-01T00:00:00Z",
+    created_by: "550e8400-e29b-41d4-a716-446655440000",
+    updated_by: "550e8400-e29b-41d4-a716-446655440000",
+    lead: "550e8400-e29b-41d4-a716-446655440000",
+  }),
+});
 const data = await response.json();
 ```
 
