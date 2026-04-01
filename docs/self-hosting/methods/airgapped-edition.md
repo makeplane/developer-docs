@@ -7,7 +7,7 @@ keywords: plane airgapped, offline deployment, air-gapped docker, plane offline 
 # Deploy Plane Airgapped on Docker <Badge type="warning" text="Enterprise Grid" />
 
 :::info
-Airgapped deployments are available exclusively for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [sales team](mailto:sales@plane.so) for trials, tailor-made pricing for lesser seats, and license information.
+Airgapped deployments are available exclusively for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [Sales team](mailto:sales@plane.so) for trials, exceptions to the seat cut-off, tailored pricing, and licensing info.
 :::
 
 This guide walks you through deploying Plane Commercial in an airgapped Docker environment using Docker Compose and pre-configured images from your private registry.
