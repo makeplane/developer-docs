@@ -7,7 +7,7 @@ keywords: plane airgapped kubernetes, offline k8s deployment, air-gapped helm, k
 # Deploy Plane Airgapped on Kubernetes <Badge type="warning" text="Enterprise Grid" />
 
 ::: info
-Airgapped deployments are available exclusively for for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [sales team](mailto:sales@plane.so) for trials, tailor-made pricing for lesser seats, and license information.
+Airgapped deployments are available exclusively for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [sales team](mailto:sales@plane.so) for trials, tailor-made pricing for lesser seats, and license information.
 :::
 
 This guide walks you through deploying Plane Commercial in an airgapped Kubernetes environment using Helm charts and pre-packaged Docker images.
