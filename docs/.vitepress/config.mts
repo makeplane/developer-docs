@@ -235,8 +235,8 @@ export default withMermaid(
                 collapsed: true,
                 items: [
                   { text: "Overview", link: "/self-hosting/methods/airgapped-requirements" },
-                  { text: "For Docker", link: "/self-hosting/methods/airgapped-edition" },
-                  { text: "For Kubernetes", link: "/self-hosting/methods/airgapped-edition-kubernetes" },
+                  { text: "On Docker", link: "/self-hosting/methods/airgapped-edition" },
+                  { text: "On Kubernetes", link: "/self-hosting/methods/airgapped-edition-kubernetes" },
                   { text: "Clone Docker Images", link: "/self-hosting/methods/clone-docker-images" },
                 ],
               },

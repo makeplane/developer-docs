@@ -29,7 +29,7 @@ Since airgapped instances can't pull updates from the internet, updating the ver
    curl -fsSL https://prime.plane.so/releases/<plane_version>/variables-airgapped.env -o plane.env
    ```
 
-   Transfer both files to your airgapped instance and replace the existing ones. If you've made custom changes to your `plane.env`, merge them into the new template before replacing.
+   Transfer both files to your airgapped instance and replace the existing ones. Before replacing your existing `plane.env`, compare it with the new template. Copy over any custom values from your old plane.env into the new template. The new template may include additional variables required by the latest version, so always use the new file as the base and bring your existing values into it.
 
    :::info
    Replace `<plane_version>` with the version you're upgrading to (e.g., v2.5.2). Check the [release notes](https://plane.so/changelog?category=self-hosted) for the latest available release version.

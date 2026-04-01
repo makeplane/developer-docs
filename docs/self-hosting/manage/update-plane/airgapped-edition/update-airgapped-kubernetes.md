@@ -35,7 +35,9 @@ Since airgapped clusters can't pull updates from the internet, upgrading require
    Replace <chart_version> with the latest Helm chart version (e.g., 2.2.4). You can check the most recent version on [Artifact Hub](https://artifacthub.io/packages/helm/makeplane/plane-enterprise).
    :::
 
-3. In your `values.yaml`, update `planeVersion` to match the version of Plane images you pushed to the registry:
+   Before replacing your existing `values.yaml`, compare it with the new Helm chart's default values. Copy over any custom configuration from your old `values.yaml` into the new template. The new chart version may include additional or renamed fields, so always use the new default values as the base and bring your existing configuration into it.
+
+3. In your `values.yaml`, update `planeVersion` to match the version of Plane images you pushed to the registry.
 
    ```yaml
    planeVersion: <plane_version>
