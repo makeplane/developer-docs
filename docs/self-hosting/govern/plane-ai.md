@@ -58,11 +58,18 @@ The custom model should have at least 100 billion parameters for all Plane AI fe
 
 Embedding models power semantic search. Plane AI supports:
 
-| Provider                | Supported models                                                 |
-| ----------------------- | ---------------------------------------------------------------- |
-| **Cohere**              | `cohere/embed-v4.0`                                              |
-| **OpenAI**              | `openai/text-embedding-ada-002`, `openai/text-embedding-3-small` |
-| **AWS Bedrock (Titan)** | `bedrock/amazon.titan-embed-text-v1`                             |
+| Provider        | Supported models                       | Dimension |
+| --------------- | -------------------------------------- | --------- |
+| **Cohere**      | `cohere/embed-v4.0`                    | 1536      |
+|                 | `cohere/embed-english-v3.0`            | 1024      |
+|                 | `cohere/embed-english-v2.0`            | 4096      |
+| **OpenAI**      | `openai/text-embedding-ada-002`        | 1536      |
+|                 | `openai/text-embedding-3-small`        | 1536      |
+|                 | `openai/text-embedding-3-large`        | 3072      |
+| **AWS Bedrock** | `bedrock/amazon.titan-embed-text-v1`   | 1536      |
+|                 | `bedrock/amazon.titan-embed-text-v2`   | 1024      |
+|                 | `bedrock/cohere.embed-english-v3`      | 1024      |
+|                 | `bedrock/cohere.embed-multilingual-v3` | 1024      |
 
 ## Enable Plane AI services
 
@@ -99,6 +106,10 @@ services:
 
 This activates the Plane AI API, worker, beat-worker, and migrator workloads. Replica counts and resource limits for each workload can be configured through the [Plane AI values block](/self-hosting/methods/kubernetes#plane-ai-pi-deployment) in your `values.yaml`.
 
+:::
+
+:::tip Plane AI API startup checks
+On start, the Plane AI container runs an embedding-dimension check against OpenSearch. **OpenSearch must be reachable** at `OPENSEARCH_URL`, and **`EMBEDDING_MODEL` must be set** in your environment or the service will not start. If existing index mappings or the deployed ML model disagree with **`OPENSEARCH_EMBEDDING_DIMENSION`**, startup fails until you align the configuration or rebuild indices (see [Changing the embedding dimension](#changing-the-embedding-dimension) below).
 :::
 
 ## Configure an LLM provider
@@ -160,14 +171,16 @@ OPENSEARCH_INDEX_PREFIX=plane
 
 ### Configure an embedding model
 
-Configure exactly one embedding model using one of these options.
+You must configure the `EMBEDDING_MODEL` so Plane AI knows which embedding model to construct queries for. Then configure exactly one embedding model deployment using one of these options.
 
 #### Option A: Use an existing OpenSearch model ID
 
-If you've already deployed an embedding model in OpenSearch, provide its model ID. This works with both self-hosted and AWS OpenSearch.
+If you've already deployed an embedding model in OpenSearch, provide its model ID along with your chosen embedding model and dimension. This works with both self-hosted and AWS OpenSearch.
 
 ```bash
-EMBEDDING_MODEL_ID=your-model-id
+OPENSEARCH_ML_MODEL_ID=your-model-id
+EMBEDDING_MODEL=openai/text-embedding-3-small
+OPENSEARCH_EMBEDDING_DIMENSION=1536
 ```
 
 For AWS OpenSearch, you must deploy the embedding model manually before setting this variable. See [Deploy an embedding model on AWS OpenSearch](/self-hosting/govern/aws-opensearch-embedding).
@@ -181,6 +194,7 @@ For self-hosted OpenSearch, Plane can automatically create and deploy the embedd
 ```bash
 EMBEDDING_MODEL=cohere/embed-v4.0
 COHERE_API_KEY=your-cohere-api-key
+OPENSEARCH_EMBEDDING_DIMENSION=1536
 ```
 
 **OpenAI:**
@@ -188,6 +202,7 @@ COHERE_API_KEY=your-cohere-api-key
 ```bash
 EMBEDDING_MODEL=openai/text-embedding-3-small
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
+OPENSEARCH_EMBEDDING_DIMENSION=1536
 ```
 
 **AWS Bedrock (Titan):**
@@ -197,6 +212,7 @@ EMBEDDING_MODEL=bedrock/amazon.titan-embed-text-v1
 BR_AWS_ACCESS_KEY_ID=your-access-key
 BR_AWS_SECRET_ACCESS_KEY=your-secret-key
 BR_AWS_REGION=your-region
+OPENSEARCH_EMBEDDING_DIMENSION=1536
 ```
 
 :::warning Required IAM permission for Bedrock Titan
@@ -221,7 +237,7 @@ Replace `<your-region>` with your `BR_AWS_REGION` value.
 :::
 
 :::info
-Automatic embedding model deployment only works with self-hosted OpenSearch. For AWS OpenSearch, deploy the model manually and use `EMBEDDING_MODEL_ID`.
+Automatic embedding model deployment only works with self-hosted OpenSearch. For AWS OpenSearch, deploy the model manually and set `OPENSEARCH_ML_MODEL_ID` to that model’s ID.
 :::
 
 ## Restart Plane
@@ -269,6 +285,20 @@ kubectl exec -n plane $API_POD -- python manage.py manage_search_index --backgro
 ```
 
 The `--background` flag processes vectorization through Celery workers. This is recommended for instances with large amounts of existing content.
+
+### Changing the embedding dimension
+
+If you update the model or manually override the dimension size by setting `OPENSEARCH_EMBEDDING_DIMENSION`, you must recreate your search indices so they adopt the new dimension size, then reindex and revectorize your workspace. Ensure that the model associated with your `OPENSEARCH_ML_MODEL_ID` and your `EMBEDDING_MODEL` configuration share this same dimension size.
+
+Run these commands inside your API container or pod after updating the environment variables and restarting the Plane services:
+
+```bash
+# 1. Rebuild all search indices to apply the new dimension size
+python manage.py manage_search_index index rebuild --force
+
+# 2. Reindex and revectorize all existing documents
+python manage.py manage_search_index --background --vectorize document index --force
+```
 
 ## After setup
 

@@ -224,10 +224,12 @@ POST /_plugins/_ml/models/<model_id>/_predict
 
 ## Configure Plane
 
-Add the deployed model ID to `/opt/plane/plane.env`:
+Add the deployed model ID and configuration to `/opt/plane/plane.env`:
 
 ```bash
-EMBEDDING_MODEL_ID=<model_id>
+OPENSEARCH_ML_MODEL_ID=<model_id>
+EMBEDDING_MODEL=cohere/embed-v4.0
+OPENSEARCH_EMBEDDING_DIMENSION=1536
 ```
 
 Restart Plane and complete the remaining steps in [Enable Plane AI](/self-hosting/govern/plane-ai#configure-an-embedding-model).
