@@ -4,10 +4,10 @@ description: Deploy Plane on Kubernetes using Helm charts. Complete guide for pr
 keywords: plane airgapped kubernetes, offline k8s deployment, air-gapped helm, kubernetes offline, plane helm airgapped, self-hosting
 ---
 
-# Deploy Plane with airgapped Kubernetes <Badge type="tip" text="Business" />
+# Deploy Plane with airgapped Kubernetes <Badge type="warning" text="Enterprise Grid" />
 
 ::: info
-Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
+Airgapped deployments are available exclusively for Enterprise Grid customers. Contact our [sales team](mailto:sales@plane.so) for trials, pricing and license information.
 :::
 
 This guide walks you through deploying Plane Commercial in an airgapped Kubernetes environment using Helm charts and pre-packaged Docker images.

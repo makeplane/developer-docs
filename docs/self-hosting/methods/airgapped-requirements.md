@@ -7,7 +7,7 @@ keywords: plane airgapped requirements, air-gapped architecture, offline prerequ
 # Airgapped deployment architecture
 
 ::: info
-Airgapped deployments are available exclusively for Business plan customers. Contact our [sales team](mailto:sales@plane.so) for pricing and licensing information.
+Airgapped deployments are available exclusively for Enterprise Grid customers. Contact our [sales team](mailto:sales@plane.so) for trials, pricing and license information.
 :::
 
 This document explains Plane's architecture and specific requirements for airgapped deployments. Review this before beginning your airgapped installation on [Docker](/self-hosting/methods/airgapped-edition) or [Kubernetes](/self-hosting/methods/airgapped-edition-kubernetes).
@@ -17,6 +17,19 @@ This document explains Plane's architecture and specific requirements for airgap
 An airgapped deployment operates in a completely isolated network environment with no external internet connectivity. This isolation is common in highly regulated industries, government facilities, and organizations with strict security requirements.
 
 Plane supports fully airgapped deployments where all components - application services, databases, storage, and integrations - operate entirely within your isolated network perimeter.
+
+## Deployment methods
+
+Plane's Airgapped Edition can be deployed using Docker or Kubernetes. Choose the method that best fits your infrastructure.
+
+<CardGroup>
+  <Card title="Docker" icon="docker" href="/self-hosting/methods/airgapped-edition">
+    Deploy on a single machine using Docker.
+  </Card>
+  <Card title="Kubernetes" icon="kubernetes" href="/self-hosting/methods/airgapped-edition-kubernetes">
+    Deploy on a Kubernetes cluster using Helm charts.
+  </Card>
+</CardGroup>
 
 ## Airgapped cluster architecture
 
