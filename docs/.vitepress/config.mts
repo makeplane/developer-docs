@@ -621,6 +621,7 @@ export default withMermaid(
                 collapsed: true,
                 items: [
                   { text: "Overview", link: "/api-reference/page/overview" },
+                  { text: "List Workspace Pages", link: "/api-reference/page/list-workspace-pages" },
                   { text: "Add Workspace Page", link: "/api-reference/page/add-workspace-page" },
                   { text: "Add Project Page", link: "/api-reference/page/add-project-page" },
                   { text: "Get Workspace Page", link: "/api-reference/page/get-workspace-page" },
