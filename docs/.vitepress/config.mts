@@ -623,6 +623,7 @@ export default withMermaid(
                   { text: "Overview", link: "/api-reference/page/overview" },
                   { text: "List Workspace Pages", link: "/api-reference/page/list-workspace-pages" },
                   { text: "Add Workspace Page", link: "/api-reference/page/add-workspace-page" },
+                  { text: "List Project Pages", link: "/api-reference/page/list-project-pages" },
                   { text: "Add Project Page", link: "/api-reference/page/add-project-page" },
                   { text: "Get Workspace Page", link: "/api-reference/page/get-workspace-page" },
                   { text: "Get Project Page", link: "/api-reference/page/get-project-page" },
