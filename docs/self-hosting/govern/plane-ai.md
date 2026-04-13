@@ -41,6 +41,10 @@ Supported models:
 
 You can provide API keys for both OpenAI and Anthropic, making all models available to users. If you provide only one key, users will only have access to that provider's models.
 
+:::tip
+If you need to use an LLM that isn't from OpenAI or Anthropic — for example, an open-source model or a regional provider for compliance reasons — you can proxy it through [LiteLLM](https://docs.litellm.ai). LiteLLM exposes any LLM behind an OpenAI-compatible API, which Plane can then connect to using the `CUSTOM_LLM_*` variables with `CUSTOM_LLM_PROVIDER=openai`.
+:::
+
 #### Custom models (self-hosted or third-party)
 
 Plane AI supports custom models through two backends:
@@ -51,7 +55,7 @@ Plane AI supports custom models through two backends:
 One custom model can be configured alongside your public provider keys.
 
 ::: warning
-The custom model should have at least 100 billion parameters for all Plane AI features to work reliably. Larger, more capable models yield better results.
+The custom model should have at least 1 trillion parameters for all Plane AI features to work reliably. Larger, more capable models yield better results.
 :::
 
 ### Embedding models

@@ -40,126 +40,133 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
 
 #### GitHub Cloud
 
-1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
+1.  Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
-2. Click **New GitHub App**.
-   ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
+2.  Click **New GitHub App**.
 
-3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
-   ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
+    ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
 
-4. In the **Identifying and authorizing users** section, add the following **Callback URLS**.
+3.  In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
 
-   ```bash
-   https://<your-domain>/silo/api/github/auth/callback
-   https://<your-domain>/silo/api/github/auth/user/callback
-   ```
+    ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
 
-   These URLs allow Plane to verify and enable workspace connection with the Github App.
-   ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
+4.  In the **Identifying and authorizing users** section, add the following **Callback URLS**.
 
-   :::warning
-   Make sure to opt out of **Expire user authorization tokens** feature.
-   :::
+    ```bash
+    https://<your-domain>/silo/api/github/auth/callback
+    https://<your-domain>/silo/api/github/auth/user/callback
+    ```
 
-5. In the **Post installation** section, add the below **Setup URL**.
+    These URLs allow Plane to verify and enable workspace connection with the Github App.
 
-   ```bash
-   https://<your-domain>/silo/api/github/auth/callback
-   ```
+    ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
 
-   Redirects users to this URL after GitHub app installation.
-   ![Add setup URL](/images/integrations/github/add-setup-url.webp#hero)
+    :::warning
+    Make sure to opt out of **Expire user authorization tokens** feature.
+    :::
 
-6. Turn on **Redirect on update**.
+5.  In the **Post installation** section, add the below **Setup URL**.
 
-7. In the **Webhook** section, add the below **Webhook URL**.
+    ```bash
+    https://<your-domain>/silo/api/github/auth/callback
+    ```
 
-   ```bash
-   https://<your-domain>/silo/api/github/github-webhook
-   ```
+    Redirects users to this URL after GitHub app installation.
 
-   This allows Plane to receive updates from GitHub repositories.
+    ![Add setup URL](/images/integrations/github/add-setup-url.webp#hero)
 
-   ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#hero)
+6.  Turn on **Redirect on update**.
+
+7.  In the **Webhook** section, add the below **Webhook URL**.
+
+    ```bash
+    https://<your-domain>/silo/api/github/github-webhook
+    ```
+
+    This allows Plane to receive updates from GitHub repositories.
+
+    ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#hero)
 
 == GitHub Enterprise Server {#github-enterprise-server}
 These steps cover hostname, callback URLs, and private key differences for on‑prem GitHub deployments.
 
 #### GitHub Enterprise Server
 
-1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
+1.  Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
-2. Click **New GitHub App**.
-   ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
+2.  Click **New GitHub App**.
 
-3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
-   ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
+    ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
 
-4. In the **Identifying and authorizing users** section, add the following **Callback URLS**.
+3.  In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
 
-   **For Plane cloud instance**
+    ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
 
-   ```bash
-   https://silo.plane.so/api/oauth/github-enterprise/auth/callback
-   https://silo.plane.so/api/oauth/github-enterprise/auth/user/callback
-   ```
+4.  In the **Identifying and authorizing users** section, add the following **Callback URLS**.
 
-   **For Plane self-hosted instance**
+    **For Plane cloud instance**
 
-   ```bash
-   https://<your-domain>/silo/api/oauth/github-enterprise/auth/callback
-   https://<your-domain>/silo/api/oauth/github-enterprise/auth/user/callback
-   ```
+    ```bash
+    https://silo.plane.so/api/oauth/github-enterprise/auth/callback
+    https://silo.plane.so/api/oauth/github-enterprise/auth/user/callback
+    ```
 
-   These URLs allow Plane to verify and enable workspace connection with the Github App.
-   ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
-   :::warning
-   Make sure to opt out of **Expire user authorization tokens** feature.
-   :::
+    **For Plane self-hosted instance**
 
-5. In the **Post installation** section, add the below **Setup URL**.
+    ```bash
+    https://<your-domain>/silo/api/oauth/github-enterprise/auth/callback
+    https://<your-domain>/silo/api/oauth/github-enterprise/auth/user/callback
+    ```
 
-   **For Plane cloud instance**
+    These URLs allow Plane to verify and enable workspace connection with the Github App.
+    ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
+    :::warning
+    Make sure to opt out of **Expire user authorization tokens** feature.
+    :::
 
-   ```bash
-   https://silo.plane.so/api/oauth/github-enterprise/auth/callback
-   ```
+5.  In the **Post installation** section, add the below **Setup URL**.
 
-   **For Plane self-hosted instance**
+    **For Plane cloud instance**
 
-   ```bash
-   https://<your-plane-domain>/silo/api/oauth/github-enterprise/auth/callback
-   ```
+    ```bash
+    https://silo.plane.so/api/oauth/github-enterprise/auth/callback
+    ```
 
-   Redirects users to this URL after GitHub app installation.
-   ![Add setup URL](/images/integrations/github/add-setup-url.webp#hero)
+    **For Plane self-hosted instance**
 
-6. Turn on **Redirect on update**.
+    ```bash
+    https://<your-plane-domain>/silo/api/oauth/github-enterprise/auth/callback
+    ```
 
-7. In the **Webhook** section, add the below **Webhook URL**.
+    Redirects users to this URL after GitHub app installation.
+    ![Add setup URL](/images/integrations/github/add-setup-url.webp#hero)
 
-   **For Plane cloud instance**
+6.  Turn on **Redirect on update**.
 
-   ```bash
-   https://silo.plane.so/api/github-enterprise/github-webhook
-   ```
+7.  In the **Webhook** section, add the below **Webhook URL**.
 
-   **For Plane self-hosted instance**
+    **For Plane cloud instance**
 
-   ```bash
-   https://<your-plane-domain>/silo/api/github-enterprise/github-webhook
-   ```
+    ```bash
+    https://silo.plane.so/api/github-enterprise/github-webhook
+    ```
 
-   This allows Plane to receive updates from GitHub repositories.
+    **For Plane self-hosted instance**
 
-   ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#hero)
+    ```bash
+    https://<your-plane-domain>/silo/api/github-enterprise/github-webhook
+    ```
+
+    This allows Plane to receive updates from GitHub repositories.
+
+    ![Add Webhook URL](/images/integrations/github/add-webhook-url.webp#hero)
 
 :::
 
 ### Set up permissions and events
 
 1. Add repository and account permissions by setting the **Access** dropdown next to each permission, as shown in the tables below.
+
    ![Setup permissions](/images/integrations/github/setup-permissions.webp#hero)
 
    **Repository permissions**
