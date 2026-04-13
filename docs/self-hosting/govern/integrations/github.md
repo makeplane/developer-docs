@@ -43,9 +43,11 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
 2. Click **New GitHub App**.
+
    ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
 
 3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
+
    ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**.
@@ -56,11 +58,12 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
    ```
 
    These URLs allow Plane to verify and enable workspace connection with the Github App.
+
    ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
 
-   :::warning
-   Make sure to opt out of **Expire user authorization tokens** feature.
-   :::
+      :::warning
+      Make sure to opt out of **Expire user authorization tokens** feature.
+      :::
 
 5. In the **Post installation** section, add the below **Setup URL**.
 
@@ -69,6 +72,7 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
    ```
 
    Redirects users to this URL after GitHub app installation.
+
    ![Add setup URL](/images/integrations/github/add-setup-url.webp#hero)
 
 6. Turn on **Redirect on update**.
@@ -91,9 +95,11 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 1. Go to **Settings \> Developer Settings \> GitHub Apps** in your GitHub organization.
 
 2. Click **New GitHub App**.
+
    ![Create GitHub App](/images/integrations/github/create-github-app.webp#hero)
 
 3. In the **Register new GitHub App** page, provide a **GitHub App name** and **Homepage URL**.
+
    ![App name and homepage URL](/images/integrations/github/app-name-homepage-url.webp#hero)
 
 4. In the **Identifying and authorizing users** section, add the following **Callback URLS**.
@@ -114,9 +120,9 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 
    These URLs allow Plane to verify and enable workspace connection with the Github App.
    ![Add Callback URL](/images/integrations/github/add-callback-url.webp#hero)
-   :::warning
-   Make sure to opt out of **Expire user authorization tokens** feature.
-   :::
+      :::warning
+      Make sure to opt out of **Expire user authorization tokens** feature.
+      :::
 
 5. In the **Post installation** section, add the below **Setup URL**.
 
@@ -160,6 +166,7 @@ These steps cover hostname, callback URLs, and private key differences for on‑
 ### Set up permissions and events
 
 1. Add repository and account permissions by setting the **Access** dropdown next to each permission, as shown in the tables below.
+
    ![Setup permissions](/images/integrations/github/setup-permissions.webp#hero)
 
    **Repository permissions**
