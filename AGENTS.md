@@ -1,10 +1,12 @@
 # Developer Docs Agent Context
 
 ## Purpose
+
 Internal developer documentation for Plane EE.
 
 ## Structure
-```
+
+```text
 docs/
   api-reference/        # REST API docs — 30+ resource categories (issues, cycles, modules, pages, etc.)
   dev-tools/            # Developer tooling guides
@@ -25,6 +27,7 @@ docs/
 ```
 
 ## Key Documentation Paths
+
 - `self-hosting/methods/kubernetes.md` - K8s deployment guide
 - `self-hosting/methods/install-methods-commercial/` - Commercial Docker Compose and Kubernetes
 - `self-hosting/govern/integrations/` - GitHub, GitLab, Slack, Sentry
@@ -37,6 +40,7 @@ docs/
 - `dev-tools/mcp-server.md` and `mcp-server-claude-code.md` - MCP server docs
 
 ## Important Notes
+
 - Not all features are documented immediately after release
 - Check both public docs (docs.plane.so) and internal docs
 - `self-hosting/govern/plane-ai.md` is the correct path for AI config (not `self-hosting/plane-ai.md`)
