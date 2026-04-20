@@ -8,6 +8,10 @@ Allow: /
 # Disallow crawling of search results (if any)
 Disallow: /search
 
+# Content Signals — AI content usage preferences
+# https://contentsignals.org/
+Content-Signal: search=yes, ai-train=yes, ai-input=yes
+
 # Disallow crawling of any internal/private paths (add as needed)
 # Disallow: /private/
 # Disallow: /admin/
