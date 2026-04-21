@@ -7,6 +7,10 @@
         {
           "key": "Link",
           "value": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </api-reference/introduction>; rel=\"service-doc\"; type=\"text/html\", </sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\""
+        },
+        {
+          "key": "Vary",
+          "value": "accept"
         }
       ]
     }
