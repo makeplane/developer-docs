@@ -1,8 +1,8 @@
 import { defineConfig, type HeadConfig } from "vitepress";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { withMermaid } from "vitepress-plugin-mermaid";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync, readdirSync, statSync, mkdirSync, copyFileSync } from "node:fs";
+import { resolve, join, relative, dirname } from "node:path";
 
 function loadEnvVar(key: string): string | undefined {
   // process.env takes precedence (CI/hosting platforms set vars here)
@@ -74,6 +74,29 @@ export default withMermaid(
           "dompurify",
         ],
       },
+    },
+    buildEnd(siteConfig) {
+      // Copy source .md files into dist/ for Accept: text/markdown negotiation.
+      const srcDir = siteConfig.srcDir;
+      const outDir = siteConfig.outDir;
+
+      function walk(dir: string): void {
+        for (const entry of readdirSync(dir)) {
+          if (entry === ".vitepress" || entry === "public" || entry === "node_modules") continue;
+          const abs = join(dir, entry);
+          const stat = statSync(abs);
+          if (stat.isDirectory()) {
+            walk(abs);
+          } else if (stat.isFile() && abs.endsWith(".md")) {
+            const rel = relative(srcDir, abs);
+            const dest = join(outDir, rel);
+            mkdirSync(dirname(dest), { recursive: true });
+            copyFileSync(abs, dest);
+          }
+        }
+      }
+
+      walk(srcDir);
     },
     title: "Plane developer documentation",
     description:
