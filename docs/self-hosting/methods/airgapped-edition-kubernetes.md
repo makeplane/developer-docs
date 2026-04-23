@@ -33,7 +33,7 @@ Consider these alternatives:
 - **Redis**: Replace with Valkey or a managed Redis service
 - **PostgreSQL**: Use a managed PostgreSQL service
 - **RabbitMQ**: Use a managed message queue service
-- **OpenSearch**: Use a managed OpenSearch or Elasticsearch service
+- **OpenSearch**: Use a managed OpenSearch service
   :::
 
 ## Install Plane
