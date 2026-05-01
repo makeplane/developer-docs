@@ -282,9 +282,11 @@ airgapped:
 
 When `services.minio.local_setup=false` you must configure CORS on the target bucket. Plane's web UI uploads files directly to your S3 endpoint via presigned POST. When the S3 endpoint is on a different hostname from the Plane web UI, the browser's same-origin policy requires the bucket to answer a CORS preflight; otherwise uploads fail with `net::ERR_FAILED` even though all server-side configuration is correct.
 
-The bundled MinIO setup avoids this by routing the bucket through the same ingress as the web UI (same-origin); external backends are always cross-origin and need explicit CORS configuration.
+The bundled MinIO setup avoids this by routing the bucket through the same ingress as the web UI (same-origin). External backends are typically cross-origin and need explicit CORS configuration, unless you front the S3 endpoint with a same-origin reverse proxy or DNS alias.
 
-Apply the following CORS configuration to your bucket, replacing `https://plane.example.com` with your Plane web URL:
+`env.use_storage_proxy=true` only affects browser-initiated GETs (downloads); uploads always go directly to the S3 endpoint via presigned POST and still require bucket CORS.
+
+Apply the following CORS configuration to your bucket, replacing `https://plane.example.com` with your Plane web URL and `<your-bucket-name>` with the value of `env.docstore_bucket` (default `uploads`):
 
 ```json
 {
@@ -302,7 +304,7 @@ Apply the following CORS configuration to your bucket, replacing `https://plane.
 
 ```bash
 aws --endpoint-url https://your-s3-endpoint s3api put-bucket-cors \
-  --bucket uploads \
+  --bucket <your-bucket-name> \
   --cors-configuration file://cors.json
 ```
 
