@@ -280,6 +280,34 @@ airgapped:
 | env.aws_s3_endpoint_url               |                    |          | External `S3` (or compatible) storage service providers shares a `endpoint_url` for the integration purpose for the application to connect and do the necessary upload or download operations. To be provided when `services.minio.local_setup=false`                                                                                                 |
 | env.use_storage_proxy                 |       false        |          | When set to `true`, all S3 (or compatible) file GET requests from the browser are proxied through Plane's API service instead of accessing the S3 endpoint directly. Enable this if your storage endpoint is not accessible publicly or you want to control download access through the API.                                                          |
 
+##### Bucket CORS configuration (required for browser uploads to external S3)
+
+When `services.minio.local_setup=false` you must configure CORS on the target bucket. Plane's web UI uploads files directly to your S3 endpoint via presigned POST. When the S3 endpoint is on a different hostname from the Plane web UI, the browser's same-origin policy requires the bucket to answer a CORS preflight; otherwise uploads fail with `net::ERR_FAILED` even though all server-side configuration is correct.
+
+The bundled MinIO setup avoids this by routing the bucket through the same ingress as the web UI (same-origin); external backends are always cross-origin and need explicit CORS configuration.
+
+Apply the following CORS configuration to your bucket, replacing `https://plane.example.com` with your Plane web URL:
+
+```json
+{
+  "CORSRules": [
+    {
+      "AllowedOrigins": ["https://plane.example.com"],
+      "AllowedMethods": ["GET", "HEAD", "PUT", "POST", "DELETE"],
+      "AllowedHeaders": ["*"],
+      "ExposeHeaders": ["ETag"],
+      "MaxAgeSeconds": 3000
+    }
+  ]
+}
+```
+
+```bash
+aws --endpoint-url https://your-s3-endpoint s3api put-bucket-cors \
+  --bucket uploads \
+  --cors-configuration file://cors.json
+```
+
 #### Web Deployment
 
 | Setting                        |                    Default                    | Required | Description                                                                                                                                                                                                        |
