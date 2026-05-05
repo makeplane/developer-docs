@@ -26,20 +26,20 @@ For production deployments, you can also point Plane at managed services for the
 
 ## 2. Cloud vs self-hosted
 
-| Dimension                         | [Plane Cloud](https://app.plane.so/sign-in) | Self-hosted                                                    |
-| --------------------------------- | ------------------------------------------- | -------------------------------------------------------------- |
-| Time to first user                | About 30 seconds                            | 20mins via Docker                                                   |
-| Data residency                    | US (default), EU available on demand                  | Anywhere you deploy                                            |
-| Network isolation                 | Public internet                             | VPC, private network, or fully air-gapped                      |
-| Upgrade timing                    | Continuous                                  | You choose your window                                         |
-| Feature freshness                 | New features ship here first                | Commercial gets them next, Community last                      |
-| Operational overhead              | Zero                                        | Real and ongoing |
-| Backups and DR                    | Plane operates                              | You design and operate                                         |
-| Support escalation                | One vendor                                  | Your platform team first, then Plane support                   |
-| Compliance posture                | Plane's certifications apply                | Your perimeter, your audit                                     |
-| Integration with internal systems | Egress only (public APIs)                   | Direct access to private services                              |
-| Cost model                        | Per-seat subscription                       | Per-seat subscription + On demand                         |
-| Audit logs, SCIM, advanced auth   | Business Plus                          | Available on plans (Commercial and Airgapped)                  |
+| Dimension                         | [Plane Cloud](https://app.plane.so/sign-in) | Self-hosted                                   |
+| --------------------------------- | ------------------------------------------- | --------------------------------------------- |
+| Time to first user                | About 30 seconds                            | 20mins via Docker                             |
+| Data residency                    | US (default), EU available on demand        | Anywhere you deploy                           |
+| Network isolation                 | Public internet                             | VPC, private network, or fully air-gapped     |
+| Upgrade timing                    | Continuous                                  | You choose your window                        |
+| Feature freshness                 | New features ship here first                | Commercial gets them next, Community last     |
+| Operational overhead              | Zero                                        | Real and ongoing                              |
+| Backups and DR                    | Plane operates                              | You design and operate                        |
+| Support escalation                | One vendor                                  | Your platform team first, then Plane support  |
+| Compliance posture                | Plane's certifications apply                | Your perimeter, your audit                    |
+| Integration with internal systems | Egress only (public APIs)                   | Direct access to private services             |
+| Cost model                        | Per-seat subscription                       | Per-seat subscription + On demand             |
+| Audit logs, SCIM, advanced auth   | Business Plus                               | Available on plans (Commercial and Airgapped) |
 
 [Cloud and self-hosted migration](/self-hosting/manage/migrate-plane) is supported in the Cloud-to-self-hosted direction.
 
