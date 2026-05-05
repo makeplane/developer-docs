@@ -28,18 +28,18 @@ For production deployments, you can also point Plane at managed services for the
 
 | Dimension                         | [Plane Cloud](https://app.plane.so/sign-in) | Self-hosted                                                    |
 | --------------------------------- | ------------------------------------------- | -------------------------------------------------------------- |
-| Time to first user                | About 30 seconds                            | Hours to days                                                  |
-| Data residency                    | US (default), EU available                  | Anywhere you deploy                                            |
+| Time to first user                | About 30 seconds                            | 20mins via Docker                                                   |
+| Data residency                    | US (default), EU available on demand                  | Anywhere you deploy                                            |
 | Network isolation                 | Public internet                             | VPC, private network, or fully air-gapped                      |
 | Upgrade timing                    | Continuous                                  | You choose your window                                         |
 | Feature freshness                 | New features ship here first                | Commercial gets them next, Community last                      |
-| Operational overhead              | Zero                                        | Real and ongoing (see [section 6](#6-what-your-team-operates)) |
+| Operational overhead              | Zero                                        | Real and ongoing |
 | Backups and DR                    | Plane operates                              | You design and operate                                         |
 | Support escalation                | One vendor                                  | Your platform team first, then Plane support                   |
 | Compliance posture                | Plane's certifications apply                | Your perimeter, your audit                                     |
 | Integration with internal systems | Egress only (public APIs)                   | Direct access to private services                              |
-| Cost model                        | Per-seat subscription                       | Licenses, infrastructure, and ops time                         |
-| Audit logs, SCIM, advanced auth   | Available on plans                          | Available on plans (Commercial and Airgapped)                  |
+| Cost model                        | Per-seat subscription                       | Per-seat subscription + On demand                         |
+| Audit logs, SCIM, advanced auth   | Business Plus                          | Available on plans (Commercial and Airgapped)                  |
 
 [Cloud and self-hosted migration](/self-hosting/manage/migrate-plane) is supported in the Cloud-to-self-hosted direction.
 
@@ -104,10 +104,6 @@ Self-hosting Plane fits the following scenarios.
 
 **4. Upgrade timing control.** Multi-week change windows, frozen periods around financial reporting, change-advisory-board approvals. Self-hosted lets you upgrade on your calendar. See [Upgrade Plane](/self-hosting/manage/upgrade-plane).
 
-**5. Cost predictability at scale.** At larger user counts, the unit economics of self-hosting can compare favorably to per-seat Cloud pricing if you already have a platform team. See [section 7](#7-total-cost-picture) for how to model it.
-
-**6. Customization and extension.** Direct access to the database, the ability to run [custom integrations](/dev-tools/build-plane-app/overview) inside your network, and (for Community) the option to modify the source.
-
 ---
 
 ## 5. What you're running
@@ -160,28 +156,7 @@ Self-hosted Plane sits inside your operational perimeter. Decide ownership and e
 
 ---
 
-## 7. Total cost picture
-
-Self-hosting cost has three components.
-
-**1. License costs.** Free on Community. Free on Commercial up to 12 seats per workspace. Per-seat for Pro and Business above that. Contract for [Enterprise Grid](/self-hosting/manage/manage-licenses/activate-enterprise). Contact [sales](https://plane.so/talk-to-sales) for current pricing.
-
-**2. Infrastructure costs.** Compute, database, object storage, network, and backup destinations. Order-of-magnitude buckets:
-
-- Single-VM POC: low hundreds of dollars per month.
-- Small production (10 to 100 users) on Docker Compose with managed Postgres and S3: low to mid hundreds per month.
-- Mid production (100 to 500 users): mid hundreds to low thousands per month.
-- Large production (500+ users) on Kubernetes with HA and multi-AZ: low thousands and up, scaling with usage and redundancy choices.
-
-Actual numbers depend on your cloud provider, redundancy choices, and traffic patterns.
-
-**3. Operations time.** A stable instance still consumes 0.1 to 0.25 FTE per month at small scale and 0.5 to 1.0 FTE at large scale. Upgrades, capacity planning, incident response, user support, and integration changes add up.
-
-To model the comparison against Cloud honestly, count all three buckets, including the time of the people running the system.
-
----
-
-## 8. What changes between editions
+## 7. What changes between editions
 
 Editions differ in three ways that matter operationally: feature availability, release cadence, and license model.
 
@@ -195,7 +170,7 @@ Full feature, version, and codebase comparison: [Plane Editions](/self-hosting/e
 
 ---
 
-## 9. Lifecycle: deploy, configure, operate, upgrade
+## 8. Lifecycle: deploy, configure, operate, upgrade
 
 Self-hosting Plane is four phases.
 
@@ -225,7 +200,7 @@ Skipping upgrades for 6+ months means bigger upgrade-time risk, more breaking ch
 
 ---
 
-## 10. Patterns and anti-patterns
+## 9. Patterns and anti-patterns
 
 Patterns we've seen repeated across self-hosted deployments.
 
@@ -249,7 +224,7 @@ Patterns we've seen repeated across self-hosted deployments.
 
 ---
 
-## 11. Planning checklist
+## 10. Planning checklist
 
 Before you go to production, have a clear answer to each of these:
 
@@ -263,7 +238,7 @@ Once these are settled, head to the [Self-hosting overview](/self-hosting/overvi
 
 ---
 
-## 12. Next steps
+## 11. Next steps
 
 **Try Plane self-hosted.** [Docker AIO](/self-hosting/methods/docker-aio) gives you a single container with embedded services in about 10 minutes (POC only).
 
