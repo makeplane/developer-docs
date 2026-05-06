@@ -233,6 +233,7 @@ export default withMermaid(
             text: "Self-host Plane",
             items: [
               { text: "Overview", link: "/self-hosting/overview" },
+              { text: "Self-hosting 101", link: "/self-hosting/self-hosting-101" },
               { text: "Plane Editions", link: "/self-hosting/editions-and-versions" },
               { text: "Plane Architecture", link: "/self-hosting/plane-architecture" },
             ],
