@@ -8,10 +8,10 @@ keywords: custom llm, self-hosted llm, ollama, litellm, groq, aws bedrock, plane
 
 Plane AI supports one custom LLM alongside OpenAI and Anthropic. Pick the provider type that fits your setup:
 
-| Provider type | Use when |
-| --- | --- |
+| Provider type         | Use when                                                                                              |
+| --------------------- | ----------------------------------------------------------------------------------------------------- |
 | **OpenAI-compatible** | Your model is served via an OpenAI Chat Completions API (Ollama, Groq, vLLM, LiteLLM, Cerebras, etc.) |
-| **AWS Bedrock** | You're accessing models through Amazon Bedrock |
+| **AWS Bedrock**       | You're accessing models through Amazon Bedrock                                                        |
 
 :::warning
 Use a model with at least 1 trillion parameters. Smaller models produce degraded output across Plane AI features.

@@ -12,18 +12,18 @@ This builds on the OpenSearch connection configured in [Get started with Plane A
 
 ## Supported embedding models
 
-| Provider | Model | Dimension |
-| --- | --- | --- |
-| **Cohere** | `cohere/embed-v4.0` | 1536 |
-| | `cohere/embed-english-v3.0` | 1024 |
-| | `cohere/embed-english-v2.0` | 4096 |
-| **OpenAI** | `openai/text-embedding-ada-002` | 1536 |
-| | `openai/text-embedding-3-small` | 1536 |
-| | `openai/text-embedding-3-large` | 3072 |
-| **AWS Bedrock** | `bedrock/amazon.titan-embed-text-v1` | 1536 |
-| | `bedrock/amazon.titan-embed-text-v2` | 1024 |
-| | `bedrock/cohere.embed-english-v3` | 1024 |
-| | `bedrock/cohere.embed-multilingual-v3` | 1024 |
+| Provider        | Model                                  | Dimension |
+| --------------- | -------------------------------------- | --------- |
+| **Cohere**      | `cohere/embed-v4.0`                    | 1536      |
+|                 | `cohere/embed-english-v3.0`            | 1024      |
+|                 | `cohere/embed-english-v2.0`            | 4096      |
+| **OpenAI**      | `openai/text-embedding-ada-002`        | 1536      |
+|                 | `openai/text-embedding-3-small`        | 1536      |
+|                 | `openai/text-embedding-3-large`        | 3072      |
+| **AWS Bedrock** | `bedrock/amazon.titan-embed-text-v1`   | 1536      |
+|                 | `bedrock/amazon.titan-embed-text-v2`   | 1024      |
+|                 | `bedrock/cohere.embed-english-v3`      | 1024      |
+|                 | `bedrock/cohere.embed-multilingual-v3` | 1024      |
 
 ## Step 1 — Configure the embedding model
 
