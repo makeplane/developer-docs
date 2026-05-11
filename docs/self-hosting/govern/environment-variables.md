@@ -237,7 +237,7 @@ These settings are required for semantic search and Plane AI Chat. Configure one
 | **BR_AWS_SECRET_ACCESS_KEY**       | AWS secret access key for Bedrock Titan embedding                                        | Conditional |
 | **BR_AWS_REGION**                  | AWS region for Bedrock Titan embedding                                                   | Conditional |
 
-For setup instructions, supported models, and IAM permissions, see [Enable Plane AI](/self-hosting/govern/plane-ai).
+For setup instructions, supported models, and IAM permissions, see [Plane AI](/self-hosting/govern/plane-ai/getting-started).
 
 ### API settings
 
@@ -312,7 +312,7 @@ For setup instructions, supported models, and IAM permissions, see [Enable Plane
 | **CUSTOM_LLM_MAX_TOKENS**               | Maximum token limit for the custom LLM.                                                                                                                        | 128000                                |
 | **EMBEDDING_MODEL**                     | Model key for generating embeddings (e.g. `cohere/embed-v4.0`). Required for PI API startup when Plane AI is enabled.                                          |                                       |
 | **OPENSEARCH_ML_MODEL_ID**              | OpenSearch ML model ID for the deployed embedding model.                                                                                                       |                                       |
-| **OPENSEARCH_EMBEDDING_DIMENSION**      | Vector dimension for `knn_vector` fields; must match the embedding model and stay aligned with the API service. See [Plane AI](/self-hosting/govern/plane-ai). | 1536                                  |
+| **OPENSEARCH_EMBEDDING_DIMENSION**      | Vector dimension for `knn_vector` fields; must match the embedding model and stay aligned with the API service. See [Semantic search](/self-hosting/govern/plane-ai/semantic-search). | 1536                                  |
 | **BR_AWS_ACCESS_KEY_ID**                | AWS access key for Amazon Bedrock integration.                                                                                                                 |                                       |
 | **BR_AWS_SECRET_ACCESS_KEY**            | AWS secret key for Amazon Bedrock integration.                                                                                                                 |                                       |
 | **BR_AWS_SESSION_TOKEN**                | AWS session token for Amazon Bedrock integration (for temporary credentials).                                                                                  |                                       |
