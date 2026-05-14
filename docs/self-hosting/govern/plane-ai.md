@@ -1,12 +1,12 @@
 ---
 title: Configure Plane AI
-description: Configure Plane AI on your self-hosted Plane deployment. Set up LLM providers, embedding models, and semantic search for Plane's AI features.
+description: Configure Plane AI on your self-hosted Plane deployment. Set up LLM providers for AI chat and duplicate detection. Optionally configure embedding models and semantic search.
 keywords: plane ai, Plane ai, self-hosted ai, llm configuration, embedding models, semantic search, openai, anthropic, cohere
 ---
 
 # Configure Plane AI <Badge type="info" text="Commercial Edition" />
 
-Plane AI brings AI-powered features to your workspace, including natural language chat, duplicate detection, and semantic search across work items, pages, and projects. This guide walks you through configuring Plane AI on your self-hosted instance.
+Plane AI brings AI-powered features to your workspace, including natural language chat, duplicate detection, and optionally semantic search across work items, pages, and projects. This guide walks you through configuring Plane AI on your self-hosted instance.
 
 For an overview of what Plane AI can do, see the [Plane AI](https://docs.plane.so/ai/pi-chat).
 
@@ -15,9 +15,16 @@ For an overview of what Plane AI can do, see the [Plane AI](https://docs.plane.s
 You'll need:
 
 - A **separate database** for Plane AI. Plane AI requires its own database instance.
-- An OpenSearch instance running version 2.19 or later (self-hosted or AWS OpenSearch) configured for [advanced search](/self-hosting/govern/advanced-search).
 - At least one LLM provider API key or a custom OpenAI-compatible endpoint.
-- At least one embedding model configured in OpenSearch.
+
+**Optional (for semantic search):**
+
+- An OpenSearch instance running version 2.19 or later (self-hosted or AWS OpenSearch) configured for [advanced search](/self-hosting/govern/advanced-search).
+- An embedding model configured in OpenSearch.
+
+::: tip
+Without OpenSearch and an embedding model, Plane AI chat, duplicate detection, and other LLM-powered features will work normally. Semantic search across work items, pages, and projects will not be available.
+:::
 
 ## Supported models
 
@@ -60,7 +67,7 @@ The custom model should have at least 1 trillion parameters for all Plane AI fea
 
 ### Embedding models
 
-Embedding models power semantic search. Plane AI supports:
+Embedding models power semantic search and are **optional**. If you're not using OpenSearch, you can skip configuring an embedding model. Plane AI supports:
 
 | Provider        | Supported models                       | Dimension |
 | --------------- | -------------------------------------- | --------- |
@@ -113,7 +120,7 @@ This activates the Plane AI API, worker, beat-worker, and migrator workloads. Re
 :::
 
 :::tip Plane AI API startup checks
-On start, the Plane AI container runs an embedding-dimension check against OpenSearch. **OpenSearch must be reachable** at `OPENSEARCH_URL`, and **`EMBEDDING_MODEL` must be set** in your environment or the service will not start. If existing index mappings or the deployed ML model disagree with **`OPENSEARCH_EMBEDDING_DIMENSION`**, startup fails until you align the configuration or rebuild indices (see [Changing the embedding dimension](#changing-the-embedding-dimension) below).
+If you configure OpenSearch for semantic search, the Plane AI container runs an embedding-dimension check on start. **OpenSearch must be reachable** at `OPENSEARCH_URL`, and **`EMBEDDING_MODEL` must be set** when OpenSearch is configured, or the service will not start. If existing index mappings or the deployed ML model disagree with **`OPENSEARCH_EMBEDDING_DIMENSION`**, startup fails until you align the configuration or rebuild indices (see [Changing the embedding dimension](#changing-the-embedding-dimension) below).
 :::
 
 ## Configure an LLM provider
@@ -160,9 +167,11 @@ GROQ_API_KEY=your-groq-api-key
 
 This enables voice input in Plane AI. It's not required for LLM or semantic search features.
 
-## Configure OpenSearch and an embedding model
+## Configure OpenSearch and an embedding model (optional)
 
-Plane AI uses OpenSearch for semantic indexing and retrieval. If you haven't set up OpenSearch yet, complete the [OpenSearch for advanced search](/self-hosting/govern/advanced-search) guide first, then return here.
+Plane AI uses OpenSearch for semantic indexing and retrieval, which powers semantic search across work items, pages, and projects. **This is optional** — Plane AI chat, duplicate detection, and other LLM-powered features work without OpenSearch or an embedding model.
+
+If you want to enable semantic search, complete the [OpenSearch for advanced search](/self-hosting/govern/advanced-search) guide first, then return here to configure the embedding model.
 
 ### Configure OpenSearch connection
 
@@ -175,7 +184,11 @@ OPENSEARCH_INDEX_PREFIX=plane
 
 ### Configure an embedding model
 
-You must configure the `EMBEDDING_MODEL` so Plane AI knows which embedding model to construct queries for. Then configure exactly one embedding model deployment using one of these options.
+If you're using OpenSearch for semantic search, configure the `EMBEDDING_MODEL` so Plane AI knows which embedding model to construct queries for. Then configure exactly one embedding model deployment using one of these options.
+
+::: info Skip if not using semantic search
+If you're not configuring OpenSearch, skip this section. Plane AI will work without semantic search capabilities.
+:::
 
 #### Option A: Use an existing OpenSearch model ID
 
@@ -272,7 +285,11 @@ helm upgrade --install plane-app plane/plane-enterprise \
 
 ## Vectorize existing data
 
-Generate embeddings for your existing content by running this command in the API container.
+::: info Only needed for semantic search
+Skip this section if you haven't configured OpenSearch and an embedding model. Vectorization is only required for semantic search functionality.
+:::
+
+If you configured OpenSearch and an embedding model, generate embeddings for your existing content by running this command in the API container.
 
 **Docker:**
 
@@ -308,7 +325,11 @@ python manage.py manage_search_index --background --vectorize document index --f
 
 Once configured:
 
-- Plane AI is available across your workspace.
+- Plane AI chat, duplicate detection, and LLM-powered features are available across your workspace.
+
+**If you configured OpenSearch and an embedding model:**
+
+- Semantic search is enabled across work items, pages, and projects.
 - New content (work items, pages, comments) is automatically vectorized in the background.
 - Semantic search stays synchronized without manual intervention.
 
