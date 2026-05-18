@@ -35,9 +35,7 @@ For cloud deployments, the server acts as an **OAuth proxy** to Plane's OAuth sy
 4. Subsequent MCP requests carry this token, from which the server extracts the workspace slug
 
 The server supports OAuth redirect URIs for all major MCP clients:
-
-- `http://localhost:*` (dynamic ports from desktop clients)
-- `cursor://`, `vscode://`, `vscode-insiders://`, `windsurf://`, `claude://`
+`cursor://`, `vscode://`, `vscode-insiders://`, `windsurf://`, `claude://`
 
 ### Header auth (HTTP with PAT Token)
 
@@ -71,6 +69,8 @@ Plane uses two kinds of identifiers for work items.
 ---
 
 ## How-to guides
+
+Plane hosts the MCP server for you at **`https://mcp.plane.so`**. If you run your own instance of the MCP server, replace `https://mcp.plane.so` with your own server's public URL (e.g., `https://mcp.yourcompany.com`) in all client config examples below.
 
 ### Prerequisites
 
@@ -136,7 +136,7 @@ Connects to a remote MCP server. Claude Desktop opens a browser window for the P
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/mcp",
+      "url": "https://mcp.plane.so/http/mcp",
       "type": "http"
     }
   }
@@ -151,7 +151,7 @@ Connects to the PAT endpoint using API key headers. No browser interaction requi
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/api-key/mcp",
+      "url": "https://mcp.plane.so/http/api-key/mcp",
       "type": "http",
       "headers": {
         "x-api-key": "your_api_key_here",
@@ -170,7 +170,7 @@ For existing integrations already using the SSE transport.
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/sse",
+      "url": "https://mcp.plane.so/sse",
       "type": "sse"
     }
   }
@@ -215,7 +215,7 @@ Settings file (`.claude/settings.json` for project scope, `~/.claude/settings.js
 ```bash
 claude mcp add plane \
   --transport http \
-  --url https://your-mcp-server.com/http/mcp
+  --url https://mcp.plane.so/http/mcp
 ```
 
 Claude Code will open a browser for the Plane OAuth flow. Settings file equivalent:
@@ -224,7 +224,7 @@ Claude Code will open a browser for the Plane OAuth flow. Settings file equivale
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/mcp",
+      "url": "https://mcp.plane.so/http/mcp",
       "type": "http"
     }
   }
@@ -236,7 +236,7 @@ Claude Code will open a browser for the Plane OAuth flow. Settings file equivale
 ```bash
 claude mcp add plane \
   --transport http \
-  --url https://your-mcp-server.com/http/api-key/mcp \
+  --url https://mcp.plane.so/http/api-key/mcp \
   --header "x-api-key: your_api_key_here" \
   --header "x-workspace-slug: your-workspace-slug"
 ```
@@ -247,7 +247,7 @@ Settings file equivalent:
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/api-key/mcp",
+      "url": "https://mcp.plane.so/http/api-key/mcp",
       "type": "http",
       "headers": {
         "x-api-key": "your_api_key_here",
@@ -263,7 +263,7 @@ Settings file equivalent:
 ```bash
 claude mcp add plane \
   --transport sse \
-  --url https://your-mcp-server.com/sse
+  --url https://mcp.plane.so/sse
 ```
 
 Settings file equivalent:
@@ -272,7 +272,7 @@ Settings file equivalent:
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/sse",
+      "url": "https://mcp.plane.so/sse",
       "type": "sse"
     }
   }
@@ -305,21 +305,21 @@ Claude.ai supports remote MCP servers for eligible plans. Because it runs in a b
 
 #### HTTP with OAuth
 
-1. Go to **Settings → Integrations** in Claude.ai.
-2. Click **Add Integration**.
-3. Enter the server URL: `https://your-mcp-server.com/http/mcp`
+1. Go to **Customize → Connectors ** in Claude.ai.
+2. Click **Add custom connector**.
+3. Enter the server URL: `https://mcp.plane.so/http/mcp`
 4. Claude.ai redirects you through the Plane OAuth flow.
 
 #### HTTP with PAT Token
 
 If your Claude.ai plan supports custom headers in integrations:
 
-- URL: `https://your-mcp-server.com/http/api-key/mcp`
+- URL: `https://mcp.plane.so/http/api-key/mcp`
 - Headers: `x-api-key: your_api_key_here`, `x-workspace-slug: your-workspace-slug`
 
 #### SSE (Legacy)
 
-- URL: `https://your-mcp-server.com/sse`
+- URL: `https://mcp.plane.so/sse`
 
 ---
 
@@ -355,7 +355,7 @@ The `cursor://` redirect URI is registered natively in the OAuth provider.
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/mcp",
+      "url": "https://mcp.plane.so/http/mcp",
       "type": "http"
     }
   }
@@ -368,7 +368,7 @@ The `cursor://` redirect URI is registered natively in the OAuth provider.
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/api-key/mcp",
+      "url": "https://mcp.plane.so/http/api-key/mcp",
       "type": "http",
       "headers": {
         "x-api-key": "your_api_key_here",
@@ -385,7 +385,7 @@ The `cursor://` redirect URI is registered natively in the OAuth provider.
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/sse",
+      "url": "https://mcp.plane.so/sse",
       "type": "sse"
     }
   }
@@ -424,7 +424,7 @@ Config can be set at workspace level (`.vscode/mcp.json`) or user level (VS Code
 {
   "servers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/mcp",
+      "url": "https://mcp.plane.so/http/mcp",
       "type": "http"
     }
   }
@@ -437,7 +437,7 @@ Config can be set at workspace level (`.vscode/mcp.json`) or user level (VS Code
 {
   "servers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/api-key/mcp",
+      "url": "https://mcp.plane.so/http/api-key/mcp",
       "type": "http",
       "headers": {
         "x-api-key": "your_api_key_here",
@@ -454,7 +454,7 @@ Config can be set at workspace level (`.vscode/mcp.json`) or user level (VS Code
 {
   "servers": {
     "plane": {
-      "url": "https://your-mcp-server.com/sse",
+      "url": "https://mcp.plane.so/sse",
       "type": "sse"
     }
   }
@@ -493,7 +493,7 @@ Restart Windsurf after saving, then open the Cascade panel. The `windsurf://` re
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/mcp",
+      "url": "https://mcp.plane.so/http/mcp",
       "type": "http"
     }
   }
@@ -506,7 +506,7 @@ Restart Windsurf after saving, then open the Cascade panel. The `windsurf://` re
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/http/api-key/mcp",
+      "url": "https://mcp.plane.so/http/api-key/mcp",
       "type": "http",
       "headers": {
         "x-api-key": "your_api_key_here",
@@ -523,7 +523,7 @@ Restart Windsurf after saving, then open the Cascade panel. The `windsurf://` re
 {
   "mcpServers": {
     "plane": {
-      "url": "https://your-mcp-server.com/sse",
+      "url": "https://mcp.plane.so/sse",
       "type": "sse"
     }
   }
@@ -563,7 +563,7 @@ Config file: `~/.config/zed/settings.json` under `"context_servers"`. Zed uses a
 {
   "context_servers": {
     "plane-mcp-server": {
-      "url": "https://your-mcp-server.com/http/mcp",
+      "url": "https://mcp.plane.so/http/mcp",
       "settings": {}
     }
   }
@@ -576,7 +576,7 @@ Config file: `~/.config/zed/settings.json` under `"context_servers"`. Zed uses a
 {
   "context_servers": {
     "plane-mcp-server": {
-      "url": "https://your-mcp-server.com/http/api-key/mcp",
+      "url": "https://mcp.plane.so/http/api-key/mcp",
       "headers": {
         "x-api-key": "your_api_key_here",
         "x-workspace-slug": "your-workspace-slug"
@@ -593,7 +593,7 @@ Config file: `~/.config/zed/settings.json` under `"context_servers"`. Zed uses a
 {
   "context_servers": {
     "plane-mcp-server": {
-      "url": "https://your-mcp-server.com/sse",
+      "url": "https://mcp.plane.so/sse",
       "settings": {}
     }
   }
@@ -1377,7 +1377,7 @@ Wiki-style documents. Pages can be workspace-scoped or project-scoped.
 
 ---
 
-## Common Workflows
+## Common workflows
 
 ### Look up a work item by ID
 
