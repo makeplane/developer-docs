@@ -621,92 +621,41 @@ A `200` response confirms the API key and URL are correct.
 
 ---
 
-## Reference
-
-### Transport modes
-
-#### HTTP with OAuth
-
-| Property            | Value                                                                                                                     |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Start command       | `plane-mcp-server http`                                                                                                   |
-| MCP endpoint        | `http://host:8211/http/mcp`                                                                                               |
-| Auth                | Browser OAuth flow via Plane                                                                                              |
-| Token storage       | Redis (recommended) or in-memory                                                                                          |
-| OAuth redirect URIs | `cursor://`, `vscode://`, `windsurf://`, `claude://`, `http://localhost:*`                                                |
-| Required env vars   | `PLANE_OAUTH_PROVIDER_CLIENT_ID`, `PLANE_OAUTH_PROVIDER_CLIENT_SECRET`, `PLANE_OAUTH_PROVIDER_BASE_URL`, `PLANE_BASE_URL` |
-
-#### HTTP with PAT Token
-
-| Property          | Value                                         |
-| ----------------- | --------------------------------------------- |
-| Start command     | `plane-mcp-server http` (same process)        |
-| MCP endpoint      | `http://host:8211/http/api-key/mcp`           |
-| Auth              | `x-api-key` + `x-workspace-slug` HTTP headers |
-| Token storage     | None (stateless)                              |
-| Required env vars | None (credentials come from request headers)  |
-
-The PAT endpoint validates the API key against Plane's `/api/v1/users/me/` on each request.
-
-#### Local Stdio
-
-| Property          | Value                                             |
-| ----------------- | ------------------------------------------------- |
-| Start command     | `plane-mcp-server stdio`                          |
-| Transport         | stdin/stdout (JSON-RPC 2.0)                       |
-| Auth              | `PLANE_API_KEY` + `PLANE_WORKSPACE_SLUG` env vars |
-| Process lifecycle | One process per client session                    |
-| Required env vars | `PLANE_API_KEY`, `PLANE_WORKSPACE_SLUG`           |
-
-#### SSE (Legacy)
-
-| Property          | Value                                  |
-| ----------------- | -------------------------------------- |
-| Start command     | `plane-mcp-server http` (same process) |
-| MCP endpoint      | `http://host:8211/sse`                 |
-| Auth              | Browser OAuth flow via Plane           |
-| Token storage     | Redis (recommended) or in-memory       |
-| Required env vars | Same as HTTP with OAuth                |
-
-Use SSE only for clients that require it. New integrations should prefer streamable HTTP.
-
----
-
-### Tool reference
+## Tool reference
 
 The server exposes 100+ tools across 20 modules. All tools are registered identically regardless of transport mode. The same tools are available via stdio, HTTP/OAuth, HTTP/PAT, and SSE.
 
-#### Users
+### Users
 
-##### `get_me`
+#### `get_me`
 
 Returns the profile of the currently authenticated user. No parameters.
 
 ---
 
-#### Workspaces
+### Workspaces
 
-##### `get_workspace_members`
+#### `get_workspace_members`
 
 Returns all members of the workspace.
 
-##### `get_workspace_features`
+#### `get_workspace_features`
 
 Returns enabled features for the workspace.
 
-##### `update_workspace_features`
+#### `update_workspace_features`
 
 Updates workspace-level feature flags.
 
 ---
 
-#### Projects
+### Projects
 
-##### `list_projects`
+#### `list_projects`
 
 Returns all projects the current user is a member of.
 
-##### `create_project`
+#### `create_project`
 
 Creates a new project.
 
@@ -717,7 +666,7 @@ Creates a new project.
 | `description` | string | No       | Project description                              |
 | `network`     | string | No       | `0` (secret) or `2` (public)                     |
 
-##### `retrieve_project`
+#### `retrieve_project`
 
 Returns details of a single project.
 
@@ -725,7 +674,7 @@ Returns details of a single project.
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `update_project`
+#### `update_project`
 
 Updates project fields. All fields are optional.
 
@@ -734,7 +683,7 @@ Updates project fields. All fields are optional.
 | `project_id` | UUID string | **Yes**  |
 | other fields | partial     | No       |
 
-##### `delete_project`
+#### `delete_project`
 
 Deletes a project.
 
@@ -742,7 +691,7 @@ Deletes a project.
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `get_project_worklog_summary`
+#### `get_project_worklog_summary`
 
 Returns time-tracking summary for a project.
 
@@ -750,7 +699,7 @@ Returns time-tracking summary for a project.
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `get_project_members`
+#### `get_project_members`
 
 Returns all members of a project.
 
@@ -758,7 +707,7 @@ Returns all members of a project.
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `get_project_features`
+#### `get_project_features`
 
 Returns the feature configuration for a project (modules, cycles, pages, etc.).
 
@@ -766,7 +715,7 @@ Returns the feature configuration for a project (modules, cycles, pages, etc.).
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `update_project_features`
+#### `update_project_features`
 
 Updates which features are enabled on a project.
 
@@ -777,9 +726,9 @@ Updates which features are enabled on a project.
 
 ---
 
-#### Work Items
+### Work Items
 
-##### `list_work_items`
+#### `list_work_items`
 
 Lists work items in a project, or searches across the workspace when filters are provided.
 
@@ -807,7 +756,7 @@ When any filter parameter is set, the tool uses Plane's advanced search endpoint
 | `fields`           | string      | No          | Comma-separated fields to include                               |
 | `order_by`         | string      | No          | Sort field                                                      |
 
-##### `create_work_item`
+#### `create_work_item`
 
 Creates a new work item in a project.
 
@@ -825,7 +774,7 @@ Creates a new work item in a project.
 | `start_date`       | string      | No       | `YYYY-MM-DD`                                  |
 | `due_date`         | string      | No       | `YYYY-MM-DD`                                  |
 
-##### `retrieve_work_item`
+#### `retrieve_work_item`
 
 Returns a single work item by UUID.
 
@@ -834,7 +783,7 @@ Returns a single work item by UUID.
 | `project_id`   | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `retrieve_work_item_by_identifier`
+#### `retrieve_work_item_by_identifier`
 
 Returns a work item using its human-readable identifier (e.g., `ENG-42`).
 
@@ -843,7 +792,7 @@ Returns a work item using its human-readable identifier (e.g., `ENG-42`).
 | `project_identifier`   | string | **Yes**  | Project prefix, e.g., `ENG` |
 | `work_item_identifier` | string | **Yes**  | Issue number, e.g., `42`    |
 
-##### `update_work_item`
+#### `update_work_item`
 
 Updates one or more fields on a work item. Only supplied fields are changed.
 
@@ -853,7 +802,7 @@ Updates one or more fields on a work item. Only supplied fields are changed.
 | `work_item_id` | UUID string | **Yes**  |
 | other fields   | partial     | No       |
 
-##### `delete_work_item`
+#### `delete_work_item`
 
 Permanently deletes a work item.
 
@@ -862,7 +811,7 @@ Permanently deletes a work item.
 | `project_id`   | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `search_work_items`
+#### `search_work_items`
 
 Searches work items by text query within a project.
 
@@ -873,9 +822,9 @@ Searches work items by text query within a project.
 
 ---
 
-#### Work Item Activities
+### Work Item Activities
 
-##### `list_work_item_activities`
+#### `list_work_item_activities`
 
 Returns the activity log (history of changes) for a work item.
 
@@ -884,7 +833,7 @@ Returns the activity log (history of changes) for a work item.
 | `project_id`   | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `retrieve_work_item_activity`
+#### `retrieve_work_item_activity`
 
 Returns a single activity entry.
 
@@ -896,9 +845,9 @@ Returns a single activity entry.
 
 ---
 
-#### Work Item Comments
+### Work Item Comments
 
-##### `list_work_item_comments`
+#### `list_work_item_comments`
 
 Returns all comments on a work item.
 
@@ -907,7 +856,7 @@ Returns all comments on a work item.
 | `project_id`   | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `retrieve_work_item_comment`
+#### `retrieve_work_item_comment`
 
 Returns a single comment.
 
@@ -917,7 +866,7 @@ Returns a single comment.
 | `work_item_id` | UUID string | **Yes**  |
 | `comment_id`   | UUID string | **Yes**  |
 
-##### `create_work_item_comment`
+#### `create_work_item_comment`
 
 Adds a comment to a work item. Comments are stored as HTML.
 
@@ -927,7 +876,7 @@ Adds a comment to a work item. Comments are stored as HTML.
 | `work_item_id` | UUID string | **Yes**  |                                                     |
 | `comment_html` | string      | **Yes**  | HTML content, e.g., `<p>Fixed in commit abc123</p>` |
 
-##### `update_work_item_comment`
+#### `update_work_item_comment`
 
 Updates a comment's content.
 
@@ -938,7 +887,7 @@ Updates a comment's content.
 | `comment_id`   | UUID string | **Yes**  |
 | `comment_html` | string      | **Yes**  |
 
-##### `delete_work_item_comment`
+#### `delete_work_item_comment`
 
 Deletes a comment.
 
@@ -950,18 +899,18 @@ Deletes a comment.
 
 ---
 
-#### Work Item Links
+### Work Item Links
 
 External URLs attached to a work item (e.g., Figma designs, PRs, docs).
 
-##### `list_work_item_links`
+#### `list_work_item_links`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
 | `project_id`   | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `retrieve_work_item_link`
+#### `retrieve_work_item_link`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
@@ -969,7 +918,7 @@ External URLs attached to a work item (e.g., Figma designs, PRs, docs).
 | `work_item_id` | UUID string | **Yes**  |
 | `link_id`      | UUID string | **Yes**  |
 
-##### `create_work_item_link`
+#### `create_work_item_link`
 
 | Parameter      | Type        | Required | Description                |
 | -------------- | ----------- | -------- | -------------------------- |
@@ -978,7 +927,7 @@ External URLs attached to a work item (e.g., Figma designs, PRs, docs).
 | `url`          | string      | **Yes**  | External URL               |
 | `title`        | string      | No       | Display title for the link |
 
-##### `update_work_item_link`
+#### `update_work_item_link`
 
 | Parameter       | Type        | Required |
 | --------------- | ----------- | -------- |
@@ -987,7 +936,7 @@ External URLs attached to a work item (e.g., Figma designs, PRs, docs).
 | `link_id`       | UUID string | **Yes**  |
 | `url` / `title` | string      | No       |
 
-##### `delete_work_item_link`
+#### `delete_work_item_link`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
@@ -997,18 +946,18 @@ External URLs attached to a work item (e.g., Figma designs, PRs, docs).
 
 ---
 
-#### Work Item Relations
+### Work Item Relations
 
 Relations between work items (e.g., "blocks", "is blocked by", "duplicate of").
 
-##### `list_work_item_relations`
+#### `list_work_item_relations`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
 | `project_id`   | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `create_work_item_relation`
+#### `create_work_item_relation`
 
 | Parameter              | Type        | Required | Description                                                             |
 | ---------------------- | ----------- | -------- | ----------------------------------------------------------------------- |
@@ -1017,7 +966,7 @@ Relations between work items (e.g., "blocks", "is blocked by", "duplicate of").
 | `related_work_item_id` | UUID string | **Yes**  | Target work item                                                        |
 | `relation_type`        | string      | **Yes**  | `blocking` · `blocked_by` · `duplicate_of` · `duplicate` · `relates_to` |
 
-##### `remove_work_item_relation`
+#### `remove_work_item_relation`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
@@ -1027,17 +976,17 @@ Relations between work items (e.g., "blocks", "is blocked by", "duplicate of").
 
 ---
 
-#### Work Item Properties
+### Work Item Properties
 
 Custom fields defined per project.
 
-##### `list_work_item_properties`
+#### `list_work_item_properties`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `create_work_item_property`
+#### `create_work_item_property`
 
 | Parameter       | Type        | Required | Description              |
 | --------------- | ----------- | -------- | ------------------------ |
@@ -1045,21 +994,21 @@ Custom fields defined per project.
 | `name`          | string      | **Yes**  | Property name            |
 | `property_type` | string      | **Yes**  | Type of the custom field |
 
-##### `retrieve_work_item_property`
+#### `retrieve_work_item_property`
 
 | Parameter     | Type        | Required |
 | ------------- | ----------- | -------- |
 | `project_id`  | UUID string | **Yes**  |
 | `property_id` | UUID string | **Yes**  |
 
-##### `update_work_item_property`
+#### `update_work_item_property`
 
 | Parameter     | Type        | Required |
 | ------------- | ----------- | -------- |
 | `project_id`  | UUID string | **Yes**  |
 | `property_id` | UUID string | **Yes**  |
 
-##### `delete_work_item_property`
+#### `delete_work_item_property`
 
 | Parameter     | Type        | Required |
 | ------------- | ----------- | -------- |
@@ -1068,17 +1017,17 @@ Custom fields defined per project.
 
 ---
 
-#### Work Item Types
+### Work Item Types
 
 Custom work item type definitions (e.g., Bug, Feature, Task, Epic).
 
-##### `list_work_item_types`
+#### `list_work_item_types`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `create_work_item_type`
+#### `create_work_item_type`
 
 | Parameter     | Type        | Required |
 | ------------- | ----------- | -------- |
@@ -1087,21 +1036,21 @@ Custom work item type definitions (e.g., Bug, Feature, Task, Epic).
 | `description` | string      | No       |
 | `is_active`   | boolean     | No       |
 
-##### `retrieve_work_item_type`
+#### `retrieve_work_item_type`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 | `type_id`    | UUID string | **Yes**  |
 
-##### `update_work_item_type`
+#### `update_work_item_type`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 | `type_id`    | UUID string | **Yes**  |
 
-##### `delete_work_item_type`
+#### `delete_work_item_type`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
@@ -1110,18 +1059,18 @@ Custom work item type definitions (e.g., Bug, Feature, Task, Epic).
 
 ---
 
-#### Worklogs
+### Worklogs
 
 Time tracking for work items. All durations are in **minutes**.
 
-##### `list_work_logs`
+#### `list_work_logs`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
 | `project_id`   | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `create_work_log`
+#### `create_work_log`
 
 | Parameter      | Type        | Required | Description          |
 | -------------- | ----------- | -------- | -------------------- |
@@ -1130,7 +1079,7 @@ Time tracking for work items. All durations are in **minutes**.
 | `duration`     | integer     | **Yes**  | Minutes logged (≥ 0) |
 | `description`  | string      | No       | What was done        |
 
-##### `update_work_log`
+#### `update_work_log`
 
 | Parameter                  | Type        | Required |
 | -------------------------- | ----------- | -------- |
@@ -1139,7 +1088,7 @@ Time tracking for work items. All durations are in **minutes**.
 | `work_log_id`              | UUID string | **Yes**  |
 | `duration` / `description` | -           | No       |
 
-##### `delete_work_log`
+#### `delete_work_log`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
@@ -1149,11 +1098,11 @@ Time tracking for work items. All durations are in **minutes**.
 
 ---
 
-#### States
+### States
 
 Workflow states for a project's work items.
 
-##### `list_states` / `create_state` / `retrieve_state` / `update_state` / `delete_state`
+#### `list_states` / `create_state` / `retrieve_state` / `update_state` / `delete_state`
 
 All state tools accept `project_id`. Create and update accept:
 
@@ -1166,11 +1115,11 @@ All state tools accept `project_id`. Create and update accept:
 
 ---
 
-#### Labels
+### Labels
 
 Tags for work items.
 
-##### `list_labels` / `create_label` / `retrieve_label` / `update_label` / `delete_label`
+#### `list_labels` / `create_label` / `retrieve_label` / `update_label` / `delete_label`
 
 All label tools accept `project_id`. Create and update accept:
 
@@ -1182,11 +1131,11 @@ All label tools accept `project_id`. Create and update accept:
 
 ---
 
-#### Cycles
+### Cycles
 
 Time-boxed iterations (sprints).
 
-##### `list_cycles`
+#### `list_cycles`
 
 Returns all cycles in a project including upcoming, active, and completed.
 
@@ -1194,7 +1143,7 @@ Returns all cycles in a project including upcoming, active, and completed.
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `list_archived_cycles`
+#### `list_archived_cycles`
 
 Returns archived cycles only.
 
@@ -1202,7 +1151,7 @@ Returns archived cycles only.
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `create_cycle`
+#### `create_cycle`
 
 | Parameter     | Type        | Required | Description  |
 | ------------- | ----------- | -------- | ------------ |
@@ -1212,18 +1161,18 @@ Returns archived cycles only.
 | `end_date`    | string      | No       | `YYYY-MM-DD` |
 | `description` | string      | No       |              |
 
-##### `retrieve_cycle`
+#### `retrieve_cycle`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 | `cycle_id`   | UUID string | **Yes**  |
 
-##### `update_cycle` / `delete_cycle`
+#### `update_cycle` / `delete_cycle`
 
 Accept `project_id` and `cycle_id`.
 
-##### `add_work_items_to_cycle`
+#### `add_work_items_to_cycle`
 
 | Parameter       | Type        | Required |
 | --------------- | ----------- | -------- |
@@ -1231,7 +1180,7 @@ Accept `project_id` and `cycle_id`.
 | `cycle_id`      | UUID string | **Yes**  |
 | `work_item_ids` | UUID[]      | **Yes**  |
 
-##### `remove_work_item_from_cycle`
+#### `remove_work_item_from_cycle`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
@@ -1239,14 +1188,14 @@ Accept `project_id` and `cycle_id`.
 | `cycle_id`     | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `list_cycle_work_items`
+#### `list_cycle_work_items`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 | `cycle_id`   | UUID string | **Yes**  |
 
-##### `transfer_cycle_work_items`
+#### `transfer_cycle_work_items`
 
 Moves all incomplete work items from one cycle to another.
 
@@ -1258,17 +1207,17 @@ Moves all incomplete work items from one cycle to another.
 
 ---
 
-#### Modules
+### Modules
 
 Feature groupings within a project.
 
-##### `list_modules` / `list_archived_modules`
+#### `list_modules` / `list_archived_modules`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `create_module`
+#### `create_module`
 
 | Parameter     | Type        | Required |
 | ------------- | ----------- | -------- |
@@ -1280,11 +1229,11 @@ Feature groupings within a project.
 | `lead`        | UUID string | No       |
 | `members`     | UUID[]      | No       |
 
-##### `retrieve_module` / `update_module` / `delete_module` / `archive_module`
+#### `retrieve_module` / `update_module` / `delete_module` / `archive_module`
 
 Accept `project_id` and `module_id`.
 
-##### `add_work_items_to_module`
+#### `add_work_items_to_module`
 
 | Parameter       | Type        | Required |
 | --------------- | ----------- | -------- |
@@ -1292,7 +1241,7 @@ Accept `project_id` and `module_id`.
 | `module_id`     | UUID string | **Yes**  |
 | `work_item_ids` | UUID[]      | **Yes**  |
 
-##### `remove_work_item_from_module`
+#### `remove_work_item_from_module`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
@@ -1300,7 +1249,7 @@ Accept `project_id` and `module_id`.
 | `module_id`    | UUID string | **Yes**  |
 | `work_item_id` | UUID string | **Yes**  |
 
-##### `list_module_work_items`
+#### `list_module_work_items`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
@@ -1309,11 +1258,11 @@ Accept `project_id` and `module_id`.
 
 ---
 
-#### Epics
+### Epics
 
 Large work items that group related items. The server resolves the Epic work item type automatically.
 
-##### `list_epics` / `create_epic` / `retrieve_epic` / `update_epic` / `delete_epic`
+#### `list_epics` / `create_epic` / `retrieve_epic` / `update_epic` / `delete_epic`
 
 | Parameter               | Type        | Required            |
 | ----------------------- | ----------- | ------------------- |
@@ -1323,11 +1272,11 @@ Large work items that group related items. The server resolves the Epic work ite
 
 ---
 
-#### Milestones
+### Milestones
 
 Point-in-time goals within a project.
 
-##### `list_milestones` / `create_milestone` / `retrieve_milestone` / `update_milestone` / `delete_milestone`
+#### `list_milestones` / `create_milestone` / `retrieve_milestone` / `update_milestone` / `delete_milestone`
 
 | Parameter      | Type        | Required         |
 | -------------- | ----------- | ---------------- |
@@ -1335,7 +1284,7 @@ Point-in-time goals within a project.
 | `milestone_id` | UUID string | Varies           |
 | `name`         | string      | **Yes** (create) |
 
-##### `add_work_items_to_milestone`
+#### `add_work_items_to_milestone`
 
 | Parameter       | Type        | Required |
 | --------------- | ----------- | -------- |
@@ -1343,7 +1292,7 @@ Point-in-time goals within a project.
 | `milestone_id`  | UUID string | **Yes**  |
 | `work_item_ids` | UUID[]      | **Yes**  |
 
-##### `remove_work_items_from_milestone`
+#### `remove_work_items_from_milestone`
 
 | Parameter       | Type        | Required |
 | --------------- | ----------- | -------- |
@@ -1351,7 +1300,7 @@ Point-in-time goals within a project.
 | `milestone_id`  | UUID string | **Yes**  |
 | `work_item_ids` | UUID[]      | **Yes**  |
 
-##### `list_milestone_work_items`
+#### `list_milestone_work_items`
 
 | Parameter      | Type        | Required |
 | -------------- | ----------- | -------- |
@@ -1360,27 +1309,27 @@ Point-in-time goals within a project.
 
 ---
 
-#### Initiatives
+### Initiatives
 
 Workspace-scoped strategic goals that span multiple projects.
 
-##### `list_initiatives` / `create_initiative` / `retrieve_initiative` / `update_initiative` / `delete_initiative`
+#### `list_initiatives` / `create_initiative` / `retrieve_initiative` / `update_initiative` / `delete_initiative`
 
 Initiatives are workspace-scoped - no `project_id` required. `retrieve_initiative`, `update_initiative`, and `delete_initiative` accept an `initiative_id` UUID.
 
 ---
 
-#### Intake
+### Intake
 
 Triage queue for incoming work items before they enter a project.
 
-##### `list_intake_work_items`
+#### `list_intake_work_items`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 
-##### `create_intake_work_item`
+#### `create_intake_work_item`
 
 | Parameter          | Type        | Required |
 | ------------------ | ----------- | -------- |
@@ -1388,37 +1337,37 @@ Triage queue for incoming work items before they enter a project.
 | `name`             | string      | **Yes**  |
 | `description_html` | string      | No       |
 
-##### `retrieve_intake_work_item` / `update_intake_work_item` / `delete_intake_work_item`
+#### `retrieve_intake_work_item` / `update_intake_work_item` / `delete_intake_work_item`
 
 Accept `project_id` and `work_item_id`.
 
 ---
 
-#### Pages
+### Pages
 
 Wiki-style documents. Pages can be workspace-scoped or project-scoped.
 
-##### `retrieve_workspace_page`
+#### `retrieve_workspace_page`
 
 | Parameter | Type        | Required |
 | --------- | ----------- | -------- |
 | `page_id` | UUID string | **Yes**  |
 
-##### `retrieve_project_page`
+#### `retrieve_project_page`
 
 | Parameter    | Type        | Required |
 | ------------ | ----------- | -------- |
 | `project_id` | UUID string | **Yes**  |
 | `page_id`    | UUID string | **Yes**  |
 
-##### `create_workspace_page`
+#### `create_workspace_page`
 
 | Parameter          | Type   | Required |
 | ------------------ | ------ | -------- |
 | `name`             | string | **Yes**  |
 | `description_html` | string | No       |
 
-##### `create_project_page`
+#### `create_project_page`
 
 | Parameter          | Type        | Required |
 | ------------------ | ----------- | -------- |
