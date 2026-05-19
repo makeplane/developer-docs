@@ -49,7 +49,8 @@ docs/
 │   ├── config.mts          # VitePress configuration
 │   ├── theme/              # Custom Vue theme
 │   │   ├── components/     # Custom Vue components
-│   │   └── style.css       # Global styles
+│   │   ├── styles.css           # VoidZero/Vitest theme styles
+│   │   └── plane-overrides.css  # Plane-specific overrides
 │   └── public/             # Static assets (images, logos)
 ├── api-reference/          # REST API documentation
 ├── self-hosting/           # Deployment and configuration guides

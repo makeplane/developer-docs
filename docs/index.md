@@ -1,8 +1,9 @@
 ---
-layout: home
+layout: doc
 title: Plane Developer Documentation - API Reference & Self-Hosting Guides
 description: Build integrations with Plane's REST API and deploy on your infrastructure. Complete guides for self-hosting with Docker, Kubernetes, webhooks, and OAuth apps.
 keywords: plane developer docs, plane api, self-hosting plane, kubernetes deployment, docker compose, plane webhooks, plane oauth, project management api
+aside: false
 hero:
   name: Developer docs
   text: Build, deploy, and integrate
@@ -42,6 +43,9 @@ features:
     link: /dev-tools/mcp-server
     linkText: Setup MCP
 ---
+
+<VPHomeHero />
+<VPHomeFeatures />
 
 ## Quick start guides
 

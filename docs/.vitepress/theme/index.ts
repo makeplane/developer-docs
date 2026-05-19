@@ -1,11 +1,15 @@
-import DefaultTheme from "vitepress/theme";
 import type { Theme } from "vitepress";
 import { onMounted, watch, nextTick, h } from "vue";
 import { useRoute } from "vitepress";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import mediumZoom from "medium-zoom";
+import VitestTheme from "@voidzero-dev/vitepress-theme/src/vitest";
+import { themeContextKey, VPHomeHero, VPHomeFeatures } from "@voidzero-dev/vitepress-theme";
+import footerBg from "@voidzero-dev/vitepress-theme/src/assets/vitest/footer-background.jpg";
+import monoIcon from "@voidzero-dev/vitepress-theme/src/assets/icons/vitest-mono.svg";
 
-import "./style.css";
+import "./styles.css";
+import "./plane-overrides.css";
 import "vitepress-plugin-tabs/client";
 
 import ApiParam from "./components/ApiParam.vue";
@@ -14,10 +18,8 @@ import ResponsePanel from "./components/ResponsePanel.vue";
 import Card from "./components/Card.vue";
 import CardGroup from "./components/CardGroup.vue";
 import CookieConsent from "./components/CookieConsent.vue";
+import PlaneLayout from "./Layout.vue";
 
-/**
- * Adds 'api-page' class to hide the aside on API reference pages
- */
 function updateLayout() {
   if (typeof document === "undefined") return;
 
@@ -31,69 +33,39 @@ function updateLayout() {
   }
 }
 
-/**
- * Handles tab activation based on URL hash
- */
 function handleTabHash() {
   if (typeof document === "undefined") return;
 
-  const hash = window.location.hash.slice(1); // Remove the '#'
+  const hash = window.location.hash.slice(1);
   if (!hash) return;
 
-  console.log("Looking for hash:", hash);
-
   const tabButtons = document.querySelectorAll('[role="tab"]');
-
-  if (tabButtons.length === 0) {
-    console.log("No tabs found on page");
-    return;
-  }
-
-  console.log("Found tabs:", tabButtons);
+  if (tabButtons.length === 0) return;
 
   tabButtons.forEach((button) => {
     const labelText = button.textContent?.trim().toLowerCase().replace(/\s+/g, "-");
-    console.log("Tab label text:", labelText);
-
     if (labelText === hash) {
-      console.log("Activating tab:", button);
-
-      // Trigger multiple event types to ensure Vue picks it up
       const element = button as HTMLElement;
-
-      // Dispatch a proper mouse event
-      const clickEvent = new MouseEvent("click", {
-        view: window,
-        bubbles: true,
-        cancelable: true,
-      });
-
-      element.dispatchEvent(clickEvent);
-
-      // Also try direct click
+      element.dispatchEvent(
+        new MouseEvent("click", {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+        })
+      );
       element.click();
-
-      // Set focus as well
       element.focus();
     }
   });
 }
 
-/**
- * Adds click listeners to tabs to update URL hash
- */
 function setupTabHashUpdates() {
   if (typeof document === "undefined") return;
 
   const tabButtons = document.querySelectorAll('[role="tab"]');
-
   tabButtons.forEach((button) => {
     const element = button as HTMLElement;
-
-    // Remove existing listener if any
     element.removeEventListener("click", updateHashOnTabClick);
-
-    // Add new listener
     element.addEventListener("click", updateHashOnTabClick);
   });
 }
@@ -101,21 +73,30 @@ function setupTabHashUpdates() {
 function updateHashOnTabClick(event: Event) {
   const button = event.currentTarget as HTMLElement;
   const labelText = button.textContent?.trim().toLowerCase().replace(/\s+/g, "-");
-
   if (labelText) {
-    // Update URL hash without triggering scroll
     history.replaceState(null, "", `#${labelText}`);
   }
 }
 
 export default {
-  extends: DefaultTheme,
+  extends: VitestTheme,
   Layout() {
-    return h(DefaultTheme.Layout, null, {
+    return h(PlaneLayout, null, {
       "layout-bottom": () => h(CookieConsent),
     });
   },
-  enhanceApp({ app, router }) {
+  enhanceApp(ctx) {
+    VitestTheme.enhanceApp?.(ctx);
+    const { app } = ctx;
+
+    app.provide(themeContextKey, {
+      logoDark: "/logo/dev-logo-watermark-light.png",
+      logoLight: "/logo/dev-logo-watermark-dark.png",
+      logoAlt: "Plane",
+      footerBg,
+      monoIcon,
+    });
+
     enhanceAppWithTabs(app);
 
     app.component("ApiParam", ApiParam);
@@ -123,14 +104,8 @@ export default {
     app.component("ResponsePanel", ResponsePanel);
     app.component("Card", Card);
     app.component("CardGroup", CardGroup);
-
-    if (typeof window !== "undefined") {
-      router.onAfterRouteChanged = () => {
-        nextTick(() => {
-          updateLayout();
-        });
-      };
-    }
+    app.component("VPHomeHero", VPHomeHero);
+    app.component("VPHomeFeatures", VPHomeFeatures);
   },
   setup() {
     if (typeof window === "undefined") return;
@@ -146,25 +121,23 @@ export default {
     };
 
     onMounted(() => {
+      nextTick(updateLayout);
       initZoom();
-
-      // Delay tab hash handling to ensure tabs are rendered
       setTimeout(() => {
         handleTabHash();
         setupTabHashUpdates();
       }, 100);
 
-      // Listen for hash changes
       window.addEventListener("hashchange", () => {
         nextTick(handleTabHash);
       });
     });
 
-    // Watch for route changes
     watch(
       () => route.path,
       () => {
         nextTick(() => {
+          updateLayout();
           initZoom();
           handleTabHash();
           setupTabHashUpdates();
