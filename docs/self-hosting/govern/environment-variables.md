@@ -210,7 +210,7 @@ Plane AI supports multiple LLM providers. Configure one or more by adding their 
 | **CUSTOM_LLM_API_KEY**    | API key for authenticating with the custom endpoint. Required for `openai` provider; used as the AWS access key ID when `CUSTOM_LLM_PROVIDER=bedrock`. | Optional |
 | **CUSTOM_LLM_AWS_REGION** | AWS region for the Bedrock model (e.g. `us-east-1`). Required when `CUSTOM_LLM_PROVIDER=bedrock`.                                                      | Optional |
 | **CUSTOM_LLM_NAME**       | Display name for the custom model shown in the UI. Defaults to `Custom LLM`.                                                                           | Optional |
-| **CUSTOM_LLM_MAX_TOKENS** | Maximum token limit for the custom model. Defaults to `64000`.                                                                                        | Optional |
+| **CUSTOM_LLM_MAX_TOKENS** | Maximum token limit for the custom model. Defaults to `64000`.                                                                                         | Optional |
 
 #### Provider base URLs
 

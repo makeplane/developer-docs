@@ -121,4 +121,4 @@ python manage.py manage_search_index index rebuild --force
 python manage.py manage_search_index --background --vectorize document index --force
 ```
 
-`OPENSEARCH_EMBEDDING_DIMENSION` must match the actual output dimension of the model in `EMBEDDING_MODEL`. A mismatch breaks indexing silently.
+`OPENSEARCH_EMBEDDING_DIMENSION` must match the actual output dimension of the model in `EMBEDDING_MODEL`. A mismatch breaks indexing.

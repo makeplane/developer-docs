@@ -8,8 +8,6 @@ keywords: plane ai setup, self-hosted ai, llm api key, openai, anthropic, opense
 
 Plane AI brings AI-powered features to your workspace, including natural language chat, duplicate detection, and search across work items, pages, and projects. This guide walks you through configuring Plane AI on your self-hosted instance.
 
-For an overview of what Plane AI can do, see [Plane AI](https://docs.plane.so/ai/pi-chat).
-
 Plane AI requires four things to work:
 
 1. **An LLM API key** (OpenAI or Anthropic) — powers AI responses.
