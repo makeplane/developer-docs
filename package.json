@@ -8,7 +8,8 @@
     "build": "vitepress build docs",
     "preview": "vitepress preview docs",
     "fix:format": "prettier --write .",
-    "check:format": "prettier --check ."
+    "check:format": "prettier --check .",
+    "check:types": "tsc --noEmit -p docs/.vitepress/tsconfig.json"
   },
   "keywords": [
     "plane",
