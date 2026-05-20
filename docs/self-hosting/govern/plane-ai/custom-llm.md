@@ -34,7 +34,7 @@ CUSTOM_LLM_MODEL_KEY=your-model-id        # model ID as the endpoint expects it
 CUSTOM_LLM_BASE_URL=https://your-endpoint/v1
 CUSTOM_LLM_API_KEY=your-api-key           # use any non-empty string if no key is required
 CUSTOM_LLM_NAME=Your Model Name           # display name shown to users
-CUSTOM_LLM_MAX_TOKENS=128000              # optional, defaults to 128000
+CUSTOM_LLM_MAX_TOKENS=64000               # optional; max output tokens per response
 ```
 
 **Examples:**
@@ -72,6 +72,7 @@ CUSTOM_LLM_API_KEY=your-aws-secret-access-key
 CUSTOM_LLM_AWS_REGION=us-east-1
 AWS_ACCESS_KEY_ID=your-aws-access-key-id  # standard AWS env var, picked up by boto3
 CUSTOM_LLM_NAME=Claude via Bedrock
+CUSTOM_LLM_MAX_TOKENS=64000               # optional; max output tokens per response
 ```
 
 :::warning IAM permission required
@@ -90,6 +91,7 @@ CUSTOM_LLM_AWS_REGION=us-east-1
 BEDROCK_INFERENCE_PROFILE_ARN=arn:aws:bedrock:us-east-1:123456789012:application-inference-profile/xxxx
 # or use BEDROCK_INFERENCE_PROFILE_ID=global.anthropic.claude-sonnet-4-6
 CUSTOM_LLM_NAME=Claude via Inference Profile
+CUSTOM_LLM_MAX_TOKENS=64000               # optional; max output tokens per response
 ```
 
 Plane AI activates inference profile mode automatically when a profile ARN or ID is set and ambient AWS credentials are present (`AWS_ROLE_ARN`, `AWS_WEB_IDENTITY_TOKEN_FILE`, `AWS_CONTAINER_CREDENTIALS_FULL_URI`, or `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE`).
