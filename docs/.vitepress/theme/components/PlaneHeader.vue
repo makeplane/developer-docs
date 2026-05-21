@@ -41,6 +41,9 @@ const { localeLinks, currentLang } = useLangs({ correspondingLink: true });
 const isForcedTheme = computed(() => !!frontmatter.value.theme);
 const { logoDark, logoLight, logoAlt } = inject(themeContextKey)!;
 
+/** logoDark = dark mark for light navbar; logoLight = light mark for dark navbar */
+const headerLogoSrc = computed(() => (isDark.value ? logoLight : logoDark));
+
 const isMarketingPage = computed(() => {
   const layout = frontmatter.value.layout;
   return layout === "home" || (layout && layout !== "doc" && layout !== "page");
@@ -191,13 +194,11 @@ onUnmounted(() => {
   >
     <header
       class="plane-header wrapper relative border-b border-stroke dark:border-nickel"
-      :data-theme="isDark ? 'dark' : 'dark'"
+      :data-theme="isDark ? 'dark' : 'light'"
     >
       <a href="/" class="plane-header__brand">
         <slot name="nav-bar-title-before" />
-        <img class="plane-header__logo block dark:hidden" :src="logoDark" :alt="logoAlt" />
-        <img class="plane-header__logo hidden dark:block" :src="logoLight" :alt="logoAlt" />
-        <span class="plane-header__title">Plane Developers</span>
+        <img class="plane-header__logo" :src="headerLogoSrc" :alt="logoAlt" />
         <slot name="nav-bar-title-after" />
       </a>
 
@@ -245,11 +246,25 @@ onUnmounted(() => {
           aria-label="Toggle navigation menu"
           @click="toggleMobileMenu"
         >
-          <svg v-if="!mobileMenuOpen" class="size-6" viewBox="0 0 18 8" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg
+            v-if="!mobileMenuOpen"
+            class="size-6"
+            viewBox="0 0 18 8"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
             <path d="M0 0.75H18" stroke="currentColor" stroke-width="1.5" />
             <path d="M0 6.75H18" stroke="currentColor" stroke-width="1.5" />
           </svg>
-          <svg v-else class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <svg
+            v-else
+            class="size-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
             <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" />
           </svg>
         </button>
@@ -270,8 +285,7 @@ onUnmounted(() => {
       <section class="wrapper animate-fade-in">
         <div class="w-full pl-5 pr-5 py-5 lg:py-7 flex items-center justify-between">
           <a href="/" class="flex items-center gap-2">
-            <img class="h-4 block dark:hidden" :src="logoDark" :alt="logoAlt" />
-            <img class="h-4 hidden dark:block" :src="logoLight" :alt="logoAlt" />
+            <img class="h-4" :src="headerLogoSrc" :alt="logoAlt" />
             <span class="text-base font-medium text-primary dark:text-white">Plane Developers</span>
           </a>
           <div class="flex items-center gap-2">
@@ -282,7 +296,14 @@ onUnmounted(() => {
               class="p-2 text-primary dark:text-white hover:opacity-70 transition-opacity cursor-pointer"
               @click="triggerSearch"
             >
-              <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <svg
+                class="size-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" stroke-linecap="round" />
               </svg>
@@ -293,7 +314,14 @@ onUnmounted(() => {
               class="p-2 -mr-2 text-primary dark:text-white hover:opacity-70 transition-opacity"
               @click="closeMobileMenu"
             >
-              <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <svg
+                class="size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
                 <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" />
               </svg>
             </button>
@@ -486,7 +514,7 @@ onUnmounted(() => {
   width: 100%;
   max-width: 100%;
   overflow-x: clip;
-  background: #000000;
+  background: var(--plane-header-bg);
   box-sizing: border-box;
 }
 
@@ -520,8 +548,8 @@ onUnmounted(() => {
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: clip;
-    background: #000000;
-    border-bottom-color: #2a2a2a !important;
+    background: var(--plane-header-bg);
+    border-bottom-color: var(--plane-header-border) !important;
   }
 
   .plane-header__brand {
@@ -545,7 +573,7 @@ onUnmounted(() => {
   .plane-header__title {
     font-size: 0.9375rem;
     font-weight: 500;
-    color: #ffffff;
+    color: var(--plane-header-text);
     white-space: nowrap;
     letter-spacing: -0.01em;
     min-width: 0;
@@ -598,7 +626,7 @@ onUnmounted(() => {
   .plane-header__divider {
     width: 1px;
     height: 1.25rem;
-    background: #3a3a3c;
+    background: var(--plane-header-divider);
     flex-shrink: 0;
   }
 
@@ -608,15 +636,6 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1023px) {
-  .plane-header-shell {
-    background: #ffffff;
-  }
-
-  :global(.dark) .plane-header-shell,
-  .plane-header-shell[data-theme="dark"] {
-    background: #141415;
-  }
-
   .plane-header {
     display: flex;
     align-items: center;
@@ -642,12 +661,7 @@ onUnmounted(() => {
   .plane-header__title {
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--vp-c-text-1);
-  }
-
-  :global(.dark) .plane-header__title,
-  .plane-header[data-theme="dark"] .plane-header__title {
-    color: #ffffff;
+    color: var(--plane-header-text);
   }
 
   .plane-header__mobile-btn {
@@ -655,15 +669,10 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    color: var(--vp-c-text-1);
+    color: var(--plane-header-text);
     cursor: pointer;
     background: transparent;
     border: none;
-  }
-
-  :global(.dark) .plane-header__mobile-btn,
-  .plane-header[data-theme="dark"] .plane-header__mobile-btn {
-    color: #ffffff;
   }
 }
 </style>

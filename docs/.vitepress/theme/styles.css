@@ -99,6 +99,9 @@ html:not(.dark):not([data-theme="dark"]) {
 
   --docs-divider: #ececec;
 
+  --vp-c-bg: #ffffff;
+  --vp-c-text-1: #0a0a0a;
+
   --plane-link-hover: #0078b8;
   --plane-brand-hover: #0078b8;
 
@@ -185,6 +188,8 @@ html.dark,
   --color-plane-600: #005280;
 
   --docs-divider: #2a2a2a;
+
+  --vp-c-text-1: rgba(255, 255, 255, 0.9);
 
   --plane-link-hover: #3aa5d4;
   --plane-brand-hover: #3aa5d4;

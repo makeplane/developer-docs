@@ -111,6 +111,7 @@ export default {
     const { app } = ctx;
 
     app.provide(themeContextKey, {
+      /* dark mark on light bg | light/white mark on dark bg (VoidZero naming) */
       logoDark: "/logo/dev-logo-watermark-light.png",
       logoLight: "/logo/dev-logo-watermark-dark.png",
       logoAlt: "Plane",
