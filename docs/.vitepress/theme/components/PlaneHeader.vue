@@ -15,25 +15,30 @@ import VPSocialLinks from "@vp-default/VPSocialLinks.vue";
 import { useLangs } from "@vp-composables/langs";
 
 const SIGN_IN_RE = /sign-in/i;
+const PLANE_DOCS_RE = /docs\.plane\.so/i;
 const EXTERNAL_URL_RE = /^(?:[a-z]+:|\/\/)/i;
 
 const { theme, frontmatter, isDark } = useData();
 const nav = computed(() => theme.value.nav ?? []);
 
-const mainNav = computed(() =>
-  nav.value.filter((item) => {
-    if ("link" in item && typeof item.link === "string") {
-      return !SIGN_IN_RE.test(item.link);
-    }
-    return true;
-  })
-);
+const isSignInItem = (item: DefaultTheme.NavItem) =>
+  "link" in item && typeof item.link === "string" && SIGN_IN_RE.test(item.link);
+
+const isPlaneDocsItem = (item: DefaultTheme.NavItem) =>
+  "link" in item &&
+  typeof item.link === "string" &&
+  (PLANE_DOCS_RE.test(item.link) || item.text === "Plane Docs");
+
+const isNavButtonItem = (item: DefaultTheme.NavItem) => isSignInItem(item) || isPlaneDocsItem(item);
+
+const mainNav = computed(() => nav.value.filter((item) => !isNavButtonItem(item)));
 
 const signInNavItem = computed(() =>
-  nav.value.find(
-    (item): item is DefaultTheme.NavItemWithLink =>
-      "link" in item && typeof item.link === "string" && SIGN_IN_RE.test(item.link)
-  )
+  nav.value.find((item): item is DefaultTheme.NavItemWithLink => isSignInItem(item))
+);
+
+const planeDocsNavItem = computed(() =>
+  nav.value.find((item): item is DefaultTheme.NavItemWithLink => isPlaneDocsItem(item))
 );
 
 const route = useRoute();
@@ -196,17 +201,13 @@ onUnmounted(() => {
       class="plane-header wrapper relative border-b border-stroke dark:border-nickel"
       :data-theme="isDark ? 'dark' : 'light'"
     >
-      <a href="/" class="plane-header__brand">
-        <slot name="nav-bar-title-before" />
-        <img class="plane-header__logo" :src="headerLogoSrc" :alt="logoAlt" />
-        <slot name="nav-bar-title-after" />
-      </a>
+      <div class="plane-header__start">
+        <a href="/" class="plane-header__brand">
+          <slot name="nav-bar-title-before" />
+          <img class="plane-header__logo" :src="headerLogoSrc" :alt="logoAlt" />
+          <slot name="nav-bar-title-after" />
+        </a>
 
-      <div v-if="isSearchAvailable" class="plane-header__search">
-        <VPNavBarSearch />
-      </div>
-
-      <div class="plane-header__end">
         <nav v-if="mainNav.length" class="plane-header__nav" aria-labelledby="plane-main-nav-label">
           <span id="plane-main-nav-label" class="visually-hidden">Main Navigation</span>
           <template v-for="item in mainNav" :key="JSON.stringify(item)">
@@ -215,14 +216,27 @@ onUnmounted(() => {
             <VPNavBarMenuGroup v-else :item="item" />
           </template>
         </nav>
+      </div>
 
-        <div class="plane-header__utilities">
-          <VPNavBarMenuLink v-if="signInNavItem" :item="signInNavItem" class="plane-header__sign-in" />
-          <span v-if="signInNavItem && !isForcedTheme" class="plane-header__divider" aria-hidden="true" />
-          <VPNavBarAppearance v-if="!isForcedTheme" />
-          <span class="plane-header__divider" aria-hidden="true" />
-          <VPNavBarSocialLinks />
-        </div>
+      <div v-if="isSearchAvailable" class="plane-header__search">
+        <VPNavBarSearch />
+      </div>
+
+      <div class="plane-header__actions">
+        <VPNavBarMenuLink
+          v-if="planeDocsNavItem"
+          :item="planeDocsNavItem"
+          class="home-doc-actions__btn home-doc-actions__btn--secondary home-doc-actions__btn--nav"
+        />
+        <VPNavBarMenuLink
+          v-if="signInNavItem"
+          :item="signInNavItem"
+          class="home-doc-actions__btn home-doc-actions__btn--primary home-doc-actions__btn--nav"
+        />
+        <span v-if="signInNavItem && !isForcedTheme" class="plane-header__divider" aria-hidden="true" />
+        <VPNavBarAppearance v-if="!isForcedTheme" />
+        <span class="plane-header__divider" aria-hidden="true" />
+        <VPNavBarSocialLinks />
       </div>
 
       <div class="plane-header__mobile">
@@ -285,7 +299,7 @@ onUnmounted(() => {
       <section class="wrapper animate-fade-in">
         <div class="w-full pl-5 pr-5 py-5 lg:py-7 flex items-center justify-between">
           <a href="/" class="flex items-center gap-2">
-            <img class="h-4" :src="headerLogoSrc" :alt="logoAlt" />
+            <img class="plane-header__logo" :src="headerLogoSrc" :alt="logoAlt" />
             <span class="text-base font-medium text-primary dark:text-white">Plane Developers</span>
           </a>
           <div class="flex items-center gap-2">
@@ -330,11 +344,11 @@ onUnmounted(() => {
 
         <div
           class="overflow-y-auto flex flex-col [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-          style="height: calc(100vh - 88px)"
+          style="height: calc(100vh - var(--vp-nav-height, 84px))"
         >
           <nav class="flex-1 w-full pt-6 pb-8">
             <ul class="space-y-1">
-              <li v-for="(navItem, index) in nav" :key="navItem.text">
+              <li v-for="(navItem, index) in mainNav" :key="navItem.text">
                 <template v-if="isDropdown(navItem)">
                   <button
                     type="button"
@@ -428,6 +442,29 @@ onUnmounted(() => {
             class="w-full pt-6 pb-12 border-t border-stroke dark:border-nickel relative tick-left tick-right mt-auto"
           >
             <div class="space-y-6">
+              <div v-if="planeDocsNavItem || signInNavItem" class="flex flex-col gap-2 px-4">
+                <a
+                  v-if="planeDocsNavItem"
+                  :href="planeDocsNavItem.link"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="home-doc-actions__btn home-doc-actions__btn--secondary home-doc-actions__btn--nav w-full"
+                  @click="closeMobileMenu"
+                >
+                  {{ planeDocsNavItem.text }}
+                </a>
+                <a
+                  v-if="signInNavItem"
+                  :href="signInNavItem.link"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="home-doc-actions__btn home-doc-actions__btn--primary home-doc-actions__btn--nav w-full"
+                  @click="closeMobileMenu"
+                >
+                  {{ signInNavItem.text }}
+                </a>
+              </div>
+
               <div v-if="localeLinks.length && currentLang.label" class="px-4">
                 <button
                   type="button"
@@ -504,6 +541,23 @@ onUnmounted(() => {
   border: 0;
 }
 
+.plane-header__brand {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  height: auto;
+  line-height: 0;
+}
+
+.plane-header__logo {
+  display: block;
+  height: var(--plane-header-logo-height, 1.625rem);
+  width: auto;
+  max-width: none;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
 .plane-header__mobile {
   display: flex;
   align-items: center;
@@ -532,18 +586,19 @@ onUnmounted(() => {
   }
 }
 
+.plane-header__start .plane-header__nav,
 .plane-header__search,
-.plane-header__end {
+.plane-header__actions {
   display: none;
 }
 
 @media (min-width: 1024px) {
   .plane-header {
     display: grid;
-    grid-template-columns: minmax(0, auto) 240px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) 240px auto;
     align-items: center;
     gap: 0.5rem 0.75rem;
-    padding: 0.75rem 1rem;
+    padding: var(--plane-header-padding-y, 1.125rem) var(--plane-header-padding-x, 1.375rem);
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -552,22 +607,22 @@ onUnmounted(() => {
     border-bottom-color: var(--plane-header-border) !important;
   }
 
-  .plane-header__brand {
+  .plane-header__start {
     grid-column: 1;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 0.625rem;
+    gap: 1.25rem;
     min-width: 0;
     max-width: 100%;
-    padding: 0;
-    margin: 0;
+    overflow: hidden;
   }
 
-  .plane-header__logo {
-    height: 1.25rem;
-    width: auto;
+  .plane-header__brand {
     flex-shrink: 0;
+    gap: 0.625rem;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
   }
 
   .plane-header__title {
@@ -591,32 +646,24 @@ onUnmounted(() => {
     overflow: hidden;
   }
 
-  .plane-header__end {
-    grid-column: 3;
+  .plane-header__start .plane-header__nav {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 0.5rem;
-    min-width: 0;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .plane-header__nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 0.125rem;
     min-width: 0;
     flex: 1 1 auto;
     overflow: hidden;
   }
 
-  .plane-header__utilities {
+  .plane-header__actions {
+    grid-column: 3;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.5rem;
     flex-shrink: 0;
+    min-width: 0;
   }
 
   .plane-header__mobile {
@@ -625,7 +672,7 @@ onUnmounted(() => {
 
   .plane-header__divider {
     width: 1px;
-    height: 1.25rem;
+    height: var(--plane-header-logo-height, 1.625rem);
     background: var(--plane-header-divider);
     flex-shrink: 0;
   }
@@ -640,7 +687,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.25rem;
+    padding: var(--plane-header-padding-y, 1.125rem) var(--plane-header-padding-x, 1.375rem);
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -655,7 +702,7 @@ onUnmounted(() => {
   }
 
   .plane-header__logo {
-    height: 1rem;
+    height: var(--plane-header-logo-height, 1.4375rem);
   }
 
   .plane-header__title {

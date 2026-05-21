@@ -2,12 +2,12 @@
    PLANE BRAND THEME — component overrides
    ================================================ */
 
-/* --- Doc links --- */
-.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link) {
+/* --- Doc links (exclude home hero CTAs) --- */
+.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)) {
   color: var(--vp-c-brand-1);
 }
 
-.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):hover {
+.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)):hover {
   color: var(--plane-link-hover);
 }
 
@@ -25,17 +25,6 @@ header.plane-header.wrapper,
     border-radius: 8px;
     color: var(--plane-header-search-text) !important;
   }
-}
-
-/* --- Home hero buttons --- */
-.VPHomeHero .VPButton.brand:hover {
-  box-shadow: 0 4px 14px rgba(0, 99, 153, 0.25);
-}
-
-.dark .VPHomeHero .VPButton.brand:hover,
-html.dark .VPHomeHero .VPButton.brand:hover,
-[data-theme="dark"] .VPHomeHero .VPButton.brand:hover {
-  box-shadow: 0 4px 14px rgba(40, 147, 204, 0.25);
 }
 
 /* --- Home feature cards --- */
@@ -426,53 +415,6 @@ html.dark .card-description,
 
 .card-link:hover .card-cta {
   color: var(--plane-brand-hover);
-}
-
-/* Sign in button */
-.plane-header .VPNavBarMenuLink.VPLink[href*="sign-in"],
-.plane-header a.VPLink.VPNavBarMenuLink[href*="sign-in"] {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-.VPNavBarMenuLink.VPLink[href*="sign-in"],
-a.VPLink.VPNavBarMenuLink[href*="sign-in"],
-.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"] {
-  background: var(--vp-c-brand-1) !important;
-  color: #ffffff !important;
-  padding: 6px 14px !important;
-  margin-top: 15px !important;
-  margin-bottom: 15px !important;
-  border-radius: 6px !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  transition: all 0.2s ease !important;
-  line-height: normal !important;
-  text-decoration: none !important;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-.VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
-a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover,
-.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"]:hover {
-  background: var(--plane-brand-hover) !important;
-  box-shadow: 0 4px 14px rgba(0, 99, 153, 0.25);
-}
-
-.dark .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
-.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover,
-html.dark .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
-html.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover,
-[data-theme="dark"] .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover {
-  box-shadow: 0 4px 14px rgba(40, 147, 204, 0.25);
-}
-
-.VPNavBarMenuLink.VPLink[href*="sign-in"] .vp-external-link-icon,
-a.VPLink.VPNavBarMenuLink[href*="sign-in"] .vp-external-link-icon,
-.VPNavBarMenuLink.VPLink[href*="sign-in"] svg,
-a.VPLink.VPNavBarMenuLink[href*="sign-in"] svg {
-  display: none !important;
 }
 
 /* Hero image layout in markdown */

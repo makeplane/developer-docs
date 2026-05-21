@@ -5,6 +5,10 @@
 
 :root {
   --vp-layout-top-height: 0;
+  --plane-header-padding-y: 1.125rem;
+  --plane-header-padding-x: 1.375rem;
+  --plane-header-logo-height: 1.625rem;
+  --vp-nav-height: 84px;
 
   /* Navbar tokens (fallback outside .docs-layout) */
   --plane-header-bg: #ffffff;
@@ -52,8 +56,11 @@ html.dark body {
 .docs-layout {
   --vp-font-family-base: var(--vp-font-family-base, "Inter", system-ui, sans-serif);
   --vp-font-family-mono: var(--vp-font-family-mono, "IBM Plex Mono", ui-monospace, monospace);
-  /* Plane header row (py-3 + logo + border) */
-  --vp-nav-height: 72px;
+  /* Plane header row — keep in sync with .plane-header padding + content */
+  --plane-header-padding-y: 1.125rem;
+  --plane-header-padding-x: 1.375rem;
+  --plane-header-logo-height: 1.625rem;
+  --vp-nav-height: 84px;
 
   /* Navbar — Plane theme tokens (light) */
   --plane-header-bg: #ffffff;
@@ -231,7 +238,8 @@ html.dark .docs-layout .plane-header-shell,
     overflow-x: clip;
   }
 
-  .plane-header .plane-header__end {
+  .plane-header .plane-header__start,
+  .plane-header .plane-header__actions {
     min-width: 0;
     overflow: hidden;
   }
@@ -256,7 +264,7 @@ html.dark .docs-layout .plane-header-shell,
 
   .plane-header .DocSearch.DocSearch-Button,
   .plane-header .VPNavBarSearchButton {
-    height: 36px;
+    height: 39px;
     border-radius: 12px;
     background: var(--plane-header-search-bg) !important;
     border: 1px solid var(--plane-header-search-border) !important;
@@ -306,10 +314,16 @@ html.dark .docs-layout .plane-header-shell,
     transition: color 0.2s ease;
   }
 
-  .plane-header :deep(.VPNavBarMenuLink:hover),
+  .plane-header :deep(.VPNavBarMenuLink:not(.home-doc-actions__btn):hover),
   .plane-header :deep(.VPNavBarMenuGroup .button:hover) {
     color: var(--vp-c-brand-1) !important;
     opacity: 1;
+  }
+
+  .plane-header :deep(a.home-doc-actions__btn--secondary.VPNavBarMenuLink),
+  .plane-header :deep(a.home-doc-actions__btn--secondary.VPNavBarMenuLink:hover) {
+    color: inherit !important;
+    opacity: 1 !important;
   }
 
   .plane-header :deep(.VPNavBarMenuLink.active) {
@@ -350,8 +364,7 @@ html.dark .docs-layout .plane-header-shell,
 @media (min-width: 1280px) {
   .plane-header {
     gap: 0.5rem 1.25rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    --plane-header-padding-x: 1.5rem;
   }
 
   .plane-header :deep(.VPNavBarMenuLink),
@@ -426,6 +439,143 @@ div[class*="language-"] > span.lang {
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 3rem;
+}
+
+/* --- Plane buttons: shared base --- */
+a.home-doc-actions__btn,
+.home-doc-actions__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Navbar — smaller primary variant */
+a.home-doc-actions__btn--nav,
+.home-doc-actions__btn--nav {
+  min-height: auto;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin: 0 !important;
+}
+
+/* Primary */
+a.home-doc-actions__btn--primary,
+a.home-doc-actions__btn--primary:is(:link, :visited, :focus, :active) {
+  background: #006399 !important;
+  border-color: #006399 !important;
+  color: #ffffff !important;
+}
+
+a.home-doc-actions__btn--primary:hover {
+  background: #0078b8 !important;
+  border-color: #0078b8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 99, 153, 0.25);
+}
+
+a.home-doc-actions__btn--primary.home-doc-actions__btn--nav:hover {
+  transform: translateY(-1px);
+}
+
+.dark a.home-doc-actions__btn--primary,
+.dark a.home-doc-actions__btn--primary:is(:link, :visited, :focus, :active),
+html.dark a.home-doc-actions__btn--primary,
+html.dark a.home-doc-actions__btn--primary:is(:link, :visited, :focus, :active),
+[data-theme="dark"] a.home-doc-actions__btn--primary,
+[data-theme="dark"] a.home-doc-actions__btn--primary:is(:link, :visited, :focus, :active) {
+  background: #2893cc !important;
+  border-color: #2893cc !important;
+  color: #ffffff !important;
+}
+
+.dark a.home-doc-actions__btn--primary:hover,
+html.dark a.home-doc-actions__btn--primary:hover,
+[data-theme="dark"] a.home-doc-actions__btn--primary:hover {
+  background: #3aa5d4 !important;
+  border-color: #3aa5d4 !important;
+  color: #ffffff !important;
+}
+
+.dark a.home-doc-actions__btn--primary.home-doc-actions__btn--nav:hover,
+html.dark a.home-doc-actions__btn--primary.home-doc-actions__btn--nav:hover,
+[data-theme="dark"] a.home-doc-actions__btn--primary.home-doc-actions__btn--nav:hover {
+  box-shadow: 0 2px 8px rgba(40, 147, 204, 0.25);
+}
+
+/* Secondary */
+a.home-doc-actions__btn--secondary,
+a.home-doc-actions__btn--secondary:is(:link, :visited, :focus, :active) {
+  background: transparent !important;
+  border-color: #e5e7eb !important;
+  color: #0a0a0a !important;
+}
+
+a.home-doc-actions__btn--secondary:hover {
+  background: #f7f8f9 !important;
+  border-color: #d1d5db !important;
+  color: #0a0a0a !important;
+}
+
+.dark a.home-doc-actions__btn--secondary,
+.dark a.home-doc-actions__btn--secondary:is(:link, :visited, :focus, :active),
+html.dark a.home-doc-actions__btn--secondary,
+html.dark a.home-doc-actions__btn--secondary:is(:link, :visited, :focus, :active),
+[data-theme="dark"] a.home-doc-actions__btn--secondary,
+[data-theme="dark"] a.home-doc-actions__btn--secondary:is(:link, :visited, :focus, :active) {
+  background: #252829 !important;
+  border-color: #3f4244 !important;
+  color: #ffffff !important;
+}
+
+.dark a.home-doc-actions__btn--secondary:hover,
+html.dark a.home-doc-actions__btn--secondary:hover,
+[data-theme="dark"] a.home-doc-actions__btn--secondary:hover {
+  background: #2f3236 !important;
+  border-color: #4a4e52 !important;
+  color: #ffffff !important;
+}
+
+/* Navbar buttons — hide external-link ↗ icon */
+.plane-header a.home-doc-actions__btn.vp-external-link-icon::after,
+.plane-header .VPLink.home-doc-actions__btn.vp-external-link-icon::after,
+.plane-header a.home-doc-actions__btn.no-icon::after,
+.plane-header .VPLink.home-doc-actions__btn.no-icon::after {
+  display: none !important;
+  content: none !important;
+}
+
+.plane-header a.home-doc-actions__btn .vp-external-link-icon,
+.plane-header a.home-doc-actions__btn svg {
+  display: none !important;
+}
+
+/* Navbar button links — override default nav link layout */
+.plane-header :deep(a.home-doc-actions__btn.VPNavBarMenuLink),
+.plane-header :deep(.VPLink.home-doc-actions__btn) {
+  padding: 5px 14px !important;
+  font-size: 14px !important;
+  white-space: nowrap;
+}
+
+/* Don't apply nav text-link hover to Sign in button */
+.plane-header :deep(.VPNavBarMenuLink.home-doc-actions__btn:hover) {
+  opacity: 1 !important;
 }
 
 .home-feature-cards {

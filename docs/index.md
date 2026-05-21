@@ -17,8 +17,8 @@ aside: false
 </div>
 
 <div class="home-doc-actions">
-  <a class="VPButton medium brand" href="/self-hosting/overview">Get Started</a>
-  <a class="VPButton medium alt" href="/api-reference/introduction">Tutorials</a>
+  <a class="home-doc-actions__btn home-doc-actions__btn--primary" href="/self-hosting/overview">Get Started</a>
+  <a class="home-doc-actions__btn home-doc-actions__btn--secondary" href="/api-reference/introduction">Tutorials</a>
 </div>
 
 <div class="home-feature-cards">

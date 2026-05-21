@@ -236,7 +236,7 @@ export default extendConfig(
           { text: "Self-hosting", link: "/self-hosting/overview" },
           { text: "API Reference", link: "/api-reference/introduction" },
           { text: "Build and extend", link: "/dev-tools/build-plane-app/overview" },
-          { text: "Plane Docs", link: "https://docs.plane.so" },
+          { text: "Plane Docs", link: "https://docs.plane.so", noIcon: true },
           { text: "Sign in", link: "https://app.plane.so/sign-in" },
         ],
 
