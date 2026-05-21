@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { computed, useSlots } from "vue";
 import { useData, Content } from "vitepress";
-import VPDefaultLayout from "@voidzero-dev/vitepress-theme/src/components/vitepress-default/Layout.vue";
-import OSSHeader from "@voidzero-dev/vitepress-theme/src/components/oss/Header.vue";
-import TopBanner from "@voidzero-dev/vitepress-theme/src/components/oss/TopBanner.vue";
+import VPDefaultLayout from "./voidzero/default-layout";
+import OSSHeader from "./voidzero/header";
+import TopBanner from "./voidzero/top-banner";
 
 const { frontmatter, site } = useData();
 const slots = useSlots();
 
-const variant = computed(() => (site.value.themeConfig as { variant?: string }).variant ?? "vite");
+const variant = computed(() => (site.value.themeConfig as { variant?: string }).variant ?? "voidzero");
 
 // Use the standard doc layout (with sidebar) for doc, page, and home layouts
 const useDocLayout = computed(() => {

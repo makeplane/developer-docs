@@ -129,6 +129,13 @@ export default extendConfig(
           },
         ],
 
+        // Sync OSS header data-theme with html.dark after hydration
+        [
+          "script",
+          {},
+          `(function(){function s(){var d=document.documentElement.classList.contains("dark");document.querySelectorAll("header.wrapper").forEach(function(h){d?h.setAttribute("data-theme","dark"):h.removeAttribute("data-theme")})}s();new MutationObserver(s).observe(document.documentElement,{attributes:true,attributeFilter:["class"]})})();`,
+        ],
+
         // Google Analytics with Consent Mode v2
         ["script", { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-JF828SKW90" }],
         [
@@ -213,8 +220,8 @@ export default extendConfig(
       },
 
       themeConfig: {
-        variant: "vitest",
-        siteTitle: false,
+        variant: "voidzero",
+        siteTitle: "Plane",
         logo: {
           light: "/logo/dev-logo-watermark-light.png",
           dark: "/logo/dev-logo-watermark-dark.png",

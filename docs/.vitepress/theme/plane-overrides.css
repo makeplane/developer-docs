@@ -1,4 +1,164 @@
 /* ================================================
+   PLANE BRAND THEME — component overrides
+   ================================================ */
+
+/* --- Doc links --- */
+.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link) {
+  color: var(--vp-c-brand-1);
+}
+
+.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):hover {
+  color: var(--plane-link-hover);
+}
+
+/* --- Navbar / header --- */
+header.plane-header.wrapper {
+  border-bottom-color: var(--docs-divider) !important;
+}
+
+.dark header.plane-header.wrapper,
+html.dark header.plane-header.wrapper,
+[data-theme="dark"] header.plane-header.wrapper {
+  background-color: #000000 !important;
+  border-bottom-color: #2a2a2a !important;
+}
+
+@media (min-width: 768px) {
+  .VPNavBarSearchButton {
+    background-color: #fff !important;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+  }
+
+  .dark .VPNavBarSearchButton,
+  html.dark .VPNavBarSearchButton,
+  [data-theme="dark"] .VPNavBarSearchButton {
+    background-color: #111 !important;
+    border-color: #323232;
+  }
+}
+
+/* --- Home hero buttons --- */
+.VPHomeHero .VPButton.brand:hover {
+  box-shadow: 0 4px 14px rgba(0, 99, 153, 0.25);
+}
+
+.dark .VPHomeHero .VPButton.brand:hover,
+html.dark .VPHomeHero .VPButton.brand:hover,
+[data-theme="dark"] .VPHomeHero .VPButton.brand:hover {
+  box-shadow: 0 4px 14px rgba(40, 147, 204, 0.25);
+}
+
+/* --- Home feature cards --- */
+.VPHomeFeatures .VPFeature {
+  background-color: #f7f8f9;
+  border-color: #f7f8f9;
+}
+
+.VPHomeFeatures .VPFeature.link:hover {
+  background-color: #eef0f2;
+  border-color: #eef0f2;
+}
+
+.VPHomeFeatures .VPFeature .icon {
+  background-color: transparent;
+  color: #0a0a0a;
+}
+
+.VPHomeFeatures .VPFeature .title {
+  color: #0a0a0a;
+}
+
+.VPHomeFeatures .VPFeature.link:hover .title {
+  color: #111827;
+}
+
+.VPHomeFeatures .VPFeature .details {
+  color: #4a5568;
+}
+
+.VPHomeFeatures .VPFeature .link-text-value {
+  color: var(--vp-c-brand-1);
+}
+
+.VPHomeFeatures .VPFeature.link:hover .link-text-value {
+  color: var(--plane-brand-hover);
+}
+
+.dark .VPHomeFeatures .VPFeature,
+html.dark .VPHomeFeatures .VPFeature,
+[data-theme="dark"] .VPHomeFeatures .VPFeature {
+  background-color: #181a1b;
+  border-color: #181a1b;
+}
+
+.dark .VPHomeFeatures .VPFeature.link:hover,
+html.dark .VPHomeFeatures .VPFeature.link:hover,
+[data-theme="dark"] .VPHomeFeatures .VPFeature.link:hover {
+  background-color: #1d1f20;
+  border-color: #1d1f20;
+}
+
+.dark .VPHomeFeatures .VPFeature .icon,
+html.dark .VPHomeFeatures .VPFeature .icon,
+[data-theme="dark"] .VPHomeFeatures .VPFeature .icon {
+  color: #f4f4f4;
+}
+
+.dark .VPHomeFeatures .VPFeature .title,
+html.dark .VPHomeFeatures .VPFeature .title,
+[data-theme="dark"] .VPHomeFeatures .VPFeature .title {
+  color: #f4f4f4;
+}
+
+.dark .VPHomeFeatures .VPFeature .details,
+html.dark .VPHomeFeatures .VPFeature .details,
+[data-theme="dark"] .VPHomeFeatures .VPFeature .details {
+  color: #a1a1aa;
+}
+
+/* --- Hero images in markdown --- */
+.vp-doc p:has(> img[src$="#hero"]),
+.vp-doc p:has(> img[src$="#hero-tl"]),
+.vp-doc p:has(> img[src$="#hero-tr"]),
+.vp-doc p:has(> img[src$="#hero-bl"]),
+.vp-doc p:has(> img[src$="#hero-br"]),
+article p:has(> img[src$="#hero"]),
+article p:has(> img[src$="#hero-tl"]),
+article p:has(> img[src$="#hero-tr"]),
+article p:has(> img[src$="#hero-bl"]),
+article p:has(> img[src$="#hero-br"]) {
+  background: #f1f3f3;
+}
+
+.vp-doc img[src$="#hero"],
+.vp-doc img[src$="#hero-tl"],
+.vp-doc img[src$="#hero-tr"],
+.vp-doc img[src$="#hero-bl"],
+.vp-doc img[src$="#hero-br"],
+article img[src$="#hero"],
+article img[src$="#hero-tl"],
+article img[src$="#hero-tr"],
+article img[src$="#hero-bl"],
+article img[src$="#hero-br"] {
+  border-color: #eaebeb;
+  box-shadow:
+    0 1px 2px rgba(41, 47, 61, 0.04),
+    0 4px 12px rgba(41, 47, 61, 0.05);
+}
+
+/* --- HR / borders --- */
+.vp-doc hr {
+  border-color: #e5e7eb;
+}
+
+.dark .vp-doc hr,
+html.dark .vp-doc hr,
+[data-theme="dark"] .vp-doc hr {
+  border-color: #2a2a2a;
+}
+
+/* ================================================
    PLANE-SPECIFIC OVERRIDES (API docs, components)
    ================================================ */
 
@@ -197,8 +357,8 @@
   display: block;
   padding: 24px;
   border-radius: 12px;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
   transition: all 0.2s ease;
   text-decoration: none !important;
   color: inherit;
@@ -210,6 +370,19 @@
   text-decoration: none !important;
 }
 
+.dark .card-link,
+html.dark .card-link,
+[data-theme="dark"] .card-link {
+  border-color: #2a2a2a;
+  background: rgba(20, 20, 20, 0.5);
+}
+
+.dark .card-link:hover,
+html.dark .card-link:hover,
+[data-theme="dark"] .card-link:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
 .card-icon {
   font-size: 32px;
   margin-bottom: 16px;
@@ -219,7 +392,7 @@
 .card-title {
   font-size: 16px !important;
   font-weight: 600 !important;
-  color: var(--vp-c-text-1) !important;
+  color: #111827 !important;
   margin: 0 0 12px 0 !important;
   padding: 0 !important;
   border: none !important;
@@ -230,14 +403,49 @@
   color: var(--vp-c-brand-1) !important;
 }
 
+.dark .card-title,
+html.dark .card-title,
+[data-theme="dark"] .card-title {
+  color: #f9fafb !important;
+}
+
+.dark .card-link:hover .card-title,
+html.dark .card-link:hover .card-title,
+[data-theme="dark"] .card-link:hover .card-title {
+  color: #f9fafb !important;
+}
+
 .card-description {
   font-size: 14px;
-  color: var(--vp-c-text-2);
+  color: #6b7280;
   line-height: 1.6;
   margin: 0;
 }
 
+.dark .card-description,
+html.dark .card-description,
+[data-theme="dark"] .card-description {
+  color: #9ca3af;
+}
+
+/* Card CTA link (optional slot / future use) */
+.card-cta {
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.card-link:hover .card-cta {
+  color: var(--plane-brand-hover);
+}
+
 /* Sign in button */
+.plane-header .VPNavBarMenuLink.VPLink[href*="sign-in"],
+.plane-header a.VPLink.VPNavBarMenuLink[href*="sign-in"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .VPNavBarMenuLink.VPLink[href*="sign-in"],
 a.VPLink.VPNavBarMenuLink[href*="sign-in"],
 .VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"] {
@@ -256,6 +464,21 @@ a.VPLink.VPNavBarMenuLink[href*="sign-in"],
   align-items: center !important;
 }
 
+.VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
+a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover,
+.VPNavBarMenu .VPLink[href="https://app.plane.so/sign-in"]:hover {
+  background: var(--plane-brand-hover) !important;
+  box-shadow: 0 4px 14px rgba(0, 99, 153, 0.25);
+}
+
+.dark .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
+.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover,
+html.dark .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover,
+html.dark a.VPLink.VPNavBarMenuLink[href*="sign-in"]:hover,
+[data-theme="dark"] .VPNavBarMenuLink.VPLink[href*="sign-in"]:hover {
+  box-shadow: 0 4px 14px rgba(40, 147, 204, 0.25);
+}
+
 .VPNavBarMenuLink.VPLink[href*="sign-in"] .vp-external-link-icon,
 a.VPLink.VPNavBarMenuLink[href*="sign-in"] .vp-external-link-icon,
 .VPNavBarMenuLink.VPLink[href*="sign-in"] svg,
@@ -263,25 +486,40 @@ a.VPLink.VPNavBarMenuLink[href*="sign-in"] svg {
   display: none !important;
 }
 
-/* Hero image variants in markdown */
+/* Hero image layout in markdown */
 .vp-doc p:has(> img[src$="#hero"]),
-article p:has(> img[src$="#hero"]) {
+.vp-doc p:has(> img[src$="#hero-tl"]),
+.vp-doc p:has(> img[src$="#hero-tr"]),
+.vp-doc p:has(> img[src$="#hero-bl"]),
+.vp-doc p:has(> img[src$="#hero-br"]),
+article p:has(> img[src$="#hero"]),
+article p:has(> img[src$="#hero-tl"]),
+article p:has(> img[src$="#hero-tr"]),
+article p:has(> img[src$="#hero-bl"]),
+article p:has(> img[src$="#hero-br"]) {
   max-width: 841px;
   padding: 36px 56px 0;
-  background: var(--vp-c-bg-soft);
   border-radius: 12px;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .vp-doc img[src$="#hero"],
-article img[src$="#hero"] {
+.vp-doc img[src$="#hero-tl"],
+.vp-doc img[src$="#hero-tr"],
+.vp-doc img[src$="#hero-bl"],
+.vp-doc img[src$="#hero-br"],
+article img[src$="#hero"],
+article img[src$="#hero-tl"],
+article img[src$="#hero-tr"],
+article img[src$="#hero-bl"],
+article img[src$="#hero-br"] {
   width: 100%;
   height: auto;
   display: block;
   margin: 0;
   border-radius: 8px 8px 0 0;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid #eaebeb;
   border-bottom: none;
   object-fit: cover;
 }

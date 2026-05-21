@@ -1,0 +1,470 @@
+/* ================================================
+   PLANE UI — layout, typography, shell, header
+   (VoidZero base + Plane overrides)
+   ================================================ */
+
+:root {
+  --vp-layout-top-height: 0;
+}
+
+/* --- Fonts & body --- */
+body,
+.docs-layout {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings:
+    "cv01" on,
+    "cv02" on,
+    "zero" on;
+}
+
+html.dark .docs-layout,
+html.dark body {
+  background-color: #141415;
+  color-scheme: dark;
+}
+
+.docs-layout {
+  --vp-font-family-base: var(--vp-font-family-base, "Inter", system-ui, sans-serif);
+  --vp-font-family-mono: var(--vp-font-family-mono, "IBM Plex Mono", ui-monospace, monospace);
+  /* Plane header row (py-3 + logo + border) */
+  --vp-nav-height: 72px;
+}
+
+/* --- Doc prose --- */
+.vp-doc {
+  line-height: 1.7;
+  letter-spacing: -0.011em;
+}
+
+.vp-doc h1 {
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+}
+
+.vp-doc h2 {
+  border-top: none !important;
+  margin-top: 32px;
+  letter-spacing: -0.017em;
+  line-height: 1.3;
+}
+
+.vp-doc h3 {
+  border-top: none !important;
+  letter-spacing: -0.014em;
+  line-height: 1.4;
+}
+
+/* --- Sidebars: flush under OSS navbar --- */
+@media (min-width: 1024px) {
+  .docs-layout .VPSidebar {
+    padding-top: 0;
+    top: calc(var(--vp-nav-height) + var(--vp-banner-height, 0px) - 4px);
+  }
+
+  .docs-layout .VPDoc .aside-container {
+    padding-top: 0;
+    top: calc(var(--vp-nav-height) + var(--vp-banner-height, 0px) - 4px);
+  }
+}
+
+/* --- Doc layout shell (1280px+) --- */
+@media (min-width: 1280px) {
+  .docs-layout .VPSidebar .nav {
+    padding-top: 0;
+  }
+
+  .docs-layout .VPDoc .content {
+    padding-top: 32px;
+  }
+
+  .docs-layout .VPDoc .aside {
+    max-width: 256px;
+  }
+
+  .docs-layout .VPDoc .aside-container {
+    width: 256px;
+    padding-left: 24px;
+    border-left-color: var(--docs-divider);
+  }
+
+  .docs-layout .VPDocOutlineItem .outline-link {
+    white-space: normal;
+    text-overflow: unset;
+    overflow: visible;
+  }
+}
+
+/* No right outline (aside: false) — widen main column */
+.docs-layout .VPDoc:not(.has-aside) .content-container {
+  max-width: 960px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 1280px) {
+  .docs-layout .VPDoc:not(.has-aside) .content-container {
+    max-width: 1104px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+/* Content column borders */
+@media (min-width: 960px) {
+  .docs-layout .content-wrapper.has-sidebar {
+    border-left: 1px solid var(--docs-divider);
+    border-right: 1px solid var(--docs-divider);
+  }
+}
+
+.docs-layout .VPSidebar {
+  border-right: 1px solid var(--docs-divider);
+}
+
+/* Hide local nav when sidebar is present */
+@media (min-width: 1024px) {
+  .docs-layout .VPLocalNav {
+    display: none !important;
+  }
+}
+
+/* --- Plane header — match content-wrapper width (centered when fixed) --- */
+@media (min-width: 768px) {
+  .docs-layout .plane-header-shell {
+    width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 90rem) {
+  .docs-layout .plane-header-shell {
+    width: 90rem;
+    max-width: 90rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .docs-layout .plane-header-shell--docs {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+  }
+
+  .docs-layout .plane-header-shell--docs.plane-header-shell {
+    overflow-x: clip;
+  }
+}
+
+@media (min-width: 90rem) {
+  .docs-layout .plane-header-shell--docs {
+    width: 90rem;
+    max-width: 90rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .plane-header-shell {
+    overflow-x: clip;
+  }
+
+  .docs-layout .plane-header.wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+
+  .plane-header .plane-header__end {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .plane-header .plane-header__search {
+    width: 240px;
+    max-width: 240px;
+  }
+
+  .plane-header .VPNavBarSearch {
+    width: 100%;
+    min-width: 0;
+    max-width: 240px;
+  }
+
+  .plane-header .VPNavBarSearchButton,
+  .plane-header .DocSearch.DocSearch-Button {
+    width: 100% !important;
+    max-width: 240px !important;
+    min-width: 0 !important;
+  }
+
+  .plane-header .DocSearch.DocSearch-Button,
+  .plane-header .VPNavBarSearchButton {
+    height: 36px;
+    border-radius: 12px;
+    background: #1c1c1e !important;
+    border: 1px solid #2a2a2a !important;
+    color: #a1a1a6 !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    gap: 0.5rem;
+  }
+
+  .plane-header .DocSearch-Button-Container {
+    justify-content: flex-start !important;
+    flex: 1;
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .plane-header .DocSearch-Button-Placeholder,
+  .plane-header .VPNavBarSearchButton .text {
+    color: #a1a1a6 !important;
+    text-align: left !important;
+    flex: 0 1 auto;
+  }
+
+  .plane-header .DocSearch-Button-Keys,
+  .plane-header .VPNavBarSearchButton .keys {
+    color: #a1a1a6 !important;
+    margin-left: auto !important;
+    flex-shrink: 0;
+  }
+
+  .plane-header :deep(.VPNavBarMenuLink),
+  .plane-header :deep(.VPNavBarMenuGroup .button) {
+    color: #ffffff !important;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    padding: 0.375rem 0.5rem;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .plane-header :deep(.VPNavBarMenuLink:hover) {
+    opacity: 0.85;
+  }
+
+  .plane-header :deep(.VPNavBarAppearance),
+  .plane-header :deep(.VPNavBarSocialLinks) {
+    display: flex !important;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .plane-header :deep(.VPNavBarSocialLinks) {
+    gap: 0.25rem;
+  }
+
+  .plane-header :deep(.VPNavBarSocialLinks .VPSocialLink) {
+    color: #ffffff;
+  }
+
+  .plane-header :deep(.VPSwitchAppearance) {
+    --vp-c-bg: #1c1c1e;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .plane-header__title {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .plane-header {
+    gap: 0.5rem 1.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .plane-header :deep(.VPNavBarMenuLink),
+  .plane-header :deep(.VPNavBarMenuGroup .button) {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+/* --- Code blocks --- */
+div[class*="language-"] {
+  border-radius: 8px !important;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #fafafa !important;
+}
+
+.dark div[class*="language-"],
+html.dark div[class*="language-"],
+[data-theme="dark"] div[class*="language-"] {
+  background: #0f0f0f !important;
+  border-color: #2a2a2a !important;
+}
+
+div[class*="language-"] pre {
+  background: transparent !important;
+}
+
+.dark .shiki,
+.dark .shiki span,
+html.dark .shiki,
+html.dark .shiki span {
+  background: transparent !important;
+}
+
+div[class*="language-"] > span.lang {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* --- Home page (layout: doc) --- */
+.vp-doc .home-hero {
+  margin-bottom: 2rem;
+}
+
+.vp-doc .home-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+}
+
+.vp-doc .home-hero .home-hero-text {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc .home-hero .home-hero-tagline {
+  font-size: 1.125rem;
+  color: var(--vp-c-text-2);
+  max-width: 42rem;
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+.home-doc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 3rem;
+}
+
+.home-feature-cards {
+  margin: 2rem 0 3rem;
+}
+
+.home-feature-cards .card-group {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .home-feature-cards .card-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .home-feature-cards .card-group {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.home-feature-cards .card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: none;
+  background: #f7f8f9;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.home-feature-cards .card-link:hover {
+  background: #eef0f2;
+  border: none;
+  box-shadow: none;
+}
+
+.dark .home-feature-cards .card-link,
+html.dark .home-feature-cards .card-link,
+[data-theme="dark"] .home-feature-cards .card-link {
+  background: #181a1b;
+  border: none;
+}
+
+.dark .home-feature-cards .card-link:hover,
+html.dark .home-feature-cards .card-link:hover,
+[data-theme="dark"] .home-feature-cards .card-link:hover {
+  background: #1d1f20;
+  border: none;
+  box-shadow: none;
+}
+
+.home-feature-cards .card-link:hover .card-title {
+  color: #0a0a0a !important;
+}
+
+.dark .home-feature-cards .card-link:hover .card-title,
+html.dark .home-feature-cards .card-link:hover .card-title,
+[data-theme="dark"] .home-feature-cards .card-link:hover .card-title {
+  color: #f4f4f4 !important;
+}
+
+.home-feature-cards .card-cta {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+/* Hide footer prev/next on home when feature grid is present */
+.Layout:has(.home-feature-cards) .VPDocFooter .prev,
+.Layout:has(.home-feature-cards) .VPDocFooter .next,
+.Layout:has(.home-feature-cards) .VPDocFooter .pager-link {
+  display: none;
+}
+
+/* Legacy VPFeature icons in dark mode */
+.dark .VPFeature .VPImage,
+html.dark .VPFeature .VPImage {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.dark .VPFeatures .VPFeature .icon img,
+html.dark .VPFeatures .VPFeature .icon img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* --- Tags --- */
+.plantag,
+a.plantag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+a.plantag:hover {
+  color: var(--plane-brand-hover);
+}

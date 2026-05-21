@@ -6,6 +6,8 @@ const props = defineProps({
   title: String,
   icon: String,
   href: String,
+  /** CTA label shown at bottom of card (e.g. "View deployment guides") */
+  linkText: String,
 });
 
 // Custom SVG icons for brands (add more as needed)
@@ -55,11 +57,9 @@ const IconComponent = computed(() => {
 </script>
 
 <template>
-  <a :href="href" class="card-link">
+  <component :is="href ? 'a' : 'div'" :href="href" class="card-link" :class="{ 'card-link--static': !href }">
     <div v-if="icon" class="card-icon">
-      <!-- Render custom SVG if available -->
       <div v-if="customSvgIcons[icon]" v-html="customSvgIcons[icon]"></div>
-      <!-- Otherwise render Lucide icon -->
       <component v-else :is="IconComponent" :size="24" />
     </div>
     <h3 class="card-title">
@@ -68,5 +68,37 @@ const IconComponent = computed(() => {
     <p class="card-description">
       <slot />
     </p>
-  </a>
+    <span v-if="linkText" class="card-cta">{{ linkText }} →</span>
+  </component>
 </template>
+
+<style scoped>
+.card-link {
+  color: inherit;
+}
+
+.card-cta {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #006399;
+  transition: color 0.2s ease;
+}
+
+.card-link:hover .card-cta {
+  color: #0078b8;
+}
+
+:global(.dark) .card-cta,
+:global(html.dark) .card-cta,
+:global([data-theme="dark"]) .card-cta {
+  color: #2893cc;
+}
+
+:global(.dark) .card-link:hover .card-cta,
+:global(html.dark) .card-link:hover .card-cta,
+:global([data-theme="dark"]) .card-link:hover .card-cta {
+  color: #3aa5d4;
+}
+</style>
