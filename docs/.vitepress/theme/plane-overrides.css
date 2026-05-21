@@ -3,11 +3,11 @@
    ================================================ */
 
 /* --- Doc links (exclude home hero CTAs) --- */
-.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)) {
+.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)):not(:where(.card-links *)) {
   color: var(--vp-c-brand-1);
 }
 
-.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)):hover {
+.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)):not(:where(.card-links *)):hover {
   color: var(--plane-link-hover);
 }
 
@@ -361,18 +361,16 @@ html.dark .card-link:hover,
   border-color: var(--vp-c-brand-1);
 }
 
-.card-icon {
-  font-size: 32px;
-  margin-bottom: 16px;
-  line-height: 1;
+.card-head {
+  margin-bottom: 0;
 }
 
 .card-title {
-  font-size: 16px !important;
+  font-size: 1.0625rem !important;
   font-weight: 600 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em;
   color: #111827 !important;
-  margin: 0 0 12px 0 !important;
-  padding: 0 !important;
   border: none !important;
   transition: color 0.2s ease;
 }

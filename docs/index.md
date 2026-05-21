@@ -25,37 +25,37 @@ aside: false
 
 <CardGroup cols="3">
 
-<Card title="Self-hosting" icon="docker" href="/self-hosting/overview" link-text="View deployment guides">
+<Card title="Self-hosting" icon="server" href="/self-hosting/overview" link-text="View deployment guides">
 
 Deploy Plane on your infrastructure with Docker, Kubernetes, or other methods. Complete guides for configuration, authentication, and management.
 
 </Card>
 
-<Card title="REST API" href="/api-reference/introduction" link-text="Explore API docs">
+<Card title="REST API" icon="braces" href="/api-reference/introduction" link-text="Explore API docs">
 
 180+ endpoints to manage projects, work items, cycles, modules, and more.
 
 </Card>
 
-<Card title="Webhooks" href="/dev-tools/intro-webhooks" link-text="Configure webhooks">
+<Card title="Webhooks" icon="webhook" href="/dev-tools/intro-webhooks" link-text="Configure webhooks">
 
 Automate workflows with real-time webhooks for project events, work item updates, and team activities.
 
 </Card>
 
-<Card title="OAuth Apps" href="/dev-tools/build-plane-app/overview" link-text="Build an app">
+<Card title="OAuth Apps" icon="key-round" href="/dev-tools/build-plane-app/overview" link-text="Build an app">
 
 Build custom integrations using OAuth 2.0. Complete guides for app registration, token management, and API access.
 
 </Card>
 
-<Card title="MCP Server" href="/dev-tools/mcp-server" link-text="Setup MCP">
+<Card title="MCP Server" icon="plug-zap" href="/dev-tools/mcp-server" link-text="Setup MCP">
 
 Integrate Plane with AI agents using Model Context Protocol for intelligent project management automation.
 
 </Card>
 
-<Card title="Agents" href="/dev-tools/agents/overview" link-text="Build an agent">
+<Card title="Agents" icon="bot" href="/dev-tools/agents/overview" link-text="Build an agent">
 
 Create and deploy agents that work with Plane using signals, webhooks, and the REST API.
 
@@ -67,36 +67,44 @@ Create and deploy agents that work with Plane using signals, webhooks, and the R
 
 ## Quick start guides
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 1rem; margin: 2rem 0; max-width: 100%; overflow: hidden;">
+<div class="home-quick-start">
 
-<div style="border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 1.5rem;">
+<CardGroup cols="3">
 
-### Deploy with Docker
+<Card title="Deploy with Docker" icon="container">
 
-Get Plane running in minutes with Docker Compose
+Get Plane running in minutes with Docker Compose.
 
-[Docker Compose](/self-hosting/methods/docker-compose)
-
+<div class="card-links">
+<a href="/self-hosting/methods/docker-compose">Docker Compose</a>
 </div>
 
-<div style="border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 1.5rem;">
+</Card>
 
-### Configure Your Instance
+<Card title="Configure your instance" icon="settings-2">
 
 Set up authentication and connect external services to your Plane deployment.
 
-[Instance Admin](/self-hosting/govern/instance-admin) • [Configure SSO](/self-hosting/govern/authentication)
-
+<div class="card-links">
+<a href="/self-hosting/govern/instance-admin">Instance Admin</a>
+<span class="card-links__sep" aria-hidden="true">·</span>
+<a href="/self-hosting/govern/authentication">Configure SSO</a>
 </div>
 
-<div style="border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 1.5rem;">
+</Card>
 
-### Manage instance
+<Card title="Manage instance" icon="refresh-cw">
 
-Keep your instance up-to-date with the latest features and security patches.
+Keep your instance up to date with the latest features and security patches.
 
-[Update guide](/self-hosting/manage/upgrade-plane) • [Manage licenses](/self-hosting/manage/manage-licenses/activate-pro-and-business)
-
+<div class="card-links">
+<a href="/self-hosting/manage/upgrade-plane">Update guide</a>
+<span class="card-links__sep" aria-hidden="true">·</span>
+<a href="/self-hosting/manage/manage-licenses/activate-pro-and-business">Manage licenses</a>
 </div>
+
+</Card>
+
+</CardGroup>
 
 </div>
