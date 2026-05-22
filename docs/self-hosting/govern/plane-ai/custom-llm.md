@@ -14,7 +14,7 @@ Plane AI supports one custom LLM alongside OpenAI and Anthropic. Pick the provid
 | **AWS Bedrock**       | You're accessing models through Amazon Bedrock                                                        |
 
 :::warning
-Use a model with at least 100 billion parameters. Smaller models produce degraded output across Plane AI features.
+Use a model with at least 1 trillion parameters. Smaller models produce degraded output across Plane AI features.
 :::
 
 :::tip No OpenAI-compatible API?
