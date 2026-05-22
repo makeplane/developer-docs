@@ -102,7 +102,7 @@ env:
 
 ## Recommended topology
 
-```
+```text
                      ┌──────────────────────────┐
                      │   External Load Balancer │
                      │   (cross-zone enabled)   │
