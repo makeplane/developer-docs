@@ -1,9 +1,10 @@
 ---
 title: High Availability Deployment
-description: How to deploy Plane Enterprise on Kubernetes with high availability using the plane-enterprise Helm chart.
+description: How to deploy Plane Commercial Edition on Kubernetes with high availability using the plane-enterprise Helm chart.
+keywords: plane high availability, kubernetes ha, multi-az deployment, plane-enterprise helm chart, karpenter, pod disruption budget, hpa, self-hosting, plane kubernetes
 ---
 
-# High Availability on Kubernetes
+# High Availability on Kubernetes <Badge type="info" text="Commercial Edition" />
 
 This guide covers what high availability means, how the `plane-enterprise` Helm chart workloads behave under failure, and exactly what to configure so your deployment survives the loss of a single availability zone or node without manual recovery. The setup is cloud-agnostic. If you're deploying on AWS with Karpenter, there's a dedicated section for you.
 
@@ -408,7 +409,7 @@ spec:
 
 ## Karpenter on AWS
 
-If you're on EKS, Karpenter is the recommended node provisioner for Plane Enterprise. It's AZ-aware, provisions nodes in seconds, and lets you mix on-demand and spot capacity per workload type.
+If you're on EKS, Karpenter is the recommended node provisioner for Plane Commercial Edition. It's AZ-aware, provisions nodes in seconds, and lets you mix on-demand and spot capacity per workload type.
 
 ### Minimum versions
 
