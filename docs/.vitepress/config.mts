@@ -252,12 +252,11 @@ export default withMermaid(
                   { text: "Download config files", link: "/self-hosting/methods/download-config" },
                 ],
               },
-              { 
-                text: "Kubernetes", link: "/self-hosting/methods/kubernetes",
+              {
+                text: "Kubernetes",
+                link: "/self-hosting/methods/kubernetes",
                 collapsed: true,
-                items: [
-                  { text: "High availability", link: "/self-hosting/govern/high-availability" }
-                ],
+                items: [{ text: "High availability", link: "/self-hosting/govern/high-availability" }],
               },
               { text: "Podman Quadlets", link: "/self-hosting/methods/podman-quadlets" },
               {

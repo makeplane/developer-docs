@@ -3,7 +3,7 @@ title: High Availability Deployment
 description: How to deploy Plane Enterprise on Kubernetes with high availability using the plane-enterprise Helm chart.
 ---
 
-# High Availability on Kubernetes 
+# High Availability on Kubernetes
 
 This guide covers what high availability means, how the `plane-enterprise` Helm chart workloads behave under failure, and exactly what to configure so your deployment survives the loss of a single availability zone or node without manual recovery. The setup is cloud-agnostic. If you're deploying on AWS with Karpenter, there's a dedicated section for you.
 
@@ -31,13 +31,13 @@ Run at least `replicas: 2` per service. Use `replicas >= 2` for `api`, `worker`,
 
 These do scheduled or coordinator work. **Do not scale any of them past `replicas: 1`** - running two copies doubles job execution.
 
-| Workload | Kind | Why it stays at 1 |
-|---|---|---|
-| `monitor` | StatefulSet | Coordinator role; owns a `ReadWriteOnce` PVC |
-| `beatworker` | Deployment | Celery beat - schedules periodic Plane jobs |
-| `pi_beat_worker` | Deployment | PI beat - schedules periodic PI jobs |
-| `migrator` | Job | DB migration; runs once per release |
-| `pi-migrator` | Job | PI DB migration; runs once per release |
+| Workload         | Kind        | Why it stays at 1                            |
+| ---------------- | ----------- | -------------------------------------------- |
+| `monitor`        | StatefulSet | Coordinator role; owns a `ReadWriteOnce` PVC |
+| `beatworker`     | Deployment  | Celery beat - schedules periodic Plane jobs  |
+| `pi_beat_worker` | Deployment  | PI beat - schedules periodic PI jobs         |
+| `migrator`       | Job         | DB migration; runs once per release          |
+| `pi-migrator`    | Job         | PI DB migration; runs once per release       |
 
 The stateless singletons (`beatworker`, `pi_beat_worker`) reschedule onto a healthy node within seconds when their node fails.
 
@@ -88,12 +88,12 @@ env:
 
 **3. A cross-zone load balancer.** Traffic must reach pods in any AZ.
 
-| Cloud | Recommendation |
-|---|---|
-| AWS | NLB or ALB with cross-zone load balancing enabled |
-| GCP | Default global LB |
-| Azure | Standard Load Balancer with zones `[1,2,3]` |
-| On-prem | MetalLB in BGP mode, or an external LB |
+| Cloud   | Recommendation                                    |
+| ------- | ------------------------------------------------- |
+| AWS     | NLB or ALB with cross-zone load balancing enabled |
+| GCP     | Default global LB                                 |
+| Azure   | Standard Load Balancer with zones `[1,2,3]`       |
+| On-prem | MetalLB in BGP mode, or an external LB            |
 
 **4. A working `IngressClass`.** The chart supports `traefik` (default) or `nginx`. Deploy the ingress controller with `replicas >= 2` spread across AZs.
 
@@ -141,13 +141,13 @@ Tier-1 pods spread across AZs. All Tier-3 state lives in managed services that h
 
 The chart supports pointing each stateful component at a remote managed service. Use these value keys.
 
-| Component | Disable local | External URL / credentials |
-|---|---|---|
-| Postgres | `services.postgres.local_setup: false` | `env.pgdb_remote_url`, `env.pg_pi_db_remote_url`; optional read replica via `services.postgres.read_replica.enabled` + `services.postgres.read_replica.remote_url` |
-| Redis | `services.redis.local_setup: false` | `env.remote_redis_url` |
-| RabbitMQ | `services.rabbitmq.local_setup: false` | `services.rabbitmq.external_rabbitmq_url` |
-| OpenSearch | `services.opensearch.local_setup: false` | `env.opensearch_remote_url`, `env.opensearch_remote_username`, `env.opensearch_remote_password`; optional `env.opensearch_index_prefix` for multi-tenant clusters |
-| Object store | `services.minio.local_setup: false` | `env.aws_access_key`, `env.aws_secret_access_key`, `env.aws_region`, `env.aws_s3_endpoint_url`, `env.docstore_bucket` |
+| Component    | Disable local                            | External URL / credentials                                                                                                                                         |
+| ------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Postgres     | `services.postgres.local_setup: false`   | `env.pgdb_remote_url`, `env.pg_pi_db_remote_url`; optional read replica via `services.postgres.read_replica.enabled` + `services.postgres.read_replica.remote_url` |
+| Redis        | `services.redis.local_setup: false`      | `env.remote_redis_url`                                                                                                                                             |
+| RabbitMQ     | `services.rabbitmq.local_setup: false`   | `services.rabbitmq.external_rabbitmq_url`                                                                                                                          |
+| OpenSearch   | `services.opensearch.local_setup: false` | `env.opensearch_remote_url`, `env.opensearch_remote_username`, `env.opensearch_remote_password`; optional `env.opensearch_index_prefix` for multi-tenant clusters  |
+| Object store | `services.minio.local_setup: false`      | `env.aws_access_key`, `env.aws_secret_access_key`, `env.aws_region`, `env.aws_s3_endpoint_url`, `env.docstore_bucket`                                              |
 
 ### What HA looks like for each service
 
@@ -208,7 +208,7 @@ services:
 The chart labels every workload with `app.name` set to <code v-pre>{{ .Release.Namespace }}-{{ .Release.Name }}-&lt;svc&gt;</code>. For a release named `plane` in namespace `plane`, that's `plane-plane-api` for the API.
 
 :::warning
-**Watch for this** 
+**Watch for this**
 The hard hostname anti-affinity rule requires at least as many schedulable nodes as the workload's replica count. Three `api` replicas need three nodes available, or pods sit `Pending`. If you can't guarantee that (small cluster, dedicated taints), relax the hostname rule to `preferredDuringSchedulingIgnoredDuringExecution`.
 :::
 
@@ -328,7 +328,7 @@ Add similar PDBs for `pi`, `pi_worker`, `outbox_poller`, `automation_consumer`, 
 
 ## HorizontalPodAutoscalers
 
-:::info 
+:::info
 Native HPA rendering is planned for a future release. Apply the manifests below yourself until then.
 :::
 
@@ -570,6 +570,7 @@ services:
   ```yaml
   service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   ```
+
 - The `live` service uses WebSockets. Make sure your ingress controller and LB don't have idle-timeout values that drop long-lived connections. The default AWS NLB idle timeout is 350s - that's usually fine. ALB defaults to 60s and needs raising for WebSocket connections.
 
 - The chart configures request-body size limits via `ingress.traefik.maxRequestBodyBytes` (Traefik) and `nginx.ingress.kubernetes.io/proxy-body-size` (nginx). Tune these to your expected file upload size.
@@ -578,14 +579,14 @@ services:
 
 HA protects against AZ and node failure. Backups protect against logical corruption, accidental deletion, and ransomware. You need both.
 
-| Component | Backup mechanism | Recommended retention |
-|---|---|---|
-| Postgres | Managed-service automated backups + PITR | 30 days, PITR ≥ 7 days |
-| Object storage | Bucket versioning + lifecycle to a different bucket/region | 90 days |
-| OpenSearch | Snapshots to object storage | 7 days |
-| Redis | Optional; treat as cache + queue. Document what your team loses on a full Redis failure (sessions, in-flight Celery tasks). | - |
-| RabbitMQ | Definitions export (users, queues, bindings) on a schedule; messages are transient | - |
-| Kubernetes objects | Velero, namespace-scoped, daily | 30 days |
+| Component          | Backup mechanism                                                                                                            | Recommended retention  |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| Postgres           | Managed-service automated backups + PITR                                                                                    | 30 days, PITR ≥ 7 days |
+| Object storage     | Bucket versioning + lifecycle to a different bucket/region                                                                  | 90 days                |
+| OpenSearch         | Snapshots to object storage                                                                                                 | 7 days                 |
+| Redis              | Optional; treat as cache + queue. Document what your team loses on a full Redis failure (sessions, in-flight Celery tasks). | -                      |
+| RabbitMQ           | Definitions export (users, queues, bindings) on a schedule; messages are transient                                          | -                      |
+| Kubernetes objects | Velero, namespace-scoped, daily                                                                                             | 30 days                |
 
 **Run a restore drill** before go-live and at least once per quarter. A backup that's never been restored is an assumption, not a guarantee.
 
@@ -617,13 +618,13 @@ Work through every item before sending real traffic.
 
 The following capabilities aren't natively provided by the chart and need to be applied separately.
 
-| Gap | Workaround |
-|---|---|
+| Gap                                                            | Workaround                                                                                      |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | No native `topologySpreadConstraints` in `plane.podScheduling` | Use `podAntiAffinity` as shown in the spreading section - functionally equivalent for AZ spread |
-| No PDBs rendered by the chart | Apply the PDB manifests from the PodDisruptionBudgets section |
-| No HPAs rendered by the chart | Apply the HPA manifests from the HorizontalPodAutoscalers section |
-| In-chart Tier-3 StatefulSets are single-replica, RWO | Set `local_setup: false` and use managed services |
-| `monitor` is a singleton StatefulSet | Accept the 60–120s reschedule window on AZ failure - it's internal and non-user-facing |
+| No PDBs rendered by the chart                                  | Apply the PDB manifests from the PodDisruptionBudgets section                                   |
+| No HPAs rendered by the chart                                  | Apply the HPA manifests from the HorizontalPodAutoscalers section                               |
+| In-chart Tier-3 StatefulSets are single-replica, RWO           | Set `local_setup: false` and use managed services                                               |
+| `monitor` is a singleton StatefulSet                           | Accept the 60–120s reschedule window on AZ failure - it's internal and non-user-facing          |
 
 ## Reference values.yaml for HA
 
@@ -690,15 +691,15 @@ services:
                   - { key: app.name, operator: In, values: [plane-plane-api] }
               topologyKey: topology.kubernetes.io/zone
 
-  web:    { replicas: 3 }
-  space:  { replicas: 2 }
-  admin:  { replicas: 2 }
-  live:   { replicas: 3 }
+  web: { replicas: 3 }
+  space: { replicas: 2 }
+  admin: { replicas: 2 }
+  live: { replicas: 3 }
   worker: { replicas: 4 }
-  silo:   { enabled: true, replicas: 2 }
+  silo: { enabled: true, replicas: 2 }
 
-  beatworker:     { replicas: 1 }    # singleton - do not scale
-  pi_beat_worker: { replicas: 1 }    # singleton - do not scale
+  beatworker: { replicas: 1 } # singleton - do not scale
+  pi_beat_worker: { replicas: 1 } # singleton - do not scale
 ```
 
 Repeat the `affinity` block (varying the pod label) for every Tier-1 service. YAML anchors (`&spread-api` / `*spread-api`) help avoid repetition.
