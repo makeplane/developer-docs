@@ -58,7 +58,8 @@ VS Code uses `"servers"`, not `"mcpServers"`.
 
 ### Windsurf
 
-Edit `~/.codeium/windsurf/mcp_config.json`. Windsurf uses `serverUrl` (not `url`) for remote HTTP servers.
+Edit `~/.codeium/windsurf/mcp_config.json`. Windsurf uses `serverUrl` (not `url`)
+for remote HTTP servers.
 
 ```json
 {
@@ -106,7 +107,9 @@ MCP configs live in `~/.claude.json` or `.mcp.json` — **not** `.claude/setting
 
 ### Claude Desktop
 
-Claude Desktop doesn't support remote HTTP natively. Use `mcp-remote` — a local proxy that bridges Claude Desktop to Plane's cloud server over Streamable HTTP. **Requires Node.js 18+.**
+Claude Desktop doesn't support remote HTTP natively. Use `mcp-remote` — a local proxy
+that bridges Claude Desktop to Plane's cloud server over Streamable HTTP.
+**Requires Node.js 18+.**
 
 Config file:
 
@@ -249,7 +252,9 @@ claude mcp add-json plane '{
 
 ## Stdio
 
-Runs `plane-mcp-server` locally per-client as a subprocess. Use when remote HTTP isn't an option — air-gapped envs, local dev, or self-hosted Plane without a deployed MCP server. Uses the same API key + workspace slug as [PAT](#pat-token).
+Runs `plane-mcp-server` locally per-client as a subprocess. Use when remote HTTP isn't an option —
+air-gapped envs, local dev, or self-hosted Plane without a deployed MCP server.
+Uses the same API key + workspace slug as [PAT](#pat-token).
 
 **Prerequisites:** Python 3.10+ and `uvx` installed and available on your `PATH`.
 
