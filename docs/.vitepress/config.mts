@@ -309,11 +309,10 @@ export default withMermaid(
               { text: "OpenSearch for search", link: "/self-hosting/govern/advanced-search" },
               {
                 text: "Plane AI",
+                link: "/self-hosting/govern/plane-ai/configure-plane-ai",
                 collapsed: true,
                 items: [
-                  { text: "Get started", link: "/self-hosting/govern/plane-ai/getting-started" },
-                  { text: "Custom LLM models", link: "/self-hosting/govern/plane-ai/custom-llm" },
-                  { text: "Semantic search", link: "/self-hosting/govern/plane-ai/semantic-search" },
+                  { text: "Embedding model", link: "/self-hosting/govern/plane-ai/configure-embedding-model" },
                   { text: "AWS OpenSearch embedding", link: "/self-hosting/govern/aws-opensearch-embedding" },
                 ],
               },

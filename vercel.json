@@ -103,6 +103,10 @@
     {
       "source": "/self-hosting",
       "destination": "/self-hosting/overview"
+    },
+    {
+      "source": "/self-hosting/govern/plane-ai",
+      "destination": "/self-hosting/govern/plane-ai/configure-plane-ai"
     }
   ],
   "rewrites": [
