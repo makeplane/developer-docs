@@ -95,7 +95,7 @@ Replace `<your-region>` with your `BR_AWS_REGION` value.
 Auto-deploy requires direct ML access to OpenSearch. AWS managed OpenSearch restricts this, so deploy the model manually using the [AWS OpenSearch embedding guide](/self-hosting/govern/plane-ai/aws-opensearch-embedding), then use the model ID option above.
 :::
 
-##  Restart Plane
+## Restart Plane
 
 After updating `/opt/plane/plane.env`, restart Plane.
 

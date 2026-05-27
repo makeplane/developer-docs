@@ -80,16 +80,15 @@ The custom model should have at least 1 trillion parameters for all Plane AI fea
 
 Plane AI supports one custom LLM alongside OpenAI and Anthropic.
 
-- OpenAI-compatible -  any model exposed via an OpenAI Chat Completions API, including models served by Ollama, Groq, Cerebras, and similar runtimes.
+- OpenAI-compatible - any model exposed via an OpenAI Chat Completions API, including models served by Ollama, Groq, Cerebras, and similar runtimes.
 - AWS Bedrock - models accessed directly through Amazon Bedrock using your AWS credentials.
-One custom model can be configured alongside your public provider keys.
+  One custom model can be configured alongside your public provider keys.
 
 :::tip No OpenAI-compatible API?
-Proxy any model through  - it exposes any LLM behind the OpenAI API. Then use the OpenAI-compatible setup below.
+Proxy any model through - it exposes any LLM behind the OpenAI API. Then use the OpenAI-compatible setup below.
 
 If you need to use an LLM that isn't from OpenAI or Anthropic - for example, an open-source model or a regional provider for compliance reasons - you can proxy it through [LiteLLM](https://docs.litellm.ai).Then use the OpenAI-compatible setup below.
 :::
-
 
 #### OpenAI-compatible
 
@@ -161,7 +160,6 @@ CUSTOM_LLM_MAX_TOKENS=64000               # optional; max output tokens per resp
 ```
 
 Plane AI activates inference profile mode automatically when a profile ARN or ID is set and ambient AWS credentials are present (`AWS_ROLE_ARN`, `AWS_WEB_IDENTITY_TOKEN_FILE`, `AWS_CONTAINER_CREDENTIALS_FULL_URI`, or `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE`).
-
 
 ## Connect Plane AI to your Plane deployment
 
