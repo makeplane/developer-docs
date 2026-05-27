@@ -31,7 +31,7 @@ Two options depending on your OpenSearch setup.
 
 ### Option A: Use an existing OpenSearch model ID
 
-Use this if you've already deployed an embedding model in OpenSearch - either via the [AWS OpenSearch embedding guide](/self-hosting/govern/aws-opensearch-embedding) or manually on self-hosted OpenSearch.
+Use this if you've already deployed an embedding model in OpenSearch - either via the [AWS OpenSearch embedding guide](/self-hosting/govern/plane-ai/aws-opensearch-embedding) or manually on self-hosted OpenSearch.
 
 ```bash
 EMBEDDING_MODEL=cohere/embed-v4.0          # must match the deployed model
@@ -92,7 +92,7 @@ Replace `<your-region>` with your `BR_AWS_REGION` value.
 :::
 
 :::info AWS managed OpenSearch
-Auto-deploy requires direct ML access to OpenSearch. AWS managed OpenSearch restricts this, so deploy the model manually using the [AWS OpenSearch embedding guide](/self-hosting/govern/aws-opensearch-embedding), then use the model ID option above.
+Auto-deploy requires direct ML access to OpenSearch. AWS managed OpenSearch restricts this, so deploy the model manually using the [AWS OpenSearch embedding guide](/self-hosting/govern/plane-ai/aws-opensearch-embedding), then use the model ID option above.
 :::
 
 ##  Restart Plane

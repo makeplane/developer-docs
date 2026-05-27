@@ -34,7 +34,7 @@ Plane AI requires four things to work:
 You can provide API keys for both OpenAI and Anthropic, making all models available to users. If you provide only one key, users will only have access to that provider's models.
 
 :::tip Custom or self-hosted models
-To use Ollama, Groq, LiteLLM, AWS Bedrock, or any OpenAI-compatible endpoint, see [Custom LLM models](/self-hosting/govern/plane-ai/custom-llm).
+To use Ollama, Groq, LiteLLM, AWS Bedrock, or any OpenAI-compatible endpoint, see [Custom LLM models](#custom-llm-models).
 :::
 
 ## Set up databases

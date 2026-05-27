@@ -232,4 +232,4 @@ EMBEDDING_MODEL=cohere/embed-v4.0
 OPENSEARCH_EMBEDDING_DIMENSION=1536
 ```
 
-Restart Plane and complete the remaining steps in [Set up semantic search](/self-hosting/govern/plane-ai/semantic-search).
+Restart Plane and complete the remaining steps in [Configure embedding model](/self-hosting/govern/plane-ai/configure-embedding-model).

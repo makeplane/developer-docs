@@ -107,6 +107,10 @@
     {
       "source": "/self-hosting/govern/plane-ai",
       "destination": "/self-hosting/govern/plane-ai/configure-plane-ai"
+    },
+    {
+      "source": "/self-hosting/govern/aws-opensearch-embedding",
+      "destination": "/self-hosting/govern/plane-ai/configure-embedding-model"
     }
   ],
   "rewrites": [
