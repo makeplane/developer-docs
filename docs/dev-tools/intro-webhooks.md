@@ -72,16 +72,16 @@ Switching between modes is lossless - your filter is not lost when you switch.
 
 ### PQL syntax and supported fields
 
-| Filter field | PQL field name | Accepted values |
-|---|---|---|
-| Work item type | `type_id` | Work item type UUID |
-| State group | `state_group` | `backlog` · `unstarted` · `started` · `completed` · `cancelled` |
-| Assignees | `assignee_id` | User UUID |
-| Labels | `label_id` | Label UUID |
-| Projects | `project_id` | Project UUID |
-| Priority | `priority` | `none` · `low` · `medium` · `high` · `urgent` |
-| Start date | `start_date` | ISO date |
-| Due date | `target_date` | ISO date |
+| Filter field   | PQL field name | Accepted values                                                 |
+| -------------- | -------------- | --------------------------------------------------------------- |
+| Work item type | `type_id`      | Work item type UUID                                             |
+| State group    | `state_group`  | `backlog` · `unstarted` · `started` · `completed` · `cancelled` |
+| Assignees      | `assignee_id`  | User UUID                                                       |
+| Labels         | `label_id`     | Label UUID                                                      |
+| Projects       | `project_id`   | Project UUID                                                    |
+| Priority       | `priority`     | `none` · `low` · `medium` · `high` · `urgent`                   |
+| Start date     | `start_date`   | ISO date                                                        |
+| Due date       | `target_date`  | ISO date                                                        |
 
 **Expression syntax**
 
@@ -124,8 +124,8 @@ Use the raw bytes from the incoming request - not a parsed or re-serialized vers
 
 ### Signature header reference
 
-| Header | Value |
-|---|---|
+| Header              | Value                                                                          |
+| ------------------- | ------------------------------------------------------------------------------ |
 | `X-Plane-Signature` | HMAC-SHA256 hex digest of the raw request body, keyed with your webhook secret |
 
 The secret key is formatted as `plane_wh_` followed by a random string. Plane masks it in the UI. To view the full key, open the edit form for the webhook and use the show/hide toggle in the **Secret key** section.
@@ -194,83 +194,83 @@ Retry behavior is automatic. There is no way to trigger a manual retry for a fai
 
 The top of the view shows four summary stats:
 
-| Stat | What it shows |
-|---|---|
-| Total deliveries | Total number of delivery attempts |
-| Successful | Deliveries that received a 2xx response |
-| Failed | Deliveries that returned an error or exhausted retries |
-| Success rate | Successful deliveries as a percentage of total |
+| Stat             | What it shows                                          |
+| ---------------- | ------------------------------------------------------ |
+| Total deliveries | Total number of delivery attempts                      |
+| Successful       | Deliveries that received a 2xx response                |
+| Failed           | Deliveries that returned an error or exhausted retries |
+| Success rate     | Successful deliveries as a percentage of total         |
 
 Below the summary, the delivery log lists individual attempts:
 
-| Column | What it shows |
-|---|---|
-| Events | The event type that triggered the delivery |
-| Status | Successful or Failed |
+| Column        | What it shows                                           |
+| ------------- | ------------------------------------------------------- |
+| Events        | The event type that triggered the delivery              |
+| Status        | Successful or Failed                                    |
 | Response time | How long your endpoint took to respond, in milliseconds |
-| Event time | When the delivery was sent |
+| Event time    | When the delivery was sent                              |
 
 ## Events and payload
 
 ### Event reference
 
-| Group | Event key | Fires when |
-|---|---|---|
-| **Projects** | `project.created` | A project is created |
-| | `project.updated` | A project is updated |
-| | `project.archived` | A project is archived |
-| | `project.deleted` | A project is deleted |
-| **Cycles** | `cycle.created` | A cycle is created |
-| | `cycle.updated` | A cycle is updated |
-| | `cycle.archived` | A cycle is archived |
-| | `cycle.deleted` | A cycle is deleted |
-| **Modules** | `module.created` | A module is created |
-| | `module.updated` | A module is updated |
-| | `module.archived` | A module is archived |
-| | `module.deleted` | A module is deleted |
-| **Milestones** | `milestone.created` | A milestone is created |
-| | `milestone.updated` | A milestone is updated |
-| | `milestone.deleted` | A milestone is deleted |
-| **Pages** | `page.created` | A page is created |
-| | `page.updated` | A page is updated |
-| | `page.archived` | A page is archived |
-| | `page.deleted` | A page is deleted |
-| **Page comments** | `page.comment.created` | A comment is added to a page |
-| | `page.comment.updated` | A page comment is edited |
-| | `page.comment.deleted` | A page comment is deleted |
-| **Work items** | `workitem.created` | A work item is created |
-| | `workitem.updated` | A work item is updated |
-| | `workitem.archived` | A work item is archived |
-| | `workitem.deleted` | A work item is deleted |
-| **Work item comments** | `workitem.comment.created` | A comment is added to a work item |
-| | `workitem.comment.updated` | A work item comment is edited |
-| | `workitem.comment.deleted` | A work item comment is deleted |
-| **Work item links** | `workitem.link.created` | A link is added to a work item |
-| | `workitem.link.updated` | A work item link is updated |
-| | `workitem.link.deleted` | A work item link is removed |
-| **Work item votes** | `workitem.vote.created` | A vote is cast on a work item |
-| | `workitem.vote.deleted` | A vote is removed |
-| **Work item attachments** | `workitem.attachment.created` | A file is attached to a work item |
-| | `workitem.attachment.updated` | A work item attachment is updated |
-| | `workitem.attachment.deleted` | A work item attachment is removed |
-| **Work item relations** | `workitem.relation.created` | A relation is added between work items |
-| | `workitem.relation.deleted` | A relation is removed |
-| **Work item dependencies** | `workitem.dependency.created` | A dependency is added |
-| | `workitem.dependency.deleted` | A dependency is removed |
-| **Work item page links** | `workitem.page_link.created` | A page link is added to a work item |
-| | `workitem.page_link.deleted` | A page link is removed |
+| Group                      | Event key                     | Fires when                             |
+| -------------------------- | ----------------------------- | -------------------------------------- |
+| **Projects**               | `project.created`             | A project is created                   |
+|                            | `project.updated`             | A project is updated                   |
+|                            | `project.archived`            | A project is archived                  |
+|                            | `project.deleted`             | A project is deleted                   |
+| **Cycles**                 | `cycle.created`               | A cycle is created                     |
+|                            | `cycle.updated`               | A cycle is updated                     |
+|                            | `cycle.archived`              | A cycle is archived                    |
+|                            | `cycle.deleted`               | A cycle is deleted                     |
+| **Modules**                | `module.created`              | A module is created                    |
+|                            | `module.updated`              | A module is updated                    |
+|                            | `module.archived`             | A module is archived                   |
+|                            | `module.deleted`              | A module is deleted                    |
+| **Milestones**             | `milestone.created`           | A milestone is created                 |
+|                            | `milestone.updated`           | A milestone is updated                 |
+|                            | `milestone.deleted`           | A milestone is deleted                 |
+| **Pages**                  | `page.created`                | A page is created                      |
+|                            | `page.updated`                | A page is updated                      |
+|                            | `page.archived`               | A page is archived                     |
+|                            | `page.deleted`                | A page is deleted                      |
+| **Page comments**          | `page.comment.created`        | A comment is added to a page           |
+|                            | `page.comment.updated`        | A page comment is edited               |
+|                            | `page.comment.deleted`        | A page comment is deleted              |
+| **Work items**             | `workitem.created`            | A work item is created                 |
+|                            | `workitem.updated`            | A work item is updated                 |
+|                            | `workitem.archived`           | A work item is archived                |
+|                            | `workitem.deleted`            | A work item is deleted                 |
+| **Work item comments**     | `workitem.comment.created`    | A comment is added to a work item      |
+|                            | `workitem.comment.updated`    | A work item comment is edited          |
+|                            | `workitem.comment.deleted`    | A work item comment is deleted         |
+| **Work item links**        | `workitem.link.created`       | A link is added to a work item         |
+|                            | `workitem.link.updated`       | A work item link is updated            |
+|                            | `workitem.link.deleted`       | A work item link is removed            |
+| **Work item votes**        | `workitem.vote.created`       | A vote is cast on a work item          |
+|                            | `workitem.vote.deleted`       | A vote is removed                      |
+| **Work item attachments**  | `workitem.attachment.created` | A file is attached to a work item      |
+|                            | `workitem.attachment.updated` | A work item attachment is updated      |
+|                            | `workitem.attachment.deleted` | A work item attachment is removed      |
+| **Work item relations**    | `workitem.relation.created`   | A relation is added between work items |
+|                            | `workitem.relation.deleted`   | A relation is removed                  |
+| **Work item dependencies** | `workitem.dependency.created` | A dependency is added                  |
+|                            | `workitem.dependency.deleted` | A dependency is removed                |
+| **Work item page links**   | `workitem.page_link.created`  | A page link is added to a work item    |
+|                            | `workitem.page_link.deleted`  | A page link is removed                 |
 
 ### Request headers
 
 Every webhook request includes these headers:
 
-| Header | Value |
-|---|---|
-| `Content-Type` | `application/json` |
-| `User-Agent` | `Autopilot` |
-| `X-Plane-Delivery` | Unique UUID per delivery attempt. Matches `delivery_id` in the payload body. |
-| `X-Plane-Event` | The event type, e.g. `workitem.created`. Matches `event` in the payload body. |
-| `X-Plane-Signature` | HMAC-SHA256 signature of the request body |
+| Header              | Value                                                                         |
+| ------------------- | ----------------------------------------------------------------------------- |
+| `Content-Type`      | `application/json`                                                            |
+| `User-Agent`        | `Autopilot`                                                                   |
+| `X-Plane-Delivery`  | Unique UUID per delivery attempt. Matches `delivery_id` in the payload body.  |
+| `X-Plane-Event`     | The event type, e.g. `workitem.created`. Matches `event` in the payload body. |
+| `X-Plane-Signature` | HMAC-SHA256 signature of the request body                                     |
 
 These headers are reserved and cannot be overridden with custom values: `host`, `content-length`, `content-type`, `user-agent`, `x-plane-delivery`, `x-plane-event`, `x-plane-signature`.
 
@@ -280,30 +280,30 @@ All v2 payloads share this top-level structure:
 
 ```json
 {
-  "version":             "v2",
-  "delivery_id":         "<uuid>",
-  "event_id":            "<uuid>",
-  "entity_id":           "<uuid>",
-  "entity_type":         "<string>",
-  "event":               "<dot.notation.event>",
-  "webhook_id":          "<uuid>",
-  "workspace_id":        "<uuid>",
-  "data":                { },
-  "previous_attributes": { }
+  "version": "v2",
+  "delivery_id": "<uuid>",
+  "event_id": "<uuid>",
+  "entity_id": "<uuid>",
+  "entity_type": "<string>",
+  "event": "<dot.notation.event>",
+  "webhook_id": "<uuid>",
+  "workspace_id": "<uuid>",
+  "data": {},
+  "previous_attributes": {}
 }
 ```
 
-| Field | Description |
-|---|---|
-| `version` | Always `"v2"` |
-| `delivery_id` | Unique ID for this delivery attempt. Matches the `X-Plane-Delivery` header. A new UUID is generated for each retry. |
-| `event_id` | Unique ID for the triggering event. Stable across retries - use this for deduplication. |
-| `entity_id` | UUID of the primary entity affected by the event. |
-| `entity_type` | Type of the entity, e.g. `issue`, `cycle`, `issue_comment`, `issue_link`. |
-| `event` | Full dot-notation event name, e.g. `workitem.comment.updated`. |
-| `webhook_id` | ID of the webhook configuration that triggered this delivery. |
-| `workspace_id` | UUID of the workspace in which the event occurred. |
-| `data` | Full entity object for create and update events. Empty object `{}` for delete events. |
+| Field                 | Description                                                                                                                                                                                          |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `version`             | Always `"v2"`                                                                                                                                                                                        |
+| `delivery_id`         | Unique ID for this delivery attempt. Matches the `X-Plane-Delivery` header. A new UUID is generated for each retry.                                                                                  |
+| `event_id`            | Unique ID for the triggering event. Stable across retries - use this for deduplication.                                                                                                              |
+| `entity_id`           | UUID of the primary entity affected by the event.                                                                                                                                                    |
+| `entity_type`         | Type of the entity, e.g. `issue`, `cycle`, `issue_comment`, `issue_link`.                                                                                                                            |
+| `event`               | Full dot-notation event name, e.g. `workitem.comment.updated`.                                                                                                                                       |
+| `webhook_id`          | ID of the webhook configuration that triggered this delivery.                                                                                                                                        |
+| `workspace_id`        | UUID of the workspace in which the event occurred.                                                                                                                                                   |
+| `data`                | Full entity object for create and update events. Empty object `{}` for delete events.                                                                                                                |
 | `previous_attributes` | Present on all events. For `updated` events, contains the previous values of changed fields. For `deleted` events, contains the full record before deletion. Empty object `{}` for all other events. |
 
 ### Payload examples
@@ -312,23 +312,23 @@ All v2 payloads share this top-level structure:
 
 ```json
 {
-  "version":      "v2",
-  "delivery_id":  "01ab9316-f978-4449-bad6-dce958be8454",
-  "event_id":     "0afa042d-92a9-4326-bdca-5ff5490dbf09",
-  "entity_id":    "088a83b9-a53f-4dda-b2bc-c860cf455997",
-  "entity_type":  "issue",
-  "event":        "workitem.comment.created",
-  "webhook_id":   "285f087b-e1e0-4f90-b9f4-0b720acfac04",
+  "version": "v2",
+  "delivery_id": "01ab9316-f978-4449-bad6-dce958be8454",
+  "event_id": "0afa042d-92a9-4326-bdca-5ff5490dbf09",
+  "entity_id": "088a83b9-a53f-4dda-b2bc-c860cf455997",
+  "entity_type": "issue",
+  "event": "workitem.comment.created",
+  "webhook_id": "285f087b-e1e0-4f90-b9f4-0b720acfac04",
   "workspace_id": "d250cd44-fa71-42c2-b2b5-3c73227288fc",
   "data": {
-    "id":   "088a83b9-a53f-4dda-b2bc-c860cf455997",
+    "id": "088a83b9-a53f-4dda-b2bc-c860cf455997",
     "name": "Webhook Test Work Item 2",
     "comment": {
-      "id":               "4797f841-c731-4e55-971f-d9cfe1938dfb",
-      "access":           "INTERNAL",
-      "actor_id":         "88fc36c8-73b0-4547-81c7-96b70f61835e",
-      "issue_id":         "088a83b9-a53f-4dda-b2bc-c860cf455997",
-      "edited_at":        null,
+      "id": "4797f841-c731-4e55-971f-d9cfe1938dfb",
+      "access": "INTERNAL",
+      "actor_id": "88fc36c8-73b0-4547-81c7-96b70f61835e",
+      "issue_id": "088a83b9-a53f-4dda-b2bc-c860cf455997",
+      "edited_at": null,
       "comment_stripped": "Webhook Test Comment"
     }
   },
@@ -340,22 +340,22 @@ All v2 payloads share this top-level structure:
 
 ```json
 {
-  "version":      "v2",
-  "delivery_id":  "616d98fe-35a7-4431-a233-db40936c8339",
-  "event_id":     "7b3c1e2a-8f94-4b12-a781-2c5e9d4f6a03",
-  "entity_id":    "8661bdfa-098f-434d-8e44-b1f32de62406",
-  "entity_type":  "issue_link",
-  "event":        "workitem.link.created",
-  "webhook_id":   "285f087b-e1e0-4f90-b9f4-0b720acfac04",
+  "version": "v2",
+  "delivery_id": "616d98fe-35a7-4431-a233-db40936c8339",
+  "event_id": "7b3c1e2a-8f94-4b12-a781-2c5e9d4f6a03",
+  "entity_id": "8661bdfa-098f-434d-8e44-b1f32de62406",
+  "entity_type": "issue_link",
+  "event": "workitem.link.created",
+  "webhook_id": "285f087b-e1e0-4f90-b9f4-0b720acfac04",
   "workspace_id": "d250cd44-fa71-42c2-b2b5-3c73227288fc",
   "data": {
-    "id":            "a6f8e562-49d2-4c19-bc4b-2bcb9d917da1",
-    "url":           "http://google.com",
-    "title":         "",
-    "issue_id":      "8661bdfa-098f-434d-8e44-b1f32de62406",
-    "created_at":    "2026-05-20T09:51:27.373582+00:00",
-    "project_id":    "45b87d89-0ce0-4d6f-8903-4070f1c67f1b",
-    "workspace_id":  "d250cd44-fa71-42c2-b2b5-3c73227288fc",
+    "id": "a6f8e562-49d2-4c19-bc4b-2bcb9d917da1",
+    "url": "http://google.com",
+    "title": "",
+    "issue_id": "8661bdfa-098f-434d-8e44-b1f32de62406",
+    "created_at": "2026-05-20T09:51:27.373582+00:00",
+    "project_id": "45b87d89-0ce0-4d6f-8903-4070f1c67f1b",
+    "workspace_id": "d250cd44-fa71-42c2-b2b5-3c73227288fc",
     "created_by_id": "88fc36c8-73b0-4547-81c7-96b70f61835e"
   },
   "previous_attributes": {}
