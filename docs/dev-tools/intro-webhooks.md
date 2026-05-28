@@ -6,135 +6,358 @@ keywords: plane, developer tools, integrations, extensions, webhooks, automation
 
 # Webhooks
 
-A webhook triggers a HTTP POST request on the specified url, whenever there is a change in an event. Like a new project is created, updated or deleted then a webhook can be triggered to receive the required payload.
+Webhooks give you a way to push Plane events into other systems the moment they happen. Instead of polling the Plane API periodically to check for changes, your service registers a URL and Plane calls it, with a structured payload, whenever something occurs.
+
+The value of webhooks over polling is immediacy and simplicity. Your endpoint receives exactly what happened without having to query anything. A work item created at 14:00:01 triggers a request at 14:00:01.
+
+Webhooks in Plane work at the workspace level. A single webhook can subscribe to events from every project in the workspace. There is no per-project webhook configuration. Only Workspace Owners and Admins can create or manage them.
+
+The current webhook system is v2. V2 payloads use dot-notation event names (e.g., `workitem.created`) and include structured fields for deduplication, diffing, and filtering that were not available in the original version. If you have webhooks created before v2, they appear in the list with a **(deprecated)** tag. They still deliver but do not receive any v2 fields. Recreate them as new webhooks to get the full v2 feature set.
 
 ## Creating a webhook
 
-`url` You are required to provide a url in which you want the payloads to be triggered.
+### What you're configuring
 
-Then select the events for which you want the webhook to be triggered.
+When you create a webhook, you're telling Plane two things: where to send events, and which events to send.
 
-After you create the webhook, a secret key will be created automatically and will be downloaded in csv format.
+**Webhook title** is a label for your own reference - it appears in the webhook list and helps you tell multiple webhooks apart.
 
-```ini
-"Content-Type": "application/json",
-"User-Agent": "Autopilot",
-"X-Plane-Delivery": "f819eff4-cd50-4987-bc97-e5be1e04c94f",
-"X-Plane-Event": "project",
-"X-Plane-Signature": "7896ae9addb1f73931132b4f3e052bf12c410b837b24898e75dcd660c7"
-```
+**Payload URL** is the endpoint that Plane will POST to. It must be a publicly reachable `http://` or `https://` address. Local addresses (localhost, private IPs) are not accepted.
 
-| Header            | Description                                                          |
-| ----------------- | -------------------------------------------------------------------- |
-| X-Plane-Delivery  | It is a randomly generated UUID for uniquely identifying the payload |
-| X-Plane-Event     | It describes the event for which the webhook triggered               |
-| X-Plane-Signature | A signature is generated based on the secret and the payload         |
+**Events** control what triggers this webhook. The form groups events by type - Projects, Cycles, Modules, Work items, and so on. Check the specific actions you care about. You can subscribe to as many or as few as you need.
 
-### Webhook Payload Example for the project `update`
+**Advanced configurations** lets you add a filter so the webhook only fires for work items that match specific conditions - for example, high-priority bugs in a particular project. See [Filtering work item events](#filtering-work-item-events) below.
 
-```json
-"event": "project",
-"action": "update",
-"webhook_id": "3c2c32ac-82df-48b3-be2a-a3e21dbe8692",
-"workspace_id": "d2d97c94-a6ad-4012-b526-5577c0d7c769",
-"data": {
-	"id":"22b6fc9c-1849-45da-b103-52a3e3a6b4c1",
-    "workspace_detail": {
-        "name":"Testing Project",
-        "slug":"testing-project",
-        "id":"bob1b192-f988-4bf9-b569-825de8cb0678"
-    },
-	"created_at":"2023-10-25T04:38:59.566962Z",
-	"updated_at":"2023-10-25T06:44:48.543685Z",
-	"name":"vfecddcwerj",
-	"description":"",
-	"description_text":null,
-	"description_html":null,
-	"network":2,
-	"identifier":"TRACE",
-	"emoji":null,
-	"icon_prop":null,
-	"module_view":true,
-	"cycle_view":true,
-	"issue_views_view":true,
-	"page_view":true,
-	"inbox_view":true,
-	"cover_image":null,
-	"archive_in":0,
-	"close_in":0,
-	"created_by":"6bb20d1c-4960-41ca-af4f-cee01de160c4",
-	"updated_by":"6bb20d1c-4960-41ca-af4f-cee01de160c4",
-	"workspace":"bob1b192-f988-4bf9-b569-825de8cb0678",
-	"default_assignee":null,
-	"project_lead":null,
-	"estimate":null,
-	"default_state":null
-},
-```
+**Secret key** is generated automatically when you save the webhook. Plane downloads it as a CSV file the moment you click **Create webhook** and then returns you to the webhook list. It is not displayed on screen - the download is the only time you receive it automatically. Save the file. You need the key to verify incoming requests.
 
-User can choose the things for which they want the webhook to be triggered.
+### How to create a webhook
 
-Currently Plane supports the following events for which webhook can be trigged:
+1. Go to **Workspace Settings → Webhooks**.
+2. Click **Add webhook**.
+3. Enter a **Webhook title** and **Payload URL**.
+4. Check the events you want this webhook to fire for.
+5. Optionally, expand **Advanced configurations** to add a work item filter.
+6. Click **Create webhook**.
 
-    -  Project
-    -  Issue
-    -  Cycle
-    -  Module
-    -  Issue Comment
+Plane downloads the secret key as a CSV file to your computer and returns you to the webhook list. The webhook is active immediately.
 
-## Verifying Signature
+If you lose the CSV, you can re-generate the secret key from the edit form - but the old key stops working the moment you do.
+
+## Filtering work item events
+
+### How filtering works
+
+By default, a webhook fires for every work item event you subscribe to, across all projects in the workspace. Filters let you narrow that, for example, to fire only when a high-priority work item is created in a specific project.
+
+Filters apply only to work item events. Events for projects, cycles, pages, milestones, and other types are always delivered without filtering.
+
+Plane evaluates filters at delivery time. If the filter fails to evaluate for any reason, the delivery is skipped rather than defaulting to "deliver everything." If you're not receiving expected deliveries, check that your filter expression is valid.
+
+### Basic mode versus PQL mode
+
+The filter builder in **Advanced configurations** offers two modes you can switch between freely:
+
+- **Basic** - a visual picker. Select values from dropdowns and Plane converts your selections into a filter expression behind the scenes.
+- **PQL** - direct text input. Type a PQL (Plane Query Language) expression. The expression shown is exactly what is stored and evaluated at delivery time.
+
+Switching between modes is lossless - your filter is not lost when you switch.
+
+### How to add a work item filter
+
+1. Create or edit a webhook.
+2. Check at least one **Work items** event.
+3. Expand **Advanced configurations**.
+4. Use the filter builder to define your conditions in Basic mode, or switch to PQL mode to type an expression directly.
+5. Save the webhook.
+
+### PQL syntax and supported fields
+
+| Filter field | PQL field name | Accepted values |
+|---|---|---|
+| Work item type | `type_id` | Work item type UUID |
+| State group | `state_group` | `backlog` · `unstarted` · `started` · `completed` · `cancelled` |
+| Assignees | `assignee_id` | User UUID |
+| Labels | `label_id` | Label UUID |
+| Projects | `project_id` | Project UUID |
+| Priority | `priority` | `none` · `low` · `medium` · `high` · `urgent` |
+| Start date | `start_date` | ISO date |
+| Due date | `target_date` | ISO date |
+
+**Expression syntax**
 
 ```
+priority = "urgent"                         Single value
+priority in ["urgent", "high"]              Multiple values
+state_group = "started"                     State group match
+assignee_id = "<user-uuid>"                 Specific assignee
+project_id = "<project-uuid>"               Specific project
+```
+
+## Securing requests
+
+### Why Plane signs every request
+
+Any server on the internet can send a POST request to your endpoint. Without a way to verify the source, someone could send fake webhook payloads to your system and trigger whatever logic you've built around them.
+
+Plane solves this by signing every request with HMAC-SHA256 using your secret key. The signature is attached as an `X-Plane-Signature` header. Because only Plane and you know the secret, a valid signature proves the request came from Plane and was not modified in transit.
+
+Skipping verification means your endpoint will process any request that arrives - forged or not.
+
+### How to verify a webhook payload
+
+On your server, compute the expected signature from the **raw request body bytes** and compare it to the value in `X-Plane-Signature`. Use a constant-time comparison to prevent timing attacks.
+
+```python
 import hashlib
 import hmac
 
-secret_token = os.environ.get("WEBHOOK_SECRET")
-
-received_signature = request.headers.get('X-Plane-Signature')
-received_payload = json.dumps(request.json).encode('utf-8')
-
-expected_signature = hmac.new(secret_token.encode('utf-8'), msg=received_payload, digestmod=hashlib.sha256).hexdigest()
-
-if not hmac.compare_digest(expected_signature, received_signature):
-   raise HTTPException(status_code=403, detail="Invalid Signature provided")
-
+def verify_webhook(request_body_bytes: bytes, secret: str, signature_header: str) -> bool:
+    expected = hmac.new(
+        secret.encode("utf-8"),
+        request_body_bytes,
+        hashlib.sha256,
+    ).hexdigest()
+    return hmac.compare_digest(expected, signature_header)
 ```
 
-## How webhook works
+Use the raw bytes from the incoming request - not a parsed or re-serialized version. JSON re-serialization can change key ordering, spacing, or escaping, which will produce a different signature and cause verification to fail. Reject any request where the signature does not match before running any other logic.
 
-Your webhook consumer is a simple HTTP endpoint. It must satisfy the following conditions:
+### Signature header reference
 
-- It's available in a publicly accessible non-localhost URL.
-- It will respond to the Plane Webhook push (HTTP POST request) with a `HTTP 200` ("OK") response.
+| Header | Value |
+|---|---|
+| `X-Plane-Signature` | HMAC-SHA256 hex digest of the raw request body, keyed with your webhook secret |
 
-If a delivery fails (i.e. server unavailable or responded with a non-200 HTTP status code), the push will be retried a couple of times. Here an exponential backoff delay is used: the attempt will be retried after approximately 10 minutes, then 30 minutes, and so on.
+The secret key is formatted as `plane_wh_` followed by a random string. Plane masks it in the UI. To view the full key, open the edit form for the webhook and use the show/hide toggle in the **Secret key** section.
 
-The webhooks are triggered for POST, PATCH, and DELETE requests.
+## Managing webhooks
 
-- For DELETE requests, the response only includes the ID of the deleted entity.
+### Disabling versus deleting
+
+Disabling a webhook pauses delivery without removing any configuration. The webhook stays in the list, its event subscriptions are preserved, and you can re-enable it at any time. Events are not queued while the webhook is disabled - any event that fires during the disabled period is not delivered. Use this when your endpoint is temporarily down or you need to make changes to your receiving system.
+
+Deleting a webhook removes it permanently - configuration and delivery history are gone. There is no undo.
+
+### Edit a webhook
+
+1. Go to **Workspace Settings → Webhooks**.
+2. Click **···** on the webhook row and select **Edit**.
+3. Update the title, URL, event subscriptions, or filter.
+4. Click **Update webhook**.
+
+### Disable or enable a webhook
+
+1. Go to **Workspace Settings → Webhooks**.
+2. Click **···** on the webhook row.
+3. Select **Disable webhook** to stop delivery, or **Enable webhook** to resume it.
+
+### Delete a webhook
+
+1. Go to **Workspace Settings → Webhooks**.
+2. Click **···** on the webhook row and select **Delete webhook**.
+
+### View and copy the secret key
+
+The secret key is not displayed during creation - Plane downloads it as a CSV instead. To access it later:
+
+1. Go to **Workspace Settings → Webhooks**.
+2. Click **···** on the webhook row and select **Edit**.
+3. In the **Secret key** section, click the eye icon to reveal the key.
+4. Click the copy icon to copy it.
+
+### Re-generate the secret key
+
+Re-generate if your secret key is compromised. The old key is invalidated the moment you re-generate - update your server before completing this step or your signature verification will break.
+
+1. Go to **Workspace Settings → Webhooks**.
+2. Click **···** on the webhook row and select **Edit**.
+3. In the **Secret key** section, click **Re-generate key**.
+
+Plane downloads the new key as a CSV.
+
+## Delivery and monitoring
+
+### How Plane delivers events
+
+Plane sends webhook requests asynchronously. When an event occurs, Plane queues the delivery and sends a POST request to your endpoint. Any 2xx response is treated as a success.
+
+If your endpoint is unavailable or returns a server error, Plane retries using exponential backoff with a ~10-minute base and jitter. After **5 failed attempts**, Plane automatically disables the webhook and emails the webhook creator. Re-enable it from the webhook list once your endpoint is fixed.
+
+4xx responses are not retried. Plane treats them as a deliberate rejection from your server.
+
+Retry behavior is automatic. There is no way to trigger a manual retry for a failed delivery.
+
+### How to read delivery logs
+
+1. Go to **Workspace Settings → Webhooks**.
+2. Click on a webhook to open its detail view.
+
+The top of the view shows four summary stats:
+
+| Stat | What it shows |
+|---|---|
+| Total deliveries | Total number of delivery attempts |
+| Successful | Deliveries that received a 2xx response |
+| Failed | Deliveries that returned an error or exhausted retries |
+| Success rate | Successful deliveries as a percentage of total |
+
+Below the summary, the delivery log lists individual attempts:
+
+| Column | What it shows |
+|---|---|
+| Events | The event type that triggered the delivery |
+| Status | Successful or Failed |
+| Response time | How long your endpoint took to respond, in milliseconds |
+| Event time | When the delivery was sent |
+
+## Events and payload
+
+### Event reference
+
+| Group | Event key | Fires when |
+|---|---|---|
+| **Projects** | `project.created` | A project is created |
+| | `project.updated` | A project is updated |
+| | `project.archived` | A project is archived |
+| | `project.deleted` | A project is deleted |
+| **Cycles** | `cycle.created` | A cycle is created |
+| | `cycle.updated` | A cycle is updated |
+| | `cycle.archived` | A cycle is archived |
+| | `cycle.deleted` | A cycle is deleted |
+| **Modules** | `module.created` | A module is created |
+| | `module.updated` | A module is updated |
+| | `module.archived` | A module is archived |
+| | `module.deleted` | A module is deleted |
+| **Milestones** | `milestone.created` | A milestone is created |
+| | `milestone.updated` | A milestone is updated |
+| | `milestone.deleted` | A milestone is deleted |
+| **Pages** | `page.created` | A page is created |
+| | `page.updated` | A page is updated |
+| | `page.archived` | A page is archived |
+| | `page.deleted` | A page is deleted |
+| **Page comments** | `page.comment.created` | A comment is added to a page |
+| | `page.comment.updated` | A page comment is edited |
+| | `page.comment.deleted` | A page comment is deleted |
+| **Work items** | `workitem.created` | A work item is created |
+| | `workitem.updated` | A work item is updated |
+| | `workitem.archived` | A work item is archived |
+| | `workitem.deleted` | A work item is deleted |
+| **Work item comments** | `workitem.comment.created` | A comment is added to a work item |
+| | `workitem.comment.updated` | A work item comment is edited |
+| | `workitem.comment.deleted` | A work item comment is deleted |
+| **Work item links** | `workitem.link.created` | A link is added to a work item |
+| | `workitem.link.updated` | A work item link is updated |
+| | `workitem.link.deleted` | A work item link is removed |
+| **Work item votes** | `workitem.vote.created` | A vote is cast on a work item |
+| | `workitem.vote.deleted` | A vote is removed |
+| **Work item attachments** | `workitem.attachment.created` | A file is attached to a work item |
+| | `workitem.attachment.updated` | A work item attachment is updated |
+| | `workitem.attachment.deleted` | A work item attachment is removed |
+| **Work item relations** | `workitem.relation.created` | A relation is added between work items |
+| | `workitem.relation.deleted` | A relation is removed |
+| **Work item dependencies** | `workitem.dependency.created` | A dependency is added |
+| | `workitem.dependency.deleted` | A dependency is removed |
+| **Work item page links** | `workitem.page_link.created` | A page link is added to a work item |
+| | `workitem.page_link.deleted` | A page link is removed |
+
+### Request headers
+
+Every webhook request includes these headers:
+
+| Header | Value |
+|---|---|
+| `Content-Type` | `application/json` |
+| `User-Agent` | `Autopilot` |
+| `X-Plane-Delivery` | Unique UUID per delivery attempt. Matches `delivery_id` in the payload body. |
+| `X-Plane-Event` | The event type, e.g. `workitem.created`. Matches `event` in the payload body. |
+| `X-Plane-Signature` | HMAC-SHA256 signature of the request body |
+
+These headers are reserved and cannot be overridden with custom values: `host`, `content-length`, `content-type`, `user-agent`, `x-plane-delivery`, `x-plane-event`, `x-plane-signature`.
+
+### Payload structure
+
+All v2 payloads share this top-level structure:
 
 ```json
-"action":"delete",
-"data":{
-	"id":"9a28bd00-ed9c-4f5d-8be9-fc05cbb1fc57"
-},
-"event":"issue",
-"webhook_id":"f1a2fe64-c8d4-4eed-b3ef-498690052c1d",
-"workspace_id":"c467e125-59e3-44ec-b5ee-f9c1e138c611"
-
+{
+  "version":             "v2",
+  "delivery_id":         "<uuid>",
+  "event_id":            "<uuid>",
+  "entity_id":           "<uuid>",
+  "entity_type":         "<string>",
+  "event":               "<dot.notation.event>",
+  "webhook_id":          "<uuid>",
+  "workspace_id":        "<uuid>",
+  "data":                { },
+  "previous_attributes": { }
+}
 ```
 
-- However, for both POST and PATCH requests, the complete payload is sent in the response.
+| Field | Description |
+|---|---|
+| `version` | Always `"v2"` |
+| `delivery_id` | Unique ID for this delivery attempt. Matches the `X-Plane-Delivery` header. A new UUID is generated for each retry. |
+| `event_id` | Unique ID for the triggering event. Stable across retries - use this for deduplication. |
+| `entity_id` | UUID of the primary entity affected by the event. |
+| `entity_type` | Type of the entity, e.g. `issue`, `cycle`, `issue_comment`, `issue_link`. |
+| `event` | Full dot-notation event name, e.g. `workitem.comment.updated`. |
+| `webhook_id` | ID of the webhook configuration that triggered this delivery. |
+| `workspace_id` | UUID of the workspace in which the event occurred. |
+| `data` | Full entity object for create and update events. Empty object `{}` for delete events. |
+| `previous_attributes` | Present on all events. For `updated` events, contains the previous values of changed fields. For `deleted` events, contains the full record before deletion. Empty object `{}` for all other events. |
+
+### Payload examples
+
+**workitem.comment.created**
 
 ```json
-"event":"issue",
-"action":"update",
-"webhook_id":"f1a2fe64-c8d4-4eed-b3ef-498690052c1d",
-"workspace_id":"c467e125-59e3-44ec-b5ee-f9c1e138c611",
-"data":{ ... }
-
+{
+  "version":      "v2",
+  "delivery_id":  "01ab9316-f978-4449-bad6-dce958be8454",
+  "event_id":     "0afa042d-92a9-4326-bdca-5ff5490dbf09",
+  "entity_id":    "088a83b9-a53f-4dda-b2bc-c860cf455997",
+  "entity_type":  "issue",
+  "event":        "workitem.comment.created",
+  "webhook_id":   "285f087b-e1e0-4f90-b9f4-0b720acfac04",
+  "workspace_id": "d250cd44-fa71-42c2-b2b5-3c73227288fc",
+  "data": {
+    "id":   "088a83b9-a53f-4dda-b2bc-c860cf455997",
+    "name": "Webhook Test Work Item 2",
+    "comment": {
+      "id":               "4797f841-c731-4e55-971f-d9cfe1938dfb",
+      "access":           "INTERNAL",
+      "actor_id":         "88fc36c8-73b0-4547-81c7-96b70f61835e",
+      "issue_id":         "088a83b9-a53f-4dda-b2bc-c860cf455997",
+      "edited_at":        null,
+      "comment_stripped": "Webhook Test Comment"
+    }
+  },
+  "previous_attributes": {}
+}
 ```
 
-::: info
-Whenever an issue is added to the module, the corresponding issue webhook will be triggered. Similarly, any updates made to the cycle issue will also activate the issue webhook.
-:::
+**workitem.link.created**
+
+```json
+{
+  "version":      "v2",
+  "delivery_id":  "616d98fe-35a7-4431-a233-db40936c8339",
+  "event_id":     "7b3c1e2a-8f94-4b12-a781-2c5e9d4f6a03",
+  "entity_id":    "8661bdfa-098f-434d-8e44-b1f32de62406",
+  "entity_type":  "issue_link",
+  "event":        "workitem.link.created",
+  "webhook_id":   "285f087b-e1e0-4f90-b9f4-0b720acfac04",
+  "workspace_id": "d250cd44-fa71-42c2-b2b5-3c73227288fc",
+  "data": {
+    "id":            "a6f8e562-49d2-4c19-bc4b-2bcb9d917da1",
+    "url":           "http://google.com",
+    "title":         "",
+    "issue_id":      "8661bdfa-098f-434d-8e44-b1f32de62406",
+    "created_at":    "2026-05-20T09:51:27.373582+00:00",
+    "project_id":    "45b87d89-0ce0-4d6f-8903-4070f1c67f1b",
+    "workspace_id":  "d250cd44-fa71-42c2-b2b5-3c73227288fc",
+    "created_by_id": "88fc36c8-73b0-4547-81c7-96b70f61835e"
+  },
+  "previous_attributes": {}
+}
+```
