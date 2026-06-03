@@ -8,9 +8,10 @@ keywords: plane compose, plane yaml, infrastructure as code, plane cli, plane pr
 
 Plane Compose is a command-line tool that lets you define and manage Plane projects using YAML configuration files. Think of it as "project as code", you write your project structure, schema, and work items in files, version control them with Git, and sync them with Plane.
 
-You can track version updates [here](https://pypi.org/project/plane-compose/). 
+You can track version updates [here](https://pypi.org/project/plane-compose/).
 
 ## Prerequisites
+
 - Python 3.10 or later. Verify with `python3 --version`.
 - pipx. Plane Compose is distributed as a Python package and pipx is the recommended installer. If you do not have pipx:
 
@@ -32,6 +33,7 @@ pipx ensurepath
 ```bash
 pipx install plane-compose
 ```
+
 The package is published at [https://pypi.org/project/plane-compose/](https://pypi.org/project/plane-compose/).
 
 To upgrade to the latest version:
@@ -77,6 +79,7 @@ plane auth logout <connection-name>
 ```bash
 plane init <project-key> --workspace <workspace-slug>
 ```
+
 This creates the project directory with the given key and generates the full file structure inside it.
 
 To start from a template instead of the default schema:
@@ -105,7 +108,7 @@ After `plane init`, the `schema/` directory contains default files. Edit them to
 
 **Edit the files in this order** - each file can only reference names defined in the files before it.
 
-1. **Define your states** 
+1. **Define your states**
 
 Open `schema/states.yaml`. Every state belongs to one of five groups: `backlog`, `unstarted`, `started`, `completed`, `cancelled`. Exactly one state should have `is_default: true`.
 
@@ -222,7 +225,6 @@ plane schema push
 
 This creates the project in Plane if it does not exist yet and pushes your types, states, labels, and workflows. `plane.yaml` is updated with the project UUID after this runs.
 
-
 ## Clone an existing project
 
 Use this when the project already exists in Plane and you want to manage it locally.
@@ -283,7 +285,7 @@ To overwrite local files entirely with what is in Plane:
 
 ```bash
 plane pull --force
-````
+```
 
 ## Import schema changes made in Plane
 
@@ -446,12 +448,12 @@ plane init [PROJECT] [--workspace WS] [--connection CONN]
            [--path PATH] [--template TEMPLATE]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Name of the directory to create and the project key written into `plane.yaml` under `project.key`. |
-| `--workspace WS` | Slug of the Plane workspace this project belongs to. Written into `plane.yaml`. |
-| `--connection CONN` | ID of the connection to use for API calls during initialisation. Defaults to the connection linked to the workspace. |
-| `--path PATH` | Parent directory in which to create the project folder. Defaults to the current working directory. |
+| Option                | Description                                                                                                                                                                                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT`             | Name of the directory to create and the project key written into `plane.yaml` under `project.key`.                                                                                                                                                                        |
+| `--workspace WS`      | Slug of the Plane workspace this project belongs to. Written into `plane.yaml`.                                                                                                                                                                                           |
+| `--connection CONN`   | ID of the connection to use for API calls during initialisation. Defaults to the connection linked to the workspace.                                                                                                                                                      |
+| `--path PATH`         | Parent directory in which to create the project folder. Defaults to the current working directory.                                                                                                                                                                        |
 | `--template TEMPLATE` | Source for pre-populating the schema and work files. Accepts a built-in name (e.g. `default`), a local filesystem path, a Git HTTPS URL, or a Git SSH URL. The resolved value is written to `plane.yaml` under `template` so that `plane upgrade` can reference it later. |
 
 ---
@@ -465,13 +467,13 @@ plane auth login [--connection CONN] [--server-url URL] [--auth-type TYPE]
                  [--token TOKEN] [--workspace WS]
 ```
 
-| Option | Description |
-|---|---|
+| Option              | Description                                                                                                                                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--connection CONN` | Name or ID to assign to this connection. Used to identify it in `plane auth list-connections` and to reference it with `--connection` in other commands. If omitted, a name is prompted interactively. |
-| `--server-url URL` | Base URL of the Plane API. Defaults to `https://api.plane.so`. Set this to your instance URL when using a self-hosted deployment. |
-| `--auth-type TYPE` | Token type. `pat` for a Personal Access Token scoped to a user. `workspace` for a workspace-scoped token. |
-| `--token TOKEN` | The API token value. |
-| `--workspace WS` | Workspace slug to associate with this connection. The association is stored so that commands can resolve credentials from `plane.yaml` automatically. |
+| `--server-url URL`  | Base URL of the Plane API. Defaults to `https://api.plane.so`. Set this to your instance URL when using a self-hosted deployment.                                                                      |
+| `--auth-type TYPE`  | Token type. `pat` for a Personal Access Token scoped to a user. `workspace` for a workspace-scoped token.                                                                                              |
+| `--token TOKEN`     | The API token value.                                                                                                                                                                                   |
+| `--workspace WS`    | Workspace slug to associate with this connection. The association is stored so that commands can resolve credentials from `plane.yaml` automatically.                                                  |
 
 ---
 
@@ -483,10 +485,10 @@ Removes a stored connection and all its associated workspace links from `~/.conf
 plane auth logout CONNECTION_ID [--force]
 ```
 
-| Option | Description |
-|---|---|
+| Option          | Description                                                                |
+| --------------- | -------------------------------------------------------------------------- |
 | `CONNECTION_ID` | ID of the connection to remove, as shown by `plane auth list-connections`. |
-| `--force` | Skips the confirmation prompt before deletion. |
+| `--force`       | Skips the confirmation prompt before deletion.                             |
 
 ---
 
@@ -508,9 +510,9 @@ Associates a workspace slug with an existing connection. After this, any command
 plane auth connect-workspace WORKSPACE_SLUG --connection CONN_ID
 ```
 
-| Option | Description |
-|---|---|
-| `WORKSPACE_SLUG` | The Plane workspace slug to link. |
+| Option                 | Description                                   |
+| ---------------------- | --------------------------------------------- |
+| `WORKSPACE_SLUG`       | The Plane workspace slug to link.             |
 | `--connection CONN_ID` | ID of the connection to link it to. Required. |
 
 ---
@@ -523,9 +525,9 @@ Removes the association between a workspace slug and a connection. After this, c
 plane auth disconnect-workspace WORKSPACE_SLUG [--connection CONN_ID]
 ```
 
-| Option | Description |
-|---|---|
-| `WORKSPACE_SLUG` | The workspace slug to unlink. |
+| Option                 | Description                                                                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `WORKSPACE_SLUG`       | The workspace slug to unlink.                                                                                                                    |
 | `--connection CONN_ID` | ID of the connection to unlink from. If omitted and the workspace has only one associated connection, that connection is unlinked automatically. |
 
 ---
@@ -538,10 +540,10 @@ Checks all schema files in the project for structural errors, unknown field type
 plane schema validate [PROJECT] [--path PATH]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
+| Option        | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| `PROJECT`     | Project key or directory. Defaults to the current directory. |
+| `--path PATH` | Explicit filesystem path to the project root.                |
 
 ---
 
@@ -553,12 +555,12 @@ Pushes local schema files to Plane. Creates the project in Plane if it does not 
 plane schema push [PROJECT] [--path PATH] [--dry-run] [--force]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--dry-run` | Computes and displays the full change plan without making any API calls or modifying any files. |
-| `--force` | Skips the interactive confirmation prompt before applying changes. |
+| Option        | Description                                                                                     |
+| ------------- | ----------------------------------------------------------------------------------------------- |
+| `PROJECT`     | Project key or directory. Defaults to the current directory.                                    |
+| `--path PATH` | Explicit filesystem path to the project root.                                                   |
+| `--dry-run`   | Computes and displays the full change plan without making any API calls or modifying any files. |
+| `--force`     | Skips the interactive confirmation prompt before applying changes.                              |
 
 ---
 
@@ -570,12 +572,12 @@ Reads the current schema from the Plane remote and reconciles it with local file
 plane schema import [PROJECT] [--path PATH] [--merge] [--force]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--merge` | Writes remote schema items that are absent from local files into the appropriate YAML files. Existing local items are not modified. Additive only. |
-| `--force` | Replaces the contents of local schema files entirely with what is returned from the Plane API. Any local-only items are lost. |
+| Option        | Description                                                                                                                                        |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT`     | Project key or directory. Defaults to the current directory.                                                                                       |
+| `--path PATH` | Explicit filesystem path to the project root.                                                                                                      |
+| `--merge`     | Writes remote schema items that are absent from local files into the appropriate YAML files. Existing local items are not modified. Additive only. |
+| `--force`     | Replaces the contents of local schema files entirely with what is returned from the Plane API. Any local-only items are lost.                      |
 
 ---
 
@@ -587,10 +589,10 @@ Fetches the current schema from Plane and compares it to local schema files. Pri
 plane schema diff [PROJECT] [--path PATH]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
+| Option        | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| `PROJECT`     | Project key or directory. Defaults to the current directory. |
+| `--path PATH` | Explicit filesystem path to the project root.                |
 
 ---
 
@@ -605,22 +607,22 @@ plane push [PROJECT] [--path PATH] [--connection CONN]
            [--no-conflict-check] [--exit-code] [--resume]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--connection CONN` | Overrides the connection resolved from `plane.yaml` for this invocation only. |
-| `--dry-run` | Computes and displays the full change plan without making any API calls or writing to state. |
-| `--force` | Skips the interactive confirmation prompt before applying changes. |
-| `--schema-only` | Pushes only schema files. Equivalent to running `plane schema push`. Skips `workitems`, `cycles`, `modules`, and `milestones`. |
-| `--work-only` | Skips the schema push phase and pushes only work files. Requires schema to already be in sync. |
-| `--skip SECTION` | Excludes a specific section from the push. Repeatable. Valid values: `workitems`, `cycles`, `modules`, `milestones`. |
-| `--all` | Discovers all project directories under the current directory and pushes each one. |
-| `--workspace WS` | When used with `--all`, restricts discovery to projects belonging to this workspace. |
-| `--filter PATTERN` | When used with `--all`, applies a glob pattern to filter project directory names. |
-| `--no-conflict-check` | Skips the pre-push API call that detects remote conflicts. Reduces API usage. Recommended for CI/CD pipelines where conflicts are not expected. |
-| `--exit-code` | Returns a differentiated exit code: `0` if no changes were needed, `1` on error, `2` if changes were successfully applied. Useful for scripting and CI gate logic. |
-| `--resume` | Reads the failure log from the previous push and retries only the items that failed. Items that succeeded in the previous run are not re-pushed. |
+| Option                | Description                                                                                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PROJECT`             | Project key or directory. Defaults to the current directory.                                                                                                       |
+| `--path PATH`         | Explicit filesystem path to the project root.                                                                                                                      |
+| `--connection CONN`   | Overrides the connection resolved from `plane.yaml` for this invocation only.                                                                                      |
+| `--dry-run`           | Computes and displays the full change plan without making any API calls or writing to state.                                                                       |
+| `--force`             | Skips the interactive confirmation prompt before applying changes.                                                                                                 |
+| `--schema-only`       | Pushes only schema files. Equivalent to running `plane schema push`. Skips `workitems`, `cycles`, `modules`, and `milestones`.                                     |
+| `--work-only`         | Skips the schema push phase and pushes only work files. Requires schema to already be in sync.                                                                     |
+| `--skip SECTION`      | Excludes a specific section from the push. Repeatable. Valid values: `workitems`, `cycles`, `modules`, `milestones`.                                               |
+| `--all`               | Discovers all project directories under the current directory and pushes each one.                                                                                 |
+| `--workspace WS`      | When used with `--all`, restricts discovery to projects belonging to this workspace.                                                                               |
+| `--filter PATTERN`    | When used with `--all`, applies a glob pattern to filter project directory names.                                                                                  |
+| `--no-conflict-check` | Skips the pre-push API call that detects remote conflicts. Reduces API usage. Recommended for CI/CD pipelines where conflicts are not expected.                    |
+| `--exit-code`         | Returns a differentiated exit code: `0` if no changes were needed, `1` on error, `2` if changes were successfully applied. Useful for scripting and CI gate logic. |
+| `--resume`            | Reads the failure log from the previous push and retries only the items that failed. Items that succeeded in the previous run are not re-pushed.                   |
 
 ---
 
@@ -635,21 +637,21 @@ plane pull [PROJECT] [--path PATH] [--connection CONN]
            [--all] [--workspace WS] [--filter PATTERN]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--connection CONN` | Overrides the connection resolved from `plane.yaml` for this invocation only. |
-| `--merge` | Applies remote changes to local files while preserving items that exist locally but not remotely. Local-only items are not deleted. |
-| `--force` | Overwrites local files with remote content without prompting. Local-only items are lost. |
-| `--schema-only` | Pulls only schema files. Skips `workitems`, `cycles`, `modules`, and `milestones`. |
-| `--work-only` | Pulls only work files. Skips schema. |
-| `--skip SECTION` | Excludes a specific section from the pull. Repeatable. Valid values: `workitems`, `cycles`, `modules`, `milestones`. |
-| `--with-properties` | Includes custom property values in the pulled work items. Enabled by default. |
-| `--no-properties` | Excludes custom property values from pulled work items. The `properties` map is omitted from each work item in the output file. |
-| `--all` | Discovers all project directories under the current directory and pulls each one. |
-| `--workspace WS` | When used with `--all`, restricts discovery to projects belonging to this workspace. |
-| `--filter PATTERN` | When used with `--all`, applies a glob pattern to filter project directory names. |
+| Option              | Description                                                                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT`           | Project key or directory. Defaults to the current directory.                                                                        |
+| `--path PATH`       | Explicit filesystem path to the project root.                                                                                       |
+| `--connection CONN` | Overrides the connection resolved from `plane.yaml` for this invocation only.                                                       |
+| `--merge`           | Applies remote changes to local files while preserving items that exist locally but not remotely. Local-only items are not deleted. |
+| `--force`           | Overwrites local files with remote content without prompting. Local-only items are lost.                                            |
+| `--schema-only`     | Pulls only schema files. Skips `workitems`, `cycles`, `modules`, and `milestones`.                                                  |
+| `--work-only`       | Pulls only work files. Skips schema.                                                                                                |
+| `--skip SECTION`    | Excludes a specific section from the pull. Repeatable. Valid values: `workitems`, `cycles`, `modules`, `milestones`.                |
+| `--with-properties` | Includes custom property values in the pulled work items. Enabled by default.                                                       |
+| `--no-properties`   | Excludes custom property values from pulled work items. The `properties` map is omitted from each work item in the output file.     |
+| `--all`             | Discovers all project directories under the current directory and pulls each one.                                                   |
+| `--workspace WS`    | When used with `--all`, restricts discovery to projects belonging to this workspace.                                                |
+| `--filter PATTERN`  | When used with `--all`, applies a glob pattern to filter project directory names.                                                   |
 
 ---
 
@@ -663,16 +665,16 @@ plane clone PROJECT [--directory DIR] [--path PATH]
             [--schema-only] [--skip SECTION] [--with-properties]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project identifier. Accepts three formats: `workspace/KEY` shorthand (e.g. `myteam/API`), a project key with `--workspace` flag, or a UUID with `--workspace` flag. |
-| `--directory DIR` | Name of the local directory to create. Defaults to the project key. |
-| `--path PATH` | Parent directory in which to create the project folder. Defaults to the current working directory. |
-| `--workspace WS` | Workspace slug. Required when `PROJECT` is a key or UUID rather than a shorthand. |
-| `--connection CONN` | Overrides the connection resolved from the workspace for this invocation only. |
-| `--schema-only` | Downloads schema files only. Skips `workitems`, `cycles`, `modules`, and `milestones`. |
-| `--skip SECTION` | Excludes a specific section from the clone. Repeatable. Valid values: `workitems`, `cycles`, `modules`, `milestones`. |
-| `--with-properties` | Includes custom property values in the cloned work items. Enabled by default. |
+| Option              | Description                                                                                                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT`           | Project identifier. Accepts three formats: `workspace/KEY` shorthand (e.g. `myteam/API`), a project key with `--workspace` flag, or a UUID with `--workspace` flag. |
+| `--directory DIR`   | Name of the local directory to create. Defaults to the project key.                                                                                                 |
+| `--path PATH`       | Parent directory in which to create the project folder. Defaults to the current working directory.                                                                  |
+| `--workspace WS`    | Workspace slug. Required when `PROJECT` is a key or UUID rather than a shorthand.                                                                                   |
+| `--connection CONN` | Overrides the connection resolved from the workspace for this invocation only.                                                                                      |
+| `--schema-only`     | Downloads schema files only. Skips `workitems`, `cycles`, `modules`, and `milestones`.                                                                              |
+| `--skip SECTION`    | Excludes a specific section from the clone. Repeatable. Valid values: `workitems`, `cycles`, `modules`, `milestones`.                                               |
+| `--with-properties` | Includes custom property values in the cloned work items. Enabled by default.                                                                                       |
 
 ---
 
@@ -684,22 +686,22 @@ Fetches work items from Plane and compares them to local work files. Classifies 
 plane diff [PROJECT] [--path PATH] [--connection CONN]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
+| Option              | Description                                                                   |
+| ------------------- | ----------------------------------------------------------------------------- |
+| `PROJECT`           | Project key or directory. Defaults to the current directory.                  |
+| `--path PATH`       | Explicit filesystem path to the project root.                                 |
 | `--connection CONN` | Overrides the connection resolved from `plane.yaml` for this invocation only. |
 
 **Output categories:**
 
-| Category | Meaning |
-|---|---|
-| `new_local` | Item exists in local files but has no corresponding remote record. |
-| `modified_local` | Item exists both locally and remotely, and the local version differs from the remote. |
+| Category          | Meaning                                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------------------ |
+| `new_local`       | Item exists in local files but has no corresponding remote record.                               |
+| `modified_local`  | Item exists both locally and remotely, and the local version differs from the remote.            |
 | `modified_remote` | Item exists both locally and remotely, and the remote version differs from what was last synced. |
-| `conflicts` | Item has been modified both locally and remotely since the last sync. |
-| `in_sync` | Local and remote versions are identical. |
-| `deleted_remote` | Item has been deleted from Plane but still exists in local files. |
+| `conflicts`       | Item has been modified both locally and remotely since the last sync.                            |
+| `in_sync`         | Local and remote versions are identical.                                                         |
+| `deleted_remote`  | Item has been deleted from Plane but still exists in local files.                                |
 
 ---
 
@@ -711,11 +713,11 @@ Validates work item files against the project schema. Checks for unknown type na
 plane validate [PATH] [--offline] [--json]
 ```
 
-| Option | Description |
-|---|---|
-| `PATH` | Filesystem path to the project root. Defaults to the current directory. |
-| `--offline` | Skips the API call to fetch the remote schema. Validates only against local schema files. |
-| `--json` | Outputs validation errors as a JSON array instead of formatted text. Useful for scripting and CI pipelines. |
+| Option      | Description                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| `PATH`      | Filesystem path to the project root. Defaults to the current directory.                                     |
+| `--offline` | Skips the API call to fetch the remote schema. Validates only against local schema files.                   |
+| `--json`    | Outputs validation errors as a JSON array instead of formatted text. Useful for scripting and CI pipelines. |
 
 ---
 
@@ -727,13 +729,13 @@ Reads `.plane/state.json` and the local work files to produce a summary of the p
 plane status [PATH] [--all] [--workspace WS] [--filter PATTERN] [--json]
 ```
 
-| Option | Description |
-|---|---|
-| `PATH` | Filesystem path to the project root. Defaults to the current directory. |
-| `--all` | Discovers all project directories under the current directory and reports status for each. |
-| `--workspace WS` | When used with `--all`, restricts discovery to projects belonging to this workspace. |
-| `--filter PATTERN` | When used with `--all`, applies a glob pattern to filter project directory names. |
-| `--json` | Outputs the status report as JSON. |
+| Option             | Description                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| `PATH`             | Filesystem path to the project root. Defaults to the current directory.                    |
+| `--all`            | Discovers all project directories under the current directory and reports status for each. |
+| `--workspace WS`   | When used with `--all`, restricts discovery to projects belonging to this workspace.       |
+| `--filter PATTERN` | When used with `--all`, applies a glob pattern to filter project directory names.          |
+| `--json`           | Outputs the status report as JSON.                                                         |
 
 ---
 
@@ -747,16 +749,16 @@ plane upgrade [PROJECT] --template TEMPLATE [--path PATH]
               [--skip-pull] [--schema-only]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--template TEMPLATE` | Template source. Required. Accepts a built-in name, a local path, a Git HTTPS URL, or a Git SSH URL. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--include-data` | Also copies cycles, modules, and work items from the template into the local work files. |
-| `--dry-run` | Computes and displays the upgrade plan without modifying any files or making any API calls. |
-| `--force` | Skips the interactive confirmation prompt before applying the upgrade. |
-| `--skip-pull` | Skips pulling the latest schema from Plane before computing the merge. Uses the current local schema as the base. |
-| `--schema-only` | Applies only schema changes from the template. Does not copy cycles, modules, or work items even if `--include-data` is set. |
+| Option                | Description                                                                                                                  |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT`             | Project key or directory. Defaults to the current directory.                                                                 |
+| `--template TEMPLATE` | Template source. Required. Accepts a built-in name, a local path, a Git HTTPS URL, or a Git SSH URL.                         |
+| `--path PATH`         | Explicit filesystem path to the project root.                                                                                |
+| `--include-data`      | Also copies cycles, modules, and work items from the template into the local work files.                                     |
+| `--dry-run`           | Computes and displays the upgrade plan without modifying any files or making any API calls.                                  |
+| `--force`             | Skips the interactive confirmation prompt before applying the upgrade.                                                       |
+| `--skip-pull`         | Skips pulling the latest schema from Plane before computing the merge. Uses the current local schema as the base.            |
+| `--schema-only`       | Applies only schema changes from the template. Does not copy cycles, modules, or work items even if `--include-data` is set. |
 
 ---
 
@@ -768,11 +770,11 @@ Prints the contents of `.plane/state.json` as a structured report showing remote
 plane state show [PROJECT] [--path PATH] [--json]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--json` | Outputs the state as raw JSON. |
+| Option        | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| `PROJECT`     | Project key or directory. Defaults to the current directory. |
+| `--path PATH` | Explicit filesystem path to the project root.                |
+| `--json`      | Outputs the state as raw JSON.                               |
 
 ---
 
@@ -784,11 +786,11 @@ Clears all entries from `.plane/state.json`. After a reset, the next `plane push
 plane state reset [PROJECT] [--path PATH] [--force]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--force` | Skips the confirmation prompt. |
+| Option        | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| `PROJECT`     | Project key or directory. Defaults to the current directory. |
+| `--path PATH` | Explicit filesystem path to the project root.                |
+| `--force`     | Skips the confirmation prompt.                               |
 
 ---
 
@@ -800,11 +802,11 @@ Removes only the `work_items` section of `.plane/state.json`, leaving schema sta
 plane state clear-items [PROJECT] [--path PATH] [--force]
 ```
 
-| Option | Description |
-|---|---|
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
-| `--force` | Skips the confirmation prompt. |
+| Option        | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| `PROJECT`     | Project key or directory. Defaults to the current directory. |
+| `--path PATH` | Explicit filesystem path to the project root.                |
+| `--force`     | Skips the confirmation prompt.                               |
 
 ---
 
@@ -816,11 +818,11 @@ Removes a single entry from `.plane/state.json` identified by a dot-separated pa
 plane state remove PATH_STR [PROJECT] [--path PATH]
 ```
 
-| Option | Description |
-|---|---|
-| `PATH_STR` | Dot-separated path into the state object. For example: `types.Story` removes the Story type mapping; `states.Done` removes the Done state mapping; `work_items.AUTH-1` removes a specific work item mapping. |
-| `PROJECT` | Project key or directory. Defaults to the current directory. |
-| `--path PATH` | Explicit filesystem path to the project root. |
+| Option        | Description                                                                                                                                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PATH_STR`    | Dot-separated path into the state object. For example: `types.Story` removes the Story type mapping; `states.Done` removes the Done state mapping; `work_items.AUTH-1` removes a specific work item mapping. |
+| `PROJECT`     | Project key or directory. Defaults to the current directory.                                                                                                                                                 |
+| `--path PATH` | Explicit filesystem path to the project root.                                                                                                                                                                |
 
 ---
 
@@ -833,14 +835,14 @@ plane ws clone WORKSPACE [--directory DIR] [--path PATH]
                [--connection CONN] [--force] [--skip SECTION]
 ```
 
-| Option | Description |
-|---|---|
-| `WORKSPACE` | Workspace slug to clone. |
-| `--directory DIR` | Name of the local directory to create. Defaults to the workspace slug. |
-| `--path PATH` | Parent directory for the workspace folder. Defaults to the current working directory. |
-| `--connection CONN` | Overrides the connection resolved from the workspace slug for this invocation only. |
-| `--force` | Overwrites an existing local directory without prompting. |
-| `--skip SECTION` | Excludes a section from the clone. Valid values: `releases`. |
+| Option              | Description                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `WORKSPACE`         | Workspace slug to clone.                                                              |
+| `--directory DIR`   | Name of the local directory to create. Defaults to the workspace slug.                |
+| `--path PATH`       | Parent directory for the workspace folder. Defaults to the current working directory. |
+| `--connection CONN` | Overrides the connection resolved from the workspace slug for this invocation only.   |
+| `--force`           | Overwrites an existing local directory without prompting.                             |
+| `--skip SECTION`    | Excludes a section from the clone. Valid values: `releases`.                          |
 
 ---
 
@@ -852,13 +854,13 @@ Fetches workspace-level configuration from Plane and writes it to local workspac
 plane ws pull [WORKSPACE] [--path PATH] [--merge] [--force] [--skip SECTION]
 ```
 
-| Option | Description |
-|---|---|
-| `WORKSPACE` | Workspace slug. Defaults to the value in `workspace.yaml`. |
-| `--path PATH` | Explicit filesystem path to the workspace root. |
-| `--merge` | Preserves local-only items while applying remote changes. |
-| `--force` | Overwrites local files with remote content without prompting. Local-only items are lost. |
-| `--skip SECTION` | Excludes a section from the pull. Valid values: `releases`. |
+| Option           | Description                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| `WORKSPACE`      | Workspace slug. Defaults to the value in `workspace.yaml`.                               |
+| `--path PATH`    | Explicit filesystem path to the workspace root.                                          |
+| `--merge`        | Preserves local-only items while applying remote changes.                                |
+| `--force`        | Overwrites local files with remote content without prompting. Local-only items are lost. |
+| `--skip SECTION` | Excludes a section from the pull. Valid values: `releases`.                              |
 
 ---
 
@@ -870,12 +872,12 @@ Pushes local workspace configuration files to Plane. Updates `.plane/state.json`
 plane ws push [WORKSPACE] [--path PATH] [--dry-run] [--force]
 ```
 
-| Option | Description |
-|---|---|
-| `WORKSPACE` | Workspace slug. Defaults to the value in `workspace.yaml`. |
-| `--path PATH` | Explicit filesystem path to the workspace root. |
-| `--dry-run` | Computes and displays the change plan without making any API calls. |
-| `--force` | Skips the interactive confirmation prompt. |
+| Option        | Description                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| `WORKSPACE`   | Workspace slug. Defaults to the value in `workspace.yaml`.          |
+| `--path PATH` | Explicit filesystem path to the workspace root.                     |
+| `--dry-run`   | Computes and displays the change plan without making any API calls. |
+| `--force`     | Skips the interactive confirmation prompt.                          |
 
 ---
 
@@ -887,10 +889,10 @@ Fetches workspace configuration from Plane and compares it to local workspace fi
 plane ws diff [WORKSPACE] [--path PATH]
 ```
 
-| Option | Description |
-|---|---|
-| `WORKSPACE` | Workspace slug. Defaults to the value in `workspace.yaml`. |
-| `--path PATH` | Explicit filesystem path to the workspace root. |
+| Option        | Description                                                |
+| ------------- | ---------------------------------------------------------- |
+| `WORKSPACE`   | Workspace slug. Defaults to the value in `workspace.yaml`. |
+| `--path PATH` | Explicit filesystem path to the workspace root.            |
 
 ---
 
@@ -903,15 +905,15 @@ plane ws upgrade [WORKSPACE] [--path PATH] [--template TEMPLATE]
                  [--dry-run] [--force] [--skip-pull] [--schema-only]
 ```
 
-| Option | Description |
-|---|---|
-| `WORKSPACE` | Workspace slug. Defaults to the value in `workspace.yaml`. |
-| `--path PATH` | Explicit filesystem path to the workspace root. |
+| Option                | Description                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| `WORKSPACE`           | Workspace slug. Defaults to the value in `workspace.yaml`.                           |
+| `--path PATH`         | Explicit filesystem path to the workspace root.                                      |
 | `--template TEMPLATE` | Template source. Accepts a built-in name, local path, Git HTTPS URL, or Git SSH URL. |
-| `--dry-run` | Displays the upgrade plan without applying it. |
-| `--force` | Skips the confirmation prompt. |
-| `--skip-pull` | Skips pulling the latest workspace schema from Plane before computing the merge. |
-| `--schema-only` | Applies only schema changes. Does not copy data from the template. |
+| `--dry-run`           | Displays the upgrade plan without applying it.                                       |
+| `--force`             | Skips the confirmation prompt.                                                       |
+| `--skip-pull`         | Skips pulling the latest workspace schema from Plane before computing the merge.     |
+| `--schema-only`       | Applies only schema changes. Does not copy data from the template.                   |
 
 ---
 
@@ -954,11 +956,11 @@ plane rate reset
 
 These options are accepted by every `plane` command.
 
-| Option | Description |
-|---|---|
-| `--version`, `-V` | Prints the installed version of Plane Compose and exits. |
-| `--verbose`, `-v` | Enables verbose output. Prints additional detail about each operation as it runs. |
-| `--debug` | Enables debug-level logging. Writes a structured log to `~/.config/plane-compose/plane.log`. |
+| Option            | Description                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `--version`, `-V` | Prints the installed version of Plane Compose and exits.                                     |
+| `--verbose`, `-v` | Enables verbose output. Prints additional detail about each operation as it runs.            |
+| `--debug`         | Enables debug-level logging. Writes a structured log to `~/.config/plane-compose/plane.log`. |
 
 ---
 
@@ -1006,20 +1008,20 @@ Workspace directory (created by `plane ws clone`):
 
 The primary configuration file for a project. Identifies the project, specifies the workspace and connection, and sets defaults used when work item fields are omitted.
 
-| Field | Type | Description |
-|---|---|---|
-| `type` | string | Always `project`. Identifies this directory as a project as opposed to a workspace. |
-| `workspace` | string | Slug of the Plane workspace this project belongs to. Used to resolve the correct connection from `~/.config/plane-compose/config.json`. |
-| `connection` | string | Optional. ID of a specific connection to use for all operations on this project. Overrides the workspace-to-connection mapping. |
-| `project.key` | string | Short project identifier, maximum 10 uppercase characters. Used as the prefix in work item sequence IDs (e.g. `API-42`). |
-| `project.name` | string | Human-readable project name as displayed in Plane. |
-| `project.uuid` | string | Remote UUID of the project. Populated automatically after the first `plane schema push`. Do not set manually. |
-| `project.description` | string | Optional project description as displayed in Plane. |
-| `project.network` | string | Visibility setting. `public` makes the project visible to all workspace members. `private` restricts visibility. Defaults to `public`. |
-| `project.timezone` | string | IANA timezone string (e.g. `UTC`, `America/New_York`). Affects due date display and cycle date calculations in Plane. |
-| `defaults.type` | string | Default work item type applied when a work item in `work/workitems.yaml` does not specify a `type` field. Must match a key in `schema/types.yaml`. |
-| `defaults.workflow` | string | Default workflow applied when a work item type does not specify one. Must match a key in `schema/workflows.yaml`. |
-| `template` | string | Source of the template used during `plane init` or `plane upgrade`. Written automatically; used by `plane upgrade` to know where to pull the template from. |
+| Field                 | Type   | Description                                                                                                                                                 |
+| --------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                | string | Always `project`. Identifies this directory as a project as opposed to a workspace.                                                                         |
+| `workspace`           | string | Slug of the Plane workspace this project belongs to. Used to resolve the correct connection from `~/.config/plane-compose/config.json`.                     |
+| `connection`          | string | Optional. ID of a specific connection to use for all operations on this project. Overrides the workspace-to-connection mapping.                             |
+| `project.key`         | string | Short project identifier, maximum 10 uppercase characters. Used as the prefix in work item sequence IDs (e.g. `API-42`).                                    |
+| `project.name`        | string | Human-readable project name as displayed in Plane.                                                                                                          |
+| `project.uuid`        | string | Remote UUID of the project. Populated automatically after the first `plane schema push`. Do not set manually.                                               |
+| `project.description` | string | Optional project description as displayed in Plane.                                                                                                         |
+| `project.network`     | string | Visibility setting. `public` makes the project visible to all workspace members. `private` restricts visibility. Defaults to `public`.                      |
+| `project.timezone`    | string | IANA timezone string (e.g. `UTC`, `America/New_York`). Affects due date display and cycle date calculations in Plane.                                       |
+| `defaults.type`       | string | Default work item type applied when a work item in `work/workitems.yaml` does not specify a `type` field. Must match a key in `schema/types.yaml`.          |
+| `defaults.workflow`   | string | Default workflow applied when a work item type does not specify one. Must match a key in `schema/workflows.yaml`.                                           |
+| `template`            | string | Source of the template used during `plane init` or `plane upgrade`. Written automatically; used by `plane upgrade` to know where to pull the template from. |
 
 ```yaml
 type: project
@@ -1044,15 +1046,15 @@ template: default
 
 The configuration file for a workspace directory created by `plane ws clone`. Identifies the workspace and connection, and contains workspace-level member data.
 
-| Field | Type | Description |
-|---|---|---|
-| `workspace` | string | Slug of the Plane workspace. Used to resolve the correct connection from `~/.config/plane-compose/config.json`. |
-| `connection` | string | Optional. ID of a specific connection to pin to this workspace directory. |
-| `workspace_features` | map | Optional. Workspace-level feature flag overrides. Keys are feature names; values are `true` or `false`. |
-| `members` | list | Workspace members. Populated automatically on `plane ws pull`. Read-only - do not edit manually. |
-| `members[].id` | string | Remote UUID of the member. |
-| `members[].email` | string | Email address of the member. |
-| `members[].display_name` | string | Display name of the member as shown in Plane. |
+| Field                    | Type   | Description                                                                                                     |
+| ------------------------ | ------ | --------------------------------------------------------------------------------------------------------------- |
+| `workspace`              | string | Slug of the Plane workspace. Used to resolve the correct connection from `~/.config/plane-compose/config.json`. |
+| `connection`             | string | Optional. ID of a specific connection to pin to this workspace directory.                                       |
+| `workspace_features`     | map    | Optional. Workspace-level feature flag overrides. Keys are feature names; values are `true` or `false`.         |
+| `members`                | list   | Workspace members. Populated automatically on `plane ws pull`. Read-only - do not edit manually.                |
+| `members[].id`           | string | Remote UUID of the member.                                                                                      |
+| `members[].email`        | string | Email address of the member.                                                                                    |
+| `members[].display_name` | string | Display name of the member as shown in Plane.                                                                   |
 
 ```yaml
 workspace: myteam
@@ -1071,39 +1073,39 @@ members:
 
 Defines the work item types available in the project. Each key is the type name. Types control which workflow applies, whether the type can act as an parent, its icon in the Plane UI, and which custom properties are attached.
 
-| Field | Type | Description |
-|---|---|---|
-| `<TypeName>` | map | Top-level key is the type name as referenced in work items and workflows. |
-| `description` | string | Human-readable description of the type, displayed in the Plane UI. |
-| `workflow` | string | Name of the workflow from `schema/workflows.yaml` that governs state transitions for this type. |
-| `is_epic` | boolean | When `true`, work items of this type can act as parents for other work items, enabling hierarchy. Defaults to `false`. Requires `epics: true` in `schema/features.yaml`. |
-| `logo_props.icon` | string | Name of the icon displayed for this type in the Plane UI. |
-| `logo_props.background_color` | string | Hex colour string for the icon background (e.g. `#6366f1`). |
-| `properties` | list | List of custom property definitions attached to this type. |
-| `properties[].name` | string | Property name as displayed in the Plane UI and as the key in work item `properties` maps. |
-| `properties[].type` | string | Data type of the property. See property type table below. |
-| `properties[].required` | boolean | When `true`, the property must have a value before a work item of this type can be marked as done. |
-| `properties[].options` | list | List of option strings. Required when `type` is `option`. |
-| `properties[].is_multi` | boolean | When `true` and `type` is `option`, the property accepts multiple selected values. Defaults to `false`. |
+| Field                         | Type    | Description                                                                                                                                                              |
+| ----------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `<TypeName>`                  | map     | Top-level key is the type name as referenced in work items and workflows.                                                                                                |
+| `description`                 | string  | Human-readable description of the type, displayed in the Plane UI.                                                                                                       |
+| `workflow`                    | string  | Name of the workflow from `schema/workflows.yaml` that governs state transitions for this type.                                                                          |
+| `is_epic`                     | boolean | When `true`, work items of this type can act as parents for other work items, enabling hierarchy. Defaults to `false`. Requires `epics: true` in `schema/features.yaml`. |
+| `logo_props.icon`             | string  | Name of the icon displayed for this type in the Plane UI.                                                                                                                |
+| `logo_props.background_color` | string  | Hex colour string for the icon background (e.g. `#6366f1`).                                                                                                              |
+| `properties`                  | list    | List of custom property definitions attached to this type.                                                                                                               |
+| `properties[].name`           | string  | Property name as displayed in the Plane UI and as the key in work item `properties` maps.                                                                                |
+| `properties[].type`           | string  | Data type of the property. See property type table below.                                                                                                                |
+| `properties[].required`       | boolean | When `true`, the property must have a value before a work item of this type can be marked as done.                                                                       |
+| `properties[].options`        | list    | List of option strings. Required when `type` is `option`.                                                                                                                |
+| `properties[].is_multi`       | boolean | When `true` and `type` is `option`, the property accepts multiple selected values. Defaults to `false`.                                                                  |
 
 **Property types:**
 
-| Type | Description | Notes |
-|---|---|---|
-| `text` | Single or multi-line text input. | Alias: `string`. |
-| `number` | Integer numeric value. | |
-| `decimal` | Floating-point numeric value. | |
-| `date` | Calendar date in `YYYY-MM-DD` format. | |
-| `datetime` | Date and time in ISO 8601 format. | |
-| `option` | Dropdown selector, single or multi-select. | Alias: `enum`. Requires `options` list. Add `is_multi: true` for multi-select. |
-| `boolean` | True/false checkbox. | |
-| `url` | URL string with validation. | |
-| `email` | Email address string with validation. | |
-| `member_picker` | Reference to one or more Plane workspace members. | |
-| `relation` | Reference to another work item or user. | Set `relation_type: user` or `relation_type: issue`. |
-| `release_picker` | Reference to a Plane release tag. | Populated on pull; push is blocked by the Plane API. Read-only in practice. |
-| `file` | File attachment reference. | |
-| `formula` | Computed value derived from other fields. | Push not yet supported. |
+| Type             | Description                                       | Notes                                                                          |
+| ---------------- | ------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `text`           | Single or multi-line text input.                  | Alias: `string`.                                                               |
+| `number`         | Integer numeric value.                            |                                                                                |
+| `decimal`        | Floating-point numeric value.                     |                                                                                |
+| `date`           | Calendar date in `YYYY-MM-DD` format.             |                                                                                |
+| `datetime`       | Date and time in ISO 8601 format.                 |                                                                                |
+| `option`         | Dropdown selector, single or multi-select.        | Alias: `enum`. Requires `options` list. Add `is_multi: true` for multi-select. |
+| `boolean`        | True/false checkbox.                              |                                                                                |
+| `url`            | URL string with validation.                       |                                                                                |
+| `email`          | Email address string with validation.             |                                                                                |
+| `member_picker`  | Reference to one or more Plane workspace members. |                                                                                |
+| `relation`       | Reference to another work item or user.           | Set `relation_type: user` or `relation_type: issue`.                           |
+| `release_picker` | Reference to a Plane release tag.                 | Populated on pull; push is blocked by the Plane API. Read-only in practice.    |
+| `file`           | File attachment reference.                        |                                                                                |
+| `formula`        | Computed value derived from other fields.         | Push not yet supported.                                                        |
 
 ```yaml
 work_item_types:
@@ -1138,13 +1140,13 @@ work_item_types:
 
 Defines the states available in the project. Each key is the state name as referenced in work items and workflows. States are grouped into one of five standard Plane groups that determine how Plane treats them in reporting and cycle calculations.
 
-| Field | Type | Description |
-|---|---|---|
-| `<StateName>` | map | Top-level key is the state name, referenced in `work/workitems.yaml` and `schema/workflows.yaml`. |
-| `group` | string | Functional category of the state. One of: `backlog`, `unstarted`, `started`, `completed`, `cancelled`. Determines how Plane aggregates and reports on work items in this state. |
-| `color` | string | Hex colour string used to represent this state in the Plane UI (e.g. `#22c55e`). |
-| `allow_issue_creation` | boolean | When `true`, new work items can be created directly in this state. Defaults to `true`. |
-| `is_default` | boolean | When `true`, this state is assigned to new work items that do not specify a state. Only one state per project should have `is_default: true`. |
+| Field                  | Type    | Description                                                                                                                                                                     |
+| ---------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<StateName>`          | map     | Top-level key is the state name, referenced in `work/workitems.yaml` and `schema/workflows.yaml`.                                                                               |
+| `group`                | string  | Functional category of the state. One of: `backlog`, `unstarted`, `started`, `completed`, `cancelled`. Determines how Plane aggregates and reports on work items in this state. |
+| `color`                | string  | Hex colour string used to represent this state in the Plane UI (e.g. `#22c55e`).                                                                                                |
+| `allow_issue_creation` | boolean | When `true`, new work items can be created directly in this state. Defaults to `true`.                                                                                          |
+| `is_default`           | boolean | When `true`, this state is assigned to new work items that do not specify a state. Only one state per project should have `is_default: true`.                                   |
 
 ```yaml
 states:
@@ -1173,18 +1175,18 @@ states:
 
 Defines the workflows available in the project. Each workflow associates a set of states with a set of work item types and optionally restricts which state transitions are permitted. When no transitions are defined, any state change is allowed.
 
-| Field | Type | Description |
-|---|---|---|
-| `<WorkflowName>` | map | Top-level key is the workflow name, referenced from `schema/types.yaml` and `plane.yaml`. |
-| `description` | string | Human-readable description of the workflow. |
-| `is_active` | boolean | When `false`, the workflow is defined but not enforced by Plane. |
-| `work_item_types` | list | Names of work item types from `schema/types.yaml` that this workflow governs. |
-| `states` | list | Names of states from `schema/states.yaml` that are valid within this workflow. |
-| `transitions` | map | Optional. Defines which state transitions are permitted. Keys are source state names; values are lists of allowed target transitions. When absent, all transitions between the workflow's states are permitted. |
-| `transitions.<State>[].to` | string | Name of the target state for this transition. Must be in the workflow's `states` list. |
-| `transitions.<State>[].type` | string | `transition` for a direct state change. `approval` for a change that requires approval before completing. |
-| `transitions.<State>[].required_approvals` | integer | For `approval` type only. Number of approvers required. `null` means all listed approvers must approve. |
-| `transitions.<State>[].approvers` | list | For `approval` type only. Email addresses of Plane members who can approve the transition. |
+| Field                                      | Type    | Description                                                                                                                                                                                                     |
+| ------------------------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<WorkflowName>`                           | map     | Top-level key is the workflow name, referenced from `schema/types.yaml` and `plane.yaml`.                                                                                                                       |
+| `description`                              | string  | Human-readable description of the workflow.                                                                                                                                                                     |
+| `is_active`                                | boolean | When `false`, the workflow is defined but not enforced by Plane.                                                                                                                                                |
+| `work_item_types`                          | list    | Names of work item types from `schema/types.yaml` that this workflow governs.                                                                                                                                   |
+| `states`                                   | list    | Names of states from `schema/states.yaml` that are valid within this workflow.                                                                                                                                  |
+| `transitions`                              | map     | Optional. Defines which state transitions are permitted. Keys are source state names; values are lists of allowed target transitions. When absent, all transitions between the workflow's states are permitted. |
+| `transitions.<State>[].to`                 | string  | Name of the target state for this transition. Must be in the workflow's `states` list.                                                                                                                          |
+| `transitions.<State>[].type`               | string  | `transition` for a direct state change. `approval` for a change that requires approval before completing.                                                                                                       |
+| `transitions.<State>[].required_approvals` | integer | For `approval` type only. Number of approvers required. `null` means all listed approvers must approve.                                                                                                         |
+| `transitions.<State>[].approvers`          | list    | For `approval` type only. Email addresses of Plane members who can approve the transition.                                                                                                                      |
 
 ```yaml
 workflows:
@@ -1219,11 +1221,11 @@ workflows:
 
 Defines the labels available in the project. Labels are flat - no nesting. Each entry in the list defines one label.
 
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | Label name as referenced in work item `labels` lists. |
-| `color` | string | Hex colour string used to render the label chip in the Plane UI. |
-| `id` | string | Remote UUID of the label. Populated automatically after the first push. Do not set manually. |
+| Field   | Type   | Description                                                                                  |
+| ------- | ------ | -------------------------------------------------------------------------------------------- |
+| `name`  | string | Label name as referenced in work item `labels` lists.                                        |
+| `color` | string | Hex colour string used to render the label chip in the Plane UI.                             |
+| `id`    | string | Remote UUID of the label. Populated automatically after the first push. Do not set manually. |
 
 ```yaml
 labels:
@@ -1241,18 +1243,18 @@ labels:
 
 Controls which Plane features are enabled for the project. Disabling a feature hides it from the Plane UI and prevents Plane Compose from pushing or pulling data for that section.
 
-| Field | Type | Description |
-|---|---|---|
-| `cycles` | boolean | Enables time-boxed sprint cycles. When `false`, `work/cycles.yaml` is ignored on push and pull. |
-| `modules` | boolean | Enables modules for grouping work by feature area. When `false`, `work/modules.yaml` is ignored. |
-| `pages` | boolean | Enables wiki-style pages within the project. |
-| `views` | boolean | Enables saved filtered views. |
-| `intakes` | boolean | Enables a public intake form for submitting work items from outside the workspace. |
-| `epics` | boolean | Enables work item hierarchy. Requires at least one type with `is_epic: true` in `schema/types.yaml`. |
-| `work_item_types` | boolean | Enables custom work item types. When `false`, Plane uses only the default type. |
-| `workflows` | boolean | Enables custom workflow enforcement. When `false`, state transitions are unrestricted. |
-| `parallel_cycles` | boolean | Allows multiple active cycles to run simultaneously. |
-| `project_updates` | boolean | Enables the project updates feed. |
+| Field             | Type    | Description                                                                                          |
+| ----------------- | ------- | ---------------------------------------------------------------------------------------------------- |
+| `cycles`          | boolean | Enables time-boxed sprint cycles. When `false`, `work/cycles.yaml` is ignored on push and pull.      |
+| `modules`         | boolean | Enables modules for grouping work by feature area. When `false`, `work/modules.yaml` is ignored.     |
+| `pages`           | boolean | Enables wiki-style pages within the project.                                                         |
+| `views`           | boolean | Enables saved filtered views.                                                                        |
+| `intakes`         | boolean | Enables a public intake form for submitting work items from outside the workspace.                   |
+| `epics`           | boolean | Enables work item hierarchy. Requires at least one type with `is_epic: true` in `schema/types.yaml`. |
+| `work_item_types` | boolean | Enables custom work item types. When `false`, Plane uses only the default type.                      |
+| `workflows`       | boolean | Enables custom workflow enforcement. When `false`, state transitions are unrestricted.               |
+| `parallel_cycles` | boolean | Allows multiple active cycles to run simultaneously.                                                 |
+| `project_updates` | boolean | Enables the project updates feed.                                                                    |
 
 ```yaml
 features:
@@ -1274,25 +1276,25 @@ features:
 
 Defines the work items to be synced to Plane. Contains a single top-level `workitems` key whose value is a list. Each list entry represents one work item.
 
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `id` | string | Recommended | Stable local identifier chosen by the author. Used as the tracking key in `.plane/state.json`. If omitted, Plane Compose derives the key from a hash of the item's content - title or description changes will then generate a new key and cause a duplicate to be created instead of an update. |
-| `title` | string | Yes | Work item title as displayed in Plane. |
-| `type` | string | No | Name of the work item type from `schema/types.yaml`. Defaults to `defaults.type` in `plane.yaml`. |
-| `state` | string | No | Name of the state from `schema/states.yaml`. Defaults to the state with `is_default: true`. |
-| `priority` | string | No | Priority level. One of: `urgent`, `high`, `medium`, `low`, `none`. Defaults to `none`. |
-| `labels` | list | No | List of label names from `schema/labels.yaml`. |
-| `assignees` | list | No | List of email addresses of Plane workspace members to assign to this work item. |
-| `watchers` | list | No | List of email addresses of Plane workspace members who receive notifications for this work item. |
-| `start_date` | string | No | Planned start date in `YYYY-MM-DD` format. |
-| `due_date` | string | No | Planned due date in `YYYY-MM-DD` format. |
-| `description` | string | No | Full description in Markdown format. |
-| `parent` | string | No | Sequence ID of the parent work item (e.g. `API-5`). Requires `epics: true` in `schema/features.yaml` and a type with `is_epic: true`. |
-| `blocked_by` | list | No | List of sequence IDs of work items that must be completed before this one can begin. |
-| `blocking` | list | No | List of sequence IDs of work items that cannot begin until this one is completed. |
-| `duplicate_of` | string | No | Sequence ID of the work item this one duplicates. |
-| `relates_to` | list | No | List of sequence IDs of work items related to this one without a specific dependency relationship. |
-| `properties` | map | No | Custom property values. Keys are property names as defined in the type's `properties` list in `schema/types.yaml`. Values must match the property type. |
+| Field          | Type   | Required    | Description                                                                                                                                                                                                                                                                                      |
+| -------------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`           | string | Recommended | Stable local identifier chosen by the author. Used as the tracking key in `.plane/state.json`. If omitted, Plane Compose derives the key from a hash of the item's content - title or description changes will then generate a new key and cause a duplicate to be created instead of an update. |
+| `title`        | string | Yes         | Work item title as displayed in Plane.                                                                                                                                                                                                                                                           |
+| `type`         | string | No          | Name of the work item type from `schema/types.yaml`. Defaults to `defaults.type` in `plane.yaml`.                                                                                                                                                                                                |
+| `state`        | string | No          | Name of the state from `schema/states.yaml`. Defaults to the state with `is_default: true`.                                                                                                                                                                                                      |
+| `priority`     | string | No          | Priority level. One of: `urgent`, `high`, `medium`, `low`, `none`. Defaults to `none`.                                                                                                                                                                                                           |
+| `labels`       | list   | No          | List of label names from `schema/labels.yaml`.                                                                                                                                                                                                                                                   |
+| `assignees`    | list   | No          | List of email addresses of Plane workspace members to assign to this work item.                                                                                                                                                                                                                  |
+| `watchers`     | list   | No          | List of email addresses of Plane workspace members who receive notifications for this work item.                                                                                                                                                                                                 |
+| `start_date`   | string | No          | Planned start date in `YYYY-MM-DD` format.                                                                                                                                                                                                                                                       |
+| `due_date`     | string | No          | Planned due date in `YYYY-MM-DD` format.                                                                                                                                                                                                                                                         |
+| `description`  | string | No          | Full description in Markdown format.                                                                                                                                                                                                                                                             |
+| `parent`       | string | No          | Sequence ID of the parent work item (e.g. `API-5`). Requires `epics: true` in `schema/features.yaml` and a type with `is_epic: true`.                                                                                                                                                            |
+| `blocked_by`   | list   | No          | List of sequence IDs of work items that must be completed before this one can begin.                                                                                                                                                                                                             |
+| `blocking`     | list   | No          | List of sequence IDs of work items that cannot begin until this one is completed.                                                                                                                                                                                                                |
+| `duplicate_of` | string | No          | Sequence ID of the work item this one duplicates.                                                                                                                                                                                                                                                |
+| `relates_to`   | list   | No          | List of sequence IDs of work items related to this one without a specific dependency relationship.                                                                                                                                                                                               |
+| `properties`   | map    | No          | Custom property values. Keys are property names as defined in the type's `properties` list in `schema/types.yaml`. Values must match the property type.                                                                                                                                          |
 
 ```yaml
 workitems:
@@ -1326,13 +1328,13 @@ workitems:
 
 Defines time-boxed sprint cycles. The `status` field is computed by Plane based on dates relative to the current time and is read-only - do not set it manually. The `id` field is populated automatically after the first push.
 
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | Cycle name as displayed in Plane. Used as the tracking key in state. |
-| `description` | string | Optional description of the cycle's goal or scope. |
-| `start_date` | string | Cycle start date in `YYYY-MM-DD` format. |
-| `end_date` | string | Cycle end date in `YYYY-MM-DD` format. |
-| `id` | string | Remote UUID of the cycle. Populated automatically after push. Do not set manually. |
+| Field         | Type   | Description                                                                        |
+| ------------- | ------ | ---------------------------------------------------------------------------------- |
+| `name`        | string | Cycle name as displayed in Plane. Used as the tracking key in state.               |
+| `description` | string | Optional description of the cycle's goal or scope.                                 |
+| `start_date`  | string | Cycle start date in `YYYY-MM-DD` format.                                           |
+| `end_date`    | string | Cycle end date in `YYYY-MM-DD` format.                                             |
+| `id`          | string | Remote UUID of the cycle. Populated automatically after push. Do not set manually. |
 
 ```yaml
 cycles:
@@ -1349,13 +1351,13 @@ cycles:
 
 Defines modules that group work by feature or initiative. The `status` field is computed by Plane and is read-only. The `id` field is populated automatically after the first push.
 
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | Module name as displayed in Plane. Used as the tracking key in state. |
-| `description` | string | Optional description of the module's scope. |
-| `start_date` | string | Module start date in `YYYY-MM-DD` format. |
-| `end_date` | string | Module end date in `YYYY-MM-DD` format. |
-| `id` | string | Remote UUID of the module. Populated automatically after push. Do not set manually. |
+| Field         | Type   | Description                                                                         |
+| ------------- | ------ | ----------------------------------------------------------------------------------- |
+| `name`        | string | Module name as displayed in Plane. Used as the tracking key in state.               |
+| `description` | string | Optional description of the module's scope.                                         |
+| `start_date`  | string | Module start date in `YYYY-MM-DD` format.                                           |
+| `end_date`    | string | Module end date in `YYYY-MM-DD` format.                                             |
+| `id`          | string | Remote UUID of the module. Populated automatically after push. Do not set manually. |
 
 ```yaml
 modules:
@@ -1372,12 +1374,12 @@ modules:
 
 Defines milestones that mark significant points in the project timeline. The `id` field is populated automatically after the first push.
 
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | Milestone name as displayed in Plane. Used as the tracking key in state. Maps to the `title` field in the Plane API. |
-| `target_date` | string | Target completion date in `YYYY-MM-DD` format. |
-| `work_items` | list | List of work item sequence IDs (e.g. `API-1`) to associate with this milestone. |
-| `id` | string | Remote UUID of the milestone. Populated automatically after push. Do not set manually. |
+| Field         | Type   | Description                                                                                                          |
+| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| `name`        | string | Milestone name as displayed in Plane. Used as the tracking key in state. Maps to the `title` field in the Plane API. |
+| `target_date` | string | Target completion date in `YYYY-MM-DD` format.                                                                       |
+| `work_items`  | list   | List of work item sequence IDs (e.g. `API-1`) to associate with this milestone.                                      |
+| `id`          | string | Remote UUID of the milestone. Populated automatically after push. Do not set manually.                               |
 
 ```yaml
 milestones:
@@ -1465,9 +1467,9 @@ This design also separates identity from configuration. `plane.yaml` contains th
 
 Plane Compose separates project content into two categories with different natures and different lifecycles.
 
-Schema files define *what is possible*: the types of work items that exist, the states they can move through, the labels available, the features enabled. Schema changes infrequently, is owned by leads or architects, and has consequences across the entire project.
+Schema files define _what is possible_: the types of work items that exist, the states they can move through, the labels available, the features enabled. Schema changes infrequently, is owned by leads or architects, and has consequences across the entire project.
 
-Work files define *what is happening*: the actual items, sprints, modules, and milestones. Work changes constantly - every day, by everyone on the team.
+Work files define _what is happening_: the actual items, sprints, modules, and milestones. Work changes constantly - every day, by everyone on the team.
 
 This distinction shapes how you use Plane Compose. Schema is the part of the project you want to version-control rigorously, review carefully, and propagate from a template. Work is the part you might generate programmatically, import from another source, or let the team manage through the Plane UI. Some teams commit both to Git. Others commit only schema and treat work items as data managed through Plane directly. Both are valid.
 
