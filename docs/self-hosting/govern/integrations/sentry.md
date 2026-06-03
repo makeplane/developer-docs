@@ -151,7 +151,7 @@ Paste this schema into the **Schema** field:
             "default": "issue.description"
           },
           {
-            "uri": "/api/sentry/projects",
+            "uri": "/silo/api/sentry/projects",
             "name": "project_id",
             "type": "select",
             "async": false,
