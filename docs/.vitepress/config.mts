@@ -386,6 +386,7 @@ export default withMermaid(
               { text: "Upgrade Community to Commercial Edition", link: "/self-hosting/upgrade-from-community" },
               { text: "Upgrade Community to Airgapped Edition", link: "/self-hosting/manage/community-to-airgapped" },
               { text: "View Logs", link: "/self-hosting/manage/view-logs" },
+              { text: "Health checks", link: "/self-hosting/manage/health-checks" },
               { text: "Migrate Plane", link: "/self-hosting/manage/migrate-plane" },
               { text: "Prime CLI", link: "/self-hosting/manage/prime-cli" },
               { text: "Manage users", link: "/self-hosting/manage/manage-instance-users" },
