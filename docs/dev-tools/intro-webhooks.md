@@ -14,21 +14,22 @@ Webhooks in Plane work at the workspace level. A single webhook can subscribe to
 
 The current webhook system is v2. V2 payloads use dot-notation event names (e.g., `workitem.created`) and include structured fields for deduplication, diffing, and filtering that were not available in the original version. If you have webhooks created before v2, they appear in the list with a **(deprecated)** tag. They still deliver but do not receive any v2 fields. Recreate them as new webhooks to get the full v2 feature set.
 
+:::warning Migrate your v1 webhooks to v2
+V1 webhooks are deprecated. They continue to deliver but will not receive v2 payload features — including `delivery_id` and `event_id` for deduplication, `previous_attributes` for diffs on updated events, and dot-notation event names. There is no in-place upgrade. To move to v2, recreate each v1 webhook as a new webhook and update your server to handle the v2 payload structure.
+
+**To migrate a v1 webhook:**
+
+1. Open the v1 webhook (marked **deprecated**) and note its URL and event subscriptions.
+2. Create a new webhook with the same URL and event subscriptions. See [How to create a webhook](#how-to-create-a-webhook).
+3. Save the new secret key from the CSV download — your server will need it to verify v2 requests.
+4. Update your server to expect the v2 payload structure. See [Payload structure](#payload-structure) for the full field reference.
+5. Test that deliveries are arriving and your server is handling them correctly.
+6. Delete the original v1 webhook once you're confident the new one is working.
+:::
+
 ## Creating a webhook
 
-### What you're configuring
-
-When you create a webhook, you're telling Plane two things: where to send events, and which events to send.
-
-**Webhook title** is a label for your own reference - it appears in the webhook list and helps you tell multiple webhooks apart.
-
-**Payload URL** is the endpoint that Plane will POST to. It must be a publicly reachable `http://` or `https://` address. Local addresses (localhost, private IPs) are not accepted.
-
-**Events** control what triggers this webhook. The form groups events by type - Projects, Cycles, Modules, Work items, and so on. Check the specific actions you care about. You can subscribe to as many or as few as you need.
-
-**Advanced configurations** lets you add a filter so the webhook only fires for work items that match specific conditions - for example, high-priority bugs in a particular project. See [Filtering work item events](#filtering-work-item-events) below.
-
-**Secret key** is generated automatically when you save the webhook. Plane downloads it as a CSV file the moment you click **Create webhook** and then returns you to the webhook list. It is not displayed on screen - the download is the only time you receive it automatically. Save the file. You need the key to verify incoming requests.
+![Plane architecture](/images/webhooks/create-webhook.webp#hero)
 
 ### How to create a webhook
 
@@ -42,6 +43,20 @@ When you create a webhook, you're telling Plane two things: where to send events
 Plane downloads the secret key as a CSV file to your computer and returns you to the webhook list. The webhook is active immediately.
 
 If you lose the CSV, you can re-generate the secret key from the edit form - but the old key stops working the moment you do.
+
+### What you're configuring
+
+When you create a webhook, you're telling Plane two things: where to send events, and which events to send.
+
+- **Webhook title** is a label for your own reference - it appears in the webhook list and helps you tell multiple webhooks apart.
+
+- **Payload URL** is the endpoint that Plane will POST to. It must be a publicly reachable `http://` or `https://` address. Local addresses (localhost, private IPs) are not accepted.
+
+- **Events** control what triggers this webhook. The form groups events by type - Projects, Cycles, Modules, Work items, and so on. Check the specific actions you care about. You can subscribe to as many or as few as you need.
+
+- **Advanced configurations** lets you add a filter so the webhook only fires for work items that match specific conditions - for example, high-priority bugs in a particular project. See [Filtering work item events](#filtering-work-item-events) below.
+
+- **Secret key** is generated automatically when you save the webhook. Plane downloads it as a CSV file the moment you click **Create webhook** and then returns you to the webhook list. It is not displayed on screen - the download is the only time you receive it automatically. Save the file. You need the key to verify incoming requests.
 
 ## Filtering work item events
 
@@ -66,7 +81,7 @@ Switching between modes is lossless - your filter is not lost when you switch.
 
 1. Create or edit a webhook.
 2. Check at least one **Work items** event.
-3. Expand **Advanced configurations**.
+3. Scroll down to the **Work item v2 filters** section.
 4. Use the filter builder to define your conditions in Basic mode, or switch to PQL mode to type an expression directly.
 5. Save the webhook.
 
@@ -92,43 +107,6 @@ state_group = "started"                     State group match
 assignee_id = "<user-uuid>"                 Specific assignee
 project_id = "<project-uuid>"               Specific project
 ```
-
-## Securing requests
-
-### Why Plane signs every request
-
-Any server on the internet can send a POST request to your endpoint. Without a way to verify the source, someone could send fake webhook payloads to your system and trigger whatever logic you've built around them.
-
-Plane solves this by signing every request with HMAC-SHA256 using your secret key. The signature is attached as an `X-Plane-Signature` header. Because only Plane and you know the secret, a valid signature proves the request came from Plane and was not modified in transit.
-
-Skipping verification means your endpoint will process any request that arrives - forged or not.
-
-### How to verify a webhook payload
-
-On your server, compute the expected signature from the **raw request body bytes** and compare it to the value in `X-Plane-Signature`. Use a constant-time comparison to prevent timing attacks.
-
-```python
-import hashlib
-import hmac
-
-def verify_webhook(request_body_bytes: bytes, secret: str, signature_header: str) -> bool:
-    expected = hmac.new(
-        secret.encode("utf-8"),
-        request_body_bytes,
-        hashlib.sha256,
-    ).hexdigest()
-    return hmac.compare_digest(expected, signature_header)
-```
-
-Use the raw bytes from the incoming request - not a parsed or re-serialized version. JSON re-serialization can change key ordering, spacing, or escaping, which will produce a different signature and cause verification to fail. Reject any request where the signature does not match before running any other logic.
-
-### Signature header reference
-
-| Header              | Value                                                                          |
-| ------------------- | ------------------------------------------------------------------------------ |
-| `X-Plane-Signature` | HMAC-SHA256 hex digest of the raw request body, keyed with your webhook secret |
-
-The secret key is formatted as `plane_wh_` followed by a random string. Plane masks it in the UI. To view the full key, open the edit form for the webhook and use the show/hide toggle in the **Secret key** section.
 
 ## Managing webhooks
 
@@ -174,6 +152,43 @@ Re-generate if your secret key is compromised. The old key is invalidated the mo
 3. In the **Secret key** section, click **Re-generate key**.
 
 Plane downloads the new key as a CSV.
+
+## Securing requests
+
+### Why Plane signs every request
+
+Any server on the internet can send a POST request to your endpoint. Without a way to verify the source, someone could send fake webhook payloads to your system and trigger whatever logic you've built around them.
+
+Plane solves this by signing every request with HMAC-SHA256 using your secret key. The signature is attached as an `X-Plane-Signature` header. Because only Plane and you know the secret, a valid signature proves the request came from Plane and was not modified in transit.
+
+Skipping verification means your endpoint will process any request that arrives - forged or not.
+
+### How to verify a webhook payload
+
+On your server, compute the expected signature from the **raw request body bytes** and compare it to the value in `X-Plane-Signature`. Use a constant-time comparison to prevent timing attacks.
+
+```python
+import hashlib
+import hmac
+
+def verify_webhook(request_body_bytes: bytes, secret: str, signature_header: str) -> bool:
+    expected = hmac.new(
+        secret.encode("utf-8"),
+        request_body_bytes,
+        hashlib.sha256,
+    ).hexdigest()
+    return hmac.compare_digest(expected, signature_header)
+```
+
+Use the raw bytes from the incoming request - not a parsed or re-serialized version. JSON re-serialization can change key ordering, spacing, or escaping, which will produce a different signature and cause verification to fail. Reject any request where the signature does not match before running any other logic.
+
+### Signature header reference
+
+| Header              | Value                                                                          |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `X-Plane-Signature` | HMAC-SHA256 hex digest of the raw request body, keyed with your webhook secret |
+
+The secret key is formatted as `plane_wh_` followed by a random string. Plane masks it in the UI. To view the full key, open the edit form for the webhook and use the show/hide toggle in the **Secret key** section.
 
 ## Delivery and monitoring
 
@@ -359,5 +374,53 @@ All v2 payloads share this top-level structure:
     "created_by_id": "88fc36c8-73b0-4547-81c7-96b70f61835e"
   },
   "previous_attributes": {}
+}
+```
+
+**workitem.link.updated**
+
+```json
+{
+   "version":"v2",
+   "delivery_id":"2a0d0510-9052-446e-a1c7-a704bbd68cba",
+   "event_id":"9d508cd9-36c2-44a5-928d-7ee2f2a3b8a8",
+   "entity_id":"775c5716-5302-4617-bb9f-2cd843911268",
+   "entity_type":"issue",
+   "event":"WebhookScope.ScopeChoices.WORK_ITEM_UPDATED",
+   "webhook_id":"8944ed18-1331-4eae-b9bb-7c40864b8abd",
+   "workspace_id":"b54ecb0d-e3eb-4986-b238-f83fd8665e65",
+   "data":{
+      "id":"775c5716-5302-4617-bb9f-2cd843911268",
+      "name":"webhook test 3",
+      "point":"None",
+      "type_id":"None",
+      "is_draft":false,
+      "priority":"none",
+      "state_id":"067b88e5-304b-4221-ba09-94340dcc36e5",
+      "label_ids":[],
+      "parent_id":"None",
+      "created_at":"2026-03-31T11:44:41.249292+00:00",
+      "deleted_at":"None",
+      "project_id":"59e3be42-87ec-4950-99a3-ae639cf2b089",
+      "sort_order":75535,
+      "start_date":"None",
+      "updated_at":"2026-03-31T11:44:41.249304+00:00",
+      "archived_at":"None",
+      "external_id":"None",
+      "sequence_id":3,
+      "target_date":"None",
+      "assignee_ids":[ ],
+      "completed_at":"None",
+      "workspace_id":"b54ecb0d-e3eb-4986-b238-f83fd8665e65",
+      "created_by_id":"754009ab-3fb5-424e-909a-b46e9c9d0c4f",
+      "updated_by_id":"None",
+      "external_source":"None",
+      "description_json":{},
+      "last_activity_at":"2026-03-31T11:44:41.346305+00:00",
+      "estimate_point_id":"None"
+   },
+   "previous_attributes":{
+      "last_activity_at":"2026-03-31 11:44:41.242868+00"
+   }
 }
 ```
