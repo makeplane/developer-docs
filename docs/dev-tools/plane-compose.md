@@ -8,8 +8,6 @@ keywords: plane compose, plane yaml, infrastructure as code, plane cli, plane pr
 
 Plane Compose is a command-line tool that lets you define and manage Plane projects using YAML configuration files. Think of it as "project as code", you write your project structure, schema, and work items in files, version control them with Git, and sync them with Plane.
 
-You can track version updates [here](https://pypi.org/project/plane-compose/).
-
 ## Prerequisites
 
 - Python 3.10 or later. Verify with `python3 --version`.
@@ -85,7 +83,8 @@ This creates the project directory with the given key and generates the full fil
 To start from a template instead of the default schema:
 
 ```bash
-plane init <project-key> --workspace <workspace-slug> --template default
+plane init <project-key> --workspace <workspace-slug> --template ./templates/standard
+
 # or a Git URL:
 plane init <project-key> --workspace <workspace-slug> \
   --template https://github.com/<org>/<repo>/templates/<template-name>
@@ -230,18 +229,18 @@ This creates the project in Plane if it does not exist yet and pushes your types
 Use this when the project already exists in Plane and you want to manage it locally.
 
 ```bash
-plane clone <workspace-slug>/<project-key>
-```
-
-Or using the project UUID:
-
-```bash
 plane clone <project-uuid> --workspace <workspace-slug>
 ```
+
+:::info
+Use `--connection <connection-name>` if the workspace slug is common across multiple connections.
+:::
 
 This downloads `plane.yaml`, all schema files, and all work files into a new local directory. The schema files will reflect what is currently in Plane, you can edit them and push changes back.
 
 ## Push changes to Plane
+
+`plane push` pushes everything - schema and work files - in the correct order. `plane schema push` pushes schema only and is equivalent to `plane push --schema-only`. Use `plane schema push` when you are setting up a project for the first time and have no work items yet, or when you want to push schema changes without touching work items. Use `plane push` for all other cases.
 
 From inside the project directory:
 
@@ -352,7 +351,7 @@ Exit code values: `0` - no changes needed, `1` - error, `2` - changes were appli
 Clone workspace-level configuration to a local directory:
 
 ```bash
-plane ws clone <workspace-slug>
+plane ws clone <workspace-slug> -c <connection-name>
 ```
 
 After making changes locally, push them to Plane:
