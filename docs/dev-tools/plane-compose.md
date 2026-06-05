@@ -72,7 +72,9 @@ Remove a connection:
 plane auth logout <connection-name>
 ```
 
-## Start a new project
+## Project operations
+
+### Start a new project
 
 ```bash
 plane init <project-key> --workspace <workspace-slug>
@@ -101,7 +103,7 @@ plane schema push
 
 `plane.yaml` is updated with the project UUID after this runs.
 
-## Define your project schema
+### Define your project schema
 
 After `plane init`, the `schema/` directory contains default files. Edit them to match your project's actual structure before pushing.
 
@@ -224,7 +226,7 @@ plane schema push
 
 This creates the project in Plane if it does not exist yet and pushes your types, states, labels, and workflows. `plane.yaml` is updated with the project UUID after this runs.
 
-## Clone an existing project
+### Clone an existing project
 
 Use this when the project already exists in Plane and you want to manage it locally.
 
@@ -238,7 +240,7 @@ Use `--connection <connection-name>` if the workspace slug is common across mult
 
 This downloads `plane.yaml`, all schema files, and all work files into a new local directory. The schema files will reflect what is currently in Plane, you can edit them and push changes back.
 
-## Push changes to Plane
+### Push changes to Plane
 
 `plane push` pushes everything - schema and work files - in the correct order. `plane schema push` pushes schema only and is equivalent to `plane push --schema-only`. Use `plane schema push` when you are setting up a project for the first time and have no work items yet, or when you want to push schema changes without touching work items. Use `plane push` for all other cases.
 
@@ -266,7 +268,7 @@ If you have only changed work items:
 plane push --work-only
 ```
 
-## Pull remote changes from Plane
+### Pull remote changes from Plane
 
 Use this when changes have been made in Plane (via the UI or by other users) and you want to bring them into your local files.
 
@@ -286,7 +288,7 @@ To overwrite local files entirely with what is in Plane:
 plane pull --force
 ```
 
-## Import schema changes made in Plane
+### Import schema changes made in Plane
 
 Use this when someone has modified work item types, states, labels, or workflows directly in the Plane UI and your local schema files are now out of sync.
 
@@ -308,7 +310,7 @@ To replace your local schema files entirely with whatever is in Plane:
 plane schema import --force
 ```
 
-## Upgrade a project to a new template version
+### Upgrade a project to a new template version
 
 Use this when your team has updated the standard template and you want to bring an existing project in line with it.
 
@@ -326,7 +328,7 @@ plane upgrade --template https://github.com/<org>/<repo>/templates/<template-nam
 
 The template merges over your local schema. Items unique to your project are preserved; conflicts are resolved in favour of the template.
 
-## Run Plane Compose in CI/CD
+### Run Plane Compose in CI/CD
 
 Authenticate non-interactively using flags:
 
@@ -346,7 +348,9 @@ plane push --force --no-conflict-check --exit-code
 
 Exit code values: `0` - no changes needed, `1` - error, `2` - changes were applied.
 
-## Manage workspace configuration
+## Workspace operations
+
+### Manage workspace configuration
 
 Clone workspace-level configuration to a local directory:
 
@@ -372,7 +376,7 @@ To pull and preserve local additions:
 plane ws pull --merge
 ```
 
-## Work with multiple projects
+### Work with multiple projects
 
 From a directory containing multiple project subdirectories:
 
