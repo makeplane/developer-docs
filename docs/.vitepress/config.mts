@@ -973,7 +973,10 @@ export default withMermaid(
                 text: "MCP Server",
                 link: "/dev-tools/mcp-server",
                 collapsed: false,
-                items: [{ text: "For Claude Code", link: "/dev-tools/mcp-server-claude-code" }],
+                items: [
+                  { text: "Tool Reference", link: "/dev-tools/mcp-server-tools" },
+                  { text: "Self-host", link: "/dev-tools/mcp-server-self-host" },
+                ],
               },
               { text: "Plane Compose", link: "/dev-tools/plane-compose" },
               { text: "OpenAPI Specification", link: "/dev-tools/openapi-specification" },
