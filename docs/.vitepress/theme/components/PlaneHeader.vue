@@ -25,9 +25,7 @@ const isSignInItem = (item: DefaultTheme.NavItem) =>
   "link" in item && typeof item.link === "string" && SIGN_IN_RE.test(item.link);
 
 const isPlaneDocsItem = (item: DefaultTheme.NavItem) =>
-  "link" in item &&
-  typeof item.link === "string" &&
-  (PLANE_DOCS_RE.test(item.link) || item.text === "Plane Docs");
+  "link" in item && typeof item.link === "string" && (PLANE_DOCS_RE.test(item.link) || item.text === "Plane Docs");
 
 const isNavButtonItem = (item: DefaultTheme.NavItem) => isSignInItem(item) || isPlaneDocsItem(item);
 
@@ -298,7 +296,7 @@ onUnmounted(() => {
         <div class="w-full pl-5 pr-5 py-5 lg:py-7 flex items-center justify-between">
           <a href="/" class="flex items-center gap-2">
             <img class="plane-header__logo plane-header__logo--light-bg" :src="logoDark" :alt="logoAlt" />
-          <img class="plane-header__logo plane-header__logo--dark-bg" :src="logoLight" :alt="logoAlt" />
+            <img class="plane-header__logo plane-header__logo--dark-bg" :src="logoLight" :alt="logoAlt" />
             <span class="text-base font-medium text-primary dark:text-white">Plane Developers</span>
           </a>
           <div class="flex items-center gap-2">

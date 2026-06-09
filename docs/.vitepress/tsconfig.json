@@ -29,15 +29,9 @@
       "@voidzero-dev/vitepress-theme/src/types/theme-context": [
         "../../node_modules/@voidzero-dev/vitepress-theme/src/types/theme-context.ts"
       ],
-      "@vp-default/*": [
-        "../../node_modules/@voidzero-dev/vitepress-theme/src/components/vitepress-default/*"
-      ],
-      "@vp-composables/*": [
-        "../../node_modules/@voidzero-dev/vitepress-theme/src/composables/vitepress-default/*"
-      ],
-      "@vp-support/*": [
-        "../../node_modules/@voidzero-dev/vitepress-theme/src/support/vitepress-default/*"
-      ],
+      "@vp-default/*": ["../../node_modules/@voidzero-dev/vitepress-theme/src/components/vitepress-default/*"],
+      "@vp-composables/*": ["../../node_modules/@voidzero-dev/vitepress-theme/src/composables/vitepress-default/*"],
+      "@vp-support/*": ["../../node_modules/@voidzero-dev/vitepress-theme/src/support/vitepress-default/*"],
       "@components/*": ["../../node_modules/@voidzero-dev/vitepress-theme/src/components/*"]
     }
   },

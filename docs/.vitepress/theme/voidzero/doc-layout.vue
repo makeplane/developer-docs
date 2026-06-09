@@ -1,32 +1,28 @@
 <script setup lang="ts">
-import { computed, provide, useSlots } from 'vue'
-import VPBackdrop from '@vp-default/VPBackdrop.vue'
-import VPContent from '@vp-default/VPContent.vue'
-import VPFooter from '@vp-default/VPFooter.vue'
-import VPLocalNav from '@vp-default/VPLocalNav.vue'
-import PlaneHeader from '../components/PlaneHeader.vue'
-import TopBanner from '@components/oss/TopBanner.vue'
-import VPSidebar from '@vp-default/VPSidebar.vue'
-import VPSkipLink from '@vp-default/VPSkipLink.vue'
-import { useData } from '@vp-composables/data'
-import { layoutInfoInjectionKey, registerWatchers, useLayout } from '@vp-composables/layout'
-import { useSidebarControl } from '@vp-composables/sidebar'
+import { computed, provide, useSlots } from "vue";
+import VPBackdrop from "@vp-default/VPBackdrop.vue";
+import VPContent from "@vp-default/VPContent.vue";
+import VPFooter from "@vp-default/VPFooter.vue";
+import VPLocalNav from "@vp-default/VPLocalNav.vue";
+import PlaneHeader from "../components/PlaneHeader.vue";
+import TopBanner from "@components/oss/TopBanner.vue";
+import VPSidebar from "@vp-default/VPSidebar.vue";
+import VPSkipLink from "@vp-default/VPSkipLink.vue";
+import { useData } from "@vp-composables/data";
+import { layoutInfoInjectionKey, registerWatchers, useLayout } from "@vp-composables/layout";
+import { useSidebarControl } from "@vp-composables/sidebar";
 
-const {
-  isOpen: isSidebarOpen,
-  open: openSidebar,
-  close: closeSidebar
-} = useSidebarControl()
+const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar } = useSidebarControl();
 
-registerWatchers({ closeSidebar })
+registerWatchers({ closeSidebar });
 
-const { frontmatter } = useData()
-const { hasSidebar } = useLayout()
+const { frontmatter } = useData();
+const { hasSidebar } = useLayout();
 
-const slots = useSlots()
-const heroImageSlotExists = computed(() => !!slots['home-hero-image'])
+const slots = useSlots();
+const heroImageSlotExists = computed(() => !!slots["home-hero-image"]);
 
-provide(layoutInfoInjectionKey, { heroImageSlotExists })
+provide(layoutInfoInjectionKey, { heroImageSlotExists });
 </script>
 
 <template>
@@ -152,7 +148,6 @@ provide(layoutInfoInjectionKey, { heroImageSlotExists })
   flex-direction: column;
   min-height: 100vh;
 }
-
 
 .content-wrapper {
   position: relative;

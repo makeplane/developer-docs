@@ -44,7 +44,13 @@ const hasCustomIcon = computed(() => props.icon && cardBrandIcons[props.icon]);
     <span v-if="linkText" class="card-cta">
       {{ linkText }}
       <svg class="card-cta__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path
+          d="M3 8h10M9 4l4 4-4 4"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
       </svg>
     </span>
   </component>
@@ -180,7 +186,9 @@ const hasCustomIcon = computed(() => props.icon && cardBrandIcons[props.icon]);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--vp-c-brand-1);
-  transition: color 0.2s ease, gap 0.2s ease;
+  transition:
+    color 0.2s ease,
+    gap 0.2s ease;
 }
 
 .card-cta__arrow {
