@@ -46,9 +46,6 @@ const { localeLinks, currentLang } = useLangs({ correspondingLink: true });
 const isForcedTheme = computed(() => !!frontmatter.value.theme);
 const { logoDark, logoLight, logoAlt } = inject(themeContextKey)!;
 
-/** logoDark = dark mark for light navbar; logoLight = light mark for dark navbar */
-const headerLogoSrc = computed(() => (isDark.value ? logoLight : logoDark));
-
 const isMarketingPage = computed(() => {
   const layout = frontmatter.value.layout;
   return layout === "home" || (layout && layout !== "doc" && layout !== "page");
@@ -204,7 +201,8 @@ onUnmounted(() => {
       <div class="plane-header__start">
         <a href="/" class="plane-header__brand">
           <slot name="nav-bar-title-before" />
-          <img class="plane-header__logo" :src="headerLogoSrc" :alt="logoAlt" />
+          <img class="plane-header__logo plane-header__logo--light-bg" :src="logoDark" :alt="logoAlt" />
+          <img class="plane-header__logo plane-header__logo--dark-bg" :src="logoLight" :alt="logoAlt" />
           <slot name="nav-bar-title-after" />
         </a>
 
@@ -299,7 +297,8 @@ onUnmounted(() => {
       <section class="wrapper animate-fade-in">
         <div class="w-full pl-5 pr-5 py-5 lg:py-7 flex items-center justify-between">
           <a href="/" class="flex items-center gap-2">
-            <img class="plane-header__logo" :src="headerLogoSrc" :alt="logoAlt" />
+            <img class="plane-header__logo plane-header__logo--light-bg" :src="logoDark" :alt="logoAlt" />
+          <img class="plane-header__logo plane-header__logo--dark-bg" :src="logoLight" :alt="logoAlt" />
             <span class="text-base font-medium text-primary dark:text-white">Plane Developers</span>
           </a>
           <div class="flex items-center gap-2">
@@ -556,6 +555,29 @@ onUnmounted(() => {
   max-width: none;
   flex-shrink: 0;
   object-fit: contain;
+}
+
+/* Swap logos via html.dark / data-theme — avoids isDark reactivity lag on toggle */
+.plane-header__logo--dark-bg {
+  display: none;
+}
+
+html.dark .plane-header__logo--light-bg,
+[data-theme="dark"] .plane-header__logo--light-bg {
+  display: none;
+}
+
+html.dark .plane-header__logo--dark-bg,
+[data-theme="dark"] .plane-header__logo--dark-bg {
+  display: block;
+}
+
+[data-theme="light"] .plane-header__logo--dark-bg {
+  display: none;
+}
+
+[data-theme="light"] .plane-header__logo--light-bg {
+  display: block;
 }
 
 .plane-header__mobile {
