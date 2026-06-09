@@ -160,15 +160,11 @@ provide(layoutInfoInjectionKey, { heroImageSlotExists })
   width: 100%;
 }
 
-.dark .content-wrapper {
-  border-color: var(--color-nickel);
-}
-
 @media (min-width: 768px) {
   .content-wrapper {
     max-width: calc(100vw - 2rem);
-    border-left: 1px solid var(--color-stroke);
-    border-right: 1px solid var(--color-stroke);
+    border-left: 1px solid var(--docs-divider);
+    border-right: 1px solid var(--docs-divider);
   }
 }
 

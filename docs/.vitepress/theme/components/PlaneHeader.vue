@@ -551,7 +551,7 @@ onUnmounted(() => {
 
 .plane-header__logo {
   display: block;
-  height: var(--plane-header-logo-height, 1.625rem);
+  height: var(--plane-header-logo-height, 1.6875rem);
   width: auto;
   max-width: none;
   flex-shrink: 0;
@@ -672,7 +672,7 @@ onUnmounted(() => {
 
   .plane-header__divider {
     width: 1px;
-    height: var(--plane-header-logo-height, 1.625rem);
+    height: var(--plane-header-logo-height, 1.6875rem);
     background: var(--plane-header-divider);
     flex-shrink: 0;
   }
@@ -702,7 +702,7 @@ onUnmounted(() => {
   }
 
   .plane-header__logo {
-    height: var(--plane-header-logo-height, 1.4375rem);
+    height: var(--plane-header-logo-height, 1.5rem);
   }
 
   .plane-header__title {

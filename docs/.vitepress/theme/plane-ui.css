@@ -7,7 +7,7 @@
   --vp-layout-top-height: 0;
   --plane-header-padding-y: 1.125rem;
   --plane-header-padding-x: 1.375rem;
-  --plane-header-logo-height: 1.625rem;
+  --plane-header-logo-height: 1.6875rem;
   --vp-nav-height: 84px;
 
   /* Navbar tokens (fallback outside .docs-layout) */
@@ -17,8 +17,9 @@
   --plane-header-muted: var(--vp-c-text-2, #6b7280);
   --plane-header-divider: var(--docs-divider, #ececec);
   --plane-header-search-bg: #ffffff;
-  --plane-header-search-border: var(--vp-c-border, #e5e7eb);
-  --plane-header-search-text: var(--vp-c-text-2, #6b7280);
+  --plane-header-search-border: #e7e7e7;
+  --plane-header-search-text: #867e8e;
+  --plane-header-search-keys-border: #e5e4e7;
 }
 
 html.dark,
@@ -30,9 +31,10 @@ html.dark .plane-header-shell,
   --plane-header-text: #ffffff;
   --plane-header-muted: var(--vp-c-text-2, #9ca3af);
   --plane-header-divider: var(--docs-divider, #2a2a2a);
-  --plane-header-search-bg: var(--vp-c-bg-mute, #252829);
-  --plane-header-search-border: var(--vp-c-border, #2a2a2a);
-  --plane-header-search-text: var(--vp-c-text-2, #9ca3af);
+  --plane-header-search-bg: #111111;
+  --plane-header-search-border: #323232;
+  --plane-header-search-text: #867e8e;
+  --plane-header-search-keys-border: #323232;
 }
 
 /* --- Fonts & body --- */
@@ -59,7 +61,7 @@ html.dark body {
   /* Plane header row — keep in sync with .plane-header padding + content */
   --plane-header-padding-y: 1.125rem;
   --plane-header-padding-x: 1.375rem;
-  --plane-header-logo-height: 1.625rem;
+  --plane-header-logo-height: 1.6875rem;
   --vp-nav-height: 84px;
 
   /* Navbar — Plane theme tokens (light) */
@@ -69,8 +71,9 @@ html.dark body {
   --plane-header-muted: var(--vp-c-text-2);
   --plane-header-divider: var(--docs-divider);
   --plane-header-search-bg: #ffffff;
-  --plane-header-search-border: var(--vp-c-border);
-  --plane-header-search-text: var(--vp-c-text-2);
+  --plane-header-search-border: #e7e7e7;
+  --plane-header-search-text: #867e8e;
+  --plane-header-search-keys-border: #e5e4e7;
 }
 
 html.dark .docs-layout,
@@ -82,9 +85,10 @@ html.dark .docs-layout .plane-header-shell,
   --plane-header-text: #ffffff;
   --plane-header-muted: var(--vp-c-text-2);
   --plane-header-divider: var(--docs-divider);
-  --plane-header-search-bg: var(--vp-c-bg-mute, #252829);
-  --plane-header-search-border: var(--vp-c-border);
-  --plane-header-search-text: var(--vp-c-text-2);
+  --plane-header-search-bg: #111111;
+  --plane-header-search-border: #323232;
+  --plane-header-search-text: #867e8e;
+  --plane-header-search-keys-border: #323232;
 }
 
 /* --- Doc prose --- */
@@ -166,12 +170,21 @@ html.dark .docs-layout .plane-header-shell,
   }
 }
 
-/* Content column borders */
-@media (min-width: 960px) {
-  .docs-layout .content-wrapper.has-sidebar {
-    border-left: 1px solid var(--docs-divider);
-    border-right: 1px solid var(--docs-divider);
+/* Unified layout borders & corner ticks */
+@media (min-width: 768px) {
+  .docs-layout .content-wrapper,
+  .docs-layout .wrapper {
+    border-left-color: var(--docs-divider);
+    border-right-color: var(--docs-divider);
   }
+}
+
+.docs-layout .tick-left::before {
+  border-left-color: var(--docs-divider);
+}
+
+.docs-layout .tick-right::after {
+  border-right-color: var(--docs-divider);
 }
 
 .docs-layout .VPSidebar {
@@ -263,15 +276,16 @@ html.dark .docs-layout .plane-header-shell,
   }
 
   .plane-header .DocSearch.DocSearch-Button,
-  .plane-header .VPNavBarSearchButton {
-    height: 39px;
+  .plane-header .VPNavBarSearchButton,
+  .plane-header .search-bar {
+    height: 36px;
     border-radius: 12px;
     background: var(--plane-header-search-bg) !important;
     border: 1px solid var(--plane-header-search-border) !important;
     color: var(--plane-header-search-text) !important;
     justify-content: flex-start !important;
     text-align: left !important;
-    gap: 0.5rem;
+    gap: 8px;
   }
 
   .plane-header .DocSearch-Button-Container {
@@ -286,21 +300,26 @@ html.dark .docs-layout .plane-header-shell,
   }
 
   .plane-header .DocSearch-Button-Placeholder,
-  .plane-header .VPNavBarSearchButton .text {
+  .plane-header .VPNavBarSearchButton .text,
+  .plane-header .search-bar__text {
     color: var(--plane-header-search-text) !important;
     text-align: left !important;
     flex: 0 1 auto;
+    font-size: 13px;
   }
 
   .plane-header .DocSearch-Button-Keys,
-  .plane-header .VPNavBarSearchButton .keys {
+  .plane-header .VPNavBarSearchButton .keys,
+  .plane-header .search-bar__keys {
     color: var(--plane-header-search-text) !important;
-    border-color: var(--plane-header-search-border) !important;
+    border: 1px solid var(--plane-header-search-keys-border) !important;
     margin-left: auto !important;
     flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 500;
   }
 
-  .plane-header :deep(.VPNavBarMenuLink),
+  .plane-header :deep(.VPNavBarMenuLink:not(.home-doc-actions__btn)),
   .plane-header :deep(.VPNavBarMenuGroup .button) {
     color: var(--plane-header-text) !important;
     font-size: 0.8125rem;
@@ -355,6 +374,18 @@ html.dark .docs-layout .plane-header-shell,
   }
 }
 
+/* Theme switcher border: --vp-input-border-color → --vp-c-border → stroke / nickel */
+.docs-layout .VPSwitchAppearance {
+  --vp-c-border: var(--color-stroke);
+  --vp-input-border-color: var(--vp-c-border);
+}
+
+html.dark .docs-layout .VPSwitchAppearance,
+[data-theme="dark"] .docs-layout .VPSwitchAppearance {
+  --vp-c-border: var(--color-nickel);
+  --vp-input-border-color: var(--vp-c-border);
+}
+
 @media (min-width: 1024px) and (max-width: 1279px) {
   .plane-header__title {
     display: none;
@@ -367,7 +398,7 @@ html.dark .docs-layout .plane-header-shell,
     --plane-header-padding-x: 1.5rem;
   }
 
-  .plane-header :deep(.VPNavBarMenuLink),
+  .plane-header :deep(.VPNavBarMenuLink:not(.home-doc-actions__btn)),
   .plane-header :deep(.VPNavBarMenuGroup .button) {
     font-size: 0.875rem;
     padding: 0.375rem 0.75rem;
@@ -468,7 +499,7 @@ a.home-doc-actions__btn,
 a.home-doc-actions__btn--nav,
 .home-doc-actions__btn--nav {
   min-height: auto;
-  padding: 5px 14px;
+  padding: 4px 15px;
   border-radius: 6px;
   font-size: 14px;
   margin: 0 !important;
@@ -565,11 +596,17 @@ html.dark a.home-doc-actions__btn--secondary:hover,
   display: none !important;
 }
 
-/* Navbar button links — override default nav link layout */
-.plane-header :deep(a.home-doc-actions__btn.VPNavBarMenuLink),
-.plane-header :deep(.VPLink.home-doc-actions__btn) {
-  padding: 5px 14px !important;
+/* Navbar primary & secondary buttons */
+.plane-header :deep(a.home-doc-actions__btn--primary.VPNavBarMenuLink),
+.plane-header :deep(a.home-doc-actions__btn--secondary.VPNavBarMenuLink),
+.plane-header :deep(.VPLink.home-doc-actions__btn--primary),
+.plane-header :deep(.VPLink.home-doc-actions__btn--secondary) {
+  padding: 4px 15px !important;
   font-size: 14px !important;
+  border-radius: 6px !important;
+  min-height: auto !important;
+  line-height: 1.25 !important;
+  font-weight: 500 !important;
   white-space: nowrap;
 }
 

@@ -3,26 +3,49 @@
    ================================================ */
 
 /* --- Doc links (exclude home hero CTAs) --- */
-.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)):not(:where(.card-links *)) {
+.vp-doc
+  a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(
+    :where(.home-doc-actions *)
+  ):not(:where(.card-links *)) {
   color: var(--vp-c-brand-1);
 }
 
-.vp-doc a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(:where(.home-doc-actions *)):not(:where(.card-links *)):hover {
+.vp-doc
+  a:not(.header-anchor):not(.vp-button):not(.card-link):not(.home-doc-actions__btn):not(
+    :where(.home-doc-actions *)
+  ):not(:where(.card-links *)):hover {
   color: var(--plane-link-hover);
 }
 
 /* --- Navbar / header --- */
 header.plane-header.wrapper,
 .plane-header-shell {
+  --font-heading: var(--vp-font-family-base);
+  font-family: var(--vp-font-family-base);
   background-color: var(--plane-header-bg) !important;
   border-bottom-color: var(--plane-header-border) !important;
 }
 
 @media (min-width: 768px) {
-  .plane-header .VPNavBarSearchButton {
+  .docs-layout header.plane-header.wrapper,
+  .docs-layout .plane-header-shell .wrapper {
+    border-left-color: var(--docs-divider) !important;
+    border-right-color: var(--docs-divider) !important;
+  }
+}
+
+.docs-layout .border-stroke,
+html.dark .docs-layout .border-stroke,
+[data-theme="dark"] .docs-layout .border-stroke {
+  border-color: var(--docs-divider) !important;
+}
+
+@media (min-width: 768px) {
+  .plane-header .VPNavBarSearchButton,
+  .plane-header .search-bar {
     background-color: var(--plane-header-search-bg) !important;
     border: 1px solid var(--plane-header-search-border) !important;
-    border-radius: 8px;
+    border-radius: 12px;
     color: var(--plane-header-search-text) !important;
   }
 }
