@@ -1,11 +1,14 @@
-import DefaultTheme from "vitepress/theme";
 import type { Theme } from "vitepress";
-import { onMounted, watch, nextTick, h } from "vue";
-import { useRoute } from "vitepress";
+import { onMounted, onUnmounted, watch, nextTick, h } from "vue";
+import { useRoute, useData } from "vitepress";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import mediumZoom from "medium-zoom";
+import VoidZeroTheme from "@voidzero-dev/vitepress-theme";
+import { themeContextKey } from "@voidzero-dev/vitepress-theme";
 
-import "./style.css";
+import "./styles.css";
+import "./plane-overrides.css";
+import "./plane-ui.css";
 import "vitepress-plugin-tabs/client";
 
 import ApiParam from "./components/ApiParam.vue";
@@ -13,11 +16,13 @@ import CodePanel from "./components/CodePanel.vue";
 import ResponsePanel from "./components/ResponsePanel.vue";
 import Card from "./components/Card.vue";
 import CardGroup from "./components/CardGroup.vue";
+import Tags from "./components/Tags.vue";
 import CookieConsent from "./components/CookieConsent.vue";
+import PlaneLayout from "./Layout.vue";
 
-/**
- * Adds 'api-page' class to hide the aside on API reference pages
- */
+const PLANE_FOOTER_BG = "https://media.docs.plane.so/logo/og-docs.webp";
+const PLANE_MONO_ICON = "/logo/favicon-32x32.png";
+
 function updateLayout() {
   if (typeof document === "undefined") return;
 
@@ -31,69 +36,53 @@ function updateLayout() {
   }
 }
 
-/**
- * Handles tab activation based on URL hash
- */
+/** Keep OSS header data-theme aligned with html.dark after hydration */
+function syncHeaderTheme() {
+  if (typeof document === "undefined") return;
+
+  const isDark = document.documentElement.classList.contains("dark");
+  document.querySelectorAll("header.plane-header, header.wrapper").forEach((header) => {
+    if (isDark) {
+      header.setAttribute("data-theme", "dark");
+    } else {
+      header.removeAttribute("data-theme");
+    }
+  });
+}
+
 function handleTabHash() {
   if (typeof document === "undefined") return;
 
-  const hash = window.location.hash.slice(1); // Remove the '#'
+  const hash = window.location.hash.slice(1);
   if (!hash) return;
 
-  console.log("Looking for hash:", hash);
-
   const tabButtons = document.querySelectorAll('[role="tab"]');
-
-  if (tabButtons.length === 0) {
-    console.log("No tabs found on page");
-    return;
-  }
-
-  console.log("Found tabs:", tabButtons);
+  if (tabButtons.length === 0) return;
 
   tabButtons.forEach((button) => {
     const labelText = button.textContent?.trim().toLowerCase().replace(/\s+/g, "-");
-    console.log("Tab label text:", labelText);
-
     if (labelText === hash) {
-      console.log("Activating tab:", button);
-
-      // Trigger multiple event types to ensure Vue picks it up
       const element = button as HTMLElement;
-
-      // Dispatch a proper mouse event
-      const clickEvent = new MouseEvent("click", {
-        view: window,
-        bubbles: true,
-        cancelable: true,
-      });
-
-      element.dispatchEvent(clickEvent);
-
-      // Also try direct click
+      element.dispatchEvent(
+        new MouseEvent("click", {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+        })
+      );
       element.click();
-
-      // Set focus as well
       element.focus();
     }
   });
 }
 
-/**
- * Adds click listeners to tabs to update URL hash
- */
 function setupTabHashUpdates() {
   if (typeof document === "undefined") return;
 
   const tabButtons = document.querySelectorAll('[role="tab"]');
-
   tabButtons.forEach((button) => {
     const element = button as HTMLElement;
-
-    // Remove existing listener if any
     element.removeEventListener("click", updateHashOnTabClick);
-
-    // Add new listener
     element.addEventListener("click", updateHashOnTabClick);
   });
 }
@@ -101,21 +90,35 @@ function setupTabHashUpdates() {
 function updateHashOnTabClick(event: Event) {
   const button = event.currentTarget as HTMLElement;
   const labelText = button.textContent?.trim().toLowerCase().replace(/\s+/g, "-");
-
   if (labelText) {
-    // Update URL hash without triggering scroll
     history.replaceState(null, "", `#${labelText}`);
   }
 }
 
+function runDomEnhancements() {
+  syncHeaderTheme();
+}
+
 export default {
-  extends: DefaultTheme,
+  extends: VoidZeroTheme,
   Layout() {
-    return h(DefaultTheme.Layout, null, {
+    return h(PlaneLayout, null, {
       "layout-bottom": () => h(CookieConsent),
     });
   },
-  enhanceApp({ app, router }) {
+  enhanceApp(ctx) {
+    VoidZeroTheme.enhanceApp?.(ctx);
+    const { app } = ctx;
+
+    app.provide(themeContextKey, {
+      /* dark mark on light bg | light/white mark on dark bg (VoidZero naming) */
+      logoDark: "/logo/dev-logo-watermark-light.png",
+      logoLight: "/logo/dev-logo-watermark-dark.png",
+      logoAlt: "Plane",
+      footerBg: PLANE_FOOTER_BG,
+      monoIcon: PLANE_MONO_ICON,
+    });
+
     enhanceAppWithTabs(app);
 
     app.component("ApiParam", ApiParam);
@@ -123,20 +126,16 @@ export default {
     app.component("ResponsePanel", ResponsePanel);
     app.component("Card", Card);
     app.component("CardGroup", CardGroup);
-
-    if (typeof window !== "undefined") {
-      router.onAfterRouteChanged = () => {
-        nextTick(() => {
-          updateLayout();
-        });
-      };
-    }
+    app.component("Tags", Tags);
   },
   setup() {
     if (typeof window === "undefined") return;
 
     const route = useRoute();
+    const { isDark } = useData();
     let zoom: ReturnType<typeof mediumZoom> | null = null;
+    let headerObserver: MutationObserver | null = null;
+    let htmlClassObserver: MutationObserver | null = null;
 
     const initZoom = () => {
       zoom?.detach();
@@ -145,29 +144,67 @@ export default {
       });
     };
 
-    onMounted(() => {
-      initZoom();
+    const scheduleEnhancements = () => {
+      nextTick(() => {
+        runDomEnhancements();
+        requestAnimationFrame(runDomEnhancements);
+      });
+    };
 
-      // Delay tab hash handling to ensure tabs are rendered
+    watch(isDark, () => {
+      syncHeaderTheme();
+    });
+
+    onMounted(() => {
+      nextTick(() => {
+        updateLayout();
+        initZoom();
+        scheduleEnhancements();
+      });
+
       setTimeout(() => {
         handleTabHash();
         setupTabHashUpdates();
+        runDomEnhancements();
       }, 100);
 
-      // Listen for hash changes
       window.addEventListener("hashchange", () => {
         nextTick(handleTabHash);
       });
+
+      window.addEventListener("resize", scheduleEnhancements);
+
+      htmlClassObserver = new MutationObserver(() => {
+        syncHeaderTheme();
+      });
+      htmlClassObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+
+      const navRoot = document.querySelector(".VPNav");
+      if (navRoot) {
+        headerObserver = new MutationObserver(scheduleEnhancements);
+        headerObserver.observe(navRoot, { childList: true, subtree: true });
+      }
     });
 
-    // Watch for route changes
+    onUnmounted(() => {
+      htmlClassObserver?.disconnect();
+      headerObserver?.disconnect();
+      window.removeEventListener("resize", scheduleEnhancements);
+      zoom?.detach();
+    });
+
     watch(
       () => route.path,
       () => {
         nextTick(() => {
+          updateLayout();
           initZoom();
           handleTabHash();
           setupTabHashUpdates();
+          scheduleEnhancements();
         });
       }
     );

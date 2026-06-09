@@ -8,7 +8,8 @@
     "build": "vitepress build docs",
     "preview": "vitepress preview docs",
     "fix:format": "prettier --write .",
-    "check:format": "prettier --check ."
+    "check:format": "prettier --check .",
+    "check:types": "tsc --noEmit -p docs/.vitepress/tsconfig.json"
   },
   "keywords": [
     "plane",
@@ -18,15 +19,14 @@
   "author": "Plane",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "autoprefixer": "^10.4.23",
+    "@types/node": "^25.9.0",
+    "@voidzero-dev/vitepress-theme": "^4.8.4",
     "mermaid": "^11.12.2",
-    "postcss": "^8.5.6",
     "prettier": "^3.8.1",
-    "tailwindcss": "^4.1.18",
-    "vitepress": "^1.6.4",
+    "typescript": "^6.0.3",
+    "vitepress": "2.0.0-alpha.16",
     "vitepress-plugin-mermaid": "^2.0.17",
-    "vitepress-plugin-tabs": "^0.7.3",
+    "vitepress-plugin-tabs": "^0.8.0",
     "vue": "^3.5.26"
   },
   "dependencies": {
@@ -34,6 +34,11 @@
     "medium-zoom": "^1.1.0"
   },
   "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "vitepress": "2"
+      }
+    },
     "overrides": {
       "rollup": "4.59.0",
       "lodash-es": "4.18.1",

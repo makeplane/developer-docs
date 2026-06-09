@@ -45,11 +45,12 @@ Thank you for your interest in contributing to Plane's developer documentation. 
 
 ### Configuration Files
 
-| File                                | Purpose                                |
-| ----------------------------------- | -------------------------------------- |
-| `docs/.vitepress/config.mts`        | Navigation, sidebar, and site settings |
-| `docs/.vitepress/theme/style.css`   | Global CSS styles                      |
-| `docs/.vitepress/theme/components/` | Custom Vue components                  |
+| File                                        | Purpose                                   |
+| ------------------------------------------- | ----------------------------------------- |
+| `docs/.vitepress/config.mts`                | Navigation, sidebar, and site settings    |
+| `docs/.vitepress/theme/styles.css`          | Global CSS styles (VoidZero/Vitest theme) |
+| `docs/.vitepress/theme/plane-overrides.css` | Plane-specific CSS overrides              |
+| `docs/.vitepress/theme/components/`         | Custom Vue components                     |
 
 ## Writing Documentation
 
