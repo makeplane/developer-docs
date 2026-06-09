@@ -319,10 +319,12 @@ html.dark .docs-layout .plane-header-shell,
     font-weight: 500;
   }
 
-  .plane-header :deep(.VPNavBarMenuLink:not(.home-doc-actions__btn)),
-  .plane-header :deep(.VPNavBarMenuGroup .button) {
+  .plane-header__nav .VPLink.link,
+  .plane-header__nav .VPLink.text-base,
+  .plane-header .VPNavBarMenuLink:not(.home-doc-actions__btn),
+  .plane-header .VPNavBarMenuGroup .button {
     color: var(--plane-header-text) !important;
-    font-size: 0.8125rem;
+    font-size: 14px !important;
     font-weight: 400;
     padding: 0.375rem 0.5rem;
     min-width: 0;
@@ -333,43 +335,45 @@ html.dark .docs-layout .plane-header-shell,
     transition: color 0.2s ease;
   }
 
-  .plane-header :deep(.VPNavBarMenuLink:not(.home-doc-actions__btn):hover),
-  .plane-header :deep(.VPNavBarMenuGroup .button:hover) {
+  .plane-header__nav .VPLink.link:hover,
+  .plane-header .VPNavBarMenuLink:not(.home-doc-actions__btn):hover,
+  .plane-header .VPNavBarMenuGroup .button:hover {
     color: var(--vp-c-brand-1) !important;
     opacity: 1;
   }
 
-  .plane-header :deep(a.home-doc-actions__btn--secondary.VPNavBarMenuLink),
-  .plane-header :deep(a.home-doc-actions__btn--secondary.VPNavBarMenuLink:hover) {
+  .plane-header a.home-doc-actions__btn--secondary.VPNavBarMenuLink,
+  .plane-header a.home-doc-actions__btn--secondary.VPNavBarMenuLink:hover {
     color: inherit !important;
     opacity: 1 !important;
   }
 
-  .plane-header :deep(.VPNavBarMenuLink.active) {
+  .plane-header .VPNavBarMenuLink.active,
+  .plane-header__nav .VPLink.link.active {
     color: var(--vp-c-brand-1) !important;
   }
 
-  .plane-header :deep(.VPNavBarAppearance),
-  .plane-header :deep(.VPNavBarSocialLinks) {
+  .plane-header .VPNavBarAppearance,
+  .plane-header .VPNavBarSocialLinks {
     display: flex !important;
     align-items: center;
     flex-shrink: 0;
   }
 
-  .plane-header :deep(.VPNavBarSocialLinks) {
+  .plane-header .VPNavBarSocialLinks {
     gap: 0.25rem;
   }
 
-  .plane-header :deep(.VPNavBarSocialLinks .VPSocialLink) {
+  .plane-header .VPNavBarSocialLinks .VPSocialLink {
     color: var(--plane-header-text);
     transition: color 0.2s ease;
   }
 
-  .plane-header :deep(.VPNavBarSocialLinks .VPSocialLink:hover) {
+  .plane-header .VPNavBarSocialLinks .VPSocialLink:hover {
     color: var(--vp-c-brand-1);
   }
 
-  .plane-header :deep(.VPSwitchAppearance) {
+  .plane-header .VPSwitchAppearance {
     --vp-c-bg: var(--plane-header-search-bg);
   }
 }
@@ -398,9 +402,11 @@ html.dark .docs-layout .VPSwitchAppearance,
     --plane-header-padding-x: 1.5rem;
   }
 
-  .plane-header :deep(.VPNavBarMenuLink:not(.home-doc-actions__btn)),
-  .plane-header :deep(.VPNavBarMenuGroup .button) {
-    font-size: 0.875rem;
+  .plane-header__nav .VPLink.link,
+  .plane-header__nav .VPLink.text-base,
+  .plane-header .VPNavBarMenuLink:not(.home-doc-actions__btn),
+  .plane-header .VPNavBarMenuGroup .button {
+    font-size: 14px !important;
     padding: 0.375rem 0.75rem;
   }
 }
@@ -597,10 +603,10 @@ html.dark a.home-doc-actions__btn--secondary:hover,
 }
 
 /* Navbar primary & secondary buttons */
-.plane-header :deep(a.home-doc-actions__btn--primary.VPNavBarMenuLink),
-.plane-header :deep(a.home-doc-actions__btn--secondary.VPNavBarMenuLink),
-.plane-header :deep(.VPLink.home-doc-actions__btn--primary),
-.plane-header :deep(.VPLink.home-doc-actions__btn--secondary) {
+.plane-header a.home-doc-actions__btn--primary.VPNavBarMenuLink,
+.plane-header a.home-doc-actions__btn--secondary.VPNavBarMenuLink,
+.plane-header .VPLink.home-doc-actions__btn--primary,
+.plane-header .VPLink.home-doc-actions__btn--secondary {
   padding: 4px 15px !important;
   font-size: 14px !important;
   border-radius: 6px !important;
@@ -611,7 +617,7 @@ html.dark a.home-doc-actions__btn--secondary:hover,
 }
 
 /* Don't apply nav text-link hover to Sign in button */
-.plane-header :deep(.VPNavBarMenuLink.home-doc-actions__btn:hover) {
+.plane-header .VPNavBarMenuLink.home-doc-actions__btn:hover {
   opacity: 1 !important;
 }
 
@@ -799,8 +805,8 @@ html.dark .home-quick-start .card-description,
   border-radius: 0.6875rem;
 }
 
-.home-feature-cards .card-icon__custom :deep(svg),
-.home-quick-start .card-icon__custom :deep(svg) {
+.home-feature-cards .card-icon__custom svg,
+.home-quick-start .card-icon__custom svg {
   width: 1.375rem;
   height: 1.375rem;
 }

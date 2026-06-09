@@ -40,6 +40,13 @@ html.dark .docs-layout .border-stroke,
   border-color: var(--docs-divider) !important;
 }
 
+@media (min-width: 1024px) {
+  .plane-header__nav .VPLink.text-base,
+  .plane-header__nav a.text-base {
+    font-size: 14px !important;
+  }
+}
+
 @media (min-width: 768px) {
   .plane-header .VPNavBarSearchButton,
   .plane-header .search-bar {
