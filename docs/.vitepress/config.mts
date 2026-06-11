@@ -313,7 +313,12 @@ export default extendConfig(
                     { text: "Download config files", link: "/self-hosting/methods/download-config" },
                   ],
                 },
-                { text: "Kubernetes", link: "/self-hosting/methods/kubernetes" },
+                {
+                  text: "Kubernetes",
+                  link: "/self-hosting/methods/kubernetes",
+                  collapsed: true,
+                  items: [{ text: "High availability", link: "/self-hosting/govern/high-availability" }],
+                },
                 { text: "Podman Quadlets", link: "/self-hosting/methods/podman-quadlets" },
                 {
                   text: "Airgapped Edition",
@@ -445,6 +450,7 @@ export default extendConfig(
                 { text: "Upgrade Community to Commercial Edition", link: "/self-hosting/upgrade-from-community" },
                 { text: "Upgrade Community to Airgapped Edition", link: "/self-hosting/manage/community-to-airgapped" },
                 { text: "View Logs", link: "/self-hosting/manage/view-logs" },
+                { text: "Health checks", link: "/self-hosting/manage/health-checks" },
                 { text: "Migrate Plane", link: "/self-hosting/manage/migrate-plane" },
                 { text: "Prime CLI", link: "/self-hosting/manage/prime-cli" },
                 { text: "Manage users", link: "/self-hosting/manage/manage-instance-users" },
