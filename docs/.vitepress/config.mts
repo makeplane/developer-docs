@@ -261,7 +261,6 @@ export default extendConfig(
             },
             {
               text: "Self-host Plane",
-              collapsed: true,
               items: [
                 { text: "Overview", link: "/self-hosting/overview" },
                 { text: "Self-hosting 101", link: "/self-hosting/self-hosting-101" },
@@ -271,7 +270,6 @@ export default extendConfig(
             },
             {
               text: "API Reference",
-              collapsed: true,
               items: [
                 { text: "Introduction", link: "/api-reference/introduction" },
                 { text: "Work items", link: "/api-reference/issue/overview" },
@@ -280,7 +278,6 @@ export default extendConfig(
             },
             {
               text: "Build and extend",
-              collapsed: true,
               items: [
                 { text: "Webhooks", link: "/dev-tools/intro-webhooks" },
                 { text: "Build Plane App", link: "/dev-tools/build-plane-app/overview" },
