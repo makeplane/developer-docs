@@ -372,8 +372,13 @@ export default extendConfig(
                   text: "Plane AI",
                   link: "/self-hosting/govern/plane-ai/configure-plane-ai",
                   collapsed: true,
-                  items: [ { text: "Embedding model", link: "/self-hosting/govern/plane-ai/configure-embedding-model" },
-                  { text: "AWS OpenSearch embedding", link: "/self-hosting/govern/plane-ai/aws-opensearch-embedding" },],
+                  items: [
+                    { text: "Embedding model", link: "/self-hosting/govern/plane-ai/configure-embedding-model" },
+                    {
+                      text: "AWS OpenSearch embedding",
+                      link: "/self-hosting/govern/plane-ai/aws-opensearch-embedding",
+                    },
+                  ],
                 },
                 { text: "External secrets", link: "/self-hosting/govern/external-secrets" },
                 { text: "External reverse proxy", link: "/self-hosting/govern/reverse-proxy" },
