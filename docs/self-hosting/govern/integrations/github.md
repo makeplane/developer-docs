@@ -11,7 +11,7 @@ This guide walks you through setting up a GitHub App to enable GitHub integratio
 This guide covers configuration for both:
 
 - **[GitHub Cloud](/self-hosting/govern/integrations/github#github-cloud)** (github.com)   
-  The standard GitHub service, available at github.com. Covers all account types
+  The standard GitHub service, available at github.com. Covers all plans
 
 - **[GitHub Enterprise Cloud](/self-hosting/govern/integrations/github#github-enterprise-server)** (ghe.com)  
   GitHub's managed enterprise service where your organization gets a dedicated subdomain
