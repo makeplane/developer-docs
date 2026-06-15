@@ -604,7 +604,6 @@ A `200` response confirms the API key and URL are correct.
 
 See the [MCP Server Tool Reference](/dev-tools/mcp-server-tools) for a complete list of all 100+ tools — work items, projects, cycles, modules, worklogs, and more.
 
-
 ## Common workflows
 
 ### Look up a work item by ID

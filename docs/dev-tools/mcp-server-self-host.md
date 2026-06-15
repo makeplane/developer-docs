@@ -32,12 +32,12 @@ The MCP server authenticates users through Plane's OAuth 2.0 system. You need to
 
 3. Fill in the application details:
 
-   | Field            | Value                                                   |
-   | ---------------- | ------------------------------------------------------- |
-   | **App Name**     | Anything descriptive (e.g. `Plane MCP Server`)          |
+   | Field            | Value                                                            |
+   | ---------------- | ---------------------------------------------------------------- |
+   | **App Name**     | Anything descriptive (e.g. `Plane MCP Server`)                   |
    | **Setup URL**    | Your MCP server's public URL (e.g. `https://mcp.yourdomain.com`) |
-   | **Redirect URI** | All three URIs listed below, space-separated            |
-   | **Webhook URL**  | Leave empty unless you need webhook events              |
+   | **Redirect URI** | All three URIs listed below, space-separated                     |
+   | **Webhook URL**  | Leave empty unless you need webhook events                       |
 
    ::: tip Add all three redirect URIs
    The server exposes callbacks on three paths to support all transports and MCP clients:
@@ -53,6 +53,7 @@ The MCP server authenticates users through Plane's OAuth 2.0 system. You need to
    ```
    https://mcp.yourdomain.com/callback https://mcp.yourdomain.com/http/auth/callback https://mcp.yourdomain.com/auth/callback
    ```
+
    :::
 
 4. Under **Scopes & Permissions**, select both **read** and **write** scopes.
@@ -145,15 +146,15 @@ The container listens on plain HTTP at `:8211`. Put it behind a reverse proxy (n
 
 #### Environment variable reference
 
-| Variable                             | Required | Description                                                                      |
-| ------------------------------------ | -------- | -------------------------------------------------------------------------------- |
-| `APP_RELEASE_VERSION`                | No       | Image tag to deploy. Defaults to `latest`. Pin in production.                    |
-| `PLANE_BASE_URL`                     | No       | Plane API URL. Defaults to `https://api.plane.so`.                               |
-| `PLANE_INTERNAL_BASE_URL`            | No       | Internal Plane URL for server-to-server calls. Falls back to `PLANE_BASE_URL`.   |
-| `PLANE_OAUTH_PROVIDER_CLIENT_ID`     | Yes      | OAuth Client ID from Step 1.                                                     |
-| `PLANE_OAUTH_PROVIDER_CLIENT_SECRET` | Yes      | OAuth Client Secret from Step 1.                                                 |
-| `PLANE_OAUTH_PROVIDER_BASE_URL`      | Yes      | Public URL of **this MCP server** - not your Plane instance.                     |
-| `MCP_PATH_PREFIX`                    | No       | Path prefix for all routes. Use when reverse-proxying alongside other apps.      |
+| Variable                             | Required | Description                                                                    |
+| ------------------------------------ | -------- | ------------------------------------------------------------------------------ |
+| `APP_RELEASE_VERSION`                | No       | Image tag to deploy. Defaults to `latest`. Pin in production.                  |
+| `PLANE_BASE_URL`                     | No       | Plane API URL. Defaults to `https://api.plane.so`.                             |
+| `PLANE_INTERNAL_BASE_URL`            | No       | Internal Plane URL for server-to-server calls. Falls back to `PLANE_BASE_URL`. |
+| `PLANE_OAUTH_PROVIDER_CLIENT_ID`     | Yes      | OAuth Client ID from Step 1.                                                   |
+| `PLANE_OAUTH_PROVIDER_CLIENT_SECRET` | Yes      | OAuth Client Secret from Step 1.                                               |
+| `PLANE_OAUTH_PROVIDER_BASE_URL`      | Yes      | Public URL of **this MCP server** - not your Plane instance.                   |
+| `MCP_PATH_PREFIX`                    | No       | Path prefix for all routes. Use when reverse-proxying alongside other apps.    |
 
 #### Upgrading
 
@@ -243,11 +244,11 @@ helm uninstall plane-mcp --namespace plane-mcp
 
 Once the server is running, your available endpoints are:
 
-| Endpoint                                      | Auth       | Description                            |
-| --------------------------------------------- | ---------- | -------------------------------------- |
-| `https://mcp.yourdomain.com/http/mcp`         | OAuth      | Recommended for most clients           |
-| `https://mcp.yourdomain.com/http/api-key/mcp` | PAT header | For CI/CD, scripts, headless setups    |
-| `https://mcp.yourdomain.com/sse`              | OAuth      | Legacy SSE transport (deprecated)      |
+| Endpoint                                      | Auth       | Description                         |
+| --------------------------------------------- | ---------- | ----------------------------------- |
+| `https://mcp.yourdomain.com/http/mcp`         | OAuth      | Recommended for most clients        |
+| `https://mcp.yourdomain.com/http/api-key/mcp` | PAT header | For CI/CD, scripts, headless setups |
+| `https://mcp.yourdomain.com/sse`              | OAuth      | Legacy SSE transport (deprecated)   |
 
 Client configuration is identical to the [MCP Server setup guide](/dev-tools/mcp-server) - replace `https://mcp.plane.so` with your server's URL in every config snippet.
 
