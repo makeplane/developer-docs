@@ -3,6 +3,7 @@ import { defineConfig, type HeadConfig, type PageData } from "vitepress";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { withMermaid } from "vitepress-plugin-mermaid";
 import { extendConfig } from "@voidzero-dev/vitepress-theme/config";
+import llmstxt from "vitepress-plugin-llms";
 import { readFileSync, readdirSync, statSync, mkdirSync, copyFileSync } from "node:fs";
 import { resolve, join, relative, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -63,6 +64,30 @@ export default extendConfig(
         // Mermaid configuration options
       },
       vite: {
+        plugins: [
+          // Generates llms.txt and llms-full.txt from the docs and sidebar.
+          // https://github.com/okineadev/vitepress-plugin-llms
+          llmstxt({
+            domain: "https://developers.plane.so",
+            title: "Plane Developer Documentation",
+            description:
+              "Plane is open-source, modern project management software. These developer docs cover self-hosting, the REST API, and tools for building on Plane.",
+            details:
+              "This documentation covers self-hosting (Docker, Kubernetes, and more), the REST API reference for projects, work items, cycles, modules, states, pages, and more, plus developer tools including OAuth apps, webhooks, agents, and the MCP server.",
+            // Per-page .md versions are already emitted by buildEnd() for the
+            // `Accept: text/markdown` rewrite in vercel.json, so the plugin only
+            // owns llms.txt / llms-full.txt.
+            generateLLMFriendlyDocsForEachPage: false,
+            // Don't inject invisible LLM-hint markup into rendered pages.
+            injectLLMHint: false,
+            // Pages hidden from search (search: false / noindex) are excluded
+            // from the LLM files too.
+            ignoreFiles: [
+              "self-hosting/methods/install-methods-commercial/docker-compose.md",
+              "self-hosting/methods/install-methods-commercial/kubernetes.md",
+            ],
+          }),
+        ],
         resolve: {
           alias: {
             "@vp-default/VPNavBarSearchButton.vue": fileURLToPath(
