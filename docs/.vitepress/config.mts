@@ -501,6 +501,10 @@ export default extendConfig(
                   items: [
                     { text: "Overview", link: "/api-reference/project/overview" },
                     { text: "Create Project", link: "/api-reference/project/add-project" },
+                    {
+                      text: "Create Project with Template",
+                      link: "/api-reference/project/create-project-with-template",
+                    },
                     { text: "List Projects", link: "/api-reference/project/list-projects" },
                     { text: "Get Project", link: "/api-reference/project/get-project-detail" },
                     { text: "Update Project", link: "/api-reference/project/update-project-detail" },
