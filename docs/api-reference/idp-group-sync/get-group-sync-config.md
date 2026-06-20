@@ -33,6 +33,69 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 <div class="params-section">
 
+### Response Attributes
+
+<div class="params-list">
+
+<ApiParam name="id" type="string">
+
+Unique identifier of the config.
+
+</ApiParam>
+
+<ApiParam name="is_enabled" type="boolean">
+
+Whether IdP group sync is enabled for the workspace.
+
+</ApiParam>
+
+<ApiParam name="sync_on_login" type="boolean">
+
+Sync group memberships automatically on user login.
+
+</ApiParam>
+
+<ApiParam name="auto_remove" type="boolean">
+
+Automatically remove users from projects or workspace when removed from their IdP group.
+
+</ApiParam>
+
+<ApiParam name="sync_offline" type="boolean">
+
+Allow sync to run outside of login events.
+
+</ApiParam>
+
+<ApiParam name="group_attribute_key" type="string">
+
+The IdP claim key that contains group membership data (e.g. `groups`).
+
+</ApiParam>
+
+<ApiParam name="default_workspace_role" type="string">
+
+Role slug assigned to users when added to the workspace via group sync.
+
+</ApiParam>
+
+<ApiParam name="created_at" type="timestamp">
+
+The timestamp of when the config was created.
+
+</ApiParam>
+
+<ApiParam name="updated_at" type="timestamp">
+
+The timestamp of when the config was last updated.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `workspaces.group_sync:read`

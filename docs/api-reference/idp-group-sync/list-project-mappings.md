@@ -33,6 +33,57 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 <div class="params-section">
 
+### Response Attributes
+
+<div class="params-list">
+
+<ApiParam name="id" type="string">
+
+Unique identifier of the mapping.
+
+</ApiParam>
+
+<ApiParam name="idp_group_name" type="string">
+
+The name of the IdP group.
+
+</ApiParam>
+
+<ApiParam name="project" type="string">
+
+Project identifier the group is mapped to. `null` when `all_projects` is `true`.
+
+</ApiParam>
+
+<ApiParam name="all_projects" type="boolean">
+
+Whether the group is mapped to all projects in the workspace.
+
+</ApiParam>
+
+<ApiParam name="role" type="string">
+
+Role slug assigned to group members within the project.
+
+</ApiParam>
+
+<ApiParam name="created_at" type="timestamp">
+
+The timestamp of when the mapping was created.
+
+</ApiParam>
+
+<ApiParam name="updated_at" type="timestamp">
+
+The timestamp of when the mapping was last updated.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `workspaces.group_sync:read`
