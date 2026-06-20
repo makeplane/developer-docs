@@ -1026,6 +1026,43 @@ export default extendConfig(
                     { text: "Get Current User", link: "/api-reference/user/get-current-user" },
                   ],
                 },
+                {
+                  text: "IDP Group Sync",
+                  collapsed: true,
+                  items: [
+                    { text: "Overview", link: "/api-reference/idp-group-sync/overview" },
+                    { text: "Get Group Sync Config", link: "/api-reference/idp-group-sync/get-group-sync-config" },
+                    {
+                      text: "Update Group Sync Config",
+                      link: "/api-reference/idp-group-sync/update-group-sync-config",
+                    },
+                    { text: "List Project Mappings", link: "/api-reference/idp-group-sync/list-project-mappings" },
+                    { text: "Create Project Mapping", link: "/api-reference/idp-group-sync/create-project-mapping" },
+                    { text: "Get Project Mapping", link: "/api-reference/idp-group-sync/get-project-mapping" },
+                    { text: "Update Project Mapping", link: "/api-reference/idp-group-sync/update-project-mapping" },
+                    { text: "Delete Project Mapping", link: "/api-reference/idp-group-sync/delete-project-mapping" },
+                    {
+                      text: "List Workspace Mappings",
+                      link: "/api-reference/idp-group-sync/list-workspace-mappings",
+                    },
+                    {
+                      text: "Create Workspace Mapping",
+                      link: "/api-reference/idp-group-sync/create-workspace-mapping",
+                    },
+                    {
+                      text: "Get Workspace Mapping",
+                      link: "/api-reference/idp-group-sync/get-workspace-mapping",
+                    },
+                    {
+                      text: "Update Workspace Mapping",
+                      link: "/api-reference/idp-group-sync/update-workspace-mapping",
+                    },
+                    {
+                      text: "Delete Workspace Mapping",
+                      link: "/api-reference/idp-group-sync/delete-workspace-mapping",
+                    },
+                  ],
+                },
               ],
             },
           ],
