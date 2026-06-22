@@ -387,6 +387,7 @@ export default extendConfig(
                   text: "Integrations",
                   collapsed: true,
                   items: [
+                    { text: "Bitbucket", link: "/self-hosting/govern/integrations/bitbucket" },
                     { text: "GitHub", link: "/self-hosting/govern/integrations/github" },
                     { text: "GitLab", link: "/self-hosting/govern/integrations/gitlab" },
                     { text: "Sentry", link: "/self-hosting/govern/integrations/sentry" },
