@@ -33,7 +33,7 @@ Ensure you use use the latest Helm chart version.
 2. Set the following environment variables:
 
 ```bash
-PLANE_VERSION=v2.4.0
+PLANE_VERSION=v2.6.3
 ```
 
 ```bash
@@ -88,7 +88,7 @@ helm repo add plane https://helm.plane.so/
       i. Run the script below to download the `values.yaml` file and edit using any editor like Vim or Nano.
 
       Make sure you set the required environment variables listed below:
-      - `planeVersion: v2.4.0`
+      - `planeVersion: v2.6.3`
       - `license.licenseDomain: <The domain you have specified to host Plane>`
       - `license.licenseServer: https://prime.plane.so`
       - `ingress.enabled: <true | false>`
@@ -115,7 +115,7 @@ helm repo add plane https://helm.plane.so/
 
 | Setting               |       Default       | Required | Description                                                                                                                                                                          |
 | --------------------- | :-----------------: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| planeVersion          |       v2.4.0        |   Yes    | Specifies the version of Plane to be deployed. Copy this from prime.plane.so.                                                                                                        |
+| planeVersion          |       v2.6.3        |   Yes    | Specifies the version of Plane to be deployed. Copy this from prime.plane.so.                                                                                                        |
 | license.licenseDomain | 'plane.example.com' |   Yes    | The fully-qualified domain name (FQDN) in the format `sudomain.domain.tld` or `domain.tld` that the license is bound to. It is also attached to your `ingress` host to access Plane. |
 
 ### Airgapped Settings
@@ -123,7 +123,7 @@ helm repo add plane https://helm.plane.so/
 | Setting                | Default | Required | Description                                                                                                                                                                                                                                                                                                                                |
 | ---------------------- | :-----: | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | airgapped.enabled      |  false  |    No    | Enable airgapped mode for the Plane API.                                                                                                                                                                                                                                                                                                   |
-| airgapped.s3Secrets    |   []    |    No    | List of Kubernetes Secrets containing CA certificates to install. Each entry requires `name` (Secret name) and `key` (filename in the Secret). Example: `kubectl -n plane create secret generic plane-s3-ca --from-file=s3-custom-ca.crt=/path/to/ca.crt`. Supports multiple certs (e.g. S3 + internal CA). Available in v2.4.0 and later. |
+| airgapped.s3Secrets    |   []    |    No    | List of Kubernetes Secrets containing CA certificates to install. Each entry requires `name` (Secret name) and `key` (filename in the Secret). Example: `kubectl -n plane create secret generic plane-s3-ca --from-file=s3-custom-ca.crt=/path/to/ca.crt`. Supports multiple certs (e.g. S3 + internal CA). Available in v2.6.3 and later. |
 | airgapped.s3SecretName |   ""    |    No    | **Deprecated** <br/> Name of a single Kubernetes Secret containing the S3 CA cert. Used only when `s3Secrets` is empty. Use `s3Secrets` instead.                                                                                                                                                                                           |
 | airgapped.s3SecretKey  |   ""    |    No    | **Deprecated** <br/> Key (filename) of the cert file inside the Secret. Used only when `s3Secrets` is empty. Set together with `airgapped.s3SecretName`. Use `s3Secrets` instead.                                                                                                                                                          |
 
@@ -137,7 +137,7 @@ Plane supports custom CA certificates for connecting to S3-compatible storage an
 #### Migrating to the new configuration
 
 :::warning
-Requires Plane v2.4.0 or later.
+Requires Plane v2.6.3 or later.
 :::
 
 The new `s3Secrets` configuration supports multiple CA certificates, useful if you need to trust certificates from different sources (e.g., S3 endpoint CA and internal PKI). If you only need a single certificate, migration is optional.
