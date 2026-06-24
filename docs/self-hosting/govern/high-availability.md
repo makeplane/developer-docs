@@ -632,7 +632,7 @@ The following capabilities aren't natively provided by the chart and need to be 
 A minimal example that disables every local stateful service and gives each Tier-1 workload three replicas with AZ anti-affinity. Adapt names to your release.
 
 ```yaml
-planeVersion: v2.6.0
+planeVersion: v2.6.3
 
 license:
   licenseServer: https://prime.plane.so
