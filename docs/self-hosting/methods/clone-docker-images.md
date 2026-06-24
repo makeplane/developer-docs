@@ -49,15 +49,15 @@ curl -sL "https://github.com/google/go-containerregistry/releases/latest/downloa
 The following Plane Commercial images need to be transferred to your private registry:
 
 ```
-artifacts.plane.so/makeplane/admin-commercial:${APP_RELEASE_VERSION}
-artifacts.plane.so/makeplane/web-commercial:${APP_RELEASE_VERSION}
-artifacts.plane.so/makeplane/space-commercial:${APP_RELEASE_VERSION}
-artifacts.plane.so/makeplane/live-commercial:${APP_RELEASE_VERSION}
-artifacts.plane.so/makeplane/monitor-commercial:${APP_RELEASE_VERSION}
-artifacts.plane.so/makeplane/backend-commercial:${APP_RELEASE_VERSION}
-artifacts.plane.so/makeplane/iframely:v1.2.0
-artifacts.plane.so/makeplane/silo-commercial:${APP_RELEASE_VERSION}
-artifacts.plane.so/makeplane/email-commercial:${APP_RELEASE_VERSION}
+makeplane/admin-commercial:${APP_RELEASE_VERSION}
+makeplane/web-commercial:${APP_RELEASE_VERSION}
+makeplane/space-commercial:${APP_RELEASE_VERSION}
+makeplane/live-commercial:${APP_RELEASE_VERSION}
+makeplane/monitor-commercial:${APP_RELEASE_VERSION}
+makeplane/backend-commercial:${APP_RELEASE_VERSION}
+makeplane/iframely:v1.2.0
+makeplane/silo-commercial:${APP_RELEASE_VERSION}
+makeplane/email-commercial:${APP_RELEASE_VERSION}
 ```
 
 ::: warning
@@ -145,7 +145,7 @@ You can copy images individually or use the provided script to copy all images a
 
 ```bash
 crane copy \
-  artifacts.plane.so/makeplane/backend-commercial:${APP_RELEASE_VERSION} \
+  makeplane/backend-commercial:${APP_RELEASE_VERSION} \
   ${DESTINATION_REGISTRY}/backend-commercial:${APP_RELEASE_VERSION}
 ```
 
@@ -154,7 +154,7 @@ crane copy \
 ```bash
 crane copy \
   --platform linux/amd64 \
-  artifacts.plane.so/makeplane/backend-commercial:${APP_RELEASE_VERSION} \
+  makeplane/backend-commercial:${APP_RELEASE_VERSION} \
   ${DESTINATION_REGISTRY}/backend-commercial:${APP_RELEASE_VERSION}
 ```
 
@@ -162,10 +162,10 @@ crane copy \
 
 ```bash
 # Check if source image exists
-crane manifest artifacts.plane.so/makeplane/backend-commercial:${APP_RELEASE_VERSION}
+crane manifest makeplane/backend-commercial:${APP_RELEASE_VERSION}
 
 # List all available tags
-crane ls artifacts.plane.so/makeplane/backend-commercial
+crane ls makeplane/backend-commercial
 ```
 
 **Verify image after copying:**
@@ -198,7 +198,7 @@ if [ -z "$DESTINATION_REGISTRY" ]; then
 fi
 
 # Source registry
-SOURCE_REGISTRY="artifacts.plane.so/makeplane"
+SOURCE_REGISTRY="makeplane"
 
 # Image list
 declare -a IMAGES=(
@@ -293,7 +293,7 @@ Verify your credentials are correct and that you have push permissions to the re
 - Verify the source image exists:
 
 ```bash
-  crane ls artifacts.plane.so/makeplane/backend-commercial
+  crane ls makeplane/backend-commercial
 ```
 
 - Check that you're using the correct version tag
