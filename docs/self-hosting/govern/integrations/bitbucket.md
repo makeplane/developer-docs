@@ -46,25 +46,26 @@ Follow these steps to register an OAuth consumer in your Bitbucket workspace, se
 4. Provide a **Name** for your OAuth consumer.
 
 5. Enter the following **Callback URL**, replacing `[YOUR_DOMAIN]` with your actual domain:
+
    ```bash
    https://[YOUR_DOMAIN]/silo/api/oauth/bitbucket/auth/callback
    ```
 
 6. Set permissions by selecting the required **Scopes**. The table below explains each scope:
 
-   | Category         | Permission   | Explanation                                                              |
-   | ---------------- | ------------ | ------------------------------------------------------------------------ |
-   | Account          | `email`      | Read the user's primary email address.                                   |
-   | Account          | `read`       | Read the user's account information and workspace memberships.           |
-   | Repositories     | `read`       | Read access to repositories, including source code and metadata.         |
-   | Repositories     | `write`      | Write access to repositories, required for creating and updating refs.   |
-   | Pull requests    | `read`       | Read pull requests, comments, and activity on repositories.              |
-   | Pull requests    | `write`      | Create and update pull requests and post comments.                       |
-   | Projects         | `read`       | Read project metadata and repository associations.                       |
-   | Issues           | `read`       | Read issues and their comments on repositories.                          |
-   | Issues           | `write`      | Create and update issues and post comments.                              |
-   | Webhooks         | `read`       | Read webhook subscriptions on repositories and workspaces.               |
-   | Webhooks         | `write`      | Create and manage webhook subscriptions.                                 |
+   | Category      | Permission | Explanation                                                            |
+   | ------------- | ---------- | ---------------------------------------------------------------------- |
+   | Account       | `email`    | Read the user's primary email address.                                 |
+   | Account       | `read`     | Read the user's account information and workspace memberships.         |
+   | Repositories  | `read`     | Read access to repositories, including source code and metadata.       |
+   | Repositories  | `write`    | Write access to repositories, required for creating and updating refs. |
+   | Pull requests | `read`     | Read pull requests, comments, and activity on repositories.            |
+   | Pull requests | `write`    | Create and update pull requests and post comments.                     |
+   | Projects      | `read`     | Read project metadata and repository associations.                     |
+   | Issues        | `read`     | Read issues and their comments on repositories.                        |
+   | Issues        | `write`    | Create and update issues and post comments.                            |
+   | Webhooks      | `read`     | Read webhook subscriptions on repositories and workspaces.             |
+   | Webhooks      | `write`    | Create and manage webhook subscriptions.                               |
 
 7. Click **Save** to finalize the setup.
 
@@ -83,18 +84,19 @@ These instructions cover registering an application link on your self-hosted Bit
 4. Enter the URL of your Plane instance and click **Continue**.
 
 5. Enter the following **Redirect URL**, replacing `[YOUR_DOMAIN]` with your actual domain:
+
    ```bash
    https://[YOUR_DOMAIN]/silo/api/oauth/bitbucket-dc/auth/callback
    ```
 
 6. Set the required **Application Permissions**:
 
-   | Resource      | Permission Level | Explanation                                                              |
-   | ------------- | ---------------- | ------------------------------------------------------------------------ |
-   | Projects      | `Admin`          | Required to read project metadata and manage webhook subscriptions.      |
-   | Repositories  | `Read`           | Read access to repository metadata, branches, and commits.               |
-   | Repositories  | `Write`          | Write access to create refs and update repository content.               |
-   | Repositories  | `Admin`          | Required to manage repository-level webhooks.                            |
+   | Resource     | Permission Level | Explanation                                                         |
+   | ------------ | ---------------- | ------------------------------------------------------------------- |
+   | Projects     | `Admin`          | Required to read project metadata and manage webhook subscriptions. |
+   | Repositories | `Read`           | Read access to repository metadata, branches, and commits.          |
+   | Repositories | `Write`          | Write access to create refs and update repository content.          |
+   | Repositories | `Admin`          | Required to manage repository-level webhooks.                       |
 
 7. Click **Save** to create the application link.
 
