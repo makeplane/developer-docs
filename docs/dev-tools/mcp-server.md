@@ -83,6 +83,12 @@ Plane hosts the MCP server for you at **`https://mcp.plane.so`**. If you run you
 - Python 3.10+ installed (`python --version`)
 - `uv` package manager (recommended). See [Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
 
+| Variable               | Required | Description                                                           |
+| ---------------------- | -------- | --------------------------------------------------------------------- |
+| `PLANE_API_KEY`        | Yes      | API key from your workspace settings                                  |
+| `PLANE_WORKSPACE_SLUG` | Yes      | Your workspace slug                                                   |
+| `PLANE_BASE_URL`       | No       | API URL for self-hosted instances. Defaults to `https://api.plane.so` |
+
 #### Get your API key (required for stdio and PAT token modes)
 
 1. Open Plane and go to your workspace.
@@ -101,6 +107,11 @@ https://app.plane.so/acme-corp/
 ```
 
 the slug is `acme-corp`.
+
+::: info Clients that don't support custom headers
+**Claude Desktop** — use Stdio instead.<br>
+**Claude.ai** — use OAuth instead (the UI doesn't expose arbitrary headers).
+:::
 
 ### Claude Desktop
 
@@ -144,6 +155,10 @@ Claude Desktop doesn't support remote HTTP natively. Use `mcp-remote` — a loca
 ```
 
 On first launch, `mcp-remote` opens a browser for the Plane OAuth flow.
+
+::: tip No Node.js?
+Use the SSE fallback instead: `"url": "https://mcp.plane.so/sse", "type": "sse"`.
+:::
 
 #### HTTP with PAT Token
 
@@ -598,6 +613,10 @@ curl -H "x-api-key: YOUR_API_KEY" \
 
 A `200` response confirms the API key and URL are correct.
 
+::: tip Running your own MCP server?
+You can skip `mcp.plane.so` entirely and deploy `plane-mcp-server` yourself — Docker Compose, Helm, OAuth app setup: [Self-host MCP Server](/dev-tools/mcp-server-self-host).
+:::
+
 ---
 
 ## Common workflows
@@ -665,17 +684,19 @@ Model calls `list_modules` to find the UUID, then `add_work_items_to_module` wit
 
 The server propagates errors from the Plane SDK as MCP tool errors.
 
-| Scenario                          | HTTP Status | Cause                                   | Resolution                                          |
-| --------------------------------- | ----------- | --------------------------------------- | --------------------------------------------------- |
-| Invalid API key                   | 401         | `PLANE_API_KEY` is wrong or revoked     | Regenerate the token in Plane settings              |
-| Invalid OAuth token               | 401         | Token expired or revoked                | Re-authorise through OAuth flow                     |
-| Missing `x-workspace-slug` header | -           | Header auth missing workspace           | Include `x-workspace-slug` header                   |
-| Wrong workspace slug              | 404         | Slug doesn't exist                      | Check the exact slug in your Plane URL              |
-| Insufficient permissions          | 403         | User role too low                       | Check your role in the workspace/project            |
-| Resource not found                | 404         | UUID or identifier doesn't exist        | Verify the ID; check if resource was deleted        |
-| Validation error                  | 400         | Required field missing or invalid value | Check required fields and value constraints         |
-| Redis unavailable                 | -           | Token storage down                      | Set `REDIS_HOST`/`REDIS_PORT` or omit for in-memory |
-| Network error                     | -           | Cannot reach Plane API                  | Verify `PLANE_BASE_URL` and connectivity            |
+| Scenario                            | HTTP Status          | Cause                                           | Resolution                                          |
+| ----------------------------------- | -------------------- | ----------------------------------------------- | --------------------------------------------------- |
+| Invalid API key                     | 401                  | `PLANE_API_KEY` is wrong or revoked             | Regenerate the token in Plane settings              |
+| Invalid OAuth token                 | 401                  | Token expired or revoked                        | Re-authorise through OAuth flow                     |
+| Missing `x-workspace-slug` header   | -                    | Header auth missing workspace                   | Include `x-workspace-slug` header                   |
+| Wrong workspace slug                | 404                  | Slug doesn't exist                              | Check the exact slug in your Plane URL              |
+| Insufficient permissions            | 403                  | User role too low                               | Check your role in the workspace/project            |
+| Resource not found                  | 404                  | UUID or identifier doesn't exist                | Verify the ID; check if resource was deleted        |
+| Validation error                    | 400                  | Required field missing or invalid value         | Check required fields and value constraints         |
+| Redis unavailable                   | -                    | Token storage down                              | Set `REDIS_HOST`/`REDIS_PORT` or omit for in-memory |
+| Network error                       | -                    | Cannot reach Plane API                          | Verify `PLANE_BASE_URL` and connectivity            |
+| Server not listed in Claude Desktop | Wrong transport type | Claude Desktop doesn't support `"type": "http"` | Use `npx mcp-remote@latest` or SSE transport        |
+| Server config skipped               | JSON syntax error    | Config file ignored silently                    | Validate JSON — check for trailing commas           |
 
 **Verify connectivity (stdio/PAT):**
 
@@ -710,6 +731,11 @@ rm -rf ~/.mcp-auth
 ```
 
 Restart Claude Code and run `/mcp` to authenticate again.
+
+## See also
+
+- [Self-host MCP Server](/dev-tools/mcp-server-self-host)
+- [Tool Reference](/dev-tools/mcp-server-tools)
 
 ---
 
