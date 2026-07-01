@@ -1041,7 +1041,6 @@ export default extendConfig(
                   link: "/dev-tools/mcp-server",
                   collapsed: false,
                   items: [
-                    { text: "For Claude Code", link: "/dev-tools/mcp-server-claude-code" },
                     { text: "Self-host MCP Server", link: "/dev-tools/mcp-server-self-host" },
                     { text: "Tool Reference", link: "/dev-tools/mcp-server-tools" },
                   ],

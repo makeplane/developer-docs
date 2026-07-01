@@ -297,5 +297,5 @@ docker compose up -d
 
 ---
 
-→ For client configuration details, see the [MCP Server setup guide](/dev-tools/mcp-server).
+→ For client configuration details, see the [MCP Server setup guide](/dev-tools/mcp-server).  
 → For the full list of available tools, see the [MCP Server Tool Reference](/dev-tools/mcp-server-tools).

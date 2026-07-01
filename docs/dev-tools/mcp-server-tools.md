@@ -8,7 +8,7 @@ keywords: plane mcp server, mcp tools, plane api tools, work items mcp, projects
 
 The Plane MCP Server exposes 100+ tools across 20 modules. All tools are available regardless of transport mode — stdio, HTTP/OAuth, HTTP/PAT, and SSE expose the same set.
 
-→ For setup and client configuration, see the [MCP Server setup guide](/dev-tools/mcp-server).
+For setup and client configuration, see the [MCP Server setup guide](/dev-tools/mcp-server).
 
 ---
 
