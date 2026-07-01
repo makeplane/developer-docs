@@ -115,6 +115,10 @@
     {
       "source": "/self-hosting/govern/aws-opensearch-embedding",
       "destination": "/self-hosting/govern/plane-ai/configure-embedding-model"
+    },
+    {
+      "source": "/dev-tools/mcp-server-claude-code",
+      "destination": "/dev-tools/mcp-server#claude-code-cli"
     }
   ],
   "rewrites": [

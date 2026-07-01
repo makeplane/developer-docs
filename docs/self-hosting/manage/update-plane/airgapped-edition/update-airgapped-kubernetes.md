@@ -45,7 +45,7 @@ Since airgapped clusters can't pull updates from the internet, upgrading require
    ```
 
    :::info
-   Replace `<plane_version>` with the version you're upgrading to (e.g., v2.5.2). Check the [release notes](https://plane.so/changelog?category=self-hosted) for the latest available release version.
+   Replace `<plane_version>` with the version you're upgrading to (e.g., v2.6.3). Check the [release notes](https://plane.so/changelog?category=self-hosted) for the latest available release version.
    :::
 
 4. Once the Helm chart and `values.yaml` file are updated, redeploy the Helm release in your Kubernetes cluster to complete the update.
