@@ -1,0 +1,34 @@
+# pnpm workspace configuration.
+# Holds settings that previously lived in package.json's "pnpm" field —
+# pnpm reads overrides / peerDependencyRules / auditConfig from here.
+
+overrides:
+  # Toolchain pins for VitePress 2 alpha compatibility.
+  rollup: 4.59.0
+  lodash-es: 4.18.1
+  esbuild: 0.25.0
+  # Security overrides — force patched versions of vulnerable transitive deps
+  # (see `pnpm audit`). Bump these as new advisories are published.
+  dompurify: 3.4.11 # was 3.4.0 — resolves 8 DOMPurify advisories (via mermaid)
+  vite: 6.4.3 # was 6.4.2 — GHSA-fx2h-pf6j-xcff (high), GHSA-v6wh-96g9-6wx3
+  postcss: 8.5.15 # GHSA-qx2v-qp2m-jg93 (via vite)
+  uuid: 11.1.1 # GHSA-w5hq-g745-h8pq (via mermaid; stays in mermaid's ^11 range)
+
+peerDependencyRules:
+  allowedVersions:
+    vitepress: "2"
+
+auditConfig:
+  ignoreGhsas:
+    # js-yaml 3.x quadratic-DoS via merge-key aliases (CVE-2026-53550).
+    # gray-matter@4.0.3 hard-pins js-yaml 3.x (uses safeLoad/safeDump, removed
+    # in 4.x) and has no newer release; the fix only landed in js-yaml >=4.2.0,
+    # so 3.x cannot be patched. js-yaml here only parses this repo's own
+    # build-time frontmatter (trusted input), so the DoS is not reachable.
+    - GHSA-h67p-54hq-rp68
+
+# Build scripts left disabled (matching prior pnpm 10 behavior — neither was
+# ever approved, and the site builds fine without them). Flip to true to allow.
+allowBuilds:
+  esbuild: false
+  vue-demi: false
