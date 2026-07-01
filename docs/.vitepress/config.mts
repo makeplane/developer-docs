@@ -1107,7 +1107,10 @@ export default extendConfig(
                   text: "MCP Server",
                   link: "/dev-tools/mcp-server",
                   collapsed: false,
-                  items: [{ text: "For Claude Code", link: "/dev-tools/mcp-server-claude-code" }],
+                  items: [
+                    { text: "Self-host MCP Server", link: "/dev-tools/mcp-server-self-host" },
+                    { text: "Tool Reference", link: "/dev-tools/mcp-server-tools" },
+                  ],
                 },
                 { text: "Plane Compose", link: "/dev-tools/plane-compose" },
                 { text: "OpenAPI Specification", link: "/dev-tools/openapi-specification" },
