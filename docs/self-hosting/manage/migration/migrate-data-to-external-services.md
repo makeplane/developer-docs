@@ -35,6 +35,7 @@ docker compose up -d plane-db plane-minio
 ```
 
 ## Export the database
+
 Run `pg_dump` inside the running database container. This creates a compressed binary dump file in your current directory.
 
 ```bash
@@ -53,6 +54,7 @@ ls -lh plane-backup.dump
 ```
 
 ## Restore the database to your cloud Postgres
+
 Use `pg_restore` on your local machine to load the dump into your cloud database. Replace the placeholder values with your actual connection details.
 
 ```bash
@@ -66,6 +68,7 @@ pg_restore \
 You will be prompted for your cloud database password.
 
 ## Sync storage to your cloud bucket
+
 MinIO ships with the `mc` client. Use it from inside the MinIO container to sync your local uploads to your cloud storage.
 
 1. Create an alias for your local MinIO.
@@ -87,6 +90,7 @@ docker compose --env-file plane.env exec plane-minio \
 ```
 
 3. Mirror local data to your cloud bucket.
+
 ```bash
 docker compose --env-file plane.env exec plane-minio \
     mc mirror localminio/uploads cloudminio/<bucket-name> --overwrite
@@ -97,6 +101,7 @@ This copies all files from the local uploads bucket to your cloud bucket. The `-
 Wait for the sync to complete before continuing.
 
 ## Update your environment configuration
+
 Open plane.env and update the database and storage settings to point to your cloud services.
 
 ### Database
@@ -116,6 +121,7 @@ AWS_REGION = <aws-region>
 ```
 
 ## Restart Plane
+
 Bring all services back up
 
 ```bash
@@ -125,6 +131,5 @@ docker compose up -d
 Open Plane in a browser and verify that your data, attachments, and pages are intact.
 
 ## After migration
+
 Keep plane-backup.dump in a safe location as a point-in-time backup.
-
-
