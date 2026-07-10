@@ -475,6 +475,10 @@ export default extendConfig(
                 { text: "View Logs", link: "/self-hosting/manage/view-logs" },
                 { text: "Health checks", link: "/self-hosting/manage/health-checks" },
                 { text: "Migrate Plane", link: "/self-hosting/manage/migrate-plane" },
+                {
+                  text: "Migrate to external services",
+                  link: "/self-hosting/manage/migration/migrate-data-to-external-services",
+                },
                 { text: "Prime CLI", link: "/self-hosting/manage/prime-cli" },
                 { text: "Manage users", link: "/self-hosting/manage/manage-instance-users" },
               ],
