@@ -1,8 +1,7 @@
 ---
-
 title: Migrate to external services
 description: Move your Plane data from the default local Postgres and MinIO containers to managed cloud services for a production ready deployment.
----------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 # Migrate to external Postgres and storage
 
@@ -14,11 +13,11 @@ This guide walks through moving your existing data from the local containers to 
 
 You need:
 
-* Docker and Docker Compose installed on the host running Plane
-* The PostgreSQL client `psql` and `pg_restore` installed on your local machine
-* Your cloud Postgres connection details: host, username, database name, and password
-* Your cloud storage connection details: endpoint URL, access key, secret key, and bucket name
-* Your cloud PostgreSQL version should ideally match your source PostgreSQL version
+- Docker and Docker Compose installed on the host running Plane
+- The PostgreSQL client `psql` and `pg_restore` installed on your local machine
+- Your cloud Postgres connection details: host, username, database name, and password
+- Your cloud storage connection details: endpoint URL, access key, secret key, and bucket name
+- Your cloud PostgreSQL version should ideally match your source PostgreSQL version
 
 ## Stop Plane
 
