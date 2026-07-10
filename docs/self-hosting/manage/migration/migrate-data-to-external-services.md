@@ -1,6 +1,7 @@
 ---
 title: Migrate to external services
 description: Move your Plane data from the default local Postgres and MinIO containers to managed cloud services for a production ready deployment.
+keywords: Plane migration, external Postgres, cloud storage, MinIO migration, self-hosted Plane, production deployment, pg_dump, pg_restore, S3-compatible storage
 ---
 
 # Migrate to external Postgres and storage
