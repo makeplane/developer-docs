@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
+    "build": "(git fetch --unshallow || true) && vitepress build docs",
     "preview": "vitepress preview docs",
     "fix:format": "prettier --write .",
     "check:format": "prettier --check .",
