@@ -202,6 +202,7 @@ Plane AI supports multiple LLM providers. Configure one or more by adding their 
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
 | **OPENAI_API_KEY**        | API key for OpenAI models                                                                                                                              | Optional |
 | **CLAUDE_API_KEY**        | API key for Anthropic models                                                                                                                           | Optional |
+| **BASETEN_API_KEY**       | API key for Baseten models (Kimi K2.6, GLM 5.2, DeepSeek V4). Requires `BASETEN_BASE_URL`.                                                             | Optional |
 | **GROQ_API_KEY**          | API key for speech-to-text features                                                                                                                    | Optional |
 | **CUSTOM_LLM_ENABLED**    | Set to `true` to enable a custom LLM. Supports OpenAI-compatible endpoints and AWS Bedrock.                                                            | Optional |
 | **CUSTOM_LLM_PROVIDER**   | Backend provider for the custom model. Accepted values: `openai` (default), `bedrock`.                                                                 | Optional |
@@ -216,12 +217,13 @@ Plane AI supports multiple LLM providers. Configure one or more by adding their 
 
 Use these when routing requests through self-hosted gateways, proxies, or compatible third-party endpoints.
 
-| Variable            | Description                                | Default   |
-| ------------------- | ------------------------------------------ | --------- |
-| **OPENAI_BASE_URL** | Custom base URL for OpenAI-compatible APIs | OpenAI    |
-| **CLAUDE_BASE_URL** | Custom base URL for Claude-compatible APIs | Anthropic |
-| **COHERE_BASE_URL** | Custom base URL for Cohere APIs            | Cohere    |
-| **GROQ_BASE_URL**   | Custom base URL for Groq APIs              | Groq      |
+| Variable             | Description                                | Default                           |
+| -------------------- | ------------------------------------------ | --------------------------------- |
+| **OPENAI_BASE_URL**  | Custom base URL for OpenAI-compatible APIs | OpenAI                            |
+| **CLAUDE_BASE_URL**  | Custom base URL for Claude-compatible APIs | Anthropic                         |
+| **BASETEN_BASE_URL** | Base URL for Baseten APIs                  | `https://inference.baseten.co/v1` |
+| **COHERE_BASE_URL**  | Custom base URL for Cohere APIs            | Cohere                            |
+| **GROQ_BASE_URL**    | Custom base URL for Groq APIs              | Groq                              |
 
 #### Embedding model configuration
 
@@ -299,6 +301,8 @@ For setup instructions, supported models, and IAM permissions, see [Configure Pl
 | **OPENAI_BASE_URL**                     | Custom base URL for OpenAI-compatible API endpoints.                                                                                                                                                      |                                       |
 | **CLAUDE_API_KEY**                      | API key for Anthropic Claude services used by Plane Intelligence.                                                                                                                                         |                                       |
 | **CLAUDE_BASE_URL**                     | Custom base URL for Claude API endpoints.                                                                                                                                                                 |                                       |
+| **BASETEN_API_KEY**                     | API key for Baseten services (Kimi K2.6, GLM 5.2, DeepSeek V4) used by Plane Intelligence. Requires `BASETEN_BASE_URL`.                                                                                   |                                       |
+| **BASETEN_BASE_URL**                    | Base URL for Baseten API endpoints.                                                                                                                                                                       | `https://inference.baseten.co/v1`     |
 | **GROQ_API_KEY**                        | API key for Groq services used by Plane Intelligence.                                                                                                                                                     |                                       |
 | **GROQ_BASE_URL**                       | Custom base URL for Groq API endpoints.                                                                                                                                                                   |                                       |
 | **COHERE_API_KEY**                      | API key for Cohere services used by Plane Intelligence.                                                                                                                                                   |                                       |
