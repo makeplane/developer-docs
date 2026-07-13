@@ -138,6 +138,10 @@ export default extendConfig(
       description:
         "Self-host Plane, integrate with our API, configure webhooks, and extend your project management platform. Complete guides for developers building on Plane.",
 
+      // SEO: Per-page lastmod in sitemap.xml from each file's latest git commit.
+      // Requires full git history at build time (see package.json build script).
+      lastUpdated: true,
+
       // SEO: Generate sitemap automatically
       sitemap: {
         hostname: "https://developers.plane.so",
