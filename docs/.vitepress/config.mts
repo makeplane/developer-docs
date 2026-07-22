@@ -412,6 +412,7 @@ export default extendConfig(
                     },
                   ],
                 },
+                { text: "Session expiry", link: "/self-hosting/govern/god-mode/session-expiry" },
                 { text: "External secrets", link: "/self-hosting/govern/external-secrets" },
                 { text: "External reverse proxy", link: "/self-hosting/govern/reverse-proxy" },
                 { text: "Private storage buckets", link: "/self-hosting/govern/private-bucket" },
