@@ -327,47 +327,47 @@ All v2 payloads share this top-level structure:
 
 ```json
 {
-   "version":"v2",
-   "delivery_id":"2a0d0510-9052-446e-a1c7-a704bbd68cba",
-   "event_id":"9d508cd9-36c2-44a5-928d-7ee2f2a3b8a8",
-   "entity_id":"775c5716-5302-4617-bb9f-2cd843911268",
-   "entity_type":"issue",
-   "event":"WebhookScope.ScopeChoices.WORK_ITEM_UPDATED",
-   "webhook_id":"8944ed18-1331-4eae-b9bb-7c40864b8abd",
-   "workspace_id":"b54ecb0d-e3eb-4986-b238-f83fd8665e65",
-   "data":{
-      "id":"775c5716-5302-4617-bb9f-2cd843911268",
-      "name":"webhook test 3",
-      "point":"None",
-      "type_id":"None",
-      "is_draft":false,
-      "priority":"none",
-      "state_id":"067b88e5-304b-4221-ba09-94340dcc36e5",
-      "label_ids":[],
-      "parent_id":"None",
-      "created_at":"2026-03-31T11:44:41.249292+00:00",
-      "deleted_at":"None",
-      "project_id":"59e3be42-87ec-4950-99a3-ae639cf2b089",
-      "sort_order":75535,
-      "start_date":"None",
-      "updated_at":"2026-03-31T11:44:41.249304+00:00",
-      "archived_at":"None",
-      "external_id":"None",
-      "sequence_id":3,
-      "target_date":"None",
-      "assignee_ids":[ ],
-      "completed_at":"None",
-      "workspace_id":"b54ecb0d-e3eb-4986-b238-f83fd8665e65",
-      "created_by_id":"754009ab-3fb5-424e-909a-b46e9c9d0c4f",
-      "updated_by_id":"None",
-      "external_source":"None",
-      "description_json":{},
-      "last_activity_at":"2026-03-31T11:44:41.346305+00:00",
-      "estimate_point_id":"None"
-   },
-   "previous_attributes":{
-      "last_activity_at":"2026-03-31 11:44:41.242868+00"
-   }
+  "version": "v2",
+  "delivery_id": "2a0d0510-9052-446e-a1c7-a704bbd68cba",
+  "event_id": "9d508cd9-36c2-44a5-928d-7ee2f2a3b8a8",
+  "entity_id": "775c5716-5302-4617-bb9f-2cd843911268",
+  "entity_type": "issue",
+  "event": "WebhookScope.ScopeChoices.WORK_ITEM_UPDATED",
+  "webhook_id": "8944ed18-1331-4eae-b9bb-7c40864b8abd",
+  "workspace_id": "b54ecb0d-e3eb-4986-b238-f83fd8665e65",
+  "data": {
+    "id": "775c5716-5302-4617-bb9f-2cd843911268",
+    "name": "webhook test 3",
+    "point": "None",
+    "type_id": "None",
+    "is_draft": false,
+    "priority": "none",
+    "state_id": "067b88e5-304b-4221-ba09-94340dcc36e5",
+    "label_ids": [],
+    "parent_id": "None",
+    "created_at": "2026-03-31T11:44:41.249292+00:00",
+    "deleted_at": "None",
+    "project_id": "59e3be42-87ec-4950-99a3-ae639cf2b089",
+    "sort_order": 75535,
+    "start_date": "None",
+    "updated_at": "2026-03-31T11:44:41.249304+00:00",
+    "archived_at": "None",
+    "external_id": "None",
+    "sequence_id": 3,
+    "target_date": "None",
+    "assignee_ids": [],
+    "completed_at": "None",
+    "workspace_id": "b54ecb0d-e3eb-4986-b238-f83fd8665e65",
+    "created_by_id": "754009ab-3fb5-424e-909a-b46e9c9d0c4f",
+    "updated_by_id": "None",
+    "external_source": "None",
+    "description_json": {},
+    "last_activity_at": "2026-03-31T11:44:41.346305+00:00",
+    "estimate_point_id": "None"
+  },
+  "previous_attributes": {
+    "last_activity_at": "2026-03-31 11:44:41.242868+00"
+  }
 }
 ```
 
