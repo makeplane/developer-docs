@@ -56,6 +56,10 @@ export default extendConfig(
   withMermaid(
     defineConfig({
       markdown: {
+        theme: {
+          light: "github-light",
+          dark: "github-dark",
+        },
         config(md) {
           md.use(tabsMarkdownPlugin);
         },
