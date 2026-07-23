@@ -97,6 +97,11 @@ html:not(.dark):not([data-theme="dark"]) {
   --color-plane-500: #006399;
   --color-plane-600: #005280;
 
+  /* Inline code — neutral body-text color instead of the VitePress default
+     (brand blue), which is hard to read on the dark pill background.
+     Linked code keeps --vp-code-link-color (brand) so links stay visible. */
+  --vp-code-color: var(--vp-c-text-1);
+
   --docs-divider: #ececec;
 
   --vp-c-bg: #ffffff;
@@ -158,7 +163,7 @@ html:not(.dark):not([data-theme="dark"]) {
 :root[data-variant="voidzero"]:not(.dark):not([data-theme="dark"]),
 :root[data-variant="vitest"]:not(.dark):not([data-theme="dark"]) {
   --color-brand: #006399;
-  --vp-code-color: #006399;
+  --vp-code-color: var(--vp-c-text-1);
 }
 
 /* --- Dark mode --- */
