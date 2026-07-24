@@ -275,13 +275,7 @@ export default extendConfig(
 
         nav: [
           { text: "Self-hosting", link: "/self-hosting/overview" },
-          {
-            text: "API Reference",
-            items: [
-              { text: "v2 (latest)", link: "/api-reference/v2/introduction" },
-              { text: "v1 (legacy)", link: "/api-reference/v1/introduction" },
-            ],
-          },
+          { text: "API Reference", link: "/api-reference/v2/introduction" },
           { text: "Build and extend", link: "/dev-tools/build-plane-app/overview" },
           { text: "Plane Docs", link: "https://docs.plane.so", noIcon: true },
           { text: "Sign in", link: "https://app.plane.so/sign-in" },
@@ -310,10 +304,9 @@ export default extendConfig(
             {
               text: "API Reference",
               items: [
-                { text: "Introduction (v2)", link: "/api-reference/v2/introduction" },
-                { text: "Work items (v2)", link: "/api-reference/v2/work-items/overview" },
+                { text: "Introduction", link: "/api-reference/v2/introduction" },
+                { text: "Work items", link: "/api-reference/v2/work-items/overview" },
                 { text: "Migrating from v1", link: "/api-reference/v2/migrating-from-v1" },
-                { text: "v1 Reference (legacy)", link: "/api-reference/v1/introduction" },
               ],
             },
             {
@@ -1124,7 +1117,7 @@ export default extendConfig(
 
           "/api-reference/v2/": [
             {
-              text: "API Reference v2",
+              text: "API Reference",
               items: [
                 { text: "Introduction", link: "/api-reference/v2/introduction" },
                 { text: "Authentication", link: "/api-reference/v2/authentication" },
