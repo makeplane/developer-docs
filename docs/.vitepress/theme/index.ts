@@ -27,8 +27,25 @@ function updateLayout() {
   if (typeof document === "undefined") return;
 
   const path = window.location.pathname;
-  const isApiPage =
-    path.includes("/api-reference/") && !path.endsWith("/introduction") && !path.endsWith("/introduction.html");
+  // Prose pages under /api-reference/ (the introductions and the v2 concept
+  // guides) keep the normal doc layout; only endpoint pages go wide.
+  const PROSE_PAGES = [
+    "introduction",
+    "authentication",
+    "pagination",
+    "filtering-and-ordering",
+    "expanding-relations",
+    "errors",
+    "work-item-type-modes",
+    "migrating-from-v1",
+  ];
+  const slug =
+    path
+      .replace(/\.html$/, "")
+      .replace(/\/$/, "")
+      .split("/")
+      .pop() ?? "";
+  const isApiPage = path.includes("/api-reference/") && !PROSE_PAGES.includes(slug);
 
   const vpDoc = document.querySelector(".VPDoc");
   if (vpDoc) {
