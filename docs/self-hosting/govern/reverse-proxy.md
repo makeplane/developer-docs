@@ -225,7 +225,7 @@ Plane CE relies on path-based routing to direct traffic to different services. Y
 | `/god-mode/*` | `admin` | 3000 |
 | `/live/*` | `live` | 3000 |
 | `/api/*`, `/auth/*`, `/static/*` | `api` | 8000 |
-| `/${AWS_S3_BUCKET_NAME}/*` | `plane-minio` | 9000 |
+| `/<bucket-name>/*` (default: `/uploads`) | `plane-minio` | 9000 |
 
 ### 4. Configuration templates
 
@@ -239,6 +239,7 @@ server {
     server_name <domain>;
 
     # File uploads (MinIO)
+    # Replace 'uploads' with your configured AWS_S3_BUCKET_NAME if changed
     location ~ ^/uploads(/.*)?$ {
         proxy_pass http://plane-minio:9000;
         proxy_set_header Host $http_host;
@@ -259,6 +260,7 @@ server {
     # Live (WebSockets)
     location /live/ {
         proxy_pass http://live:3000;
+        proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_set_header Host $http_host;
@@ -343,35 +345,35 @@ services:
     # ...
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.plane-api.rule=Host(`<domain>`) && (PathPrefix(`/api`) || PathPrefix(`/auth`) || PathPrefix(`/static`))"
+      - "traefik.http.routers.plane-api.rule=Host(`<domain>`) && (Path(`/api`) || PathPrefix(`/api/`) || Path(`/auth`) || PathPrefix(`/auth/`) || Path(`/static`) || PathPrefix(`/static/`))"
       - "traefik.http.services.plane-api.loadbalancer.server.port=8000"
 
   admin:
     # ...
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.plane-admin.rule=Host(`<domain>`) && PathPrefix(`/god-mode`)"
+      - "traefik.http.routers.plane-admin.rule=Host(`<domain>`) && (Path(`/god-mode`) || PathPrefix(`/god-mode/`))"
       - "traefik.http.services.plane-admin.loadbalancer.server.port=3000"
 
   space:
     # ...
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.plane-space.rule=Host(`<domain>`) && PathPrefix(`/spaces`)"
+      - "traefik.http.routers.plane-space.rule=Host(`<domain>`) && (Path(`/spaces`) || PathPrefix(`/spaces/`))"
       - "traefik.http.services.plane-space.loadbalancer.server.port=3000"
 
   live:
     # ...
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.plane-live.rule=Host(`<domain>`) && PathPrefix(`/live`)"
+      - "traefik.http.routers.plane-live.rule=Host(`<domain>`) && (Path(`/live`) || PathPrefix(`/live/`))"
       - "traefik.http.services.plane-live.loadbalancer.server.port=3000"
 
   plane-minio:
     # ...
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.plane-minio.rule=Host(`<domain>`) && PathPrefix(`/uploads`)"
+      - "traefik.http.routers.plane-minio.rule=Host(`<domain>`) && (Path(`/uploads`) || PathPrefix(`/uploads/`))"
       - "traefik.http.services.plane-minio.loadbalancer.server.port=9000"
 ```
 
