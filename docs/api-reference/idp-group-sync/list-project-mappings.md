@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, idp group sync, list proj
 <div class="api-two-column">
 <div class="api-left">
 
-Retrieve all IdP group → project mappings for the workspace.
+Retrieve all IdP group → project mappings for the workspace. Pass `project_identifier` to return only the mappings for a single project.
 
 <div class="params-section">
 
@@ -25,6 +25,21 @@ Retrieve all IdP group → project mappings for the workspace.
 <ApiParam name="workspace_slug" type="string" :required="true">
 
 The workspace_slug represents the unique workspace identifier for a workspace in Plane. It can be found in the URL. For example, in the URL `https://app.plane.so/my-team/projects/`, the workspace slug is `my-team`.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
+### Query Parameters
+
+<div class="params-list">
+
+<ApiParam name="project_identifier" type="string" :required="false">
+
+Filter mappings to a single project by its identifier (e.g. `ENG`). Case-insensitive — the value is matched against the uppercase project identifier. An unknown identifier returns an empty list.
 
 </ApiParam>
 
