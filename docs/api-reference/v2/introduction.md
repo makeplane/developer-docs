@@ -94,7 +94,11 @@ If that returns `200`, your key is valid. If it returns `401`, the header name o
   same as sending `null` to clear it.
 - **`DELETE` returns `204`** with an empty body. Deletes are soft.
 - **Writes take ids, not nested objects.** Set a relation with its `*_id` field (`state_id`, `parent_id`, `lead_id`) or
-  its `*_ids` array (`assignee_ids`, `label_ids`).
+  its `*_ids` array (`assignee_ids`, `label_ids`). Work items also accept write-only human-readable parallels
+  (`state`, `type`, `parent`, `assignees`, `labels`, `estimate`) — see
+  [Work items](/api-reference/v2/work-items/overview#writing-send-ids-or-send-names).
+- **Sparse responses with `?fields=`.** Ask for only the keys you need; unrequested keys are omitted. See
+  [Sparse fieldsets](/api-reference/v2/fields).
 - **Audit fields are read-only.** `created_at`, `created_by_id`, and their siblings are set server-side; sending them
   has no effect.
 
@@ -132,13 +136,25 @@ embedded by default, so response size stays predictable no matter how many relat
 }
 ```
 
+Trim further with **`?fields=`** — unrequested keys are omitted from the JSON (not nulled). `?fields=id,name,state_id`
+returns only those keys; `?fields=all` returns every requestable field for that response shape. See
+[Sparse fieldsets](/api-reference/v2/fields).
+
 ### Expansion is separate-key
 
 `?expand=` **adds** an object beside the id — it never replaces it. `?expand=state` gives you `state_id` _and_ a
 `state` object, so code that reads `state_id` keeps working whether or not the caller asked for the expansion.
 
-Only work items and members support `?expand=`. See
-[Expanding relations](/api-reference/v2/expanding-relations) for the allowed values.
+Work items accept `state`, `type`, `parent`, `assignees`, `labels`, `cycle`, and `modules`. Members, cycles, modules,
+and several other resources declare their own expand allowlists. See
+[Expanding relations](/api-reference/v2/expanding-relations).
+
+### Paths address by stable keys
+
+Detail segments use UUIDs (or the three bare human keys: workspace slug, project identifier, work-item `PROJ-123`).
+There are no scheme-prefixed path aliases (`name:…`, `key:…`, `external:…`). Resolve a mutable attribute — a state
+name, a label name, an external id — with a **list** filter such as `?name=` or `?external_id=`, optionally paired with
+`?fields=id`. Parent `project_id` segments accept the project UUID **or** its bare identifier (`ENG`).
 
 ### Errors are RFC 9457
 
@@ -203,6 +219,7 @@ authority for every field, enum, and scope in this reference.
 - [Authentication](/api-reference/v2/authentication) — API keys, OAuth 2.0, and the scope model.
 - [Pagination](/api-reference/v2/pagination) — offset by default, cursor for deep traversal.
 - [Filtering and ordering](/api-reference/v2/filtering-and-ordering) — query parameters on list endpoints.
+- [Sparse fieldsets](/api-reference/v2/fields) — `?fields=` omit semantics and list deferral.
 - [Expanding relations](/api-reference/v2/expanding-relations) — where `?expand=` works and what it accepts.
 - [Errors](/api-reference/v2/errors) — the RFC 9457 problem shape and the full code table.
 - [Migrating from v1](/api-reference/v2/migrating-from-v1) — what changed and how to move.

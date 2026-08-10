@@ -197,6 +197,31 @@ type's defaults. See [work item properties](/api-reference/v2/work-item-properti
 
 <div class="params-section">
 
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included when the
+resource declares one. `all` returns every requestable field for this response shape. Unknown names are a `400`.
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed on the response: `state`, `type`, `parent`, `assignees`, `labels`, `cycle`,
+`modules`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
 ### Scopes
 
 `projects.work_items:write`
@@ -296,10 +321,13 @@ const data = await response.json();
   "identifier": "PROJ-142",
   "sequence_id": 142,
   "priority": "high",
+  "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
   "state_id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
   "type_id": null,
   "assignee_ids": ["16c61a3a-512a-48ac-b0be-b6b46fe6f430"],
   "label_ids": [],
+  "cycle_id": null,
+  "module_ids": [],
   "parent_id": null,
   "start_date": null,
   "target_date": "2026-01-20",
@@ -309,6 +337,7 @@ const data = await response.json();
   "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
   "custom_fields": {}
 }
+
 ```
 
 </ResponsePanel>

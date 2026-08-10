@@ -79,6 +79,14 @@ A search term matched against the state name.
 
 </ApiParam>
 
+<ApiParam name="name" type="string" :required="false">
+
+Exact state name match (case-insensitive). Use this to resolve a human label to a `state_id` — for example
+`?name=In%20Progress&fields=id,name`. Prefer this over free-text `search` when you want an exact identity lookup.
+There is no path alias such as `…/states/name:…/`.
+
+</ApiParam>
+
 </div>
 </div>
 
@@ -137,6 +145,24 @@ Defaults to `true`. Set to `false` to skip the `COUNT(*)` behind `total_count`; 
 </div>
 
 <div class="params-section">
+
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included when the
+resource declares one. `all` returns every requestable field for this response shape. Unknown names are a `400`.
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
+</div>
+</div>
 
 ### Scopes
 

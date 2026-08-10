@@ -1,7 +1,7 @@
 ---
 title: Migrating from v1
 description: A practical guide to moving an integration from the Plane REST API v1 to v2. Path and header changes, PATCH-only writes, RFC 9457 errors, sparse reads, the new pagination envelope, renamed fields, and what v2 does not cover yet.
-keywords: plane api v2 migration, v1 to v2, plane rest api upgrade, is_default, description_html, custom_fields, RFC 9457, sparse reads, PATCH only
+keywords: plane api v2 migration, v1 to v2, plane rest api upgrade, is_default, description_html, custom_fields, RFC 9457, sparse reads, fields, PATCH only
 ---
 
 # Migrating from v1
@@ -20,7 +20,7 @@ This page is the checklist for moving a call across.
 | Errors            | Ad-hoc JSON bodies         | RFC 9457 `application/problem+json` with stable `code`      |
 | Relations on read | Embedded objects           | `*_id` / `*_ids`, plus `?expand=` on work items and members |
 | List envelope     | `results` + cursor strings | `data` + `pagination.style`                                 |
-| Sparse fieldsets  | `?fields=`                 | Not needed — reads are already sparse                       |
+| Sparse fieldsets  | `?fields=` (include-style) | `?fields=` with **omit** semantics + `all`; list deferral   |
 
 Unchanged: the base URL (`https://api.plane.so`), the trailing slash on every path, JSON in and out, and the fine-grained OAuth scope names (`projects.work_items:read`, `projects.states:write`, and so on).
 
@@ -103,19 +103,45 @@ To-one relations come back as `<name>_id`; to-many relations as `<name>_ids` arr
 
 Where you genuinely need the object, add `?expand=`. It is **separate-key**: `?expand=state` keeps `state_id` _and_ adds a `state` object beside it, so nothing you already read stops working.
 
-`?expand=` is supported on **work items** (`state`, `type`, `parent`, `assignees`, `labels`) and on **workspace and project members** (`member`). No other v2 resource supports it, and an unknown value is a `400`. Full details in [Expanding relations](/api-reference/v2/expanding-relations).
+Work items accept `state`, `type`, `parent`, `assignees`, `labels`, `cycle`, and `modules`. Members accept `member`. Cycles, modules, comments, and other resources declare their own allowlists. An unknown value is a `400`. Full details in [Expanding relations](/api-reference/v2/expanding-relations).
 
 ::: tip You usually need fewer objects than v1 gave you
 v1 embedded relations whether or not you used them. Before reaching for `?expand=`, check whether the id is all your code actually consumed — for cache keys, joins, and foreign keys it almost always is.
 :::
 
-There is no `?fields=` in v2. Reads are already sparse, so there is nothing to trim.
+### `?fields=` is omit-based
+
+v2 still has `?fields=`, but the semantics differ from a naive "include only" mental model of v1:
+
+- Unrequested keys are **absent**, not `null`
+- `?fields=all` returns every requestable field for that response shape
+- Collection rows may omit heavy or expensive fields by default (list deferral); naming them pulls them back
+- Work-item `custom_fields` is **detail-only** — absent on list rows, and requesting it on a list is a `400`
+
+```bash
+# v2 — only the keys you name (id is always forced when the resource declares one)
+GET /api/v2/.../work-items/?fields=id,name,state_id
+```
+
+See [Sparse fieldsets](/api-reference/v2/fields).
 
 ## 6. Writes take ids
 
 v2 write payloads take identifiers, never nested objects: `state_id`, `parent_id`, `assignee_ids`, `label_ids`, modules' `lead_id`. An id belonging to another project or workspace is a clean `400` — it never silently links to nothing.
 
+Work items additionally accept write-only human-readable parallels (`state`, `type`, `parent`, `assignees`, `labels`, `estimate`) so importers and agents can avoid a lookup round trip. Sending both a parallel and its `*_id` sibling is a `400`. See [Work items](/api-reference/v2/work-items/overview#writing-send-ids-or-send-names).
+
 Audit fields (`created_at`, `created_by_id`, and friends) are read-only. Sending them has no effect.
+
+## 6b. No path aliases for attribute lookup
+
+v2 does **not** accept scheme-prefixed detail segments such as `…/states/name:In%20Progress/`. Detail paths use UUIDs (plus workspace slug, bare project identifier, and work-item `PROJ-123`). Resolve a name or external id on the list endpoint:
+
+```bash
+GET /api/v2/workspaces/my-team/projects/ENG/states/?name=In%20Progress&fields=id
+```
+
+Parent `project_id` path segments accept the project UUID or its bare identifier (`ENG`).
 
 ## 7. The pagination envelope changed
 

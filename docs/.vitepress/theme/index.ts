@@ -35,6 +35,7 @@ function updateLayout() {
     "authentication",
     "pagination",
     "filtering-and-ordering",
+    "fields",
     "expanding-relations",
     "errors",
     "work-item-type-modes",

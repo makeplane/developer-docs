@@ -172,6 +172,24 @@ Defaults to `true`. Set to `false` to skip the `COUNT(*)` behind `total_count`; 
 
 <div class="params-section">
 
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included when the
+resource declares one. `all` returns every requestable field for this response shape. Unknown names are a `400`.
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
+</div>
+</div>
+
 ### Scopes
 
 `workspaces.audit_logs:read`
