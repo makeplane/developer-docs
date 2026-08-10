@@ -1123,6 +1123,7 @@ export default extendConfig(
                 { text: "Authentication", link: "/api-reference/v2/authentication" },
                 { text: "Pagination", link: "/api-reference/v2/pagination" },
                 { text: "Filtering & Ordering", link: "/api-reference/v2/filtering-and-ordering" },
+                { text: "Sparse Fieldsets", link: "/api-reference/v2/fields" },
                 { text: "Expanding Relations", link: "/api-reference/v2/expanding-relations" },
                 { text: "Errors", link: "/api-reference/v2/errors" },
                 { text: "Migrating from v1", link: "/api-reference/v2/migrating-from-v1" },

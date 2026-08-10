@@ -42,6 +42,25 @@ Filter a relation with its **`*_id` parameter**. There is no bare-name form — 
 
 This mirrors how writes work — you set a relation with `state_id`, and you filter on it with `state_id` too. See [Migrating from v1](/api-reference/v2/migrating-from-v1) if you are used to v1's embedded relation objects.
 
+## Identity filters (resolve a name or key)
+
+Detail paths do not accept attribute aliases such as `name:In Progress`. Look up a record by a mutable attribute on the **list** endpoint instead. These filters are exact (case-insensitive for names) and return zero, one, or many rows — they never invent a single-object 409.
+
+| Filter | Typical resources |
+| --- | --- |
+| `?name=` | States, labels, cycles, modules, and other named collections |
+| `?external_id=` / `?external_source=` | Work items, states, labels, cycles, modules, and other importable resources |
+| `?search=` | Partial match — broader than `?name=` |
+
+Pair with `?fields=id` (or `id,name`) when you only need an id for a later write:
+
+```bash
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/ENG/states/?name=In%20Progress&fields=id,name" \
+  -H "X-Api-Key: $PLANE_API_KEY"
+```
+
+See [Sparse fieldsets](/api-reference/v2/fields#addressing-by-attribute-not-by-path-alias).
+
 ```bash
 # every cycle owned by one person
 curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3-94aa-50dc9427067b/cycles/?owned_by_id=16c61a3a-512a-48ac-b0be-b6b46fe6f430" \

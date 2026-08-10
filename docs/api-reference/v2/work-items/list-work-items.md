@@ -32,9 +32,9 @@ The workspace slug. It appears in your Plane URLs — in `https://app.plane.so/m
 
 </ApiParam>
 
-<ApiParam name="project_id" type="string (uuid)" :required="true">
+<ApiParam name="project_id" type="string" :required="true">
 
-The project to list work items from.
+The project to list work items from. Accepts the project UUID or its bare identifier (for example `ENG`).
 
 </ApiParam>
 
@@ -238,16 +238,29 @@ the returned `next_cursor` as described in [Pagination](/api-reference/v2/pagina
 
 <div class="params-section">
 
-### Expansion
+### Response shaping
 
 <div class="params-list">
 
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included.
+`all` returns every requestable field for a collection row. `custom_fields` is **not** available here — requesting it
+is a `400`. See [Sparse fieldsets](/api-reference/v2/fields).
+
+Allowed values (also enumerated in OpenAPI): `all`, `archived_at`, `assignee_ids`, `created_at`, `created_by_id`,
+`cycle_id`, `id`, `identifier`, `is_draft`, `label_ids`, `module_ids`, `name`, `parent_id`, `priority`, `project_id`,
+`sequence_id`, `start_date`, `state_id`, `target_date`, `type_id`.
+
+</ApiParam>
+
 <ApiParam name="expand" type="string" :required="false">
 
-Comma-separated relations to embed alongside the ids: `state`, `type`, `parent`, `assignees`, `labels`.
+Comma-separated relations to embed alongside the ids: `state`, `type`, `parent`, `assignees`, `labels`, `cycle`,
+`modules`.
 
 Expansion is separate-key — `?expand=state` keeps `state_id` and adds a `state` object next to it. An unknown value is
-a `400`.
+a `400`. See [Expanding relations](/api-reference/v2/expanding-relations).
 
 </ApiParam>
 
@@ -357,18 +370,20 @@ const data = await response.json();
       "identifier": "PROJ-142",
       "sequence_id": 142,
       "priority": "high",
+      "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
       "state_id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
       "type_id": "2d9d1a97-5c6f-4a1e-9d5b-8c2f7e30b6a4",
       "assignee_ids": ["16c61a3a-512a-48ac-b0be-b6b46fe6f430"],
       "label_ids": ["c1b8f3d6-9a44-4e12-8f7a-2b6d5c9e1a03"],
+      "cycle_id": null,
+      "module_ids": [],
       "parent_id": null,
       "start_date": "2026-01-12",
       "target_date": "2026-01-20",
       "is_draft": false,
       "archived_at": null,
       "created_at": "2026-01-14T09:22:41.478363Z",
-      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null
+      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
     },
     {
       "id": "3b7d9e40-1c62-4a85-b0f3-9d5c2e6a8471",
@@ -376,18 +391,20 @@ const data = await response.json();
       "identifier": "PROJ-141",
       "sequence_id": 141,
       "priority": "high",
+      "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
       "state_id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
       "type_id": null,
       "assignee_ids": [],
       "label_ids": [],
+      "cycle_id": null,
+      "module_ids": [],
       "parent_id": "a7e51d24-3b98-4c6d-9f10-7d2c8e4b5a61",
       "start_date": null,
       "target_date": null,
       "is_draft": false,
       "archived_at": null,
       "created_at": "2026-01-13T16:04:02.911204Z",
-      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null
+      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
     }
   ],
   "next": 50,
@@ -395,6 +412,7 @@ const data = await response.json();
   "total_count": 327,
   "pagination": { "style": "offset" }
 }
+
 ```
 
 </ResponsePanel>
@@ -410,24 +428,27 @@ const data = await response.json();
       "identifier": "PROJ-142",
       "sequence_id": 142,
       "priority": "high",
+      "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
       "state_id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
       "type_id": "2d9d1a97-5c6f-4a1e-9d5b-8c2f7e30b6a4",
       "assignee_ids": ["16c61a3a-512a-48ac-b0be-b6b46fe6f430"],
       "label_ids": ["c1b8f3d6-9a44-4e12-8f7a-2b6d5c9e1a03"],
+      "cycle_id": null,
+      "module_ids": [],
       "parent_id": null,
       "start_date": "2026-01-12",
       "target_date": "2026-01-20",
       "is_draft": false,
       "archived_at": null,
       "created_at": "2026-01-14T09:22:41.478363Z",
-      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null
+      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
     }
   ],
   "next_cursor": "b3A9MTcxJmxpbWl0PTUw",
   "has_more": true,
   "pagination": { "style": "cursor" }
 }
+
 ```
 
 </ResponsePanel>
@@ -435,15 +456,16 @@ const data = await response.json();
 </div>
 </div>
 
-## Why `custom_fields` is `null` here
+## Why `custom_fields` is absent here
 
-Custom property values are resolved per work item. Doing that for a full page would mean an extra lookup pass for every
-row, so the list endpoint skips it and returns `custom_fields: null` on every item — deliberately, not because the
-values are missing.
+`custom_fields` is **detail-only**: collection rows omit the key entirely. Resolving custom properties costs one
+lookup pass per work item, so the list path does not pay that cost. Retrieve a work item (or create/update it) to
+read property values. Requesting `?fields=custom_fields` on this endpoint is a `400`.
 
-To read custom property values, fetch the work item on its own:
-[Get a work item](/api-reference/v2/work-items/get-work-item) or
-[Get by identifier](/api-reference/v2/work-items/get-work-item-by-identifier). Both populate `custom_fields`.
+See [Get a work item](/api-reference/v2/work-items/get-work-item),
+[Get by identifier](/api-reference/v2/work-items/get-work-item-by-identifier), and
+[Sparse fieldsets](/api-reference/v2/fields#detail-only-fields).
+
 
 ## Paging through everything
 

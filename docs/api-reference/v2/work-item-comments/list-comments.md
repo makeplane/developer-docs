@@ -153,6 +153,31 @@ ordering, so check your spelling there because a typo shows up as an unexpected 
 
 <div class="params-section">
 
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included when the
+resource declares one. `all` returns every requestable field for this response shape. Unknown names are a `400`.
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids. Comments support `actor`. Expansion is separate-key.
+See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
 ### Scopes
 
 `projects.work_items.comments:read`

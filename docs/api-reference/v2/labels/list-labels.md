@@ -79,6 +79,13 @@ A search term matched against the label `name`. Use it to power type-ahead in a 
 
 </ApiParam>
 
+<ApiParam name="name" type="string" :required="false">
+
+Exact label name match (case-insensitive). Use it to resolve a label name to the id you send in `label_ids`.
+There is no path alias such as `…/labels/name:…/`. Pair with `?fields=id,name` for a cheap resolve.
+
+</ApiParam>
+
 </div>
 
 **Ordering**
@@ -135,6 +142,24 @@ Defaults to `true`. Set to `false` to omit `total_count` and skip the count quer
 </div>
 
 <div class="params-section">
+
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included when the
+resource declares one. `all` returns every requestable field for this response shape. Unknown names are a `400`.
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
+</div>
+</div>
 
 ### Scopes
 

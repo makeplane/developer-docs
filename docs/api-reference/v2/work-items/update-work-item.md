@@ -193,6 +193,31 @@ properties you submit are replaced; untouched properties keep their values and a
 
 <div class="params-section">
 
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included when the
+resource declares one. `all` returns every requestable field for this response shape. Unknown names are a `400`.
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed on the response: `state`, `type`, `parent`, `assignees`, `labels`, `cycle`,
+`modules`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
 ### Scopes
 
 `projects.work_items:write`
@@ -291,10 +316,13 @@ const data = await response.json();
   "identifier": "PROJ-142",
   "sequence_id": 142,
   "priority": "urgent",
+  "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
   "state_id": "5d2a91b7-64c0-4f38-b9e2-0a3f7c6d8149",
   "type_id": "2d9d1a97-5c6f-4a1e-9d5b-8c2f7e30b6a4",
   "assignee_ids": ["16c61a3a-512a-48ac-b0be-b6b46fe6f430", "9b7f4c53-2d18-4a6e-8c05-1f3e7d9a2b64"],
   "label_ids": ["c1b8f3d6-9a44-4e12-8f7a-2b6d5c9e1a03"],
+  "cycle_id": null,
+  "module_ids": [],
   "parent_id": null,
   "start_date": "2026-01-12",
   "target_date": null,
@@ -314,6 +342,7 @@ const data = await response.json();
     }
   }
 }
+
 ```
 
 </ResponsePanel>

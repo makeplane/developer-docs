@@ -35,7 +35,7 @@ The workspace slug. It appears in your Plane URLs — in `https://app.plane.so/m
 
 <ApiParam name="project_id" type="string (uuid)" :required="true">
 
-The project the work item belongs to.
+The project the work item belongs to. Accepts the project UUID or its bare identifier (for example `ENG`).
 
 </ApiParam>
 
@@ -54,9 +54,17 @@ The work item's UUID. This lookup is UUID-only — a `PROJ-142` identifier here 
 
 <div class="params-list">
 
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted. `id` is always included. `all` returns every
+requestable field, including `custom_fields`. See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
 <ApiParam name="expand" type="string" :required="false">
 
-Comma-separated relations to embed alongside the ids: `state`, `type`, `parent`, `assignees`, `labels`.
+Comma-separated relations to embed alongside the ids: `state`, `type`, `parent`, `assignees`, `labels`, `cycle`,
+`modules`.
 
 Expansion is separate-key — `?expand=state` keeps `state_id` and adds a `state` object next to it. An unknown value is
 a `400`.
@@ -147,10 +155,13 @@ const data = await response.json();
   "identifier": "PROJ-142",
   "sequence_id": 142,
   "priority": "high",
+  "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
   "state_id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
   "type_id": "2d9d1a97-5c6f-4a1e-9d5b-8c2f7e30b6a4",
   "assignee_ids": ["16c61a3a-512a-48ac-b0be-b6b46fe6f430"],
   "label_ids": ["c1b8f3d6-9a44-4e12-8f7a-2b6d5c9e1a03"],
+  "cycle_id": null,
+  "module_ids": [],
   "parent_id": null,
   "start_date": "2026-01-12",
   "target_date": "2026-01-20",
@@ -170,6 +181,7 @@ const data = await response.json();
     }
   }
 }
+
 ```
 
 </ResponsePanel>
@@ -183,10 +195,13 @@ const data = await response.json();
   "identifier": "PROJ-142",
   "sequence_id": 142,
   "priority": "high",
+  "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
   "state_id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
   "type_id": "2d9d1a97-5c6f-4a1e-9d5b-8c2f7e30b6a4",
   "assignee_ids": ["16c61a3a-512a-48ac-b0be-b6b46fe6f430"],
   "label_ids": ["c1b8f3d6-9a44-4e12-8f7a-2b6d5c9e1a03"],
+  "cycle_id": null,
+  "module_ids": [],
   "parent_id": null,
   "start_date": "2026-01-12",
   "target_date": "2026-01-20",
@@ -210,6 +225,7 @@ const data = await response.json();
     }
   ]
 }
+
 ```
 
 </ResponsePanel>
@@ -219,7 +235,7 @@ const data = await response.json();
 
 ## What you get here that a list doesn't give you
 
-- **`custom_fields`** — the work item type's custom property values. The list endpoint returns `null` for this field on
+- **`custom_fields`** — the work item type's custom property values. The list endpoint omits this field on
   every row to avoid resolving properties per row; only single-item reads populate it.
 - **Cheaper expansion** — `?expand=` works on both, but expanding one work item is a fixed cost while expanding a full
   page multiplies it.

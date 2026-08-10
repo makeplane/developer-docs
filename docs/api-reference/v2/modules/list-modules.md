@@ -85,6 +85,13 @@ Free-text match on the module name.
 
 </ApiParam>
 
+<ApiParam name="name" type="string" :required="false">
+
+Exact module name match (case-insensitive). Use it to resolve a human name to a module id. There is no path alias
+such as `…/modules/name:…/`.
+
+</ApiParam>
+
 **Ordering**
 
 <ApiParam name="order_by" type="string" :required="false">
@@ -142,6 +149,31 @@ The default `sort_order` is not unique, so it can't back a stable keyset. A bare
 Modules do not support `?expand=` — `lead_id` and `member_ids` are always returned as ids.
 
 <div class="params-section">
+
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated field names to return. Unrequested keys are omitted (not nulled). `id` is always included when the
+resource declares one. `all` returns every requestable field for this response shape. Unknown names are a `400`.
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids. Modules support `lead` and `members`. Expansion is separate-key.
+See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
 
 ### Scopes
 

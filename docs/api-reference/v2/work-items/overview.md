@@ -1,7 +1,7 @@
 ---
 title: Work items overview
-description: The Plane API v2 work item object. Sparse id-based reads, the PROJ-123 identifier, custom fields, human-readable write inputs, expandable relations, and every work item endpoint.
-keywords: plane api v2, work items, issues, tasks, sequence id, identifier, custom fields, expand, priority, archive work item
+description: The Plane API v2 work item object. Sparse id-based reads, ?fields=, the PROJ-123 identifier, custom fields, human-readable write inputs, expandable relations, and every work item endpoint.
+keywords: plane api v2, work items, issues, tasks, sequence id, identifier, custom fields, fields, expand, priority, archive work item
 ---
 
 # Work items overview
@@ -63,9 +63,21 @@ human-readable names you already have, so you rarely need a lookup round trip be
 
   Label ids applied to the work item. Empty array when unlabeled.
 
+- `cycle_id` _string (uuid)_
+
+  The cycle the work item belongs to, or `null`. A work item is in at most one cycle.
+
+- `module_ids` _array of string_
+
+  Module ids the work item belongs to. Empty array when the item is in no modules.
+
 - `parent_id` _string (uuid)_
 
   The parent work item, or `null` for a top-level item. A parent may live in another project of the same workspace.
+
+- `project_id` _string (uuid)_
+
+  The project that owns the work item. Always present on the read shape (including the workspace-scoped list).
 
 - `start_date` _string (date)_
 
@@ -93,13 +105,13 @@ human-readable names you already have, so you rarely need a lookup round trip be
 
 - `custom_fields` _object_
 
-  Values of the work item type's custom properties, keyed by property name. **Populated only on single-item
-  responses** — it is always `null` on the list endpoint. See [Custom fields](#custom-fields).
+  Values of the work item type's custom properties, keyed by property name. **Present only on single-item
+  responses** — collection rows omit the key entirely (`detail_only`). See [Custom fields](#custom-fields).
 
 ::: info The read shape is sparse and fixed
 `description_html`, `external_id`, `external_source`, and `estimate_point_id` are accepted on writes but are **not**
-part of the read shape — they will not come back on any response. There is also no `updated_at`, no `project_id`, and
-no `workspace_id`: you already know the project from the path.
+part of the default read shape — they will not come back on any response. There is also no `updated_at` and no
+`workspace_id`. Trim further with [`?fields=`](/api-reference/v2/fields).
 :::
 
 </div>
@@ -116,8 +128,11 @@ no `workspace_id`: you already know the project from the path.
   "priority": "high",
   "state_id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
   "type_id": "2d9d1a97-5c6f-4a1e-9d5b-8c2f7e30b6a4",
+  "project_id": "4af68566-94a4-4eb3-94aa-50dc9427067b",
   "assignee_ids": ["16c61a3a-512a-48ac-b0be-b6b46fe6f430"],
   "label_ids": ["c1b8f3d6-9a44-4e12-8f7a-2b6d5c9e1a03"],
+  "cycle_id": null,
+  "module_ids": [],
   "parent_id": null,
   "start_date": "2026-01-12",
   "target_date": "2026-01-20",
@@ -172,8 +187,12 @@ Every project-scoped route needs `projects.work_items:read` for `GET` and `proje
 | UUID (`id`)          | `8f4c2b1e-0d3a-4f7b-9c21-6e5a8b7d4f13` | `.../projects/{project_id}/work-items/{pk}/` — reads and writes   |
 | Human (`identifier`) | `PROJ-142`                             | `/api/v2/workspaces/{slug}/work-items/{identifier}/` — reads only |
 
-The two lookups are separate routes on purpose. The UUID route is the canonical surface for everything, including
-writes. The identifier route is workspace-scoped and read-only, and it exists precisely so a caller holding only
+`{project_id}` on parent path segments accepts the project UUID **or** the bare project identifier (`ENG`). There are
+no scheme-prefixed aliases (`name:…`, `external:…`) on detail segments — resolve those with list filters such as
+`?name=` or `?external_id=`.
+
+The two work-item lookups are separate routes on purpose. The UUID route is the canonical surface for everything,
+including writes. The identifier route is workspace-scoped and read-only, and it exists precisely so a caller holding only
 `PROJ-142` — a chat bot, a commit-hook, an LLM agent — can fetch the work item without first discovering which project
 it belongs to.
 
@@ -184,14 +203,13 @@ Each entry carries the property definition `id`, a human-useful `value`, and a `
 underlying record for option and relation properties (`null` for plain scalars). Properties the work item has no value
 for are omitted rather than emitted as `null`.
 
-::: warning `custom_fields` is null on the list endpoint
-Resolving custom properties costs one lookup pass per work item, so the list endpoint deliberately skips it to avoid an
-N+1 across a full page of results. `custom_fields` is populated only on retrieve, retrieve by identifier, create, and
-update. It is `null` on list, and `null` on the archive and unarchive responses too — those return the work item, not
-its property values.
+::: warning `custom_fields` is absent on the list endpoint
+Resolving custom properties costs one lookup pass per work item, so the list endpoint deliberately omits the key
+entirely (`detail_only`). `custom_fields` is populated on retrieve, retrieve by identifier, create, and update.
 
-If you are exporting custom property values for many work items, list to get the ids, then fetch the ones you need
-individually. Do not expect `custom_fields` to arrive from a list call.
+Requesting `?fields=…,custom_fields` on a list is a `400`. If you are exporting custom property values for many work
+items, list to get the ids, then fetch the ones you need individually. See
+[Sparse fieldsets](/api-reference/v2/fields#detail-only-fields).
 :::
 
 The object is empty (`{}`) when the work item is untyped or custom properties are not enabled for the workspace. See
@@ -226,17 +244,30 @@ ambiguous:
 - The human inputs are **write-only**. Responses always come back in the sparse id shape, so `state` never appears in a
   response body — `state_id` does.
 
-## Expanding relations
+## Sparse fieldsets
 
-Work items are one of only two resources that support `?expand=`. The accepted values are `state`, `type`, `parent`,
-`assignees`, and `labels`, comma-separated.
-
-Expansion is **separate-key**: the `*_id` field is always present, and the expanded object is _added_ beside it under
-the bare name. `?expand=state` gives you both `state_id` and a `state` object; it never swaps one for the other, so a
-client that reads ids keeps working when someone adds an expand to the request.
+Trim any read or write-echo response with `?fields=`. Unrequested keys are omitted (not nulled). `id` is always
+included when the resource declares one. `?fields=all` returns every requestable field for that response shape;
+collections still exclude `custom_fields`.
 
 ```bash
-GET .../work-items/?expand=state,assignees
+GET .../work-items/?fields=id,name,state_id,priority
+GET .../work-items/{pk}/?fields=id,name,custom_fields
+```
+
+See [Sparse fieldsets](/api-reference/v2/fields).
+
+## Expanding relations
+
+Work items support `?expand=` with: `state`, `type`, `parent`, `assignees`, `labels`, `cycle`, and `modules`
+(comma-separated).
+
+Expansion is **separate-key**: the `*_id` / `*_ids` field stays present by default, and the expanded object is _added_
+beside it under the bare name. `?expand=state` gives you both `state_id` and a `state` object; it never swaps one for
+the other. `?fields=` can omit the id if you only want the expanded object.
+
+```bash
+GET .../work-items/?expand=state,assignees,cycle
 ```
 
 An unknown expand value is a `400`. Expansion works on the list, both retrieve routes, and the create/update responses.
@@ -262,11 +293,14 @@ it.
   `assignees` → **`assignee_ids`**, `labels` → **`label_ids`**, `created_by` → **`created_by_id`**.
 - Reads no longer return `updated_at`, `updated_by`, `project`, `workspace`, `description_html`,
   `description_stripped`, `description_binary`, `sort_order`, `completed_at`, `estimate_point`, or `module`.
-- **`identifier`** (`PROJ-142`) and **`custom_fields`** are new on the read shape.
+- **`identifier`** (`PROJ-142`), **`cycle_id`**, **`module_ids`**, and **`custom_fields`** are part of the read shape
+  (`custom_fields` is detail-only — absent on list rows).
 - Writes accept human-readable parallels (`state`, `type`, `parent`, `assignees`, `labels`, `estimate`) alongside the
   id fields.
-- `?expand=` is now **separate-key** — it adds an object beside the id instead of replacing the id. The allowed values
-  are `state`, `type`, `parent`, `assignees`, and `labels`; v1's `project` and `module` expansions are gone.
+- `?expand=` is **separate-key** — it adds an object beside the id instead of replacing it. Allowed values:
+  `state`, `type`, `parent`, `assignees`, `labels`, `cycle`, `modules`.
+- `?fields=` trims response keys with omit semantics; pair it with list identity filters (`?name=`) instead of path
+  aliases when resolving human labels to ids.
 - Updates are `PATCH` only. `PUT` returns `405`.
 - Lists return a pagination envelope instead of a bare array, and errors are RFC 9457 `application/problem+json`.
 
