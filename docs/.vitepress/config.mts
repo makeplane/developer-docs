@@ -2567,6 +2567,17 @@ export default extendConfig(
                     { text: "Get current user", link: "/api-reference/v2/users/get-current-user" },
                   ],
                 },
+                {
+                  text: "Artifacts",
+                  collapsed: true,
+                  items: [
+                    { text: "Overview", link: "/api-reference/v2/artifacts/overview" },
+                    { text: "Get an artifact", link: "/api-reference/v2/artifacts/get-artifact" },
+                    { text: "Create an artifact", link: "/api-reference/v2/artifacts/create-artifact" },
+                    { text: "Append a new version", link: "/api-reference/v2/artifacts/update-artifact" },
+                    { text: "Publish an artifact", link: "/api-reference/v2/artifacts/publish-artifact" },
+                  ],
+                },
               ],
             },
           ],

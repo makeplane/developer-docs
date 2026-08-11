@@ -144,7 +144,8 @@ It does **not** apply to:
 
 - `APIView` endpoints — [current user](/api-reference/v2/users/get-current-user),
   [workspace features](/api-reference/v2/workspace-features/get-workspace-features),
-  [effective permissions](/api-reference/v2/permissions/get-workspace-permissions)
+  [effective permissions](/api-reference/v2/permissions/get-workspace-permissions),
+  [artifacts](/api-reference/v2/artifacts/overview)
 - `bulk` writes, whose response is a per-row result envelope rather than a resource body
 - bespoke bodies such as upload credentials and grouped relation reads
 - resources served by a compact `Lite` serializer, such as work item property options and type-property attachments

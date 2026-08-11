@@ -275,6 +275,8 @@ tier scope (`read` or `write`).
 | `webhooks:write`                                  | Write access to workspace webhooks                           |
 | `wiki.pages:read`                                 | Read access to wiki pages                                    |
 | `wiki.pages:write`                                | Write access to wiki pages                                   |
+| `workspaces.artifacts:read`                       | Read access to workspace artifacts                           |
+| `workspaces.artifacts:write`                      | Write access to workspace artifacts                          |
 | `workspaces.audit_logs:read`                      | Read access to workspace audit logs                          |
 | `workspaces.features:read`                        | Read access to workspace features                            |
 | `workspaces.features:write`                       | Write access to workspace features                           |
