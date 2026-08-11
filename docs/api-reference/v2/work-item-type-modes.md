@@ -30,9 +30,7 @@ That status is deliberate. `404` would mean "no such thing" and `403` would mean
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work_item_types_managed_at_workspace",
-  "title": "Work Item Types Managed At Workspace",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_workspace",
   "detail": "Work item types are managed at the workspace level for this workspace."
 }

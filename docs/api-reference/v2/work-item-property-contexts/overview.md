@@ -167,7 +167,7 @@ When you create a workspace-level property, Plane seeds a context named `Default
 | `PATCH`  | `/api/v2/workspaces/{slug}/work-item-properties/{property_id}/contexts/{pk}/` | Update a context |
 | `DELETE` | `/api/v2/workspaces/{slug}/work-item-properties/{property_id}/contexts/{pk}/` | Delete a context |
 
-`{property_id}` must be a workspace-level property. A project-level property id is not addressable here and returns `404 resource_not_found`.
+`{property_id}` must be a workspace-level property. A project-level property id is not addressable here and returns `404 not_found`.
 
 ## Scope: wildcards and explicit lists
 

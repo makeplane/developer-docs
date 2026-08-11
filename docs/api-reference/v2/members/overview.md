@@ -75,10 +75,16 @@ The schema types `role` as a plain string with no enum. Built-in slugs such as `
 
 ## Endpoints
 
-| Method | Path                                                       | Description            |
-| ------ | ---------------------------------------------------------- | ---------------------- |
-| `GET`  | `/api/v2/workspaces/{slug}/members/`                       | List workspace members |
-| `GET`  | `/api/v2/workspaces/{slug}/projects/{project_id}/members/` | List project members   |
+| Method   | Path                                                            | Description                   |
+| -------- | --------------------------------------------------------------- | ----------------------------- |
+| `GET`    | `/api/v2/workspaces/{slug}/members/`                            | List workspace members        |
+| `POST`   | `/api/v2/workspaces/{slug}/members/remove/`                     | Remove a workspace member     |
+| `GET`    | `/api/v2/workspaces/{slug}/project-role-distribution/`          | Get project role distribution |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/members/`      | List project members          |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/members/`      | Create a project member       |
+| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/members/{pk}/` | Delete a project member       |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/members/{pk}/` | Get a project member          |
+| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/members/{pk}/` | Update a project member       |
 
 Both endpoints return the **active** roster for their scope. The workspace list is the superset: a project member is always a workspace member too, so a `member_id` on a project roster always appears on the workspace roster as well — usually with a different `role`.
 
@@ -105,11 +111,11 @@ GET /api/v2/workspaces/my-team/members/?expand=member
 
 Expansion is **separate-key**: `member_id` stays exactly where it was and a `member` object is added beside it. The id is never swapped for an object, so code that reads `member_id` keeps working whether or not the caller expanded. The expanded object carries `id`, `display_name`, `avatar_url`, and `email`.
 
-Any other value — `user`, `project`, `role` — is rejected with `400 validation_error`. See [Expanding relations](/api-reference/v2/expanding-relations) for the full contract.
+Any other value — `user`, `project`, `role` — is rejected with `400 invalid_request`. See [Expanding relations](/api-reference/v2/expanding-relations) for the full contract.
 
 ## Roles and errors
 
-A role that is too narrow produces `403 forbidden` on the write you attempted. Roles never produce a `404`: a workspace or project outside your tenant returns `404 resource_not_found` whether or not you would have had the role for it.
+A role that is too narrow produces `403 forbidden` on the write you attempted. Roles never produce a `404`: a workspace or project outside your tenant returns `404 not_found` whether or not you would have had the role for it.
 
 ::: info A `409` is never a role problem
 If a write comes back `409 work_item_types_managed_at_workspace` or `work_item_types_managed_at_project`, the caller's role and scopes are fine. The workspace simply manages work item types on the other surface, and the same call succeeds there. See [Work item type modes](/api-reference/v2/work-item-type-modes).

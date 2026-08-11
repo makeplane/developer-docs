@@ -64,13 +64,18 @@ Deleting the property's default option leaves the property with no default. Noth
 
 ### Errors
 
-| Status | Code                                 | Cause                                                                                                                        |
-| ------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| `401`  | `unauthorized`                       | Missing or invalid credentials.                                                                                              |
-| `403`  | `forbidden`                          | Your role or token scope can't write this workspace's properties.                                                            |
-| `404`  | `resource_not_found`                 | No such workspace, workspace-level property, or option — or it's outside your tenant. Already-deleted options are `404` too. |
-| `409`  | `work_item_types_managed_at_project` | This workspace manages work item types at the project level. Use the project-level options endpoint.                         |
-| `429`  | `rate_limited`                       | Throttled. Honor the `Retry-After` header before retrying.                                                                   |
+| Status | Code                     | Cause                                                                                                                        |
+| ------ | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | The request body or a query parameter failed validation.                                                                     |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                              |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                                         |
+| `403`  | `forbidden`              | Your role or token scope can't write this workspace's properties.                                                            |
+| `404`  | `not_found`              | No such workspace, workspace-level property, or option — or it's outside your tenant. Already-deleted options are `404` too. |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                                         |
+| `409`  | `conflict`               | This workspace manages work item types at the project level. Use the project-level options endpoint.                         |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                                     |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                                          |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                                                   |
 
 </div>
 
@@ -131,9 +136,7 @@ console.log(response.status); // 204
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work_item_types_managed_at_project",
-  "title": "Work Item Types Managed At Project",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_project",
   "detail": "Work item types are managed at the project level for this workspace."
 }

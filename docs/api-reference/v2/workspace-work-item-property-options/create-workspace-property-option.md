@@ -16,7 +16,7 @@ keywords: plane api v2, create property option, workspace work item property, OP
 
 Add a choice to a workspace-level `OPTION` property. The new option is appended to the end of the property's list and becomes immediately selectable on work items across the workspace.
 
-The property must have `property_type: "OPTION"`. Posting an option to a property of any other type returns `400 validation_error` — the option list is meaningless for a `TEXT` or `DECIMAL` property.
+The property must have `property_type: "OPTION"`. Posting an option to a property of any other type returns `400 invalid_request` — the option list is meaningless for a `TEXT` or `DECIMAL` property.
 
 ::: warning Workspace mode only
 This write requires the workspace to manage work item types at the workspace level. In project mode it returns `409 work_item_types_managed_at_project` — add the option through the project-level endpoint instead. See [Work item type modes](/api-reference/v2/work-item-type-modes).
@@ -63,7 +63,7 @@ Free-form text explaining when to pick this choice.
 
 <ApiParam name="is_default" type="boolean" :required="false">
 
-Make this the property's default choice. At most one option per property can be the default, and there is no automatic hand-off: if another option already has it, this request is rejected with `400 validation_error`. Clear the current default with a `PATCH` first.
+Make this the property's default choice. At most one option per property can be the default, and there is no automatic hand-off: if another option already has it, this request is rejected with `400 invalid_request`. Clear the current default with a `PATCH` first.
 
 </ApiParam>
 
@@ -97,14 +97,18 @@ The system `external_id` came from, for example `github` or `jira`. Maximum 255 
 
 ### Errors
 
-| Status | Code                                 | Cause                                                                                                                                                   |
-| ------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`                   | Missing `name`, a field over 255 characters, `is_default` when the property already has a default, or a property whose `property_type` is not `OPTION`. |
-| `401`  | `unauthorized`                       | Missing or invalid credentials.                                                                                                                         |
-| `403`  | `forbidden`                          | Your role or token scope can't write this workspace's properties.                                                                                       |
-| `404`  | `resource_not_found`                 | No such workspace or workspace-level property, or it's outside your tenant.                                                                             |
-| `409`  | `work_item_types_managed_at_project` | This workspace manages work item types at the project level. Use the project-level options endpoint.                                                    |
-| `429`  | `rate_limited`                       | Throttled. Honor the `Retry-After` header before retrying.                                                                                              |
+| Status | Code                     | Cause                                                                                                                                                   |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | Missing `name`, a field over 255 characters, `is_default` when the property already has a default, or a property whose `property_type` is not `OPTION`. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                                                         |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                                                                    |
+| `403`  | `forbidden`              | Your role or token scope can't write this workspace's properties.                                                                                       |
+| `404`  | `not_found`              | No such workspace or workspace-level property, or it's outside your tenant.                                                                             |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                                                                    |
+| `409`  | `conflict`               | This workspace manages work item types at the project level. Use the project-level options endpoint.                                                    |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                                                                |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                                                                     |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                                                                              |
 
 </div>
 
@@ -193,9 +197,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work_item_types_managed_at_project",
-  "title": "Work Item Types Managed At Project",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_project",
   "detail": "Work item types are managed at the project level for this workspace."
 }

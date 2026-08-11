@@ -193,6 +193,37 @@ properties you submit are replaced; untouched properties keep their values and a
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `archived_at`, `assignee_ids`, `created_at`, `created_by_id`, `custom_fields`, `cycle_id`, `id`, `identifier`, `is_draft`, `label_ids`, `module_ids`, `name`, `parent_id`, `priority`, `project_id`, `sequence_id`, `start_date`, `state_id`, `target_date`, `type_id`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `assignees` (the assigned users), `cycle` (the cycle it belongs to), `labels` (the applied labels), `modules` (the modules it belongs to), `parent` (its parent work item), `state` (the work item's state object), `type` (its work item type).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.work_items:write`
@@ -203,15 +234,18 @@ properties you submit are replaced; untouched properties keep their values and a
 
 ### Errors
 
-| Status | Code                         | Cause                                                                                                                                                                                                             |
-| ------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`           | A bad `priority`; `start_date` after `target_date`; an unresolvable or ambiguous `state`/`type`/`parent`/`assignees`/`labels`/`estimate`; both a name and its `*_id`; or an id from another project or workspace. |
-| `401`  | `unauthorized`               | Missing or invalid credentials.                                                                                                                                                                                   |
-| `403`  | `forbidden`                  | Your role or token scope can't edit this work item.                                                                                                                                                               |
-| `403`  | `workflow_transition_denied` | A workflow rule forbids the requested state transition.                                                                                                                                                           |
-| `404`  | `resource_not_found`         | No such work item, or it's outside your project or tenant.                                                                                                                                                        |
-| `409`  | `conflict`                   | The write collides with a uniqueness or protected-resource constraint.                                                                                                                                            |
-| `429`  | `rate_limited`               | Throttled. Honor the `Retry-After` header before retrying.                                                                                                                                                        |
+| Status | Code                     | Cause                                                                                                                                                                                                             |
+| ------ | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | A bad `priority`; `start_date` after `target_date`; an unresolvable or ambiguous `state`/`type`/`parent`/`assignees`/`labels`/`estimate`; both a name and its `*_id`; or an id from another project or workspace. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                                                                                                                   |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                                                                                                                              |
+| `403`  | `forbidden`              | A workflow rule forbids the requested state transition.                                                                                                                                                           |
+| `404`  | `not_found`              | No such work item, or it's outside your project or tenant.                                                                                                                                                        |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                                                                                                                              |
+| `409`  | `conflict`               | The write collides with a uniqueness or protected-resource constraint.                                                                                                                                            |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                                                                                                                          |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                                                                                                                               |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                                                                                                                                        |
 
 </div>
 
@@ -322,9 +356,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/workflow_transition_denied",
-  "title": "Forbidden",
-  "status": 403,
+  "type": "forbidden",
   "code": "workflow_transition_denied",
   "detail": "State transition is not allowed."
 }

@@ -96,6 +96,37 @@ The system `external_id` came from, for example `github` or `zendesk`. Maximum 2
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `access`, `actor_id`, `comment_html`, `comment_stripped`, `created_at`, `created_by_id`, `edited_at`, `external_id`, `external_source`, `id`, `work_item_id`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `actor` (the comment author).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.work_items.comments:write`
@@ -106,14 +137,18 @@ The system `external_id` came from, for example `github` or `zendesk`. Maximum 2
 
 ### Errors
 
-| Status | Code                 | Cause                                                                  |
-| ------ | -------------------- | ---------------------------------------------------------------------- |
-| `400`  | `validation_error`   | Missing `comment_html`, or an `access` value outside the enum.         |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                        |
-| `403`  | `forbidden`          | Your role or token scope can't comment on this work item.              |
-| `404`  | `resource_not_found` | No such workspace, project, or work item, or it's outside your tenant. |
-| `409`  | `conflict`           | The write conflicts with the current state of the work item.           |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.             |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | Missing `comment_html`, or an `access` value outside the enum.                       |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't comment on this work item.                            |
+| `404`  | `not_found`              | No such workspace, project, or work item, or it's outside your tenant.               |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | The write conflicts with the current state of the work item.                         |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -200,12 +235,16 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "The request body failed validation.",
-  "errors": [{ "field": "comment_html", "message": "This field is required." }]
+  "errors": [
+    {
+      "field": "comment_html",
+      "code": "required",
+      "message": "This field is required."
+    }
+  ]
 }
 ```
 

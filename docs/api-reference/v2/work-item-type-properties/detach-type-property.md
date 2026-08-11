@@ -77,14 +77,18 @@ the `properties` array when you attached it.
 
 ### Errors
 
-| Status | Code                                   | Cause                                                                             |
-| ------ | -------------------------------------- | --------------------------------------------------------------------------------- |
-| `400`  | `validation_error`                     | Malformed request — for example a `pk` that isn't a valid UUID.                   |
-| `401`  | `unauthorized`                         | Missing or invalid credentials.                                                   |
-| `403`  | `forbidden`                            | Your role or token scope can't edit this project's work item types.               |
-| `404`  | `resource_not_found`                   | The property isn't attached to this type, or no such type, project, or workspace. |
-| `409`  | `work_item_types_managed_at_workspace` | This workspace manages work item types at the workspace level. See below.         |
-| `429`  | `rate_limited`                         | Throttled. Honor the `Retry-After` header before retrying.                        |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | Malformed request — for example a `pk` that isn't a valid UUID.                      |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't edit this project's work item types.                  |
+| `404`  | `not_found`              | The property isn't attached to this type, or no such type, project, or workspace.    |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | This workspace manages work item types at the workspace level. See below.            |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -157,9 +161,7 @@ No response body.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work_item_types_managed_at_workspace",
-  "title": "Work Item Types Managed At Workspace",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_workspace",
   "detail": "Work item types are managed at the workspace level for this workspace."
 }
@@ -171,10 +173,8 @@ No response body.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource_not_found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "The requested resource was not found."
 }
 ```

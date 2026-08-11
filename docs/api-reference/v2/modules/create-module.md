@@ -69,7 +69,7 @@ Where the module sits in its lifecycle.
 - `completed` — Delivered
 - `cancelled` — Dropped without delivering
 
-Defaults to `planned` when omitted. A value outside this list is a `400 validation_error`.
+Defaults to `planned` when omitted. A value outside this list is a `400 invalid_request`.
 
 </ApiParam>
 
@@ -128,6 +128,37 @@ the v2 API.
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `archived_at`, `created_at`, `created_by_id`, `description`, `external_id`, `external_source`, `id`, `lead_id`, `logo_props`, `member_ids`, `name`, `sort_order`, `start_date`, `status`, `target_date`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `lead` (the module lead), `members` (the module members).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.modules:write`
@@ -138,14 +169,18 @@ the v2 API.
 
 ### Errors
 
-| Status | Code                 | Cause                                                                                                                        |
-| ------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`   | Missing `name`, a `status` outside the enum, a `lead_id` who isn't a project member, or a `target_date` before `start_date`. |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                                                                              |
-| `403`  | `forbidden`          | Your role or token scope can't create modules in this project.                                                               |
-| `404`  | `resource_not_found` | No such workspace or project, or it's outside your tenant.                                                                   |
-| `409`  | `conflict`           | A module with this name already exists in the project.                                                                       |
-| `429`  | `rate_limited`       | Throttled. Wait for the interval in `Retry-After` and retry.                                                                 |
+| Status | Code                     | Cause                                                                                                                        |
+| ------ | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | Missing `name`, a `status` outside the enum, a `lead_id` who isn't a project member, or a `target_date` before `start_date`. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                              |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                                         |
+| `403`  | `forbidden`              | Your role or token scope can't create modules in this project.                                                               |
+| `404`  | `not_found`              | No such workspace or project, or it's outside your tenant.                                                                   |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                                         |
+| `409`  | `conflict`               | A module with this name already exists in the project.                                                                       |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                                     |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                                          |
+| `429`  | `rate_limited`           | Throttled. Wait for the interval in `Retry-After` and retry.                                                                 |
 
 </div>
 
@@ -248,9 +283,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/conflict",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "conflict",
   "detail": "A module with this name already exists in the project."
 }

@@ -80,9 +80,11 @@ A search term matched against the member's user record, so you can find someone 
 
 <ApiParam name="expand" type="string" :required="false">
 
-Set to `member` to embed the user beside the id. `member_id` stays in place and a `member` object with `id`, `display_name`, `avatar_url`, and `email` is added next to it.
+Comma-separated relations to embed alongside the ids: `member` (the member's user object).
 
-`member` is the only accepted value; anything else returns `400`. See [Expanding relations](/api-reference/v2/expanding-relations).
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
 
 </ApiParam>
 
@@ -142,6 +144,27 @@ Defaults to `true`. Set to `false` to skip the `COUNT(*)` behind `total_count`; 
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return on each row. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `id`, `member_id`, `role`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.members:read`
@@ -152,12 +175,14 @@ Defaults to `true`. Set to `false` to skip the `COUNT(*)` behind `total_count`; 
 
 ### Errors
 
-| Status | Code                 | Cause                                                      |
-| ------ | -------------------- | ---------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                            |
-| `403`  | `forbidden`          | Your role or token scope can't read this project's roster. |
-| `404`  | `resource_not_found` | No such workspace or project, or it's outside your tenant. |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying. |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read this project's roster.                           |
+| `404`  | `not_found`        | No such workspace or project, or it's outside your tenant.                           |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -258,10 +283,8 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource_not_found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "No Project matches the given query."
 }
 ```

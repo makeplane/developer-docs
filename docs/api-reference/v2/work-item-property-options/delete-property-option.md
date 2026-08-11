@@ -65,14 +65,18 @@ The id of the option to delete. Every ancestor in the path is enforced — an op
 
 ### Errors
 
-| Status | Code                                   | Cause                                                                                                  |
-| ------ | -------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `400`  | `validation_error`                     | The request couldn't be processed as sent — for example a malformed identifier in the path.            |
-| `401`  | `unauthorized`                         | Missing or invalid credentials.                                                                        |
-| `403`  | `forbidden`                            | Your role or token scope can't write this project's properties.                                        |
-| `404`  | `resource_not_found`                   | No such option, property, project, or workspace — or the option belongs to a different property.       |
-| `409`  | `work_item_types_managed_at_workspace` | The workspace manages work item types at the workspace level, so this project-level write is rejected. |
-| `429`  | `rate_limited`                         | Throttled. Honor the `Retry-After` header before retrying.                                             |
+| Status | Code                     | Cause                                                                                                  |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | The request couldn't be processed as sent — for example a malformed identifier in the path.            |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                        |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                   |
+| `403`  | `forbidden`              | Your role or token scope can't write this project's properties.                                        |
+| `404`  | `not_found`              | No such option, property, project, or workspace — or the option belongs to a different property.       |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                   |
+| `409`  | `conflict`               | The workspace manages work item types at the workspace level, so this project-level write is rejected. |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                               |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                    |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                             |
 
 </div>
 
@@ -81,7 +85,7 @@ If the workspace manages work item types at the **workspace** level, this projec
 :::
 
 ::: info 404 after a successful delete
-A repeat `DELETE` of the same option returns `404 resource_not_found`, not another `204`. If you are reconciling state, treat `404` on delete as "already gone" rather than as a failure.
+A repeat `DELETE` of the same option returns `404 not_found`, not another `204`. If you are reconciling state, treat `404` on delete as "already gone" rather than as a failure.
 :::
 
 </div>
@@ -142,9 +146,7 @@ console.log(response.status); // 204
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work-item-types-managed-at-workspace",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_workspace",
   "detail": "Work item types are managed at the workspace level for this workspace."
 }

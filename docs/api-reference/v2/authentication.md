@@ -194,35 +194,105 @@ role, not the token.
 These are the scopes that gate endpoints documented in this reference. Each is also satisfied by the matching global
 tier scope (`read` or `write`).
 
-| Scope                                   | Grants                                         |
-| --------------------------------------- | ---------------------------------------------- |
-| `projects.work_items:read`              | Read access to project work items              |
-| `projects.work_items:write`             | Write access to project work items             |
-| `projects.work_items.comments:read`     | Read access to work item comments              |
-| `projects.work_items.comments:write`    | Write access to work item comments             |
-| `projects.states:read`                  | Read access to project states                  |
-| `projects.states:write`                 | Write access to project states                 |
-| `projects.labels:read`                  | Read access to project labels                  |
-| `projects.labels:write`                 | Write access to project labels                 |
-| `projects.cycles:read`                  | Read access to project cycles                  |
-| `projects.cycles:write`                 | Write access to project cycles                 |
-| `projects.modules:read`                 | Read access to project modules                 |
-| `projects.modules:write`                | Write access to project modules                |
-| `projects.work_item_types:read`         | Read access to work item types                 |
-| `projects.work_item_types:write`        | Write access to work item types                |
-| `projects.work_item_properties:read`    | Read access to work item properties            |
-| `projects.work_item_properties:write`   | Write access to work item properties           |
-| `projects.members:read`                 | Read access to project members                 |
-| `workspaces.members:read`               | Read access to workspace members               |
-| `workspaces.work_item_types:read`       | Read access to workspace work item types       |
-| `workspaces.work_item_types:write`      | Write access to workspace work item types      |
-| `workspaces.work_item_properties:read`  | Read access to workspace work item properties  |
-| `workspaces.work_item_properties:write` | Write access to workspace work item properties |
-| `workspaces.features:read`              | Read access to workspace features              |
-| `workspaces.features:write`             | Write access to workspace features             |
-| `workspaces.audit_logs:read`            | Read access to workspace audit logs            |
-| `read`                                  | Read access to all resources                   |
-| `write`                                 | Write access to all resources                  |
+| Scope                                             | Grants                                                       |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| `assets:read`                                     | Read access to assets                                        |
+| `assets:write`                                    | Write access to assets                                       |
+| `automations:read`                                | Read access to automations                                   |
+| `automations:write`                               | Write access to automations                                  |
+| `customers:read`                                  | Read access to customers                                     |
+| `customers:write`                                 | Write access to customers                                    |
+| `customers.properties:read`                       | Read access to customer properties                           |
+| `customers.properties:write`                      | Write access to customer properties                          |
+| `customers.property_values:read`                  | Read access to customer property values                      |
+| `customers.property_values:write`                 | Write access to customer property values                     |
+| `customers.requests:read`                         | Read access to customer requests                             |
+| `customers.requests:write`                        | Write access to customer requests                            |
+| `initiatives:read`                                | Read access to initiatives                                   |
+| `initiatives:write`                               | Write access to initiatives                                  |
+| `initiatives.labels:read`                         | Read access to initiatives labels                            |
+| `initiatives.labels:write`                        | Write access to initiatives labels                           |
+| `projects:read`                                   | Read access to projects                                      |
+| `projects:write`                                  | Write access to projects                                     |
+| `projects.cycles:read`                            | Read access to project cycles                                |
+| `projects.cycles:write`                           | Write access to project cycles                               |
+| `projects.estimates:read`                         | Read access to project estimates                             |
+| `projects.estimates:write`                        | Write access to project estimates                            |
+| `projects.features:read`                          | Read access to project features                              |
+| `projects.features:write`                         | Write access to project features                             |
+| `projects.intakes:read`                           | Read access to project intakes                               |
+| `projects.intakes:write`                          | Write access to project intakes                              |
+| `projects.labels:read`                            | Read access to project labels                                |
+| `projects.labels:write`                           | Write access to project labels                               |
+| `projects.members:read`                           | Read access to project members                               |
+| `projects.members:write`                          | Write access to project members                              |
+| `projects.milestones:read`                        | Read access to project milestones                            |
+| `projects.milestones:write`                       | Write access to project milestones                           |
+| `projects.modules:read`                           | Read access to project modules                               |
+| `projects.modules:write`                          | Write access to project modules                              |
+| `projects.pages:read`                             | Read access to project pages                                 |
+| `projects.pages:write`                            | Write access to project pages                                |
+| `projects.states:read`                            | Read access to project states                                |
+| `projects.states:write`                           | Write access to project states                               |
+| `projects.views:read`                             | Read access to project views                                 |
+| `projects.views:write`                            | Write access to project views                                |
+| `projects.work_item_properties:read`              | Read access to work item properties                          |
+| `projects.work_item_properties:write`             | Write access to work item properties                         |
+| `projects.work_item_types:read`                   | Read access to work item types                               |
+| `projects.work_item_types:write`                  | Write access to work item types                              |
+| `projects.work_items:read`                        | Read access to project work items                            |
+| `projects.work_items:write`                       | Write access to project work items                           |
+| `projects.work_items.activities:read`             | Read access to work item activities                          |
+| `projects.work_items.attachments:read`            | Read access to work item attachments                         |
+| `projects.work_items.attachments:write`           | Write access to work item attachments                        |
+| `projects.work_items.comments:read`               | Read access to work item comments                            |
+| `projects.work_items.comments:write`              | Write access to work item comments                           |
+| `projects.work_items.links:read`                  | Read access to work item links                               |
+| `projects.work_items.links:write`                 | Write access to work item links                              |
+| `projects.work_items.relations:read`              | Read access to work item relations                           |
+| `projects.work_items.relations:write`             | Write access to work item relations                          |
+| `projects.work_items.worklogs:read`               | Read access to work item worklogs                            |
+| `projects.work_items.worklogs:write`              | Write access to work item worklogs                           |
+| `projects.workflows:read`                         | Read access to project workflows                             |
+| `projects.workflows:write`                        | Write access to project workflows                            |
+| `releases:read`                                   | Read access to releases                                      |
+| `releases:write`                                  | Write access to releases                                     |
+| `releases.comments:read`                          | Read access to release comments                              |
+| `releases.comments:write`                         | Write access to release comments                             |
+| `releases.labels:read`                            | Read access to release labels                                |
+| `releases.labels:write`                           | Write access to release labels                               |
+| `releases.links:read`                             | Read access to release links                                 |
+| `releases.links:write`                            | Write access to release links                                |
+| `releases.tags:read`                              | Read access to release tags                                  |
+| `releases.tags:write`                             | Write access to release tags                                 |
+| `stickies:read`                                   | Read access to stickies                                      |
+| `stickies:write`                                  | Write access to stickies                                     |
+| `teamspaces:read`                                 | Read access to teamspaces                                    |
+| `teamspaces:write`                                | Write access to teamspaces                                   |
+| `templates.work_items:read`                       | Read access to work item templates                           |
+| `templates.work_items:write`                      | Write access to work item templates                          |
+| `webhooks:read`                                   | Read access to workspace webhooks                            |
+| `webhooks:write`                                  | Write access to workspace webhooks                           |
+| `wiki.pages:read`                                 | Read access to wiki pages                                    |
+| `wiki.pages:write`                                | Write access to wiki pages                                   |
+| `workspaces.audit_logs:read`                      | Read access to workspace audit logs                          |
+| `workspaces.features:read`                        | Read access to workspace features                            |
+| `workspaces.features:write`                       | Write access to workspace features                           |
+| `workspaces.group_sync:read`                      | Read access to workspace IdP group sync config and mappings  |
+| `workspaces.group_sync:write`                     | Write access to workspace IdP group sync config and mappings |
+| `workspaces.members:read`                         | Read access to workspace members                             |
+| `workspaces.members:write`                        | Write access to workspace members                            |
+| `workspaces.roles:read`                           | Read access to workspace roles (system + custom)             |
+| `workspaces.views:read`                           | Read access to workspace views                               |
+| `workspaces.views:write`                          | Write access to workspace views                              |
+| `workspaces.work_item_properties:read`            | Read access to workspace work item properties                |
+| `workspaces.work_item_properties:write`           | Write access to workspace work item properties               |
+| `workspaces.work_item_relation_definitions:read`  | Read access to workspace work item relation definitions      |
+| `workspaces.work_item_relation_definitions:write` | Write access to workspace work item relation definitions     |
+| `workspaces.work_item_types:read`                 | Read access to workspace work item types                     |
+| `workspaces.work_item_types:write`                | Write access to workspace work item types                    |
+| `read`                                            | Read access to all resources                                 |
+| `write`                                           | Write access to all resources                                |
 
 ::: info The catalog is larger than this table
 The OAuth scope catalog advertises the full planned resource surface — pages, customers, initiatives, releases,
@@ -239,7 +309,7 @@ The scope required by a specific operation is listed in the **Scopes** section o
 ## Tenancy
 
 Authentication tells Plane who you are; tenancy decides what you can see. A workspace slug, project id, or record id
-outside your tenant returns **`404 resource_not_found`**, never `403`.
+outside your tenant returns **`404 not_found`**, never `403`.
 
 ::: warning A cross-tenant id looks identical to a deleted one
 This is deliberate — the API never confirms that a resource you cannot access exists. When a request that should work

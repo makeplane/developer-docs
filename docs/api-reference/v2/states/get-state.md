@@ -47,6 +47,27 @@ The id of the state to retrieve.
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `color`, `created_at`, `created_by_id`, `description`, `external_id`, `external_source`, `group`, `id`, `is_default`, `is_triage`, `name`, `sequence`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.states:read`
@@ -57,12 +78,14 @@ The id of the state to retrieve.
 
 ### Errors
 
-| Status | Code                 | Cause                                                               |
-| ------ | -------------------- | ------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                     |
-| `403`  | `forbidden`          | Your role or token scope can't read this project's states.          |
-| `404`  | `resource_not_found` | No such state, project, or workspace — or it's outside your tenant. |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.          |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read this project's states.                           |
+| `404`  | `not_found`        | No such state, project, or workspace — or it's outside your tenant.                  |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -143,10 +166,8 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource-not-found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "No State matches the given query."
 }
 ```

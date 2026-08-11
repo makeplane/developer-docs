@@ -1,14 +1,21 @@
 ---
 title: Errors
 description: The Plane API v2 error model — RFC 9457 problem+json responses, the full error code table, validation error arrays, rate limiting, and mode conflicts.
-keywords: plane api v2 errors, rfc 9457, problem json, validation_error, resource_not_found, rate_limited, retry-after, plane api error codes
+keywords: plane api v2 errors, rfc 9457, problem json, invalid_request, not_found, rate_limited, retry-after, plane api error codes
 ---
 
 # Errors
 
-Every v2 error is an [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) problem document, served as
-`application/problem+json`. The shape is the same whether the failure is a typo in a request body or a throttled
-client, so one error handler covers the whole API.
+Every v2 error is served as `application/problem+json` with the same three members, whether the failure is a typo in a
+request body or a throttled client. One error handler covers the whole API.
+
+```json
+{
+  "type": "conflict",
+  "code": "states_managed_at_workspace",
+  "detail": "States are managed at the workspace level."
+}
+```
 
 ## The problem shape
 
@@ -17,37 +24,45 @@ client, so one error handler covers the whole API.
 
 ### Fields
 
-- `type` _string (uri)_
+Three members are always present and never `null`.
 
-  A URI identifying the error class, for example `https://api.plane.so/errors/validation_error`. Stable, but meant for
-  humans following the link — do not parse it.
+- `type` _string_
 
-- `title` _string_
-
-  A short human-readable summary of the error class, the same for every occurrence.
-
-- `status` _integer_
-
-  The HTTP status code, repeated in the body so a logged payload is self-contained.
+  The **coarse category**, from a closed set of 13 values (below). This is the fallback arm for a `code` you have never
+  seen — small and stable enough to embed in a client.
 
 - `code` _string_
 
-  **The stable machine-readable identifier.** This is the field to branch on.
+  The **specific condition**, and the field to branch on. An open vocabulary that grows as v2 grows. When a condition
+  needs no refinement, `code` is equal to `type`.
 
 - `detail` _string_
 
-  A human-readable explanation of this specific occurrence. Written for a developer reading a log — the wording can
-  change between releases.
+  A human-readable explanation of this occurrence. Written for a developer reading a log — the wording is not part of
+  the contract.
+
+Plus one member on validation failures only:
 
 - `errors` _array_
 
-  Present **only** on `validation_error`. One entry per rejected field, each with a `field` and a `message`.
+  Present **only** on `invalid_request`. One entry per rejected field, each carrying `field`, `code` and `message`. The
+  per-field `code` (`required`, `invalid`, `unique`, `invalid_choice`, `max_length`, `does_not_exist`) lets you branch
+  per field without matching English prose.
 
-::: warning Branch on `code`, not on status or prose
-Two different failures share status `403` (`forbidden` and `workflow_transition_denied`) and three share `400`. The
-HTTP status alone cannot tell them apart.
+::: warning Branch on `code`, fall back to `type`
+Several conditions share a status: `403` covers both `forbidden` and `workflow_transition_denied`, and `409` covers
+`conflict` plus four refinements. The HTTP status alone cannot tell them apart, and neither can `type`.
 
-`detail` is written for people and its wording is not part of the contract. Matching on its text will break.
+Because `code` is always present — even when it just repeats `type` — you never need a `code ?? type` null check.
+Switch on `code`, and let unrecognized values fall through to a `type` arm.
+
+`detail` is written for people. Matching on its text will break.
+:::
+
+::: info No `status`, `title`, or URI `type`
+Earlier v2 previews sent `status` and `title` in the body, and a `type` of the form
+`https://api.plane.so/errors/<code>`. All three are gone: `status` duplicated the HTTP status line, `title` was
+derivable boilerplate, and the URI pointed at a page a self-hosted instance never serves. `type` is now a bare slug.
 :::
 
 </div>
@@ -57,14 +72,20 @@ HTTP status alone cannot tell them apart.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "One or more fields failed validation.",
   "errors": [
-    { "field": "name", "message": "This field is required." },
-    { "field": "group", "message": "\"in_review\" is not a valid choice." }
+    {
+      "field": "name",
+      "code": "required",
+      "message": "This field is required."
+    },
+    {
+      "field": "group",
+      "code": "invalid_choice",
+      "message": "\"in_review\" is not a valid choice."
+    }
   ]
 }
 ```
@@ -75,10 +96,8 @@ HTTP status alone cannot tell them apart.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource_not_found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "The requested resource was not found."
 }
 ```
@@ -90,7 +109,8 @@ HTTP status alone cannot tell them apart.
 
 ## Handling errors
 
-Read `code` first. Fall back to `status` only for codes you do not recognize yet — new codes can appear as v2 grows.
+Read `code` first, and fall back to `type` for codes you do not recognize yet — new codes can appear as v2 grows, but
+the `type` set will not.
 
 <CodePanel title="Branch on the error code" :languages="['cURL', 'Python', 'JavaScript']">
 <template #curl>
@@ -118,14 +138,17 @@ response = requests.post(
 
 if not response.ok:
     problem = response.json()
-    if problem["code"] == "validation_error":
+    if problem["code"] == "invalid_request":
         for item in problem["errors"]:
             print(f"{item['field']}: {item['message']}")
     elif problem["code"] == "rate_limited":
         retry_after = int(response.headers.get("Retry-After", "1"))
         print(f"Throttled, retry in {retry_after}s")
+    elif problem["code"] == "payment_required":
+        print("Feature not enabled:", problem["detail"])
     else:
-        print(problem["code"], problem["detail"])
+        # unknown code — fall back to the closed `type` set
+        print(problem["type"], problem["code"], problem["detail"])
 ```
 
 </template>
@@ -147,14 +170,18 @@ const response = await fetch(
 if (!response.ok) {
   const problem = await response.json();
   switch (problem.code) {
-    case "validation_error":
+    case "invalid_request":
       problem.errors.forEach((e) => console.error(`${e.field}: ${e.message}`));
       break;
     case "rate_limited":
       console.error(`Throttled, retry in ${response.headers.get("Retry-After")}s`);
       break;
+    case "payment_required":
+      console.error("Feature not enabled:", problem.detail);
+      break;
     default:
-      console.error(problem.code, problem.detail);
+      // unknown code — fall back to the closed `type` set
+      console.error(problem.type, problem.code, problem.detail);
   }
 }
 ```
@@ -162,44 +189,113 @@ if (!response.ok) {
 </template>
 </CodePanel>
 
+## The `type` vocabulary
+
+Closed set, 13 values. It grows only when a genuinely new _kind_ of failure appears.
+
+| `type`                   | Status            | Meaning                                                                                             |
+| ------------------------ | ----------------- | --------------------------------------------------------------------------------------------------- |
+| `invalid_request`        | `400`             | The request itself is wrong.                                                                        |
+| `unauthorized`           | `401`             | Credentials missing or invalid.                                                                     |
+| `payment_required`       | `402`             | The feature isn't enabled on your plan.                                                             |
+| `forbidden`              | `403`             | Authenticated, but not allowed.                                                                     |
+| `not_found`              | `404`             | No such resource, or it's outside your tenant.                                                      |
+| `method_not_allowed`     | `405`             | Method not supported on this route — most often a `PUT`.                                            |
+| `not_acceptable`         | `406`             | Can't produce the representation your `Accept` header asks for.                                     |
+| `conflict`               | `409`             | The write collides with existing state or a business rule.                                          |
+| `payload_too_large`      | `413`             | Request body over the size limit.                                                                   |
+| `unsupported_media_type` | `415`             | `Content-Type` not accepted here.                                                                   |
+| `rate_limited`           | `429`             | Throttled.                                                                                          |
+| `server_error`           | `500`             | Unexpected server-side failure. Retry; alert if it persists.                                        |
+| `service_unavailable`    | `502`/`503`/`504` | Temporarily unavailable. **This is the retryable 5xx** — back off and retry, unlike `server_error`. |
+
 ## Error codes
 
-| Status | Code                                   | Meaning                                                                     |
-| ------ | -------------------------------------- | --------------------------------------------------------------------------- |
-| `400`  | `validation_error`                     | Malformed or invalid body or query parameter. Includes an `errors[]` array. |
-| `401`  | `unauthorized`                         | Missing or invalid credentials.                                             |
-| `403`  | `forbidden`                            | Authenticated, but your role or token scope can't do this.                  |
-| `403`  | `workflow_transition_denied`           | A workflow rule blocked the create or state transition.                     |
-| `404`  | `resource_not_found`                   | No such resource, or it's outside your tenant.                              |
-| `405`  | `method_not_allowed`                   | Method not supported on this route — most often a `PUT`.                    |
-| `409`  | `conflict`                             | Uniqueness or protected-state conflict.                                     |
-| `409`  | `work_item_types_managed_at_workspace` | Wrong mode — this workspace manages work item types at the workspace level. |
-| `409`  | `work_item_types_managed_at_project`   | Wrong mode — this workspace manages work item types at the project level.   |
-| `429`  | `rate_limited`                         | Throttled. Honor the `Retry-After` header.                                  |
+Every `code` maps to exactly one `type`, permanently. Codes are additive-only: they are never renamed or repurposed, so
+a code you handle today keeps its meaning.
 
-Two more `400` codes come from pagination:
+Status-level codes are equal to their `type` — `invalid_request`, `unauthorized`, `payment_required`, `forbidden`,
+`not_found`, `method_not_allowed`, `not_acceptable`, `conflict`, `payload_too_large`, `unsupported_media_type`,
+`rate_limited`, `server_error`, `service_unavailable`.
 
-| Status | Code                           | Meaning                                                                  |
-| ------ | ------------------------------ | ------------------------------------------------------------------------ |
-| `400`  | `count_pagination_disabled`    | Offset and COUNT are disabled for this resource. Use `?paginate=cursor`. |
-| `400`  | `ordering_not_cursor_eligible` | This ordering can't be combined with cursor pagination. Use offset.      |
+These refine one of those:
 
-An unexpected server-side failure returns `500` with code `internal_error`. Retry it; if it persists, it is not
-something your request can fix.
+| Status | Code                                   | `type`            | Meaning                                                                     |
+| ------ | -------------------------------------- | ----------------- | --------------------------------------------------------------------------- |
+| `400`  | `count_pagination_disabled`            | `invalid_request` | Offset and COUNT are disabled for this resource. Use `?paginate=cursor`.    |
+| `400`  | `ordering_not_cursor_eligible`         | `invalid_request` | This ordering can't back a keyset cursor. Use offset.                       |
+| `403`  | `workflow_transition_denied`           | `forbidden`       | A workflow rule blocked the create or state transition.                     |
+| `409`  | `states_managed_at_workspace`          | `conflict`        | States are governed at the workspace level for this workspace.              |
+| `409`  | `work_item_types_managed_at_workspace` | `conflict`        | Wrong mode — this workspace manages work item types at the workspace level. |
+| `409`  | `work_item_types_managed_at_project`   | `conflict`        | Wrong mode — this workspace manages work item types at the project level.   |
+| `409`  | `governance_migration_in_progress`     | `conflict`        | A governance migration is running. Retry shortly.                           |
+| `500`  | `listing_authorization_misconfigured`  | `server_error`    | A server-side authorization guard tripped. Report it; retrying won't help.  |
+
+::: tip Handle the codes you care about, default the rest
+The code set is deliberately large — a code exists when a client would write a _different branch_ for it, which is why
+`count_pagination_disabled` ("switch to cursor") and `ordering_not_cursor_eligible` ("switch to offset") are separate.
+A big enum costs you nothing: match what you act on, and send everything else to a `type`-based default arm.
+:::
 
 ## Validation failures
 
-A `400 validation_error` is the only code that carries `errors[]`. Each entry names one rejected field, and a single
+A `400 invalid_request` is the only code that carries `errors[]`. Each entry names one rejected field, and a single
 response can carry several — the API validates the whole payload rather than stopping at the first problem, so one
 round trip tells you everything to fix.
 
 Query parameters are validated too. Enum-backed parameters such as `priority`, `state_group`, state `group`, and module
 `status` are checked against their allowed values, so a typo returns a clean `400` rather than a silently empty list.
 
+`?fields=` and `?expand=` are strict in the same way, and their messages are written to be self-correcting — they name
+the closest match and enumerate the valid set, so a client can fix itself in one round trip:
+
+```json
+{
+  "type": "invalid_request",
+  "code": "invalid_request",
+  "detail": "One or more fields failed validation.",
+  "errors": [
+    {
+      "field": "fields",
+      "code": "invalid",
+      "message": "Unknown field(s): titel — did you mean 'title'? Valid fields: all, id, name, identifier, …"
+    }
+  ]
+}
+```
+
+Naming an expandable relation in `?fields=` (or a field in `?expand=`) tells you which parameter you actually wanted
+rather than guessing. See [Sparse fields](/api-reference/v2/sparse-fields).
+
 ::: tip Surface `field` and `message` verbatim
 When you are relaying an error to a human — a CLI, a form, a Slack notification — the `field`/`message` pairs are
-already specific enough to act on. Passing them through beats collapsing them into "invalid request".
+already specific enough to act on. Passing them through beats collapsing them into "invalid request". Use the per-entry
+`code` when you need to branch programmatically.
 :::
+
+## Feature gating — `402`
+
+Endpoints that belong to a paid or optional feature answer `402 payment_required` when the feature is off, rather than
+`403` or `404`:
+
+<ResponsePanel status="402">
+
+```json
+{
+  "type": "payment_required",
+  "code": "payment_required",
+  "detail": "This feature is not available on your current plan."
+}
+```
+
+</ResponsePanel>
+
+Two things can produce it: the feature isn't in your plan, or it is but hasn't been switched on for the workspace or
+project. Both are configuration, not permissions — retrying or widening your token's scopes will not help. Affected
+surfaces include customers, releases, workflows, automations, worklogs and custom relation definitions.
+
+Because `402` is declared on every operation, treat it as a first-class arm in shared client code rather than something
+only certain endpoints can return.
 
 ## Rate limiting
 
@@ -210,9 +306,7 @@ service tokens, and external tokens. Exceeding a bucket returns `429 rate_limite
 
 ```json
 {
-  "type": "https://api.plane.so/errors/rate_limited",
-  "title": "Rate Limited",
-  "status": 429,
+  "type": "rate_limited",
   "code": "rate_limited",
   "detail": "Rate limit exceeded."
 }

@@ -43,7 +43,7 @@ The project whose states you want to list.
 
 ### Query Parameters
 
-Filters combine with `AND`. The enum-backed _filters_ `group` and `group__in` are validated: an unrecognized value is rejected with a `400 validation_error` instead of quietly returning an empty list, so a typo surfaces immediately rather than looking like "no results". `order_by` and `paginate` are not validated — an unrecognized `order_by` silently falls back to the default ordering and anything other than `paginate=cursor` silently uses offset pagination, so check your spelling there.
+Filters combine with `AND`. The enum-backed _filters_ `group` and `group__in` are validated: an unrecognized value is rejected with a `400 invalid_request` instead of quietly returning an empty list, so a typo surfaces immediately rather than looking like "no results". `order_by` and `paginate` are not validated — an unrecognized `order_by` silently falls back to the default ordering and anything other than `paginate=cursor` silently uses offset pagination, so check your spelling there.
 
 <div class="params-list">
 
@@ -138,6 +138,27 @@ Defaults to `true`. Set to `false` to skip the `COUNT(*)` behind `total_count`; 
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return on each row. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `color`, `created_at`, `created_by_id`, `description`, `external_id`, `external_source`, `group`, `id`, `is_default`, `is_triage`, `name`, `sequence`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.states:read`
@@ -148,12 +169,14 @@ Defaults to `true`. Set to `false` to skip the `COUNT(*)` behind `total_count`; 
 
 ### Errors
 
-| Status | Code                 | Cause                                                      |
-| ------ | -------------------- | ---------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                            |
-| `403`  | `forbidden`          | Your role or token scope can't read this project's states. |
-| `404`  | `resource_not_found` | No such workspace or project, or it's outside your tenant. |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying. |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read this project's states.                           |
+| `404`  | `not_found`        | No such workspace or project, or it's outside your tenant.                           |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 

@@ -71,7 +71,7 @@ Free-form text explaining when to pick this choice.
 
 <ApiParam name="is_default" type="boolean" :required="false">
 
-Make this the property's default choice, or send `false` to clear it. At most one option per property can be the default: setting it while a different option already holds it returns `400 validation_error`, so clear the current default first and then set the new one.
+Make this the property's default choice, or send `false` to clear it. At most one option per property can be the default: setting it while a different option already holds it returns `400 invalid_request`, so clear the current default first and then set the new one.
 
 </ApiParam>
 
@@ -105,14 +105,18 @@ The system `external_id` came from, for example `github` or `jira`. Maximum 255 
 
 ### Errors
 
-| Status | Code                                 | Cause                                                                                                          |
-| ------ | ------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`                   | A field over 255 characters, or `is_default: true` when another option on the property is already the default. |
-| `401`  | `unauthorized`                       | Missing or invalid credentials.                                                                                |
-| `403`  | `forbidden`                          | Your role or token scope can't write this workspace's properties.                                              |
-| `404`  | `resource_not_found`                 | No such workspace, workspace-level property, or option — or it's outside your tenant.                          |
-| `409`  | `work_item_types_managed_at_project` | This workspace manages work item types at the project level. Use the project-level options endpoint.           |
-| `429`  | `rate_limited`                       | Throttled. Honor the `Retry-After` header before retrying.                                                     |
+| Status | Code                     | Cause                                                                                                          |
+| ------ | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | A field over 255 characters, or `is_default: true` when another option on the property is already the default. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                           |
+| `403`  | `forbidden`              | Your role or token scope can't write this workspace's properties.                                              |
+| `404`  | `not_found`              | No such workspace, workspace-level property, or option — or it's outside your tenant.                          |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                           |
+| `409`  | `conflict`               | This workspace manages work item types at the project level. Use the project-level options endpoint.           |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                       |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                            |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                                     |
 
 </div>
 
@@ -195,10 +199,8 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "Only one option can be the default."
 }
 ```

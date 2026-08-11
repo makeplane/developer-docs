@@ -1,6 +1,6 @@
 ---
 title: Plane API v2
-description: Introduction to the Plane REST API v2 — base URL, trailing slashes, PATCH-only writes, sparse reads, RFC 9457 errors, and a quickstart request.
+description: Introduction to the Plane REST API v2 — base URL, trailing slashes, PATCH-only writes, sparse reads, ?fields= responses, problem+json errors, and a quickstart request.
 keywords: plane api v2, rest api, plane api introduction, api.plane.so, plane api quickstart, openapi schema, plane developer api
 ---
 
@@ -132,22 +132,43 @@ embedded by default, so response size stays predictable no matter how many relat
 }
 ```
 
+### `?fields=` trims the response further
+
+Pass a comma-separated field list to get only the keys you need. Unrequested keys are **omitted**, not returned as
+`null`, and `id` always comes back:
+
+```bash
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/ENG/work-items/?fields=id,name,state_id" \
+  -H "X-Api-Key: $PLANE_API_KEY"
+```
+
+An unknown field name is a `400` that suggests the closest match rather than being silently ignored. See
+[Sparse fields](/api-reference/v2/sparse-fields).
+
 ### Expansion is separate-key
 
 `?expand=` **adds** an object beside the id — it never replaces it. `?expand=state` gives you `state_id` _and_ a
 `state` object, so code that reads `state_id` keeps working whether or not the caller asked for the expansion.
 
-Only work items and members support `?expand=`. See
-[Expanding relations](/api-reference/v2/expanding-relations) for the allowed values.
+Each resource declares its own allowlist, and `?expand=` is a separate namespace from `?fields=` — the two compose
+without interacting. See [Expanding relations](/api-reference/v2/expanding-relations) for the allowed values.
 
-### Errors are RFC 9457
+### Errors are `problem+json`
 
-Every failure is `application/problem+json` with a stable machine-readable `code`. Branch on `code`, never on the HTTP
-status or the human-readable `detail`. See [Errors](/api-reference/v2/errors).
+Every failure is `application/problem+json` carrying `type`, `code` and `detail`. Branch on the stable
+machine-readable `code`, falling back to the closed `type` category for codes you do not recognize — never on the
+human-readable `detail`. See [Errors](/api-reference/v2/errors).
+
+### Path segments take ids
+
+A path segment addresses a resource by id, with three human-readable exceptions: the workspace **slug**, a project's
+**identifier** (`…/projects/ENG/`), and a work item's **`PROJ-123`**. To look something up by name, filter the list —
+`?name=In%20Progress` — rather than putting the name in the path. See
+[Filtering and ordering](/api-reference/v2/filtering-and-ordering).
 
 ### Cross-tenant ids return 404
 
-A workspace, project, or record id that belongs to someone else returns `404 resource_not_found`, never `403`. The API
+A workspace, project, or record id that belongs to someone else returns `404 not_found`, never `403`. The API
 does not distinguish "does not exist" from "exists but is not yours", so it never leaks the existence of a resource you
 cannot see.
 

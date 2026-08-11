@@ -60,7 +60,7 @@ The work item type to attach the properties to.
 <ApiParam name="properties" type="array of string (uuid)" :required="true">
 
 The ids of the properties to attach. Every id must belong to a property in **this project** — an id from another
-project or another workspace fails the whole request with `400 validation_error`, and nothing is attached. Nothing is
+project or another workspace fails the whole request with `400 invalid_request`, and nothing is attached. Nothing is
 attached partially: either all the ids are valid or none are applied.
 
 The array cannot be empty. Attaching an id the type already exposes is not an error and does not create a duplicate, so
@@ -83,14 +83,18 @@ retrying a request that may have already landed is safe.
 
 ### Errors
 
-| Status | Code                                   | Cause                                                                          |
-| ------ | -------------------------------------- | ------------------------------------------------------------------------------ |
-| `400`  | `validation_error`                     | `properties` missing or empty, or an id that isn't a property in this project. |
-| `401`  | `unauthorized`                         | Missing or invalid credentials.                                                |
-| `403`  | `forbidden`                            | Your role or token scope can't edit this project's work item types.            |
-| `404`  | `resource_not_found`                   | No such workspace, project, or type — or it's outside your tenant.             |
-| `409`  | `work_item_types_managed_at_workspace` | This workspace manages work item types at the workspace level. See below.      |
-| `429`  | `rate_limited`                         | Throttled. Honor the `Retry-After` header before retrying.                     |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | `properties` missing or empty, or an id that isn't a property in this project.       |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't edit this project's work item types.                  |
+| `404`  | `not_found`              | No such workspace, project, or type — or it's outside your tenant.                   |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | This workspace manages work item types at the workspace level. See below.            |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -180,14 +184,13 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "One or more fields failed validation.",
   "errors": [
     {
       "field": "properties",
+      "code": "invalid",
       "message": "This list may not be empty."
     }
   ]
@@ -200,9 +203,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work_item_types_managed_at_workspace",
-  "title": "Work Item Types Managed At Workspace",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_workspace",
   "detail": "Work item types are managed at the workspace level for this workspace."
 }

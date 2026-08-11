@@ -57,30 +57,38 @@ Two things follow from partial updates:
 - **You no longer have to read-modify-write.** To change one field, send one field.
 - **Omitted is not the same as `null`.** Leaving a key out means "don't touch it"; sending `"target_date": null` means "clear it".
 
-## 4. Errors are RFC 9457
+## 4. Errors are `problem+json`
 
-Every v2 error is `application/problem+json` with the same five keys:
+Every v2 error is `application/problem+json` with the same three keys — `type`, `code` and `detail` — plus `errors[]` on validation failures:
 
 <ResponsePanel status="400">
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "One or more fields failed validation.",
-  "errors": [{ "field": "name", "message": "This field is required." }]
+  "errors": [
+    {
+      "field": "name",
+      "code": "required",
+      "message": "This field is required."
+    }
+  ]
 }
 ```
 
 </ResponsePanel>
 
-**Branch on `code`.** It is the stable, machine-readable part. `status` is too coarse (several distinct conditions share `409`) and `detail` is prose that can be reworded at any time. `errors[]` appears only on `validation_error` and names the offending fields.
+**Branch on `code`.** It is the stable, machine-readable part, and it is always present. `type` is a coarse category from a closed 13-value set — use it as the fallback arm for a `code` you do not recognize. `detail` is prose that can be reworded at any time. `errors[]` appears only on `invalid_request`, and each entry carries `field`, `code` and `message`.
+
+::: warning The body has no `status` or `title`
+If you built against an early v2 preview, note that `status` and `title` were removed from the body, and `type` changed from a `https://api.plane.so/errors/…` URI to a bare slug. Read the HTTP status from the status line.
+:::
 
 Other behavior worth knowing while you port error handling:
 
-- A resource outside your tenant is `404 resource_not_found`, never `403`. v2 does not leak existence.
+- A resource outside your tenant is `404 not_found`, never `403`. v2 does not leak existence.
 - `DELETE` returns `204` with an empty body.
 - Uniqueness and protected-state conflicts are `409 conflict` — a duplicate state name, deleting a project's default state, deleting a state that still holds work items.
 - Throttling is `429 rate_limited`; honor `Retry-After`.
@@ -103,13 +111,25 @@ To-one relations come back as `<name>_id`; to-many relations as `<name>_ids` arr
 
 Where you genuinely need the object, add `?expand=`. It is **separate-key**: `?expand=state` keeps `state_id` _and_ adds a `state` object beside it, so nothing you already read stops working.
 
-`?expand=` is supported on **work items** (`state`, `type`, `parent`, `assignees`, `labels`) and on **workspace and project members** (`member`). No other v2 resource supports it, and an unknown value is a `400`. Full details in [Expanding relations](/api-reference/v2/expanding-relations).
+Each resource declares its own allowlist — work items expand `state`, `type`, `parent`, `assignees`, `labels`, `cycle` and `modules`; cycles expand `owned_by`; modules expand `lead` and `members`; comments expand `actor`; and so on. A resource that declares none rejects every value, and an unknown value is always a `400`. The full table is in [Expanding relations](/api-reference/v2/expanding-relations).
 
 ::: tip You usually need fewer objects than v1 gave you
 v1 embedded relations whether or not you used them. Before reaching for `?expand=`, check whether the id is all your code actually consumed — for cache keys, joins, and foreign keys it almost always is.
 :::
 
-There is no `?fields=` in v2. Reads are already sparse, so there is nothing to trim.
+### `?fields=` trims further
+
+v1 had a `?fields=` parameter, and so does v2 — but the semantics are stricter in two ways worth porting carefully:
+
+- **Unrequested keys are omitted, not nulled.** In v2, absent means "not requested" and `null` means "genuinely null". Code that reads `row.target_date` expecting a key to exist needs to check presence instead.
+- **Unknown names are a `400`.** v1 ignored them silently. A typo that used to return the full row now fails loudly — which is the point, since a silently-ignored field name costs you the saving without telling you.
+
+`id` always comes back, and `all` returns the full requestable set. Some resources also leave heavy fields such as `description_html` off list rows by default; naming the field pulls it back. See [Sparse fields](/api-reference/v2/sparse-fields).
+
+```bash
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/ENG/work-items/?fields=id,name,state_id" \
+  -H "X-Api-Key: $PLANE_API_KEY"
+```
 
 ## 6. Writes take ids
 
@@ -156,7 +176,7 @@ These are the concrete differences to grep your codebase for.
 | States     | `updated_at`, `updated_by`, `project`, `workspace` | **Not returned**                                          |
 | Work items | `updated_at`, `updated_by`, `project`, `workspace` | **Not returned**                                          |
 | Work items | `description_html` on read                         | **Write-only** — accepted on write, not returned on read  |
-| Work items | —                                                  | `custom_fields` — populated only on single-item responses |
+| Work items | —                                                  | `custom_fields` — present only on single-object responses |
 
 Details on the two that bite hardest:
 
@@ -164,8 +184,8 @@ Details on the two that bite hardest:
 You can send `description_html` on a create or update and it is stored, but it does **not** come back on any read — not on the list, not on the detail route, not in the create/update response. Code that round-trips a description through the API needs to keep its own copy of what it wrote.
 :::
 
-::: warning `custom_fields` is `null` on list responses
-`custom_fields` carries a work item's custom property values, and it is populated **only on single-item responses** — retrieve, create, and update. On the **list** path it is always `null`, because resolving properties per row would mean a query per work item. If you need custom property values for many items, list first and then fetch the ones you care about individually.
+::: warning `custom_fields` is absent on list responses
+`custom_fields` carries a work item's custom property values, and it is present **only on single-object responses** — retrieve, create, update, upsert and the archive verbs. On the **list** path the key is **omitted entirely** (not `null`), because resolving properties per row would mean a query per work item. Asking for it there with `?fields=custom_fields` is a `400` rather than a silent empty answer. If you need property values for many items, list first and then fetch the ones you care about individually.
 :::
 
 Also note: the state `group` enum gained `triage` alongside v1's five groups.
@@ -243,7 +263,6 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
       "archived_at": null,
       "created_at": "2026-01-14T09:22:41.478363Z",
       "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null,
       "state": {
         "id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
         "name": "In Progress",
@@ -274,7 +293,7 @@ Line up the differences:
 - `results` → `data`; the cursor strings are replaced by an integer `next` plus a `pagination.style` discriminator.
 - `state` → `state_id`, and `assignees` → `assignee_ids`. The expanded `state` and `assignees` objects are **added** by `?expand=`, not substituted for the ids.
 - `description` is gone from the read shape.
-- New on every work item: `identifier` (`PROJ-118`), `type_id`, `is_draft`, `archived_at`, `created_by_id`, and `custom_fields` (`null` here because this is a list).
+- New on every work item: `identifier` (`PROJ-118`), `type_id`, `is_draft`, `archived_at`, and `created_by_id`. `custom_fields` is absent here because this is a list — it appears on single-object responses.
 
 ## 10. What is new in v2
 
@@ -317,7 +336,10 @@ There is no requirement to migrate wholesale. Point the calls that v2 covers at 
 6. Rename state `default` to `is_default`, and stop reading `updated_at`, `updated_by`, `project`, and `workspace` from state and work item responses.
 7. Stop expecting `description_html` back from a work item read.
 8. Stop expecting `custom_fields` on list responses — fetch the item individually when you need its property values.
-9. Confirm nothing you depend on is in the "not yet in v2" list above.
+9. Update your error handling to the `{type, code, detail}` shape: v2 no longer sends `status` or `title`, and `type` is a bare category slug rather than a URI. See [Errors](/api-reference/v2/errors).
+10. Adopt [`?fields=`](/api-reference/v2/sparse-fields) where you only need a few keys — v1's `?fields=` silently ignored unknown names, whereas v2 returns a `400`, and v2 **omits** unrequested keys rather than nulling them.
+11. Replace name-based lookups with the identity filters (`?name=`, `?key=`, `?url=`) — v2 path segments take ids, not attributes. See [Filtering and ordering](/api-reference/v2/filtering-and-ordering).
+12. Confirm nothing you depend on is in the "not yet in v2" list above.
 
 ## Related
 

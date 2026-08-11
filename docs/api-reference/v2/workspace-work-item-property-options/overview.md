@@ -14,7 +14,7 @@ Options hang off the property, not off a project. The path carries no project se
 /api/v2/workspaces/{slug}/work-item-properties/{property_id}/options/
 ```
 
-A property of any other type has no options. Adding one to a `TEXT`, `BOOLEAN`, `DECIMAL` or other non-`OPTION` property is rejected with `400 validation_error`, so create the property with `property_type: "OPTION"` first — see [Workspace work item properties](/api-reference/v2/workspace-work-item-properties/overview).
+A property of any other type has no options. Adding one to a `TEXT`, `BOOLEAN`, `DECIMAL` or other non-`OPTION` property is rejected with `400 invalid_request`, so create the property with `property_type: "OPTION"` first — see [Workspace work item properties](/api-reference/v2/workspace-work-item-properties/overview).
 
 <div class="api-two-column">
 <div class="api-left">
@@ -102,7 +102,7 @@ Reads are unaffected by mode: `GET` works in either mode. See [Work item type mo
 
 ## Only one option can be the default
 
-Setting `is_default: true` while another option on the same property already has it is rejected with `400 validation_error`. There is no automatic hand-off. To move the default, clear it on the current holder first:
+Setting `is_default: true` while another option on the same property already has it is rejected with `400 invalid_request`. There is no automatic hand-off. To move the default, clear it on the current holder first:
 
 1. `PATCH` the current default with `{"is_default": false}`.
 2. `PATCH` (or `POST`) the new option with `{"is_default": true}`.

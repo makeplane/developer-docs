@@ -151,16 +151,19 @@ no `workspace_id`: you already know the project from the path.
 
 ## Endpoints
 
-| Method   | Path                                                                         | Description                                                                   |
-| -------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/`                | [List work items](/api-reference/v2/work-items/list-work-items)               |
-| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/`                | [Create a work item](/api-reference/v2/work-items/create-work-item)           |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/`           | [Get a work item](/api-reference/v2/work-items/get-work-item)                 |
-| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/`           | [Update a work item](/api-reference/v2/work-items/update-work-item)           |
-| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/`           | [Delete a work item](/api-reference/v2/work-items/delete-work-item)           |
-| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/archive/`   | [Archive a work item](/api-reference/v2/work-items/archive-work-item)         |
-| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/unarchive/` | [Unarchive a work item](/api-reference/v2/work-items/unarchive-work-item)     |
-| `GET`    | `/api/v2/workspaces/{slug}/work-items/{identifier}/`                         | [Get by identifier](/api-reference/v2/work-items/get-work-item-by-identifier) |
+| Method   | Path                                                                         | Description                        |
+| -------- | ---------------------------------------------------------------------------- | ---------------------------------- |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/`                | List work items                    |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/`                | Create a work item                 |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/bulk/`           | Bulk write work items              |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/upsert/`         | Upsert a work item                 |
+| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/`           | Delete a work item                 |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/`           | Get a work item                    |
+| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/`           | Update a work item                 |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/archive/`   | Archive a work item                |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{pk}/unarchive/` | Unarchive a work item              |
+| `GET`    | `/api/v2/workspaces/{slug}/work-items/`                                      | List work items across a workspace |
+| `GET`    | `/api/v2/workspaces/{slug}/work-items/{identifier}/`                         | Get a work item by identifier      |
 
 Every project-scoped route needs `projects.work_items:read` for `GET` and `projects.work_items:write` for `POST`,
 `PATCH`, and `DELETE`.

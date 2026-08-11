@@ -116,18 +116,21 @@ Modules do not support `?expand=`. `lead_id` and `member_ids` come back as ids �
 
 ## Endpoints
 
-| Method   | Path                                                            | Description     |
-| -------- | --------------------------------------------------------------- | --------------- |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/`      | List modules    |
-| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/`      | Create a module |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/{pk}/` | Get a module    |
-| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/{pk}/` | Update a module |
-| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/{pk}/` | Delete a module |
+| Method   | Path                                                                       | Description                     |
+| -------- | -------------------------------------------------------------------------- | ------------------------------- |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/`                 | List modules                    |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/`                 | Create a module                 |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/bulk/`            | Bulk write modules              |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/upsert/`          | Upsert a module                 |
+| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/{pk}/`            | Delete a module                 |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/{pk}/`            | Get a module                    |
+| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/{pk}/`            | Update a module                 |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/modules/{pk}/work-items/` | Add or remove module work items |
 
 ## Status
 
 `status` is the module's lifecycle position and is validated on both writes and the `status` filter — a value outside
-the enum is a `400 validation_error`, never a silently ignored write or an empty list.
+the enum is a `400 invalid_request`, never a silently ignored write or an empty list.
 
 | Value         | Meaning                        |
 | ------------- | ------------------------------ |
@@ -143,7 +146,7 @@ A module created without a `status` starts as `planned`.
 ## Lead and members
 
 `lead_id` must be a member of the module's project. Passing a user who isn't a project member is rejected with
-`400 validation_error` naming `lead_id` — the link is never made silently.
+`400 invalid_request` naming `lead_id` — the link is never made silently.
 
 `member_ids` is read-only. Reads return the module's current members, but there is no v2 write path for adding or
 removing them yet.
@@ -151,7 +154,7 @@ removing them yet.
 ## Dates
 
 `start_date` and `target_date` are plain dates (`YYYY-MM-DD`), and either can be `null`. A `target_date` earlier than
-`start_date` is rejected with `400 validation_error`.
+`start_date` is rejected with `400 invalid_request`.
 
 ## Names are unique per project
 

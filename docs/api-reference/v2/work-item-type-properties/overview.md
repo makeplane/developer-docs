@@ -182,7 +182,7 @@ Every field is read-only here. Changing a definition goes through
 `properties` array.
 
 - Only properties belonging to the **same project** can be attached. An id from another project is a
-  `400 validation_error` that names the offending ids, never a silent skip — one bad id rejects the whole call.
+  `400 invalid_request` that names the offending ids, never a silent skip — one bad id rejects the whole call.
 - Re-attaching a property the type already exposes is harmless. The call still returns `201` and the type is not left
   with a duplicate, so a replayed request is safe.
 

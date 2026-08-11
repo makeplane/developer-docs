@@ -63,12 +63,14 @@ The id of the option to retrieve. Every ancestor in the path is enforced — an 
 
 ### Errors
 
-| Status | Code                 | Cause                                                                                            |
-| ------ | -------------------- | ------------------------------------------------------------------------------------------------ |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                                                  |
-| `403`  | `forbidden`          | Your role or token scope can't read this project's properties.                                   |
-| `404`  | `resource_not_found` | No such option, property, project, or workspace — or the option belongs to a different property. |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.                                       |
+| Status | Code               | Cause                                                                                            |
+| ------ | ------------------ | ------------------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                                  |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.             |
+| `403`  | `forbidden`        | Your role or token scope can't read this project's properties.                                   |
+| `404`  | `not_found`        | No such option, property, project, or workspace — or the option belongs to a different property. |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                             |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                                       |
 
 </div>
 
@@ -144,10 +146,8 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource-not-found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "No IssuePropertyOption matches the given query."
 }
 ```

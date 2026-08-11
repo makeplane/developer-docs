@@ -189,7 +189,7 @@ properties that already exist, and editing a property is done on the catalog res
 ```
 
 The response echoes the ids that are now on the type. An id that does not exist in this workspace is rejected
-with `400 validation_error` — a cross-tenant id is never silently ignored.
+with `400 invalid_request` — a cross-tenant id is never silently ignored.
 
 ## Where a property applies
 

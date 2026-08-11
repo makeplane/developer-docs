@@ -126,14 +126,18 @@ Enable Pi, Plane's AI assistant, in the workspace.
 
 ### Errors
 
-| Status | Code                 | Cause                                                                                                                                          |
-| ------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`   | A flag was sent with a non-boolean value, or `work_item_type_default_level` was not an integer. Includes an `errors[]` array naming the field. |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                                                                                                |
-| `403`  | `forbidden`          | Your role or token scope can't change this workspace's features.                                                                               |
-| `404`  | `resource_not_found` | No such workspace, or it's outside your tenant.                                                                                                |
-| `409`  | `conflict`           | The requested toggle conflicts with the workspace's current state and was not applied. Re-read the object before retrying.                     |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.                                                                                     |
+| Status | Code                     | Cause                                                                                                                                          |
+| ------ | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | A flag was sent with a non-boolean value, or `work_item_type_default_level` was not an integer. Includes an `errors[]` array naming the field. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                                                |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                                                           |
+| `403`  | `forbidden`              | Your role or token scope can't change this workspace's features.                                                                               |
+| `404`  | `not_found`              | No such workspace, or it's outside your tenant.                                                                                                |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                                                           |
+| `409`  | `conflict`               | The requested toggle conflicts with the workspace's current state and was not applied. Re-read the object before retrying.                     |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                                                       |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                                                            |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                                                                     |
 
 </div>
 
@@ -223,12 +227,16 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "Invalid input.",
-  "errors": [{ "field": "is_teams_enabled", "message": "Must be a valid boolean." }]
+  "errors": [
+    {
+      "field": "is_teams_enabled",
+      "code": "invalid",
+      "message": "Must be a valid boolean."
+    }
+  ]
 }
 ```
 

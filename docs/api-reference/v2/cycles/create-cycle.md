@@ -71,7 +71,7 @@ When the cycle closes, as an ISO 8601 date-time. Nullable.
 
 <ApiParam name="timezone" type="string" :required="false">
 
-The IANA time zone the cycle's dates are interpreted in, for example `America/New_York`, `Asia/Kolkata`, `Europe/London`, or `UTC`. Set it to the team's working zone so a cycle boundary lands at local midnight instead of UTC midnight. Any value outside the IANA list is rejected with `400 validation_error`.
+The IANA time zone the cycle's dates are interpreted in, for example `America/New_York`, `Asia/Kolkata`, `Europe/London`, or `UTC`. Set it to the team's working zone so a cycle boundary lands at local midnight instead of UTC midnight. Any value outside the IANA list is rejected with `400 invalid_request`.
 
 </ApiParam>
 
@@ -108,6 +108,37 @@ The system `external_id` came from, for example `jira` or `linear`. Maximum 255 
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `created_at`, `created_by_id`, `description`, `end_date`, `external_id`, `external_source`, `id`, `logo_props`, `name`, `owned_by_id`, `sort_order`, `start_date`, `timezone`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `owned_by` (the cycle owner).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.cycles:write`
@@ -118,14 +149,18 @@ The system `external_id` came from, for example `jira` or `linear`. Maximum 255 
 
 ### Errors
 
-| Status | Code                 | Cause                                                                                                   |
-| ------ | -------------------- | ------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`   | Missing `name`, a name over 255 characters, an unparseable date, or a `timezone` outside the IANA list. |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                                                         |
-| `403`  | `forbidden`          | Your role or token scope can't create cycles in this project.                                           |
-| `404`  | `resource_not_found` | No such workspace or project, or it's outside your tenant.                                              |
-| `409`  | `conflict`           | A cycle with this name already exists in the project.                                                   |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.                                              |
+| Status | Code                     | Cause                                                                                                   |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | Missing `name`, a name over 255 characters, an unparseable date, or a `timezone` outside the IANA list. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                         |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                    |
+| `403`  | `forbidden`              | Your role or token scope can't create cycles in this project.                                           |
+| `404`  | `not_found`              | No such workspace or project, or it's outside your tenant.                                              |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                    |
+| `409`  | `conflict`               | A cycle with this name already exists in the project.                                                   |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                     |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                              |
 
 </div>
 
@@ -223,9 +258,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/conflict",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "conflict",
   "detail": "A cycle with this name already exists in this project."
 }

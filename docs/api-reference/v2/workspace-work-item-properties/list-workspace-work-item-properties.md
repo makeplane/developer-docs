@@ -107,6 +107,27 @@ the response.
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return on each row. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `created_at`, `default_value`, `description`, `display_name`, `external_id`, `external_source`, `id`, `is_active`, `is_multi`, `is_required`, `logo_props`, `name`, `options`, `property_type`, `relation_type`, `settings`, `validation_rules`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `workspaces.work_item_properties:read`
@@ -117,12 +138,14 @@ the response.
 
 ### Errors
 
-| Status | Code                 | Cause                                                               |
-| ------ | -------------------- | ------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                     |
-| `403`  | `forbidden`          | Your role or token scope can't read workspace work item properties. |
-| `404`  | `resource_not_found` | No such workspace, or it's outside your tenant.                     |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.          |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read workspace work item properties.                  |
+| `404`  | `not_found`        | No such workspace, or it's outside your tenant.                                      |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 

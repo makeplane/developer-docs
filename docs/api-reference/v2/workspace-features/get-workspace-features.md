@@ -53,12 +53,14 @@ None. This endpoint takes no filters, no pagination, and no `?expand=` — passi
 
 ### Errors
 
-| Status | Code                 | Cause                                                          |
-| ------ | -------------------- | -------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                |
-| `403`  | `forbidden`          | Your role or token scope can't read this workspace's features. |
-| `404`  | `resource_not_found` | No such workspace, or it's outside your tenant.                |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.     |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read this workspace's features.                       |
+| `404`  | `not_found`        | No such workspace, or it's outside your tenant.                                      |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -143,10 +145,8 @@ const workspaceMode = features.is_work_item_types_enabled;
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource_not_found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "No Workspace matches the given query."
 }
 ```

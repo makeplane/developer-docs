@@ -148,6 +148,27 @@ The system `external_id` came from. Maximum 255 characters, nullable.
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `created_at`, `default_value`, `description`, `display_name`, `external_id`, `external_source`, `id`, `is_active`, `is_multi`, `is_required`, `logo_props`, `name`, `options`, `property_type`, `relation_type`, `settings`, `validation_rules`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `workspaces.work_item_properties:write`
@@ -158,14 +179,18 @@ The system `external_id` came from. Maximum 255 characters, nullable.
 
 ### Errors
 
-| Status | Code                                 | Cause                                                                    |
-| ------ | ------------------------------------ | ------------------------------------------------------------------------ |
-| `400`  | `validation_error`                   | An enum value outside the allowed set, or a field over its length limit. |
-| `401`  | `unauthorized`                       | Missing or invalid credentials.                                          |
-| `403`  | `forbidden`                          | Your role or token scope can't write workspace work item properties.     |
-| `404`  | `resource_not_found`                 | No such workspace or property, or it's outside your tenant.              |
-| `409`  | `work_item_types_managed_at_project` | This workspace manages work item types at the project level.             |
-| `429`  | `rate_limited`                       | Throttled. Honor the `Retry-After` header before retrying.               |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | An enum value outside the allowed set, or a field over its length limit.             |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't write workspace work item properties.                 |
+| `404`  | `not_found`              | No such workspace or property, or it's outside your tenant.                          |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | This workspace manages work item types at the project level.                         |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -277,9 +302,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work-item-types-managed-at-project",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_project",
   "detail": "This workspace manages work item types at the project level. Use the project-level endpoint instead."
 }

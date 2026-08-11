@@ -49,6 +49,37 @@ Cycles do not support `?expand=`. `owned_by_id` and `created_by_id` are always p
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `created_at`, `created_by_id`, `description`, `end_date`, `external_id`, `external_source`, `id`, `logo_props`, `name`, `owned_by_id`, `sort_order`, `start_date`, `timezone`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `owned_by` (the cycle owner).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.cycles:read`
@@ -59,12 +90,14 @@ Cycles do not support `?expand=`. `owned_by_id` and `created_by_id` are always p
 
 ### Errors
 
-| Status | Code                 | Cause                                                               |
-| ------ | -------------------- | ------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                     |
-| `403`  | `forbidden`          | Your role or token scope can't read cycles in this project.         |
-| `404`  | `resource_not_found` | No such cycle, wrong project, or the record is outside your tenant. |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.          |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read cycles in this project.                          |
+| `404`  | `not_found`        | No such cycle, wrong project, or the record is outside your tenant.                  |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -136,10 +169,8 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource_not_found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "No cycle matches the given id in this project."
 }
 ```

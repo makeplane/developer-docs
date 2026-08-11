@@ -62,7 +62,7 @@ Ids of properties to attach, taken from the workspace property catalog. Send the
 call rather than one request per property.
 
 Every id must already exist in this workspace. An unknown id — including one that belongs to another workspace
-— fails the request with `400 validation_error`; nothing is attached, and a cross-tenant id is never silently
+— fails the request with `400 invalid_request`; nothing is attached, and a cross-tenant id is never silently
 linked.
 
 </ApiParam>
@@ -82,14 +82,18 @@ linked.
 
 ### Errors
 
-| Status | Code                                 | Cause                                                                         |
-| ------ | ------------------------------------ | ----------------------------------------------------------------------------- |
-| `400`  | `validation_error`                   | `properties` missing, not an array, or holding an id that doesn't exist here. |
-| `401`  | `unauthorized`                       | Missing or invalid credentials.                                               |
-| `403`  | `forbidden`                          | Your role or token scope can't write workspace work item types.               |
-| `404`  | `resource_not_found`                 | No such workspace or type, or it's outside your tenant.                       |
-| `409`  | `work_item_types_managed_at_project` | This workspace manages work item types at the project level.                  |
-| `429`  | `rate_limited`                       | Throttled. Honor the `Retry-After` header before retrying.                    |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | `properties` missing, not an array, or holding an id that doesn't exist here.        |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't write workspace work item types.                      |
+| `404`  | `not_found`              | No such workspace or type, or it's outside your tenant.                              |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | This workspace manages work item types at the project level.                         |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -169,9 +173,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work-item-types-managed-at-project",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_project",
   "detail": "This workspace manages work item types at the project level. Use the project-level endpoint instead."
 }

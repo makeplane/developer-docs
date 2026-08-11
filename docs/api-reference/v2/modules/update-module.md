@@ -76,7 +76,7 @@ Move the module to a different lifecycle position.
 - `completed` — Delivered
 - `cancelled` — Dropped without delivering
 
-Any value outside this list is a `400 validation_error`. Transitions are unrestricted — a `completed` module can be
+Any value outside this list is a `400 invalid_request`. Transitions are unrestricted — a `completed` module can be
 sent back to `in-progress`.
 
 </ApiParam>
@@ -136,6 +136,37 @@ v2 has no `PUT`. Sending one returns `405 method_not_allowed` — use `PATCH` wi
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `archived_at`, `created_at`, `created_by_id`, `description`, `external_id`, `external_source`, `id`, `lead_id`, `logo_props`, `member_ids`, `name`, `sort_order`, `start_date`, `status`, `target_date`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `lead` (the module lead), `members` (the module members).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.modules:write`
@@ -146,14 +177,18 @@ v2 has no `PUT`. Sending one returns `405 method_not_allowed` — use `PATCH` wi
 
 ### Errors
 
-| Status | Code                 | Cause                                                                                                        |
-| ------ | -------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `400`  | `validation_error`   | A `status` outside the enum, a `lead_id` who isn't a project member, or a `target_date` before `start_date`. |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                                                              |
-| `403`  | `forbidden`          | Your role or token scope can't edit this module.                                                             |
-| `404`  | `resource_not_found` | No such module, workspace, or project, or it's outside your tenant.                                          |
-| `409`  | `conflict`           | Another module in the project already uses this name.                                                        |
-| `429`  | `rate_limited`       | Throttled. Wait for the interval in `Retry-After` and retry.                                                 |
+| Status | Code                     | Cause                                                                                                        |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | A `status` outside the enum, a `lead_id` who isn't a project member, or a `target_date` before `start_date`. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                              |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                         |
+| `403`  | `forbidden`              | Your role or token scope can't edit this module.                                                             |
+| `404`  | `not_found`              | No such module, workspace, or project, or it's outside your tenant.                                          |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                         |
+| `409`  | `conflict`               | Another module in the project already uses this name.                                                        |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                     |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                          |
+| `429`  | `rate_limited`           | Throttled. Wait for the interval in `Retry-After` and retry.                                                 |
 
 </div>
 
@@ -242,13 +277,15 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "The request body failed validation.",
   "errors": [
-    { "field": "lead_id", "message": "Invalid pk \"b4d70c11-9e35-4a2f-8d6c-1f0ab3e97c52\" - object does not exist." }
+    {
+      "field": "lead_id",
+      "code": "does_not_exist",
+      "message": "Invalid pk \"b4d70c11-9e35-4a2f-8d6c-1f0ab3e97c52\" - object does not exist."
+    }
   ]
 }
 ```

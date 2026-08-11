@@ -52,9 +52,84 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
   -H "X-Api-Key: $PLANE_API_KEY"
 ```
 
+## Looking something up by name
+
+Addressing by a **mutable attribute** — a name, a URL, a version string — is a collection concern in v2, never a path
+segment. Filter the list instead:
+
+```bash
+# the state called "In Progress"
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/ENG/states/?name=In%20Progress" \
+  -H "X-Api-Key: $PLANE_API_KEY"
+```
+
+Paired with [`?fields=`](/api-reference/v2/sparse-fields), that is a one-call name→id resolve of about fifteen tokens:
+
+```bash
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/ENG/states/?name=In%20Progress&fields=id" \
+  -H "X-Api-Key: $PLANE_API_KEY"
+```
+
+```json
+{
+  "data": [{ "id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f" }],
+  "next": null,
+  "previous": null,
+  "total_count": 1,
+  "pagination": { "style": "offset" }
+}
+```
+
+Matching is **case-insensitive and exact** — not a substring search. For substring matching use
+[`?search=`](#search) instead.
+
+| Filter                               | Available on                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `?name=`                             | states, labels, cycles, modules, milestones, projects, project and workspace views, initiatives, initiative labels, releases, release labels, customers, customer properties, estimates, teamspaces, webhooks, work item types (project and workspace), work item properties (project and workspace), property options, property contexts, project and workspace automations, automation nodes |
+| `?key=`                              | projects (matches `identifier`), estimate points                                                                                                                                                                                                                                                                                                                                               |
+| `?url=`                              | webhooks, work item links                                                                                                                                                                                                                                                                                                                                                                      |
+| `?title=`                            | work item links                                                                                                                                                                                                                                                                                                                                                                                |
+| `?value=`                            | estimate points                                                                                                                                                                                                                                                                                                                                                                                |
+| `?version=`                          | release tags                                                                                                                                                                                                                                                                                                                                                                                   |
+| `?external_id=`, `?external_source=` | 22 list endpoints, for sync and import correlation                                                                                                                                                                                                                                                                                                                                             |
+
+::: info Duplicates are visible, not guessed
+A filtered list is honest about ambiguity. If two states share a name, you get **two rows** and decide which one you
+meant. There is no path-level "ambiguous identifier" error to handle, because there is no path-level attribute lookup.
+:::
+
+::: warning Scheme-prefixed path segments are gone
+A brief v2 preview accepted `<scheme>:<value>` path segments — `…/states/name:In Progress/`, `…/projects/key:ENG/`,
+`…/webhooks/url:https://…/`, `external:…`. Those were removed. A `name:`-style segment is now just an unknown id and
+returns `404`.
+
+Use the filters above instead. Path segments address by **stable identifier only** — see
+[Addressing](#addressing-a-resource-in-a-path).
+:::
+
+## Addressing a resource in a path
+
+Path segments take UUIDs, with exactly three human-readable exceptions — all of them stable, none of them
+scheme-prefixed:
+
+| Key                      | Where it works                                                                                                                                     |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Workspace **slug**       | the `workspaces/{slug}/` prefix on every route                                                                                                     |
+| Project **identifier**   | the project detail route (`…/projects/ENG/`) and as a parent segment (`…/projects/ENG/work-items/`)                                                |
+| Work item **`PROJ-123`** | the [by-identifier route](/api-reference/v2/work-items/get-work-item-by-identifier), project-scoped detail, and as a `work_item_id` parent segment |
+
+```bash
+# both of these address the same project
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/ENG/" -H "X-Api-Key: $PLANE_API_KEY"
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3-94aa-50dc9427067b/" -H "X-Api-Key: $PLANE_API_KEY"
+```
+
+A project identifier is unique per workspace and uppercased on save, so it can never be ambiguous. Everything else in a
+path is a UUID.
+
 ## Enum-backed filters are validated
 
-Parameters backed by an enum — work item `priority` and `state_group`, state `group`, module `status`, comment `access` — are checked against their allowed values before the query runs. A value outside the enum is a clean `400 validation_error` naming the offending field.
+Parameters backed by an enum — work item `priority` and `state_group`, state `group`, module `status`, comment `access` — are checked against their allowed values before the query runs. A value outside the enum is a clean `400 invalid_request` naming the offending field.
 
 This matters more than it sounds. In an API that ignores unknown filter values, `?state_group=in_progress` (a plausible-looking guess; the real value is `started`) returns `200` with an empty list, and you spend an afternoon deciding whether the project is genuinely empty. In v2 it fails immediately:
 
@@ -62,13 +137,15 @@ This matters more than it sounds. In an API that ignores unknown filter values, 
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "One or more fields failed validation.",
   "errors": [
-    { "field": "state_group", "message": "Select a valid choice. in_progress is not one of the available choices." }
+    {
+      "field": "state_group",
+      "code": "invalid_choice",
+      "message": "Select a valid choice. in_progress is not one of the available choices."
+    }
   ]
 }
 ```
@@ -201,4 +278,4 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
 
 - [Pagination](/api-reference/v2/pagination) — the envelopes, and which orderings a cursor can use
 - [Expanding relations](/api-reference/v2/expanding-relations) — attaching related objects to filtered results
-- [Errors](/api-reference/v2/errors) — the `validation_error` body and its `errors[]` array
+- [Errors](/api-reference/v2/errors) — the `invalid_request` body and its `errors[]` array

@@ -122,12 +122,14 @@ Defaults to `true`. Set to `false` to skip the `COUNT(*)` behind `total_count`; 
 
 ### Errors
 
-| Status | Code                 | Cause                                                                                     |
-| ------ | -------------------- | ----------------------------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                                           |
-| `403`  | `forbidden`          | Your role or token scope can't read this project's properties.                            |
-| `404`  | `resource_not_found` | No such property, project, or workspace — or the property belongs to a different project. |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.                                |
+| Status | Code               | Cause                                                                                     |
+| ------ | ------------------ | ----------------------------------------------------------------------------------------- |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                           |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.      |
+| `403`  | `forbidden`        | Your role or token scope can't read this project's properties.                            |
+| `404`  | `not_found`        | No such property, project, or workspace — or the property belongs to a different project. |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                      |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                                |
 
 </div>
 

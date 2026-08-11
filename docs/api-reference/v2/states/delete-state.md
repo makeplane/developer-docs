@@ -47,6 +47,27 @@ The id of the state to delete.
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `color`, `created_at`, `created_by_id`, `description`, `external_id`, `external_source`, `group`, `id`, `is_default`, `is_triage`, `name`, `sequence`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.states:write`
@@ -57,14 +78,18 @@ The id of the state to delete.
 
 ### Errors
 
-| Status | Code                 | Cause                                                               |
-| ------ | -------------------- | ------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                     |
-| `403`  | `forbidden`          | Your role or token scope can't delete states.                       |
-| `404`  | `resource_not_found` | No such state, project, or workspace — or it's outside your tenant. |
-| `409`  | `conflict`           | This is the project's default state.                                |
-| `409`  | `conflict`           | The state still holds work items.                                   |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.          |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | The request body or a query parameter failed validation.                             |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't delete states.                                        |
+| `404`  | `not_found`              | No such state, project, or workspace — or it's outside your tenant.                  |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | The state still holds work items.                                                    |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -123,9 +148,7 @@ No response body.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/conflict",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "conflict",
   "detail": "The default state cannot be deleted."
 }
@@ -137,9 +160,7 @@ No response body.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/conflict",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "conflict",
   "detail": "This state still has work items in it."
 }

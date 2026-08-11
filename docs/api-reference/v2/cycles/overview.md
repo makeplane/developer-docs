@@ -101,13 +101,17 @@ Cycles are defined by a `start_date` and an `end_date`, interpreted in the cycle
 
 ## Endpoints
 
-| Method   | Path                                                           | Description    |
-| -------- | -------------------------------------------------------------- | -------------- |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/`      | List cycles    |
-| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/`      | Create a cycle |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/` | Get a cycle    |
-| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/` | Update a cycle |
-| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/` | Delete a cycle |
+| Method   | Path                                                                      | Description                        |
+| -------- | ------------------------------------------------------------------------- | ---------------------------------- |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/`                 | List cycles                        |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/`                 | Create a cycle                     |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/bulk/`            | Bulk write cycles                  |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/upsert/`          | Upsert a cycle                     |
+| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/`            | Delete a cycle                     |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/`            | Get a cycle                        |
+| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/`            | Update a cycle                     |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/transfer/`   | Transfer work items between cycles |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/cycles/{pk}/work-items/` | Add or remove cycle work items     |
 
 ## Names are unique per project
 

@@ -56,10 +56,11 @@ The work item's UUID. This lookup is UUID-only — a `PROJ-142` identifier here 
 
 <ApiParam name="expand" type="string" :required="false">
 
-Comma-separated relations to embed alongside the ids: `state`, `type`, `parent`, `assignees`, `labels`.
+Comma-separated relations to embed alongside the ids: `assignees` (the assigned users), `cycle` (the cycle it belongs to), `labels` (the applied labels), `modules` (the modules it belongs to), `parent` (its parent work item), `state` (the work item's state object), `type` (its work item type).
 
-Expansion is separate-key — `?expand=state` keeps `state_id` and adds a `state` object next to it. An unknown value is
-a `400`.
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
 
 </ApiParam>
 
@@ -74,6 +75,27 @@ again. See [Archive a work item](/api-reference/v2/work-items/archive-work-item)
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `archived_at`, `assignee_ids`, `created_at`, `created_by_id`, `custom_fields`, `cycle_id`, `id`, `identifier`, `is_draft`, `label_ids`, `module_ids`, `name`, `parent_id`, `priority`, `project_id`, `sequence_id`, `start_date`, `state_id`, `target_date`, `type_id`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.work_items:read`
@@ -84,12 +106,14 @@ again. See [Archive a work item](/api-reference/v2/work-items/archive-work-item)
 
 ### Errors
 
-| Status | Code                 | Cause                                                                         |
-| ------ | -------------------- | ----------------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                               |
-| `403`  | `forbidden`          | Your role or token scope can't read work items in this project.               |
-| `404`  | `resource_not_found` | No such work item, it belongs to another project or tenant, or it's archived. |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.                    |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read work items in this project.                      |
+| `404`  | `not_found`        | No such work item, it belongs to another project or tenant, or it's archived.        |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 

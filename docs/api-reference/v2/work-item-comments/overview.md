@@ -106,13 +106,15 @@ the two never drift apart.
 
 ## Endpoints
 
-| Method   | Path                                                                                       | Description    |
-| -------- | ------------------------------------------------------------------------------------------ | -------------- |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/`      | List comments  |
-| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/`      | Create comment |
-| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/{pk}/` | Get comment    |
-| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/{pk}/` | Update comment |
-| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/{pk}/` | Delete comment |
+| Method   | Path                                                                                         | Description         |
+| -------- | -------------------------------------------------------------------------------------------- | ------------------- |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/`        | List comments       |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/`        | Create a comment    |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/bulk/`   | Bulk write comments |
+| `POST`   | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/upsert/` | Upsert a comment    |
+| `DELETE` | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/{pk}/`   | Delete a comment    |
+| `GET`    | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/{pk}/`   | Get a comment       |
+| `PATCH`  | `/api/v2/workspaces/{slug}/projects/{project_id}/work-items/{work_item_id}/comments/{pk}/`   | Update a comment    |
 
 ## Comments are not deduplicated
 
@@ -133,7 +135,7 @@ a create always succeeds.
 ## Reads follow the parent work item
 
 Comment visibility is inherited from the work item in the path — there is no per-comment read permission. A
-`pk` that belongs to a different work item is not visible on this route and returns `404 resource_not_found`,
+`pk` that belongs to a different work item is not visible on this route and returns `404 not_found`,
 the same as a comment id that does not exist. Existence is never leaked.
 
 ## Changed from v1

@@ -57,7 +57,7 @@ The project to import the types into.
 
 The ids of the workspace work item types to make available in this project. Send them in one request rather than looping — the import is applied as a batch.
 
-An id that does not resolve to a work item type on this workspace is rejected with `400 validation_error`.
+An id that does not resolve to a work item type on this workspace is rejected with `400 invalid_request`.
 
 </ApiParam>
 
@@ -76,14 +76,18 @@ An id that does not resolve to a work item type on this workspace is rejected wi
 
 ### Errors
 
-| Status | Code                                 | Cause                                                                            |
-| ------ | ------------------------------------ | -------------------------------------------------------------------------------- |
-| `400`  | `validation_error`                   | `work_item_types` missing, or an entry that isn't a UUID.                        |
-| `401`  | `unauthorized`                       | Missing or invalid credentials.                                                  |
-| `403`  | `forbidden`                          | Your role or token scope can't configure this project's work item types.         |
-| `404`  | `resource_not_found`                 | No such workspace or project, or it's outside your tenant.                       |
-| `409`  | `work_item_types_managed_at_project` | The workspace manages types per project. Create the type in the project instead. |
-| `429`  | `rate_limited`                       | Throttled. Honor the `Retry-After` header before retrying.                       |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | `work_item_types` missing, or an entry that isn't a UUID.                            |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't configure this project's work item types.             |
+| `404`  | `not_found`              | No such workspace or project, or it's outside your tenant.                           |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | The workspace manages types per project. Create the type in the project instead.     |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -161,9 +165,7 @@ console.log(response.status); // 200
 
 ```json
 {
-  "type": "https://api.plane.so/errors/work_item_types_managed_at_project",
-  "title": "Work Item Types Managed At Project",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_project",
   "detail": "Work item types are managed at the project level for this workspace."
 }

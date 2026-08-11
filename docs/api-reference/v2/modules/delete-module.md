@@ -47,8 +47,39 @@ The module to delete.
 
 ::: info 204, then 404
 A successful delete returns `204` with an empty body — there is nothing to parse. A second `DELETE` on the same id
-returns `404 resource_not_found`, so a retry after a dropped connection is safe to treat as success.
+returns `404 not_found`, so a retry after a dropped connection is safe to treat as success.
 :::
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `archived_at`, `created_at`, `created_by_id`, `description`, `external_id`, `external_source`, `id`, `lead_id`, `logo_props`, `member_ids`, `name`, `sort_order`, `start_date`, `status`, `target_date`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `lead` (the module lead), `members` (the module members).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
 
 <div class="params-section">
 
@@ -62,12 +93,18 @@ returns `404 resource_not_found`, so a retry after a dropped connection is safe 
 
 ### Errors
 
-| Status | Code                 | Cause                                                               |
-| ------ | -------------------- | ------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                     |
-| `403`  | `forbidden`          | Your role or token scope can't delete this module.                  |
-| `404`  | `resource_not_found` | No such module, workspace, or project, or it's outside your tenant. |
-| `429`  | `rate_limited`       | Throttled. Wait for the interval in `Retry-After` and retry.        |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | The request body or a query parameter failed validation.                             |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't delete this module.                                   |
+| `404`  | `not_found`              | No such module, workspace, or project, or it's outside your tenant.                  |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | The write collides with an existing record or a business rule.                       |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Wait for the interval in `Retry-After` and retry.                         |
 
 </div>
 
@@ -125,10 +162,8 @@ No response body.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource_not_found",
-  "title": "Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "No Module matches the given query."
 }
 ```

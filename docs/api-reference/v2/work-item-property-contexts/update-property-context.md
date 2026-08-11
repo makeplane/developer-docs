@@ -32,7 +32,7 @@ The workspace slug. It appears in your Plane URLs — in `https://app.plane.so/m
 
 <ApiParam name="property_id" type="string (uuid)" :required="true">
 
-The workspace-level property the context belongs to. A project-level property id is not addressable here and returns `404 resource_not_found`.
+The workspace-level property the context belongs to. A project-level property id is not addressable here and returns `404 not_found`.
 
 </ApiParam>
 
@@ -144,6 +144,27 @@ The system `external_id` came from, for example `github` or `jira`. Maximum 255 
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `applies_to_all_projects`, `applies_to_all_work_item_types`, `created_at`, `default_value`, `external_id`, `external_source`, `id`, `is_default`, `is_multi`, `is_required`, `issue_type_ids`, `name`, `options`, `project_ids`, `settings`, `sort_order`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `workspaces.work_item_properties:write`
@@ -154,14 +175,18 @@ The system `external_id` came from, for example `github` or `jira`. Maximum 255 
 
 ### Errors
 
-| Status | Code                                 | Cause                                                                                                                                                                                       |
-| ------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`                   | An axis left without coverage, a list sent alongside its wildcard flag, an id outside the workspace, a duplicate name, a half-filled external pair, or an overlap with a same-tier context. |
-| `401`  | `unauthorized`                       | Missing or invalid credentials.                                                                                                                                                             |
-| `403`  | `forbidden`                          | Your role or token scope can't change workspace property settings.                                                                                                                          |
-| `404`  | `resource_not_found`                 | No such context, property, or workspace — or it's outside your tenant.                                                                                                                      |
-| `409`  | `work_item_types_managed_at_project` | This workspace manages work item types per project, so workspace-level property writes are refused.                                                                                         |
-| `429`  | `rate_limited`                       | Throttled. Honor the `Retry-After` header before retrying.                                                                                                                                  |
+| Status | Code                     | Cause                                                                                                                                                                                       |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | An axis left without coverage, a list sent alongside its wildcard flag, an id outside the workspace, a duplicate name, a half-filled external pair, or an overlap with a same-tier context. |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                                                                                             |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                                                                                                        |
+| `403`  | `forbidden`              | Your role or token scope can't change workspace property settings.                                                                                                                          |
+| `404`  | `not_found`              | No such context, property, or workspace — or it's outside your tenant.                                                                                                                      |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                                                                                                        |
+| `409`  | `conflict`               | This workspace manages work item types per project, so workspace-level property writes are refused.                                                                                         |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                                                                                                    |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                                                                                                         |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                                                                                                                  |
 
 </div>
 
@@ -286,14 +311,13 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation-error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "The request body failed validation.",
   "errors": [
     {
       "field": "project_ids",
+      "code": "invalid",
       "message": "Ignored when applies_to_all_projects is true; omit it."
     }
   ]

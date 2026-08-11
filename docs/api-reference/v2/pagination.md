@@ -47,8 +47,7 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
       "is_draft": false,
       "archived_at": null,
       "created_at": "2026-01-14T09:22:41.478363Z",
-      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null
+      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
     }
   ],
   "next": 50,
@@ -72,8 +71,8 @@ Because `next` and `previous` are plain integers, you can also compute them your
 
 ### Query parameters
 
-- `per_page` — page size. Defaults to `50`, capped at `200`. Values above the cap are clamped down rather than rejected; a non-integer value is a `400 validation_error`.
-- `offset` — rows to skip from the start of the result set. Defaults to `0`, maximum `10000`. A negative, non-integer, or over-cap `offset` is a `400 validation_error`, and the over-cap message points you at cursor pagination.
+- `per_page` — page size. Defaults to `50`, capped at `200`. Values above the cap are clamped down rather than rejected; a non-integer value is a `400 invalid_request`.
+- `offset` — rows to skip from the start of the result set. Defaults to `0`, maximum `10000`. A negative, non-integer, or over-cap `offset` is a `400 invalid_request`, and the over-cap message points you at cursor pagination.
 - `count` — set `?count=false` to skip the `COUNT` query. `total_count` is then omitted from the envelope; `next` and `previous` still work.
 
 ::: tip Turn off the count on hot paths
@@ -121,8 +120,7 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
       "is_draft": false,
       "archived_at": null,
       "created_at": "2026-01-14T09:22:41.478363Z",
-      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null
+      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
     }
   ],
   "next_cursor": "b3A9MTcx",
@@ -142,7 +140,7 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
 
 Passing `?cursor=<token>` is enough to stay on the cursor path — you do not need to repeat `paginate=cursor` on follow-up requests. You **do** need to repeat everything else. The token encodes only the position in the walk; filters, `order_by`, and `per_page` are re-read from each request, so dropping them mid-traversal silently changes the result set you are walking.
 
-The token is opaque. Treat it as a string to hand straight back to the API: do not parse it, do not build one yourself, and do not persist it as a long-lived bookmark. A malformed or truncated token is a `400 validation_error`.
+The token is opaque. Treat it as a string to hand straight back to the API: do not parse it, do not build one yourself, and do not persist it as a long-lived bookmark. A malformed or truncated token is a `400 invalid_request`.
 
 ::: info Why cursor is stable
 Offset pages are computed by skipping rows. If someone creates a work item while you are on page 3, everything shifts by one and you can see a row twice or miss it entirely. A cursor encodes the last row's sort key, so inserts and deletes elsewhere in the list cannot shift your window.
@@ -160,9 +158,7 @@ Pairing one of those with cursor pagination returns a `400` with the stable code
 
 ```json
 {
-  "type": "https://api.plane.so/errors/ordering_not_cursor_eligible",
-  "title": "Ordering Not Cursor Eligible",
-  "status": 400,
+  "type": "invalid_request",
   "code": "ordering_not_cursor_eligible",
   "detail": "This ordering can't be used with cursor pagination. Pass a cursor-safe ordering (e.g. order_by=created_at), or use the default offset pagination."
 }
@@ -303,8 +299,29 @@ Reach for **offset** when a human is looking at the result: you want a total to 
 
 Reach for **cursor** when a machine is looking at the result: exports, backfills, incremental syncs, anything that walks a whole project's work items. It skips the `COUNT`, has no depth cap, and will not double-count rows if the data changes while you are traversing.
 
+## Making pages cheaper with `?fields=`
+
+Both envelopes compose with [`?fields=`](/api-reference/v2/sparse-fields), which is usually the biggest win available on
+a paginated traversal — you pay for the keys you asked for, on every row of every page:
+
+```bash
+curl "https://api.plane.so/api/v2/workspaces/my-team/projects/ENG/work-items/?fields=id,updated_at&paginate=cursor&per_page=200" \
+  -H "X-Api-Key: $PLANE_API_KEY"
+```
+
+Two things worth knowing when you combine them:
+
+- **The envelope keys are never filtered.** `?fields=` shapes the objects inside `data`; `next`, `total_count`,
+  `next_cursor`, `has_more` and `pagination` always come back.
+- **Some resources leave heavy fields off list rows by default.** Pages, releases, customers, initiatives, teamspaces,
+  stickies, intake work items and templates omit `description_html` from collection rows unless you name it. So a plain
+  list is already cheaper than the object shape suggests — and `?fields=all` opts back into the full row.
+
+Pair `?count=false` with `?fields=` when you are draining a list and need neither the total nor most of the columns.
+
 ## Related
 
 - [Filtering and ordering](/api-reference/v2/filtering-and-ordering) — narrowing a list before you page through it
-- [Errors](/api-reference/v2/errors) — the full RFC 9457 error contract and code list
-- [Expanding relations](/api-reference/v2/expanding-relations) — `?expand=` on paginated work item and member lists
+- [Sparse fields](/api-reference/v2/sparse-fields) — `?fields=` for cheaper rows
+- [Errors](/api-reference/v2/errors) — the full `problem+json` error contract and code list
+- [Expanding relations](/api-reference/v2/expanding-relations) — `?expand=` on paginated lists

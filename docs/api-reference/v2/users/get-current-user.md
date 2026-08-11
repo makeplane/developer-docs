@@ -48,12 +48,14 @@ An API key reaches it unconditionally. An OAuth token still needs to carry a rea
 
 ### Errors
 
-| Status | Code                 | Cause                                                                                                 |
-| ------ | -------------------- | ----------------------------------------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials — a wrong key, the wrong header, or an expired or revoked OAuth token. |
-| `403`  | `forbidden`          | The credential is valid but carries no read scope — an OAuth token granted write scopes only.         |
-| `404`  | `resource_not_found` | The calling principal could not be resolved to a user record.                                         |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.                                            |
+| Status | Code               | Cause                                                                                                 |
+| ------ | ------------------ | ----------------------------------------------------------------------------------------------------- |
+| `401`  | `unauthorized`     | Missing or invalid credentials — a wrong key, the wrong header, or an expired or revoked OAuth token. |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                  |
+| `403`  | `forbidden`        | The credential is valid but carries no read scope — an OAuth token granted write scopes only.         |
+| `404`  | `not_found`        | The calling principal could not be resolved to a user record.                                         |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                                  |
+| `429`  | `rate_limited`     | Throttled. Honor the `Retry-After` header before retrying.                                            |
 
 </div>
 
@@ -148,9 +150,7 @@ const canWriteWorkItems = me.scopes.includes("projects.work_items:write");
 
 ```json
 {
-  "type": "https://api.plane.so/errors/unauthorized",
-  "title": "Unauthorized",
-  "status": 401,
+  "type": "unauthorized",
   "code": "unauthorized",
   "detail": "Authentication credentials were not provided or are invalid."
 }

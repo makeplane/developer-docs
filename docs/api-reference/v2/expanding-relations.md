@@ -45,15 +45,29 @@ The practical rule: **read identifiers from `*_id` / `*_ids`, and treat expanded
 
 ## Where `?expand=` is supported
 
-`?expand=` is supported on exactly two resource families. This is the complete list.
+Each resource declares its own allowlist. This is the complete list.
 
-| Resource                                      | Allowed `expand` values                          |
-| --------------------------------------------- | ------------------------------------------------ |
-| **Work items**                                | `state`, `type`, `parent`, `assignees`, `labels` |
-| **Workspace members** and **project members** | `member`                                         |
+| Resource                                                           | Allowed `expand` values                                              |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| **Work items** (project list, workspace list, detail, writes)      | `state`, `type`, `parent`, `assignees`, `labels`, `cycle`, `modules` |
+| **Projects**                                                       | `project_lead`, `default_assignee`                                   |
+| **Cycles**                                                         | `owned_by`                                                           |
+| **Modules**                                                        | `lead`, `members`                                                    |
+| **Initiatives**                                                    | `lead`                                                               |
+| **Teamspaces**                                                     | `lead`                                                               |
+| **Releases**                                                       | `lead`, `tag`                                                        |
+| **Estimates**                                                      | `points`                                                             |
+| **Comments** and **work item activities**                          | `actor`                                                              |
+| **Worklogs**                                                       | `logged_by`                                                          |
+| **Project pages** and **workspace pages**                          | `owned_by`, `parent`                                                 |
+| **Collections**                                                    | `owned_by`                                                           |
+| **Project views** and **workspace views**                          | `owned_by`                                                           |
+| **Workspace members**, **project members**, **collection members** | `member`                                                             |
 
-::: danger Every other v2 resource does not support `?expand=`
-States, labels, cycles, modules, comments, work item types, properties, property options, property contexts, workspace features, audit logs — none of them accept `?expand=`. There is no partial support and no silent ignoring: any value you pass to a resource with no expandable relations is an unknown value, and unknown values are rejected.
+::: danger A resource with no expandable relations rejects every value
+States, labels, milestones, work item types, properties, property options, property contexts, webhooks, workspace
+features and audit logs declare no expandable relations. There is no partial support and no silent ignoring — any value
+you pass to such a resource is an unknown value, and unknown values are rejected.
 :::
 
 Passing a value the resource does not declare returns a `400`:
@@ -62,19 +76,62 @@ Passing a value the resource does not declare returns a `400`:
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation_error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "One or more fields failed validation.",
-  "errors": [{ "field": "expand", "message": "Unknown expand value(s): project." }]
+  "errors": [
+    {
+      "field": "expand",
+      "code": "invalid",
+      "message": "Unknown expand value(s): project."
+    }
+  ]
 }
 ```
 
 </ResponsePanel>
 
-::: info `?expand=` is not in the published OpenAPI schema
-The API supports `?expand=` on the resources above, but the parameter is currently **absent from the served OpenAPI document** at `/api/v2/schema/`. Generated SDKs and schema-driven request validators will not know about it, and a strict client may strip it. This page is the reference until the schema catches up — the runtime behavior described here is what the API actually does.
+::: tip `?expand=` is in the published OpenAPI schema
+The parameter is declared per operation in the served OpenAPI document at `/api/v2/schema/`, with its allowlist as an
+**enum**. Generated SDKs and MCP tool definitions therefore constrain the value up front instead of discovering it from
+a `400`, and a schema-driven validator will not strip it.
+:::
+
+## Composing with `?fields=`
+
+`?expand=` and [`?fields=`](/api-reference/v2/sparse-fields) are **separate namespaces**, and they do not interact.
+
+```
+?fields=id,name&expand=state    →  { "id": "…", "name": "…", "state": { … } }
+```
+
+`state_id` is a field. `state` is an expandable relation. Because they are different keys in different namespaces:
+
+- Filtering fields **never drops an expansion**. `state` survives even though `state_id` was not requested.
+- There is no precedence rule to learn, and no order dependency between the two parameters.
+
+The flip side is that the namespaces are strict in both directions. A relation name is not a valid `?fields=` token, and
+a field name is not a valid `?expand=` value — but the `400` tells you which parameter you meant:
+
+```json
+{
+  "type": "invalid_request",
+  "code": "invalid_request",
+  "detail": "One or more fields failed validation.",
+  "errors": [
+    {
+      "field": "fields",
+      "code": "invalid",
+      "message": "'state' is an expandable relation, not a response field — use ?expand=state to embed the object, or ?fields=state_id for just its id."
+    }
+  ]
+}
+```
+
+::: info Why not unify them?
+Letting `?fields=state` imply an expansion is the trap v1 fell into: expansion _replaced_ a field, so filtering fields
+silently killed the expansion. Keeping the namespaces separate is what makes both parameters composable without
+surprises.
 :::
 
 ## Before and after
@@ -109,8 +166,7 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
       "is_draft": false,
       "archived_at": null,
       "created_at": "2026-01-14T09:22:41.478363Z",
-      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null
+      "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
     }
   ],
   "next": null,
@@ -151,7 +207,6 @@ curl "https://api.plane.so/api/v2/workspaces/my-team/projects/4af68566-94a4-4eb3
       "archived_at": null,
       "created_at": "2026-01-14T09:22:41.478363Z",
       "created_by_id": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-      "custom_fields": null,
       "state": {
         "id": "f960d3c2-8524-4a41-b8eb-055ce4be2a7f",
         "name": "In Progress",

@@ -18,7 +18,7 @@ Remove a comment from a work item. On success the response is `204 No Content` w
 nothing to parse, so branch on the status code.
 
 The delete is a soft delete: the comment stops appearing in every read, including lists and its own detail
-route, and a follow-up `GET` on the same id returns `404 resource_not_found`.
+route, and a follow-up `GET` on the same id returns `404 not_found`.
 
 ::: warning Deleting a comment is not reversible through the API
 There is no restore endpoint, so confirm with the user before deleting. Deleting the parent work item is the
@@ -61,6 +61,37 @@ The comment to delete.
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `access`, `actor_id`, `comment_html`, `comment_stripped`, `created_at`, `created_by_id`, `edited_at`, `external_id`, `external_source`, `id`, `work_item_id`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `actor` (the comment author).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.work_items.comments:write`
@@ -71,13 +102,18 @@ The comment to delete.
 
 ### Errors
 
-| Status | Code                 | Cause                                                                      |
-| ------ | -------------------- | -------------------------------------------------------------------------- |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                                            |
-| `403`  | `forbidden`          | Your role or token scope can't delete this comment.                        |
-| `404`  | `resource_not_found` | No such comment, it belongs to another work item, or it's already deleted. |
-| `409`  | `conflict`           | The delete conflicts with the current state of the comment.                |
-| `429`  | `rate_limited`       | Throttled. Honor the `Retry-After` header before retrying.                 |
+| Status | Code                     | Cause                                                                                |
+| ------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| `400`  | `invalid_request`        | The request body or a query parameter failed validation.                             |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`              | Your role or token scope can't delete this comment.                                  |
+| `404`  | `not_found`              | No such comment, it belongs to another work item, or it's already deleted.           |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                 |
+| `409`  | `conflict`               | The delete conflicts with the current state of the comment.                          |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                             |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                  |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                           |
 
 </div>
 
@@ -136,10 +172,8 @@ No response body.
 
 ```json
 {
-  "type": "https://api.plane.so/errors/resource_not_found",
-  "title": "Resource Not Found",
-  "status": 404,
-  "code": "resource_not_found",
+  "type": "not_found",
+  "code": "not_found",
   "detail": "No comment matches the given query."
 }
 ```

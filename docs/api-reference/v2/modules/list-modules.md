@@ -136,10 +136,41 @@ The default `sort_order` is not unique, so it can't back a stable keyset. A bare
 
 ::: info Enum filters are validated
 `status` and `status__in` are checked against the allowed values. A typo like `?status=in_progress` is a clean
-`400 validation_error`, not an empty result set.
+`400 invalid_request`, not an empty result set.
 :::
 
 Modules do not support `?expand=` — `lead_id` and `member_ids` are always returned as ids.
+
+<div class="params-section">
+
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return on each row. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `archived_at`, `created_at`, `created_by_id`, `description`, `external_id`, `external_source`, `id`, `lead_id`, `logo_props`, `member_ids`, `name`, `sort_order`, `start_date`, `status`, `target_date`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+<ApiParam name="expand" type="string" :required="false">
+
+Comma-separated relations to embed alongside the ids: `lead` (the module lead), `members` (the module members).
+
+Expansion is separate-key: `?expand=state` keeps `state_id` and adds a `state` object next to it, so an id is never replaced by an object. An unknown value is a `400`.
+
+`?fields=` and `?expand=` are independent namespaces. Relation names are not valid `?fields=` tokens (and vice versa), and an expanded object survives field filtering — `?fields=id,name&expand=state` returns `id`, `name` and `state`. See [Expanding relations](/api-reference/v2/expanding-relations).
+
+</ApiParam>
+
+</div>
+</div>
 
 <div class="params-section">
 
@@ -153,12 +184,14 @@ Modules do not support `?expand=` — `lead_id` and `member_ids` are always retu
 
 ### Errors
 
-| Status | Code                 | Cause                                                        |
-| ------ | -------------------- | ------------------------------------------------------------ |
-| `401`  | `unauthorized`       | Missing or invalid credentials.                              |
-| `403`  | `forbidden`          | Your role or token scope can't read modules in this project. |
-| `404`  | `resource_not_found` | No such workspace or project, or it's outside your tenant.   |
-| `429`  | `rate_limited`       | Throttled. Wait for the interval in `Retry-After` and retry. |
+| Status | Code               | Cause                                                                                |
+| ------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `401`  | `unauthorized`     | Missing or invalid credentials.                                                      |
+| `402`  | `payment_required` | The feature this endpoint belongs to isn't enabled on your plan, or is switched off. |
+| `403`  | `forbidden`        | Your role or token scope can't read modules in this project.                         |
+| `404`  | `not_found`        | No such workspace or project, or it's outside your tenant.                           |
+| `406`  | `not_acceptable`   | The `Accept` header asks for a representation the API can't produce.                 |
+| `429`  | `rate_limited`     | Throttled. Wait for the interval in `Retry-After` and retry.                         |
 
 </div>
 

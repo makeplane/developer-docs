@@ -155,6 +155,27 @@ The system `external_id` came from, for example `jira` or `linear`. Maximum 255 
 
 <div class="params-section">
 
+### Response shaping
+
+<div class="params-list">
+
+<ApiParam name="fields" type="string" :required="false">
+
+Comma-separated list of fields to return. Unrequested keys are **omitted** from the response, not returned as `null`, so absent means "not requested" and `null` means "actually null". `id` always comes back whether or not you name it.
+
+Pass `all` for every requestable field. An unknown name is a `400` that lists the valid set and suggests the closest match, so a typo can't silently cost you the saving.
+
+Requestable here: `created_at`, `default_value`, `description`, `display_name`, `external_id`, `external_source`, `id`, `is_active`, `is_multi`, `is_required`, `logo_props`, `name`, `options`, `property_type`, `relation_type`, `settings`, `validation_rules`.
+
+See [Sparse fields](/api-reference/v2/sparse-fields).
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
 ### Scopes
 
 `projects.work_item_properties:write`
@@ -165,14 +186,18 @@ The system `external_id` came from, for example `jira` or `linear`. Maximum 255 
 
 ### Errors
 
-| Status | Code                                   | Cause                                                                                                                 |
-| ------ | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `400`  | `validation_error`                     | Missing `display_name` or `property_type`, or an enum value outside the list.                                         |
-| `401`  | `unauthorized`                         | Missing or invalid credentials.                                                                                       |
-| `403`  | `forbidden`                            | Your role or token scope can't create properties.                                                                     |
-| `404`  | `resource_not_found`                   | No such workspace or project, or it's outside your tenant.                                                            |
-| `409`  | `work_item_types_managed_at_workspace` | This workspace manages work item types at the workspace level. Create the property on the workspace endpoint instead. |
-| `429`  | `rate_limited`                         | Throttled. Honor the `Retry-After` header before retrying.                                                            |
+| Status | Code                     | Cause                                                                                                                 |
+| ------ | ------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `400`  | `invalid_request`        | Missing `display_name` or `property_type`, or an enum value outside the list.                                         |
+| `401`  | `unauthorized`           | Missing or invalid credentials.                                                                                       |
+| `402`  | `payment_required`       | The feature this endpoint belongs to isn't enabled on your plan, or is switched off.                                  |
+| `403`  | `forbidden`              | Your role or token scope can't create properties.                                                                     |
+| `404`  | `not_found`              | No such workspace or project, or it's outside your tenant.                                                            |
+| `406`  | `not_acceptable`         | The `Accept` header asks for a representation the API can't produce.                                                  |
+| `409`  | `conflict`               | This workspace manages work item types at the workspace level. Create the property on the workspace endpoint instead. |
+| `413`  | `payload_too_large`      | The request body is over the size limit.                                                                              |
+| `415`  | `unsupported_media_type` | The `Content-Type` isn't one this endpoint accepts.                                                                   |
+| `429`  | `rate_limited`           | Throttled. Honor the `Retry-After` header before retrying.                                                            |
 
 </div>
 
@@ -324,9 +349,7 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/conflict",
-  "title": "Conflict",
-  "status": 409,
+  "type": "conflict",
   "code": "work_item_types_managed_at_workspace",
   "detail": "Work item types are managed at the workspace level for this workspace."
 }
@@ -338,14 +361,13 @@ const data = await response.json();
 
 ```json
 {
-  "type": "https://api.plane.so/errors/validation-error",
-  "title": "Validation Error",
-  "status": 400,
-  "code": "validation_error",
+  "type": "invalid_request",
+  "code": "invalid_request",
   "detail": "The request body failed validation.",
   "errors": [
     {
       "field": "property_type",
+      "code": "invalid_choice",
       "message": "\"SELECT\" is not a valid choice."
     }
   ]
