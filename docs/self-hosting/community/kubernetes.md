@@ -39,7 +39,7 @@ Read [Before you install](/self-hosting/methods/prerequisites). For Kubernetes y
      --create-namespace \
      --namespace plane-ce \
      --set planeVersion=%%CE_VERSION%% \
-     --set ingress.appHost="plane.example.com" \
+     --set ingress.appHost="<your-domain>" \
      --set ingress.ingressClass=traefik \
      --set env.secret_key="$(openssl rand -hex 32)" \
      --set env.live_server_secret_key="$(openssl rand -hex 32)" \
@@ -48,7 +48,7 @@ Read [Before you install](/self-hosting/methods/prerequisites). For Kubernetes y
      --wait-for-jobs
    ```
 
-   This creates PostgreSQL, Redis, RabbitMQ, and MinIO with PersistentVolumeClaims on your default StorageClass, and an Ingress for `plane.example.com`.
+   This creates PostgreSQL, Redis, RabbitMQ, and MinIO with PersistentVolumeClaims on your default StorageClass, and an Ingress for `<your-domain>`.
 
    **Values file** (recommended for anything beyond a trial)
 
@@ -71,7 +71,7 @@ The full list is in `helm show values plane/plane-ce`. These are the values most
 | Value                                                                                                                | Default                        | What it does                                                                                                                         |
 | -------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `planeVersion`                                                                                                       | %%CE_VERSION%%                 | Plane image tag to deploy. Pin an explicit version. Don't use `stable`.                                                              |
-| `ingress.enabled`, `ingress.appHost`                                                                                 | `true`, `plane.example.com`    | Create an Ingress for the app hostname.                                                                                              |
+| `ingress.enabled`, `ingress.appHost`                                                                                 | `true`, `<your-domain>`        | Create an Ingress for the app hostname.                                                                                              |
 | `ingress.minioHost`, `ingress.rabbitmqHost`                                                                          | empty                          | Optional extra hostnames for the MinIO console and RabbitMQ management UI.                                                           |
 | `ingress.ingressClass`                                                                                               | `traefik`                      | `traefik` or `nginx`.                                                                                                                |
 | `ssl.tls_secret_name`                                                                                                | empty                          | Use an existing TLS secret for the app hostname.                                                                                     |
@@ -94,7 +94,7 @@ kubectl -n plane-ce get pods
 kubectl -n plane-ce get ingress
 ```
 
-All pods should reach `Running`. The migrator job completes and exits. Then open `https://plane.example.com`. You should see the sign-in screen. Sign-in works after you create the instance admin.
+All pods should reach `Running`. The migrator job completes and exits. Then open `https://<your-domain>`. You should see the sign-in screen. Sign-in works after you create the instance admin.
 
 ## After you install
 

@@ -43,9 +43,9 @@ Add or update these environment variables:
 
 ```bash
 # SSL Configuration
-CERT_EMAIL=admin@yourcompany.com
-SITE_ADDRESS=plane.yourcompany.com
-WEB_URL=https://plane.yourcompany.com
+CERT_EMAIL=<your-email>
+SITE_ADDRESS=<your-domain>
+WEB_URL=https://<your-domain>
 ```
 
 **Variable explanations:**
@@ -54,7 +54,7 @@ WEB_URL=https://plane.yourcompany.com
 A valid email address for Let's Encrypt certificate registration. Let's Encrypt uses this to send renewal reminders and important notices about your certificates.
 
 **SITE_ADDRESS**  
-Your domain name **without** protocol. Use only the domain (e.g., `plane.company.com`), not `https://plane.company.com`. Plane's built-in proxy uses this to request certificates from Let's Encrypt.
+Your domain name **without** protocol. Use only the domain (e.g., `<your-domain>`), not `https://<your-domain>`. Plane's built-in proxy uses this to request certificates from Let's Encrypt.
 
 **WEB_URL**  
 Your full Plane URL **with** the `https://` protocol. This tells Plane services how to construct URLs for redirects, emails, and API responses.
@@ -101,12 +101,12 @@ This process typically takes 30-60 seconds.
 Check that your Plane instance is accessible via HTTPS:
 
 ```bash
-curl -I https://plane.yourcompany.com
+curl -I https://<your-domain>
 ```
 
 You should see a response with `HTTP/2 200` or `HTTP/1.1 200` and SSL-related headers.
 
-Visit your Plane instance in a browser at `https://plane.yourcompany.com`. You should see a secure connection (padlock icon) without certificate warnings.
+Visit your Plane instance in a browser at `https://<your-domain>`. You should see a secure connection (padlock icon) without certificate warnings.
 
 ## Using custom SSL certificates
 

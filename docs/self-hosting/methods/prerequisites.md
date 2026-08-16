@@ -41,8 +41,8 @@ See [Choose your install](/self-hosting/methods/overview). Each install guide li
 
 ## Domain and DNS
 
-- Decide the URL users will open, for example `plane.company.com`. An IP address works for a quick trial. Docker installers ask for it during setup and write it into `plane.env`. Changing it later means editing the configuration and restarting. See [Custom domain](/self-hosting/govern/custom-domain).
-- **Create the DNS A (or AAAA) record before you install** and confirm it resolves to the machine (`dig +short plane.company.com`). The built-in proxy requests a Let's Encrypt certificate on first start. If the record isn't live yet, the certificate request fails.
+- Decide the URL users will open, for example `plane.<your-company>.com`. An IP address works for a quick trial. Docker installers ask for it during setup and write it into `plane.env`. Changing it later means editing the configuration and restarting. See [Custom domain](/self-hosting/govern/custom-domain).
+- **Create the DNS A (or AAAA) record before you install** and confirm it resolves to the machine (`dig +short <your-domain>`). The built-in proxy requests a Let's Encrypt certificate on first start. If the record isn't live yet, the certificate request fails.
 - If Plane sits behind your own load balancer or reverse proxy that terminates TLS, point DNS at that proxy and read [External reverse proxy](/self-hosting/govern/reverse-proxy) before installing. The Prime installer accepts `--behind-proxy`.
 
 ## Ports

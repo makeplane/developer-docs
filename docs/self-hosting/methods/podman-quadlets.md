@@ -45,15 +45,15 @@ podman --version
 2. Run the installer (no `sudo`):
 
    ```bash
-   ./install.sh --domain plane.company.com
+   ./install.sh --domain <your-domain>
    # or choose the install directory explicitly:
-   ./install.sh --domain plane.company.com --base-dir /srv/plane
+   ./install.sh --domain <your-domain> --base-dir /srv/plane
    ```
 
    Without `--base-dir`, the installer uses `/opt/plane` if your user can `sudo` non-interactively, otherwise `~/plane`. It creates the `data/`, `logs/`, and `proxy/` directories, writes `plane.env` with your domain, `WEB_URL=http://<domain>:8080`, and a generated `MACHINE_SIGNATURE`, and installs the unit files into `~/.config/containers/systemd/`.
 
 3. Optional: before starting, edit `plane.env` in the install directory.
-   - Behind a TLS-terminating proxy: set `WEB_URL=https://plane.company.com` and `CORS_ALLOWED_ORIGINS=https://plane.company.com`.
+   - Behind a TLS-terminating proxy: set `WEB_URL=https://<your-domain>` and `CORS_ALLOWED_ORIGINS=https://<your-domain>`.
    - Managed services: `DATABASE_URL`, `REDIS_URL`, `AMQP_URL`, `USE_MINIO=0` plus `AWS_*` ([External services](/self-hosting/govern/database-and-storage)). OpenSearch: `OPENSEARCH_ENABLED=1`, `OPENSEARCH_URL`, credentials ([advanced search](/self-hosting/govern/advanced-search)).
    - Rotate `SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, `AES_SECRET_KEY`, and the bundled service passwords. See [Environment variables](/self-hosting/govern/environment-variables).
 
@@ -88,11 +88,11 @@ systemctl --user status {api,worker,beat-worker,monitor,silo,web,space,admin,liv
 journalctl --user -u api --no-pager | tail -20      # ends with "Application startup complete"
 ```
 
-Open `http://plane.company.com:8080` (or your proxy's URL). You should see the sign-in page. Create the instance admin next.
+Open `http://<your-domain>:8080` (or your proxy's URL). You should see the sign-in page. Create the instance admin next.
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**, starting with `http://plane.company.com:8080/god-mode/`. For HTTPS, either terminate TLS at your own reverse proxy in front of 8080 ([External reverse proxy](/self-hosting/govern/reverse-proxy)), or set `SITE_ADDRESS` in `plane.env` to your domain and expose 8443.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `http://<your-domain>:8080/god-mode/`. For HTTPS, either terminate TLS at your own reverse proxy in front of 8080 ([External reverse proxy](/self-hosting/govern/reverse-proxy)), or set `SITE_ADDRESS` in `plane.env` to your domain and expose 8443.
 
 ::: tip Purchased a plan? Activate your license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.
@@ -116,7 +116,7 @@ journalctl --user -u <service> -f                    # follow logs
 ```bash
 cp /opt/plane/plane.env ~/plane.env.backup           # keep your settings and MACHINE_SIGNATURE
 # download and extract the new bundle, then in its folder:
-./install.sh --domain plane.company.com [--base-dir /opt/plane]
+./install.sh --domain <your-domain> [--base-dir /opt/plane]
 # merge your values back: at minimum MACHINE_SIGNATURE, secrets, WEB_URL/CORS, external service URLs
 diff ~/plane.env.backup /opt/plane/plane.env
 systemctl --user daemon-reload

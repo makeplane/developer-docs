@@ -46,7 +46,7 @@ Inside the container, `localhost` is the container itself. Use hostnames or IPs 
    ```bash
    docker run -d --name plane-aio --restart unless-stopped \
      -p 80:80 \
-     -e DOMAIN_NAME=plane.company.com \
+     -e DOMAIN_NAME=<your-domain> \
      -e MACHINE_SIGNATURE=<value from step 2> \
      -e DATABASE_URL=postgresql://plane:<password>@db.internal:5432/plane \
      -e REDIS_URL=redis://cache.internal:6379 \
@@ -75,11 +75,11 @@ Inside the container, `localhost` is the container itself. Use hostnames or IPs 
 
 ## Verify
 
-Open `http://plane.company.com` (or the IP). You should see the sign-in page. You can't sign in yet. Create the instance admin first ([After you install](/self-hosting/methods/after-install)).
+Open `http://<your-domain>` (or the IP). You should see the sign-in page. You can't sign in yet. Create the instance admin first ([After you install](/self-hosting/methods/after-install)).
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**, starting with `http://plane.company.com/god-mode/`. TLS for the AIO container is normally handled by a reverse proxy or load balancer in front of it ([External reverse proxy](/self-hosting/govern/reverse-proxy)). The bundled Caddy serves plain HTTP on port 80.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `http://<your-domain>/god-mode/`. TLS for the AIO container is normally handled by a reverse proxy or load balancer in front of it ([External reverse proxy](/self-hosting/govern/reverse-proxy)). The bundled Caddy serves plain HTTP on port 80.
 
 ::: tip Purchased a plan? Activate your license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.

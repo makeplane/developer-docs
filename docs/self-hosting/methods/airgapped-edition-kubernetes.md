@@ -46,7 +46,7 @@ Prefer managed PostgreSQL, object storage, RabbitMQ, and OpenSearch reachable in
    planeVersion: %%COMMERCIAL_VERSION%%
 
    license:
-     licenseDomain: plane.internal.company.com # the hostname you'll serve Plane on
+     licenseDomain: <your-domain> # the hostname you'll serve Plane on
 
    airgapped:
      enabled: true # REQUIRED; no calls to prime.plane.so
@@ -72,45 +72,45 @@ Prefer managed PostgreSQL, object storage, RabbitMQ, and OpenSearch reachable in
    ```yaml
    services:
      web:
-       image: registry.internal.company.com/makeplane/web-commercial
+       image: <your-registry>/makeplane/web-commercial
      space:
-       image: registry.internal.company.com/makeplane/space-commercial
+       image: <your-registry>/makeplane/space-commercial
      admin:
-       image: registry.internal.company.com/makeplane/admin-commercial
+       image: <your-registry>/makeplane/admin-commercial
      live:
-       image: registry.internal.company.com/makeplane/live-commercial
+       image: <your-registry>/makeplane/live-commercial
      live_exporter:
-       image: registry.internal.company.com/makeplane/live-commercial
+       image: <your-registry>/makeplane/live-commercial
      monitor:
-       image: registry.internal.company.com/makeplane/monitor-commercial
+       image: <your-registry>/makeplane/monitor-commercial
      api:
-       image: registry.internal.company.com/makeplane/backend-commercial
+       image: <your-registry>/makeplane/backend-commercial
      worker:
-       image: registry.internal.company.com/makeplane/backend-commercial
+       image: <your-registry>/makeplane/backend-commercial
      beatworker:
-       image: registry.internal.company.com/makeplane/backend-commercial
+       image: <your-registry>/makeplane/backend-commercial
      silo:
-       image: registry.internal.company.com/makeplane/silo-commercial
+       image: <your-registry>/makeplane/silo-commercial
      email_service:
-       image: registry.internal.company.com/makeplane/email-commercial
+       image: <your-registry>/makeplane/email-commercial
      iframely:
-       image: registry.internal.company.com/makeplane/iframely:v2.5.3 # this one carries its tag in the value
+       image: <your-registry>/makeplane/iframely:v2.5.3 # this one carries its tag in the value
      pi:
-       image: registry.internal.company.com/makeplane/plane-pi-commercial
+       image: <your-registry>/makeplane/plane-pi-commercial
      runner:
-       image: registry.internal.company.com/makeplane/node-runner-commercial
+       image: <your-registry>/makeplane/node-runner-commercial
      # In-cluster infrastructure (only if local_setup: true):
      postgres:
-       image: registry.internal.company.com/postgres:15.7-alpine
+       image: <your-registry>/postgres:15.7-alpine
      redis:
-       image: registry.internal.company.com/valkey/valkey:7.2.11-alpine
+       image: <your-registry>/valkey/valkey:7.2.11-alpine
      rabbitmq:
-       image: registry.internal.company.com/rabbitmq:3.13.6-management-alpine
+       image: <your-registry>/rabbitmq:3.13.6-management-alpine
      minio:
-       image: registry.internal.company.com/minio/minio:<pinned release>
-       image_mc: registry.internal.company.com/minio/mc:<pinned release>
+       image: <your-registry>/minio/minio:<pinned release>
+       image_mc: <your-registry>/minio/mc:<pinned release>
      opensearch:
-       image: registry.internal.company.com/opensearchproject/opensearch:3.3.2
+       image: <your-registry>/opensearchproject/opensearch:3.3.2
    ```
 
    Every workload in the chart has an `image` value (`services.<name>.image`). Check `custom-values.yaml` for the full list. Anything still starting with `makeplane/` will fail to pull. Then set your own secrets (`env.secret_key`, `env.live_server_secret_key`, `env.silo_envs.hmac_secret_key`, `env.silo_envs.aes_secret_key`, service passwords), and configure external services (`env.pgdb_remote_url`, `env.remote_redis_url`, `services.rabbitmq.external_rabbitmq_url`, `env.aws_*`) as described in the [Helm values reference](/self-hosting/methods/kubernetes-values). Point integrations (GitHub Enterprise, GitLab, Slack) at your internal instances with `services.silo.connectors.*`.
@@ -135,7 +135,7 @@ kubectl -n plane get ingress -o wide
 kubectl -n plane get pvc
 ```
 
-All pods `Running` (the migrator Job completes). `ImagePullBackOff` means an image path or tag isn't in your registry. Open `https://plane.internal.company.com`. You should see the sign-in page. Sign-in works after you create the instance admin.
+All pods `Running` (the migrator Job completes). `ImagePullBackOff` means an image path or tag isn't in your registry. Open `https://<your-domain>`. You should see the sign-in page. Sign-in works after you create the instance admin.
 
 ## After you install
 

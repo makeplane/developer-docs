@@ -636,7 +636,7 @@ planeVersion: %%COMMERCIAL_VERSION%%
 
 license:
   licenseServer: https://prime.plane.so
-  licenseDomain: plane.example.com
+  licenseDomain: <your-domain>
 
 ingress:
   enabled: true
@@ -655,9 +655,9 @@ env:
   aws_region: us-east-1
   aws_s3_endpoint_url: https://s3.us-east-1.amazonaws.com
   docstore_bucket: plane-uploads-prod
-  web_url: https://plane.example.com
+  web_url: https://<your-domain>
   instance_admin_email: admin@example.com
-  cors_allowed_origins: https://plane.example.com
+  cors_allowed_origins: https://<your-domain>
 
 services:
   postgres:

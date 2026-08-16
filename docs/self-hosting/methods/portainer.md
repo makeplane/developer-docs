@@ -27,11 +27,11 @@ Read [Before you install](/self-hosting/methods/prerequisites). You also need a 
 
    ```bash
    APP_RELEASE_VERSION=%%COMMERCIAL_VERSION%%
-   DOMAIN_NAME=plane.company.com
-   SITE_ADDRESS=plane.company.com          # or :80 behind your own TLS-terminating proxy
-   WEB_URL=https://plane.company.com
-   CORS_ALLOWED_ORIGINS=https://plane.company.com
-   CERT_EMAIL=admin@company.com
+   DOMAIN_NAME=<your-domain>
+   SITE_ADDRESS=<your-domain>          # or :80 behind your own TLS-terminating proxy
+   WEB_URL=https://<your-domain>
+   CORS_ALLOWED_ORIGINS=https://<your-domain>
+   CERT_EMAIL=<your-email>
    MACHINE_SIGNATURE=<openssl rand -hex 16> # required; the license monitor won't start without it
    ```
 
@@ -45,11 +45,11 @@ Read [Before you install](/self-hosting/methods/prerequisites). You also need a 
 
 ## Verify
 
-In Portainer, open the stack and check the container states. Then open `https://plane.company.com`. You should see the sign-in page. Create the instance admin next.
+In Portainer, open the stack and check the container states. Then open `https://<your-domain>`. You should see the sign-in page. Create the instance admin next.
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://<your-domain>/god-mode/`.
 
 ::: tip Purchased a plan? Activate your license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.

@@ -24,7 +24,7 @@ Read [Before you install](/self-hosting/methods/prerequisites). You also need a 
 
 2. In Coolify, open a project, click **+ New resource**, choose **Docker Compose Empty**, and paste the contents of `coolify-compose.yml`.
 
-3. Set the domain on the **proxy** service (Coolify's `SERVICE_FQDN_PLANE_80`, for example `https://plane.company.com`). Coolify fills `APP_DOMAIN`, `MACHINE_SIGNATURE`, `SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, and the PostgreSQL, RabbitMQ, and MinIO credentials from its own generated values.
+3. Set the domain on the **proxy** service (Coolify's `SERVICE_FQDN_PLANE_80`, for example `https://<your-domain>`). Coolify fills `APP_DOMAIN`, `MACHINE_SIGNATURE`, `SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, and the PostgreSQL, RabbitMQ, and MinIO credentials from its own generated values.
 
 4. In the resource's **Environment variables**, set:
 
@@ -42,7 +42,7 @@ Open the domain you set. You should see the sign-in page. Create the instance ad
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://<your-domain>/god-mode/`.
 
 ::: tip Purchased a plan? Activate your license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.

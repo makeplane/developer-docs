@@ -187,7 +187,7 @@ On Kubernetes, run the same checks with `kubectl exec` against any application p
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/` to create the instance admin. FIPS deployments are Enterprise Grid, so activate the license as the next step.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://<your-domain>/god-mode/` to create the instance admin. FIPS deployments are Enterprise Grid, so activate the license as the next step.
 
 ::: tip Activate your Enterprise Grid license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses), sign in to **God Mode → Billing**, paste the key, and click **Activate**. It covers every workspace on the instance. [Steps](/self-hosting/manage/manage-licenses/activate-enterprise). The instance needs outbound access to `prime.plane.so` to validate the license.

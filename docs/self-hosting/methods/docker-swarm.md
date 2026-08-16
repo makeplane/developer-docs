@@ -37,11 +37,11 @@ Read [Before you install](/self-hosting/methods/prerequisites). For Swarm you ne
 
    ```bash
    APP_RELEASE_VERSION=%%COMMERCIAL_VERSION%%
-   DOMAIN_NAME=plane.company.com
-   SITE_ADDRESS=plane.company.com          # or :80 behind your own TLS-terminating proxy
-   WEB_URL=https://plane.company.com
-   CORS_ALLOWED_ORIGINS=https://plane.company.com
-   CERT_EMAIL=admin@company.com            # for the automatic Let's Encrypt certificate
+   DOMAIN_NAME=<your-domain>
+   SITE_ADDRESS=<your-domain>          # or :80 behind your own TLS-terminating proxy
+   WEB_URL=https://<your-domain>
+   CORS_ALLOWED_ORIGINS=https://<your-domain>
+   CERT_EMAIL=<your-email>            # for the automatic Let's Encrypt certificate
    MACHINE_SIGNATURE=<openssl rand -hex 16> # required; the license monitor won't start without it
    ```
 
@@ -65,11 +65,11 @@ docker stack services plane          # every service 1/1; migrator finishes and 
 docker service logs -f plane_api     # ends with "Application startup complete"
 ```
 
-Open `https://plane.company.com`. You should see the sign-in page. Sign-in works after you create the instance admin.
+Open `https://<your-domain>`. You should see the sign-in page. Sign-in works after you create the instance admin.
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://<your-domain>/god-mode/`.
 
 ::: tip Purchased a plan? Activate your license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.

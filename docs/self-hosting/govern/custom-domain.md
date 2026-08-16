@@ -52,7 +52,7 @@ This shows you all the variables that contain your current domain. You'll update
    Set this to your bare domain name without protocol:
 
    ```ini
-   DOMAIN_NAME=plane.company.com
+   DOMAIN_NAME=<your-domain>
    ```
 
    Don't include `http://` or `https://` here, just the hostname.
@@ -63,10 +63,10 @@ This shows you all the variables that contain your current domain. You'll update
    ```ini
    # Caddy serves this hostname and provisions a Let's Encrypt certificate automatically
    # (needs ports 80 and 443 reachable from the internet, and DNS pointing at this host)
-   SITE_ADDRESS=plane.company.com
+   SITE_ADDRESS=<your-domain>
 
    # Plain HTTP for this hostname (no certificate), for internal or test setups
-   SITE_ADDRESS=http://plane.company.com
+   SITE_ADDRESS=http://<your-domain>
 
    # Plain HTTP on port 80 for any hostname. Use this when an external reverse proxy or
    # load balancer terminates TLS in front of Plane. See External reverse proxy.
@@ -79,7 +79,7 @@ This shows you all the variables that contain your current domain. You'll update
    The public URL users open in the browser, always with the protocol:
 
    ```ini
-   WEB_URL=https://plane.company.com
+   WEB_URL=https://<your-domain>
    ```
 
    - **CORS_ALLOWED_ORIGINS**
@@ -87,7 +87,7 @@ This shows you all the variables that contain your current domain. You'll update
    List all domains that should be allowed to make cross-origin requests to your Plane instance. This typically includes both HTTP and HTTPS versions of your domain:
 
    ```ini
-   CORS_ALLOWED_ORIGINS=https://plane.company.com,http://plane.company.com
+   CORS_ALLOWED_ORIGINS=https://<your-domain>,http://<your-domain>
    ```
 
    Separate multiple entries with commas, no spaces. If you have multiple domains or subdomains that need access, add them all here.

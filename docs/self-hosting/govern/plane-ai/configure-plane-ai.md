@@ -168,15 +168,15 @@ Plane AI runs as a separate service and must be wired to your Plane deployment. 
 **In the Plane API env** (`/opt/plane/plane.env`), tell Plane where PI is reachable:
 
 ```bash
-PI_BASE_URL=https://plane.example.com
+PI_BASE_URL=https://<your-domain>
 ```
 
-Plane builds the PI URL as `PI_BASE_URL + PI_BASE_PATH` - with the default `PI_BASE_PATH=/pi` this becomes `https://plane.example.com/pi`.
+Plane builds the PI URL as `PI_BASE_URL + PI_BASE_PATH` - with the default `PI_BASE_PATH=/pi` this becomes `https://<your-domain>/pi`.
 
 **In the PI env** (`/opt/plane/plane.env`), set the OAuth redirect URI to match:
 
 ```bash
-PLANE_OAUTH_REDIRECT_URI=https://plane.example.com/pi/api/v1/oauth/callback/
+PLANE_OAUTH_REDIRECT_URI=https://<your-domain>/pi/api/v1/oauth/callback/
 ```
 
 ## Enable Plane AI services

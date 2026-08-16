@@ -59,15 +59,15 @@ Read [Before you install](/self-hosting/methods/prerequisites). For the Communit
    ```bash
    # The address users will open. WEB_URL and CORS_ALLOWED_ORIGINS default to
    # http://${APP_DOMAIN}. Keep that for plain HTTP, or set https URLs when you enable TLS.
-   APP_DOMAIN=plane.company.com
-   WEB_URL=https://plane.company.com
-   CORS_ALLOWED_ORIGINS=https://plane.company.com
+   APP_DOMAIN=<your-domain>
+   WEB_URL=https://<your-domain>
+   CORS_ALLOWED_ORIGINS=https://<your-domain>
 
    # Built-in Caddy proxy. Set your domain to get an automatic Let's Encrypt certificate
    # (ports 80/443 reachable, DNS pointing here). Use SITE_ADDRESS=:80 for plain HTTP or
    # when your own reverse proxy terminates TLS.
-   SITE_ADDRESS=plane.company.com
-   CERT_EMAIL=admin@company.com
+   SITE_ADDRESS=<your-domain>
+   CERT_EMAIL=<your-email>
 
    # Host ports the proxy publishes. Change if 80/443 are taken.
    LISTEN_HTTP_PORT=80

@@ -68,15 +68,15 @@ Configuration lives in `plane-app/plane.env`. Edit it, then run `./setup.sh rest
 
 ### Proxy, ports, and TLS
 
-| Variable               | Default                            | Description                                                                                                                                                                                                                                                                                                        |
-| ---------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **LISTEN_HTTP_PORT**   | `80`                               | Host port published for HTTP.                                                                                                                                                                                                                                                                                      |
-| **LISTEN_HTTPS_PORT**  | `443`                              | Host port published for HTTPS.                                                                                                                                                                                                                                                                                     |
-| **SITE_ADDRESS**       | `:80`                              | Address the bundled Caddy proxy serves. `plane.company.com`: serve that hostname and obtain a Let's Encrypt certificate automatically (needs ports 80/443 reachable and DNS pointing here). `:80`: plain HTTP for any hostname, for trials or behind your own [reverse proxy](/self-hosting/govern/reverse-proxy). |
-| **CERT_EMAIL**         | empty                              | Email for Let's Encrypt registration when `SITE_ADDRESS` is a domain.                                                                                                                                                                                                                                              |
-| **CERT_ACME_CA**       | Let's Encrypt production directory | ACME directory URL. Switch to the staging URL while testing to avoid rate limits.                                                                                                                                                                                                                                  |
-| **CERT_ACME_DNS**      | empty                              | `<provider> <api-token>` for DNS-01 validation when port 80 can't be reached from the internet.                                                                                                                                                                                                                    |
-| **MINIO_ENDPOINT_SSL** | `0`                                | Set to `1` when Plane is served over HTTPS so that links to uploaded files use `https`.                                                                                                                                                                                                                            |
+| Variable               | Default                            | Description                                                                                                                                                                                                                                                                                                    |
+| ---------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **LISTEN_HTTP_PORT**   | `80`                               | Host port published for HTTP.                                                                                                                                                                                                                                                                                  |
+| **LISTEN_HTTPS_PORT**  | `443`                              | Host port published for HTTPS.                                                                                                                                                                                                                                                                                 |
+| **SITE_ADDRESS**       | `:80`                              | Address the bundled Caddy proxy serves. `<your-domain>`: serve that hostname and obtain a Let's Encrypt certificate automatically (needs ports 80/443 reachable and DNS pointing here). `:80`: plain HTTP for any hostname, for trials or behind your own [reverse proxy](/self-hosting/govern/reverse-proxy). |
+| **CERT_EMAIL**         | empty                              | Email for Let's Encrypt registration when `SITE_ADDRESS` is a domain.                                                                                                                                                                                                                                          |
+| **CERT_ACME_CA**       | Let's Encrypt production directory | ACME directory URL. Switch to the staging URL while testing to avoid rate limits.                                                                                                                                                                                                                              |
+| **CERT_ACME_DNS**      | empty                              | `<provider> <api-token>` for DNS-01 validation when port 80 can't be reached from the internet.                                                                                                                                                                                                                |
+| **MINIO_ENDPOINT_SSL** | `0`                                | Set to `1` when Plane is served over HTTPS so that links to uploaded files use `https`.                                                                                                                                                                                                                        |
 
 ### Data services
 
@@ -104,13 +104,13 @@ For production, run PostgreSQL and object storage outside the machine so that a 
 
 ```bash
 # External PostgreSQL 15.7+/16. The application only reads DATABASE_URL.
-DATABASE_URL=postgresql://plane:<password>@db.internal.company.com:5432/plane
+DATABASE_URL=postgresql://plane:<password>@<db-host>:5432/plane
 
 # External Redis / Valkey 7.2+
-REDIS_URL=redis://cache.internal.company.com:6379/
+REDIS_URL=redis://<redis-host>:6379/
 
 # External RabbitMQ 3.13+
-AMQP_URL=amqp://plane:<password>@mq.internal.company.com:5672/plane
+AMQP_URL=amqp://plane:<password>@<rabbitmq-host>:5672/plane
 
 # S3-compatible object storage
 USE_MINIO=0
@@ -221,7 +221,7 @@ Instance-wide settings (SMTP, sign-in methods and OAuth providers, workspace cre
 
 ```bash
 docker compose -f plane-app/docker-compose.yaml --env-file plane-app/plane.env \
-  exec api python manage.py create_instance_admin user@company.com
+  exec api python manage.py create_instance_admin <admin-email>
 ```
 
 ## Uninstall

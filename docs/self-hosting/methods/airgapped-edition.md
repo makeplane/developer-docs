@@ -39,9 +39,9 @@ Use managed PostgreSQL and S3-compatible storage inside your perimeter rather th
 2. **On the airgapped machine**, point every image at your registry. The Compose file references `makeplane/<image>:%%COMMERCIAL_VERSION%%` and the public infrastructure images. One `sed` per pattern rewrites them:
 
    ```bash
-   REGISTRY=registry.internal.company.com        # your registry host (and path prefix, if any)
+   REGISTRY=<your-registry>        # your registry host (and path prefix, if any)
 
-   # Plane images: makeplane/web-commercial:<tag> becomes registry.internal.company.com/makeplane/web-commercial:<tag>
+   # Plane images: makeplane/web-commercial:<tag> becomes <your-registry>/makeplane/web-commercial:<tag>
    sed -i "s#image: makeplane/#image: ${REGISTRY}/makeplane/#g" docker-compose.yml
 
    # Infrastructure images, if you mirrored them (skip the ones you replace with managed services)
@@ -55,10 +55,10 @@ Use managed PostgreSQL and S3-compatible storage inside your perimeter rather th
 3. **Configure `plane.env`.** The template already sets `IS_AIRGAPPED=1` and `APP_RELEASE_VERSION=%%COMMERCIAL_VERSION%%`. Edit these values in the file (don't `export` them; Compose reads the file):
 
    ```bash
-   DOMAIN_NAME=plane.internal.company.com
+   DOMAIN_NAME=<your-domain>
    SITE_ADDRESS=:80                          # plain HTTP; TLS is terminated by your own proxy, or set your hostname with your own certs
-   WEB_URL=https://plane.internal.company.com
-   CORS_ALLOWED_ORIGINS=https://plane.internal.company.com
+   WEB_URL=https://<your-domain>
+   CORS_ALLOWED_ORIGINS=https://<your-domain>
    MACHINE_SIGNATURE=<output of uuidgen>     # required
    ```
 
@@ -78,7 +78,7 @@ Use managed PostgreSQL and S3-compatible storage inside your perimeter rather th
 docker compose --env-file plane.env ps
 ```
 
-All services `running` (`migrator` exits). Open `https://plane.internal.company.com`. You should see the sign-in page. Sign-in works after you create the instance admin.
+All services `running` (`migrator` exits). Open `https://<your-domain>`. You should see the sign-in page. Sign-in works after you create the instance admin.
 
 ## After you install
 

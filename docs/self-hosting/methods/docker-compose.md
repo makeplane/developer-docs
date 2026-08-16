@@ -20,7 +20,7 @@ Read [Before you install](/self-hosting/methods/prerequisites). For Docker Compo
 - **Root or sudo access.** The installer places `prime-cli` under `/bin` and Plane under `/opt/plane`.
 - **Ports 80 and 443** free on the machine and open in your firewall or security group.
 - **Docker Engine 24+ with the Compose v2 plugin.** Check with `docker compose version`. If Docker isn't installed, run `curl -fsSL https://get.docker.com | sh` (Linux) or install Docker Desktop (macOS).
-- A **domain name whose DNS record already resolves to this machine**, for example `plane.company.com`. You can also install on an IP address for a quick trial, but built-in HTTPS only works with a domain.
+- A **domain name whose DNS record already resolves to this machine**, for example `plane.<your-company>.com`. You can also install on an IP address for a quick trial, but built-in HTTPS only works with a domain.
 - Outbound access to `prime.plane.so`, Docker Hub, and Let's Encrypt.
 
 ::: warning Production deployments
@@ -40,27 +40,18 @@ For production, use managed PostgreSQL and S3-compatible storage rather than the
    The script downloads the Prime CLI for your OS and CPU architecture and runs `sudo prime-cli setup`. Optional flags skip the prompts:
 
    ```bash
-   # Non-interactive install for plane.company.com
-   curl -fsSL https://prime.plane.so/install/ | sh -s -- --domain plane.company.com --silent
+   # Non-interactive install
+   curl -fsSL https://prime.plane.so/install/ | sh -s -- --domain <your-domain> --silent
 
    # Another proxy or load balancer terminates TLS in front of Plane
-   curl -fsSL https://prime.plane.so/install/ | sh -s -- --domain plane.company.com --behind-proxy
+   curl -fsSL https://prime.plane.so/install/ | sh -s -- --domain <your-domain> --behind-proxy
    ```
 
 3. Follow the prompts. Press `Enter` to accept a default.
-   - **Domain:** enter `plane.company.com` (or `sub.domain.tld`, or an IP address for a trial). This becomes the URL your users open and the address the proxy requests a certificate for.
+   - **Domain:** enter your domain, for example `plane.<your-company>.com`. Use an IP address for a quick trial. This becomes the URL your users open and the address the proxy requests a certificate for.
    - **Express** or **Advanced:** Express installs with defaults (bundled PostgreSQL, Redis, RabbitMQ, and MinIO; ports 80/443; 5 MB upload limit). Advanced also asks for the listening port, maximum upload size, an external PostgreSQL URL, an external Redis URL, and S3 credentials (access key, secret key, bucket). You can change all of these later with `sudo prime-cli configure`.
 
-4. Wait for the images to pull and the services to start. The installer waits for database migrations and then prints **Plane has successfully installed**.
-
-What the installer creates:
-
-| Location               | Contents                                                                                                                    |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `/bin/prime-cli`       | The Prime CLI used to manage the instance ([reference](/self-hosting/manage/prime-cli))                                     |
-| `/opt/plane/plane.env` | All configuration: domain, secrets, database and storage settings ([reference](/self-hosting/govern/environment-variables)) |
-| `/opt/plane/data/`     | Data of the bundled services (PostgreSQL, Redis, RabbitMQ, MinIO, license monitor)                                          |
-| `/opt/plane/logs/`     | Service logs                                                                                                                |
+4. Wait for the images to pull and the services to start. The installer waits for database migrations and then prints **Plane has successfully installed**. Plane lives under `/opt/plane` from now on, with all configuration in `/opt/plane/plane.env`.
 
 ## Verify
 
@@ -72,11 +63,11 @@ What the installer creates:
 
    `sudo prime-cli monitor` opens a dashboard that lists each container's status and lets you tail its logs.
 
-2. Open `https://plane.company.com` (or `http://<ip>`) in a browser. You should see the sign-in screen. You can't sign in yet, because the instance has no administrator. That is the next step.
+2. Open `https://<your-domain>` (or `http://<ip>`) in a browser. You should see the sign-in screen. You can't sign in yet, because the instance has no administrator. That is the next step.
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**. The first item is required: open `https://plane.company.com/god-mode/` to create the instance admin. Until you do, nobody can sign in. The remaining steps set up email, authentication, backups, and production hardening.
+Follow **[After you install](/self-hosting/methods/after-install)**. The first item is required: open `https://<your-domain>/god-mode/` to create the instance admin. Until you do, nobody can sign in. The remaining steps set up email, authentication, backups, and production hardening.
 
 ::: tip Purchased a plan? Activate your license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.

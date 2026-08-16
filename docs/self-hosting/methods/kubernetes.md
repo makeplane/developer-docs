@@ -19,7 +19,7 @@ Chart source and README: [makeplane/helm-charts](https://github.com/makeplane/he
 Read [Before you install](/self-hosting/methods/prerequisites). For Kubernetes you need:
 
 - A cluster on **Kubernetes 1.31 to 1.33**, with `kubectl` and **Helm 3** configured against it, and capacity for about 4 vCPU / 8 GB for a single-replica install with the bundled data services (more if you enable Plane AI or OpenSearch).
-- An **ingress controller**. The chart's default `ingress.ingressClass` is `traefik`. `nginx` is also supported. Point a DNS record for your hostname (`plane.company.com`) at the ingress.
+- An **ingress controller**. The chart's default `ingress.ingressClass` is `traefik`. `nginx` is also supported. Point a DNS record for your hostname (`<your-domain>`) at the ingress.
 - A default **StorageClass** for the bundled stateful services, or set `env.storageClass` explicitly.
 - For TLS: **cert-manager** (the chart can create an Issuer and request certificates) or an existing TLS Secret to reference in `ssl.tls_secret_name`.
 - Outbound access from the cluster to Docker Hub (`makeplane/*-commercial` images) and to `prime.plane.so` (license validation).
@@ -41,7 +41,7 @@ Use managed PostgreSQL and object storage instead of the in-cluster ones (`servi
 
    ```bash
    PLANE_VERSION=%%COMMERCIAL_VERSION%%
-   DOMAIN_NAME=plane.company.com
+   DOMAIN_NAME=<your-domain>
    ```
 
    ::: warning
@@ -95,11 +95,11 @@ kubectl -n plane get pods
 kubectl -n plane get ingress
 ```
 
-All Deployments should be `Running`. The migrator Job completes and exits. Once the ingress has an address and DNS resolves, open `https://plane.company.com`. You should see the sign-in screen. You can't sign in until you create the instance admin (next section). If pods are `Pending`, check PVC binding (`kubectl -n plane get pvc`) and node capacity. If the API crash-loops, check its logs for database connectivity.
+All Deployments should be `Running`. The migrator Job completes and exits. Once the ingress has an address and DNS resolves, open `https://<your-domain>`. You should see the sign-in screen. You can't sign in until you create the instance admin (next section). If pods are `Pending`, check PVC binding (`kubectl -n plane get pvc`) and node capacity. If the API crash-loops, check its logs for database connectivity.
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `https://plane.company.com/god-mode/`, set up SMTP and sign-in, and set up backups (PVC snapshots, or, better, managed PostgreSQL and object storage).
+Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `https://<your-domain>/god-mode/`, set up SMTP and sign-in, and set up backups (PVC snapshots, or, better, managed PostgreSQL and object storage).
 
 ::: tip Purchased a plan? Activate your license
 Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.
