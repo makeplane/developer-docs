@@ -9,7 +9,8 @@
     "preview": "vitepress preview docs",
     "fix:format": "prettier --write .",
     "check:format": "prettier --check .",
-    "check:types": "tsc --noEmit -p docs/.vitepress/tsconfig.json"
+    "check:types": "tsc --noEmit -p docs/.vitepress/tsconfig.json",
+    "check:anchors": "node scripts/check-anchors.mjs docs"
   },
   "keywords": [
     "plane",

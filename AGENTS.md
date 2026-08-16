@@ -18,9 +18,10 @@ pnpm preview              # Preview production build
 pnpm check:format         # Check Prettier formatting
 pnpm fix:format           # Auto-fix Prettier formatting
 pnpm check:types          # Type-check the VitePress config and theme
+pnpm check:anchors        # Verify every internal #anchor link resolves (VitePress only checks page links)
 ```
 
-**CI checks on PRs** (to `master`): Prettier formatting + VitePress build must pass.
+**CI checks on PRs** (to `master`): Prettier formatting, type-check, anchor check, and VitePress build must pass.
 
 ## Architecture
 
@@ -44,9 +45,10 @@ docs/
     plane-compose.md    # Plane Compose reference
     openapi-specification.md
     intro-webhooks.md
-  self-hosting/         # Deployment and configuration guides
-    methods/            # Docker, Kubernetes, Podman, Coolify, Portainer, one-click, airgapped
-      install-methods-commercial/  # Commercial Docker Compose and Kubernetes
+  self-hosting/         # Deployment and configuration guides (Commercial + Airgapped Editions are the hero paths)
+    methods/            # Choose your install, prerequisites, Docker Compose, Kubernetes (+ values ref), AIO, Swarm,
+                        # Podman, Coolify, Portainer, download-config, airgapped-*, FIPS, after-install
+    community/          # Community Edition (open source): overview, docker-compose (setup.sh), kubernetes (plane-ce), manage
     govern/             # Auth, integrations, settings, SSL, DNS, env vars
       integrations/     # GitHub, GitLab, Slack, Sentry
       plane-ai/         # AI features configuration (configure-plane-ai, embedding models)
@@ -56,8 +58,13 @@ docs/
 
 ## Key Documentation Paths
 
-- `self-hosting/methods/kubernetes.md` — K8s deployment guide
-- `self-hosting/methods/install-methods-commercial/` — Commercial Docker Compose and Kubernetes
+- `self-hosting/methods/overview.md` — "Choose your install" hub (Commercial + Airgapped hero, method matrix)
+- `self-hosting/methods/prerequisites.md` / `after-install.md` — canonical before/after checklists every install page links to
+- `self-hosting/methods/docker-compose.md` — Commercial Docker Compose (Prime CLI) guide
+- `self-hosting/methods/kubernetes.md` + `kubernetes-values.md` — Commercial K8s guide and Helm values reference
+- `self-hosting/methods/airgapped-*.md` — Airgapped Edition (overview, Docker, Kubernetes)
+- `self-hosting/community/` — Community Edition guides (`setup.sh`, `plane-ce` chart, manage)
+- `self-hosting/versions.md` + `docs/.vitepress/versions.ts` — versions per edition and the single source for version tokens
 - `self-hosting/govern/integrations/` — GitHub, GitLab, Slack, Sentry
 - `self-hosting/govern/plane-ai/` — AI features configuration (`configure-plane-ai.md`, `configure-embedding-model.md`, `aws-opensearch-embedding.md`)
 - `self-hosting/govern/environment-variables.md` — All env var reference
@@ -71,13 +78,14 @@ docs/
 
 Used directly in markdown files — defined in `docs/.vitepress/theme/components/`:
 
-| Component              | Usage                                                             |
-| ---------------------- | ----------------------------------------------------------------- |
-| `<ApiParam>`           | API parameter with name, type, required badge, expandable details |
-| `<CodePanel>`          | Multi-language code tabs (cURL, Python, JavaScript)               |
-| `<ResponsePanel>`      | Syntax-highlighted API response JSON                              |
-| `<Card>`               | Feature card with icon, title, description                        |
-| `<CardGroup cols="N">` | Responsive grid layout (2, 3, or 4 columns)                       |
+| Component              | Usage                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| `<ApiParam>`           | API parameter with name, type, required badge, expandable details                                     |
+| `<CodePanel>`          | Multi-language code tabs (cURL, Python, JavaScript)                                                   |
+| `<ResponsePanel>`      | Syntax-highlighted API response JSON                                                                  |
+| `<Card>`               | Feature card with icon, title, description                                                            |
+| `<CardGroup cols="N">` | Responsive grid layout (2, 3, or 4 columns)                                                           |
+| `<EditionBadge>`       | Edition/plan badges: `edition="commercial\|airgapped\|community"`, `plan="pro\|business\|enterprise"` |
 
 ## API Documentation Pattern
 
@@ -99,10 +107,19 @@ Each endpoint page: one file per endpoint, includes path/body params, OAuth scop
 ## Conventions
 
 - **Frontmatter**: Every markdown page needs `title`, `description`, and `keywords` fields
-- **Images**: Stored in `docs/.vitepress/public/images/`, referenced with absolute paths (`/images/...`)
+- **Images**: Stored in `docs/public/images/`, referenced with absolute paths (`/images/...`)
 - **Branch workflow**: Branch from `master`, use `fix/`, `feat/`, `docs/`, `update/` prefixes
 - **Formatting**: Prettier enforced — 120 char width, 2-space indent, semicolons, double quotes, ES5 trailing commas
 - **Sidebar updates**: When adding new pages, update the sidebar config in `docs/.vitepress/config.mts`
+- **Redirects**: When moving or deleting a page, add a redirect in `vercel.json`
+
+## Self-hosting docs conventions
+
+- **Versions come from one place.** `docs/.vitepress/versions.ts` holds the current release numbers. In markdown, use the placeholders `%%COMMERCIAL_VERSION%%` (Commercial and Airgapped), `%%CE_VERSION%%` (Community), `%%HELM_EE_VERSION%%`, and `%%HELM_CE_VERSION%%`. They work in prose, inline code, code fences, and link targets, and are replaced at build time in the HTML, the `.md` mirror, and `llms*.txt`. Never hard-code a Plane version in a self-hosting page. When a release ships, bump `versions.ts` only.
+- **Editions.** Commercial and Airgapped are the primary paths. Every install and config page starts with an "Edition availability" `::: info` callout and an `<EditionBadge>` in the H1. Community Edition content lives only under `docs/self-hosting/community/`, never as a `::: details Community Edition` fold inside a Commercial page. Commercial pages get a one-line pointer instead. Where a shared page differs by edition (for example, license activation), use `:::tabs key:edition` with `== Commercial {#commercial}` and `== Airgapped {#airgapped}`.
+- **Install-page template.** Edition callout, then what you get and when to pick it, then _Before you begin_ (link `/self-hosting/methods/prerequisites` plus the page's own additions), _Install_ (exact prompts and commands from the shipped installer), _Verify_, _After you install_ (link `/self-hosting/methods/after-install`), _Manage_, and _Troubleshoot_.
+- **Facts come from the installers.** Community steps must match the released `setup.sh` (`makeplane/plane`, `deployments/cli/community/install.sh`). Commercial steps must match the Prime installer (`prime.plane.so/install/`, `deployments/cli/commercial/*` in `plane-ee`) and the `plane-enterprise` chart. When `deployments/**` changes in those repos, update the matching page here.
+- **Writing style.** Plain developer voice: short sentences, imperative steps, one idea per sentence. No em-dashes. State the command, what it does, and what to expect. Explain the reason only where it prevents a mistake.
 
 ## Important Notes
 

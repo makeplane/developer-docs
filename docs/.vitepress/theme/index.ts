@@ -17,6 +17,7 @@ import ResponsePanel from "./components/ResponsePanel.vue";
 import Card from "./components/Card.vue";
 import CardGroup from "./components/CardGroup.vue";
 import Tags from "./components/Tags.vue";
+import EditionBadge from "./components/EditionBadge.vue";
 import CookieConsent from "./components/CookieConsent.vue";
 import PlaneLayout from "./Layout.vue";
 
@@ -127,6 +128,7 @@ export default {
     app.component("Card", Card);
     app.component("CardGroup", CardGroup);
     app.component("Tags", Tags);
+    app.component("EditionBadge", EditionBadge);
   },
   setup() {
     if (typeof window === "undefined") return;

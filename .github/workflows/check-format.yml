@@ -46,4 +46,6 @@ jobs:
 
       - run: pnpm check:types
 
+      - run: pnpm check:anchors
+
       - run: pnpm build

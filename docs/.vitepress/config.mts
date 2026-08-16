@@ -4,9 +4,10 @@ import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { withMermaid } from "vitepress-plugin-mermaid";
 import { extendConfig } from "@voidzero-dev/vitepress-theme/config";
 import llmstxt from "vitepress-plugin-llms";
-import { readFileSync, readdirSync, statSync, mkdirSync, copyFileSync } from "node:fs";
+import { readFileSync, readdirSync, statSync, mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { resolve, join, relative, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { replacePlaneVersionTokens } from "./versions";
 
 function loadEnvVar(key: string): string | undefined {
   // process.env takes precedence (CI/hosting platforms set vars here)
@@ -62,6 +63,24 @@ export default extendConfig(
         },
         config(md) {
           md.use(tabsMarkdownPlugin);
+
+          // Replace %%COMMERCIAL_VERSION%%-style placeholders (see ./versions.ts) everywhere,
+          // including inline code, fenced code blocks and link targets, so version numbers in
+          // the self-hosting docs come from a single source.
+          md.core.ruler.push("plane-version-tokens", (state) => {
+            const visit = (tokens: typeof state.tokens) => {
+              for (const token of tokens) {
+                if (typeof token.content === "string") token.content = replacePlaneVersionTokens(token.content);
+                if (token.attrs) {
+                  for (const attr of token.attrs) {
+                    if (typeof attr[1] === "string") attr[1] = replacePlaneVersionTokens(attr[1]);
+                  }
+                }
+                if (token.children) visit(token.children);
+              }
+            };
+            visit(state.tokens);
+          });
         },
       },
       mermaid: {
@@ -84,12 +103,6 @@ export default extendConfig(
             generateLLMFriendlyDocsForEachPage: false,
             // Don't inject invisible LLM-hint markup into rendered pages.
             injectLLMHint: false,
-            // Pages hidden from search (search: false / noindex) are excluded
-            // from the LLM files too.
-            ignoreFiles: [
-              "self-hosting/methods/install-methods-commercial/docker-compose.md",
-              "self-hosting/methods/install-methods-commercial/kubernetes.md",
-            ],
           }),
         ],
         resolve: {
@@ -131,12 +144,20 @@ export default extendConfig(
               const rel = relative(srcDir, abs);
               const dest = join(outDir, rel);
               mkdirSync(dirname(dest), { recursive: true });
-              copyFileSync(abs, dest);
+              // Resolve %%VERSION%% placeholders (see ./versions.ts) in the markdown mirror too.
+              writeFileSync(dest, replacePlaneVersionTokens(readFileSync(abs, "utf8")));
             }
           }
         }
 
         walk(srcDir);
+
+        // The llms.txt / llms-full.txt files are generated from the raw sources by
+        // vitepress-plugin-llms; resolve the version placeholders there as well.
+        for (const name of ["llms.txt", "llms-full.txt"]) {
+          const file = join(outDir, name);
+          if (existsSync(file)) writeFileSync(file, replacePlaneVersionTokens(readFileSync(file, "utf8")));
+        }
       },
       title: "Plane developer documentation",
       description:
