@@ -1,213 +1,128 @@
 ---
 title: Docker AIO (All-in-One)
-description: Deploy Plane with Docker All-in-One (AIO) setup. Quick installation guide for running Plane in a single Docker container.
-keywords: plane docker aio, all-in-one container, single container deployment, quick install, plane docker setup, self-hosting
+description: Run Plane Commercial Edition as a single all-in-one container against your own PostgreSQL, Redis, RabbitMQ, and S3-compatible storage. Environment variables, volumes, verification, and next steps.
+keywords: plane docker aio, plane all-in-one container, single container plane, plane-aio-commercial, plane docker run, self-hosting
 ---
 
-# Docker AIO (All-in-One) <Badge type="info" text="Commercial Edition" />
+# Docker AIO (All-in-One) <EditionBadge edition="commercial" />
 
-The Plane Commercial All-in-One (AIO) Docker image packages all Plane services into a single container, making it the fastest way to get Plane running.
+::: info Edition availability
+Commercial Edition only. The image is `makeplane/plane-aio-commercial`, tagged per release (current: `%%COMMERCIAL_VERSION%%`). For a single-machine install that also runs its own database and storage, use [Docker Compose](/self-hosting/methods/docker-compose) instead.
+:::
 
-## What's included
+The AIO image runs every Plane application service (web, spaces, admin, API, workers, live collaboration, integrations, license monitor, email intake, proxy) inside one container, supervised by `supervisord`. It does not include a database or storage. You provide PostgreSQL, Redis, RabbitMQ, and an S3-compatible bucket. Use it on platforms that run one container per app, or on hosts where you already operate those services.
 
-Your single AIO container includes all these services running together:
+## Before you begin
 
-- **Web App** - The main Plane web interface you'll use
-- **Space** - Public project spaces for external collaboration
-- **Admin** - Administrative interface
-- **API Server** - Backend API
-- **Live Server** - Real-time collaboration features
-- **Silo** - Integration services
-- **Monitor** - Feature flags and payments
-- **Email Server** - SMTP server for notifications
-- **Proxy** (Port 80, 20025, 20465, 20587) - Caddy reverse proxy
-- **Worker and Beat Worker** - Background task processing
+Read [Before you install](/self-hosting/methods/prerequisites). For AIO you need the following, reachable from the container:
 
-### Port Mapping
+- **PostgreSQL** 15.7+ or 16 with an empty database and a user that owns it
+- **Redis** or Valkey 7.2+
+- **RabbitMQ** 3.13+ with a vhost and user
+- An **S3-compatible bucket** (AWS S3, MinIO, GCS interoperability, and so on) with credentials and a [CORS policy](/self-hosting/govern/database-and-storage) for your Plane origin
 
-The following ports are exposed:
+You also need Docker Engine 24+, port **80** free (and 443 if you terminate TLS in front), a domain whose DNS record points at the host, and 2 vCPU / 4 GB RAM for the container.
 
-- `80`: Main web interface (HTTP)
-- `443`: HTTPS (if SSL configured)
-- `20025`: SMTP port 25
-- `20465`: SMTP port 465 (SSL/TLS)
-- `20587`: SMTP port 587 (STARTTLS)
+::: warning Don't use `localhost` in the connection URLs
+Inside the container, `localhost` is the container itself. Use hostnames or IPs the container can reach. If the services run on the same host, use the host's LAN IP or `host.docker.internal` (Docker Desktop).
+:::
 
-## Prerequisites
+## Install
 
-- [Docker](https://docs.docker.com/engine/)
-- Set up these external services:
-  - _PostgreSQL_  
-    For data storage
-  - _Redis_  
-    For caching and session management
-  - _RabbitMQ_
-    For message queuing
-  - _S3-compatible storage_  
-    For file uploads (AWS S3 or MinIO)
-
-## Install Plane
-
-1. Download the image with:
+1. Pull the image for the release you want:
 
    ```bash
-   docker pull makeplane/plane-aio-commercial:stable
+   docker pull makeplane/plane-aio-commercial:%%COMMERCIAL_VERSION%%
    ```
 
-2. Run the following command to deploy the Plane AIO container. Make sure to replace all placeholder values (e.g., `your-domain.com`, `user:pass`) with your actual configuration.
-
-   ::: warning
-   All environment variables are required for the container to function correctly.
-   :::
+2. Generate a machine signature once and keep it. The license monitor binds licenses to it, and it must stay the same across container restarts:
 
    ```bash
-   docker run --name plane-aio --rm -it \
-       -p 80:80 \
-       -p 20025:20025 \
-       -p 20465:20465 \
-       -p 20587:20587 \
-       -e DOMAIN_NAME=your-domain.com \
-       -e DATABASE_URL=postgresql://user:pass@host:port/database \
-       -e REDIS_URL=redis://host:port \
-       -e AMQP_URL=amqp://user:pass@host:port/vhost \
-       -e AWS_REGION=us-east-1 \
-       -e AWS_ACCESS_KEY_ID=your-access-key \
-       -e AWS_SECRET_ACCESS_KEY=your-secret-key \
-       -e AWS_S3_BUCKET_NAME=your-bucket \
-       makeplane/plane-aio-commercial:stable
+   openssl rand -hex 16   # save this value
    ```
 
-   If you're running on an IP address, use this example:
+3. Start the container. Every `-e` below is required unless marked optional. Bind-mount the volumes so that data, logs, and license state survive container replacement.
 
    ```bash
-   MYIP=192.168.68.169
-   docker run --name myaio --rm -it \
-   -p 80:80 \
-   -p 20025:20025 \
-   -p 20465:20465 \
-   -p 20587:20587 \
-   -e DOMAIN_NAME=${MYIP} \
-   -e DATABASE_URL=postgresql://plane:plane@${MYIP}:15432/plane \
-   -e REDIS_URL=redis://${MYIP}:16379 \
-   -e AMQP_URL=amqp://plane:plane@${MYIP}:15673/plane \
-   -e AWS_REGION=us-east-1 \
-   -e AWS_ACCESS_KEY_ID=<YOUR_AWS_ACCESS_KEY_ID> \
-   -e AWS_SECRET_ACCESS_KEY=<YOUR_AWS_SECRET_ACCESS_KEY> \
-   -e AWS_S3_BUCKET_NAME=plane-app \
-   -e AWS_S3_ENDPOINT_URL=http://${MYIP}:19000 \
-   -e FILE_SIZE_LIMIT=10485760 \
-   makeplane/plane-aio-commercial:stable
+   docker run -d --name plane-aio --restart unless-stopped \
+     -p 80:80 \
+     -e DOMAIN_NAME=plane.company.com \
+     -e MACHINE_SIGNATURE=<value from step 2> \
+     -e DATABASE_URL=postgresql://plane:<password>@db.internal:5432/plane \
+     -e REDIS_URL=redis://cache.internal:6379 \
+     -e AMQP_URL=amqp://plane:<password>@mq.internal:5672/plane \
+     -e AWS_REGION=us-east-1 \
+     -e AWS_ACCESS_KEY_ID=<access key> \
+     -e AWS_SECRET_ACCESS_KEY=<secret key> \
+     -e AWS_S3_BUCKET_NAME=plane-uploads \
+     -e AWS_S3_ENDPOINT_URL=https://s3.us-east-1.amazonaws.com \
+     -e SECRET_KEY="$(openssl rand -hex 32)" \
+     -e LIVE_SERVER_SECRET_KEY="$(openssl rand -hex 32)" \
+     -v /srv/plane/data:/app/data \
+     -v /srv/plane/logs:/app/logs \
+     -v /srv/plane/monitor:/app/monitor \
+     makeplane/plane-aio-commercial:%%COMMERCIAL_VERSION%%
    ```
 
-3. Once it's running, you can access the Plane application on the domain you provided during the deployment.
+   For an IP-only trial, set `DOMAIN_NAME=203.0.113.10`. For HTTPS through your own proxy, add `-e APP_PROTOCOL=https` so that generated links use `https`. The container validates the required variables at start and prints each missing one.
 
-4. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+4. Watch it start:
 
-## Volume mounts
+   ```bash
+   docker logs -f plane-aio
+   docker exec -it plane-aio supervisorctl status   # every program RUNNING; migrator EXITED is normal
+   ```
 
-### Recommended persistent volumes
+## Verify
 
-```bash
--v /path/to/logs:/app/logs \
--v /path/to/data:/app/data
-```
+Open `http://plane.company.com` (or the IP). You should see the sign-in page. You can't sign in yet. Create the instance admin first ([After you install](/self-hosting/methods/after-install)).
 
-### Workspace license DB
+## After you install
 
-```bash
--v /path/to/monitordb:/app/monitor
-```
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `http://plane.company.com/god-mode/`. TLS for the AIO container is normally handled by a reverse proxy or load balancer in front of it ([External reverse proxy](/self-hosting/govern/reverse-proxy)). The bundled Caddy serves plain HTTP on port 80.
 
-### SSL certificate support
+## Volumes
 
-For HTTPS support, mount certificates:
+| Mount            | Contents                                                                                                                                |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `/app/data`      | Application data written by the services                                                                                                |
+| `/app/logs`      | Access and error logs for every service (`/app/logs/access/`, `/app/logs/error/`)                                                       |
+| `/app/monitor`   | The license monitor's database. **Must persist**, otherwise workspace and instance license state is lost when the container is replaced |
+| `/app/email/tls` | Optional: TLS certificate and key for the intake email server (`TLS_CERT_PATH`, `TLS_PRIV_KEY_PATH`)                                    |
 
-```bash
--v /path/to/certs:/app/email/tls
-```
+## Environment variables
 
-## Environment variables (optional)
+Required: `DOMAIN_NAME`, `DATABASE_URL`, `REDIS_URL`, `AMQP_URL`, `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET_NAME`.
 
-### Network and Protocol
+Strongly recommended: `MACHINE_SIGNATURE` (auto-generated on each start if unset, which breaks license binding across restarts), `SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, `AES_SECRET_KEY`. The image ships public defaults for these four secrets. Replace them.
 
-- `SITE_ADDRESS`: Server bind address (default: `:80`)
-- `APP_PROTOCOL`: Protocol to use (`http` or `https`, default: `http`)
+| Variable                                                                                                  | Default                                              | Purpose                                                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `APP_PROTOCOL`                                                                                            | `http`                                               | Protocol used to build `WEB_URL`. Set `https` when a proxy terminates TLS.                                                                                                     |
+| `SITE_ADDRESS`                                                                                            | `:80`                                                | Bind address of the internal Caddy proxy.                                                                                                                                      |
+| `AWS_S3_ENDPOINT_URL`                                                                                     | `https://s3.<AWS_REGION>.amazonaws.com`              | S3 endpoint. Set it for MinIO or other providers.                                                                                                                              |
+| `FILE_SIZE_LIMIT`                                                                                         | `5242880`                                            | Maximum upload size in bytes.                                                                                                                                                  |
+| `API_KEY_RATE_LIMIT`                                                                                      | `60/minute`                                          | Throttle for API-key requests.                                                                                                                                                 |
+| `ENABLE_PLANE_AI` + `PLANE_PI_DATABASE_URL`                                                               | `0`                                                  | Start the Plane AI services (needs a second PostgreSQL database).                                                                                                              |
+| `ENABLE_RUNNER`                                                                                           | `0`                                                  | Start the runner service for agents.                                                                                                                                           |
+| `INTAKE_EMAIL_DOMAIN`, `LISTEN_SMTP_PORT_25/465/587`, `SMTP_DOMAIN`, `TLS_CERT_PATH`, `TLS_PRIV_KEY_PATH` | `intake.<DOMAIN_NAME>`, `20025`/`20465`/`20587`, ... | Intake email server. Publish the SMTP ports (`-p 20025:20025 -p 20465:20465 -p 20587:20587`) only if you use [intake email](/self-hosting/govern/configure-dns-email-service). |
+| `GITHUB_*`, `GITLAB_*`, `SLACK_*`, `INTEGRATION_CALLBACK_BASE_URL`                                        | empty                                                | Integration credentials. See [Integrations](/self-hosting/govern/integrations/github).                                                                                         |
 
-### Email configuration
-
-- `INTAKE_EMAIL_DOMAIN`: Domain for intake emails (default: `intake.<DOMAIN_NAME>`)
-- `LISTEN_SMTP_PORT_25`: SMTP port 25 mapping (default: `20025`)
-- `LISTEN_SMTP_PORT_465`: SMTP port 465 mapping (default: `20465`)
-- `LISTEN_SMTP_PORT_587`: SMTP port 587 mapping (default: `20587`)
-- `SMTP_DOMAIN`: SMTP server domain (default: `0.0.0.0`)
-- `TLS_CERT_PATH`: Path to TLS certificate file (optional)
-- `TLS_PRIV_KEY_PATH`: Path to TLS private key file (optional)
-
-### Security and secrets
-
-- `MACHINE_SIGNATURE`: Unique machine identifier (auto-generated if not provided)
-- `SECRET_KEY`: Django secret key (default provided)
-- `SILO_HMAC_SECRET_KEY`: Silo HMAC secret (default provided)
-- `AES_SECRET_KEY`: AES encryption key (default provided)
-- `LIVE_SERVER_SECRET_KEY`: Live server secret (default provided)
-
-### File handling
-
-- `FILE_SIZE_LIMIT`: Maximum file upload size in bytes (default: `5242880` = 5MB)
-
-### Integration callbacks
-
-- `INTEGRATION_CALLBACK_BASE_URL`: Base URL for OAuth callbacks
-
-### API configuration
-
-- `API_KEY_RATE_LIMIT`: API key rate limit (default: `60/minute`)
-
-### Third-party integrations
-
-- `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`: GitHub integration
-- `GITHUB_APP_NAME`, `GITHUB_APP_ID`, `GITHUB_PRIVATE_KEY`: GitHub App integration
-- `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`: Slack integration
-- `GITLAB_CLIENT_ID`, `GITLAB_CLIENT_SECRET`: GitLab integration
-
-## Build the image
-
-To build the AIO image yourself:
+## Manage the container
 
 ```bash
-cd deploy/aio/commercial
-./build.sh --release=v1.11.1
+docker logs -f plane-aio                              # all services
+docker exec -it plane-aio supervisorctl status        # per-service status
+docker exec -it plane-aio supervisorctl restart api   # restart one service
+docker stop plane-aio && docker rm plane-aio          # then docker run again with the new tag to upgrade
 ```
 
-Available build options:
-
-- `--release`: Plane version to build (required)
-- `--image-name`: Custom image name (default: `plane-aio-commercial`)
+The data lives in your external services and the bind mounts, so upgrading is: pull the new tag, stop and remove the container, and run it again with the same environment and volumes.
 
 ## Troubleshoot
 
-The container will validate required environment variables on startup and display helpful error messages if any are missing.
-
-### Logs
-
-All service logs are available in `/app/logs/`:
-
-- Access logs: `/app/logs/access/`
-- Error logs: `/app/logs/error/`
-
-### Health checks
-
-The container runs multiple services managed by Supervisor. Check service status:
-
-```bash
-docker exec -it <container-name> supervisorctl status
-```
-
-## Production considerations
-
-- Use proper SSL certificates for HTTPS
-- Configure proper backup strategies for data
-- Monitor resource usage and scale accordingly
-- Use external load balancer for high availability
-- Regularly update to latest versions
-- Secure your environment variables and secrets
+- **The container exits and lists `❌ '<KEY>' is not set`.** A required variable is missing.
+- **`DOMAIN_NAME is not a valid FQDN or IP address`.** Use a bare hostname or IP, without `https://`.
+- **Migrator or API can't connect.** A URL points at `localhost`, credentials are wrong, or a firewall blocks the container's egress.
+- **Licenses reset after restarting the container.** `/app/monitor` wasn't persisted, or `MACHINE_SIGNATURE` changed.
+- More: [Troubleshoot](/self-hosting/troubleshoot/overview).

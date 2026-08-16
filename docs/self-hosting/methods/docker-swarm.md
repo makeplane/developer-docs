@@ -1,69 +1,89 @@
 ---
-title: Deploy Plane with Docker Swarm
-description: Deploy Plane on Docker Swarm cluster. Guide for running Plane in a distributed Docker Swarm environment with high availability.
-keywords: plane docker swarm, swarm deployment, distributed containers, high availability, plane cluster, docker orchestration, self-hosting
+title: Docker Swarm
+description: Deploy Plane Commercial Edition on a Docker Swarm cluster with docker stack deploy. Download the stack file and environment template for a release, configure, deploy, verify, and manage.
+keywords: plane docker swarm, docker stack deploy plane, swarm-compose.yml, plane swarm cluster, self-hosting
 ---
 
-# Deploy Plane with Docker Swarm <Badge type="info" text="Commercial Edition" />
+# Docker Swarm <EditionBadge edition="commercial" />
 
-This guide shows you the steps to deploy a self-hosted instance of the Plane Commercial Edition using Docker Swarm.
+::: info Edition availability
+Commercial Edition only. If you don't already run Swarm, use [Docker Compose](/self-hosting/methods/docker-compose) on a single machine or [Kubernetes](/self-hosting/methods/kubernetes) for a cluster. Both are managed for you (Prime CLI, Helm). A Swarm stack is managed by hand.
+:::
 
-## Install Plane
+Plane publishes a Swarm-ready stack file for each release. You download it with the environment template, fill in a few values, and deploy with `docker stack deploy`. The data services (PostgreSQL, Redis, RabbitMQ, MinIO) are included as single-replica services with named volumes. For production, point Plane at managed services instead.
 
-### Prerequisites
+## Before you begin
 
-- Before you get started, make sure you have a Docker Swarm environment set up and ready to go.
-- Your setup should support either amd64 or arm64 architectures.
+Read [Before you install](/self-hosting/methods/prerequisites). For Swarm you need:
 
-### Procedure
+- An initialized Swarm (`docker swarm init`, plus joined nodes) on Docker Engine 24+, AMD64 or ARM64.
+- Ports 80 and 443 free and reachable on the nodes that publish the proxy.
+- A domain whose DNS points at the cluster or at a load balancer in front of it.
+- Outbound access to Docker Hub and `prime.plane.so` from every node.
+- Recommended: managed PostgreSQL and S3-compatible storage. The stateful services in the stack use named volumes on one node and are not highly available.
 
-1. **Download the required deployment files**
-   - `swarm-compose.yml` – Defines Plane's services and dependencies.
+## Install
+
+1. Download the stack file and environment template for the release (current: %%COMMERCIAL_VERSION%%):
 
    ```bash
-   curl -fsSL https://prime.plane.so/releases/<plane-version>/swarm-compose.yml -o swarm-compose.yml
+   curl -fsSL https://prime.plane.so/releases/%%COMMERCIAL_VERSION%%/swarm-compose.yml -o swarm-compose.yml
+   curl -fsSL https://prime.plane.so/releases/%%COMMERCIAL_VERSION%%/variables.env -o plane.env
    ```
 
-   - `variables.env` – Stores environment variables for your deployment.
+   For other releases, replace the version in both URLs. See [Download config files](/self-hosting/methods/download-config).
+
+2. Edit `plane.env`. Required:
 
    ```bash
-   curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
+   APP_RELEASE_VERSION=%%COMMERCIAL_VERSION%%
+   DOMAIN_NAME=plane.company.com
+   SITE_ADDRESS=plane.company.com          # or :80 behind your own TLS-terminating proxy
+   WEB_URL=https://plane.company.com
+   CORS_ALLOWED_ORIGINS=https://plane.company.com
+   CERT_EMAIL=admin@company.com            # for the automatic Let's Encrypt certificate
+   MACHINE_SIGNATURE=<openssl rand -hex 16> # required; the license monitor won't start without it
    ```
 
-   ::: warning
-   The `<plane-version>` value should be v1.8.3 or higher.
+   Rotate the shipped secrets before real use (`SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, `AES_SECRET_KEY`, and the PostgreSQL, RabbitMQ, and MinIO passwords). For production, set `DATABASE_URL`, `REDIS_URL`, `AMQP_URL`, and the `AWS_*` variables to your managed services. See [External services](/self-hosting/govern/database-and-storage) and [Environment variables](/self-hosting/govern/environment-variables).
+
+   ::: tip
+   Generate the machine signature in place: `sed -i "s/^MACHINE_SIGNATURE=.*/MACHINE_SIGNATURE=$(openssl rand -hex 16)/" plane.env` (on macOS use `sed -i ''`).
    :::
 
-2. **Configure environment variables**  
-   Before deploying, edit the `variables.env` file in your preferred text editor and update the following values:
-   - `DOMAIN_NAME` – (required) Your application's domain name.
-   - `SITE_ADDRESS` – (required) The full domain name (FQDN) of your instance.
-   - `MACHINE_SIGNATURE` – (required) A unique identifier for your machine. You can generate this by running below code in terminal:
-     ```sh
-     sed -i 's/MACHINE_SIGNATURE=.*/MACHINE_SIGNATURE='$(openssl rand -hex 16)'/' plane.env
-     ```
-   - `CERT_EMAIL` – (optional) Email address for SSL certificate generation (only needed if you're setting up HTTPS).
-
-3. **Configure external DB, Redis, and RabbitMQ**
-   ::: warning
-   When self-hosting Plane for production use, it is strongly recommended to configure external database and storage. This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-   :::
-   - `DATABASE_URL` – Connection string for your external database.
-   - `REDIS_URL` – Connection string for your external Redis instance.
-   - `AMQP_URL` – Connection string for your external RabbitMQ server.
-
-4. **Load the environment variables**
+3. Export the variables and deploy the stack:
 
    ```bash
-   set -o allexport; source <path-to variables.env>; set +o allexport;
+   set -o allexport; source ./plane.env; set +o allexport
+   docker stack deploy -c swarm-compose.yml plane
    ```
 
-5. **Deploy the stack**
+## Verify
 
-   ```bash
-   docker stack deploy -c <path-to swarm-compose.yml> plane
-   ```
+```bash
+docker stack services plane          # every service 1/1; migrator finishes and shows 0/1, which is normal
+docker service logs -f plane_api     # ends with "Application startup complete"
+```
 
-   That's it! This will deploy Plane as a Swarm stack, and your instance should be accessible on your configured domain.
+Open `https://plane.company.com`. You should see the sign-in page. Sign-in works after you create the instance admin.
 
-6. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+## After you install
+
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
+
+## Manage the stack
+
+```bash
+docker stack ps plane                                  # placement and state
+docker service scale plane_api=2 plane_worker=2        # scale stateless services
+docker stack rm plane                                  # remove; named volumes are kept
+```
+
+**Upgrade:** download the new `swarm-compose.yml` and `variables.env` for the release, merge any new variables into your `plane.env`, set `APP_RELEASE_VERSION`, re-export, and run `docker stack deploy` again. Swarm rolls the services. Back up first. See [Backup and restore](/self-hosting/manage/backup-restore#other-deployment-methods).
+
+## Troubleshoot
+
+- **`monitor` restarts.** `MACHINE_SIGNATURE` is empty.
+- **The proxy can't get a certificate.** DNS doesn't resolve to the node publishing 80/443, or the ports aren't reachable. Use `SITE_ADDRESS=:80` behind your own proxy.
+- **Variables didn't apply.** You skipped `set -o allexport; source ./plane.env`. The stack file reads them from your shell, not from the file.
+- More: [Troubleshoot](/self-hosting/troubleshoot/overview).

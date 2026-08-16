@@ -1,65 +1,62 @@
 ---
-title: Deploy Plane with Portainer
-description: Deploy and manage Plane using Portainer container management UI. Visual Docker management with stack deployment and monitoring.
-keywords: plane portainer, portainer deployment, docker management ui, plane container management, portainer stack, self-hosting
+title: Portainer
+description: Deploy Plane Commercial Edition as a Portainer stack. Download the stack file and environment template for a release, add the stack in Portainer, set the required variables, deploy, and verify.
+keywords: plane portainer, portainer stack plane, portainer-compose.yml, docker management ui, self-hosting
 ---
 
-# Deploy Plane with Portainer <Badge type="info" text="Commercial Edition" />
+# Portainer <EditionBadge edition="commercial" />
 
-This guide shows you the steps to deploy a self-hosted instance of Plane using Portainer.
+::: info Edition availability
+Commercial Edition only. Portainer deploys the same stack the [Docker Compose](/self-hosting/methods/docker-compose) installer would, managed from the Portainer UI instead of the Prime CLI.
+:::
 
-## Install Plane
+## Before you begin
 
-### Prerequisites
+Read [Before you install](/self-hosting/methods/prerequisites). You also need a Portainer environment attached to a Docker host (or Swarm) on Docker Engine 24+, ports 80/443 free on that host, DNS pointing at it, and outbound access to Docker Hub and `prime.plane.so`.
 
-- Before you get started, make sure you have a Portainer environment set up and ready to go.
-- Your setup should support either amd64 or arm64 architectures.
+## Install
 
-### Procedure
-
-1. **Download the required deployment files**
-
-   `portainer-compose.yml` – Defines Plane's services and dependencies.
+1. Download the stack file and the environment template for the release (current: %%COMMERCIAL_VERSION%%):
 
    ```bash
-   curl -fsSL https://prime.plane.so/releases/<plane-version>/portainer-compose.yml -o portainer-compose.yml
+   curl -fsSL https://prime.plane.so/releases/%%COMMERCIAL_VERSION%%/portainer-compose.yml -o portainer-compose.yml
+   curl -fsSL https://prime.plane.so/releases/%%COMMERCIAL_VERSION%%/variables.env -o plane.env
    ```
 
-   `variables.env` – Stores environment variables for your deployment.
+2. Edit `plane.env`. Required:
 
    ```bash
-   curl -fsSL https://prime.plane.so/releases/<plane-version>/variables.env -o plane.env
+   APP_RELEASE_VERSION=%%COMMERCIAL_VERSION%%
+   DOMAIN_NAME=plane.company.com
+   SITE_ADDRESS=plane.company.com          # or :80 behind your own TLS-terminating proxy
+   WEB_URL=https://plane.company.com
+   CORS_ALLOWED_ORIGINS=https://plane.company.com
+   CERT_EMAIL=admin@company.com
+   MACHINE_SIGNATURE=<openssl rand -hex 16> # required; the license monitor won't start without it
    ```
 
-   ::: warning
-   The `<plane-version>` value should be v1.8.2 or higher.
-   :::
+   Rotate the shipped secrets (`SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, `AES_SECRET_KEY`, database, RabbitMQ, and MinIO passwords). For production, set `DATABASE_URL`, `REDIS_URL`, `AMQP_URL`, and `AWS_*` to managed services. See [External services](/self-hosting/govern/database-and-storage) and [Environment variables](/self-hosting/govern/environment-variables).
 
-2. Click **+ Add stack** on Portainer.
+3. In Portainer, open your environment, go to **Stacks**, click **+ Add stack**, name it `plane`, and paste the contents of `portainer-compose.yml` into the web editor.
 
-3. Copy and paste the contents of `portainer-compose.yml` into the editor.
+4. Under **Environment variables**, choose **Load variables from .env file** and upload `plane.env` (or add the variables one by one).
 
-4. Load environment variables from the `variables.env` file.
+5. Click **Deploy the stack** and wait for every service to reach _running_. The migrator exits after it completes.
 
-5. **Configure environment variables**  
-   Before deploying, edit the following variables:
-   - `DOMAIN_NAME` – (required) Your application's domain name.
-   - `SITE_ADDRESS` – (required) The full domain name (FQDN) of your instance.
-   - `MACHINE_SIGNATURE` – (required) A unique identifier for your machine. You can generate this by running below code in terminal:
-     ```sh
-     sed -i 's/MACHINE_SIGNATURE=.*/MACHINE_SIGNATURE='$(openssl rand -hex 16)'/' plane.env
-     ```
-   - `CERT_EMAIL` – (optional) Email address for SSL certificate generation (only needed if you're setting up HTTPS).
+## Verify
 
-6. **Configure external DB, Redis, and RabbitMQ**
-   ::: warning
-   When self-hosting Plane for production use, it is strongly recommended to configure external database and storage. This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-   :::
-   - `DATABASE_URL` – Connection string for your external database.
-   - `REDIS_URL` – Connection string for your external Redis instance.
-   - `AMQP_URL` – Connection string for your external RabbitMQ server.
+In Portainer, open the stack and check the container states. Then open `https://plane.company.com`. You should see the sign-in page. Create the instance admin next.
 
-7. Click **Deploy the stack**.
-   That's it! Once the deployment is complete, Plane should be up and running on your configured domain.
+## After you install
 
-8. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
+
+## Manage the stack
+
+Use the stack's **Editor** to change variables and **Update the stack** to apply. To upgrade, download the new `portainer-compose.yml` and `variables.env` for the release, merge new variables into your `plane.env`, set `APP_RELEASE_VERSION`, replace the stack definition, and update with **Re-pull image**. Back up first. See [Backup and restore](/self-hosting/manage/backup-restore#other-deployment-methods). This stack file has no built-in intake email service. Use [Docker Compose](/self-hosting/methods/docker-compose) if you need [intake email](/self-hosting/govern/configure-dns-email-service).
+
+## Troubleshoot
+
+- **`monitor` restarts.** `MACHINE_SIGNATURE` is empty.
+- **The proxy can't get a certificate.** DNS or ports 80/443. Use `SITE_ADDRESS=:80` behind your own proxy.
+- More: [Troubleshoot](/self-hosting/troubleshoot/overview).

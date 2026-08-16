@@ -1,174 +1,125 @@
 ---
-title: Deploy Plane with Podman Quadlets
-description: Install Plane using Podman Quadlets. Guide for deploying Plane with Podman as a Docker alternative with systemd integration.
-keywords: plane podman, podman quadlets, systemd containers, docker alternative, rootless containers, plane podman deployment, self-hosting
+title: Podman Quadlets
+description: Deploy Plane Commercial Edition with rootless Podman managed by systemd (Quadlets). Install Podman, download the quadlets bundle for a release, run install.sh, start the services in order, and verify.
+keywords: plane podman, podman quadlets, systemd containers, rootless containers, docker alternative, plane podman deployment, self-hosting
 ---
 
-# Deploy Plane with Podman Quadlets <Badge type="info" text="Commercial Edition" />
+# Podman Quadlets <EditionBadge edition="commercial" />
 
-This guide shows you the steps to deploy a self-hosted instance of Plane using Podman Quadlets.
+::: info Edition availability
+Commercial Edition only. Podman Quadlets run each Plane service as a rootless systemd user unit. Use this on hosts where Docker isn't allowed. On a normal Docker host, [Docker Compose](/self-hosting/methods/docker-compose) is simpler.
+:::
 
-## Prerequisites
+The quadlets bundle contains one `.container` unit per service, a shared network unit, a Caddyfile, and an `install.sh` that puts everything in place. The proxy publishes **8080** (HTTP) and **8443** (HTTPS) on the host. Put your own reverse proxy or firewall rules in front if you need 80/443. The data services (PostgreSQL, Redis, RabbitMQ, MinIO) are included. Point Plane at managed services for production.
 
-Before we start, make sure you've got these covered:
+## Before you begin
 
-- A non-root user account with `systemd --user support` (most modern Linux setups have this)
-- Podman version **4.4 or higher**
+Read [Before you install](/self-hosting/methods/prerequisites). For Podman you need:
 
-## Set up Podman
+- **Podman 4.4 or later** with `netavark`, `passt`, and `uidmap`, plus `aardvark-dns` (package name varies: `aardvark-dns` on Debian/Ubuntu, `podman-plugins` on RHEL-family) for container name resolution.
+- A **non-root user** with a systemd user session. Enable lingering so that services keep running after logout: `loginctl enable-linger $USER`.
+- Ports **8080 and 8443** free, and DNS for your domain pointing at the host (or at the proxy in front of it).
+- Outbound access to Docker Hub and `prime.plane.so`.
+- `uuidgen` (`util-linux` or `uuid-runtime`). `install.sh` uses it to generate the machine signature.
 
-1. Add the Podman repository.
+Install Podman with your distribution's packages (`sudo dnf install podman` on Fedora/RHEL 9+, `sudo apt install podman uidmap netavark passt` on Debian 12+/Ubuntu 24.04+). If your distribution ships an older Podman, use a newer repository. For Debian 12, for example, the alvistack builds:
 
-   ```bash
-   echo 'deb http://download.opensuse.org/repositories/home:/alvistack/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
-   ```
+```bash
+echo 'deb http://download.opensuse.org/repositories/home:/alvistack/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/home:alvistack.list
+curl -fsSL https://download.opensuse.org/repositories/home:alvistack/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+sudo apt update && sudo apt install -y podman uidmap netavark passt aardvark-dns
+podman --version
+```
 
-2. Add the GPG key.
+## Install
 
-   ```bash
-   curl -fsSL https://download.opensuse.org/repositories/home:alvistack/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
-   ```
-
-3. Refresh your package lists.
-
-   ```bash
-   sudo apt update
-   ```
-
-4. Install Podman and its dependencies.
-
-   ```bash
-   sudo apt install -y podman uidmap netavark passt
-   ```
-
-   The `uidmap` package handles user namespace mapping, `netavark` takes care of networking, and `passt` helps with network connectivity.
-
-5. Download and extract Podman Quadlets.
+1. Download and extract the quadlets bundle for the release (current: %%COMMERCIAL_VERSION%%), as the user who will run Plane:
 
    ```bash
    mkdir podman-quadlets
-   curl -fsSL https://prime.plane.so/releases/v2.6.3/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
+   curl -fsSL https://prime.plane.so/releases/%%COMMERCIAL_VERSION%%/podman-quadlets.tar.gz -o podman-quadlets.tar.gz
    tar -xvzf podman-quadlets.tar.gz -C podman-quadlets
+   cd podman-quadlets
    ```
 
-   The directory contains an `install.sh` script that will handle the installation and configuration.
+2. Run the installer (no `sudo`):
 
-## Install Plane
+   ```bash
+   ./install.sh --domain plane.company.com
+   # or choose the install directory explicitly:
+   ./install.sh --domain plane.company.com --base-dir /srv/plane
+   ```
 
-The installation script sets up Plane and configures all required services. You have two options:
+   Without `--base-dir`, the installer uses `/opt/plane` if your user can `sudo` non-interactively, otherwise `~/plane`. It creates the `data/`, `logs/`, and `proxy/` directories, writes `plane.env` with your domain, `WEB_URL=http://<domain>:8080`, and a generated `MACHINE_SIGNATURE`, and installs the unit files into `~/.config/containers/systemd/`.
 
-### Without sudo access
+3. Optional: before starting, edit `plane.env` in the install directory.
+   - Behind a TLS-terminating proxy: set `WEB_URL=https://plane.company.com` and `CORS_ALLOWED_ORIGINS=https://plane.company.com`.
+   - Managed services: `DATABASE_URL`, `REDIS_URL`, `AMQP_URL`, `USE_MINIO=0` plus `AWS_*` ([External services](/self-hosting/govern/database-and-storage)). OpenSearch: `OPENSEARCH_ENABLED=1`, `OPENSEARCH_URL`, credentials ([advanced search](/self-hosting/govern/advanced-search)).
+   - Rotate `SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, `AES_SECRET_KEY`, and the bundled service passwords. See [Environment variables](/self-hosting/govern/environment-variables).
 
-```bash
-./install.sh --domain your-domain.com --base-dir /your/custom/path
-```
-
-This installs Plane in your specified directory, which is useful if you want to maintain control over the installation location.
-
-### With sudo access
-
-```bash
-./install.sh --domain your-domain.com
-```
-
-This installs Plane in `/opt/plane`, which is a standard system location.
-
-::: info
-Systemd configurations are installed in `~/.config/containers/systemd/`
-:::
-
-## Configure external services (optional)
-
-If you use external services for database, Redis, RabbitMQ, OpenSearch, or object storage (MinIO/S3), edit `plane.env` in your Plane installation directory (e.g. `/opt/plane` or your custom path from `--base-dir`) before starting services.
-See [Environment variables](/self-hosting/govern/environment-variables) for more details.
-
-- **Database** — In the **DB SETTINGS** section, set `DATABASE_URL` or individual variables (`PGHOST`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, `POSTGRES_PORT`).
-
-- **Redis** — In the **REDIS SETTINGS** section, set `REDIS_URL` or `REDIS_HOST` and `REDIS_PORT`.
-
-- **RabbitMQ** — Set `AMQP_URL` (e.g. `amqp://username:password@your-rabbitmq-host:5672/vhost`).
-
-- **OpenSearch** — Set `OPENSEARCH_ENABLED=1`, `OPENSEARCH_URL`, and optionally `OPENSEARCH_USERNAME` and `OPENSEARCH_PASSWORD`. See [Configure OpenSearch for advanced search](/self-hosting/govern/advanced-search).
-
-- **MinIO / S3** — In the **DATA STORE SETTINGS** section, set `USE_MINIO=0` for external S3, then set `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_ENDPOINT_URL`, and `AWS_S3_BUCKET_NAME`.
-
-After editing `plane.env`, start or restart services as described in [Start Plane](#start-plane) so the changes take effect.
-
-## Start Plane
-
-::: warning
-Note that you should run these commands without `sudo`.
-:::
-
-1. Reload systemd to recognize new configurations.
+4. Start the services in order (as your user, no `sudo`):
 
    ```bash
    systemctl --user daemon-reload
-   ```
 
-2. Start the network service.
-
-   ```bash
+   # network first; required for container name resolution
    systemctl --user start plane-nw-network.service
-   ```
 
-3. Start core dependencies.
-
-   ```bash
+   # data services
    systemctl --user start plane-{db,redis,mq,minio}.service
+
+   # backend
+   systemctl --user start {migrator,api,worker,beat-worker,monitor,silo,automation-consumer,webhook-consumer,outbox-poller,live-exporter,runner}.service
+
+   # optional: Plane AI (needs PLANE_PI_DATABASE_URL in plane.env)
+   # systemctl --user start {pi-db-init,pi-migrator,pi-api,pi-beat,pi-worker}.service
+
+   # frontends and proxy
+   systemctl --user start {web,space,admin,live,iframely,proxy}.service
    ```
 
-4. Start backend services.
+   Enable the units you want at boot with `systemctl --user enable <unit>`. With lingering enabled they start without a login.
 
-   ```bash
-   systemctl --user start {api,worker,beat-worker,migrator,monitor}.service
-   ```
+## Verify
 
-5. Start frontend services.
+```bash
+systemctl --user status plane-nw-network.service plane-{db,redis,mq,minio}.service --no-pager
+systemctl --user status {api,worker,beat-worker,monitor,silo,web,space,admin,live,proxy}.service --no-pager
+journalctl --user -u api --no-pager | tail -20      # ends with "Application startup complete"
+```
 
-   ```bash
-   systemctl --user start {web,space,admin,live,proxy}.service
-   ```
+Open `http://plane.company.com:8080` (or your proxy's URL). You should see the sign-in page. Create the instance admin next.
 
-   The startup sequence is important: network first, then dependencies, followed by backend services, and finally frontend services.
+## After you install
 
-6. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `http://plane.company.com:8080/god-mode/`. For HTTPS, either terminate TLS at your own reverse proxy in front of 8080 ([External reverse proxy](/self-hosting/govern/reverse-proxy)), or set `SITE_ADDRESS` in `plane.env` to your domain and expose 8443.
 
-### Verify service status
+## Manage
 
-Check that all services are running correctly:
+```bash
+systemctl --user restart api.service                 # restart one service after editing plane.env
+systemctl --user stop {web,space,admin,live,iframely,proxy}.service   # stop groups in reverse order
+journalctl --user -u <service> -f                    # follow logs
+```
 
-1. Check network status.
+**Upgrade:** back up your data and copy `plane.env` aside first. `install.sh` overwrites `plane.env` and generates a **new** `MACHINE_SIGNATURE`, which would unbind your licenses. Then:
 
-   ```bash
-   systemctl --user status plane-nw-network.service
-   ```
+```bash
+cp /opt/plane/plane.env ~/plane.env.backup           # keep your settings and MACHINE_SIGNATURE
+# download and extract the new bundle, then in its folder:
+./install.sh --domain plane.company.com [--base-dir /opt/plane]
+# merge your values back: at minimum MACHINE_SIGNATURE, secrets, WEB_URL/CORS, external service URLs
+diff ~/plane.env.backup /opt/plane/plane.env
+systemctl --user daemon-reload
+# stop and start the services in the order above
+```
 
-2. Check core dependencies.
-
-   ```bash
-   systemctl --user status plane-{db,redis,mq,minio}.service
-   ```
-
-3. Check backend services.
-
-   ```bash
-   systemctl --user status {api,worker,beat-worker,migrator,monitor}.service
-   ```
-
-4. Check frontend services.
-   ```bash
-   systemctl --user status {web,space,admin,live,proxy}.service
-   ```
-
-Your Plane installation should now be running successfully with Podman Quadlets. This setup provides automatic service restart capabilities and standard systemd management commands for maintaining your installation.
+See [Backup and restore](/self-hosting/manage/backup-restore#other-deployment-methods).
 
 ## Troubleshoot
 
-To debug service issues, examine the logs using:
-
-```bash
-journalctl --user -u <service-name> --no-pager
-```
-
-The logs will provide detailed information about any configuration issues or errors that may occur.
+- **Containers can't resolve each other** (`plane-db` not found). The network unit isn't started, or `aardvark-dns` isn't installed.
+- **Services stop when you log out.** Enable lingering: `loginctl enable-linger $USER`.
+- **`monitor` fails.** `MACHINE_SIGNATURE` is missing in `plane.env` (`uuidgen` wasn't available when `install.sh` ran). Set it and restart.
+- **Ports 8080/8443 not reachable.** Firewall. Or you expected 80/443: the quadlets publish 8080/8443 by design.
+- Logs: `journalctl --user -u <service-name> --no-pager`. More: [Troubleshoot](/self-hosting/troubleshoot/overview).

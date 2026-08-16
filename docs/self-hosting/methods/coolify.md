@@ -1,52 +1,55 @@
 ---
-title: Deploy Plane with Coolify
-description: Deploy Plane using Coolify, an open-source PaaS. One-click deployment with automatic SSL, domain configuration, and container management.
-keywords: plane coolify, coolify deployment, plane paas, one-click deployment, plane hosting platform, self-hosting
+title: Coolify
+description: Deploy Plane Commercial Edition on Coolify from the Plane Compose template. Create the resource, set the domain and release version, deploy, and verify.
+keywords: plane coolify, coolify plane deployment, coolify-compose.yml, plane paas, self-hosting
 ---
 
-# Deploy Plane with Coolify <Badge type="info" text="Commercial Edition" />
+# Coolify <EditionBadge edition="commercial" />
 
-This guide shows you the steps to deploy a self-hosted instance of Plane using Coolify.
-
-## Install Plane
-
-### Prerequisites
-
-- Before you get started, make sure you have a Coolify environment set up and ready to go.
-- Your setup should support either amd64 or arm64 architectures.
-
-### Procedure
-
-1. **Download the required deployment files**
-
-`coolify-compose.yml` – Defines Plane's services and dependencies.
-
-```bash
-curl -fsSL https://prime.plane.so/releases/<plane-version>/coolify-compose.yml -o coolify-compose.yml
-```
-
-::: warning
-The `<plane-version>` value should be v1.8.2 or higher.
+::: info Edition availability
+Commercial Edition only. Coolify generates the secrets and passwords for you and terminates TLS at its own proxy. Plane's built-in proxy runs plain HTTP behind it.
 :::
 
-2. Create a new project in Coolify.
+## Before you begin
 
-3. Add a new resource.
+Read [Before you install](/self-hosting/methods/prerequisites). You also need a Coolify instance with a server on Docker Engine 24+ (AMD64 or ARM64), a domain pointed at that server, and outbound access to Docker Hub and `prime.plane.so`.
 
-4. Select **Docker Compose Empty** as the deployment method.
+## Install
 
-5. Copy and paste the contents of the `coolify-compose.yml` file into the editor.
+1. Download the Compose template for the release (current: %%COMMERCIAL_VERSION%%):
 
-6. Configure external DB, Redis, RabbitMQ and any other required environment variables in the UI.
-   ::: warning
-   When self-hosting Plane for production use, it is strongly recommended to configure external database and storage. This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-   :::
+   ```bash
+   curl -fsSL https://prime.plane.so/releases/%%COMMERCIAL_VERSION%%/coolify-compose.yml -o coolify-compose.yml
+   ```
 
-- `DATABASE_URL` – Connection string for your external database.
-- `REDIS_URL` – Connection string for your external Redis instance.
-- `AMQP_URL` – Connection string for your external RabbitMQ server.
+2. In Coolify, open a project, click **+ New resource**, choose **Docker Compose Empty**, and paste the contents of `coolify-compose.yml`.
 
-7. Deploy to launch your Plane instance.
-   Once the deployment is complete, your Plane instance should be accessible on the configured domain.
+3. Set the domain on the **proxy** service (Coolify's `SERVICE_FQDN_PLANE_80`, for example `https://plane.company.com`). Coolify fills `APP_DOMAIN`, `MACHINE_SIGNATURE`, `SECRET_KEY`, `LIVE_SERVER_SECRET_KEY`, `SILO_HMAC_SECRET_KEY`, and the PostgreSQL, RabbitMQ, and MinIO credentials from its own generated values.
 
-8. If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+4. In the resource's **Environment variables**, set:
+
+   ```bash
+   APP_RELEASE_VERSION=%%COMMERCIAL_VERSION%%   # required; the template ships with a placeholder version
+   ```
+
+   For production, also set `DATABASE_URL`, `REDIS_URL`, `AMQP_URL`, and the `AWS_*` variables to managed services ([External services](/self-hosting/govern/database-and-storage)), and replace `AES_SECRET_KEY` and `PI_INTERNAL_SECRET`. The template still carries default values for those two.
+
+5. Click **Deploy** and wait for all services to be healthy.
+
+## Verify
+
+Open the domain you set. You should see the sign-in page. Create the instance admin next.
+
+## After you install
+
+Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
+
+## Manage
+
+Change environment variables in Coolify and redeploy. To upgrade, download the new `coolify-compose.yml`, replace the resource's Compose content, set `APP_RELEASE_VERSION` to the new release, and redeploy. Back up first. See [Backup and restore](/self-hosting/manage/backup-restore#other-deployment-methods). This template has no intake email service. Use [Docker Compose](/self-hosting/methods/docker-compose) if you need [intake email](/self-hosting/govern/configure-dns-email-service).
+
+## Troubleshoot
+
+- **Image pulls fail with a `v1.x.x` tag.** `APP_RELEASE_VERSION` isn't set.
+- **`monitor` restarts.** `MACHINE_SIGNATURE` is empty. Check that Coolify generated it, or set it yourself with `openssl rand -hex 16`.
+- More: [Troubleshoot](/self-hosting/troubleshoot/overview).
