@@ -10,9 +10,7 @@ keywords: plane docker compose, install plane docker, prime cli, plane commercia
 This guide installs the **Commercial Edition** (current release %%COMMERCIAL_VERSION%%) with the Prime CLI. It includes the Free plan. A license key unlocks Pro, Business, or Enterprise Grid later. For isolated networks, use [Airgapped on Docker](/self-hosting/methods/airgapped-edition). For the open-source Community Edition, see [Community Edition → Docker Compose](/self-hosting/community/docker-compose).
 :::
 
-Docker Compose is the recommended way to run Plane on a single machine. One command downloads the Prime CLI, which generates the configuration, pulls the images, and starts every service behind a bundled Caddy proxy that also handles HTTPS. Allow about 15 minutes.
-
-**What you get:** the web app, public spaces, admin console (God Mode), REST API, background workers, real-time collaboration server, integrations service, license monitor, and, unless you point Plane at your own, PostgreSQL, Redis (Valkey), RabbitMQ, and MinIO object storage. See [Plane architecture](/self-hosting/plane-architecture).
+Docker Compose is the recommended way to run Plane on a single machine. One command downloads the Prime CLI, which generates the configuration, pulls the images, and starts the full stack behind a bundled Caddy proxy that also handles HTTPS. Allow about 15 minutes. If you want to know what runs inside the stack, see [Plane architecture](/self-hosting/plane-architecture).
 
 ## Before you begin
 
