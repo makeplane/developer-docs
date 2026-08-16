@@ -11,7 +11,7 @@ Starting with v1.4.0 of the Commercial edition Plane will use private storage bu
 :::
 
 ::: info
-New installations with default storage, which is MiniO, don't need to change anything. For S3 or S3-compatible storage, please see [this](https://developers.plane.so/self-hosting/govern/database-and-storage).
+New installations with default storage, which is MiniO, don't need to change anything. For S3 or S3-compatible storage, please see [this](/self-hosting/govern/database-and-storage).
 :::
 
 While you can use the current public storage paradigm that Plane has followed so far, we highly recommend you migrate to private storage buckets which ensure greater security and give you more control over how files are accessed.

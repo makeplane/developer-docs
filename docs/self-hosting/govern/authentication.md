@@ -16,7 +16,7 @@ To ensure only specific users can sign up and use Plane, you can toggle on `Allo
 
 ### Unique code
 
-Plane lets your users log in with codes sent over email. This is disabled if SMTP is not configured for your instance. See [Communication](https://app.plane.so/plane/projects/e3ea12b0-62e3-4b8d-8ada-3379f4efc563/pages/e83af23e-b120-47b0-b241-2bee39037505) to set up SMTP if you wish to enable unique codes.
+Plane lets your users log in with codes sent over email. This is disabled if SMTP is not configured for your instance. See [SMTP for email](/self-hosting/govern/communication) to set up SMTP if you wish to enable unique codes.
 
 ### Passwords
 

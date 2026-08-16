@@ -46,7 +46,7 @@ Here’s what you can manage:
 
 ### Email
 
-Set up your SMTP server here so you can send essential emails—password resets, exports, changes to your instance—and Plane-enabled emails—onboarding, tips and tricks, new features— to all your users. [Learn more here](/self-hosting/govern/communication).
+Set up your SMTP server here so that Plane can send essential emails (password resets, exports, changes to your instance) and product emails (onboarding, tips, new features) to all your users. [Learn more here](/self-hosting/govern/communication).
 
 ![](/images/instance-admin/god-mode-email.webp#hero)
 
@@ -105,46 +105,28 @@ You can use your own third-party libraries to update images in project settings.
 
 ![](/images/instance-admin/god-mode-images.webp#hero)
 
+## First-run setup
+
+On a fresh instance, the first visit to `/god-mode/` shows the **secure instance setup** form instead of a sign-in screen. Enter the admin's email, a strong password, first name, and company name. Submitting the form creates the instance admin, marks the instance as set up, and opens the General settings above. Until this is done, regular users see an instance-not-set-up screen and nobody can sign in. The full first-run checklist (SMTP, sign-in methods, first workspace, license, HTTPS, backups) is at [After you install](/self-hosting/methods/after-install).
+
 ## FAQs
 
-::: details How do you know who an Instance admin is?
-Whoever spins up the instance or upgrades to v0.14, we assume, is the instance admin. When you see Let's secure your instance, enter your email-password combo. If you are already using Plane with those credentials, you will be logged in and will see /god-mode features. If not, we will create a new user on your local instance and you will see /god-mode.
-
-Our shrewd guess right now is users are technical enough to upgrade to or bring up a new instance with v0.14 are instance admins. If there’s a case where this isn’t true, please reach out to us before you upgrade or set up your fresh instance.
+::: details Who is the instance admin?
+Whoever completes the secure instance setup at `/god-mode/` on a new instance. That account can invite more instance admins from **User management**. To promote an existing user from the command line on a Docker install, run `docker compose exec api python manage.py create_instance_admin <email>`. On the Community Edition, add `-f plane-app/docker-compose.yaml --env-file plane-app/plane.env` after `docker compose`.
 :::
 
-::: details What if I don’t complete secure instance set-up at the time of the upgrade?
-We strongly recommend completing set-up at upgrade so your regular users can access Plane without trouble. Because we are introducing several sensitive admin features in `God Mode`, we will show an instance-not-set-up screen to your regular users until such a time that you can complete the setup.
-![success-on-setup-existing-instances-self-hosted](/images/faq-2.png)
+::: details I can't reach /god-mode or I'm locked out. What now?
+Check that the instance is running and reachable at your `WEB_URL`. Then contact us on [Discord](https://discord.gg/plane) (Community Edition) or through your support channel (Commercial and Airgapped Editions) with your instance details.
 :::
 
-::: details What has changed with how existing regular users of my instance log in?
-All existing users will log in with their usual email address-password combos if they are already doing it. If they haven’t been using a password when not OAuthing into Plane, they will now need to. If OAuth is enabled, users can continue using your OAuth methods. New users will need to choose a password or OAuth into Plane.
+::: details Why aren't password-reset and invitation emails arriving?
+SMTP isn't configured. Set it up in **God Mode → Email** (not in the environment file) and send the test email. See [SMTP for email](/self-hosting/govern/communication).
 :::
 
-::: details What will happen to the default captain@plane.so account that you shipped so far?
-For all new instances, there won’t be a `captain@plane.so` account. Instance set-up will allow you to set up a workspace and set workspace and project admins.
-
-For existing instances, the instance admin’s email will be added to each project with the same permissions as `captain@plane.so’s` so you can remove that email completely from your workspaces and projects.
+::: details Can I turn unique-code (magic link) sign-in off, or passwords off?
+Yes. Both toggles are in **God Mode → Authentication**. Unique codes require SMTP. Passwords are enabled by default when SMTP isn't configured. See [Authentication](/self-hosting/govern/authentication).
 :::
 
-::: details This is unreal, but I have an instance that has a /god-mode path already. I can’t access my Plane instance. Help!
-That is unreal! Please reach out to us immediately on [support](https://discord.com/login?redirect_to=%2Fchannels%2F1031547764020084846%2F1094927053867995176) or on our [Discord](https://discord.com/invite/A92xrEGCge) and mark your message urgent. We will help you get your instance back pronto.
-
-:::
-
-::: details How will emails for password resets and onboarding be sent to users of my instance(s)?
-We have always let you configure your own SMTP server to send emails from within your instance. It’s also why we are being deliberate about leading the instance admin of an existing instance to `/god-mode` first. After completing secure instance set-up now, you can configure your SMTP server on the UI instead of via `.env` variables. We strongly recommend you do that to avoid password-reset failures and failures in email delivery.
-
-Please [reach out](https://discord.com/login?redirect_to=%2Fchannels%2F1031547764020084846%2F1094927053867995176) to us on [Discord](https://discord.com/invite/A92xrEGCge) if you haven’t set up SMTP and are facing troubles with your users logging in.
-:::
-
-::: details Why are you introducing passwords for app.plane.so users? What’s happening with unique links to sign up and sign in?
-Unique links are secure and relatively easier, but we have heard from enough of our Cloud users that they would like to log in using a more permanent and easier method. Should you want to continue using unique codes, you are covered. We will keep that option alive for good.
-
-While using Google or GitHub are good options already, not all of you would want to use them. For those that prefer a password and would like to do away with codes, we want to make that option available.
-:::
-
-::: details Is there a God Mode for Cloud admins, too?
-Not now, but soon enough, there will be a `God Mode` for Cloud admins.
+::: details Is there a God Mode for Plane Cloud?
+No. God Mode is the admin console for self-hosted instances. Plane Cloud workspaces are administered from workspace settings.
 :::

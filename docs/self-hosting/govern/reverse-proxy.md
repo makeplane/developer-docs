@@ -4,7 +4,7 @@ description: Configure Nginx, Caddy, or Traefik as a reverse proxy for self-host
 keywords: plane reverse proxy, nginx proxy, traefik, caddy, upstream proxy, proxy configuration, self-hosting
 ---
 
-# Configure external reverse proxy <Badge type="info" text="Commercial Edition" />
+# Configure external reverse proxy <EditionBadge edition="commercial" />
 
 This page provides configuration for setting up an external reverse proxy with Plane.
 
@@ -25,7 +25,7 @@ Make sure to update the following environment variables in your plane.env file.
      SITE_ADDRESS=:80
    ```
 
-   This is required so that generated links and redirects work correctly behind the proxy:
+   `:80` tells the built-in Caddy proxy to serve plain HTTP for any hostname and not to request certificates itself, because your external proxy terminates TLS. If you set `SITE_ADDRESS` to a bare domain such as `plane.company.com`, Caddy tries to obtain a Let's Encrypt certificate instead (see [SSL](/self-hosting/govern/configure-ssl)). This is required so that generated links and redirects work correctly behind the proxy:
 
 3. After editing plane.env, restart your instance so the changes take effect:
    ```bash

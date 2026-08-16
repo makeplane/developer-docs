@@ -4,7 +4,7 @@ description: Migrate Plane between servers or environments. Guide for moving you
 keywords: plane migration, server migration, plane data transfer, infrastructure move, plane backup restore, self-hosting
 ---
 
-# Move Plane instance to a new server <Badge type="info" text="Commercial Edition" />
+# Move Plane instance to a new server <EditionBadge edition="commercial" />
 
 Switching to another machine is straightforward on the Commercial Edition.
 
@@ -39,7 +39,7 @@ This command will generate a backup file in the path: `/opt/plane/backups`.
 :::
 
 3.  **Set up Plane on the new server**  
-    Follow the [installation guide](/self-hosting/methods/docker-compose#install-plane) to deploy Plane on the new instance.
+    Follow the [installation guide](/self-hosting/methods/docker-compose#install) to deploy Plane on the new instance.
 
 4.  **Transfer backup files**  
     Copy the `backups` folder from the old server, created in step 2, to the new server. Place the backup in the folder `/opt/plane`.

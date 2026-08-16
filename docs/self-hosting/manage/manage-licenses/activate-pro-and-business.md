@@ -8,7 +8,7 @@ keywords: plane pro license, plane business license, license activation, commerc
 
 Pro and Business plan licenses are activated at the workspace level as each license is tied to a specific workspace.
 
-## Activate license key
+## Activate license key {#activate-your-license}
 
 Activate a paid plan license on your self-hosted Plane instance using a license key from the Prime portal.
 
@@ -60,5 +60,5 @@ Here’s how to delink your license key from a workspace:
    ![Delink license key](https://media.docs.plane.so/activate-license/delink-license-key.webp#hero-tl)
 
 3. Restart the instance using `prime-cli restart`.
-4. If you’re switching machines or reinstalling the Commercial edition, see [Move Plane instance to another server](https://developers.plane.so/self-hosting/manage/migrate-plane).
+4. If you’re switching machines or reinstalling the Commercial edition, see [Move Plane instance to another server](/self-hosting/manage/migrate-plane).
 5. Ensure you are connected to the internet and reactivate the new workspace using the license key you delinked earlier.

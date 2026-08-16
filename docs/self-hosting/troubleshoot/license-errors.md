@@ -43,9 +43,9 @@ Updating typically resolves this issue. If the problem persists, double-check yo
     Error: Payment server is not configured
 </div>
 
-This usually occurs when the environment confiuration is incorrect. The Env variable `payment_server_url` is missing in the setup. In this case, follow the below steps.
+This usually occurs when the environment configuration is incorrect. The Env variable `payment_server_url` is missing in the setup. In this case, follow the below steps.
 
 1. Backup the `plane.env` file. See [Backup plane.env](/self-hosting/manage/backup-restore#backup-plane-env).
-2. Run `prime-cli repair` to allow Prime CLI to attempt automatic fixes to the `plane.env` file.
+2. Run `sudo prime-cli repair` to let Prime CLI attempt automatic fixes to the `plane.env` file. **This resets customized values in `plane.env` to their defaults.** Back the file up first (step 1) and re-apply your custom domain, database, and storage settings afterwards.
 3. Try activating your workspace with the license key.
 4. If needed, you can configure the instance in [God mode](/self-hosting/govern/instance-admin#settings) or adjust the environment variables directly in the new plane.env file.
