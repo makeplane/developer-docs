@@ -12,7 +12,7 @@ Run Plane on infrastructure you control, from a single Docker host to a Kubernet
 
 Self-hosted Plane ships in two editions for teams and organizations:
 
-- **Commercial Edition** (recommended). Free for up to 12 seats per workspace. A license key unlocks Pro, Business, or Enterprise Grid.
+- **Commercial Edition** (recommended). Free for up to 12 seats per workspace. A license key unlocks Pro, Business, or Enterprise Grid. Purchased already? [Activate your license](/self-hosting/methods/after-install#activate-your-license) right after install.
 - **Airgapped Edition**. The same product for networks without internet access. Enterprise Grid.
 
 The open-source Community Edition is documented separately under [Community Edition](/self-hosting/community/overview). See [Plane editions](/self-hosting/editions-and-versions) for a comparison.

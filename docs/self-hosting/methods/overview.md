@@ -103,12 +103,15 @@ If you are evaluating Plane, use Docker Compose. You can move to Kubernetes late
 
 ## Before and after you install
 
-<CardGroup>
+<CardGroup cols="3">
   <Card title="Before you install" icon="clipboard-list" href="/self-hosting/methods/prerequisites">
     Machine sizing, Docker and Kubernetes versions, ports, DNS, and network access.
   </Card>
   <Card title="After you install" icon="list-checks" href="/self-hosting/methods/after-install">
-    Create the instance admin in God Mode, set up email and authentication, activate your license, enable HTTPS, set up backups.
+    Create the instance admin in God Mode, set up email and authentication, enable HTTPS, set up backups.
+  </Card>
+  <Card title="Activate your license" icon="key-round" href="/self-hosting/methods/after-install#activate-your-license">
+    Purchased Pro, Business, or Enterprise Grid? Activate the key from the Prime portal, or the license file on Airgapped, right after install.
   </Card>
 </CardGroup>
 

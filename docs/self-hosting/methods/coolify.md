@@ -44,6 +44,15 @@ Open the domain you set. You should see the sign-in page. Create the instance ad
 
 Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
 
+::: tip Purchased a plan? Activate your license
+Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.
+
+- **Pro or Business:** in the app, go to **Workspace settings → Billing and plans → Activate this workspace**, paste the key, and click **Activate**. Each key activates one workspace. [Steps](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license).
+- **Enterprise Grid:** open **God Mode → Billing**, paste the key, and click **Activate**. It covers every workspace on the instance. [Steps](/self-hosting/manage/manage-licenses/activate-enterprise).
+
+The instance needs outbound access to `prime.plane.so` to validate the license. Without a license, Plane runs on the Free plan. See [plans and pricing](https://plane.so/pricing).
+:::
+
 ## Manage
 
 Change environment variables in Coolify and redeploy. To upgrade, download the new `coolify-compose.yml`, replace the resource's Compose content, set `APP_RELEASE_VERSION` to the new release, and redeploy. Back up first. See [Backup and restore](/self-hosting/manage/backup-restore#other-deployment-methods). This template has no intake email service. Use [Docker Compose](/self-hosting/methods/docker-compose) if you need [intake email](/self-hosting/govern/configure-dns-email-service).

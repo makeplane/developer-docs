@@ -8,6 +8,8 @@ keywords: plane god mode setup, instance admin, first admin, plane smtp setup, a
 
 Your instance is running. Work through this list in order. The first item is required before anyone can sign in. The next few make the instance usable for a team. The rest harden it for production. Each step links to the page with the details.
 
+Already purchased Pro, Business, or Enterprise Grid? Do step 1, then jump to [Activate your license](#activate-your-license).
+
 ::: info Applies to
 Commercial and Airgapped Editions on every deployment method. Steps that differ by edition are called out. On the Community Edition, everything here applies too, except that the CLI commands are the `setup.sh` ones. See [Community Edition → Manage your instance](/self-hosting/community/manage).
 :::
@@ -36,7 +38,7 @@ Turn off **Allow anyone to sign up without an invite** if the instance is reacha
 
 Open `https://<your-domain>/` and sign in with the instance-admin account. Create a workspace, then invite members from **Workspace settings → Members**. Instance admins can see and manage every workspace from **God Mode → Workspaces**.
 
-## 5. Activate your license (paid plans)
+## 5. Activate your license (paid plans) {#activate-your-license}
 
 The Commercial and Airgapped Editions run on the Free plan out of the box. To unlock Pro, Business, or Enterprise Grid features, activate the license from the [Prime portal](https://prime.plane.so/licenses):
 

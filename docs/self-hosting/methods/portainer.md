@@ -51,6 +51,15 @@ In Portainer, open the stack and check the container states. Then open `https://
 
 Follow **[After you install](/self-hosting/methods/after-install)**, starting with `https://plane.company.com/god-mode/`.
 
+::: tip Purchased a plan? Activate your license
+Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.
+
+- **Pro or Business:** in the app, go to **Workspace settings → Billing and plans → Activate this workspace**, paste the key, and click **Activate**. Each key activates one workspace. [Steps](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license).
+- **Enterprise Grid:** open **God Mode → Billing**, paste the key, and click **Activate**. It covers every workspace on the instance. [Steps](/self-hosting/manage/manage-licenses/activate-enterprise).
+
+The instance needs outbound access to `prime.plane.so` to validate the license. Without a license, Plane runs on the Free plan. See [plans and pricing](https://plane.so/pricing).
+:::
+
 ## Manage the stack
 
 Use the stack's **Editor** to change variables and **Update the stack** to apply. To upgrade, download the new `portainer-compose.yml` and `variables.env` for the release, merge new variables into your `plane.env`, set `APP_RELEASE_VERSION`, replace the stack definition, and update with **Re-pull image**. Back up first. See [Backup and restore](/self-hosting/manage/backup-restore#other-deployment-methods). This stack file has no built-in intake email service. Use [Docker Compose](/self-hosting/methods/docker-compose) if you need [intake email](/self-hosting/govern/configure-dns-email-service).

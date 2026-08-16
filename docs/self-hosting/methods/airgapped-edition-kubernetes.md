@@ -139,7 +139,14 @@ All pods `Running` (the migrator Job completes). `ImagePullBackOff` means an ima
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `/god-mode/`, configure your internal SMTP relay and sign-in, then activate the license from the file. **Enterprise Grid:** God Mode → Billing → upload ([guide](/self-hosting/manage/manage-licenses/activate-airgapped-enterprise)). **Per workspace:** Workspace settings → Billing and plans ([guide](/self-hosting/manage/manage-licenses/activate-airgapped)).
+Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `/god-mode/`, configure your internal SMTP relay and sign-in, then activate the license.
+
+::: tip Activate your license
+Airgapped licenses are files, not keys, and activation makes no outbound calls. On a connected machine, sign in to the [Prime portal](https://prime.plane.so/licenses) with the email you used to purchase, click **Download license** for your Plane version, and transfer the file inside.
+
+- **Enterprise Grid:** open **God Mode → Billing**, upload the file, and click **Activate**. It covers every workspace on the instance. [Steps](/self-hosting/manage/manage-licenses/activate-airgapped-enterprise).
+- **Pro or Business:** in the workspace, go to **Workspace settings → Billing and plans → Activate this workspace** and upload the file. [Steps](/self-hosting/manage/manage-licenses/activate-airgapped).
+  :::
 
 ## Upgrade
 

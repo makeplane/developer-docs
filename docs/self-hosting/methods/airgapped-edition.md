@@ -82,7 +82,14 @@ All services `running` (`migrator` exits). Open `https://plane.internal.company.
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `/god-mode/`, configure your internal SMTP relay, set up sign-in, then activate the license from the file. **Enterprise Grid:** God Mode → Billing → upload ([guide](/self-hosting/manage/manage-licenses/activate-airgapped-enterprise)). **Per workspace:** Workspace settings → Billing and plans → Activate this workspace → upload ([guide](/self-hosting/manage/manage-licenses/activate-airgapped)). Nothing in the deployment contacts `prime.plane.so`.
+Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `/god-mode/`, configure your internal SMTP relay, set up sign-in, then activate the license. Nothing in the deployment contacts `prime.plane.so`.
+
+::: tip Activate your license
+Airgapped licenses are files, not keys, and activation makes no outbound calls. On a connected machine, sign in to the [Prime portal](https://prime.plane.so/licenses) with the email you used to purchase, click **Download license** for your Plane version, and transfer the file inside.
+
+- **Enterprise Grid:** open **God Mode → Billing**, upload the file, and click **Activate**. It covers every workspace on the instance. [Steps](/self-hosting/manage/manage-licenses/activate-airgapped-enterprise).
+- **Pro or Business:** in the workspace, go to **Workspace settings → Billing and plans → Activate this workspace** and upload the file. [Steps](/self-hosting/manage/manage-licenses/activate-airgapped).
+  :::
 
 ## Manage
 

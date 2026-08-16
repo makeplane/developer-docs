@@ -99,7 +99,16 @@ All Deployments should be `Running`. The migrator Job completes and exits. Once 
 
 ## After you install
 
-Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `https://plane.company.com/god-mode/`, set up SMTP and sign-in, activate your license, and set up backups (PVC snapshots, or, better, managed PostgreSQL and object storage).
+Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `https://plane.company.com/god-mode/`, set up SMTP and sign-in, and set up backups (PVC snapshots, or, better, managed PostgreSQL and object storage).
+
+::: tip Purchased a plan? Activate your license
+Copy the license key from the [Prime portal](https://prime.plane.so/licenses). Sign in with the email you used to purchase.
+
+- **Pro or Business:** in the app, go to **Workspace settings → Billing and plans → Activate this workspace**, paste the key, and click **Activate**. Each key activates one workspace. [Steps](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license).
+- **Enterprise Grid:** open **God Mode → Billing**, paste the key, and click **Activate**. It covers every workspace on the instance. [Steps](/self-hosting/manage/manage-licenses/activate-enterprise).
+
+The instance needs outbound access to `prime.plane.so` to validate the license. Without a license, Plane runs on the Free plan. See [plans and pricing](https://plane.so/pricing).
+:::
 
 ## Manage the deployment
 
