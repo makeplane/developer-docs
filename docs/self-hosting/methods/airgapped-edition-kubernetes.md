@@ -1,292 +1,193 @@
 ---
-title: Deploy Plane with airgapped Kubernetes
-description: Deploy Plane on Kubernetes using Helm charts. Complete guide for production-ready Kubernetes deployment with scaling and management.
-keywords: plane airgapped kubernetes, offline k8s deployment, air-gapped helm, kubernetes offline, plane helm airgapped, self-hosting
+title: Airgapped on Kubernetes
+description: Install the Airgapped Edition on Kubernetes with the plane-enterprise Helm chart in a cluster without internet access. Mirror images, transfer the chart, configure airgapped mode and your registry, install, verify, and activate the license file.
+keywords: plane airgapped kubernetes, air-gapped helm, offline kubernetes plane, plane-enterprise airgapped, plane private registry helm, self-hosting
 ---
 
-# Deploy Plane Airgapped on Kubernetes <Badge type="warning" text="Enterprise Grid" />
+# Airgapped on Kubernetes <EditionBadge edition="airgapped" plan="enterprise" />
 
-::: info
-Airgapped deployments are available exclusively for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [Sales team](mailto:sales@plane.so) for trials, exceptions to the seat cut-off, tailored pricing, and licensing info.
+::: info Availability
+The Airgapped Edition is available to Enterprise Grid customers (minimum 100 seats). Contact [sales](mailto:sales@plane.so) for trials and exceptions. Read the [Airgapped Edition overview](/self-hosting/methods/airgapped-requirements) first. Current release: Plane %%COMMERCIAL_VERSION%%, chart `plane-enterprise` %%HELM_EE_VERSION%%.
 :::
 
-This guide walks you through deploying Plane Commercial in an airgapped Kubernetes environment using Helm charts and pre-packaged Docker images.
+This guide deploys Plane with the `plane-enterprise` chart in **airgapped mode**: images from your private registry, `airgapped.enabled: true`, an internal CA for TLS, and license activation from a file. It assumes you know the standard [Kubernetes](/self-hosting/methods/kubernetes) install. Only the airgapped differences are covered here. Every chart value is in the [Helm values reference](/self-hosting/methods/kubernetes-values).
 
-## What you'll need
+## Before you begin
 
-Before starting, ensure you have:
+From [Before you install](/self-hosting/methods/prerequisites) and the [airgapped overview](/self-hosting/methods/airgapped-requirements#kubernetes-specific-requirements):
 
-- Kubernetes cluster (v1.31 - v1.33)
-- Helm 3.x installed
-- `kubectl` configured to access your cluster
-- `cert-manager` available in the cluster
-- A valid and working ingress controller (nginx, traefik, etc)
-- Required ports opened to access the application (80, 443)
-- SMTP ports opened if using email intake (25, 465, 587)
+- Kubernetes **1.31 to 1.33**, Helm 3, and `kubectl`. An ingress controller (`traefik` or `nginx`), a StorageClass, and **cert-manager configured with an internal CA**.
+- Ports 80/443 reachable at the ingress, and 25/465/587 if you use intake email.
+- Your **private registry** populated with the Plane images for %%COMMERCIAL_VERSION%% ([Clone Docker images](/self-hosting/methods/clone-docker-images)) plus, for anything you run in-cluster, `postgres:15.7-alpine`, `valkey/valkey:7.2.11-alpine`, `rabbitmq:3.13.6-management-alpine`, `minio/minio` and `minio/mc` (pin a release when mirroring), and `opensearchproject/opensearch:3.3.2`. Mirror add-on images your cluster needs too (ingress controller, cert-manager, metrics-server).
+- The chart archive `plane-enterprise-%%HELM_EE_VERSION%%.tgz`, downloaded on a connected machine from [GitHub releases](https://github.com/makeplane/helm-charts/releases) or [Artifact Hub](https://artifacthub.io/packages/helm/makeplane/plane-enterprise) and transferred inside.
+- License files from the [Prime portal](https://prime.plane.so/licenses).
 
-::: warning
-While Kubernetes can run stateful services with persistent volumes, and Plane's Helm chart supports deploying PostgreSQL, MinIO, RabbitMQ, and Redis, we strongly recommend using external managed services for better reliability in backup/restore operations and disaster recovery.
+::: warning Production deployments
+Prefer managed PostgreSQL, object storage, RabbitMQ, and OpenSearch reachable inside your perimeter over the in-cluster ones (`services.<name>.local_setup: false`). See [External services](/self-hosting/govern/database-and-storage) and [High availability](/self-hosting/govern/high-availability).
+:::
 
-Consider these alternatives:
+## Install
 
-- **MinIO**: Replace with AWS S3, Google Cloud Storage, or any S3-compatible service
-- **Redis**: Replace with Valkey or a managed Redis service
-- **PostgreSQL**: Use a managed PostgreSQL service
-- **RabbitMQ**: Use a managed message queue service
-- **OpenSearch**: Use a managed OpenSearch service
-  :::
-
-## Install Plane
-
-1. **Download Plane Enterprise Helm chart**
-
-   Get the Plane Enterprise Helm chart from the official release. Check for the latest version at [Artifact Hub](https://artifacthub.io/packages/helm/makeplane/plane-enterprise).
+1. **Get the chart** (connected machine):
 
    ```bash
-   # Using wget
-   wget https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.6.4/plane-enterprise-1.6.4.tgz
-
-   # Using curl
-   curl -L -O https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-1.6.4/plane-enterprise-1.6.4.tgz
+   curl -L -O https://github.com/makeplane/helm-charts/releases/download/plane-enterprise-%%HELM_EE_VERSION%%/plane-enterprise-%%HELM_EE_VERSION%%.tgz
    ```
 
-2. **Prepare Docker images for airgapped environment**
-
-   Refer to [this document](/self-hosting/methods/clone-docker-images) to download the Docker images from the public repository to your internal repository.
-
-   ::: info
-   This process will NOT download or clone these infrastructure images:
-   - `valkey:7.2.5-alpine`
-   - `postgres:15.7-alpine`
-   - `rabbitmq:3.13.6-management-alpine`
-   - `minio/minio:latest`
-   - `minio/mc:latest`
-   - `opensearchproject/opensearch:3.3.2`
-
-   If you're using `local_setup: true` for any of these services, you'll need to pull and transfer these images separately.
-   :::
-
-3. **Configure custom values file**
-
-   a. Extract the default values from the Helm chart.
+2. **Start from the chart's default values** (airgapped machine):
 
    ```bash
-   helm show values plane-enterprise-1.6.4.tgz > custom-values.yaml
+   helm show values plane-enterprise-%%HELM_EE_VERSION%%.tgz > custom-values.yaml
    ```
 
-   b. Update Docker image references
-
-   Edit the `custom-values.yaml` file to point to your local or private registry images and configure important settings.
-
-   **Basic configuration:**
+3. **Edit `custom-values.yaml`.** The essentials for an airgapped install:
 
    ```yaml
-   # Specify the Plane version
-   planeVersion: <plane-version>
+   planeVersion: %%COMMERCIAL_VERSION%%
 
-   # Enable airgapped mode (REQUIRED)
+   license:
+     licenseDomain: plane.internal.company.com # the hostname you'll serve Plane on
+
    airgapped:
-     enabled: true # Must be TRUE for airgapped installations
-     # If using custom root CA for S3 storage
-     s3Secrets:
-       - name: plane-s3-ca
-         key: s3-custom-ca.crt
-       - name: plane-s3-ca-2
-         key: s3-custom-ca-2.crt
+     enabled: true # REQUIRED; no calls to prime.plane.so
+     s3Secrets: [] # add your internal CA for S3 here if the endpoint is internally signed
+     # s3Secrets:
+     #   - name: plane-s3-ca
+     #     key: s3-custom-ca.crt
+
+   dockerRegistry:
+     enabled: true # only if your registry needs credentials
+     existingSecret: my-registry-pull-secret # or set registry/loginid/password
+
+   ingress:
+     enabled: true
+     ingressClass: traefik # or nginx (see the values reference for nginx annotations)
+
+   ssl:
+     tls_secret_name: plane-tls # certificate from your internal CA (cert-manager or pre-created Secret)
    ```
 
-   **Service images:**
+   **Point every image at your registry.** The chart uses `makeplane/<image>` with `planeVersion` as the tag for the Plane services, and full image references for the infrastructure services. Replace the `makeplane/` prefix under `services.*.image` with your registry path. Mirror the images under the same names so that the change is a plain prefix. For example:
 
    ```yaml
    services:
      web:
-       image: /web-commercial
-
-     api:
-       image: /backend-commercial
-
+       image: registry.internal.company.com/makeplane/web-commercial
      space:
-       image: /space-commercial
-
+       image: registry.internal.company.com/makeplane/space-commercial
      admin:
-       image: /admin-commercial
-
+       image: registry.internal.company.com/makeplane/admin-commercial
      live:
-       image: /live-commercial
-
+       image: registry.internal.company.com/makeplane/live-commercial
+     live_exporter:
+       image: registry.internal.company.com/makeplane/live-commercial
      monitor:
-       image: /monitor-commercial
-
+       image: registry.internal.company.com/makeplane/monitor-commercial
+     api:
+       image: registry.internal.company.com/makeplane/backend-commercial
+     worker:
+       image: registry.internal.company.com/makeplane/backend-commercial
+     beatworker:
+       image: registry.internal.company.com/makeplane/backend-commercial
+     silo:
+       image: registry.internal.company.com/makeplane/silo-commercial
      email_service:
-       enabled: true
-       image: /email-commercial
-
-     silo:
-       enabled: true
-       image: /silo-commercial
-
+       image: registry.internal.company.com/makeplane/email-commercial
      iframely:
-       enabled: true
-       image: /iframely:v1.2.0
-   ```
-
-   **Infrastructure services:**
-
-   Configure whether to use local (in-cluster) or external services:
-
-   ```yaml
-   services:
-     # Database and infrastructure images
-     redis:
-       local_setup: true # Set to false if using external service
-       image: valkey/valkey:7.2.11-alpine
-
+       image: registry.internal.company.com/makeplane/iframely:v2.5.3 # this one carries its tag in the value
+     pi:
+       image: registry.internal.company.com/makeplane/plane-pi-commercial
+     runner:
+       image: registry.internal.company.com/makeplane/node-runner-commercial
+     # In-cluster infrastructure (only if local_setup: true):
      postgres:
-       local_setup: true # Set to false if using external service
-       image: postgres:15.7-alpine
-
+       image: registry.internal.company.com/postgres:15.7-alpine
+     redis:
+       image: registry.internal.company.com/valkey/valkey:7.2.11-alpine
      rabbitmq:
-       local_setup: true # Set to false if using external service
-       image: rabbitmq:3.13.6-management-alpine
-       external_rabbitmq_url: "" # Required only if using remote RabbitMQ
-
+       image: registry.internal.company.com/rabbitmq:3.13.6-management-alpine
      minio:
-       local_setup: true # Set to false if using external service
-       image: minio/minio:latest
-       image_mc: minio/mc:latest
+       image: registry.internal.company.com/minio/minio:<pinned release>
+       image_mc: registry.internal.company.com/minio/mc:<pinned release>
+     opensearch:
+       image: registry.internal.company.com/opensearchproject/opensearch:3.3.2
    ```
 
-   **Environment variables:**
+   Every workload in the chart has an `image` value (`services.<name>.image`). Check `custom-values.yaml` for the full list. Anything still starting with `makeplane/` will fail to pull. Then set your own secrets (`env.secret_key`, `env.live_server_secret_key`, `env.silo_envs.hmac_secret_key`, `env.silo_envs.aes_secret_key`, service passwords), and configure external services (`env.pgdb_remote_url`, `env.remote_redis_url`, `services.rabbitmq.external_rabbitmq_url`, `env.aws_*`) as described in the [Helm values reference](/self-hosting/methods/kubernetes-values). Point integrations (GitHub Enterprise, GitLab, Slack) at your internal instances with `services.silo.connectors.*`.
 
-   ```yaml
-   env:
-     storageClass: ""
-     remote_redis_url: "" # Required only if using remote Redis
-     pgdb_remote_url: "" # Required only if using remote PostgreSQL
-     # Required if MinIO local_setup is false
-     aws_access_key: ""
-     aws_secret_access_key: ""
-     aws_region: ""
-     aws_s3_endpoint_url: ""
-   ```
-
-   c. **Configure integrations and importers**
-
-   To set up integrations with external systems like Slack, GitHub, and GitLab, configure these values in `custom-values.yaml`:
-
-   ```yaml
-   services:
-     silo:
-       enabled: true
-       connectors:
-         slack:
-           enabled: false
-           client_id: ""
-           client_secret: ""
-         github:
-           enabled: false
-           client_id: ""
-           client_secret: ""
-           app_name: ""
-           app_id: ""
-           private_key: ""
-         gitlab:
-           enabled: false
-           client_id: ""
-           client_secret: ""
-
-   env:
-     silo_envs:
-       batch_size: 100
-       mq_prefetch_count: 1
-       request_interval: 400
-       hmac_secret_key: ""
-       aes_secret_key: "dsOdt7YrvxsTIFJ37pOaEVvLxN8KGBCr"
-   ```
-
-   d. **Configure intake email**
-
-   The email intake feature in Plane lets you capture incoming emails. Before or after setting up the application, configure DNS settings following [this guide](https://developers.plane.so/self-hosting/govern/configure-dns-email-service).
-
-   Add these required values to `custom-values.yaml`:
-
-   ```yaml
-   ingress:
-       enabled: true
-       ingressClass: 'nginx'  # Or as per your cluster
-       ingress_annotations: {}
-
-   ssl:
-       tls_secret_name: ''  # If you have a custom TLS secret name
-       # If you want to use Let's Encrypt, set createIssuer and generateCerts to true
-       createIssuer: false
-       issuer: http  # Allowed: cloudflare, digitalocean, http
-       token: ''  # Not required for http
-       server: https://acme-v02.api.letsencrypt.org/directory
-       email: plane@example.com  # A valid email address
-       generateCerts: true
-
-   services:
-       email_service:
-           enabled: true
-           replicas: 1
-           memoryLimit: 1000Mi
-           cpuLimit: 500m
-           memoryRequest: 50Mi
-           cpuRequest: 50m
-           image: /email-commercial:
-           pullPolicy: Always
-           nodeSelector: {}
-           tolerations: []
-           affinity: {}
-           labels: {}
-           annotations: {}
-
-   env:
-       email_service_envs:
-           smtp_domain: ''
-   ```
-
-4. **Install or upgrade with custom values**
-
-   Install Plane Enterprise using your customized values file:
+4. **Install:**
 
    ```bash
-   helm upgrade plane-app plane-enterprise-1.6.4.tgz \
-       --install \
-       --create-namespace \
-       --namespace plane \
-       -f custom-values.yaml \
-       --timeout 10m \
-       --wait \
-       --wait-for-jobs
+   helm upgrade --install plane-app plane-enterprise-%%HELM_EE_VERSION%%.tgz \
+     --create-namespace \
+     --namespace plane \
+     -f custom-values.yaml \
+     --timeout 10m \
+     --wait \
+     --wait-for-jobs
    ```
 
-5. **Verify installation**
+## Verify
 
-   Check that all components are running:
+```bash
+kubectl -n plane get pods
+kubectl -n plane get ingress -o wide
+kubectl -n plane get pvc
+```
 
-   ```bash
-   # Check all pods
-   kubectl get pods -n plane
+All pods `Running` (the migrator Job completes). `ImagePullBackOff` means an image path or tag isn't in your registry. Open `https://plane.internal.company.com`. You should see the sign-in page. Sign-in works after you create the instance admin.
 
-   # Check services
-   kubectl get services -n plane
+## After you install
 
-   # Check ingress
-   kubectl get ingress -n plane
+Follow **[After you install](/self-hosting/methods/after-install)**: create the instance admin at `/god-mode/`, configure your internal SMTP relay and sign-in, then activate the license from the file. **Enterprise Grid:** God Mode → Billing → upload ([guide](/self-hosting/manage/manage-licenses/activate-airgapped-enterprise)). **Per workspace:** Workspace settings → Billing and plans ([guide](/self-hosting/manage/manage-licenses/activate-airgapped)).
 
-   # Check persistent volumes
-   kubectl get pv,pvc -n plane
+## Upgrade
 
-   # Get the ingress URL
-   kubectl get ingress -n plane -o wide
-   ```
+A new release means new images in your registry, a new chart `.tgz` if the chart moved, `planeVersion` bumped in `custom-values.yaml`, `helm upgrade`, and a new license file. Step by step: [Update Airgapped on Kubernetes](/self-hosting/manage/update-plane/airgapped-edition/update-airgapped-kubernetes).
 
-   You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
+## Airgapped values reference
 
-6. [Activate your license key](/self-hosting/manage/manage-licenses/activate-airgapped).
+### `airgapped.*` values
 
-## Additional configuration
+| Setting                | Default | Required | Description                                                                                                                                                                                                                                                                                                                               |
+| ---------------------- | :-----: | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| airgapped.enabled      |  false  |    No    | Enable airgapped mode for the Plane API.                                                                                                                                                                                                                                                                                                  |
+| airgapped.s3Secrets    |   []    |    No    | List of Kubernetes Secrets containing CA certificates to install. Each entry requires `name` (Secret name) and `key` (filename in the Secret). Example: `kubectl -n plane create secret generic plane-s3-ca --from-file=s3-custom-ca.crt=/path/to/ca.crt`. Supports multiple certs (e.g. S3 + internal CA). Available in 2.6.3 and later. |
+| airgapped.s3SecretName |   ""    |    No    | **Deprecated** <br/> Name of a single Kubernetes Secret containing the S3 CA cert. Used only when `s3Secrets` is empty. Use `s3Secrets` instead.                                                                                                                                                                                          |
+| airgapped.s3SecretKey  |   ""    |    No    | **Deprecated** <br/> Key (filename) of the cert file inside the Secret. Used only when `s3Secrets` is empty. Set together with `airgapped.s3SecretName`. Use `s3Secrets` instead.                                                                                                                                                         |
 
-For more advanced Plane configuration options, refer to the [Kubernetes documentation](https://developers.plane.so/self-hosting/methods/kubernetes#configuration-settings).
+### CA certificate configuration (For airgapped deployments only)
+
+Plane supports custom CA certificates for connecting to S3-compatible storage and other internal services in airgapped environments.
+
+- **New deployments:** Use `airgapped.s3Secrets` as shown in the table above.
+- **Existing deployments using `s3SecretName` and `s3SecretKey`:** Your configuration still works. Migrate only if you need to use multiple CA certificates.
+
+### Migrating to the new configuration
+
+:::warning
+Requires Plane 2.6.3 or later.
+:::
+
+The new `s3Secrets` configuration supports multiple CA certificates, useful if you need to trust certificates from different sources (e.g., S3 endpoint CA and internal PKI). If you only need a single certificate, migration is optional.
+
+To migrate:
+
+1. Add your existing secret to the `s3Secrets` list:
+
+```yaml
+airgapped:
+  enabled: true
+  s3Secrets:
+    - name: plane-s3-ca # your existing s3SecretName value
+      key: s3-custom-ca.crt # your existing s3SecretKey value
+
+
+  # s3SecretName and s3SecretKey can be removed after migration
+```
+
+2. Remove `s3SecretName` and `s3SecretKey` from your values file.
+
+3. Upgrade your Helm release.
+
+For everything else (services, replicas, resources, external secrets, ingress, custom routes), see the [Helm values reference](/self-hosting/methods/kubernetes-values).

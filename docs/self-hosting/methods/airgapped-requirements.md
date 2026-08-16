@@ -1,16 +1,25 @@
 ---
-title: Airgapped deployment architecture
-description: System requirements and architecture overview for Plane airgapped deployments. Hardware specs, network topology, and prerequisites for offline installations.
-keywords: plane airgapped requirements, air-gapped architecture, offline prerequisites, system requirements, airgapped planning, self-hosting
+title: Airgapped Edition overview
+description: How the Airgapped Edition works and what to prepare. The bundle and license-file flow, private registry, requirements for Docker and Kubernetes, and the guarantees for isolated networks.
+keywords: plane airgapped edition, airgapped requirements, air-gapped plane, offline plane install, private registry, airgapped kubernetes, airgapped docker, self-hosting
 ---
 
-# Airgapped deployment architecture
+# Airgapped Edition overview <EditionBadge edition="airgapped" plan="enterprise" />
 
-::: info
-Airgapped deployments are available exclusively for Enterprise Grid customers with a minimum commitment of 100 seats. Contact our [Sales team](mailto:sales@plane.so) for trials, exceptions to the seat cut-off, tailored pricing, and licensing info.
+::: info Availability
+The Airgapped Edition is available to Enterprise Grid customers (minimum commitment of 100 seats). Contact [sales](mailto:sales@plane.so) for trials, exceptions to the seat threshold, pricing, and licensing. It runs the same codebase and version series as the Commercial Edition. Current release: **%%COMMERCIAL_VERSION%%**.
 :::
 
-This document explains Plane's architecture and specific requirements for airgapped deployments. Review this before beginning your airgapped installation on [Docker](/self-hosting/methods/airgapped-edition) or [Kubernetes](/self-hosting/methods/airgapped-edition-kubernetes).
+The Airgapped Edition is Plane for networks with **no outbound internet access**. Images come from your own registry, licenses are activated with files instead of keys, and nothing inside the deployment calls out. This page explains how the pieces fit together and what to prepare. Then follow the install guide for [Docker](/self-hosting/methods/airgapped-edition) or [Kubernetes](/self-hosting/methods/airgapped-edition-kubernetes).
+
+## How an airgapped install works
+
+1. **Get the download URL and license file from Plane.** [Sales](mailto:sales@plane.so) provides the bundle download URL. You download license files for your version from the [Prime portal](https://prime.plane.so/licenses).
+2. **Mirror the images.** On a machine with internet access, copy every Plane image for your release into your private registry. [Clone Docker images](/self-hosting/methods/clone-docker-images) uses `crane` and lists all images. Mirror the infrastructure images too (PostgreSQL, Valkey, RabbitMQ, MinIO, OpenSearch) if you run them yourself rather than use managed services.
+3. **Transfer the deployment files.** Docker: `docker-compose-airgapped.yml` and `variables-airgapped.env` for your release ([Download config files](/self-hosting/methods/download-config)). Kubernetes: the `plane-enterprise` Helm chart (%%HELM_EE_VERSION%%) as a `.tgz`.
+4. **Install inside the perimeter**, pointing images at your registry and setting `IS_AIRGAPPED=1` (Docker) or `airgapped.enabled: true` (Helm).
+5. **Activate the license** by uploading the file. Enterprise Grid is activated instance-wide in God Mode → Billing ([Activate Enterprise Grid on Airgapped Edition](/self-hosting/manage/manage-licenses/activate-airgapped-enterprise)). Workspace licenses are activated per workspace ([Activate on Airgapped Edition](/self-hosting/manage/manage-licenses/activate-airgapped)).
+6. **Upgrade** by repeating steps 2 and 3 for the new release. See [Update Airgapped on Docker](/self-hosting/manage/update-plane/airgapped-edition/update-airgapped-docker) and [Update Airgapped on Kubernetes](/self-hosting/manage/update-plane/airgapped-edition/update-airgapped-kubernetes).
 
 ## What is an airgapped deployment?
 
@@ -23,11 +32,11 @@ Plane supports fully airgapped deployments where all components - application se
 Plane's Airgapped Edition can be deployed using Docker or Kubernetes. Choose the method that best fits your infrastructure.
 
 <CardGroup>
-  <Card title="Docker" icon="docker" href="/self-hosting/methods/airgapped-edition">
-    Deploy on a single machine using Docker.
+  <Card title="Airgapped on Docker" icon="docker" href="/self-hosting/methods/airgapped-edition" link-text="Install with Docker Compose">
+    Single machine, Docker Compose, images from your private registry.
   </Card>
-  <Card title="Kubernetes" icon="kubernetes" href="/self-hosting/methods/airgapped-edition-kubernetes">
-    Deploy on a Kubernetes cluster using Helm charts.
+  <Card title="Airgapped on Kubernetes" icon="kubernetes" href="/self-hosting/methods/airgapped-edition-kubernetes" link-text="Install with Helm">
+    <code>plane-enterprise</code> Helm chart in airgapped mode, with cert-manager and an internal CA.
   </Card>
 </CardGroup>
 
@@ -37,7 +46,7 @@ Here's how Plane operates in an airgapped environment with internal enterprise a
 
 ![Airgapped cluster architecture](/images/airgapped/airgapped-cluster.webp#hero)
 
-This diagram illustrates a critical principle: **all OAuth flows and API communication remain internal to the airgapped cluster**. When integrating with self-hosted GitHub Enterprise, GitLab, or other internal services, the entire authentication and data exchange happens within your isolated network — no internet access required.
+This diagram illustrates a critical principle: **all OAuth flows and API communication remain internal to the airgapped cluster**. When integrating with self-hosted GitHub Enterprise, GitLab, or other internal services, the entire authentication and data exchange happens within your isolated network. No internet access is required.
 
 For a detailed breakdown of Plane's services and infrastructure dependencies, see [Plane self-hosted architecture](/self-hosting/plane-architecture).
 
@@ -68,6 +77,23 @@ The airgapped cluster diagram above shows the complete data flow. Key points:
 This architecture ensures complete network isolation while maintaining full integration functionality.
 
 ---
+
+## Requirements common to both methods
+
+- **A private container registry** reachable from every host or node, populated with the images listed in [Clone Docker images](/self-hosting/methods/clone-docker-images) for your release, plus the infrastructure images if you run them in-cluster or on the host.
+- **A machine with internet access** to mirror images and download the deployment files, and a controlled way to move artifacts across the boundary.
+- **DNS inside the perimeter** that resolves your Plane hostname, and an **internal certificate authority** if you want HTTPS. Let's Encrypt is unreachable from an airgapped network.
+- **SMTP relay inside the perimeter** for invitations and notifications ([SMTP for email](/self-hosting/govern/communication)). Optional inbound SMTP ports 25/465/587 for [intake email](/self-hosting/govern/configure-dns-email-service).
+- **License files** downloaded from the [Prime portal](https://prime.plane.so/licenses) for the exact version you install.
+- General sizing, OS, and port requirements from [Before you install](/self-hosting/methods/prerequisites).
+
+## Docker-specific requirements
+
+- Docker Engine **24 or later** with the Compose v2 plugin (`docker compose version`), root or sudo access, ports 80 and 443 free.
+- The compose file and environment template for your release: `docker-compose-airgapped.yml` and `variables-airgapped.env` ([Download config files](/self-hosting/methods/download-config)).
+- Image references in the compose file rewritten to your registry. This is a one-line `sed`. See the [Docker guide](/self-hosting/methods/airgapped-edition).
+- A generated `MACHINE_SIGNATURE` (`uuidgen`) in `plane.env`. The license monitor runs in `start-airgapped` mode and never contacts Prime.
+- For production, external PostgreSQL and S3-compatible storage reachable inside the perimeter, with the S3 endpoint's CA trusted by the API if it's internally signed.
 
 ## Kubernetes-specific requirements
 

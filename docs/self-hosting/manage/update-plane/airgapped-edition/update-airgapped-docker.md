@@ -16,7 +16,7 @@ Since airgapped instances can't pull updates from the internet, updating the ver
 
 ## Update Plane
 
-1. On a machine with internet access, pull the latest Plane images and push them to your airgapped Docker registry. Follow the guide for [cloning and pushing Plane Docker images](https://developers.plane.so/self-hosting/methods/clone-docker-images).
+1. On a machine with internet access, pull the latest Plane images and push them to your airgapped Docker registry. Follow the guide for [cloning and pushing Plane Docker images](/self-hosting/methods/clone-docker-images).
 
    Once complete, the latest Plane images are available in your internal registry.
 
@@ -33,15 +33,15 @@ Since airgapped instances can't pull updates from the internet, updating the ver
    Transfer both files to your airgapped instance and replace the existing ones. Before replacing your existing `plane.env`, compare it with the new template. Copy over any custom values from your old plane.env into the new template. The new template may include additional variables required by the latest version, so always use the new file as the base and bring your existing values into it.
 
    :::info
-   Replace `<plane_version>` with the version you're upgrading to (e.g., v2.6.3). Check the [release notes](https://plane.so/changelog?category=self-hosted) for the latest available release version.
+   Replace `<plane_version>` with the version you're upgrading to (e.g., %%COMMERCIAL_VERSION%%). Check the [release notes](https://plane.so/changelog?category=self-hosted) for the latest available release version.
    :::
 
-3. Download the latest license file for the new version from [prime.plane.so](https://prime.plane.so). Follow [this guide](https://developers.plane.so/self-hosting/manage/manage-licenses/activate-airgapped) to activate license.
+3. Download the latest license file for the new version from [prime.plane.so](https://prime.plane.so). Follow [this guide](/self-hosting/manage/manage-licenses/activate-airgapped) to activate license.
 
 4. Restart the instance to bring the instance back up with the new configuration.
 
    ```bash
-   docker compose up -d
+   docker compose --env-file plane.env up -d
    ```
 
 Verify the upgrade by checking the version in your Plane application.

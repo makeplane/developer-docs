@@ -4,11 +4,10 @@ description: Mirror Plane Docker images to your private container registry. Pull
 keywords: plane docker images, private registry, container mirroring, docker pull, image cloning, airgapped docker, self-hosting
 ---
 
-# Clone Docker images to your private registry
+# Clone Docker images to your private registry <EditionBadge edition="airgapped" plan="enterprise" />
 
-::: info
-**Part of airgapped deployment**  
-This guide is part of the airgapped deployment process. If you're setting up Plane in an airgapped environment, return to that guide after copying your images.
+::: info Part of the airgapped install
+Do this on a machine with internet access before you install [Airgapped on Docker](/self-hosting/methods/airgapped-edition) or [Airgapped on Kubernetes](/self-hosting/methods/airgapped-edition-kubernetes), and again for every [upgrade](/self-hosting/manage/update-plane/airgapped-edition/update-airgapped-docker). Current release: %%COMMERCIAL_VERSION%%.
 :::
 
 This guide shows you how to copy Docker images from the Plane artifact registry to your destination registry using the `crane` tool.
@@ -79,7 +78,7 @@ Set your version and destination registry before copying images.
 
 ```bash
 # Set your Plane version
-export APP_RELEASE_VERSION="v3.1.0"  # Replace with your desired version
+export APP_RELEASE_VERSION="%%COMMERCIAL_VERSION%%"  # Replace with the version you are installing
 
 # Set your destination registry
 export DESTINATION_REGISTRY="your-registry.io/your-namespace"
@@ -191,7 +190,7 @@ Create a file named `copy-plane-images.sh`:
 set -e
 
 # Configuration
-APP_RELEASE_VERSION="${APP_RELEASE_VERSION:-v3.1.0}"
+APP_RELEASE_VERSION="${APP_RELEASE_VERSION:-%%COMMERCIAL_VERSION%%}"
 DESTINATION_REGISTRY="${DESTINATION_REGISTRY}"
 
 if [ -z "$DESTINATION_REGISTRY" ]; then
