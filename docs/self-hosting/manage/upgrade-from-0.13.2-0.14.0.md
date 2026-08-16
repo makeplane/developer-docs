@@ -4,7 +4,7 @@ description: Upgrade self-hosted Plane to the latest version. Step-by-step guide
 keywords: plane v0.14 upgrade, mandatory checkpoint, plane migration 0.13, breaking changes, version upgrade, self-hosting update
 ---
 
-# Mandatory checkpoint at v0.14.0 <Badge type="info" text="Community Edition" />
+# Mandatory checkpoint at v0.14.0 <EditionBadge edition="community" />
 
 If you’re upgrading from `v0.13.2` or below, there are some additional migration steps due to significant changes in the self-hosting setup. Follow these instructions to migrate your data to the new volume structure in `v0.14.0`.
 
@@ -25,7 +25,7 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
 
    ```bash
    export RELEASE=v0.14-dev
-   curl -fsSL https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/install.sh | sed -e 's@BRANCH=${BRANCH:-master}@BRANCH='"$RELEASE"'@' -e 's@APP_RELEASE="stable"@APP_RELEASE='"$RELEASE"'@' > setup.sh
+   curl -fsSL https://raw.githubusercontent.com/makeplane/plane/master/deployments/cli/community/install.sh | sed -e 's@BRANCH=${BRANCH:-master}@BRANCH='"$RELEASE"'@' -e 's@APP_RELEASE="stable"@APP_RELEASE='"$RELEASE"'@' > setup.sh
    chmod +x setup.sh
    ```
 
@@ -50,7 +50,7 @@ If you’re upgrading from `v0.13.2` or below, there are some additional migrati
 7. Download the migration script:
 
    ```bash
-   curl -fsSL -o migrate.sh https://raw.githubusercontent.com/makeplane/plane/master/deploy/selfhost/migration-0.13-0.14.sh
+   curl -fsSL -o migrate.sh https://raw.githubusercontent.com/makeplane/plane/master/deployments/cli/community/migration-0.13-0.14.sh
    chmod +x migrate.sh
    ```
 

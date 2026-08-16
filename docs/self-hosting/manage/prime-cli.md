@@ -8,7 +8,7 @@ keywords: plane cli, prime cli, command line tools, plane management, plane setu
 
 Our command-line tool is here to make managing your Plane instance simple. You can handle installs, upgrades, and general management without needing to be a Docker expert.
 
-## Prime CLI <Badge type="info" text="Commercial Edition" /> <Badge type="tip" text="Docker" />
+## Prime CLI <EditionBadge edition="commercial" /> <Badge type="tip" text="Docker" />
 
 The Prime CLI provides commands for common tasks like configuring services, monitoring health, managing backups, and upgrading your Plane instance.
 
@@ -59,12 +59,12 @@ For more advanced admins that want greater control over their instance, the list
 - `External Postgres URL`
   Specify the URL of your own hosted Postgres if you would like to change the database your Plane app uses.
 
-Default database: Postgres 15.5 in the Docker container
+Default database: PostgreSQL 15.7 in the bundled Docker container
 
 - `External Redis URL`
-  Specify the URL of your own hosted REdis if you would like to change the default Redis Plane ships with.
+  Specify the URL of your own hosted Redis if you would like to change the default Redis Plane ships with.
 
-Default Redis: Redis 7.2.4
+Default Redis: Valkey 7.2 (Redis-compatible) in the bundled Docker container
 
 - `External storage`
   Specify your AWS S3 bucket's credentials in the format below to change storage from the default Plane ships with.
@@ -92,65 +92,9 @@ uninstalls Plane. Before it goes through, it asks you for a confirmation.
 1. Typing `YES` lets the CLI clean up the `/opt/plane` folder, leaving behind the `/opt/plane/data` and `/opt/plane/logs` folders.
 2. Typing `NO` cancels the uninstall.
 
-::: details Setup.sh script • Community Edition
+## Community Edition: setup.sh
 
-The setup script `setup.sh` provides a menu-driven interface to help you install and manage your Plane instance.
-
-#### Usage
-
-To run the setup.sh script, use the following command in your terminal from the directory where the script is located:
-
-```bash
-./setup.sh
-```
-
-This will launch an interactive menu with options to manage various aspects of your Plane instance.
-
-```bash
-Select a Action you want to perform:
-   1) Install
-   2) Start
-   3) Stop
-   4) Restart
-   5) Upgrade
-   6) View Logs
-   7) Backup Data
-   8) Exit
-```
-
-#### Actions
-
-- **Install**  
-  Installs the Plane Community Edition on your machine. Choose this option if you are setting up Plane for the first time.
-
-- **Start**  
-  Starts the Plane server and all related services.
-
-- **Stop**  
-  Stops the Plane server and all services currently running on the machine.
-
-- **Restart**  
-  Restarts the Plane server and all associated services.
-
-- **Upgrade**
-  Upgrades Plane to the latest available version. This will stop all services, update the necessary files, and then restart Plane with the latest configuration. See [Update Plane](/self-hosting/manage/upgrade-plane#prerequisites) for more info.
-
-  > [!WARNING]
-  > It's recommended to create a backup before upgrading your instance. See [Backup and restore](/self-hosting/manage/backup-restore#backup-data).
-
-- **View Logs**
-  Displays real-time logs of specific Plane services. See [View logs](/self-hosting/manage/view-logs) for more info.
-
-  > [!TIP]
-  > Use **View Logs** to monitor service performance or troubleshoot issues. Press `CTRL+C` to exit the log view and return to the main menu.
-
-- **Backup Data**
-  Creates a backup of your current Plane installation, including all data. See [Backup and restore data](/self-hosting/manage/backup-restore#backup-data) for more info.
-
-- **Exit**  
-  Closes the setup script and returns you to the command line.
-
-:::
+The Community Edition is managed with the menu-driven `setup.sh` script instead of the Prime CLI. See [Community Edition → Manage your instance](/self-hosting/community/manage#the-setup-sh-script).
 
 ## Troubleshoot
 

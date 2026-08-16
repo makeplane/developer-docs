@@ -4,7 +4,7 @@ description: Configure custom domain for self-hosted Plane. Setup your own domai
 keywords: plane custom domain, domain setup, dns configuration, self-hosting, plane domain name, custom url
 ---
 
-# Configure custom domain <Badge type="info" text="Commercial Edition" />
+# Configure custom domain <EditionBadge edition="commercial" />
 
 During installation, you configure a domain for your instance. If you need to change that domain later, whether you're moving to a production domain, switching to a different hostname, or updating your DNS configuration, this guide walks you through the process.
 
@@ -58,24 +58,31 @@ This shows you all the variables that contain your current domain. You'll update
    Don't include `http://` or `https://` here, just the hostname.
    - **SITE_ADDRESS**
 
-   Set this to your full domain URL:
+   This is the address the built-in Caddy proxy listens on. It decides how TLS is handled:
 
    ```ini
-   SITE_ADDRESS=https://plane.company.com
+   # Caddy serves this hostname and provisions a Let's Encrypt certificate automatically
+   # (needs ports 80 and 443 reachable from the internet, and DNS pointing at this host)
+   SITE_ADDRESS=plane.company.com
+
+   # Plain HTTP for this hostname (no certificate), for internal or test setups
+   SITE_ADDRESS=http://plane.company.com
+
+   # Plain HTTP on port 80 for any hostname. Use this when an external reverse proxy or
+   # load balancer terminates TLS in front of Plane. See External reverse proxy.
+   SITE_ADDRESS=:80
    ```
 
-   Include the protocol (`https://` for SSL, `http://` if you haven't set up SSL yet).
+   See [SSL](/self-hosting/govern/configure-ssl) and [External reverse proxy](/self-hosting/govern/reverse-proxy).
    - **WEB_URL**
 
-   This should match your SITE_ADDRESS:
+   The public URL users open in the browser, always with the protocol:
 
    ```ini
    WEB_URL=https://plane.company.com
    ```
 
-   Again, include the full protocol.
-
-   **CORS_ALLOWED_ORIGINS**
+   - **CORS_ALLOWED_ORIGINS**
 
    List all domains that should be allowed to make cross-origin requests to your Plane instance. This typically includes both HTTP and HTTPS versions of your domain:
 
@@ -95,48 +102,6 @@ sudo prime-cli restart
 
 This process typically takes a few minutes. You'll see output indicating the status of each service as it restarts.
 
-::: details Community Edition
+## Community Edition
 
-Our steps differ slightly depending on whether you are hosting on a public IP or a private/internal IP. Follow the steps listed below.
-
-#### Update configuration in .env file
-
-Open your project's `.env` file in a text editor. This file contains configuration settings for your application. Locate the following lines:
-
-```
-WEB_URL=<your domain name with http/https>
-CORS_ALLOWED_ORIGINS=<your domain name with http/https>
-```
-
-Replace `<your domain name with http/https>` with your actual domain name, including the protocol (http:// or https://). For example:
-
-```
-WEB_URL=https://example.com
-CORS_ALLOWED_ORIGINS=https://example.com
-```
-
-If you are hosting Plane on a public IP, then follow the steps here. However, if you are hosting Plane on an internal IP then follow these steps.
-
-#### Set DNS A record (for public IP)
-
-If your server has a public IP address, you need to configure the DNS A record to point to this IP address. This allows users to access your application using your custom domain name. Here’s how to do it:
-
-- Log in to your domain registrar's website or DNS hosting provider.
-- Navigate to the DNS management section.
-- Find the option to edit your domain's DNS records.
-- Add a new A record with the hostname set to `@` (or your subdomain if applicable) and the IP address set to your server's public IP address.
-- Save the changes. It may take some time for the DNS changes to propagate.
-
-#### Configure reverse proxy (for internal IP)
-
-If your server is behind a firewall or router and has an internal IP address, you'll need to set up a reverse proxy to route requests from your custom domain to your server. Follow these steps:
-
-- Configure a CNAME record in your domain's DNS settings that points to your reverse proxy server's hostname. This allows your domain to resolve to the reverse proxy server.
-
-- Set up reverse proxy redirection on your reverse proxy server to forward incoming requests to your server's internal IP address and port.
-
-- Depending on the reverse proxy software you're using (e.g., Nginx, Apache, etc.), the configuration process may vary. Refer to the documentation for your specific reverse proxy server for detailed instructions on setting up reverse proxy redirection.
-
-- Once the reverse proxy is properly configured, ensure that your firewall/router allows incoming traffic on the necessary ports to reach your server.
-
-By following these steps, you will be able to access your self-hosted instance of Plane using your custom domain name, whether your server has a public IP address or is behind a firewall with an internal IP address.
+On the Community Edition the same settings live in `plane-app/plane.env` (`APP_DOMAIN`, `WEB_URL`, `CORS_ALLOWED_ORIGINS`, and `SITE_ADDRESS`/`CERT_EMAIL` for the bundled Caddy proxy). Edit the file, then run `./setup.sh restart`. See [Community Edition → Manage your instance](/self-hosting/community/manage#change-the-domain).

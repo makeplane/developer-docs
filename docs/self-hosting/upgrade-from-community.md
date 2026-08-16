@@ -13,7 +13,7 @@ The Commercial edition comes with the free plan and the flexibility to upgrade t
 
 ## Prerequisites
 
-- Install the [Commercial Edition](/self-hosting/methods/docker-compose#install-plane) on a fresh machine, not the one running the Plane Community Edition.
+- Install the [Commercial Edition](/self-hosting/methods/docker-compose#install) on a fresh machine, not the one running the Plane Community Edition.
 - Be sure to log in as the root user or as a user with sudo access. The `/opt` folder requires sudo or root privileges.
 
 :::tabs key:upgrade-options
@@ -37,12 +37,13 @@ This upgrade path is for installations using Plane's default PostgreSQL database
 
 3. When done, your data will be backed up to the folder shown on the screen.
    e.g., `/plane-selfhost/plane-app/backup/20240522-1027`
-   This folder will contain 3 `tar.gz` files.
+   This folder contains:
    - `pgdata.tar.gz`
    - `redisdata.tar.gz`
    - `uploads.tar.gz`
+   - `rabbitmq_data.tar.gz` (queue data; transient, not restored on the new instance)
 
-4. Copy all the three files from the server running the Community Edition to any folder on the server running the Commercial Edition.
+4. Copy the files from the server running the Community Edition to any folder on the server running the Commercial Edition.
 
    e.g., `~/ce-backup`
 
@@ -60,26 +61,27 @@ This upgrade path is for installations using Plane's default PostgreSQL database
 
     for FILE in *.tar.gz; do
         if [ -e "$FILE" ]; then
-            tar -xzvf "$FILE" -C "$TARGET_DIR"
+            sudo tar -xzvf "$FILE" -C "$TARGET_DIR"
         else
             echo "No .tar.gz files found in the current directory."
             exit 1
         fi
     done
 
-    # Remove destinations first, then mv
-    sudo rm -rf $TARGET_DIR/db && mv $TARGET_DIR/pgdata $TARGET_DIR/db
-    sudo rm -rf $TARGET_DIR/redis && mv $TARGET_DIR/redisdata $TARGET_DIR/redis
+    # Remove destinations first, then move the extracted data into place
+    sudo rm -rf $TARGET_DIR/db && sudo mv $TARGET_DIR/pgdata $TARGET_DIR/db
+    sudo rm -rf $TARGET_DIR/redis && sudo mv $TARGET_DIR/redisdata $TARGET_DIR/redis
+    sudo rm -rf $TARGET_DIR/rabbitmq_data   # queue data is transient and not needed on the new instance
 
-    mkdir -p $TARGET_DIR/minio
-    sudo rm -rf $TARGET_DIR/minio/uploads && mv $TARGET_DIR/uploads $TARGET_DIR/minio/uploads
+    sudo mkdir -p $TARGET_DIR/minio
+    sudo rm -rf $TARGET_DIR/minio/uploads && sudo mv $TARGET_DIR/uploads $TARGET_DIR/minio/uploads
    ```
 
 3. This script will extract your Community Edition data and restore it to `/opt/plane/data`.
 
 == Managed services (external DB and storage) {#managed-services}
 
-This upgrade path is for installations using external or managed database and object storage services (like AWS RDS and S3). Since your data already lives in external services, you only need to update your configuration — no backup and restore required.
+This upgrade path is for installations using external or managed database and object storage services (like AWS RDS and S3). Since your data already lives in external services, you only need to update your configuration. No backup and restore required.
 
 ## Update configuration for Commercial Edition
 

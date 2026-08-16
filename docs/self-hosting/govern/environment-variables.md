@@ -4,7 +4,7 @@ description: Configure environment variables for Plane. Complete reference of al
 keywords: plane environment variables, configuration reference, env settings, plane config, self-hosting settings, plane env
 ---
 
-# Environment variables reference <Badge type="info" text="Commercial Edition" />
+# Environment variables reference <EditionBadge edition="commercial" />
 
 This guide provides a comprehensive overview of all environment variables used in the Commercial Edition. These variables allow you to customize your Plane instance to best fit your organization's needs.
 
@@ -68,12 +68,12 @@ This is where you'll make all configuration changes. Remember to restart the ins
 
 ### SSL and certificates
 
-| Variable          | Description                                                                                                                          | Default Value                                  |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
-| **CERT_EMAIL**    | Email used for SSL certificate registration with Let's Encrypt or other ACME providers.                                              | admin@example.com                              |
-| **CERT_ACME_CA**  | ACME Certificate Authority URL for SSL certificate issuance.                                                                         | https://acme-v02.api.letsencrypt.org/directory |
-| **CERT_ACME_DNS** | DNS provider configuration for SSL certificate domain validation. Format varies by provider.                                         |                                                |
-| **SITE_ADDRESS**  | The domain name and port required by Caddy for serving your Plane instance. This determines how Caddy will handle incoming requests. | localhost:80                                   |
+| Variable          | Description                                                                                                                                                                                                                                                                                                                                                     | Default Value                                  |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| **CERT_EMAIL**    | Email used for SSL certificate registration with Let's Encrypt or other ACME providers.                                                                                                                                                                                                                                                                         | admin@example.com                              |
+| **CERT_ACME_CA**  | ACME Certificate Authority URL for SSL certificate issuance.                                                                                                                                                                                                                                                                                                    | https://acme-v02.api.letsencrypt.org/directory |
+| **CERT_ACME_DNS** | DNS provider configuration for SSL certificate domain validation. Format varies by provider.                                                                                                                                                                                                                                                                    |                                                |
+| **SITE_ADDRESS**  | The site address the built-in Caddy proxy listens on. `plane.company.com`: Caddy serves that hostname and provisions a Let's Encrypt certificate (ports 80/443 and DNS required). `http://plane.company.com`: plain HTTP for that hostname. `:80`: plain HTTP for any hostname, for use behind an [external reverse proxy](/self-hosting/govern/reverse-proxy). | localhost:80                                   |
 
 ### Database settings
 
@@ -325,100 +325,6 @@ For setup instructions, supported models, and IAM permissions, see [Configure Pl
 | **CELERY_DOCS_SYNC_ENABLED**            | Enable periodic documents synchronization for AI indexing.                                                                                                                                                | 0                                     |
 | **CELERY_DOCS_SYNC_INTERVAL**           | Interval (in seconds) for documents synchronization.                                                                                                                                                      | 86400                                 |
 
-::: details Community Edition
+## Community Edition
 
-This guide provides a comprehensive overview of all environment variables available for configuring your self-hosted Plane Community Edition. Use these variables to customize your instance to fit your deployment needs.
-
-## Where to find the environment file
-
-The environment configuration file is located at:
-
-```bash
-plane-selfhost/plane-app/plane.env
-```
-
-## Environment Variables
-
-### General settings
-
-| Variable                 | Description                                                                                                                                         | Default Value        |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| **APP_DOMAIN**           | Domain name for your Plane instance. This determines how users will access your installation.                                                       | localhost            |
-| **APP_RELEASE**          | Release version of Plane. Helps with compatibility and troubleshooting.                                                                             | stable               |
-| **WEB_URL**              | The complete base URL for the web application including protocol. Essential for email links and integrations.                                       | http://${APP_DOMAIN} |
-| **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API.                                                                  | http://${APP_DOMAIN} |
-| **DEBUG**                | Toggles debug mode for verbose logging. Set to `1` to enable, `0` to disable. Not recommended in production as it may expose sensitive information. | 0                    |
-| **LISTEN_HTTP_PORT**     | Port for HTTP traffic. The primary port your users will connect to.                                                                                 | 80                   |
-| **LISTEN_HTTPS_PORT**    | Port for HTTPS traffic. The primary port your users will connect to.                                                                                | 443                  |
-
-### Scaling and performance
-
-| Variable                 | Description                                                                                       | Default Value |
-| ------------------------ | ------------------------------------------------------------------------------------------------- | ------------- |
-| **WEB_REPLICAS**         | Number of web server replicas for serving the frontend UI. Increase for better load distribution. | 1             |
-| **SPACE_REPLICAS**       | Number of space service replicas handling workspace-related operations.                           | 1             |
-| **ADMIN_REPLICAS**       | Number of admin service replicas for administrative functions.                                    | 1             |
-| **API_REPLICAS**         | Number of API service replicas processing API requests.                                           | 1             |
-| **WORKER_REPLICAS**      | Number of worker service replicas handling background tasks.                                      | 1             |
-| **BEAT_WORKER_REPLICAS** | Number of beat worker replicas for scheduled/periodic tasks.                                      | 1             |
-| **LIVE_REPLICAS**        | Number of live service replicas for real-time updates and WebSocket connections.                  | 1             |
-| **GUNICORN_WORKERS**     | Number of Gunicorn workers per API instance. Increase for better request handling capacity.       | 1             |
-
-### API settings
-
-| Variable               | Description                                                             | Default Value |
-| ---------------------- | ----------------------------------------------------------------------- | ------------- |
-| **API_KEY_RATE_LIMIT** | Rate limit for API requests to prevent abuse. Format: `number/timeunit` | 60/minute     |
-
-### Database settings
-
-| Variable              | Description                                                                                                                                  | Default Value            |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| **PGHOST**            | Hostname or IP address of your PostgreSQL server.                                                                                            | plane-db                 |
-| **PGDATABASE**        | Name of the PostgreSQL database Plane will use.                                                                                              | plane                    |
-| **POSTGRES_USER**     | Username for PostgreSQL authentication.                                                                                                      | plane                    |
-| **POSTGRES_PASSWORD** | Password for PostgreSQL authentication. Use a strong, unique password.                                                                       | plane                    |
-| **POSTGRES_DB**       | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                    | plane                    |
-| **POSTGRES_PORT**     | TCP port your PostgreSQL server is listening on.                                                                                             | 5432                     |
-| **PGDATA**            | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL directly.                                        | /var/lib/postgresql/data |
-| **DATABASE_URL**      | Full connection string for PostgreSQL. If provided, overrides individual settings. Format: `postgresql://username:password@host:port/dbname` |                          |
-
-### Redis settings
-
-| Variable       | Description                                                                     | Default Value |
-| -------------- | ------------------------------------------------------------------------------- | ------------- |
-| **REDIS_HOST** | Hostname or IP address of your Redis server.                                    | plane-redis   |
-| **REDIS_PORT** | TCP port your Redis server is listening on.                                     | 6379          |
-| **REDIS_URL**  | Full connection string for Redis. Format: `redis://username:password@host:port` |               |
-
-### RabbitMQ settings
-
-| Variable              | Description                                                                                      | Default Value                          |
-| --------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| **RABBITMQ_HOST**     | Hostname or IP address of your RabbitMQ server.                                                  | plane-mq                               |
-| **RABBITMQ_PORT**     | TCP port your RabbitMQ server is listening on.                                                   | 5672                                   |
-| **RABBITMQ_USER**     | Username for RabbitMQ authentication.                                                            | plane                                  |
-| **RABBITMQ_PASSWORD** | Password for RabbitMQ authentication. Use a strong, unique password.                             | plane                                  |
-| **RABBITMQ_VHOST**    | Virtual host for RabbitMQ, providing logical separation of resources.                            | plane                                  |
-| **AMQP_URL**          | Full connection string for RabbitMQ. If not provided, it's constructed from individual settings. | amqp://plane:plane@plane-mq:5672/plane |
-
-### File Storage (MinIO / S3)
-
-| Variable                  | Description                                                                                         | Default Value |
-| ------------------------- | --------------------------------------------------------------------------------------------------- | ------------- |
-| **USE_MINIO**             | Whether to use MinIO for object storage. Set to `1` to enable, `0` to use other configured storage. | 1             |
-| **MINIO_ENDPOINT_SSL**    | Force HTTPS for MinIO when handling SSL termination. Set to `1` to enable.                          | 0             |
-| **AWS_REGION**            | AWS region for S3 storage services. Applies when using S3 or MinIO.                                 |               |
-| **AWS_ACCESS_KEY_ID**     | Access key for MinIO or AWS S3 authentication.                                                      | access-key    |
-| **AWS_SECRET_ACCESS_KEY** | Secret key for MinIO or AWS S3 authentication.                                                      | secret-key    |
-| **AWS_S3_ENDPOINT_URL**   | Endpoint URL for MinIO or S3-compatible storage.                                                    |               |
-| **AWS_S3_BUCKET_NAME**    | S3 bucket name for file storage. All uploads will be stored in this bucket.                         | uploads       |
-| **FILE_SIZE_LIMIT**       | Maximum file upload size in bytes.                                                                  | 5242880 (5MB) |
-
-### Security settings
-
-| Variable       | Description                                                                                                               | Default Value |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| **SECRET_KEY** | Secret key used for cryptographic operations like session handling and token generation. Should be a long, random string. |               |
-
-:::
+The Community Edition uses a different environment file (`plane-app/plane.env`) with its own variable names. See [Community Edition → Environment variables](/self-hosting/community/manage#environment-variables).
