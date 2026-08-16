@@ -4,7 +4,7 @@ description: Connect GitHub to your self-hosted Plane instance. Sync pull reques
 keywords: plane github integration, github cloud, github enterprise, github sync, pull request tracking, commit linking, github app,
 ---
 
-# Configure GitHub for Plane integration <Badge type="info" text="Pro" />
+# Configure GitHub for Plane integration <EditionBadge plan="pro" />
 
 This guide walks you through setting up a GitHub App to enable GitHub integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for GitHub, you’ll need to set up the necessary authentication, permissions, and webhooks to ensure smooth integration.
 

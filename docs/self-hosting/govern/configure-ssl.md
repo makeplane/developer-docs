@@ -4,7 +4,7 @@ description: Configure SSL/TLS certificates for Plane. Setup HTTPS encryption fo
 keywords: plane ssl, https setup, tls certificate, ssl configuration, lets encrypt, secure deployment, self-hosting security
 ---
 
-# Set up SSL <Badge type="info" text="Commercial Edition" />
+# Set up SSL <EditionBadge edition="commercial" />
 
 This guide shows you how to configure SSL/TLS certificates for your self-hosted Plane instance. Plane handles certificate provisioning and renewal automatically using Let's Encrypt.
 

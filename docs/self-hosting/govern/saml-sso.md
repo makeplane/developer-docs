@@ -4,7 +4,7 @@ description: Configure SAML SSO authentication for Plane. Setup Security Asserti
 keywords: plane saml, saml sso, enterprise sso, saml configuration, identity provider, okta, azure ad, self-hosting
 ---
 
-# SAML SSO <Badge type="info" text="Pro" /> <Badge type="tip" text="Business" />
+# SAML SSO <EditionBadge plan="pro" /> <EditionBadge plan="business" />
 
 Plane enables custom SSO via any identity provider with an official and supported implementation of SAML standards. This page cites examples from Okta, but we will soon publish provider-specific instructions in phases.
 

@@ -4,7 +4,7 @@ description: Liveness, readiness, and health endpoints for self-hosted Plane ser
 keywords: plane health check, liveness probe, readiness probe, self-hosting monitoring, kubernetes probe, docker compose healthcheck, uptime monitor, /api/ready, /api/live, /api/health
 ---
 
-# Health checks <Badge type="info" text="Commercial Edition" />
+# Health checks <EditionBadge edition="commercial" />
 
 Self-hosted Plane services expose HTTP health endpoints so you can wire up uptime monitoring, load-balancer health checks, and container or orchestrator probes. This page documents every endpoint that ships with Plane, exactly what each one checks, and how to consume them from Kubernetes, Docker Compose, and external monitors.
 

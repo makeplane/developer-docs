@@ -4,7 +4,7 @@ description: Connect Slack to your self-hosted Plane instance. Get notifications
 keywords: plane slack integration, slack notifications, slack bot, workspace notifications, slack webhook, self-hosting, plane communication
 ---
 
-# Configure Slack for Plane integration <Badge type="info" text="Pro" />
+# Configure Slack for Plane integration <EditionBadge plan="pro" />
 
 This guide walks you through setting up a Slack App to enable Slack integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for Slack, you’ll need to set up the necessary authentication, permissions, and event subscriptions to ensure seamless communication between Plane and Slack.
 

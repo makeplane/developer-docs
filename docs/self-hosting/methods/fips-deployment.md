@@ -8,7 +8,7 @@ head:
       content: noindex, nofollow
 ---
 
-# FIPS deployment <Badge type="warning" text="Enterprise Grid" />
+# FIPS deployment <EditionBadge edition="commercial" plan="enterprise" />
 
 Plane publishes a FIPS variant of every application image alongside the standard set.
 These images are built on Red Hat UBI 10, apply the system-wide FIPS cryptographic policy, and run
@@ -87,7 +87,7 @@ FIPS is a values overlay, not a different chart. Three things change:
 
 ```yaml
 # values-fips.yaml
-planeVersion: <release-tag>
+planeVersion: %%COMMERCIAL_VERSION%%
 
 # Non-root with group 0, matching the FIPS images' group-0-writable directories
 # (see the non-root section below).

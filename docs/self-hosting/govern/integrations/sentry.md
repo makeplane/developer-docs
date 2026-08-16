@@ -4,7 +4,7 @@ description: Connect Sentry error monitoring to your self-hosted Plane instance.
 keywords: plane sentry integration, error tracking, sentry alerts, bug tracking, error monitoring, self-hosting, plane devops
 ---
 
-# Configure Sentry for Plane integration <Badge type="info" text="Pro" />
+# Configure Sentry for Plane integration <EditionBadge plan="pro" />
 
 This guide shows you how to set up Sentry integration for your self-hosted Plane instance. Unlike Plane Cloud where Sentry comes pre-configured, self-hosted instances require you to create a custom integration in Sentry and configure your Plane deployment with the necessary credentials.
 

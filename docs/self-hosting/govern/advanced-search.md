@@ -4,7 +4,7 @@ description: Enable full-text search in Plane with OpenSearch. Configure advance
 keywords: plane opensearch, full-text search, advanced search, search indexing, self-hosting, plane search
 ---
 
-# Configure OpenSearch for advanced search <Badge type="info" text="Pro" />
+# Configure OpenSearch for advanced search <EditionBadge plan="pro" />
 
 Plane uses OpenSearch to provide advanced search capabilities across your workspace. This guide walks you through setting up OpenSearch integration on your self-hosted instance.
 

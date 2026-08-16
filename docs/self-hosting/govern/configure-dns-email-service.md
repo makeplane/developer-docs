@@ -4,7 +4,7 @@ description: Configure DNS MX records for Plane intake email. Route incoming ema
 keywords: plane dns configuration, mx records, intake email, email to issue, self-hosting, plane email setup, dns setup
 ---
 
-# Configure DNS for Intake Email <Badge type="tip" text="Business" />
+# Configure DNS for Intake Email <EditionBadge plan="business" />
 
 This guide explains how to configure DNS settings to enable the [Intake Email](https://docs.plane.so/intake/intake-email) feature for your self-hosted Plane instance. These configurations enable your server to accept messages sent to your project's dedicated Intake address, which are then converted into work items in your project's Intake section.
 

@@ -4,7 +4,7 @@ description: Setup OIDC SSO authentication for Plane. Configure OpenID Connect s
 keywords: plane oidc, openid connect, sso configuration, single sign-on, oidc provider, enterprise sso, self-hosting
 ---
 
-# OIDC SSO <Badge type="info" text="Pro" /> <Badge type="tip" text="Business" />
+# OIDC SSO <EditionBadge plan="pro" /> <EditionBadge plan="business" />
 
 Plane enables custom SSO via any identity provider with an official and supported implementation of OIDC standards. This page cites examples from Okta, but we will soon publish provider-specific instructions in phases.
 

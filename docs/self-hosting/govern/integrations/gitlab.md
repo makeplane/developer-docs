@@ -4,7 +4,7 @@ description: Connect GitLab to your self-hosted Plane instance. Sync merge reque
 keywords: plane gitlab integration, gitlab cloud, gitlab self-managed, gitlab sync, merge request tracking
 ---
 
-# Configure GitLab for Plane integration <Badge type="info" text="Pro" />
+# Configure GitLab for Plane integration <EditionBadge plan="pro" />
 
 This guide walks you through setting up a GitLab application to enable GitLab integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don’t come pre-configured for GitLab, you’ll need to create an application, configure authentication, and set the necessary permissions to ensure seamless integration.
 

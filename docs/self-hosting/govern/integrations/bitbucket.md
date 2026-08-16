@@ -4,7 +4,7 @@ description: Connect Bitbucket to your self-hosted Plane instance. Sync pull req
 keywords: plane bitbucket integration, bitbucket cloud, bitbucket data center, bitbucket sync, pull request tracking
 ---
 
-# Configure Bitbucket for Plane integration <Badge type="info" text="Pro" />
+# Configure Bitbucket for Plane integration <EditionBadge plan="pro" />
 
 This guide walks you through setting up a Bitbucket application to enable Bitbucket integration for your Plane workspace on a self-hosted instance. Since self-hosted environments don't come pre-configured for Bitbucket, you'll need to create an OAuth consumer or application link, configure authentication, and set the necessary permissions to ensure seamless integration.
 
