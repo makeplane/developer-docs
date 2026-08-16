@@ -1,143 +1,106 @@
 ---
 title: Docker Compose
-description: Install Plane using Docker Compose. Step-by-step guide for deploying Plane with Docker on your server with all required services.
-keywords: plane docker compose, docker deployment, container setup, docker install plane, plane containers, self-hosting
+description: Install Plane Commercial Edition with Docker Compose. One command installs the Prime CLI and starts the full stack on a single machine. Prerequisites, verification, and next steps.
+keywords: plane docker compose, install plane docker, prime cli, plane commercial edition install, self-hosting plane, docker install
 ---
 
-# Docker Compose <Badge type="info" text="Commercial Edition" />
+# Docker Compose <EditionBadge edition="commercial" />
 
-This guide shows you the steps to deploy a self-hosted instance of Plane using Docker.
-
-::: tip
-If you want to upgrade from Community to the Commercial edition, see [Upgrade to Commercial Edition](/self-hosting/upgrade-from-community).
+::: info Edition availability
+This guide installs the **Commercial Edition** (current release %%COMMERCIAL_VERSION%%) with the Prime CLI. It includes the Free plan. A license key unlocks Pro, Business, or Enterprise Grid later. For isolated networks, use [Airgapped on Docker](/self-hosting/methods/airgapped-edition). For the open-source Community Edition, see [Community Edition → Docker Compose](/self-hosting/community/docker-compose).
 :::
 
-## Install Plane
+Docker Compose is the recommended way to run Plane on a single machine. One command downloads the Prime CLI, which generates the configuration, pulls the images, and starts every service behind a bundled Caddy proxy that also handles HTTPS. Allow about 15 minutes.
 
-Plane Pro and Plane Business are enabled on this edition, so the Free plan on this edition is easier to trial our paid plans from.
+**What you get:** the web app, public spaces, admin console (God Mode), REST API, background workers, real-time collaboration server, integrations service, license monitor, and, unless you point Plane at your own, PostgreSQL, Redis (Valkey), RabbitMQ, and MinIO object storage. See [Plane architecture](/self-hosting/plane-architecture).
 
-### Prerequisites
+## Before you begin
 
-- **CPU:** 2 cores (x64/AMD64 or AArch64/ARM64)
-- **RAM:** 4GB (8GB recommended for production)
-- **OS:** Ubuntu, Debian, CentOS, Amazon Linux 2 or 2023, macOS, Windows with WSL2
+Read [Before you install](/self-hosting/methods/prerequisites). For Docker Compose you need:
 
-::: info
-Ensure you're using the **latest version of Docker Compose**. Check your Docker Compose version with `docker-compose --version` and update if needed.
+- A Linux machine (or macOS for evaluation) with **2 vCPU and 4 GB RAM** minimum, 8 GB recommended, and disk for data if the database and uploads stay local.
+- **Root or sudo access.** The installer places `prime-cli` under `/bin` and Plane under `/opt/plane`.
+- **Ports 80 and 443** free on the machine and open in your firewall or security group.
+- **Docker Engine 24+ with the Compose v2 plugin.** Check with `docker compose version`. If Docker isn't installed, run `curl -fsSL https://get.docker.com | sh` (Linux) or install Docker Desktop (macOS).
+- A **domain name whose DNS record already resolves to this machine**, for example `plane.company.com`. You can also install on an IP address for a quick trial, but built-in HTTPS only works with a domain.
+- Outbound access to `prime.plane.so`, Docker Hub, and Let's Encrypt.
+
+::: warning Production deployments
+For production, use managed PostgreSQL and S3-compatible storage rather than the bundled containers, so that a failure of this machine doesn't take your data with it. Choose **Advanced** during setup, or configure it later with `sudo prime-cli configure`. See [External services](/self-hosting/govern/database-and-storage).
 :::
 
-### Procedure
+## Install
 
-1.  `ssh` into your machine as the root user (or user with sudo access) per the norms of your hosting provider.
-2.  Run the command below:
-    ```bash
-    curl -fsSL https://prime.plane.so/install/ | sh -
-    ```
-3.  Follow the instructions on the terminal. Hit `Enter` or `Return` to continue.
-4.  Enter the domain name where you will access the Plane app in the format `domain.tld` or `subdomain.domain.tld`.
-5.  Choose one of the options below:
-    - **Express**: Plane installs with the default configurations.
-    - **Advanced**: You can customize the database, Redis, storage and other settings.
-      ::: warning
-      When self-hosting Plane for production use, it is strongly recommended to configure [external database and storage](/self-hosting/govern/database-and-storage). This ensures that your data remains secure and accessible even if the local machine crashes or encounters hardware issues. Relying solely on local storage for these components increases the risk of data loss and service disruption.
-      :::
-6.  The installation will take a few minutes to complete and you will see the message **Plane has successfully installed**. You can access the Plane application on the domain you provided during the installation.
-7.  If you've purchased a paid plan, [activate your license key](/self-hosting/manage/manage-licenses/activate-pro-and-business#activate-your-license) to unlock premium features.
+1. SSH into the machine as root, or as a user with sudo access.
 
-::: details Install Community Edition
-The Commercial edition comes with a free plan and the flexibility to upgrade to a paid plan at any point. If you still want to install the Community edition, follow the steps below:
+2. Run the installer:
 
-#### Prerequisites
+   ```bash
+   curl -fsSL https://prime.plane.so/install/ | sh -
+   ```
 
-- Docker installed and running. Choose one of the following options:
-  - **Option 1**  
-    Create an EC2 machine on AWS. It must of minimum **t3.medium/t3a.medium**. Run the below command to install docker engine.
-    ```bash
-    curl -fsSL https://get.docker.com | sh -
-    ```
-  - **Option 2**  
-    Install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-- OS with bash scripting enabled (Ubuntu, Linux AMI, macOS). Windows systems need to have [gitbash](https://git-scm.com/download/win).
-- User context used must have access to docker services. In most cases, use `sudo su` to switch as root user.
-- Use the terminal (or gitbash) window to run all the future steps.
+   The script downloads the Prime CLI for your OS and CPU architecture and runs `sudo prime-cli setup`. Optional flags skip the prompts:
 
-#### Installation
+   ```bash
+   # Non-interactive install for plane.company.com
+   curl -fsSL https://prime.plane.so/install/ | sh -s -- --domain plane.company.com --silent
 
-1.  Create a folder named `plane-selfhost` on your machine for deployment and data storage.
-    ```bash
-    mkdir plane-selfhost
-    ```
-2.  Navigate to this folder using the cd command.
-    ```bash
-    cd plane-selfhost
-    ```
-3.  Download the latest stable release.
-    ```bash
-    curl -fsSL -o setup.sh https://github.com/makeplane/plane/releases/latest/download/setup.sh
-    ```
-4.  Make the file executable.
-    ```bash
-    chmod +x setup.sh
-    ```
-5.  Run the following command:
-    ```bash
-    ./setup.sh
-    ```
-    This will prompt you with the below options.
-    ```bash
-    Select a Action you want to perform:
-       1) Install (arm64)
-       2) Start
-       3) Stop
-       4) Restart
-       5) Upgrade
-       6) View Logs
-       7) Backup Data
-       8) Exit
-    Action [2]: 1
-    ```
-6.  Enter `1` as input.
-    This will create a folder `plane-app` or `plane-app-preview` (in case of preview deployment) and will download the `docker-compose.yaml` and `plane.env` files.
-7.  Enter `8` to exit.
-8.  Set up the environment variables. You can use any text editor to edit this file. Below are the most importants keys you must refer to:
-    - `LISTEN_HTTP_PORT`: This is set to `80` by default. Make sure the port you choose to use is not preoccupied. For example, `LISTEN_HTTP_PORT=8080`
-    - `LISTEN_HTTPS_PORT`: This is set to `443` by default. Make sure the port you choose to use is not preoccupied. For example, `LISTEN_HTTPS_PORT=4430`
-    - `WEB_URL`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with LISTEN_HTTP_PORT. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
-    - `CORS_ALLOWED_ORIGINS`: This is set to `http://localhost` by default. Change this to the FQDN you plan to use along with LISTEN_HTTP_PORT. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
-9.  Run the following command to continue with the setup.
-    ```bash
-    ./setup.sh
-    ```
-10. Enter `2` as input to start the services.
-    You will something like this:  
-     ![Downloading docker images](/images/docker-compose/download-docker.png)
-    Be patient as it might take some time based on your download speed and system configuration. If all goes well, you must see something like this:
-    ![Downloading completed](/images/docker-compose/download-complete.png)
-    This is the confirmation that all images were downloaded and the services are up and running.
+   # Another proxy or load balancer terminates TLS in front of Plane
+   curl -fsSL https://prime.plane.so/install/ | sh -s -- --domain plane.company.com --behind-proxy
+   ```
 
-You have successfully self-hosted the Plane instance. Access the application by going to IP or domain you have configured it on. For example, `https://plane.example.com:8080` or `http://[IP-ADDRESS]:8080`.
+3. Follow the prompts. Press `Enter` to accept a default.
+   - **Domain:** enter `plane.company.com` (or `sub.domain.tld`, or an IP address for a trial). This becomes the URL your users open and the address the proxy requests a certificate for.
+   - **Express** or **Advanced:** Express installs with defaults (bundled PostgreSQL, Redis, RabbitMQ, and MinIO; ports 80/443; 5 MB upload limit). Advanced also asks for the listening port, maximum upload size, an external PostgreSQL URL, an external Redis URL, and S3 credentials (access key, secret key, bucket). You can change all of these later with `sudo prime-cli configure`.
 
-##### Stop server
+4. Wait for the images to pull and the services to start. The installer waits for database migrations and then prints **Plane has successfully installed**.
 
-In case you want to make changes to the environment variables in the `plane.env` file, we recommend that you stop the services before doing that.
+What the installer creates:
 
-Run the `./setup.sh` command. Enter `3` to stop the services.
+| Location               | Contents                                                                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `/bin/prime-cli`       | The Prime CLI used to manage the instance ([reference](/self-hosting/manage/prime-cli))                                     |
+| `/opt/plane/plane.env` | All configuration: domain, secrets, database and storage settings ([reference](/self-hosting/govern/environment-variables)) |
+| `/opt/plane/data/`     | Data of the bundled services (PostgreSQL, Redis, RabbitMQ, MinIO, license monitor)                                          |
+| `/opt/plane/logs/`     | Service logs                                                                                                                |
 
-If all goes well, you will see something like this:
+## Verify
 
-![Stop Services](/images/docker-compose/stopped-docker.png)
+1. Check that every service is healthy:
 
-##### Restart server
+   ```bash
+   sudo prime-cli healthcheck
+   ```
 
-In case you want to make changes to `plane.env` variables without stopping the server or noticed some abnormalities in services, you can restart the services.
+   `sudo prime-cli monitor` opens a dashboard that lists each container's status and lets you tail its logs.
 
-Run the `./setup.sh` command. Enter `4` to restart the services.
+2. Open `https://plane.company.com` (or `http://<ip>`) in a browser. You should see the sign-in screen. You can't sign in yet, because the instance has no administrator. That is the next step.
 
-If all goes well, you will see something like this:
-![Restart Services](/images/docker-compose/restart-docker.png)
-:::
+## After you install
+
+Follow **[After you install](/self-hosting/methods/after-install)**. The first item is required: open `https://plane.company.com/god-mode/` to create the instance admin. Until you do, nobody can sign in. The remaining steps set up email, authentication, your license, backups, and production hardening.
+
+## Manage the instance
+
+Use the Prime CLI ([full reference](/self-hosting/manage/prime-cli)):
+
+```bash
+sudo prime-cli start          # start all services
+sudo prime-cli stop           # stop all services
+sudo prime-cli restart        # restart, for example after editing /opt/plane/plane.env
+sudo prime-cli monitor        # service status and live logs
+sudo prime-cli configure      # change domain, ports, upload size, external DB/Redis/S3
+sudo prime-cli backup         # back up data (see Backup and restore)
+sudo prime-cli update-cli     # update the CLI itself; run this before upgrading Plane
+sudo prime-cli upgrade        # upgrade Plane to the latest release
+```
+
+Related guides: [Update Plane](/self-hosting/manage/upgrade-plane), [Backup and restore](/self-hosting/manage/backup-restore), [View logs](/self-hosting/manage/view-logs), [Custom domain](/self-hosting/govern/custom-domain), [SSL](/self-hosting/govern/configure-ssl), [External reverse proxy](/self-hosting/govern/reverse-proxy).
 
 ## Troubleshoot
 
-- [Error during Docker Compose execution](/self-hosting/troubleshoot/installation-errors#error-during-docker-compose-execution)
-- [Migrator container exited](/self-hosting/troubleshoot/installation-errors#migrator-container-exited)
+- **The installer can't download the Prime CLI.** The machine can't reach `prime.plane.so`. Check outbound access or your proxy settings, then run the `curl` command again. See [CLI errors](/self-hosting/troubleshoot/cli-errors).
+- **`Error during docker compose execution`.** You are not root or don't have sudo, or the old `docker-compose` v1 binary is installed. See [Installation errors](/self-hosting/troubleshoot/installation-errors#error-during-docker-compose-execution).
+- **The migrator container exited.** Usually an external database URL that points at `localhost`. Inside a container, `localhost` is the container itself. See [Migrator container exited](/self-hosting/troubleshoot/installation-errors#migrator-container-exited).
+- **The site loads over HTTP only, or the certificate is invalid.** The DNS record didn't resolve to this machine when the proxy requested the certificate, or ports 80/443 aren't reachable from the internet. Fix DNS or the firewall, then run `sudo prime-cli restart`. See [SSL](/self-hosting/govern/configure-ssl).
+- **Upgrading from the Community Edition?** Don't run this installer on top of an existing Community instance. Follow [Upgrade Community to Commercial](/self-hosting/upgrade-from-community), which migrates your data.
