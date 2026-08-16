@@ -21,7 +21,7 @@ pnpm check:types          # Type-check the VitePress config and theme
 pnpm check:theme-sync     # Verify docs/.vitepress/theme/plane/ is identical to makeplane/docs (THEME_SIBLING_PATH=../docs for a local checkout)
 ```
 
-**CI checks on PRs** (to `master`): Prettier formatting + VitePress build must pass.
+**CI checks on PRs** (to `master`): Prettier formatting, type-check, VitePress build, and the shared-theme sync check must pass.
 
 ## Architecture
 
