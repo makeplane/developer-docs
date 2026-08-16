@@ -1,60 +1,84 @@
 ---
-title: Deploy Plane on your infrastructure
-description: Deploy Plane on your own infrastructure with Docker, Kubernetes, or Podman. Complete self-hosting guides for open-source project management with full control and customization.
-keywords: self-host plane, plane docker, plane kubernetes, self-hosted project management, docker compose plane, kubernetes helm plane, on-premise deployment
+title: Self-host Plane
+description: Deploy Plane on your own infrastructure. Install the Commercial Edition with Docker Compose or Kubernetes, or the Airgapped Edition for isolated networks, then configure, operate, and upgrade your instance.
+keywords: self-host plane, plane docker, plane kubernetes, plane commercial edition, plane airgapped edition, self-hosted project management, docker compose plane, kubernetes helm plane, on-premise deployment
 ---
 
-# Deploy Plane on your infrastructure
+# Self-host Plane
 
-Take complete control of your project management infrastructure by deploying Plane on your own servers. Self-hosting Plane gives you full ownership of your data and the flexibility to deploy wherever you need - from a single Docker container to enterprise Kubernetes clusters.
+Run Plane on infrastructure you control, from a single Docker host to a Kubernetes cluster, with or without internet access. You keep the data, the network path, the upgrade schedule, and the identity provider.
 
-## Why self-host Plane?
+## Pick an edition, then a method
 
-**Data sovereignty and privacy**  
-Keep all your project data within your own infrastructure. Perfect for organizations with strict data residency requirements or privacy regulations.
+Self-hosted Plane ships in two editions for teams and organizations:
 
-**Complete control**  
-Customize every aspect of Plane to match your workflows. Control when and how updates are applied, and integrate with your existing tools and infrastructure.
+- **Commercial Edition** (recommended). Free for up to 12 seats per workspace. A license key unlocks Pro, Business, or Enterprise Grid.
+- **Airgapped Edition**. The same product for networks without internet access. Enterprise Grid.
 
-**Compliance and security**  
-Meet regulatory requirements like GDPR, HIPAA, SOC 2, or industry-specific standards by maintaining full control over data storage and access.
-
-**No vendor lock-in**  
-Your data remains accessible in open formats. Migrate, backup, or customize without restrictions.
-
-## Deployment methods
-
-Choose the deployment method that best fits your infrastructure and team size:
+The open-source Community Edition is documented separately under [Community Edition](/self-hosting/community/overview). See [Plane editions](/self-hosting/editions-and-versions) for a comparison.
 
 <CardGroup>
-  <Card title="Docker Compose" icon="docker" href="/self-hosting/methods/docker-compose">
-    Quick setup with minimal configuration, ideal for small to medium teams.
+  <Card title="Docker Compose" icon="docker" href="/self-hosting/methods/docker-compose" link-text="Install with the Prime CLI">
+    Recommended. One command on a single machine. About 15 minutes to a running instance. Commercial Edition.
   </Card>
-  <Card title="Kubernetes" icon="kubernetes" href="/self-hosting/methods/kubernetes">
-    Production-grade deployment using Helm for high availability and auto-scaling.
+  <Card title="Kubernetes" icon="kubernetes" href="/self-hosting/methods/kubernetes" link-text="Install with Helm">
+    Deploy with the <code>plane-enterprise</code> Helm chart for high availability, autoscaling, and managed data services. Commercial Edition.
   </Card>
 </CardGroup>
 
-[Other deployment methods](/self-hosting/methods/overview)
+<CardGroup>
+  <Card title="Airgapped Edition" icon="wifi-off" href="/self-hosting/methods/airgapped-requirements" link-text="Deploy in isolated networks">
+    Private registry, offline license files, no outbound access. On Docker or Kubernetes. Enterprise Grid.
+  </Card>
+  <Card title="All deployment methods" icon="route" href="/self-hosting/methods/overview" link-text="Choose your install">
+    Docker AIO, Swarm, Podman, Coolify, Portainer, FIPS, and a comparison of when to use which.
+  </Card>
+</CardGroup>
 
-## Configuration and governance
+## Plan the rollout
 
-Once deployed, configure your Plane instance to match your organization's needs:
+<CardGroup cols="3">
+  <Card title="Self-hosting 101" icon="book-open" href="/self-hosting/self-hosting-101">
+    What self-hosting involves, how licensing works, what your team operates, and how to plan.
+  </Card>
+  <Card title="Before you install" icon="clipboard-list" href="/self-hosting/methods/prerequisites">
+    Sizing, Docker and Kubernetes versions, ports, DNS, and network access.
+  </Card>
+  <Card title="After you install" icon="list-checks" href="/self-hosting/methods/after-install">
+    Create the instance admin, set up email and sign-in, activate your license, enable HTTPS, set up backups.
+  </Card>
+</CardGroup>
+
+## Configure and govern
 
 <CardGroup>
-  <Card title="Instance Admin and God Mode" icon="user-star" href="/self-hosting/govern/instance-admin">
-    Configure instance-wide settings, manage users, and access God Mode for advanced administrative controls.
+  <Card title="Instance admin and God Mode" icon="user-star" href="/self-hosting/govern/instance-admin">
+    Instance-wide settings, workspaces, users, and telemetry from the admin console.
   </Card>
   <Card title="Authentication" icon="key-round" href="/self-hosting/govern/authentication">
-    Set up SSO, OAuth, LDAP, or other authentication methods. Support for Google, GitHub, GitLab, and custom providers.
+    Passwords, magic links, Google and GitHub OAuth, OIDC and SAML SSO, LDAP.
   </Card>
 </CardGroup>
 
 <CardGroup>
   <Card title="Email and communication" icon="mail" href="/self-hosting/govern/communication">
-    Configure SMTP for email notifications, invitations, and alerts. Integrate with SendGrid, AWS SES, or your own mail server.
+    SMTP for invitations, notifications, and password resets, with provider examples.
   </Card>
   <Card title="External services" icon="database" href="/self-hosting/govern/database-and-storage">
-    Connect to managed databases (PostgreSQL, Redis) and cloud storage (S3, MinIO, GCS) for scalable, production-ready deployments.
+    Managed PostgreSQL, Redis, RabbitMQ, and S3-compatible storage for production.
   </Card>
 </CardGroup>
+
+## Why teams self-host Plane
+
+- **Data residency.** All work items, pages, and attachments stay on infrastructure you control, in the region your regulator or customer contract requires.
+- **Isolation.** Run in a VPC, on a private network, or with no internet access at all with the Airgapped Edition.
+- **Control.** You decide when to upgrade, which identity provider to use, and which internal systems Plane can reach.
+- **Compliance.** The Commercial and Airgapped Editions add SSO, SAML, LDAP, audit logs, and FIPS deployment options by plan.
+
+## Get help
+
+- **Troubleshoot:** [symptom-to-log map](/self-hosting/troubleshoot/overview), plus pages for [installation](/self-hosting/troubleshoot/installation-errors), [license](/self-hosting/troubleshoot/license-errors), [CLI](/self-hosting/troubleshoot/cli-errors), and [storage](/self-hosting/troubleshoot/storage-errors) errors.
+- **Commercial and Airgapped Editions:** support according to your plan. Contact us from your Prime portal account, or [talk to sales](https://plane.so/talk-to-sales) for Enterprise support and airgapped bundles.
+- **Community Edition:** [Discord](https://discord.gg/plane) for questions, [GitHub issues](https://github.com/makeplane/plane/issues) for bugs.
+- **Changelog:** [plane.so/changelog](https://plane.so/changelog).

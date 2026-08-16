@@ -8,7 +8,7 @@ keywords: self-hosting plane, plane licensing, plane editions, agpl, commercial 
 
 Self-hosting Plane means running the full application stack on infrastructure you control. This page covers what that involves, how Plane is licensed, what your team operates, and how to plan a deployment.
 
-If you're ready to deploy, jump to the [deployment scenarios on the overview](/self-hosting/overview).
+If you're ready to deploy, jump to [Choose your install](/self-hosting/methods/overview).
 
 ---
 
@@ -18,7 +18,7 @@ Self-hosting Plane means deploying Plane, the project and knowledge management p
 
 Everything user-facing runs inside your network: the web app, the API, file uploads, real-time collaboration, search indexing, and AI inference paths. You control the data, the network path users take to reach Plane, the upgrade timing, the auth provider, and the integrations Plane talks to internally.
 
-For the [Commercial Edition](/self-hosting/editions-and-versions#commercial), Plane operates the license validation server at the [Prime portal](https://prime.plane.so/licenses). The [Airgapped Edition](/self-hosting/editions-and-versions#airgapped) removes that dependency and runs entirely offline.
+For the [Commercial Edition](/self-hosting/editions-and-versions#commercial-edition), Plane operates the license validation server at the [Prime portal](https://prime.plane.so/licenses). The [Airgapped Edition](/self-hosting/editions-and-versions#airgapped-edition) removes that dependency and runs entirely offline.
 
 For production deployments, you can also point Plane at managed services for the database and storage layers (RDS, Cloud SQL, S3, GCS, and similar) instead of running them yourself. See [Plane Architecture](/self-hosting/plane-architecture) for the full system anatomy and [External services](/self-hosting/govern/database-and-storage) for the managed-service options.
 
@@ -49,7 +49,7 @@ For production deployments, you can also point Plane at managed services for the
 
 Plane's licensing has two layers, and confusing them is the most common mistake new self-hosters make.
 
-**The edition is the codebase you run.** There are three self-hosted editions: [Community](/self-hosting/editions-and-versions#community), [Commercial](/self-hosting/editions-and-versions#commercial), and [Airgapped](/self-hosting/editions-and-versions#airgapped). Each has its own release cycle. They are separate codebases, not feature toggles on the same binary.
+**The edition is the codebase you run.** There are three self-hosted editions: [Community](/self-hosting/editions-and-versions#community-edition), [Commercial](/self-hosting/editions-and-versions#commercial-edition), and [Airgapped](/self-hosting/editions-and-versions#airgapped-edition). Each has its own release cycle. They are separate codebases, not feature toggles on the same binary.
 
 **The plan is the set of features your license key unlocks** on the Commercial and Airgapped editions. Plans are Free, Pro, Business, and Enterprise Grid. You activate a plan by pasting a license key from the [Prime portal](https://prime.plane.so/licenses) into your workspace settings.
 
@@ -108,7 +108,7 @@ Self-hosting Plane fits the following scenarios.
 
 ## 5. What you're running
 
-Plane is a multi-service application: eight application services plus a data layer.
+Plane is a multi-service application: a core set of application services plus a data layer. The Commercial and Airgapped Editions add a few more on top of the core.
 
 ### Application services
 
@@ -120,6 +120,9 @@ Plane is a multi-service application: eight application services plus a data lay
 - **Worker.** Celery background workers for async jobs (notifications, webhooks, exports, AI).
 - **Beat.** Celery scheduler that triggers periodic tasks.
 - **Migrator.** One-shot DB migration job that runs on each upgrade.
+- **Proxy.** Caddy, in front of everything. It routes requests, terminates TLS, and requests certificates.
+
+Commercial and Airgapped Editions also run **Monitor** (license validation, feature flags, health checks), **Silo** (integrations engine: GitHub, GitLab, Slack, importers), consumers for automations, webhooks, and outbox events, a background export worker, an optional intake **Email** service, and the **Plane AI** services when enabled. See [Plane architecture](/self-hosting/plane-architecture).
 
 ### Data layer
 
@@ -137,7 +140,7 @@ The full breakdown of versions, ports, resource recommendations, and dependency 
 
 ### Skills your operators need
 
-- **Container operations.** Docker basics for [Docker Compose](/self-hosting/methods/docker-compose), Kubernetes and Helm if you go [HA](/self-hosting/methods/kubernetes).
+- **Container operations.** Docker basics for [Docker Compose](/self-hosting/methods/docker-compose), Kubernetes and Helm if you go [HA](/self-hosting/govern/high-availability).
 - **Postgres operations.** Backups, restores, upgrades, basic tuning.
 - **TLS and DNS.** [Custom domains](/self-hosting/govern/custom-domain), [SSL certificates](/self-hosting/govern/configure-ssl), [reverse proxy](/self-hosting/govern/reverse-proxy) configuration.
 - **Identity provider setup.** [SAML](/self-hosting/govern/saml-sso), [OIDC](/self-hosting/govern/oidc-sso), [LDAP](/self-hosting/govern/ldap), or OAuth, depending on what your org uses.
@@ -204,7 +207,7 @@ Skipping upgrades for 6+ months means bigger upgrade-time risk, more breaking ch
 
 Patterns we've seen repeated across self-hosted deployments.
 
-**Anti-pattern: Postgres in the same Docker container as Plane in production.** Fine for [Docker AIO](/self-hosting/methods/docker-aio) evaluations. In production, you can't snapshot the database independently, you can't scale it, and a container restart is a database restart. Use a managed Postgres or run it in a separate, properly backed-up container. [External services](/self-hosting/govern/database-and-storage) walks through both options.
+**Anti-pattern: Postgres on the same machine as Plane in production.** Fine for evaluations. In production, you can't snapshot the database independently, you can't scale it, and a host failure takes the data with it. Use a managed Postgres or at least a separate, properly backed-up server. [External services](/self-hosting/govern/database-and-storage) walks through both options.
 
 **Anti-pattern: skipping backups for the first three months.** Backups should be running before the first real user logs in. See [Backup and restore](/self-hosting/manage/backup-restore).
 
@@ -234,16 +237,16 @@ Before you go to production, have a clear answer to each of these:
 4. **Upgrade cadence.** Monthly, quarterly, or another rhythm. See [Upgrade Plane](/self-hosting/manage/upgrade-plane).
 5. **Escalation path.** Internal on-call rotation and the support tier you escalate to externally.
 
-Once these are settled, head to the [Self-hosting overview](/self-hosting/overview) and pick a deployment scenario.
+Once these are settled, head to [Choose your install](/self-hosting/methods/overview) and pick a deployment method.
 
 ---
 
 ## 11. Next steps
 
-**Try Plane self-hosted.** [Docker AIO](/self-hosting/methods/docker-aio) gives you a single container with embedded services in about 10 minutes (POC only).
+**Try Plane self-hosted.** [Docker Compose](/self-hosting/methods/docker-compose) gives you a full Commercial Edition instance on one machine in about 15 minutes, on the Free plan.
 
-**Plan a production deployment.** Read [Plane Editions](/self-hosting/editions-and-versions) to pick your edition. Read [Plane Architecture](/self-hosting/plane-architecture) to plan capacity and network. Then pick a [deployment method](/self-hosting/methods/overview).
+**Plan a production deployment.** Read [Plane editions](/self-hosting/editions-and-versions) to pick your edition and [Plane architecture](/self-hosting/plane-architecture) to plan capacity and network. Then go through [Before you install](/self-hosting/methods/prerequisites) and pick a method on [Choose your install](/self-hosting/methods/overview).
 
 **Talk to a human.** [Talk to sales](https://plane.so/talk-to-sales) for pricing, contracts, professional services, and airgapped. [Community Discord](https://discord.gg/plane) for open questions. [GitHub issues](https://github.com/makeplane/plane/issues) for bugs and feature requests.
 
-[**Continue to: Self-hosting overview →**](/self-hosting/overview)
+[**Continue to: Choose your install →**](/self-hosting/methods/overview)

@@ -1,86 +1,67 @@
 ---
-title: Understanding Plane's editions
-description: Compare Plane Community, Pro, Business, and Enterprise editions. Understand features, pricing tiers, and version differences for self-hosted deployments.
-keywords: plane editions, plane community edition, plane pro, plane enterprise, plane business, self-hosting comparison, plane pricing tiers
+title: Plane editions
+description: Compare Plane's self-hosted editions. Commercial, Airgapped, and Community. How each is installed, licensed, and versioned, and which plans it supports.
+keywords: plane editions, plane commercial edition, plane airgapped edition, plane community edition, plane pro, plane business, enterprise grid, self-hosting comparison, plane versions
 ---
 
-# Understanding Plane's editions
+# Plane editions
 
-Plane comes in four editions by how its deployed. Our Cloud is our only hosted edition as of 2025. Additionally, we offer three unique self-hosted editions tailored to meet two sets of unique needs—the open-source Community Edition, the recommended Commercial Edition, and the Airgapped Edition.
+Plane is available as [Plane Cloud](https://app.plane.so) and as three self-hosted editions. Two terms matter when you self-host:
 
-## About our self-hosted editions
+- **The edition is the codebase you run:** Commercial, Airgapped, or Community. Each has its own release cycle and installer.
+- **The plan is the set of features your license unlocks:** Free, Pro, Business, or Enterprise Grid, on the Commercial and Airgapped Editions.
 
-### Community
+## At a glance
 
-Built with transparency in mind, the Community Edition,
+|                         | **Commercial Edition** (recommended)                                                                                                                                                                                                             | **Airgapped Edition**                                                                                                                                                                 | Community Edition                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Built for               | Teams and organizations that want full parity with Plane Cloud on their own infrastructure                                                                                                                                                       | Organizations that must run in isolated networks with no outbound internet access                                                                                                     | Developers and teams who want the open-source core and don't need paid features                                                     |
+| Source                  | Closed source                                                                                                                                                                                                                                    | Closed source (same codebase as Commercial)                                                                                                                                           | Open source, [AGPL v3.0](https://github.com/makeplane/plane/blob/preview/LICENSE.txt)                                               |
+| Plans                   | Free (12 seats per workspace) out of the box. Pro, Business, or Enterprise Grid with a license key                                                                                                                                               | Enterprise Grid. Licenses are activated from files instead of keys, instance-wide or per workspace for Pro/Business                                                                   | Free. No license key, no seat cap                                                                                                   |
+| Features                | Full parity with Plane Cloud. Paid features unlock per plan                                                                                                                                                                                      | Same as Commercial                                                                                                                                                                    | Parity with the Cloud Free tier                                                                                                     |
+| Installed with          | [Prime CLI on Docker Compose](/self-hosting/methods/docker-compose), [Helm chart `plane-enterprise`](/self-hosting/methods/kubernetes), plus [AIO, Swarm, Podman, Coolify, Portainer](/self-hosting/methods/overview#other-docker-based-methods) | [Bundle + private registry on Docker](/self-hosting/methods/airgapped-edition), [Helm chart `plane-enterprise` in airgapped mode](/self-hosting/methods/airgapped-edition-kubernetes) | [`setup.sh` on Docker Compose](/self-hosting/community/docker-compose), [Helm chart `plane-ce`](/self-hosting/community/kubernetes) |
+| Network access          | Outbound to `prime.plane.so` for license validation and feature flags, Docker Hub for images                                                                                                                                                     | None required                                                                                                                                                                         | Outbound to GitHub and Docker Hub for installs and upgrades                                                                         |
+| Current version         | %%COMMERCIAL_VERSION%% (Helm chart %%HELM_EE_VERSION%%)                                                                                                                                                                                          | %%COMMERCIAL_VERSION%% (same series as Commercial)                                                                                                                                    | %%CE_VERSION%% (Helm chart %%HELM_CE_VERSION%%)                                                                                     |
+| Upgrades                | `sudo prime-cli upgrade` or `helm upgrade`. See [Update Plane](/self-hosting/manage/upgrade-plane)                                                                                                                                               | New bundle and re-mirrored images. See [Update Airgapped](/self-hosting/manage/update-plane/airgapped-edition/update-airgapped-docker)                                                | `./setup.sh` → Upgrade, or `helm upgrade`. See [Community → Manage](/self-hosting/community/manage)                                 |
+| Support                 | Plane support according to your plan                                                                                                                                                                                                             | Enterprise support                                                                                                                                                                    | Community: [Discord](https://discord.gg/plane), [GitHub issues](https://github.com/makeplane/plane/issues)                          |
+| Moving between editions | Community → Commercial: [migrate your data](/self-hosting/upgrade-from-community)                                                                                                                                                                | Community → Airgapped: [migrate your data](/self-hosting/manage/community-to-airgapped)                                                                                               | To unlock paid features, move to Commercial                                                                                         |
 
-- Is governed by the AGPL v3.0 license, ensuring free and open usage
+## Commercial Edition <EditionBadge edition="commercial" />
 
-- Allows contribution to the repo by way of modifications and customizations
+The edition we recommend for teams. It is the same application that runs Plane Cloud, packaged for your infrastructure.
 
-- Has no code dependencies or restrictions on and from the Commercial Edition
+- **Free plan included.** 12 free seats per workspace, so you can run it in production at small scale without buying anything.
+- **Upgrade in place.** A license key from the [Prime portal](https://prime.plane.so/licenses) unlocks Pro or Business per workspace, or Enterprise Grid for the whole instance. The upgrade flow counts the seats you need from the users with paid roles in your workspace.
+- **Full feature parity with Cloud**, including governance, compliance, and security features (SSO, SAML, LDAP, audit logs, and more, by plan).
+- **Managed with the Prime CLI** on Docker (`sudo prime-cli`), or with Helm on Kubernetes.
 
-It’s ideal for those who want to try Plane first, audit the code for security, and see how each one of services works with the others. Several tens of thousands of uses have used it and a significant number have contributed to it.
+Install it: [Choose your install](/self-hosting/methods/overview).
 
-The Community Edition is at par with the Free tier of the Cloud edition in its feature availability. To upgrade to paid plans, you must first switch to the Commercial Edition.
+## Airgapped Edition <EditionBadge edition="airgapped" plan="enterprise" />
 
-### Commercial
+The Commercial Edition adapted for environments that prohibit outbound network communication: sovereign clouds, classified networks, regulated on-premise data centers.
 
-Designed for teams that want governance, compliance, and privacy controls, the Commercial Edition is ideal for teams that want to try Plane with an intent to unlock advanced work management and security features.
+- **Complete isolation.** No calls to `prime.plane.so` or any external service. Licenses are activated by uploading a license file, and feature flags ship with the release.
+- **Full feature parity** with the Commercial Edition.
+- **Images from your registry.** You mirror Plane's images into a private registry ([Clone Docker images](/self-hosting/methods/clone-docker-images)) and install from downloaded files on Docker, or with the `plane-enterprise` Helm chart in airgapped mode.
+- **Available with Enterprise Grid.** [Talk to sales](https://plane.so/talk-to-sales) to get the download URL and your license file.
 
-This edition also comes with a Free tier, but also lets you upgrade seamlessly to all our paid plans. It offers,
+Install it: [Airgapped overview and requirements](/self-hosting/methods/airgapped-requirements).
 
-- Full feature parity with our Cloud
+## Community Edition <EditionBadge edition="community" />
 
-- A bundle of 12 Free user seats per workspace so there are no surprises when you upgrade
+The open-source edition, licensed under AGPL v3.0, with the same core project and knowledge management features as the Cloud Free tier and no user cap. Use it to audit the code, contribute, or run Plane at any scale without paid features. It has its own installer (`setup.sh`), Helm chart (`plane-ce`), version series, and guides: [Community Edition](/self-hosting/community/overview).
 
-- An intuitive upgrade flow that automatically calculates the number of seats you need by the number of users with paid roles in your workspace, so you never have to guess
+To use Pro, Business, or Enterprise Grid features on an existing Community instance, [migrate to the Commercial Edition](/self-hosting/upgrade-from-community).
 
-### Airgapped
+## Why separate editions
 
-Built for organizations with strict security and compliance requirements, the Airgapped Commercial Edition provides the same powerful features as the Commercial Edition but operates in completely isolated environments without internet connectivity.
+We keep a clean separation rather than an open-core codebase with hidden switches. The Community Edition is fully open, with no restrictions beyond AGPL v3.0. The Commercial and Airgapped Editions are closed source so that we can ship enterprise features and support quickly. There is no code in the Community Edition that limits what you can modify, and no forced migration between editions.
 
-The Airgapped Edition offers:
+## Versions
 
-- **Complete isolation**
-  Operates entirely within your network perimeter with no external dependencies or outbound connections.
-
-- **Full feature parity**
-  Includes all features available in the standard Commercial Edition, including advanced work management, security controls, and governance tools
-
-- **Version updates**
-  Updates from your own docker registry.
-
-- **Self-contained architecture**
-  All services, dependencies, and resources are bundled for deployment in restricted networks
-
-- **Compliance-ready**
-  Designed to meet requirements for environments that prohibit external network communication
-
-## Why we separate editions
-
-We’ve designed Plane’s editions to serve diverse user needs while staying true to the ethos of open source.
-
-- The **Community Edition** is completely open-source, with no restrictions beyond those outlined in the [AGPL v3.0 license](https://github.com/makeplane/plane/blob/preview/LICENSE.txt). This is the edition that is now ranking at #1 in our space on GitHub.
-
-- The **Commercial Edition** remains closed-source to offer enterprise-grade features and seamless scalability for businesses.
-
-- The **Airgapped Edition** extends the Commercial Edition's capabilities to isolated environments, ensuring organizations with strict security requirements can still benefit from Plane's full feature set.
-
-Unlike some open-core companies, we’ve adopted a clean separation to keep things simple and transparent. There’s no hidden code that limits modifications on the Community Edition, and no forced migrations from one edition to another.
-
-## Differences in versions between editions
-
-Each of our editions is built on a distinct codebase. Versions with each differ for how we ship new code per our three separate release cycles. This distinction allows us to
-
-- Use the Cloud as a test bed for new features before they come to our self-hosted editions
-
-- Innovate quickly on a more controlled Commercial Edition
-
-- Be intentful and deliberate with changes to the Community Edition
-
-For both the Commercial, Airgapped, and Community Editions, version updates are in your control. Regular updates ensure you’re benefiting from the latest features and improvements. See [Update Plane](/self-hosting/manage/upgrade-plane) for how to upgrade your versions.
+Each edition is built from a separate codebase with its own release cycle, so version numbers are not comparable across editions. The Commercial and Airgapped Editions are on the %%COMMERCIAL_VERSION%% series. The Community Edition is on %%CE_VERSION%%. New features land in Plane Cloud first, then in Commercial and Airgapped, then in Community. See [Versions and releases](/self-hosting/versions) for where to find release numbers and how Helm chart versions map to application versions, and [Update Plane](/self-hosting/manage/upgrade-plane) for how to upgrade.
 
 ## Changelog
 
-We maintain a detailed changelog for all editions. [Check it out](https://plane.so/changelog) and bookmark it to stay informed about the latest features, bug fixes, and improvements by edition.
+The changelog for every edition is at [plane.so/changelog](https://plane.so/changelog).
