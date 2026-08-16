@@ -4,7 +4,7 @@ description: Enable Plane AI on your self-hosted instance. Set up a dedicated da
 keywords: plane ai setup, self-hosted ai, llm api key, openai, anthropic, opensearch, enable plane ai
 ---
 
-# Configure Plane AI <Badge type="info" text="Commercial Edition" />
+# Configure Plane AI <EditionBadge edition="commercial" />
 
 Plane AI brings AI-powered features to your workspace, including natural language chat, duplicate detection, and search across work items, pages, and projects. This guide walks you through configuring Plane AI on your self-hosted instance.
 
@@ -208,7 +208,7 @@ services:
     enabled: true
 ```
 
-This activates the Plane AI API, worker, beat-worker, and migrator workloads. Configure replicas and resource limits through the [Plane AI values block](/self-hosting/methods/kubernetes#plane-ai-deployment).
+This activates the Plane AI API, worker, beat-worker, and migrator workloads. Configure replicas and resource limits through the [Plane AI values block](/self-hosting/methods/kubernetes-values#plane-ai-deployment).
 :::
 
 ## Optional configuration

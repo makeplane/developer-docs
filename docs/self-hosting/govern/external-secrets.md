@@ -64,7 +64,7 @@ This guide explains how to integrate Plane with external secret management solut
    | RABBITMQ_DEFAULT_USER | plane    |
    | RABBITMQ_DEFAULT_PASS | plane123 |
 
-   Follow this pattern to manage all the [environment variables](/self-hosting/methods/kubernetes#external-secrets-config) in AWS Secrets Manager.
+   Follow this pattern to manage all the [environment variables](/self-hosting/methods/kubernetes-values#external-secrets-config) in AWS Secrets Manager.
 
 8. Create a Kubernetes secret containing AWS credentials in your application namespace:
 
@@ -125,7 +125,7 @@ This guide explains how to integrate Plane with external secret management solut
             key: prod/secrets/rabbitmq
     ```
 
-Make sure to set all [environment variables](/self-hosting/methods/kubernetes#external-secrets-config) in the AWS Secrets Manager, and then access them via ExternalSecret resources in your Kubernetes cluster.
+Make sure to set all [environment variables](/self-hosting/methods/kubernetes-values#external-secrets-config) in the AWS Secrets Manager, and then access them via ExternalSecret resources in your Kubernetes cluster.
 
 ## HashiCorp Vault
 
@@ -140,7 +140,7 @@ Make sure to set all [environment variables](/self-hosting/methods/kubernetes#ex
    | RABBITMQ_DEFAULT_USER | plane    |
    | RABBITMQ_DEFAULT_PASS | plane123 |
 
-   Follow this pattern to manage all the other [environment variables](/self-hosting/methods/kubernetes#external-secrets-config) in the Vault.
+   Follow this pattern to manage all the other [environment variables](/self-hosting/methods/kubernetes-values#external-secrets-config) in the Vault.
 
 4. Create a Kubernetes secret containing your Vault token in your application namespace:
 

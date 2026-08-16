@@ -4,7 +4,7 @@ description: How to deploy Plane Commercial Edition on Kubernetes with high avai
 keywords: plane high availability, kubernetes ha, multi-az deployment, plane-enterprise helm chart, karpenter, pod disruption budget, hpa, self-hosting, plane kubernetes
 ---
 
-# High Availability on Kubernetes <Badge type="info" text="Commercial Edition" />
+# High Availability on Kubernetes <EditionBadge edition="commercial" />
 
 This guide covers what high availability means, how the `plane-enterprise` Helm chart workloads behave under failure, and exactly what to configure so your deployment survives the loss of a single availability zone or node without manual recovery. The setup is cloud-agnostic. If you're deploying on AWS with Karpenter, there's a dedicated section for you.
 
@@ -632,7 +632,7 @@ The following capabilities aren't natively provided by the chart and need to be 
 A minimal example that disables every local stateful service and gives each Tier-1 workload three replicas with AZ anti-affinity. Adapt names to your release.
 
 ```yaml
-planeVersion: v2.6.3
+planeVersion: %%COMMERCIAL_VERSION%%
 
 license:
   licenseServer: https://prime.plane.so
