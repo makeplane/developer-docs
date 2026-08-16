@@ -119,12 +119,30 @@
     {
       "source": "/dev-tools/mcp-server-claude-code",
       "destination": "/dev-tools/mcp-server#claude-code"
+    },
+    {
+      "source": "/self-hosting/methods/one-click",
+      "destination": "/self-hosting/methods/overview"
+    },
+    {
+      "source": "/self-hosting/methods/install-methods-commercial/docker-compose",
+      "destination": "/self-hosting/methods/docker-compose"
+    },
+    {
+      "source": "/self-hosting/methods/install-methods-commercial/kubernetes",
+      "destination": "/self-hosting/methods/kubernetes"
     }
   ],
   "rewrites": [
     {
       "source": "/:path*",
-      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
       "destination": "/:path*.md"
     }
   ]
