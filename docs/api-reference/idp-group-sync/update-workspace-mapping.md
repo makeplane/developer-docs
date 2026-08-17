@@ -14,7 +14,7 @@ keywords: plane, plane api, rest api, api integration, idp group sync, update wo
 <div class="api-two-column">
 <div class="api-left">
 
-Update an existing IdP group → workspace role mapping. Supports partial updates.
+Update an existing IdP group → workspace role mapping. Supports partial updates. An empty request body returns `400` with `{"error": "Request body cannot be empty."}`.
 
 <div class="params-section">
 

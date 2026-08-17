@@ -1,22 +1,24 @@
 ---
-title: Update project group mapping
-description: Update a project group mapping via Plane API. HTTP request format, parameters, scopes, and example responses for update project group mapping.
-keywords: plane, plane api, rest api, api integration, idp group sync, update project group mapping
+title: Update project group mapping by key
+description: Update a project group mapping by project identifier and IdP group name via Plane API. HTTP request format, parameters, scopes, and example responses.
+keywords: plane, plane api, rest api, api integration, idp group sync, update project group mapping by key
 ---
 
-# Update project group mapping
+# Update project group mapping by key
 
 <div class="api-endpoint-badge">
   <span class="method patch">PATCH</span>
-  <span class="path">/api/v1/workspaces/{workspace_slug}/group-sync/project-mappings/{mapping_id}/</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/group-sync/project-mappings/{project_key}/{idp_group_name}/</span>
 </div>
 
 <div class="api-two-column">
 <div class="api-left">
 
-Update an existing IdP group → project mapping. Supports partial updates. An empty request body returns `400` with `{"error": "Request body cannot be empty."}`.
+Update an existing IdP group → project mapping addressed by its project identifier and IdP group name instead of the mapping ID. Because a project can have multiple mappings (one per IdP group), both keys are required to identify the target. Supports partial updates.
 
-To address a mapping by its project identifier and IdP group name instead of the mapping ID, see [Update project group mapping by key](/api-reference/idp-group-sync/update-project-mapping-by-key).
+Only project-scoped mappings can be addressed this way. Mappings with `all_projects: true` have no project identifier — update those by mapping ID with [Update project group mapping](/api-reference/idp-group-sync/update-project-mapping).
+
+Returns `404` when no project with the given identifier exists or the project has no mapping for the given IdP group name. An empty request body returns `400` with `{"error": "Request body cannot be empty."}`.
 
 <div class="params-section">
 
@@ -30,9 +32,15 @@ The workspace_slug represents the unique workspace identifier for a workspace in
 
 </ApiParam>
 
-<ApiParam name="mapping_id" type="string" :required="true">
+<ApiParam name="project_key" type="string" :required="true">
 
-The unique identifier of the project group mapping.
+The project identifier (e.g. `ENG`). Case-insensitive — the value is matched against the uppercase project identifier.
+
+</ApiParam>
+
+<ApiParam name="idp_group_name" type="string" :required="true">
+
+The name of the IdP group the mapping belongs to. Matched exactly.
 
 </ApiParam>
 
@@ -84,12 +92,12 @@ When `true`, maps the group to all projects in the workspace. Mutually exclusive
 
 <div class="api-right">
 
-<CodePanel title="Update project group mapping" :languages="['cURL', 'Python', 'JavaScript']">
+<CodePanel title="Update project group mapping by key" :languages="['cURL', 'Python', 'JavaScript']">
 <template #curl>
 
 ```bash
 curl -X PATCH \
-  "https://api.plane.so/api/v1/workspaces/my-workspace/group-sync/project-mappings/661f9511-f30c-52e5-b827-557766551111/" \
+  "https://api.plane.so/api/v1/workspaces/my-workspace/group-sync/project-mappings/ENG/engineering/" \
   -H "X-API-Key: $PLANE_API_KEY" \
   # Or use -H "Authorization: Bearer $PLANE_OAUTH_TOKEN" \
   -H "Content-Type: application/json" \
@@ -105,7 +113,7 @@ curl -X PATCH \
 import requests
 
 response = requests.patch(
-    "https://api.plane.so/api/v1/workspaces/my-workspace/group-sync/project-mappings/661f9511-f30c-52e5-b827-557766551111/",
+    "https://api.plane.so/api/v1/workspaces/my-workspace/group-sync/project-mappings/ENG/engineering/",
     headers={"X-API-Key": "your-api-key"},
     json={"role": "admin"}
 )
@@ -117,7 +125,7 @@ print(response.json())
 
 ```javascript
 const response = await fetch(
-  "https://api.plane.so/api/v1/workspaces/my-workspace/group-sync/project-mappings/661f9511-f30c-52e5-b827-557766551111/",
+  "https://api.plane.so/api/v1/workspaces/my-workspace/group-sync/project-mappings/ENG/engineering/",
   {
     method: "PATCH",
     headers: {
