@@ -82,6 +82,7 @@ Consider these alternatives:
    ```bash
    uuidgen
    ```
+
    :::
 
    **Update image references** in `docker-compose.yml` to point to your private registry:
