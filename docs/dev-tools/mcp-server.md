@@ -101,8 +101,8 @@ header; update existing configs.
 
 #### Get a token
 
-Create a personal access token under **Profile settings → Personal access tokens** and copy it when shown. For
-automations, you can instead create a workspace access token under **Workspace settings → Access tokens**.
+Create a personal access token under **Profile Settings → Personal Access Tokens** and copy it when shown. For
+automations, you can instead create a workspace access token under **Workspace Settings → Access Tokens**.
 
 #### Find your workspace slug
 
