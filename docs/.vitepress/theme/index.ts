@@ -18,6 +18,7 @@ import Card from "./components/Card.vue";
 import CardGroup from "./components/CardGroup.vue";
 import Tags from "./components/Tags.vue";
 import CookieConsent from "./components/CookieConsent.vue";
+import ApiVersionSwitcher from "./components/ApiVersionSwitcher.vue";
 import PlaneLayout from "./Layout.vue";
 
 const PLANE_FOOTER_BG = "https://media.docs.plane.so/logo/og-docs.webp";
@@ -27,8 +28,25 @@ function updateLayout() {
   if (typeof document === "undefined") return;
 
   const path = window.location.pathname;
-  const isApiPage =
-    path.includes("/api-reference/") && !path.endsWith("/introduction") && !path.endsWith("/introduction.html");
+  // Prose pages under /api-reference/ (the introductions and the v2 concept
+  // guides) keep the normal doc layout; only endpoint pages go wide.
+  const PROSE_PAGES = [
+    "introduction",
+    "authentication",
+    "pagination",
+    "filtering-and-ordering",
+    "expanding-relations",
+    "errors",
+    "work-item-type-modes",
+    "migrating-from-v1",
+  ];
+  const slug =
+    path
+      .replace(/\.html$/, "")
+      .replace(/\/$/, "")
+      .split("/")
+      .pop() ?? "";
+  const isApiPage = path.includes("/api-reference/") && !PROSE_PAGES.includes(slug);
 
   const vpDoc = document.querySelector(".VPDoc");
   if (vpDoc) {
@@ -104,6 +122,10 @@ export default {
   Layout() {
     return h(PlaneLayout, null, {
       "layout-bottom": () => h(CookieConsent),
+      // Renders above the sidebar nav; the component hides itself outside
+      // /api-reference/. Switching version navigates to that version's entry
+      // page, which swaps the whole sidebar tree via the path-prefix config.
+      "sidebar-nav-before": () => h(ApiVersionSwitcher),
     });
   },
   enhanceApp(ctx) {
