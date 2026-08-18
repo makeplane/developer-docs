@@ -6,46 +6,128 @@ keywords: plane, plane api, rest api, collection pages, list pages, page filters
 
 # List collection pages
 
-<div class="api-endpoint-badge"><span class="method get">GET</span><span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/pages/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method get">GET</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/pages/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
 Returns a paginated branch of visible pages. By default, it returns the collection's root pages.
 Pass `next_cursor` back as `cursor` to continue until `next_page_results` is `false`.
 
+<div class="params-section">
+
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace slug.</ApiParam>
-<ApiParam name="collection_id" type="uuid" :required="true">The collection ID.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace slug.
+
+</ApiParam>
+<ApiParam name="collection_id" type="uuid" :required="true">
+
+The collection ID.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Query Parameters
 
-<ApiParam name="parent_id" type="uuid" :required="false">Return direct children of this page.</ApiParam>
-<ApiParam name="search" type="string" :required="false">Case-insensitive page-name search.</ApiParam>
-<ApiParam name="created_by" type="string" :required="false">Comma-separated creator IDs.</ApiParam>
-<ApiParam name="favorites" type="boolean" :required="false">Filter by the current user's favorite status.</ApiParam>
-<ApiParam name="labels" type="string" :required="false">Comma-separated label IDs.</ApiParam>
-<ApiParam name="created_at__gte" type="date" :required="false">Created on or after this date.</ApiParam>
-<ApiParam name="created_at__lte" type="date" :required="false">Created on or before this date.</ApiParam>
-<ApiParam name="owned_by_id" type="uuid" :required="false">Filter by owner.</ApiParam>
-<ApiParam name="owned_by_id__in" type="string" :required="false">Comma-separated owner IDs.</ApiParam>
-<ApiParam name="parent_id__in" type="string" :required="false">Comma-separated parent IDs.</ApiParam>
-<ApiParam name="per_page" type="integer" :required="false">Results per page. Defaults to 50; maximum 100.</ApiParam>
-<ApiParam name="cursor" type="string" :required="false">Cursor returned by a previous page.</ApiParam>
+<div class="params-list">
 
-### OAuth scope
+<ApiParam name="parent_id" type="uuid" :required="false">
+
+Return direct children of this page.
+
+</ApiParam>
+<ApiParam name="search" type="string" :required="false">
+
+Case-insensitive page-name search.
+
+</ApiParam>
+<ApiParam name="created_by" type="string" :required="false">
+
+Comma-separated creator IDs.
+
+</ApiParam>
+<ApiParam name="favorites" type="boolean" :required="false">
+
+Filter by the current user's favorite status.
+
+</ApiParam>
+<ApiParam name="labels" type="string" :required="false">
+
+Comma-separated label IDs.
+
+</ApiParam>
+<ApiParam name="created_at__gte" type="date" :required="false">
+
+Created on or after this date.
+
+</ApiParam>
+<ApiParam name="created_at__lte" type="date" :required="false">
+
+Created on or before this date.
+
+</ApiParam>
+<ApiParam name="owned_by_id" type="uuid" :required="false">
+
+Filter by owner.
+
+</ApiParam>
+<ApiParam name="owned_by_id__in" type="string" :required="false">
+
+Comma-separated owner IDs.
+
+</ApiParam>
+<ApiParam name="parent_id__in" type="string" :required="false">
+
+Comma-separated parent IDs.
+
+</ApiParam>
+<ApiParam name="per_page" type="integer" :required="false">
+
+Results per page. Defaults to 50; maximum 100.
+
+</ApiParam>
+<ApiParam name="cursor" type="string" :required="false">
+
+Cursor returned by a previous page.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
+### Scopes
 
 `read` or `wiki.pages:read`
 
-</div><div class="api-right">
-<CodePanel title="List collection pages" :languages="['cURL', 'Python', 'JavaScript']"><template #curl>
+</div>
+
+</div>
+
+<div class="api-right">
+<CodePanel title="List collection pages" :languages="['cURL', 'Python', 'JavaScript']">
+<template #curl>
 
 ```bash
 curl "https://api.plane.so/api/v1/workspaces/my-workspace/collections/collection-uuid/pages/?search=API&per_page=50" \
   -H "X-API-Key: $PLANE_API_KEY"
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -54,7 +136,8 @@ response = requests.get(url, headers={"X-API-Key": "your-api-key"}, params={"sea
 print(response.json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const url =
@@ -63,7 +146,8 @@ const response = await fetch(url, { headers: { "X-API-Key": "your-api-key" } });
 console.log(await response.json());
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 <ResponsePanel status="200">
 
 ```json
@@ -105,4 +189,8 @@ console.log(await response.json());
 }
 ```
 
-</ResponsePanel></div></div>
+</ResponsePanel>
+
+</div>
+
+</div>

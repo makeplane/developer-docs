@@ -78,7 +78,12 @@ Pages allow you to create and manage documentation at both workspace and project
   "name": "Getting Started",
   "description_html": "<h1>Welcome</h1><p>This is a getting started guide.</p>",
   "created_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
-  "updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430"
+  "updated_by": "16c61a3a-512a-48ac-b0be-b6b46fe6f430",
+  "parent_id": null,
+  "collection_id": "0a8a3e6a-3c32-49c7-bbb5-b7a8e32c2f10",
+  "page_collection_id": "1d9b4f7b-56e8-4c63-9ff4-e24b508c162d",
+  "archived_at": null,
+  "is_locked": false
 }
 ```
 

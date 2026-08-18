@@ -6,30 +6,57 @@ keywords: plane, plane api, rest api, collections, retrieve collection
 
 # Retrieve a collection
 
-<div class="api-endpoint-badge"><span class="method get">GET</span><span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method get">GET</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
 Returns a collection if the authenticated user can view it. An inaccessible private collection returns `404 Not Found`.
 
+<div class="params-section">
+
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace slug.</ApiParam>
-<ApiParam name="collection_id" type="uuid" :required="true">The collection ID.</ApiParam>
+<div class="params-list">
 
-### OAuth scope
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace slug.
+
+</ApiParam>
+<ApiParam name="collection_id" type="uuid" :required="true">
+
+The collection ID.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
+### Scopes
 
 `read` or `wiki.pages:read`
 
-</div><div class="api-right">
-<CodePanel title="Retrieve a collection" :languages="['cURL', 'Python', 'JavaScript']"><template #curl>
+</div>
+
+</div>
+
+<div class="api-right">
+<CodePanel title="Retrieve a collection" :languages="['cURL', 'Python', 'JavaScript']">
+<template #curl>
 
 ```bash
 curl "https://api.plane.so/api/v1/workspaces/my-workspace/collections/0a8a3e6a-3c32-49c7-bbb5-b7a8e32c2f10/" \
   -H "X-API-Key: $PLANE_API_KEY"
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -37,7 +64,8 @@ url = "https://api.plane.so/api/v1/workspaces/my-workspace/collections/0a8a3e6a-
 print(requests.get(url, headers={"X-API-Key": "your-api-key"}).json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const url = "https://api.plane.so/api/v1/workspaces/my-workspace/collections/0a8a3e6a-3c32-49c7-bbb5-b7a8e32c2f10/";
@@ -45,7 +73,8 @@ const response = await fetch(url, { headers: { "X-API-Key": "your-api-key" } });
 console.log(await response.json());
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 <ResponsePanel status="200">
 
 ```json
@@ -68,4 +97,8 @@ console.log(await response.json());
 }
 ```
 
-</ResponsePanel></div></div>
+</ResponsePanel>
+
+</div>
+
+</div>

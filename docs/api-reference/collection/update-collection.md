@@ -6,29 +6,74 @@ keywords: plane, plane api, rest api, collections, update collection
 
 # Update a collection
 
-<div class="api-endpoint-badge"><span class="method patch">PATCH</span><span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method patch">PATCH</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
 Partially updates a collection. Its public or private access cannot be changed after creation.
 
+<div class="params-section">
+
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace slug.</ApiParam>
-<ApiParam name="collection_id" type="uuid" :required="true">The collection ID.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace slug.
+
+</ApiParam>
+<ApiParam name="collection_id" type="uuid" :required="true">
+
+The collection ID.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Body Parameters
 
-<ApiParam name="name" type="string" :required="false">A new collection name.</ApiParam>
-<ApiParam name="logo_props" type="object" :required="false">New logo or emoji properties.</ApiParam>
-<ApiParam name="sort_order" type="number" :required="false">The collection's ordering value.</ApiParam>
+<div class="params-list">
 
-### OAuth scope
+<ApiParam name="name" type="string" :required="false">
+
+A new collection name.
+
+</ApiParam>
+<ApiParam name="logo_props" type="object" :required="false">
+
+New logo or emoji properties.
+
+</ApiParam>
+<ApiParam name="sort_order" type="number" :required="false">
+
+The collection's ordering value.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
+### Scopes
 
 `write` or `wiki.pages:write`
 
-</div><div class="api-right">
-<CodePanel title="Update a collection" :languages="['cURL', 'Python', 'JavaScript']"><template #curl>
+</div>
+
+</div>
+
+<div class="api-right">
+<CodePanel title="Update a collection" :languages="['cURL', 'Python', 'JavaScript']">
+<template #curl>
 
 ```bash
 curl -X PATCH "https://api.plane.so/api/v1/workspaces/my-workspace/collections/0a8a3e6a-3c32-49c7-bbb5-b7a8e32c2f10/" \
@@ -36,7 +81,8 @@ curl -X PATCH "https://api.plane.so/api/v1/workspaces/my-workspace/collections/0
   -d '{"name":"API docs","sort_order":25000}'
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -45,7 +91,8 @@ response = requests.patch(url, headers={"X-API-Key": "your-api-key"}, json={"nam
 print(response.json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const url = "https://api.plane.so/api/v1/workspaces/my-workspace/collections/0a8a3e6a-3c32-49c7-bbb5-b7a8e32c2f10/";
@@ -57,7 +104,8 @@ const response = await fetch(url, {
 console.log(await response.json());
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 <ResponsePanel status="200">
 
 ```json
@@ -80,4 +128,8 @@ console.log(await response.json());
 }
 ```
 
-</ResponsePanel></div></div>
+</ResponsePanel>
+
+</div>
+
+</div>

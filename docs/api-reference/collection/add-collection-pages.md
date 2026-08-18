@@ -6,33 +6,78 @@ keywords: plane, plane api, rest api, collection pages, add pages, page placemen
 
 # Add pages to a collection
 
-<div class="api-endpoint-badge"><span class="method post">POST</span><span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/pages/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method post">POST</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/collections/{collection_id}/pages/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
 Adds each selected page and its sub-pages. Adding to a private collection makes the page tree private; adding an owned
 private page to a public collection makes it public. Private collections accept only root pages.
 
+<div class="params-section">
+
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace slug.</ApiParam>
-<ApiParam name="collection_id" type="uuid" :required="true">The destination collection ID.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace slug.
+
+</ApiParam>
+<ApiParam name="collection_id" type="uuid" :required="true">
+
+The destination collection ID.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Body Parameters
 
-<ApiParam name="page_ids" type="uuid[]" :required="true">One or more workspace page IDs.</ApiParam>
-<ApiParam name="sort_orders" type="object" :required="false">Page-ID keys mapped to numeric sort orders. Every key must occur in `page_ids`.</ApiParam>
-<ApiParam name="placement" type="object" :required="false">Placement with `type`: `append`, `before`, or `after`; optional `parent_id`; and required `target_page_id` for `before` or `after`. Before/after accepts exactly one page.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="page_ids" type="uuid[]" :required="true">
+
+One or more workspace page IDs.
+
+</ApiParam>
+<ApiParam name="sort_orders" type="object" :required="false">
+
+Page-ID keys mapped to numeric sort orders. Every key must occur in `page_ids`.
+
+</ApiParam>
+<ApiParam name="placement" type="object" :required="false">
+
+Placement with `type`: `append`, `before`, or `after`; optional `parent_id`; and required `target_page_id` for `before` or `after`. Before/after accepts exactly one page.
+
+</ApiParam>
 
 `placement` takes precedence over `sort_orders`. An `append` placement accepts multiple pages and preserves their order
 from `page_ids`.
 
-### OAuth scope
+</div>
+</div>
+
+<div class="params-section">
+
+### Scopes
 
 `write` or `wiki.pages:write`
 
-</div><div class="api-right">
-<CodePanel title="Add pages to a collection" :languages="['cURL', 'Python', 'JavaScript']"><template #curl>
+</div>
+
+</div>
+
+<div class="api-right">
+<CodePanel title="Add pages to a collection" :languages="['cURL', 'Python', 'JavaScript']">
+<template #curl>
 
 ```bash
 curl -X POST "https://api.plane.so/api/v1/workspaces/my-workspace/collections/collection-uuid/pages/" \
@@ -40,7 +85,8 @@ curl -X POST "https://api.plane.so/api/v1/workspaces/my-workspace/collections/co
   -d '{"page_ids":["ea8ccdab-1cf4-448b-8205-51e4b98d82b8"],"placement":{"type":"append","parent_id":null}}'
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -49,7 +95,8 @@ payload = {"page_ids": ["ea8ccdab-1cf4-448b-8205-51e4b98d82b8"], "placement": {"
 print(requests.post(url, headers={"X-API-Key": "your-api-key"}, json=payload).json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const url = "https://api.plane.so/api/v1/workspaces/my-workspace/collections/collection-uuid/pages/";
@@ -64,7 +111,8 @@ const response = await fetch(url, {
 console.log(await response.json());
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 <ResponsePanel status="200">
 
 ```json
@@ -83,4 +131,8 @@ console.log(await response.json());
 ]
 ```
 
-</ResponsePanel></div></div>
+</ResponsePanel>
+
+</div>
+
+</div>

@@ -6,28 +6,68 @@ keywords: plane, plane api, rest api, collections, create collection, private co
 
 # Create a collection
 
-<div class="api-endpoint-badge"><span class="method post">POST</span><span class="path">/api/v1/workspaces/{workspace_slug}/collections/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method post">POST</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/collections/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
 Creates a collection. Private collections can only be created by workspace admins when the feature is available. The
 creator of a private collection is automatically added as a member with edit access.
 
+<div class="params-section">
+
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace slug.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace slug.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Body Parameters
 
-<ApiParam name="name" type="string" :required="false">The collection name. Defaults to an empty string.</ApiParam>
-<ApiParam name="access" type="integer" :required="false">`0` for public (default) or `1` for private.</ApiParam>
-<ApiParam name="logo_props" type="object" :required="false">Logo or emoji properties. Defaults to an empty object.</ApiParam>
+<div class="params-list">
 
-### OAuth scope
+<ApiParam name="name" type="string" :required="false">
+
+The collection name. Defaults to an empty string.
+
+</ApiParam>
+<ApiParam name="access" type="integer" :required="false">
+
+`0` for public (default) or `1` for private.
+
+</ApiParam>
+<ApiParam name="logo_props" type="object" :required="false">
+
+Logo or emoji properties. Defaults to an empty object.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
+### Scopes
 
 `write` or `wiki.pages:write`
 
-</div><div class="api-right">
+</div>
+
+</div>
+
+<div class="api-right">
 <CodePanel title="Create a collection" :languages="['cURL', 'Python', 'JavaScript']">
 <template #curl>
 
@@ -37,7 +77,8 @@ curl -X POST "https://api.plane.so/api/v1/workspaces/my-workspace/collections/" 
   -d '{"name":"Product docs","access":0,"logo_props":{"emoji":"📚"}}'
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -50,7 +91,8 @@ response = requests.post(
 print(response.json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/collections/", {
@@ -61,7 +103,8 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
 console.log(await response.json());
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 <ResponsePanel status="201">
 
 ```json
@@ -84,4 +127,8 @@ console.log(await response.json());
 }
 ```
 
-</ResponsePanel></div></div>
+</ResponsePanel>
+
+</div>
+
+</div>

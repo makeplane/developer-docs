@@ -6,31 +6,71 @@ keywords: plane, plane api, rest api, workspace page, update wiki page
 
 # Update a workspace page
 
-<div class="api-endpoint-badge"><span class="method put">PUT</span><span class="path">/api/v1/workspaces/{workspace_slug}/pages/{page_id}/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method put">PUT</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/pages/{page_id}/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
 Update a workspace page. Send `name`, `description_html`, or both. `description_html` replaces the page's current content rather than appending to it. Plane applies the mutation through its collaborative document service so API writes remain consistent with active editor sessions. Locked or archived pages cannot be updated. The API returns `502` when the collaborative document service cannot complete the update and `503` when that service is not configured.
 
 See [Page content HTML](/api-reference/page/page-content-html) for supported HTML and Plane editor components.
 
+<div class="params-section">
+
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace's unique slug.</ApiParam>
-<ApiParam name="page_id" type="string" :required="true">The page UUID.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace's unique slug.
+
+</ApiParam>
+<ApiParam name="page_id" type="string" :required="true">
+
+The page UUID.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Body Parameters
 
-<ApiParam name="name" type="string" :required="false">The new page title.</ApiParam>
-<ApiParam name="description_html" type="string" :required="false">HTML that replaces the current page content.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="name" type="string" :required="false">
+
+The new page title.
+
+</ApiParam>
+<ApiParam name="description_html" type="string" :required="false">
+
+HTML that replaces the current page content.
+
+</ApiParam>
 
 At least one body parameter is required.
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Scopes
 
 `write` or `wiki.pages:write`
 
-</div><div class="api-right">
+</div>
+
+</div>
+
+<div class="api-right">
 
 <CodePanel title="Update a workspace page" :languages="['cURL', 'Python', 'JavaScript']">
 <template #curl>
@@ -41,7 +81,8 @@ curl -X PUT "https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid
   -d '{"name":"Release notes","description_html":"<p>Current release notes</p>"}'
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -54,7 +95,8 @@ response = requests.put(
 print(response.json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/", {
@@ -65,7 +107,8 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
 const data = await response.json();
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 
 <ResponsePanel status="200">
 
@@ -78,4 +121,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-</div></div>
+</div>
+
+</div>

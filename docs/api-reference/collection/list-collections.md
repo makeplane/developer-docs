@@ -6,22 +6,43 @@ keywords: plane, plane api, rest api, collections, list collections, wiki
 
 # List collections
 
-<div class="api-endpoint-badge"><span class="method get">GET</span><span class="path">/api/v1/workspaces/{workspace_slug}/collections/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method get">GET</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/collections/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
 Returns all public and permitted private collections in sort order. A private collection is included when the caller
 owns it, is a workspace admin, or is an explicit collection member.
 
+<div class="params-section">
+
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace slug.</ApiParam>
+<div class="params-list">
 
-### OAuth scope
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace slug.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
+
+### Scopes
 
 `read` or `wiki.pages:read`
 
-</div><div class="api-right">
+</div>
+
+</div>
+
+<div class="api-right">
 
 <CodePanel title="List collections" :languages="['cURL', 'Python', 'JavaScript']">
 <template #curl>
@@ -31,7 +52,8 @@ curl "https://api.plane.so/api/v1/workspaces/my-workspace/collections/" \
   -H "X-API-Key: $PLANE_API_KEY"
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -43,7 +65,8 @@ response = requests.get(
 print(response.json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/collections/", {
@@ -52,7 +75,8 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
 console.log(await response.json());
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 
 <ResponsePanel status="200">
 
@@ -78,4 +102,8 @@ console.log(await response.json());
 ]
 ```
 
-</ResponsePanel></div></div>
+</ResponsePanel>
+
+</div>
+
+</div>

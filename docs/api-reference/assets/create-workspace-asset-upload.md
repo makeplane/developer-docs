@@ -70,7 +70,7 @@ Asset context. Use `PAGE_DESCRIPTION` for a workspace page attachment.
 
 <ApiParam name="entity_identifier" type="string" :required="false">
 
-UUID of the workspace page when `entity_type` is `PAGE_DESCRIPTION`.
+UUID of the workspace page. This value is required when `entity_type` is `PAGE_DESCRIPTION`.
 
 </ApiParam>
 

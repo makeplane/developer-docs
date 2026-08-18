@@ -43,3 +43,11 @@ creator of a private collection is automatically added with edit access.
 
 Collection edit access allows a member to edit content and arrange pages, but it does not grant collection ownership.
 Only the collection owner or a workspace admin can add, update, or remove collection members.
+
+## Common errors
+
+| Status | Cause                                                                                                          |
+| ------ | -------------------------------------------------------------------------------------------------------------- |
+| `400`  | Invalid request payload or page placement, or an attempt to modify or delete the protected default collection. |
+| `403`  | Insufficient collection or workspace permissions, or unavailable private-collection feature access.            |
+| `404`  | The collection, page, membership, or other requested resource is unavailable or inaccessible to the caller.    |

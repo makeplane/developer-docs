@@ -6,31 +6,79 @@ keywords: plane, plane api, project page, update page
 
 # Update a project page
 
-<div class="api-endpoint-badge"><span class="method put">PUT</span><span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/pages/{page_id}/</span></div>
+<div class="api-endpoint-badge">
+  <span class="method put">PUT</span>
+  <span class="path">/api/v1/workspaces/{workspace_slug}/projects/{project_id}/pages/{page_id}/</span>
+</div>
 
-<div class="api-two-column"><div class="api-left">
+<div class="api-two-column">
+<div class="api-left">
 
-Send `name`, `description_html`, or both. `description_html` replaces the current content. Locked or archived pages return `400`; document-service failures return `502`, and an unconfigured service returns `503`.
+Send `name`, `description_html`, or both. `description_html` replaces the current content, and Plane sanitizes it before
+storing it. See [Page content HTML](/api-reference/page/page-content-html) for supported HTML and Plane editor
+components. Locked or archived pages return `400`; document-service failures return `502`, and an unconfigured service
+returns `503`.
+
+<div class="params-section">
 
 ### Path Parameters
 
-<ApiParam name="workspace_slug" type="string" :required="true">The workspace's unique slug.</ApiParam>
-<ApiParam name="project_id" type="string" :required="true">The project UUID.</ApiParam>
-<ApiParam name="page_id" type="string" :required="true">The page UUID.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="workspace_slug" type="string" :required="true">
+
+The workspace's unique slug.
+
+</ApiParam>
+<ApiParam name="project_id" type="string" :required="true">
+
+The project UUID.
+
+</ApiParam>
+<ApiParam name="page_id" type="string" :required="true">
+
+The page UUID.
+
+</ApiParam>
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Body Parameters
 
-<ApiParam name="name" type="string" :required="false">The new page title.</ApiParam>
-<ApiParam name="description_html" type="string" :required="false">HTML that replaces the current page content.</ApiParam>
+<div class="params-list">
+
+<ApiParam name="name" type="string" :required="false">
+
+The new page title.
+
+</ApiParam>
+<ApiParam name="description_html" type="string" :required="false">
+
+HTML that Plane sanitizes and uses to replace the current page content.
+
+</ApiParam>
 
 At least one body parameter is required.
+
+</div>
+</div>
+
+<div class="params-section">
 
 ### Scopes
 
 `write` or `projects.pages:write`
 
-</div><div class="api-right">
-<CodePanel title="Update a project page" :languages="['cURL', 'Python', 'JavaScript']"><template #curl>
+</div>
+
+</div>
+
+<div class="api-right">
+<CodePanel title="Update a project page" :languages="['cURL', 'Python', 'JavaScript']">
+<template #curl>
 
 ```bash
 curl -X PUT "https://api.plane.so/api/v1/workspaces/my-workspace/projects/project-uuid/pages/page-uuid/" \
@@ -38,7 +86,8 @@ curl -X PUT "https://api.plane.so/api/v1/workspaces/my-workspace/projects/projec
   -d '{"name":"Release notes","description_html":"<p>Current release notes</p>"}'
 ```
 
-</template><template #python>
+</template>
+<template #python>
 
 ```python
 import requests
@@ -46,7 +95,8 @@ response = requests.put("https://api.plane.so/api/v1/workspaces/my-workspace/pro
 print(response.json())
 ```
 
-</template><template #javascript>
+</template>
+<template #javascript>
 
 ```javascript
 const response = await fetch(
@@ -60,7 +110,8 @@ const response = await fetch(
 const data = await response.json();
 ```
 
-</template></CodePanel>
+</template>
+</CodePanel>
 <ResponsePanel status="200">
 
 ```json
@@ -72,4 +123,6 @@ const data = await response.json();
 ```
 
 </ResponsePanel>
-</div></div>
+</div>
+
+</div>
