@@ -14,7 +14,8 @@ keywords: plane, plane api, rest api, api integration, assets, create workspace 
 <div class="api-two-column">
 <div class="api-left">
 
-Generate presigned URL for generic asset upload
+Generate a presigned URL for a workspace asset upload. To attach a file to a workspace page, set `entity_type` to
+`PAGE_DESCRIPTION` and pass the page UUID as `entity_identifier`. The page must be editable, unlocked, and active.
 
 <div class="params-section">
 
@@ -61,6 +62,18 @@ UUID of the project to associate with the asset
 
 </ApiParam>
 
+<ApiParam name="entity_type" type="string" :required="false">
+
+Asset context. Use `PAGE_DESCRIPTION` for a workspace page attachment.
+
+</ApiParam>
+
+<ApiParam name="entity_identifier" type="string" :required="false">
+
+UUID of the workspace page when `entity_type` is `PAGE_DESCRIPTION`.
+
+</ApiParam>
+
 <ApiParam name="external_id" type="string" :required="false">
 
 External identifier for the asset (for integration tracking)
@@ -101,7 +114,8 @@ curl -X POST \
   "name": "Example Name",
   "type": "image/jpeg",
   "size": 1024000,
-  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "entity_type": "PAGE_DESCRIPTION",
+  "entity_identifier": "4d2f6f7e-9b4a-4d6a-8f4a-1c3f7c0f4a10",
   "external_id": "550e8400-e29b-41d4-a716-446655440000",
   "external_source": "github"
 }'
@@ -120,7 +134,8 @@ response = requests.post(
       "name": "Example Name",
       "type": "image/jpeg",
       "size": 1024000,
-      "project_id": "550e8400-e29b-41d4-a716-446655440000",
+      "entity_type": "PAGE_DESCRIPTION",
+      "entity_identifier": "4d2f6f7e-9b4a-4d6a-8f4a-1c3f7c0f4a10",
       "external_id": "550e8400-e29b-41d4-a716-446655440000",
       "external_source": "github"
     }
@@ -142,7 +157,8 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
     name: "Example Name",
     type: "image/jpeg",
     size: 1024000,
-    project_id: "550e8400-e29b-41d4-a716-446655440000",
+    entity_type: "PAGE_DESCRIPTION",
+    entity_identifier: "4d2f6f7e-9b4a-4d6a-8f4a-1c3f7c0f4a10",
     external_id: "550e8400-e29b-41d4-a716-446655440000",
     external_source: "github",
   }),
@@ -158,7 +174,7 @@ const data = await response.json();
 ```json
 {
   "asset_id": "550e8400-e29b-41d4-a716-446655440000",
-  "asset_url": "/api/assets/v2/workspaces/my-workspace/projects/None/issues/None/attachments/550e8400-e29b-41d4-a716-446655440000/",
+  "asset_url": "/api/v1/workspaces/my-workspace/pages/4d2f6f7e-9b4a-4d6a-8f4a-1c3f7c0f4a10/attachments/550e8400-e29b-41d4-a716-446655440000/",
   "upload_data": {
     "url": "https://uploads.example.com/plane-bucket",
     "fields": {
