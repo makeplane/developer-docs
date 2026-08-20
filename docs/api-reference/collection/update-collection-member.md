@@ -88,10 +88,11 @@ print(requests.patch(url, headers={"X-API-Key": "your-api-key"}, json={"access":
 <template #javascript>
 
 ```javascript
+// Run this example server-side. Browser apps must call your backend to keep the API key secret.
 const url = "https://api.plane.so/api/v1/workspaces/my-workspace/collections/collection-uuid/members/membership-uuid/";
 const response = await fetch(url, {
   method: "PATCH",
-  headers: { "X-API-Key": "your-api-key", "Content-Type": "application/json" },
+  headers: { "X-API-Key": process.env.PLANE_API_KEY, "Content-Type": "application/json" },
   body: JSON.stringify({ access: 2 }),
 });
 console.log(await response.json());

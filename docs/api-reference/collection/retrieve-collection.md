@@ -68,8 +68,9 @@ print(requests.get(url, headers={"X-API-Key": "your-api-key"}).json())
 <template #javascript>
 
 ```javascript
+// Run this example server-side. Browser apps must call your backend to keep the API key secret.
 const url = "https://api.plane.so/api/v1/workspaces/my-workspace/collections/0a8a3e6a-3c32-49c7-bbb5-b7a8e32c2f10/";
-const response = await fetch(url, { headers: { "X-API-Key": "your-api-key" } });
+const response = await fetch(url, { headers: { "X-API-Key": process.env.PLANE_API_KEY } });
 console.log(await response.json());
 ```
 

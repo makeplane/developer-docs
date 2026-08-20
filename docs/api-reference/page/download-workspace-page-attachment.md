@@ -84,9 +84,11 @@ download_url = response.headers["Location"]
 if urlparse(download_url).scheme != "https":
     raise ValueError("Expected an HTTPS download URL")
 
-download = requests.get(download_url)
-download.raise_for_status()
-open("diagram.png", "wb").write(download.content)
+with requests.get(download_url, stream=True) as download:
+    download.raise_for_status()
+    with open("diagram.png", "wb") as output:
+        for chunk in download.iter_content(chunk_size=8192):
+            output.write(chunk)
 ```
 
 </template>
