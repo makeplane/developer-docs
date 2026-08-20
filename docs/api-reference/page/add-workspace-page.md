@@ -14,7 +14,8 @@ keywords: plane, plane api, rest api, api integration, page, create a wiki page
 <div class="api-two-column">
 <div class="api-left">
 
-Create a workspace page
+Create a workspace page. To create a child page, pass `parent_id`; Plane creates the page and inserts a page embed into
+the parent document. The parent must be visible, editable, unlocked, and active.
 
 <div class="params-section">
 
@@ -94,7 +95,13 @@ External source.
 
 <ApiParam name="description_html" type="string" :required="true">
 
-Description html.
+HTML content for the page body. Plane sanitizes the HTML before storing it.
+
+</ApiParam>
+
+<ApiParam name="parent_id" type="string" :required="false">
+
+UUID of the parent workspace page. Do not combine `parent_id` with `collection_id`.
 
 </ApiParam>
 
@@ -105,7 +112,7 @@ Description html.
 
 ### Scopes
 
-`wiki.pages:write`
+`write` or `wiki.pages:write`
 
 </div>
 
@@ -132,6 +139,7 @@ curl -X POST \
   "logo_props": "example-value",
   "external_id": "550e8400-e29b-41d4-a716-446655440000",
   "external_source": "github",
+  "parent_id": "4d2f6f7e-9b4a-4d6a-8f4a-1c3f7c0f4a10",
   "description_html": "<p>Example content</p>"
 }'
 ```
@@ -155,6 +163,7 @@ response = requests.post(
       "logo_props": "example-value",
       "external_id": "550e8400-e29b-41d4-a716-446655440000",
       "external_source": "github",
+      "parent_id": "4d2f6f7e-9b4a-4d6a-8f4a-1c3f7c0f4a10",
       "description_html": "<p>Example content</p>"
     }
 )
@@ -165,10 +174,11 @@ print(response.json())
 <template #javascript>
 
 ```javascript
+// Run this example server-side. Browser apps must call your backend to keep the API key secret.
 const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspace/pages/", {
   method: "POST",
   headers: {
-    "X-API-Key": "your-api-key",
+    "X-API-Key": process.env.PLANE_API_KEY,
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
@@ -181,6 +191,7 @@ const response = await fetch("https://api.plane.so/api/v1/workspaces/my-workspac
     logo_props: "example-value",
     external_id: "550e8400-e29b-41d4-a716-446655440000",
     external_source: "github",
+    parent_id: "4d2f6f7e-9b4a-4d6a-8f4a-1c3f7c0f4a10",
     description_html: "<p>Example content</p>",
   }),
 });
@@ -215,3 +226,15 @@ const data = await response.json();
 </div>
 
 </div>
+
+## Child-page responses
+
+- `201 Created`: the child was created and linked in the parent document.
+- `202 Accepted`: the child was created, but Plane is still retrying the parent link. Store the returned page ID and
+  check the parent later. The response already contains the requested `parent_id`; only the parent document embed is
+  pending.
+- `400 Bad Request`: the parent is locked or archived, or `parent_id` conflicts with `collection_id`.
+- `403 Forbidden`: the caller cannot edit the parent.
+- `404 Not Found`: the parent is unavailable in this workspace.
+- `502 Bad Gateway`: the parent link was rejected and the new child was removed.
+- `503 Service Unavailable`: the collaborative document service is not configured.
