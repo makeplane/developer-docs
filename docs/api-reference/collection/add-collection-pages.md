@@ -133,6 +133,9 @@ console.log(await response.json());
 
 </ResponsePanel>
 
+The response `id` is the page placement ID. Use it as `page_collection_id` when moving, reordering, or removing the
+page from a collection.
+
 </div>
 
 </div>

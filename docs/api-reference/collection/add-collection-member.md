@@ -90,10 +90,11 @@ print(response.json())
 <template #javascript>
 
 ```javascript
+// Run this example server-side. Browser apps must call your backend to keep the API key secret.
 const url = "https://api.plane.so/api/v1/workspaces/my-workspace/collections/collection-uuid/members/";
 const response = await fetch(url, {
   method: "POST",
-  headers: { "X-API-Key": "your-api-key", "Content-Type": "application/json" },
+  headers: { "X-API-Key": process.env.PLANE_API_KEY, "Content-Type": "application/json" },
   body: JSON.stringify({ member: "6f356c85-bb22-47e0-b8b1-cf18aa6adad3", access: 0 }),
 });
 console.log(await response.json());

@@ -230,7 +230,8 @@ const data = await response.json();
 
 - `201 Created`: the child was created and linked in the parent document.
 - `202 Accepted`: the child was created, but Plane is still retrying the parent link. Store the returned page ID and
-  check the parent later.
+  check the parent later. The response already contains the requested `parent_id`; only the parent document embed is
+  pending.
 - `400 Bad Request`: the parent is locked or archived, or `parent_id` conflicts with `collection_id`.
 - `403 Forbidden`: the caller cannot edit the parent.
 - `404 Not Found`: the parent is unavailable in this workspace.

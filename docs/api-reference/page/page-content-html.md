@@ -135,7 +135,7 @@ not include private user data in page content.
 
 ```html
 <p>Inline formula: <inline-math-component id="inline-math" latex="E=mc^2"></inline-math-component></p>
-<block-math-component id="block-math" latex="\\int_0^1 x^2 dx"></block-math-component>
+<block-math-component id="block-math" latex="\int_0^1 x^2 dx"></block-math-component>
 <p>Target date: <inline-date-component id="target-date" date="2026-08-18"></inline-date-component></p>
 ```
 

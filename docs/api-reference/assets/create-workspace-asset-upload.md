@@ -64,13 +64,14 @@ UUID of the project to associate with the asset
 
 <ApiParam name="entity_type" type="string" :required="false">
 
-Asset context. Use `PAGE_DESCRIPTION` for a workspace page attachment.
+Asset context. Use `PAGE_DESCRIPTION` for a workspace page attachment; when you do, `entity_identifier` is also
+required.
 
 </ApiParam>
 
 <ApiParam name="entity_identifier" type="string" :required="false">
 
-UUID of the workspace page. This value is required when `entity_type` is `PAGE_DESCRIPTION`.
+UUID of the workspace page. This value and `entity_type` are required together for a `PAGE_DESCRIPTION` attachment.
 
 </ApiParam>
 

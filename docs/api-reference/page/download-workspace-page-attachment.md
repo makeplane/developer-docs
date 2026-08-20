@@ -56,27 +56,58 @@ The attachment asset UUID.
 <template #curl>
 
 ```bash
-curl -L "https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/attachments/attachment-uuid/download/" -H "X-API-Key: $PLANE_API_KEY" --output diagram.png
+download_url="$(
+  curl --fail --silent --show-error --dump-header - --output /dev/null \
+    "https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/attachments/attachment-uuid/download/" \
+    -H "X-API-Key: $PLANE_API_KEY" \
+    | sed -n 's/^Location: \(https:\/\/.*\)\r$/\1/p'
+)"
+test -n "$download_url"
+curl --fail --location "$download_url" --output diagram.png
 ```
 
 </template>
 <template #python>
 
 ```python
+from urllib.parse import urlparse
+
 import requests
-response = requests.get("https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/attachments/attachment-uuid/download/", headers={"X-API-Key": "your-api-key"})
-open("diagram.png", "wb").write(response.content)
+
+response = requests.get(
+    "https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/attachments/attachment-uuid/download/",
+    headers={"X-API-Key": "your-api-key"},
+    allow_redirects=False,
+)
+response.raise_for_status()
+download_url = response.headers["Location"]
+if urlparse(download_url).scheme != "https":
+    raise ValueError("Expected an HTTPS download URL")
+
+download = requests.get(download_url)
+download.raise_for_status()
+open("diagram.png", "wb").write(download.content)
 ```
 
 </template>
 <template #javascript>
 
 ```javascript
+// Run this example server-side. Browser apps must call your backend to keep the API key secret.
+import { writeFile } from "node:fs/promises";
+
 const response = await fetch(
   "https://api.plane.so/api/v1/workspaces/my-workspace/pages/page-uuid/attachments/attachment-uuid/download/",
-  { headers: { "X-API-Key": "your-api-key" }, redirect: "follow" }
+  { headers: { "X-API-Key": process.env.PLANE_API_KEY }, redirect: "manual" }
 );
-const file = await response.blob();
+if (response.status !== 302) throw new Error(`Expected a redirect, received ${response.status}`);
+
+const downloadUrl = new URL(response.headers.get("location"));
+if (downloadUrl.protocol !== "https:") throw new Error("Expected an HTTPS download URL");
+
+const download = await fetch(downloadUrl);
+if (!download.ok) throw new Error(`Download failed with ${download.status}`);
+await writeFile("diagram.png", Buffer.from(await download.arrayBuffer()));
 ```
 
 </template>
