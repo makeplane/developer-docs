@@ -240,6 +240,7 @@ backup/
 
    ```bash
    cd <airgapped-instance-folder>
+   sudo docker compose -f docker-compose.yml down
    sudo docker compose -f docker-compose.yml --env-file plane.env up -d
    ```
 
