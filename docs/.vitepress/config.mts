@@ -762,12 +762,85 @@ export default extendConfig(
                   collapsed: true,
                   items: [
                     { text: "Overview", link: "/api-reference/page/overview" },
+                    { text: "Page Content HTML", link: "/api-reference/page/page-content-html" },
                     { text: "List Workspace Pages", link: "/api-reference/page/list-workspace-pages" },
                     { text: "Add Workspace Page", link: "/api-reference/page/add-workspace-page" },
+                    { text: "Get Workspace Page", link: "/api-reference/page/get-workspace-page" },
+                    { text: "Update Workspace Page", link: "/api-reference/page/update-workspace-page" },
+                    { text: "Archive Workspace Page", link: "/api-reference/page/archive-workspace-page" },
+                    { text: "Restore Workspace Page", link: "/api-reference/page/restore-workspace-page" },
+                    { text: "Delete Workspace Page", link: "/api-reference/page/delete-workspace-page" },
+                    {
+                      text: "Get Workspace Page Attachment",
+                      link: "/api-reference/page/get-workspace-page-attachment",
+                    },
+                    {
+                      text: "Confirm Workspace Page Attachment Upload",
+                      link: "/api-reference/page/confirm-workspace-page-attachment-upload",
+                    },
+                    {
+                      text: "Download Workspace Page Attachment",
+                      link: "/api-reference/page/download-workspace-page-attachment",
+                    },
+                    {
+                      text: "Delete Workspace Page Attachment",
+                      link: "/api-reference/page/delete-workspace-page-attachment",
+                    },
                     { text: "List Project Pages", link: "/api-reference/page/list-project-pages" },
                     { text: "Add Project Page", link: "/api-reference/page/add-project-page" },
-                    { text: "Get Workspace Page", link: "/api-reference/page/get-workspace-page" },
                     { text: "Get Project Page", link: "/api-reference/page/get-project-page" },
+                    { text: "Update Project Page", link: "/api-reference/page/update-project-page" },
+                    { text: "Archive Project Page", link: "/api-reference/page/archive-project-page" },
+                    { text: "Restore Project Page", link: "/api-reference/page/restore-project-page" },
+                    { text: "Delete Project Page", link: "/api-reference/page/delete-project-page" },
+                  ],
+                },
+                {
+                  text: "Collections",
+                  collapsed: true,
+                  items: [
+                    { text: "Overview", link: "/api-reference/collection/overview" },
+                    { text: "List Collections", link: "/api-reference/collection/list-collections" },
+                    { text: "Create Collection", link: "/api-reference/collection/create-collection" },
+                    { text: "Retrieve Collection", link: "/api-reference/collection/retrieve-collection" },
+                    { text: "Update Collection", link: "/api-reference/collection/update-collection" },
+                    { text: "Delete Collection", link: "/api-reference/collection/delete-collection" },
+                    {
+                      text: "List Collection Members",
+                      link: "/api-reference/collection/list-collection-members",
+                    },
+                    {
+                      text: "Add Collection Member",
+                      link: "/api-reference/collection/add-collection-member",
+                    },
+                    {
+                      text: "Update Collection Member",
+                      link: "/api-reference/collection/update-collection-member",
+                    },
+                    {
+                      text: "Remove Collection Member",
+                      link: "/api-reference/collection/remove-collection-member",
+                    },
+                    {
+                      text: "List Collection Pages",
+                      link: "/api-reference/collection/list-collection-pages",
+                    },
+                    {
+                      text: "Search Collection Pages",
+                      link: "/api-reference/collection/search-collection-pages",
+                    },
+                    {
+                      text: "Add Collection Pages",
+                      link: "/api-reference/collection/add-collection-pages",
+                    },
+                    {
+                      text: "Move or Reorder Collection Page",
+                      link: "/api-reference/collection/move-or-reorder-collection-page",
+                    },
+                    {
+                      text: "Remove Collection Page",
+                      link: "/api-reference/collection/remove-collection-page",
+                    },
                   ],
                 },
                 {
