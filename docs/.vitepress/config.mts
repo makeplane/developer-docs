@@ -1059,6 +1059,10 @@ export default extendConfig(
                     { text: "Create Project Mapping", link: "/api-reference/idp-group-sync/create-project-mapping" },
                     { text: "Get Project Mapping", link: "/api-reference/idp-group-sync/get-project-mapping" },
                     { text: "Update Project Mapping", link: "/api-reference/idp-group-sync/update-project-mapping" },
+                    {
+                      text: "Update Project Mapping by Key",
+                      link: "/api-reference/idp-group-sync/update-project-mapping-by-key",
+                    },
                     { text: "Delete Project Mapping", link: "/api-reference/idp-group-sync/delete-project-mapping" },
                     {
                       text: "List Workspace Mappings",
