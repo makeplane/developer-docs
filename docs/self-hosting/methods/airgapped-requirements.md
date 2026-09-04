@@ -88,7 +88,7 @@ Deploying airgapped Plane via Kubernetes requires preparing all dependencies to 
 
 - IngressClass configured
 - StorageClass available
-- cert-manager configured with an internal CA
+- A TLS certificate for the Plane domain, issued by an internal CA. Either load a pre-issued certificate into the cluster as a TLS Secret, or run cert-manager configured with an internal CA issuer — public ACME and DNS-01 issuers are unreachable from an air gap
 
 **Node requirements:**
 
@@ -118,5 +118,5 @@ Plane supports using existing external secret stores, provided they are reachabl
 ### Additional considerations
 
 - Ensure all secret providers can function without external network access
-- cert-manager must use an internal certificate authority
+- If you run cert-manager, it must use an internal certificate authority
 - Keys and secret rotation policies should be part of the airgap operational procedures

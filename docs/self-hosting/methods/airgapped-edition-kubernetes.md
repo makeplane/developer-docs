@@ -32,8 +32,9 @@ On the cluster side, make sure you have:
 - An internal OCI/container registry reachable from every node, holding the mirrored images
 - A `StorageClass` you can name explicitly — airgapped clusters often have no default, and PVCs will sit in `Pending` without one
 - A working ingress controller (`ingress-nginx`, Traefik, or OpenShift Routes)
-- A TLS certificate issued by your internal CA, loaded into the cluster as a Secret
-- `cert-manager` **only if** you issue certificates in-cluster. Its images must be mirrored too, and it must be configured with an internal CA issuer — public ACME and DNS-01 issuers are unreachable from an air gap
+- A TLS certificate for `license.licenseDomain`, issued by your internal CA. Either of two paths is supported:
+  - **Pre-issued certificate** — issue it from your internal PKI, load it into the `plane` namespace as a TLS Secret, and reference it with `ssl.tls_secret_name`. No `cert-manager` required.
+  - **`cert-manager` issuing in-cluster** — mirror its images, and configure it with an internal CA issuer. Public ACME and DNS-01 issuers are unreachable from an air gap, so the chart's Let's Encrypt path cannot be used either way. See [Ingress and TLS](#ingress-and-tls).
 - Required ports opened to access the application (80, 443)
 - SMTP ports opened if using email intake (25, 465, 587)
 
@@ -156,13 +157,26 @@ The mirrored images do not need transferring separately if your internal registr
 
 **On the airgapped host.**
 
-Extract the chart defaults into a file you can edit and keep under version control:
+Extract the chart defaults into a file you can edit:
 
 ```bash
 helm show values "plane-enterprise-${CHART_VERSION}.tgz" > custom-values.yaml
 ```
 
 The sections below cover the values that matter for an airgapped install. For the full reference, see [Configuration settings](/self-hosting/methods/kubernetes#configuration-settings).
+
+::: warning Keep credentials out of this file
+`custom-values.yaml` belongs in version control, so treat every credential field shown below as a **placeholder**. Do not commit registry passwords, database credentials, connector client secrets, GitHub App private keys, or the generated application secrets into it.
+
+Create those as Kubernetes Secrets out of band and have the chart read them:
+
+- **Registry credentials** — `dockerRegistry.existingSecret`
+- **Everything else** — the `external_secrets.*_existingSecret` keys: `pgdb_existingSecret`, `rabbitmq_existingSecret`, `opensearch_existingSecret`, `doc_store_existingSecret`, `app_env_existingSecret`, `live_env_existingSecret`, `silo_env_existingSecret`, `pi_api_env_existingSecret`, and `runner_env_existingSecret`
+
+Manage those Secrets with the store you already run inside the air gap — Vault, External Secrets Operator, or sealed-secrets. See [External Secrets Config](/self-hosting/methods/kubernetes#external-secrets-config) and the secrets-management section of [Airgapped deployment architecture](/self-hosting/methods/airgapped-requirements).
+
+If you set a credential inline while testing, keep that copy of the file out of version control and treat it as a secret at rest.
+:::
 
 ### Version, license domain, and airgapped mode
 
@@ -277,7 +291,9 @@ Any override must be BusyBox-compatible — the init scripts need `/bin/sh`, `gr
 
 ### Image pull policy
 
-The chart defaults Plane's application services to `pullPolicy: Always`. In an airgapped cluster that means every pod restart re-hits your internal registry and hard-fails when it is briefly unavailable. Prefer `IfNotPresent`:
+The chart defaults Plane's application services to `pullPolicy: Always`. In an airgapped cluster that means every pod restart re-hits your internal registry and hard-fails when it is briefly unavailable. Prefer `IfNotPresent`.
+
+There is no global pull-policy value, so set it on **every service you enable** — `web`, `api`, `space`, `admin`, `live`, `monitor`, `silo`, `email_service`, `iframely`, `pi`, and `runner`. Any service left at `Always` can fail to restart while the registry is unreachable, even though its image is already cached on the node.
 
 ```yaml
 services:
@@ -285,8 +301,28 @@ services:
     pullPolicy: IfNotPresent
   api:
     pullPolicy: IfNotPresent
-  # ...repeat for space, admin, live, monitor, silo, email_service, iframely
+  space:
+    pullPolicy: IfNotPresent
+  admin:
+    pullPolicy: IfNotPresent
+  live:
+    pullPolicy: IfNotPresent
+  monitor:
+    pullPolicy: IfNotPresent
+  silo:
+    pullPolicy: IfNotPresent
+  email_service:
+    pullPolicy: IfNotPresent
+  iframely:
+    pullPolicy: IfNotPresent
+  # Only if Plane AI is enabled
+  pi:
+    pullPolicy: IfNotPresent
+  runner:
+    pullPolicy: IfNotPresent
 ```
+
+The bundled datastores (`postgres`, `redis`, `rabbitmq`, `minio`, `opensearch`) already default to `IfNotPresent`.
 
 ### Storage class
 
@@ -454,6 +490,8 @@ env:
 ```
 
 The chart also supports `sentry`, `bitbucket`, and `hubspot` connectors under the same key.
+
+Connector client secrets and the GitHub App private key are credentials — supply them through `external_secrets.silo_env_existingSecret` rather than inline in `custom-values.yaml`.
 
 ### Email intake (optional)
 
