@@ -126,6 +126,10 @@ To migrate from public to private bucket storage, follow the instructions below:
 
    :::
 
+## Related
+
+- [Use IRSA or EKS Pod Identity for S3 storage](/self-hosting/govern/aws-workload-identity) — grant these bucket permissions to an IAM role instead of an access key.
+
 ## Troubleshoot
 
 - [Bucket policy exceeds size limit](/self-hosting/troubleshoot/storage-errors#bucket-policy-exceeds-size-limit)

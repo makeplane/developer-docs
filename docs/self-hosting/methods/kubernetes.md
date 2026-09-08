@@ -867,6 +867,11 @@ The Commercial edition comes with a free plan and the flexibility to upgrade to 
 
     ##### Doc Store (Minio/S3) Setup
 
+    ::: tip
+    On Amazon EKS you can skip the access key and secret entirely and let Plane assume an IAM role
+    instead. See [Use IRSA or EKS Pod Identity for S3 storage](/self-hosting/govern/aws-workload-identity).
+    :::
+
     | Setting                      | Default                       | Required | Description                                                                                                                                                                                                                                                                                                                                      |
     | ---------------------------- | ----------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
     | minio.local_setup            | true                          |          | Plane uses minio as the default file storage drive. This storage can be hosted within kubernetes as part of helm chart deployment or can be used as hosted service remotely (e.g. aws S3 or similar services). Set this to true when you choose to setup stateful deployment of postgres. Mark it as false when using a remotely hosted database |
@@ -890,6 +895,20 @@ The Commercial edition comes with a free plan and the flexibility to upgrade to 
     | minio.affinity               | {}                            |          | This key allows you to set the affinity rules for the stateful deployment of minio. This is useful when you want to control how pods are scheduled on nodes in your Kubernetes cluster.                                                                                                                                                          |
     | minio.labels                 | {}                            |          | This key allows you to set custom labels for the stateful deployment of minio. This is useful for organizing and selecting resources in your Kubernetes cluster.                                                                                                                                                                                 |
     | minio.annotations            | {}                            |          | This key allows you to set custom annotations for the stateful deployment of minio. This is useful for adding metadata or configuration hints to your resources.                                                                                                                                                                                 |
+
+    ##### Service Account and Cloud Identity
+
+    Available in `plane-ce` chart version 1.8.0 and later. Every workload runs under this one
+    ServiceAccount, so annotating it grants the identity to the datastores too. See
+    [Use IRSA or EKS Pod Identity for S3 storage](/self-hosting/govern/aws-workload-identity).
+
+    | Setting                      | Default | Required | Description                                                                                                                                                                      |
+    | ---------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | serviceAccount.create        | true    |          | Set to false to run as a ServiceAccount that is managed outside this chart.                                                                                                      |
+    | serviceAccount.name          |         |          | Name of the ServiceAccount every workload runs as. Defaults to `<release-name>-srv-account`.                                                                                     |
+    | serviceAccount.annotations   | {}      |          | Annotations on the ServiceAccount. This is where a cloud workload-identity binding goes, such as `eks.amazonaws.com/role-arn` for IRSA. Helm values only, because this is a map. |
+    | serviceAccount.podLabels     | {}      |          | Extra pod-template labels. Not needed for IRSA or EKS Pod Identity; Azure Workload Identity requires one.                                                                        |
+    | serviceAccount.cloudIdentity | false   |          | Advisory only and changes nothing in the rendered output. Declares that this ServiceAccount is bound to a cloud identity configured out of band, which enables related warnings. |
 
     ##### Web Deployment
 

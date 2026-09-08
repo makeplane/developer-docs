@@ -122,6 +122,7 @@ To configure external Postgres, Redis, and S3 storage for the Plane Community Ed
     ```
 
 4.  In the **DATA STORE SETTINGS** section, update the variables for any S3-compatible storage:
+
     ```bash
     # DATA STORE SETTINGS
     USE_MINIO=0                                 # Set to 0 if using an external S3, 1 if using MinIO (default).
@@ -135,6 +136,13 @@ To configure external Postgres, Redis, and S3 storage for the Plane Community Ed
     BUCKET_NAME=                                # Leave blank when using external S3.
     FILE_SIZE_LIMIT=5242880                     # Set maximum file upload size in bytes (5MB here).
     ```
+
+    ::: tip
+    Running the Community Edition on Amazon EKS with the `plane-ce` Helm chart instead? You can leave
+    the access key and secret out altogether and let Plane assume an IAM role. See
+    [Use IRSA or EKS Pod Identity for S3 storage](/self-hosting/govern/aws-workload-identity).
+    :::
+
 5.  Save your changes to the `plane.env` file.
 
 6.  Restart Plane services to apply the new settings using the `setup.sh` script.
