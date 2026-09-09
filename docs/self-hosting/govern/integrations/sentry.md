@@ -71,10 +71,10 @@ Paste this schema into the **Schema** field:
   "elements": [
     {
       "link": {
-        "uri": "/api/sentry/issues/link",
+        "uri": "/silo/api/sentry/issues/link",
         "required_fields": [
           {
-            "uri": "/api/sentry/issues",
+            "uri": "/silo/api/sentry/issues",
             "name": "identifier",
             "type": "select",
             "label": "Issue",
@@ -84,10 +84,10 @@ Paste this schema into the **Schema** field:
       },
       "type": "issue-link",
       "create": {
-        "uri": "/api/sentry/issues/create",
+        "uri": "/silo/api/sentry/issues/create",
         "optional_fields": [
           {
-            "uri": "/api/sentry/users",
+            "uri": "/silo/api/sentry/users",
             "name": "assignee_ids",
             "type": "select",
             "async": false,
@@ -96,7 +96,7 @@ Paste this schema into the **Schema** field:
             "depends_on": ["project_id"]
           },
           {
-            "uri": "/api/sentry/priorities",
+            "uri": "/silo/api/sentry/priorities",
             "name": "priorities",
             "type": "select",
             "async": false,
@@ -104,7 +104,7 @@ Paste this schema into the **Schema** field:
             "depends_on": ["project_id"]
           },
           {
-            "uri": "/api/sentry/labels",
+            "uri": "/silo/api/sentry/labels",
             "name": "labels",
             "type": "select",
             "async": false,
@@ -113,7 +113,7 @@ Paste this schema into the **Schema** field:
             "depends_on": ["project_id"]
           },
           {
-            "uri": "/api/sentry/states",
+            "uri": "/silo/api/sentry/states",
             "name": "state",
             "type": "select",
             "async": false,
@@ -121,7 +121,7 @@ Paste this schema into the **Schema** field:
             "depends_on": ["project_id"]
           },
           {
-            "uri": "/api/sentry/modules",
+            "uri": "/silo/api/sentry/modules",
             "name": "module",
             "type": "select",
             "async": false,
@@ -129,7 +129,7 @@ Paste this schema into the **Schema** field:
             "depends_on": ["project_id"]
           },
           {
-            "uri": "/api/sentry/cycles",
+            "uri": "/silo/api/sentry/cycles",
             "name": "cycle",
             "type": "select",
             "async": false,
@@ -151,7 +151,7 @@ Paste this schema into the **Schema** field:
             "default": "issue.description"
           },
           {
-            "uri": "/api/sentry/projects",
+            "uri": "/silo/api/sentry/projects",
             "name": "project_id",
             "type": "select",
             "async": false,
@@ -164,12 +164,12 @@ Paste this schema into the **Schema** field:
       "type": "alert-rule-action",
       "title": "Create Plane Work Item or Intake Issue",
       "settings": {
-        "uri": "/api/sentry/alert-rule",
+        "uri": "/silo/api/sentry/alert-rule",
         "type": "alert-rule-settings",
         "description": "Create a Plane Work Item or Intake Issue when an alert is triggered",
         "optional_fields": [
           {
-            "uri": "/api/sentry/users",
+            "uri": "/silo/api/sentry/users",
             "name": "assignee_ids",
             "type": "select",
             "async": false,
@@ -178,7 +178,7 @@ Paste this schema into the **Schema** field:
             "depends_on": ["project_id"]
           },
           {
-            "uri": "/api/sentry/states",
+            "uri": "/silo/api/sentry/states",
             "name": "state",
             "type": "select",
             "async": false,
@@ -186,7 +186,7 @@ Paste this schema into the **Schema** field:
             "depends_on": ["project_id"]
           },
           {
-            "uri": "/api/sentry/labels",
+            "uri": "/silo/api/sentry/labels",
             "name": "labels",
             "type": "select",
             "async": false,
@@ -206,7 +206,7 @@ Paste this schema into the **Schema** field:
             ]
           },
           {
-            "uri": "/api/sentry/projects",
+            "uri": "/silo/api/sentry/projects",
             "name": "project_id",
             "type": "select",
             "async": false,
