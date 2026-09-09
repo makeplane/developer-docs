@@ -341,84 +341,84 @@ plane-selfhost/plane-app/plane.env
 
 ### General settings
 
-| Variable                 | Description                                                                                                                                         | Default Value        |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| **APP_DOMAIN**           | Domain name for your Plane instance. This determines how users will access your installation.                                                       | localhost            |
-| **APP_RELEASE**          | Release version of Plane. Helps with compatibility and troubleshooting.                                                                             | stable               |
-| **WEB_URL**              | The complete base URL for the web application including protocol. Essential for email links and integrations.                                       | http://${APP_DOMAIN} |
-| **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API.                                                                  | http://${APP_DOMAIN} |
-| **DEBUG**                | Toggles debug mode for verbose logging. Set to `1` to enable, `0` to disable. Not recommended in production as it may expose sensitive information. | 0                    |
-| **LISTEN_HTTP_PORT**     | Port for HTTP traffic. The primary port your users will connect to.                                                                                 | 80                   |
-| **LISTEN_HTTPS_PORT**    | Port for HTTPS traffic. The primary port your users will connect to.                                                                                | 443                  |
+| Variable                 | Description                                                                                                                                                    | Default Value        | Containers                               |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ---------------------------------------- |
+| **APP_DOMAIN**           | Domain name for your Plane instance. This configures the global URLs and proxy routing via docker-compose.                                                     | localhost            | docker-compose                           |
+| **APP_RELEASE**          | Release version of Plane (e.g., 'stable'). Determines the Docker image tags to pull.                                                                           | stable               | All containers                           |
+| **WEB_URL**              | The complete base URL for the web application including protocol. Essential for email links and integrations.                                                  | http://${APP_DOMAIN} | api, worker, beat-worker, migrator       |
+| **CORS_ALLOWED_ORIGINS** | Comma-separated list of origins allowed to make cross-origin requests to your API.                                                                             | http://${APP_DOMAIN} | live, api, worker, beat-worker, migrator |
+| **DEBUG**                | Toggles Django API debug mode for verbose logging. Set to `1` to enable, `0` to disable. Not recommended in production as it may expose sensitive information. | 0                    | api, worker, beat-worker, migrator       |
+| **LISTEN_HTTP_PORT**     | Port for HTTP traffic on the reverse proxy. The primary port your users will connect to.                                                                       | 80                   | proxy                                    |
+| **LISTEN_HTTPS_PORT**    | Port for HTTPS traffic on the reverse proxy. The primary port your users will connect to.                                                                      | 443                  | proxy                                    |
 
 ### Scaling and performance
 
-| Variable                 | Description                                                                                       | Default Value |
-| ------------------------ | ------------------------------------------------------------------------------------------------- | ------------- |
-| **WEB_REPLICAS**         | Number of web server replicas for serving the frontend UI. Increase for better load distribution. | 1             |
-| **SPACE_REPLICAS**       | Number of space service replicas handling workspace-related operations.                           | 1             |
-| **ADMIN_REPLICAS**       | Number of admin service replicas for administrative functions.                                    | 1             |
-| **API_REPLICAS**         | Number of API service replicas processing API requests.                                           | 1             |
-| **WORKER_REPLICAS**      | Number of worker service replicas handling background tasks.                                      | 1             |
-| **BEAT_WORKER_REPLICAS** | Number of beat worker replicas for scheduled/periodic tasks.                                      | 1             |
-| **LIVE_REPLICAS**        | Number of live service replicas for real-time updates and WebSocket connections.                  | 1             |
-| **GUNICORN_WORKERS**     | Number of Gunicorn workers per API instance. Increase for better request handling capacity.       | 1             |
+| Variable                 | Description                                                                                       | Default Value | Containers  |
+| ------------------------ | ------------------------------------------------------------------------------------------------- | ------------- | ----------- |
+| **WEB_REPLICAS**         | Number of web server replicas for serving the frontend UI. Increase for better load distribution. | 1             | web         |
+| **SPACE_REPLICAS**       | Number of space service replicas handling workspace-related operations.                           | 1             | space       |
+| **ADMIN_REPLICAS**       | Number of admin service replicas for administrative functions.                                    | 1             | admin       |
+| **API_REPLICAS**         | Number of API service replicas processing API requests.                                           | 1             | api         |
+| **WORKER_REPLICAS**      | Number of worker service replicas handling background tasks.                                      | 1             | worker      |
+| **BEAT_WORKER_REPLICAS** | Number of beat worker replicas for scheduled/periodic tasks.                                      | 1             | beat-worker |
+| **LIVE_REPLICAS**        | Number of live service replicas for real-time updates and WebSocket connections.                  | 1             | live        |
+| **GUNICORN_WORKERS**     | Number of Gunicorn workers per API instance. Increase for better request handling capacity.       | 1             | api         |
 
 ### API settings
 
-| Variable               | Description                                                             | Default Value |
-| ---------------------- | ----------------------------------------------------------------------- | ------------- |
-| **API_KEY_RATE_LIMIT** | Rate limit for API requests to prevent abuse. Format: `number/timeunit` | 60/minute     |
+| Variable               | Description                                                             | Default Value | Containers                         |
+| ---------------------- | ----------------------------------------------------------------------- | ------------- | ---------------------------------- |
+| **API_KEY_RATE_LIMIT** | Rate limit for API requests to prevent abuse. Format: `number/timeunit` | 60/minute     | api, worker, beat-worker, migrator |
 
 ### Database settings
 
-| Variable              | Description                                                                                                                                  | Default Value            |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| **PGHOST**            | Hostname or IP address of your PostgreSQL server.                                                                                            | plane-db                 |
-| **PGDATABASE**        | Name of the PostgreSQL database Plane will use.                                                                                              | plane                    |
-| **POSTGRES_USER**     | Username for PostgreSQL authentication.                                                                                                      | plane                    |
-| **POSTGRES_PASSWORD** | Password for PostgreSQL authentication. Use a strong, unique password.                                                                       | plane                    |
-| **POSTGRES_DB**       | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                    | plane                    |
-| **POSTGRES_PORT**     | TCP port your PostgreSQL server is listening on.                                                                                             | 5432                     |
-| **PGDATA**            | Directory path where PostgreSQL data is stored. Only relevant if you're managing PostgreSQL directly.                                        | /var/lib/postgresql/data |
-| **DATABASE_URL**      | Full connection string for PostgreSQL. If provided, overrides individual settings. Format: `postgresql://username:password@host:port/dbname` |                          |
+| Variable              | Description                                                                                                                                  | Default Value            | Containers                                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | -------------------------------------------------------------- |
+| **PGHOST**            | Hostname or IP address of your PostgreSQL server. Recognized by libpq and Django.                                                            | plane-db                 | api, worker, beat-worker, migrator                             |
+| **PGDATABASE**        | Name of the PostgreSQL database Plane will use. Recognized by libpq and Django.                                                              | plane                    | api, worker, beat-worker, migrator                             |
+| **POSTGRES_USER**     | Username for PostgreSQL authentication.                                                                                                      | plane                    | plane-db (init), api, worker, beat-worker, migrator (fallback) |
+| **POSTGRES_PASSWORD** | Password for PostgreSQL authentication. Use a strong, unique password.                                                                       | plane                    | plane-db (init), api, worker, beat-worker, migrator (fallback) |
+| **POSTGRES_DB**       | Same as PGDATABASE - the name of the PostgreSQL database.                                                                                    | plane                    | plane-db (init), api, worker, beat-worker, migrator (fallback) |
+| **POSTGRES_PORT**     | TCP port your PostgreSQL server is listening on.                                                                                             | 5432                     | api, worker, beat-worker, migrator                             |
+| **PGDATA**            | Directory path where PostgreSQL data is stored. This is specific to the internal storage path inside the container.                          | /var/lib/postgresql/data | plane-db                                                       |
+| **DATABASE_URL**      | Full connection string for PostgreSQL. If provided, overrides individual settings. Format: `postgresql://username:password@host:port/dbname` |                          | api, worker, beat-worker, migrator                             |
 
 ### Redis settings
 
-| Variable       | Description                                                                     | Default Value |
-| -------------- | ------------------------------------------------------------------------------- | ------------- |
-| **REDIS_HOST** | Hostname or IP address of your Redis server.                                    | plane-redis   |
-| **REDIS_PORT** | TCP port your Redis server is listening on.                                     | 6379          |
-| **REDIS_URL**  | Full connection string for Redis. Format: `redis://username:password@host:port` |               |
+| Variable       | Description                                                                     | Default Value | Containers                               |
+| -------------- | ------------------------------------------------------------------------------- | ------------- | ---------------------------------------- |
+| **REDIS_HOST** | Hostname or IP address of your Redis server.                                    | plane-redis   | live, api, worker, beat-worker, migrator |
+| **REDIS_PORT** | TCP port your Redis server is listening on.                                     | 6379          | live, api, worker, beat-worker, migrator |
+| **REDIS_URL**  | Full connection string for Redis. Format: `redis://username:password@host:port` |               | live, api, worker, beat-worker, migrator |
 
 ### RabbitMQ settings
 
-| Variable              | Description                                                                                      | Default Value                          |
-| --------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| **RABBITMQ_HOST**     | Hostname or IP address of your RabbitMQ server.                                                  | plane-mq                               |
-| **RABBITMQ_PORT**     | TCP port your RabbitMQ server is listening on.                                                   | 5672                                   |
-| **RABBITMQ_USER**     | Username for RabbitMQ authentication.                                                            | plane                                  |
-| **RABBITMQ_PASSWORD** | Password for RabbitMQ authentication. Use a strong, unique password.                             | plane                                  |
-| **RABBITMQ_VHOST**    | Virtual host for RabbitMQ, providing logical separation of resources.                            | plane                                  |
-| **AMQP_URL**          | Full connection string for RabbitMQ. If not provided, it's constructed from individual settings. | amqp://plane:plane@plane-mq:5672/plane |
+| Variable              | Description                                                                                      | Default Value                          | Containers                                                     |
+| --------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------- | -------------------------------------------------------------- |
+| **RABBITMQ_HOST**     | Hostname or IP address of your RabbitMQ server.                                                  | plane-mq                               | api, worker, beat-worker, migrator                             |
+| **RABBITMQ_PORT**     | TCP port your RabbitMQ server is listening on.                                                   | 5672                                   | api, worker, beat-worker, migrator                             |
+| **RABBITMQ_USER**     | Username for RabbitMQ authentication.                                                            | plane                                  | plane-mq (init), api, worker, beat-worker, migrator (fallback) |
+| **RABBITMQ_PASSWORD** | Password for RabbitMQ authentication. Use a strong, unique password.                             | plane                                  | plane-mq (init), api, worker, beat-worker, migrator (fallback) |
+| **RABBITMQ_VHOST**    | Virtual host for RabbitMQ, providing logical separation of resources.                            | plane                                  | plane-mq (init), api, worker, beat-worker, migrator (fallback) |
+| **AMQP_URL**          | Full connection string for RabbitMQ. If not provided, it's constructed from individual settings. | amqp://plane:plane@plane-mq:5672/plane | api, worker, beat-worker, migrator                             |
 
 ### File Storage (MinIO / S3)
 
-| Variable                  | Description                                                                                         | Default Value |
-| ------------------------- | --------------------------------------------------------------------------------------------------- | ------------- |
-| **USE_MINIO**             | Whether to use MinIO for object storage. Set to `1` to enable, `0` to use other configured storage. | 1             |
-| **MINIO_ENDPOINT_SSL**    | Force HTTPS for MinIO when handling SSL termination. Set to `1` to enable.                          | 0             |
-| **AWS_REGION**            | AWS region for S3 storage services. Applies when using S3 or MinIO.                                 |               |
-| **AWS_ACCESS_KEY_ID**     | Access key for MinIO or AWS S3 authentication.                                                      | access-key    |
-| **AWS_SECRET_ACCESS_KEY** | Secret key for MinIO or AWS S3 authentication.                                                      | secret-key    |
-| **AWS_S3_ENDPOINT_URL**   | Endpoint URL for MinIO or S3-compatible storage.                                                    |               |
-| **AWS_S3_BUCKET_NAME**    | S3 bucket name for file storage. All uploads will be stored in this bucket.                         | uploads       |
-| **FILE_SIZE_LIMIT**       | Maximum file upload size in bytes.                                                                  | 5242880 (5MB) |
+| Variable                  | Description                                                                                         | Default Value | Containers                                                            |
+| ------------------------- | --------------------------------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------- |
+| **USE_MINIO**             | Whether to use MinIO for object storage. Set to `1` to enable, `0` to use other configured storage. | 1             | api, worker, beat-worker, migrator                                    |
+| **MINIO_ENDPOINT_SSL**    | Force HTTPS for MinIO when handling SSL termination. Set to `1` to enable.                          | 0             | api, worker, beat-worker, migrator                                    |
+| **AWS_REGION**            | AWS region for S3 storage services. Applies when using S3 or MinIO.                                 |               | api, worker, beat-worker, migrator                                    |
+| **AWS_ACCESS_KEY_ID**     | Access key for MinIO or AWS S3 authentication.                                                      | access-key    | plane-minio (init admin), api, worker, beat-worker, migrator (client) |
+| **AWS_SECRET_ACCESS_KEY** | Secret key for MinIO or AWS S3 authentication.                                                      | secret-key    | plane-minio (init admin), api, worker, beat-worker, migrator (client) |
+| **AWS_S3_ENDPOINT_URL**   | Endpoint URL for MinIO or S3-compatible storage.                                                    |               | api, worker, beat-worker, migrator                                    |
+| **AWS_S3_BUCKET_NAME**    | S3 bucket name for file storage. All uploads will be stored in this bucket.                         | uploads       | proxy, api, worker, beat-worker, migrator                             |
+| **FILE_SIZE_LIMIT**       | Maximum file upload size in bytes.                                                                  | 5242880 (5MB) | proxy, api, worker, beat-worker, migrator                             |
 
 ### Security settings
 
-| Variable       | Description                                                                                                               | Default Value |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| **SECRET_KEY** | Secret key used for cryptographic operations like session handling and token generation. Should be a long, random string. |               |
+| Variable       | Description                                                                                                               | Default Value | Containers                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------------------------- |
+| **SECRET_KEY** | Secret key used for cryptographic operations like session handling and token generation. Should be a long, random string. |               | api, worker, beat-worker, migrator |
 
 :::
