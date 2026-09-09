@@ -200,3 +200,181 @@ providers:
 ```
 
 :::
+
+::: details Community Edition
+
+This section provides configuration for setting up a custom external reverse proxy with Plane Community Edition. By default, Plane CE includes a bundled Caddy reverse proxy.
+
+### 1. Disable the bundled proxy
+
+To use your own reverse proxy, you must first disable the built-in proxy service.
+Open your `docker-compose.yml` file and comment out or remove the `proxy` service at the end of the file.
+
+### 2. Connect to the Plane Docker network
+
+Your custom reverse proxy needs to resolve the internal container hostnames (like `web`, `api`, `admin`). The easiest way to achieve this is to run your reverse proxy container on the same Docker network as Plane (usually `plane-app_default`), or map all necessary ports from the individual containers to your host machine.
+
+### 3. Route mapping
+
+Plane CE relies on path-based routing to direct traffic to different services. You must map the following paths to their respective containers and internal ports:
+
+| Route Path | Destination Container | Internal Port |
+| :--- | :--- | :--- |
+| `/*` (catch-all) | `web` | 3000 |
+| `/spaces/*` | `space` | 3000 |
+| `/god-mode/*` | `admin` | 3000 |
+| `/live/*` | `live` | 3000 |
+| `/api/*`, `/auth/*`, `/static/*` | `api` | 8000 |
+| `/<bucket-name>/*` (default: `/uploads`) | `plane-minio` | 9000 |
+
+### 4. Configuration templates
+
+Below are example configurations for Nginx, Caddy, and Traefik assuming your proxy is on the same Docker network as the Plane containers.
+
+#### NGINX configuration
+
+```nginx
+server {
+    listen 80;
+    server_name <domain>;
+
+    # File uploads (MinIO)
+    # Replace 'uploads' with your configured AWS_S3_BUCKET_NAME if changed
+    location ~ ^/uploads(/.*)?$ {
+        proxy_pass http://plane-minio:9000;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # API, Auth, and Static
+    location ~ ^/(api|auth|static)(/.*)?$ {
+        proxy_pass http://api:8000;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Live (WebSockets)
+    location /live/ {
+        proxy_pass http://live:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # God mode (Admin)
+    location /god-mode/ {
+        proxy_pass http://admin:3000;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Spaces
+    location /spaces/ {
+        proxy_pass http://space:3000;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Frontend (Catch-all)
+    location / {
+        proxy_pass http://web:3000;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    
+    client_max_body_size 50M;
+}
+```
+
+#### Caddy configuration
+
+```caddy
+<domain> {
+    request_body {
+        max_size 50MB
+    }
+
+    redir /spaces /spaces/ permanent
+    reverse_proxy /spaces/* space:3000
+
+    redir /god-mode /god-mode/ permanent
+    reverse_proxy /god-mode/* admin:3000
+
+    reverse_proxy /live/* live:3000
+
+    reverse_proxy /api/* api:8000
+    reverse_proxy /auth/* api:8000
+    reverse_proxy /static/* api:8000
+
+    # Replace 'uploads' with your actual bucket name if changed
+    reverse_proxy /uploads/* plane-minio:9000
+    reverse_proxy /uploads plane-minio:9000
+
+    reverse_proxy /* web:3000
+}
+```
+
+#### Traefik configuration
+
+With Traefik, you can apply labels directly in your `docker-compose.yml` to the respective containers instead of a static configuration file. Assuming Traefik is set up to read Docker labels:
+
+```yaml
+services:
+  web:
+    # ...
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plane-web.rule=Host(`<domain>`)"
+      - "traefik.http.services.plane-web.loadbalancer.server.port=3000"
+
+  api:
+    # ...
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plane-api.rule=Host(`<domain>`) && (Path(`/api`) || PathPrefix(`/api/`) || Path(`/auth`) || PathPrefix(`/auth/`) || Path(`/static`) || PathPrefix(`/static/`))"
+      - "traefik.http.services.plane-api.loadbalancer.server.port=8000"
+
+  admin:
+    # ...
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plane-admin.rule=Host(`<domain>`) && (Path(`/god-mode`) || PathPrefix(`/god-mode/`))"
+      - "traefik.http.services.plane-admin.loadbalancer.server.port=3000"
+
+  space:
+    # ...
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plane-space.rule=Host(`<domain>`) && (Path(`/spaces`) || PathPrefix(`/spaces/`))"
+      - "traefik.http.services.plane-space.loadbalancer.server.port=3000"
+
+  live:
+    # ...
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plane-live.rule=Host(`<domain>`) && (Path(`/live`) || PathPrefix(`/live/`))"
+      - "traefik.http.services.plane-live.loadbalancer.server.port=3000"
+
+  plane-minio:
+    # ...
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plane-minio.rule=Host(`<domain>`) && (Path(`/uploads`) || PathPrefix(`/uploads/`))"
+      - "traefik.http.services.plane-minio.loadbalancer.server.port=9000"
+```
+
+:::
