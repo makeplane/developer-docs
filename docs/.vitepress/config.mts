@@ -900,6 +900,93 @@ export default extendConfig(
                   ],
                 },
                 {
+                  text: "Releases",
+                  collapsed: true,
+                  items: [
+                    { text: "Overview", link: "/api-reference/release/overview" },
+                    { text: "Create Release", link: "/api-reference/release/add-release" },
+                    { text: "List Releases", link: "/api-reference/release/list-releases" },
+                    { text: "Get Release", link: "/api-reference/release/get-release-detail" },
+                    { text: "Update Release", link: "/api-reference/release/update-release-detail" },
+                    { text: "Delete Release", link: "/api-reference/release/delete-release" },
+                  ],
+                },
+                {
+                  text: "Project Releases",
+                  collapsed: true,
+                  items: [
+                    { text: "Create Project Release", link: "/api-reference/release/add-project-release" },
+                    { text: "List Project Releases", link: "/api-reference/release/list-project-releases" },
+                    { text: "Get Project Release", link: "/api-reference/release/get-project-release-detail" },
+                    { text: "Update Project Release", link: "/api-reference/release/update-project-release-detail" },
+                    { text: "Delete Project Release", link: "/api-reference/release/delete-project-release" },
+                  ],
+                },
+                {
+                  text: "Release Work Items",
+                  collapsed: true,
+                  items: [
+                    { text: "Add Work Items", link: "/api-reference/release/add-release-work-items" },
+                    { text: "List Work Items", link: "/api-reference/release/list-release-work-items" },
+                    { text: "Remove Work Items", link: "/api-reference/release/remove-release-work-items" },
+                  ],
+                },
+                {
+                  text: "Release Labels",
+                  collapsed: true,
+                  items: [
+                    { text: "Create Label", link: "/api-reference/release/add-release-label" },
+                    { text: "List Labels", link: "/api-reference/release/list-release-labels" },
+                    { text: "Get Label", link: "/api-reference/release/get-release-label-detail" },
+                    { text: "Update Label", link: "/api-reference/release/update-release-label-detail" },
+                    { text: "Delete Label", link: "/api-reference/release/delete-release-label" },
+                    { text: "Add Labels to Release", link: "/api-reference/release/add-labels-to-release" },
+                    { text: "List Labels for Release", link: "/api-reference/release/list-labels-for-release" },
+                    { text: "Remove Labels from Release", link: "/api-reference/release/remove-labels-from-release" },
+                  ],
+                },
+                {
+                  text: "Release Tags",
+                  collapsed: true,
+                  items: [
+                    { text: "Create Tag", link: "/api-reference/release/add-release-tag" },
+                    { text: "List Tags", link: "/api-reference/release/list-release-tags" },
+                    { text: "Get Tag", link: "/api-reference/release/get-release-tag-detail" },
+                    { text: "Update Tag", link: "/api-reference/release/update-release-tag-detail" },
+                    { text: "Delete Tag", link: "/api-reference/release/delete-release-tag" },
+                  ],
+                },
+                {
+                  text: "Release Comments",
+                  collapsed: true,
+                  items: [
+                    { text: "Create Comment", link: "/api-reference/release/add-release-comment" },
+                    { text: "List Comments", link: "/api-reference/release/list-release-comments" },
+                    { text: "Get Comment", link: "/api-reference/release/get-release-comment-detail" },
+                    { text: "Update Comment", link: "/api-reference/release/update-release-comment-detail" },
+                    { text: "Delete Comment", link: "/api-reference/release/delete-release-comment" },
+                  ],
+                },
+                {
+                  text: "Release Links",
+                  collapsed: true,
+                  items: [
+                    { text: "Create Link", link: "/api-reference/release/add-release-link" },
+                    { text: "List Links", link: "/api-reference/release/list-release-links" },
+                    { text: "Get Link", link: "/api-reference/release/get-release-link-detail" },
+                    { text: "Update Link", link: "/api-reference/release/update-release-link-detail" },
+                    { text: "Delete Link", link: "/api-reference/release/delete-release-link" },
+                  ],
+                },
+                {
+                  text: "Release Changelog",
+                  collapsed: true,
+                  items: [
+                    { text: "Get Changelog", link: "/api-reference/release/get-release-changelog" },
+                    { text: "Update Changelog", link: "/api-reference/release/update-release-changelog" },
+                  ],
+                },
+                {
                   text: "Customers",
                   collapsed: true,
                   items: [
