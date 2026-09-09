@@ -1,7 +1,7 @@
 ---
 title: Configure Plane AI
 description: Enable Plane AI on your self-hosted instance. Set up a dedicated database, configure OpenSearch, add an LLM API key, and connect PI to your Plane deployment.
-keywords: plane ai setup, self-hosted ai, llm api key, openai, anthropic, opensearch, enable plane ai
+keywords: plane ai setup, self-hosted ai, llm api key, openai, anthropic, baseten, kimi, glm, deepseek, opensearch, enable plane ai
 ---
 
 # Configure Plane AI <Badge type="info" text="Commercial Edition" />
@@ -14,7 +14,7 @@ For an overview of what Plane AI can do, see [Plane AI](https://docs.plane.so/ai
 
 Plane AI requires four things to work:
 
-1. **An LLM API key** (OpenAI or Anthropic) - powers AI responses.
+1. **An LLM API key** (OpenAI, Anthropic, or Baseten) - powers AI responses.
 2. **OpenSearch** - An OpenSearch instance running version 2.19 or later (self-hosted or AWS OpenSearch) configured for [advanced search](/self-hosting/govern/advanced-search). Search over your workspace data (work items, pages, cycles) runs through OpenSearch indices.
 3. **A dedicated database** - Plane AI must not share the main Plane application database.
 4. **Read access to the main Plane database** - PI reads workspace data directly from the main Plane DB.
@@ -30,8 +30,15 @@ Plane AI requires four things to work:
 
 - Claude Sonnet 4.5
 - Claude Sonnet 4.6
+- Claude Sonnet 5
 
-You can provide API keys for both OpenAI and Anthropic, making all models available to users. If you provide only one key, users will only have access to that provider's models.
+### Baseten
+
+- Kimi K2.6
+- GLM 5.2
+- DeepSeek V4
+
+You can provide API keys for any combination of OpenAI, Anthropic, and Baseten, making those models available to users. If you provide only one key, users will only have access to that provider's models.
 
 :::tip Custom or self-hosted models
 To use Ollama, Groq, LiteLLM, AWS Bedrock, or any OpenAI-compatible endpoint, see [Custom LLM models](#custom-llm-models).
@@ -71,6 +78,17 @@ Add at least one to `/opt/plane/plane.env`:
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
 CLAUDE_API_KEY=xxxxxxxxxxxxxxxx
 ```
+
+### Baseten
+
+Baseten serves Kimi K2.6, GLM 5.2, and DeepSeek V4 through an OpenAI-compatible endpoint. Add both the API key and base URL to `/opt/plane/plane.env`:
+
+```bash
+BASETEN_API_KEY=xxxxxxxxxxxxxxxx
+BASETEN_BASE_URL=https://inference.baseten.co/v1
+```
+
+Both variables are required to enable Baseten models. Get an API key from the [Baseten dashboard](https://app.baseten.co/settings/api_keys).
 
 ### Custom LLM models
 
