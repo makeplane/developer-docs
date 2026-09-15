@@ -207,3 +207,54 @@ Consider these alternatives:
    You now have Plane running in your air-gapped environment. If you run into any issues, check the logs using the commands above, or reach out to our support team for assistance.
 
 3. [Activate your license key](/self-hosting/manage/manage-licenses/activate-airgapped)
+
+## Use your own SSL certificate
+
+An airgapped host cannot reach Let's Encrypt, so Plane starts on plain HTTP. To serve HTTPS, use a certificate issued by your internal CA. Available in Plane v3.2.0 and later.
+
+The `proxy` service mounts the `ssl/` folder of your install directory read-only at `/ssl`. The install directory is the directory that holds `docker-compose.yml` and `plane.env`.
+
+1. **Place the certificate and key**
+
+   ```bash
+   cd /path/to/plane
+   mkdir -p ssl
+   cp fullchain.pem ssl/cert.pem     # PEM, full chain (leaf plus intermediates)
+   cp privkey.pem   ssl/key.pem      # PEM private key matching cert.pem
+   chmod 600 ssl/key.pem
+   ```
+
+   The certificate must cover the domain you set in `plane.env`, and be issued by a CA your users' browsers trust.
+
+2. **Switch `plane.env` to HTTPS**
+
+   ```bash
+   SITE_ADDRESS=plane.yourcompany.com
+   APP_PROTOCOL=https
+   WEB_URL=https://plane.yourcompany.com
+   CORS_ALLOWED_ORIGINS=https://plane.yourcompany.com
+   ```
+
+   If `SITE_ADDRESS` is left as a plain-HTTP address (`localhost:80`, `:80`, or an `http://` URL) the certificate is ignored with a warning.
+
+3. **Recreate the proxy**
+
+   ```bash
+   docker compose --env-file plane.env up -d --force-recreate proxy
+   ```
+
+   If you also changed `WEB_URL` or `CORS_ALLOWED_ORIGINS`, recreate the services that read them:
+
+   ```bash
+   docker compose --env-file plane.env up -d --force-recreate api web space admin live
+   ```
+
+4. **Verify**
+
+   ```bash
+   docker compose --env-file plane.env logs proxy | grep -i "ssl certificate"
+   ```
+
+   Expect `Custom SSL certificate enabled: /ssl/cert.pem (key: /ssl/key.pem)`. If you see `WARNING: custom SSL certificate ignored:` instead, the reason follows on the same line. Then open `https://plane.yourcompany.com` from a machine that trusts your CA.
+
+To rotate the certificate, replace both files in `ssl/` and recreate the proxy. The `ssl/` folder is kept across upgrades. For file formats, permissions and the full troubleshooting table, see [Use your own certificate](/self-hosting/govern/configure-ssl#use-your-own-certificate).

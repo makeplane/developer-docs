@@ -290,3 +290,5 @@ Consider these alternatives:
 ## Additional configuration
 
 For more advanced Plane configuration options, refer to the [Kubernetes documentation](https://developers.plane.so/self-hosting/methods/kubernetes#configuration-settings).
+
+**Serve HTTPS with your own certificate.** An airgapped cluster cannot reach Let's Encrypt, so set `ssl.generateCerts: false` and instead create a `kubernetes.io/tls` Secret from a certificate issued by your internal CA, then set `ssl.tls_secret_name` to its name. See [Use your own certificate on Kubernetes](/self-hosting/govern/configure-ssl#use-your-own-certificate-on-kubernetes).
