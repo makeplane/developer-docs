@@ -10,11 +10,14 @@ This guide walks you through setting up a GitHub App to enable GitHub integratio
 
 This guide covers configuration for both:
 
-- **[GitHub Cloud](/self-hosting/govern/integrations/github#github-cloud)**
-  The standard cloud-hosted GitHub service
+- **[GitHub Cloud](/self-hosting/govern/integrations/github#github-cloud)** (github.com)  
+  The standard GitHub service, available at github.com. Covers all plans
 
-- **[GitHub Enterprise Server](/self-hosting/govern/integrations/github#github-enterprise-server)**
-  Self-hosted GitHub instances for organizations with specific compliance or security requirements
+- **[GitHub Enterprise Cloud](/self-hosting/govern/integrations/github#github-enterprise-server)** (ghe.com)  
+  GitHub's managed enterprise service where your organization gets a dedicated subdomain
+
+- **[GitHub Enterprise Server](/self-hosting/govern/integrations/github#github-enterprise-server)** (self-hosted)  
+  A self-hosted GitHub instance deployed on your own infrastructure
 
 In this guide, you’ll:
 
@@ -89,6 +92,9 @@ Follow these steps to create a GitHub App, set callback URLs, and configure webh
 
 == GitHub Enterprise Server {#github-enterprise-server}
 These steps cover hostname, callback URLs, and private key differences for on‑prem GitHub deployments.
+
+> [!CAUTION] GitHub Enterprise Cloud (GHE.com)
+> On GHE.com enterprise, go to `https://<github-domain>.ghe.com/enterprises/<enterprise-slug>/settings/apps` and create a new GitHub App.
 
 #### GitHub Enterprise Server
 

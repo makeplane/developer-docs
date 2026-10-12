@@ -131,6 +131,10 @@ Projects organize your team's work within a workspace. Each project contains wor
 
   Default state which will be used when the issues will be auto closed
 
+- `template_id` _uuid_
+
+  UUID of the project template used to create this project.
+
 </div>
 <div class="api-right">
 

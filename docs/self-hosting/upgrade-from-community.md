@@ -57,6 +57,7 @@ This upgrade path is for installations using Plane's default PostgreSQL database
    ```
     TARGET_DIR=/opt/plane/data
     sudo mkdir -p $TARGET_DIR
+
     for FILE in *.tar.gz; do
         if [ -e "$FILE" ]; then
             tar -xzvf "$FILE" -C "$TARGET_DIR"
@@ -66,10 +67,12 @@ This upgrade path is for installations using Plane's default PostgreSQL database
         fi
     done
 
-    mv $TARGET_DIR/pgdata/ $TARGET_DIR/db
-    mv $TARGET_DIR/redisdata/ $TARGET_DIR/redis
+    # Remove destinations first, then mv
+    sudo rm -rf $TARGET_DIR/db && mv $TARGET_DIR/pgdata $TARGET_DIR/db
+    sudo rm -rf $TARGET_DIR/redis && mv $TARGET_DIR/redisdata $TARGET_DIR/redis
+
     mkdir -p $TARGET_DIR/minio
-    mv $TARGET_DIR/uploads/ $TARGET_DIR/minio/uploads/
+    sudo rm -rf $TARGET_DIR/minio/uploads && mv $TARGET_DIR/uploads $TARGET_DIR/minio/uploads
    ```
 
 3. This script will extract your Community Edition data and restore it to `/opt/plane/data`.

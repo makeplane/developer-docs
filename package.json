@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
+    "build": "(git fetch --unshallow || true) && vitepress build docs",
     "preview": "vitepress preview docs",
     "fix:format": "prettier --write .",
-    "check:format": "prettier --check ."
+    "check:format": "prettier --check .",
+    "check:types": "tsc --noEmit -p docs/.vitepress/tsconfig.json"
   },
   "keywords": [
     "plane",
@@ -18,29 +19,20 @@
   "author": "Plane",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "autoprefixer": "^10.4.23",
-    "mermaid": "^11.12.2",
-    "postcss": "^8.5.6",
+    "@types/node": "^25.9.0",
+    "@voidzero-dev/vitepress-theme": "^4.8.4",
+    "mermaid": "^11.15.0",
     "prettier": "^3.8.1",
-    "tailwindcss": "^4.1.18",
-    "vitepress": "^1.6.4",
+    "typescript": "^6.0.3",
+    "vitepress": "2.0.0-alpha.16",
+    "vitepress-plugin-llms": "^1.13.1",
     "vitepress-plugin-mermaid": "^2.0.17",
-    "vitepress-plugin-tabs": "^0.7.3",
+    "vitepress-plugin-tabs": "^0.8.0",
     "vue": "^3.5.26"
   },
   "dependencies": {
     "lucide-vue-next": "^0.562.0",
     "medium-zoom": "^1.1.0"
   },
-  "pnpm": {
-    "overrides": {
-      "rollup": "4.59.0",
-      "lodash-es": "4.18.1",
-      "esbuild": "0.25.0",
-      "dompurify": "3.4.0",
-      "vite": "6.4.2"
-    }
-  },
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
+  "packageManager": "pnpm@11.8.0+sha512.c1f5e7c4cb241c8f174b743851d82f42b802324afc8b0f116b96adb15aa06664948dde36960a3ba1079ba5b4b29dd0140135b94b5b5f5263592249d68e555f26"
 }

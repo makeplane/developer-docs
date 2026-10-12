@@ -51,7 +51,7 @@ The following ports are exposed:
 1. Download the image with:
 
    ```bash
-   docker pull artifacts.plane.so/makeplane/plane-aio-commercial:stable
+   docker pull makeplane/plane-aio-commercial:stable
    ```
 
 2. Run the following command to deploy the Plane AIO container. Make sure to replace all placeholder values (e.g., `your-domain.com`, `user:pass`) with your actual configuration.
@@ -74,7 +74,7 @@ The following ports are exposed:
        -e AWS_ACCESS_KEY_ID=your-access-key \
        -e AWS_SECRET_ACCESS_KEY=your-secret-key \
        -e AWS_S3_BUCKET_NAME=your-bucket \
-       artifacts.plane.so/makeplane/plane-aio-commercial:stable
+       makeplane/plane-aio-commercial:stable
    ```
 
    If you're running on an IP address, use this example:
@@ -96,7 +96,7 @@ The following ports are exposed:
    -e AWS_S3_BUCKET_NAME=plane-app \
    -e AWS_S3_ENDPOINT_URL=http://${MYIP}:19000 \
    -e FILE_SIZE_LIMIT=10485760 \
-   artifacts.plane.so/makeplane/plane-aio-commercial:stable
+   makeplane/plane-aio-commercial:stable
    ```
 
 3. Once it's running, you can access the Plane application on the domain you provided during the deployment.

@@ -12,7 +12,7 @@ Plane uses [drf-spectacular](https://drf-spectacular.readthedocs.io/) to generat
 
 Add the following to your `.env` file (at the project root or `apps/api/.env`):
 
-```env
+```ini
 ENABLE_DRF_SPECTACULAR=1
 ```
 
